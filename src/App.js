@@ -1,23 +1,18 @@
-import logo from './logo.svg';
+import { useEffect, useRef } from 'react';
 import './App.css';
+import { runGame } from './game';
 
 function App() {
+  const canvasEl = useRef(null);
+
+  useEffect(() => {
+    const ctx = canvasEl.current.getContext('2d');
+    runGame(ctx);
+  });
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <canvas id="canvas" width="1024" height="1024" ref={canvasEl}></canvas>
     </div>
   );
 }
