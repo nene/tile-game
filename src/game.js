@@ -1,21 +1,25 @@
+import walkRightPath from './sprites/walk-right.png';
+import grassPath from './sprites/grass.png';
+
 const WIDTH = 1024;
 const HEIGHT = 1024;
 const SIZE = 32;
 const SCALE = 2;
 
 export function runGame(ctx) {
-  loadImage('mehike', (mehikeImg) => {
-    loadImage('grass', (grassImg) => {
+  loadImage(walkRightPath, (walkRightImg) => {
+    loadImage(grassPath, (grassImg) => {
       ctx.imageSmoothingEnabled = false;
       drawField(ctx, grassImg);
-      runAnimation(ctx, mehikeImg);
+      runAnimation(ctx, walkRightImg);
     });
   });
 }
 
-function loadImage(id, callback) {
-  const img = document.getElementById(id);
+function loadImage(src, callback) {
+  const img = new Image();
   img.addEventListener('load', () => callback(img));
+  img.src = src;
 }
 
 function runAnimation(ctx, image) {
