@@ -23,18 +23,13 @@ function runAnimation(ctx, image) {
   let prevTime = 0;
   let frameDuration = 100;
   let coord = [0, 0];
-  let oldCoord = [0,0];
-  let bg = undefined;
+  let bg = saveBg(ctx);
   function step(timestamp) {
     if (timestamp - prevTime > frameDuration) {
-      if (bg) {
-        restoreSpriteBg(ctx, oldCoord, bg);
-      }
-      bg = saveSpriteBg(ctx, coord);
+      restoreBg(ctx, bg);
       drawSprite(ctx, image, frame, coord);
       frame = nextFrame(frame);
       prevTime = timestamp;
-      oldCoord = coord;
       coord = [(coord[0] + 6) % 1024, coord[1]];
     }
     window.requestAnimationFrame(step);
@@ -58,12 +53,12 @@ function randomFrame(n) {
   return Math.floor(Math.random() * n);
 }
 
-function saveSpriteBg(ctx, coord) {
-  return ctx.getImageData(coord[0], coord[1], SIZE*SCALE, SIZE*SCALE);
+function saveBg(ctx) {
+  return ctx.getImageData(0, 0, WIDTH, HEIGHT);
 }
 
-function restoreSpriteBg(ctx, coord, bgImage) {
-  ctx.putImageData(bgImage, coord[0], coord[1]);
+function restoreBg(ctx, bgImage) {
+  ctx.putImageData(bgImage, 0, 0);
 }
 
 function drawSprite(ctx, image, index, coord) {
