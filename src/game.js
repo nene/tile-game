@@ -6,20 +6,21 @@ const HEIGHT = 1024;
 const SIZE = 32;
 const SCALE = 2;
 
-export function runGame(ctx) {
-  loadImage(walkRightPath, (walkRightImg) => {
-    loadImage(grassPath, (grassImg) => {
-      ctx.imageSmoothingEnabled = false;
-      drawField(ctx, grassImg);
-      runAnimation(ctx, walkRightImg);
-    });
-  });
+export async function runGame(ctx) {
+  const walkRightImg = await loadImage(walkRightPath);
+  const grassImg = await loadImage(grassPath);
+
+  ctx.imageSmoothingEnabled = false;
+  drawField(ctx, grassImg);
+  runAnimation(ctx, walkRightImg);
 }
 
-function loadImage(src, callback) {
-  const img = new Image();
-  img.addEventListener('load', () => callback(img));
-  img.src = src;
+async function loadImage(src) {
+  return new Promise(resolve => {
+    const img = new Image();
+    img.addEventListener('load', () => resolve(img));
+    img.src = src;
+  });
 }
 
 function runAnimation(ctx, image) {
