@@ -7,6 +7,7 @@ class PixelScreen {
     this.rawWidth = width;
     this.rawHeight = height;
     this.scale = scale;
+    this.ctx.scale(scale, scale);
     this.ctx.imageSmoothingEnabled = false;
   }
 
@@ -14,7 +15,7 @@ class PixelScreen {
     this.ctx.drawImage(
       sprite.image,
       sprite.coord[0], sprite.coord[1], sprite.size[0], sprite.size[1],
-      coord[0]*this.scale, coord[1]*this.scale, sprite.size[0]*this.scale, sprite.size[1]*this.scale
+      coord[0], coord[1], sprite.size[0], sprite.size[1]
     );
   }
 
