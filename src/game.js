@@ -40,6 +40,17 @@ class SpriteSheet {
     this.image = image;
     this.size = [width, height];
     this.count = count;
+    this.index = 0;
+  }
+
+  getNextSprite() {
+    const sprite = this.getSprite(this.index);
+    this.index = (this.index + 1) % this.count;
+    return sprite;
+  }
+
+  getRandomSprite() {
+    return this.getSprite(Math.floor(Math.random() * this.count));
   }
 
   getSprite(index) {
@@ -84,15 +95,13 @@ async function loadImage(src) {
 }
 
 function runAnimation(screen, walkSprites) {
-  let frame = 0;
   let prevTime = 0;
   let frameDuration = 100;
   let coord = [0, 0];
   function step(timestamp) {
     if (timestamp - prevTime > frameDuration) {
       screen.restoreBg();
-      screen.drawSprite(walkSprites.getSprite(frame), coord);
-      frame = nextFrame(frame);
+      screen.drawSprite(walkSprites.getNextSprite(), coord);
       prevTime = timestamp;
       coord = [(coord[0] + 3) % screen.width(), coord[1]];
     }
@@ -104,15 +113,7 @@ function runAnimation(screen, walkSprites) {
 function drawField(screen, fieldSprites) {
   for (let y=0; y<screen.height(); y+=fieldSprites.getSpriteHeight()) {
     for (let x=0; x<screen.width(); x+=fieldSprites.getSpriteWidth()) {
-      screen.drawSprite(fieldSprites.getSprite(2 + randomFrame(6)), [x, y]);
+      screen.drawSprite(fieldSprites.getRandomSprite(), [x, y]);
     }
   }
-}
-
-function nextFrame(n) {
-  return (n + 1) % 8;
-}
-
-function randomFrame(n) {
-  return Math.floor(Math.random() * n);
 }
