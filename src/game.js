@@ -1,18 +1,51 @@
 import walkRightPath from './sprites/walk-right.png';
 import grassPath from './sprites/grass.png';
 
-const WIDTH = 1024;
-const HEIGHT = 1024;
 const SIZE = 32;
-const SCALE = 2;
+
+class PixelScreen {
+  constructor(ctx, {width, height, scale}) {
+    this.ctx = ctx;
+    this.rawWidth = width;
+    this.rawHeight = height;
+    this.scale = scale;
+    this.ctx.imageSmoothingEnabled = false;
+  }
+
+  drawSprite(image, index, coord) {
+    const source = [0, SIZE*index];
+    this.ctx.drawImage(
+      image,
+      source[0], source[1], SIZE, SIZE,
+      coord[0]*this.scale, coord[1]*this.scale, SIZE*this.scale, SIZE*this.scale
+    );
+  }
+
+  saveBg() {
+    this.bg = this.ctx.getImageData(0, 0, this.rawWidth, this.rawHeight);
+  }
+  
+  restoreBg() {
+    this.ctx.putImageData(this.bg, 0, 0);
+  }
+
+  width() {
+    return this.rawWidth / this.scale;
+  }
+
+  height() {
+    return this.rawHeight / this.scale;
+  }
+}
 
 export async function runGame(ctx) {
   const walkRightImg = await loadImage(walkRightPath);
   const grassImg = await loadImage(grassPath);
 
-  ctx.imageSmoothingEnabled = false;
-  drawField(ctx, grassImg);
-  runAnimation(ctx, walkRightImg);
+  const screen = new PixelScreen(ctx, {width: 1024, height: 1024, scale: 4});
+  drawField(screen, grassImg);
+  screen.saveBg();
+  runAnimation(screen, walkRightImg);
 }
 
 async function loadImage(src) {
@@ -23,29 +56,28 @@ async function loadImage(src) {
   });
 }
 
-function runAnimation(ctx, image) {
+function runAnimation(screen, image) {
   let frame = 0;
   let prevTime = 0;
   let frameDuration = 100;
   let coord = [0, 0];
-  let bg = saveBg(ctx);
   function step(timestamp) {
     if (timestamp - prevTime > frameDuration) {
-      restoreBg(ctx, bg);
-      drawSprite(ctx, image, frame, coord);
+      screen.restoreBg();
+      screen.drawSprite(image, frame, coord);
       frame = nextFrame(frame);
       prevTime = timestamp;
-      coord = [(coord[0] + 6) % 1024, coord[1]];
+      coord = [(coord[0] + 3) % screen.width(), coord[1]];
     }
     window.requestAnimationFrame(step);
   }
   window.requestAnimationFrame(step);
 }
 
-function drawField(ctx, image) {
-  for (let y=0; y<HEIGHT; y+=SIZE*SCALE) {
-    for (let x=0; x<WIDTH; x+=SIZE*SCALE) {
-      drawSprite(ctx, image, 2+randomFrame(6), [x, y]);
+function drawField(screen, image) {
+  for (let y=0; y<screen.height(); y+=SIZE) {
+    for (let x=0; x<screen.width(); x+=SIZE) {
+      screen.drawSprite(image, 2+randomFrame(6), [x, y]);
     }
   }
 }
@@ -56,17 +88,4 @@ function nextFrame(n) {
 
 function randomFrame(n) {
   return Math.floor(Math.random() * n);
-}
-
-function saveBg(ctx) {
-  return ctx.getImageData(0, 0, WIDTH, HEIGHT);
-}
-
-function restoreBg(ctx, bgImage) {
-  ctx.putImageData(bgImage, 0, 0);
-}
-
-function drawSprite(ctx, image, index, coord) {
-  const source = [0, SIZE*index];
-  ctx.drawImage(image, source[0], source[1], SIZE, SIZE, coord[0], coord[1], SIZE*SCALE, SIZE*SCALE);
 }
