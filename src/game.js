@@ -23,6 +23,20 @@ export async function runGame(ctx) {
     screen.restoreBg();
     player.paint(screen);
   });
+
+  return {
+    onKeyDown: (key) => {
+      switch (key) {
+        case "ArrowLeft":
+          player.moveLeft();
+          break;
+        case "ArrowRight":
+          player.moveRight();
+          break;
+        default: // do nothing
+      }
+    },
+  };
 }
 
 // setInterval() will fire about 1x per second when in background tab
