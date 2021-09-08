@@ -12,7 +12,19 @@ export async function runGame(ctx) {
   const screen = new PixelScreen(ctx, { width: 1024, height: 1024, scale: 4 });
   drawField(screen, grassSprites);
   screen.saveBg();
-  runAnimation(screen, walkSprites);
+
+  let coord = [0, 0];
+  let sprite = walkSprites.getSprite(0);
+
+  gameLoop(() => {
+    coord = [(coord[0] + 3) % screen.width(), coord[1]];
+    sprite = walkSprites.getNextSprite();
+  });
+
+  paintLoop(() => {
+    screen.restoreBg();
+    screen.drawSprite(sprite, coord);
+  });
 }
 
 async function loadImage(src) {
@@ -23,20 +35,16 @@ async function loadImage(src) {
   });
 }
 
-function runAnimation(screen, walkSprites) {
-  let prevTime = 0;
-  let frameDuration = 100;
-  let coord = [0, 0];
-  function step(timestamp) {
-    if (timestamp - prevTime > frameDuration) {
-      screen.restoreBg();
-      screen.drawSprite(walkSprites.getNextSprite(), coord);
-      prevTime = timestamp;
-      coord = [(coord[0] + 3) % screen.width(), coord[1]];
-    }
-    window.requestAnimationFrame(step);
+function gameLoop(onTick) {
+  setInterval(onTick, 100);
+}
+
+function paintLoop(onPaint) {
+  function paint(time) {
+    onPaint(time);
+    window.requestAnimationFrame(paint);
   }
-  window.requestAnimationFrame(step);
+  window.requestAnimationFrame(paint);
 }
 
 function drawField(screen, fieldSprites) {
