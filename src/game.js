@@ -3,25 +3,38 @@ import { PixelScreen } from "./PixelScreen";
 import { SpriteSheet } from "./SpriteSheet";
 import { Player } from "./Player";
 import { loadImage } from "./loadImage";
+import { ImageLibrary } from "./ImageLibrary";
+import { Grass } from "./Grass";
 
 export async function runGame(ctx) {
-  const player = new Player();
-  await player.init();
-
   const grassImg = await loadImage(grassPath);
   const grassSprites = new SpriteSheet(grassImg, [32, 32], 8);
 
   const screen = new PixelScreen(ctx, { width: 1024, height: 1024, scale: 4 });
+
+  const gameObjects = [];
+
+  const images = new ImageLibrary();
+  await images.load();
+
+  for (let i = 0; i < 50; i++) {
+    gameObjects.push(new Grass(images, screen));
+  }
+
+  const player = new Player();
+  await player.init();
+  gameObjects.push(player);
+
   drawField(screen, grassSprites);
   screen.saveBg();
 
   gameLoop(() => {
-    player.tick(screen);
+    gameObjects.forEach((obj) => obj.tick(screen));
   });
 
   paintLoop(() => {
     screen.restoreBg();
-    player.paint(screen);
+    gameObjects.forEach((obj) => obj.paint(screen));
   });
 
   return {
