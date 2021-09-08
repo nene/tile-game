@@ -35,8 +35,17 @@ async function loadImage(src) {
   });
 }
 
+// setInterval() will fire about 1x per second when in background tab
 function gameLoop(onTick) {
-  setInterval(onTick, 100);
+  const duration = 100;
+  let prevTime = Date.now();
+  setInterval(() => {
+    const time = Date.now();
+    while (prevTime + duration < time) {
+      onTick();
+      prevTime += duration;
+    }
+  }, duration);
 }
 
 function paintLoop(onPaint) {
