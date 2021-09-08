@@ -3,9 +3,34 @@ import grassPath from "./sprites/grass.png";
 import { PixelScreen } from "./PixelScreen";
 import { SpriteSheet } from "./SpriteSheet";
 
+class Player {
+  constructor() {
+    this.coord = [0, 0];
+  }
+
+  async init() {
+    this.walkSprites = new SpriteSheet(
+      await loadImage(walkRightPath),
+      [32, 32],
+      8
+    );
+    this.sprite = this.walkSprites.getSprite(0);
+  }
+
+  tick(screen) {
+    this.coord = [(this.coord[0] + 3) % screen.width(), this.coord[1]];
+    this.sprite = this.walkSprites.getNextSprite();
+  }
+
+  paint(screen) {
+    screen.drawSprite(this.sprite, this.coord);
+  }
+}
+
 export async function runGame(ctx) {
-  const walkRightImg = await loadImage(walkRightPath);
-  const walkSprites = new SpriteSheet(walkRightImg, [32, 32], 8);
+  const player = new Player();
+  await player.init();
+
   const grassImg = await loadImage(grassPath);
   const grassSprites = new SpriteSheet(grassImg, [32, 32], 8);
 
@@ -13,17 +38,13 @@ export async function runGame(ctx) {
   drawField(screen, grassSprites);
   screen.saveBg();
 
-  let coord = [0, 0];
-  let sprite = walkSprites.getSprite(0);
-
   gameLoop(() => {
-    coord = [(coord[0] + 3) % screen.width(), coord[1]];
-    sprite = walkSprites.getNextSprite();
+    player.tick(screen);
   });
 
   paintLoop(() => {
     screen.restoreBg();
-    screen.drawSprite(sprite, coord);
+    player.paint(screen);
   });
 }
 
