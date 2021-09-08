@@ -80,7 +80,7 @@ function gameLoop(onTick) {
       onTick();
       prevTime += duration;
     }
-  }, duration);
+  }, duration / 2);
 }
 
 function paintLoop(onPaint) {
