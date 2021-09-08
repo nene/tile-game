@@ -1,4 +1,4 @@
-import grassPath from "./sprites/grass.png";
+import grassPath from "./sprites/grass-bg.png";
 import { PixelScreen } from "./PixelScreen";
 import { SpriteSheet } from "./SpriteSheet";
 import { Player } from "./Player";
@@ -8,7 +8,7 @@ import { Grass } from "./Grass";
 
 export async function runGame(ctx) {
   const grassImg = await loadImage(grassPath);
-  const grassSprites = new SpriteSheet(grassImg, [32, 32], 8);
+  const grassSprites = new SpriteSheet(grassImg, [32, 32], 1);
 
   const screen = new PixelScreen(ctx, { width: 1024, height: 1024, scale: 4 });
 
