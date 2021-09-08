@@ -17,13 +17,18 @@ export async function runGame(ctx) {
   const images = new ImageLibrary();
   await images.load();
 
+  const player = new Player();
+  await player.init();
+  gameObjects.push(player);
+
   for (let i = 0; i < 50; i++) {
     gameObjects.push(new Grass(images, screen));
   }
 
-  const player = new Player();
-  await player.init();
-  gameObjects.push(player);
+  // sort objects by their Y-position
+  gameObjects.sort((a, b) => {
+    return a.coord[1] - b.coord[1];
+  });
 
   drawField(screen, grassSprites);
   screen.saveBg();

@@ -8,7 +8,10 @@ export class Grass {
     for (let i = 0; i < spriteStartIndex; i++) {
       this.sprite = this.spriteSheet.getNextSprite();
     }
-    this.coord = [rand(screen.width()), rand(screen.height())];
+    this.coord = [
+      rand(screen.width() + 32) - 32,
+      rand(screen.height() + 32) - 32,
+    ];
   }
 
   tick() {
