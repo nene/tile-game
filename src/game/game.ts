@@ -22,7 +22,7 @@ export async function runGame(ctx: CanvasRenderingContext2D) {
 
   // sort objects by their Y-position
   gameObjects.sort((a, b) => {
-    return a.coord[1] - b.coord[1];
+    return a.zIndex() - b.zIndex();
   });
 
   drawField(screen, new SpriteSheet(images.get('grassBg'), [32, 32], 1));

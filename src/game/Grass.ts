@@ -5,7 +5,7 @@ import { SpriteSheet, Sprite } from "./SpriteSheet";
 import { GameObject } from "./GameObject";
 
 export class Grass implements GameObject {
-  public coord: Coord;
+  private coord: Coord;
   private spriteSheet: SpriteSheet;
   private sprite: Sprite;
   private even = false;
@@ -37,6 +37,10 @@ export class Grass implements GameObject {
 
   paint(screen: PixelScreen) {
     screen.drawSprite(this.sprite, this.coord);
+  }
+
+  zIndex(): number {
+    return this.coord[1];
   }
 }
 

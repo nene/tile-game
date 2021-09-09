@@ -8,7 +8,7 @@ const max = Math.max;
 const min = Math.min;
 
 export class Player implements GameObject {
-  public coord: Coord;
+  private coord: Coord;
   private speed: Coord;
   private standRight: SpriteSheet;
   private standLeft: SpriteSheet;
@@ -108,5 +108,9 @@ export class Player implements GameObject {
 
   paint(screen: PixelScreen) {
     screen.drawSprite(this.sprite, this.coord);
+  }
+
+  zIndex(): number {
+    return this.coord[1];
   }
 }
