@@ -7,9 +7,7 @@ import walkLeft from "./sprites/walk-left.png";
 import walkRight from "./sprites/walk-right.png";
 
 export class ImageLibrary {
-  constructor() {
-    this.images = {};
-  }
+  private images: Record<string, HTMLImageElement> = {};
 
   async load() {
     this.images.grass1 = await loadImage(grass1);
@@ -21,7 +19,7 @@ export class ImageLibrary {
     this.images.walkRight = await loadImage(walkRight);
   }
 
-  get(name) {
+  get(name: string): HTMLImageElement {
     return this.images[name];
   }
 }

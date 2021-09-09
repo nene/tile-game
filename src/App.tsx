@@ -3,11 +3,14 @@ import "./App.css";
 import { runGame } from "./game";
 
 function App() {
-  const canvasEl = useRef(null);
+  const canvasEl = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const game = async () => {
-      const ctx = canvasEl.current.getContext("2d");
+      const ctx = canvasEl?.current?.getContext("2d");
+      if (!ctx) {
+        throw new Error("Unable to access canvas 2D context");
+      }
       const events = await runGame(ctx);
 
       document.addEventListener("keydown", (e) => {

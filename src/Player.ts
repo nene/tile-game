@@ -1,11 +1,23 @@
+import { ImageLibrary } from "./ImageLibrary";
+import { PixelScreen } from "./PixelScreen";
 import { SpriteSheet } from "./SpriteSheet";
+import { Coord, GameObject, Sprite } from "./types";
 import { Vector } from "./Vector";
 
 const max = Math.max;
 const min = Math.min;
 
-export class Player {
-  constructor(images) {
+export class Player implements GameObject {
+  public coord: Coord;
+  private speed: Coord;
+  private standRight: SpriteSheet;
+  private standLeft: SpriteSheet;
+  private walkRight: SpriteSheet;
+  private walkLeft: SpriteSheet;
+  private activeSpriteSheet: SpriteSheet;
+  private sprite: Sprite;
+
+  constructor(images: ImageLibrary) {
     this.coord = [0, 0];
     this.speed = [0, 0];
 
@@ -62,7 +74,7 @@ export class Player {
     this.decideSpriteSheet(oldSpeed);
   }
 
-  decideSpriteSheet(oldSpeed) {
+  decideSpriteSheet(oldSpeed?: Coord) {
     if (this.speed[0] > 0 || this.speed[1] > 0) {
       this.activeSpriteSheet = this.walkRight;
     } else if (this.speed[0] < 0 || this.speed[1] < 0) {
@@ -77,7 +89,7 @@ export class Player {
     }
   }
 
-  tick(screen) {
+  tick(screen: PixelScreen) {
     this.coord = Vector.add(this.coord, this.speed);
     if (this.coord[0] > screen.width() - 32) {
       this.coord = [screen.width() - 32, this.coord[1]];
@@ -94,7 +106,7 @@ export class Player {
     this.sprite = this.activeSpriteSheet.getNextSprite();
   }
 
-  paint(screen) {
+  paint(screen: PixelScreen) {
     screen.drawSprite(this.sprite, this.coord);
   }
 }

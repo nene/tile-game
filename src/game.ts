@@ -5,14 +5,15 @@ import { Player } from "./Player";
 import { loadImage } from "./loadImage";
 import { ImageLibrary } from "./ImageLibrary";
 import { Grass } from "./Grass";
+import { GameObject } from "./types";
 
-export async function runGame(ctx) {
+export async function runGame(ctx: CanvasRenderingContext2D) {
   const grassImg = await loadImage(grassPath);
   const grassSprites = new SpriteSheet(grassImg, [32, 32], 1);
 
   const screen = new PixelScreen(ctx, { width: 1024, height: 1024, scale: 4 });
 
-  const gameObjects = [];
+  const gameObjects: GameObject[] = [];
 
   const images = new ImageLibrary();
   await images.load();
@@ -42,7 +43,7 @@ export async function runGame(ctx) {
   });
 
   return {
-    onKeyDown: (key) => {
+    onKeyDown: (key: string) => {
       switch (key) {
         case "ArrowLeft":
           player.moveLeft();
@@ -59,7 +60,7 @@ export async function runGame(ctx) {
         default: // do nothing
       }
     },
-    onKeyUp: (key) => {
+    onKeyUp: (key: string) => {
       switch (key) {
         case "ArrowLeft":
           player.stopLeft();
@@ -80,7 +81,7 @@ export async function runGame(ctx) {
 }
 
 // setInterval() will fire about 1x per second when in background tab
-function gameLoop(onTick) {
+function gameLoop(onTick: () => void) {
   const duration = 100;
   let prevTime = Date.now();
   setInterval(() => {
@@ -92,15 +93,15 @@ function gameLoop(onTick) {
   }, duration / 2);
 }
 
-function paintLoop(onPaint) {
-  function paint(time) {
+function paintLoop(onPaint: (time: number) => void) {
+  function paint(time: number) {
     onPaint(time);
     window.requestAnimationFrame(paint);
   }
   window.requestAnimationFrame(paint);
 }
 
-function drawField(screen, fieldSprites) {
+function drawField(screen: PixelScreen, fieldSprites: SpriteSheet) {
   for (let y = 0; y < screen.height(); y += fieldSprites.getSpriteHeight()) {
     for (let x = 0; x < screen.width(); x += fieldSprites.getSpriteWidth()) {
       screen.drawSprite(fieldSprites.getRandomSprite(), [x, y]);
