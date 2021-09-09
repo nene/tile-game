@@ -97,7 +97,7 @@ function paintLoop(onPaint: (time: number) => void) {
 function drawField(screen: PixelScreen, fieldSprites: SpriteSheet) {
   for (let y = 0; y < screen.height(); y += fieldSprites.getSpriteHeight()) {
     for (let x = 0; x < screen.width(); x += fieldSprites.getSpriteWidth()) {
-      screen.drawSprite(fieldSprites.getRandomSprite(), [x, y]);
+      screen.drawSprite(fieldSprites.getSprite(0), [x, y]);
     }
   }
 }

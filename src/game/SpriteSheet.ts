@@ -22,10 +22,6 @@ export class SpriteSheet {
     return sprite;
   }
 
-  getRandomSprite(): Sprite {
-    return this.getSprite(Math.floor(Math.random() * this.count));
-  }
-
   getSprite(index: number): Sprite {
     return {
       image: this.image,
