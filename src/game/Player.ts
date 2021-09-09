@@ -3,6 +3,7 @@ import { PixelScreen } from "./PixelScreen";
 import { SpriteSheet, Sprite } from "./SpriteSheet";
 import { GameObject } from "./GameObject";
 import { Coord, coordAdd } from "./Coord";
+import { SpriteAnimation } from "./SpriteAnimation";
 
 const max = Math.max;
 const min = Math.min;
@@ -10,81 +11,79 @@ const min = Math.min;
 export class Player implements GameObject {
   private coord: Coord;
   private speed: Coord;
-  private standRight: SpriteSheet;
-  private standLeft: SpriteSheet;
-  private walkRight: SpriteSheet;
-  private walkLeft: SpriteSheet;
-  private activeSpriteSheet: SpriteSheet;
-  private sprite: Sprite;
+  private standRight: SpriteAnimation;
+  private standLeft: SpriteAnimation;
+  private walkRight: SpriteAnimation;
+  private walkLeft: SpriteAnimation;
+  private animation: SpriteAnimation;
 
   constructor(images: ImageLibrary) {
     this.coord = [0, 0];
     this.speed = [0, 0];
 
-    this.standRight = new SpriteSheet(images.get("walkRight"), [32, 32], 1);
-    this.standLeft = new SpriteSheet(images.get("walkLeft"), [32, 32], 1);
-    this.walkRight = new SpriteSheet(images.get("walkRight"), [32, 32], 8);
-    this.walkLeft = new SpriteSheet(images.get("walkLeft"), [32, 32], 8);
+    this.standRight = new SpriteAnimation(new SpriteSheet(images.get("walkRight"), [32, 32], 1));
+    this.standLeft = new SpriteAnimation(new SpriteSheet(images.get("walkLeft"), [32, 32], 1));
+    this.walkRight = new SpriteAnimation(new SpriteSheet(images.get("walkRight"), [32, 32], 8));
+    this.walkLeft = new SpriteAnimation(new SpriteSheet(images.get("walkLeft"), [32, 32], 8));
 
-    this.activeSpriteSheet = this.standRight;
-    this.sprite = this.activeSpriteSheet.getNextSprite();
+    this.animation = this.standRight;
   }
 
   moveRight() {
     this.speed = [3, this.speed[1]];
-    this.decideSpriteSheet();
+    this.pickAnimation();
   }
 
   moveLeft() {
     this.speed = [-3, this.speed[1]];
-    this.decideSpriteSheet();
+    this.pickAnimation();
   }
 
   moveUp() {
     this.speed = [this.speed[0], -3];
-    this.decideSpriteSheet();
+    this.pickAnimation();
   }
 
   moveDown() {
     this.speed = [this.speed[0], 3];
-    this.decideSpriteSheet();
+    this.pickAnimation();
   }
 
   stopRight() {
     const oldSpeed = this.speed;
     this.speed = [min(0, this.speed[0]), this.speed[1]];
-    this.decideSpriteSheet(oldSpeed);
+    this.pickAnimation(oldSpeed);
   }
 
   stopLeft() {
     const oldSpeed = this.speed;
     this.speed = [max(0, this.speed[0]), this.speed[1]];
-    this.decideSpriteSheet(oldSpeed);
+    this.pickAnimation(oldSpeed);
   }
 
   stopDown() {
     const oldSpeed = this.speed;
     this.speed = [this.speed[0], min(0, this.speed[1])];
-    this.decideSpriteSheet(oldSpeed);
+    this.pickAnimation(oldSpeed);
   }
 
   stopUp() {
     const oldSpeed = this.speed;
     this.speed = [this.speed[0], max(0, this.speed[1])];
-    this.decideSpriteSheet(oldSpeed);
+    this.pickAnimation(oldSpeed);
   }
 
-  decideSpriteSheet(oldSpeed?: Coord) {
+  pickAnimation(oldSpeed?: Coord) {
     if (this.speed[0] > 0 || this.speed[1] > 0) {
-      this.activeSpriteSheet = this.walkRight;
+      this.animation = this.walkRight;
     } else if (this.speed[0] < 0 || this.speed[1] < 0) {
-      this.activeSpriteSheet = this.walkLeft;
+      this.animation = this.walkLeft;
     } else if (oldSpeed) {
       // when standing
       if (oldSpeed[0] > 0 || oldSpeed[1] > 0) {
-        this.activeSpriteSheet = this.standRight;
+        this.animation = this.standRight;
       } else {
-        this.activeSpriteSheet = this.standLeft;
+        this.animation = this.standLeft;
       }
     }
   }
@@ -103,11 +102,11 @@ export class Player implements GameObject {
     if (this.coord[1] > screen.height() - 32) {
       this.coord = [this.coord[0], screen.height() - 32];
     }
-    this.sprite = this.activeSpriteSheet.getNextSprite();
+    this.animation.tick();
   }
 
   paint(screen: PixelScreen) {
-    screen.drawSprite(this.sprite, this.coord);
+    screen.drawSprite(this.animation.getSprite(), this.coord);
   }
 
   zIndex(): number {
