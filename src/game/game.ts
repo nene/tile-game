@@ -3,7 +3,7 @@ import { SpriteSheet } from "./SpriteSheet";
 import { Player } from "./Player";
 import { ImageLibrary } from "./ImageLibrary";
 import { Grass } from "./Grass";
-import { GameObject } from "./types";
+import { GameObject } from "./GameObject";
 
 export async function runGame(ctx: CanvasRenderingContext2D) {
   const screen = new PixelScreen(ctx, { width: 1024, height: 1024, scale: 4 });
