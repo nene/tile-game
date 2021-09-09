@@ -11,9 +11,11 @@ function App() {
       const events = await runGame(ctx);
 
       document.addEventListener("keydown", (e) => {
+        e.preventDefault();
         events.onKeyDown(e.key);
       });
       document.addEventListener("keyup", (e) => {
+        e.preventDefault();
         events.onKeyUp(e.key);
       });
     };

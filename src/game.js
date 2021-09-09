@@ -50,6 +50,12 @@ export async function runGame(ctx) {
         case "ArrowRight":
           player.moveRight();
           break;
+        case "ArrowUp":
+          player.moveUp();
+          break;
+        case "ArrowDown":
+          player.moveDown();
+          break;
         default: // do nothing
       }
     },
@@ -59,6 +65,12 @@ export async function runGame(ctx) {
           player.stop();
           break;
         case "ArrowRight":
+          player.stop();
+          break;
+        case "ArrowUp":
+          player.stop();
+          break;
+        case "ArrowDown":
           player.stop();
           break;
         default: // do nothing

@@ -24,23 +24,39 @@ export class Player {
     this.activeSpriteSheet = this.walkLeft;
   }
 
+  moveUp() {
+    this.speed = [0, -3];
+    this.activeSpriteSheet = this.walkLeft;
+  }
+
+  moveDown() {
+    this.speed = [0, 3];
+    this.activeSpriteSheet = this.walkRight;
+  }
+
   stop() {
-    if (this.speed[0] > 0) {
+    if (this.speed[0] > 0 || this.speed[1] > 0) {
       this.activeSpriteSheet = this.standRight;
     }
-    if (this.speed[0] < 0) {
+    if (this.speed[0] < 0 || this.speed[1] < 0) {
       this.activeSpriteSheet = this.standLeft;
     }
     this.speed = [0, 0];
   }
 
   tick(screen) {
-    this.coord = [this.coord[0] + this.speed[0], this.coord[1]];
+    this.coord = [this.coord[0] + this.speed[0], this.coord[1] + this.speed[1]];
     if (this.coord[0] > screen.width() - 32) {
       this.coord = [screen.width() - 32, this.coord[1]];
     }
     if (this.coord[0] < 0) {
       this.coord = [0, this.coord[1]];
+    }
+    if (this.coord[1] < 0) {
+      this.coord = [this.coord[0], 0];
+    }
+    if (this.coord[1] > screen.height() - 32) {
+      this.coord = [this.coord[0], screen.height() - 32];
     }
     this.sprite = this.activeSpriteSheet.getNextSprite();
   }
