@@ -1,6 +1,5 @@
+import { Coord } from "./Coord";
 import { PixelScreen } from "./PixelScreen";
-
-export type Coord = [number, number];
 
 export interface GameObject {
     coord: Coord;

@@ -1,8 +1,8 @@
 import { ImageLibrary } from "./ImageLibrary";
 import { PixelScreen } from "./PixelScreen";
 import { SpriteSheet } from "./SpriteSheet";
-import { Coord, GameObject, Sprite } from "./types";
-import { Vector } from "./Vector";
+import { GameObject, Sprite } from "./types";
+import { Coord, coordAdd } from "./Coord";
 
 const max = Math.max;
 const min = Math.min;
@@ -90,7 +90,7 @@ export class Player implements GameObject {
   }
 
   tick(screen: PixelScreen) {
-    this.coord = Vector.add(this.coord, this.speed);
+    this.coord = coordAdd(this.coord, this.speed);
     if (this.coord[0] > screen.width() - 32) {
       this.coord = [screen.width() - 32, this.coord[1]];
     }
