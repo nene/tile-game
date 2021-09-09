@@ -30,62 +30,66 @@ export class Player implements GameObject {
   }
 
   moveRight() {
-    this.speed = [3, this.speed[1]];
-    this.pickAnimation();
+    this.changeSpeed([3, this.speed[1]]);
   }
 
   moveLeft() {
-    this.speed = [-3, this.speed[1]];
-    this.pickAnimation();
+    this.changeSpeed([-3, this.speed[1]]);
   }
 
   moveUp() {
-    this.speed = [this.speed[0], -3];
-    this.pickAnimation();
+    this.changeSpeed([this.speed[0], -3]);
   }
 
   moveDown() {
-    this.speed = [this.speed[0], 3];
-    this.pickAnimation();
+    this.changeSpeed([this.speed[0], 3]);
   }
 
   stopRight() {
-    const oldSpeed = this.speed;
-    this.speed = [min(0, this.speed[0]), this.speed[1]];
-    this.pickAnimation(oldSpeed);
+    this.changeSpeed([min(0, this.speed[0]), this.speed[1]]);
   }
 
   stopLeft() {
-    const oldSpeed = this.speed;
-    this.speed = [max(0, this.speed[0]), this.speed[1]];
-    this.pickAnimation(oldSpeed);
+    this.changeSpeed([max(0, this.speed[0]), this.speed[1]]);
   }
 
   stopDown() {
-    const oldSpeed = this.speed;
-    this.speed = [this.speed[0], min(0, this.speed[1])];
-    this.pickAnimation(oldSpeed);
+    this.changeSpeed([this.speed[0], min(0, this.speed[1])]);
   }
 
   stopUp() {
-    const oldSpeed = this.speed;
-    this.speed = [this.speed[0], max(0, this.speed[1])];
-    this.pickAnimation(oldSpeed);
+    this.changeSpeed([this.speed[0], max(0, this.speed[1])]);
   }
 
-  pickAnimation(oldSpeed?: Coord) {
-    if (this.speed[0] > 0 || this.speed[1] > 0) {
-      this.animation = this.walkRight;
-    } else if (this.speed[0] < 0 || this.speed[1] < 0) {
-      this.animation = this.walkLeft;
-    } else if (oldSpeed) {
-      // when standing
-      if (oldSpeed[0] > 0 || oldSpeed[1] > 0) {
-        this.animation = this.standRight;
-      } else {
-        this.animation = this.standLeft;
-      }
+  changeSpeed(newSpeed: Coord) {
+    const oldSpeed = this.speed;
+    if (this.isStanding(oldSpeed) && this.isMoving(newSpeed)) {
+      // started moving, begin new animation
+      this.animation = (newSpeed[0] > 0 || newSpeed[1] > 0) ? this.walkRight : this.walkLeft;
+      this.animation.setFrame(0);
     }
+    else if (this.isMoving(oldSpeed) && this.isMoving(newSpeed)) {
+      // was already moving, preserve current animation frame
+      const oldAnimation = this.animation;
+      this.animation = (newSpeed[0] > 0 || newSpeed[1] > 0) ? this.walkRight : this.walkLeft;
+      this.animation.setFrame(oldAnimation.getFrame());
+    }
+    else if (this.isMoving(oldSpeed) && this.isStanding(newSpeed)) {
+      // was moving, now stopped
+      this.animation = (oldSpeed[0] > 0 || oldSpeed[1] > 0) ? this.standRight : this.standLeft;
+    }
+    else {
+      // continue standing
+    }
+    this.speed = newSpeed;
+  }
+
+  isStanding(speed: Coord) {
+    return speed[0] === 0 && speed[1] === 0;
+  }
+
+  isMoving(speed: Coord) {
+    return !this.isStanding(speed);
   }
 
   tick(screen: PixelScreen) {

@@ -28,6 +28,10 @@ export class SpriteAnimation {
     }
   }
 
+  getFrame(): number {
+    return this.currentFrame;
+  }
+
   nextFrame() {
     this.setFrame(this.currentFrame + 1);
   }
