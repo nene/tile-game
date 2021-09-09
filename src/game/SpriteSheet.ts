@@ -1,5 +1,10 @@
 import { Coord } from "./Coord";
-import { Sprite } from "./types";
+
+export interface Sprite {
+  image: HTMLImageElement,
+  coord: Coord,
+  size: Coord,
+}
 
 export class SpriteSheet {
   private index = 0;

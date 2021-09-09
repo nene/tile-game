@@ -1,5 +1,5 @@
 import { Coord } from "./Coord";
-import { Sprite } from "./types";
+import { Sprite } from "./SpriteSheet";
 
 interface PixelScreenOptions {
   width: number;

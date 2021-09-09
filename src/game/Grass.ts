@@ -1,8 +1,8 @@
 import { Coord } from "./Coord";
 import { ImageLibrary } from "./ImageLibrary";
 import { PixelScreen } from "./PixelScreen";
-import { SpriteSheet } from "./SpriteSheet";
-import { GameObject, Sprite } from "./types";
+import { SpriteSheet, Sprite } from "./SpriteSheet";
+import { GameObject } from "./types";
 
 export class Grass implements GameObject {
   public coord: Coord;

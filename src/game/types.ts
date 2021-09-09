@@ -6,9 +6,3 @@ export interface GameObject {
   tick: (screen: PixelScreen) => void;
   paint: (screen: PixelScreen) => void;
 }
-
-export interface Sprite {
-  image: HTMLImageElement,
-  coord: Coord,
-  size: Coord,
-}

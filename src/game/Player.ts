@@ -1,7 +1,7 @@
 import { ImageLibrary } from "./ImageLibrary";
 import { PixelScreen } from "./PixelScreen";
-import { SpriteSheet } from "./SpriteSheet";
-import { GameObject, Sprite } from "./types";
+import { SpriteSheet, Sprite } from "./SpriteSheet";
+import { GameObject } from "./types";
 import { Coord, coordAdd } from "./Coord";
 
 const max = Math.max;
