@@ -1,16 +1,11 @@
-import grassPath from "./sprites/grass-bg.png";
 import { PixelScreen } from "./PixelScreen";
 import { SpriteSheet } from "./SpriteSheet";
 import { Player } from "./Player";
-import { loadImage } from "./loadImage";
 import { ImageLibrary } from "./ImageLibrary";
 import { Grass } from "./Grass";
 import { GameObject } from "./types";
 
 export async function runGame(ctx: CanvasRenderingContext2D) {
-  const grassImg = await loadImage(grassPath);
-  const grassSprites = new SpriteSheet(grassImg, [32, 32], 1);
-
   const screen = new PixelScreen(ctx, { width: 1024, height: 1024, scale: 4 });
 
   const gameObjects: GameObject[] = [];
@@ -30,7 +25,7 @@ export async function runGame(ctx: CanvasRenderingContext2D) {
     return a.coord[1] - b.coord[1];
   });
 
-  drawField(screen, grassSprites);
+  drawField(screen, new SpriteSheet(images.get('grassBg'), [32, 32], 1));
   screen.saveBg();
 
   gameLoop(() => {
