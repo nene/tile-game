@@ -13,6 +13,9 @@ function App() {
       document.addEventListener("keydown", (e) => {
         events.onKeyDown(e.key);
       });
+      document.addEventListener("keyup", (e) => {
+        events.onKeyUp(e.key);
+      });
     };
     game();
   });

@@ -54,6 +54,17 @@ export async function runGame(ctx) {
         default: // do nothing
       }
     },
+    onKeyUp: (key) => {
+      switch (key) {
+        case "ArrowLeft":
+          player.stop();
+          break;
+        case "ArrowRight":
+          player.stop();
+          break;
+        default: // do nothing
+      }
+    },
   };
 }
 
