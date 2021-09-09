@@ -1,4 +1,5 @@
 import { SpriteSheet } from "./SpriteSheet";
+import { Vector } from "./Vector";
 
 export class Player {
   constructor(images) {
@@ -45,7 +46,7 @@ export class Player {
   }
 
   tick(screen) {
-    this.coord = [this.coord[0] + this.speed[0], this.coord[1] + this.speed[1]];
+    this.coord = Vector.add(this.coord, this.speed);
     if (this.coord[0] > screen.width() - 32) {
       this.coord = [screen.width() - 32, this.coord[1]];
     }
