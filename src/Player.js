@@ -1,22 +1,13 @@
-import walkRightPath from "./sprites/walk-right.png";
-import walkLeftPath from "./sprites/walk-left.png";
 import { SpriteSheet } from "./SpriteSheet";
-import { loadImage } from "./loadImage";
 
 export class Player {
-  constructor() {
+  constructor(images) {
     this.coord = [0, 0];
     this.speed = 0;
-  }
 
-  async init() {
-    this.stand = new SpriteSheet(await loadImage(walkRightPath), [32, 32], 1);
-    this.walkRight = new SpriteSheet(
-      await loadImage(walkRightPath),
-      [32, 32],
-      8
-    );
-    this.walkLeft = new SpriteSheet(await loadImage(walkLeftPath), [32, 32], 8);
+    this.stand = new SpriteSheet(images.get("walkRight"), [32, 32], 1);
+    this.walkRight = new SpriteSheet(images.get("walkRight"), [32, 32], 8);
+    this.walkLeft = new SpriteSheet(images.get("walkLeft"), [32, 32], 8);
 
     this.stop();
     this.sprite = this.activeSpriteSheet.getNextSprite();

@@ -17,8 +17,7 @@ export async function runGame(ctx) {
   const images = new ImageLibrary();
   await images.load();
 
-  const player = new Player();
-  await player.init();
+  const player = new Player(images);
   gameObjects.push(player);
 
   for (let i = 0; i < 50; i++) {
