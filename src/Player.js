@@ -37,10 +37,10 @@ export class Player {
   tick(screen) {
     this.coord = [this.coord[0] + this.speed, this.coord[1]];
     if (this.coord[0] > screen.width() - 32) {
-      this.stop();
+      this.coord = [screen.width() - 32, this.coord[1]];
     }
     if (this.coord[0] < 0) {
-      this.stop();
+      this.coord = [0, this.coord[1]];
     }
     this.sprite = this.activeSpriteSheet.getNextSprite();
   }
