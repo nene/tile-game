@@ -7,19 +7,11 @@ export interface Sprite {
 }
 
 export class SpriteSheet {
-  private index = 0;
-
   constructor(
     private image: HTMLImageElement,
     private size: Coord,
     private count: number
   ) {
-  }
-
-  getNextSprite(): Sprite {
-    const sprite = this.getSprite(this.index);
-    this.index = (this.index + 1) % this.count;
-    return sprite;
   }
 
   getSprite(index: number): Sprite {
