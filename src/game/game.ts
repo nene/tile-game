@@ -20,16 +20,14 @@ export async function runGame(ctx: CanvasRenderingContext2D) {
     gameObjects.push(new Grass(images, screen));
   }
 
-  // sort objects by their Y-position
-  gameObjects.sort((a, b) => {
-    return a.zIndex() - b.zIndex();
-  });
-
   drawField(screen, new SpriteSheet(images.get('grassBg'), [32, 32], 1));
   screen.saveBg();
 
   gameLoop(() => {
     gameObjects.forEach((obj) => obj.tick(screen));
+    gameObjects.sort((a, b) => {
+      return a.zIndex() - b.zIndex();
+    });
   });
 
   paintLoop(() => {
