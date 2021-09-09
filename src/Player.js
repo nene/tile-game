@@ -1,6 +1,9 @@
 import { SpriteSheet } from "./SpriteSheet";
 import { Vector } from "./Vector";
 
+const max = Math.max;
+const min = Math.min;
+
 export class Player {
   constructor(images) {
     this.coord = [0, 0];
@@ -16,33 +19,62 @@ export class Player {
   }
 
   moveRight() {
-    this.speed = [3, 0];
-    this.activeSpriteSheet = this.walkRight;
+    this.speed = [3, this.speed[1]];
+    this.decideSpriteSheet();
   }
 
   moveLeft() {
-    this.speed = [-3, 0];
-    this.activeSpriteSheet = this.walkLeft;
+    this.speed = [-3, this.speed[1]];
+    this.decideSpriteSheet();
   }
 
   moveUp() {
-    this.speed = [0, -3];
-    this.activeSpriteSheet = this.walkLeft;
+    this.speed = [this.speed[0], -3];
+    this.decideSpriteSheet();
   }
 
   moveDown() {
-    this.speed = [0, 3];
-    this.activeSpriteSheet = this.walkRight;
+    this.speed = [this.speed[0], 3];
+    this.decideSpriteSheet();
   }
 
-  stop() {
+  stopRight() {
+    const oldSpeed = this.speed;
+    this.speed = [min(0, this.speed[0]), this.speed[1]];
+    this.decideSpriteSheet(oldSpeed);
+  }
+
+  stopLeft() {
+    const oldSpeed = this.speed;
+    this.speed = [max(0, this.speed[0]), this.speed[1]];
+    this.decideSpriteSheet(oldSpeed);
+  }
+
+  stopDown() {
+    const oldSpeed = this.speed;
+    this.speed = [this.speed[0], min(0, this.speed[1])];
+    this.decideSpriteSheet(oldSpeed);
+  }
+
+  stopUp() {
+    const oldSpeed = this.speed;
+    this.speed = [this.speed[0], max(0, this.speed[1])];
+    this.decideSpriteSheet(oldSpeed);
+  }
+
+  decideSpriteSheet(oldSpeed) {
     if (this.speed[0] > 0 || this.speed[1] > 0) {
-      this.activeSpriteSheet = this.standRight;
+      this.activeSpriteSheet = this.walkRight;
+    } else if (this.speed[0] < 0 || this.speed[1] < 0) {
+      this.activeSpriteSheet = this.walkLeft;
+    } else if (oldSpeed) {
+      // when standing
+      if (oldSpeed[0] > 0 || oldSpeed[1] > 0) {
+        this.activeSpriteSheet = this.standRight;
+      } else {
+        this.activeSpriteSheet = this.standLeft;
+      }
     }
-    if (this.speed[0] < 0 || this.speed[1] < 0) {
-      this.activeSpriteSheet = this.standLeft;
-    }
-    this.speed = [0, 0];
   }
 
   tick(screen) {

@@ -62,16 +62,16 @@ export async function runGame(ctx) {
     onKeyUp: (key) => {
       switch (key) {
         case "ArrowLeft":
-          player.stop();
+          player.stopLeft();
           break;
         case "ArrowRight":
-          player.stop();
+          player.stopRight();
           break;
         case "ArrowUp":
-          player.stop();
+          player.stopUp();
           break;
         case "ArrowDown":
-          player.stop();
+          player.stopDown();
           break;
         default: // do nothing
       }
