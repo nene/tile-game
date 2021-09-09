@@ -1,7 +1,7 @@
 import { Coord } from "./Coord";
 import { ImageLibrary } from "./ImageLibrary";
 import { PixelScreen } from "./PixelScreen";
-import { SpriteSheet, Sprite } from "./SpriteSheet";
+import { SpriteSheet } from "./SpriteSheet";
 import { GameObject } from "./GameObject";
 import { SpriteAnimation } from "./SpriteAnimation";
 
