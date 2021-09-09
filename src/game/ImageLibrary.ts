@@ -6,6 +6,8 @@ import grass3 from "./sprites/grass3.png";
 import grass4 from "./sprites/grass4.png";
 import walkLeft from "./sprites/walk-left.png";
 import walkRight from "./sprites/walk-right.png";
+import walkForward from "./sprites/walk-forward.png";
+import walkBack from "./sprites/walk-back.png";
 
 export class ImageLibrary {
   private images: Record<string, HTMLImageElement> = {};
@@ -20,6 +22,8 @@ export class ImageLibrary {
 
     this.images.walkLeft = await loadImage(walkLeft);
     this.images.walkRight = await loadImage(walkRight);
+    this.images.walkForward = await loadImage(walkForward);
+    this.images.walkBack = await loadImage(walkBack);
   }
 
   get(name: string): HTMLImageElement {
