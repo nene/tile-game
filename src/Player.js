@@ -5,11 +5,12 @@ export class Player {
     this.coord = [0, 0];
     this.speed = 0;
 
-    this.stand = new SpriteSheet(images.get("walkRight"), [32, 32], 1);
+    this.standRight = new SpriteSheet(images.get("walkRight"), [32, 32], 1);
+    this.standLeft = new SpriteSheet(images.get("walkLeft"), [32, 32], 1);
     this.walkRight = new SpriteSheet(images.get("walkRight"), [32, 32], 8);
     this.walkLeft = new SpriteSheet(images.get("walkLeft"), [32, 32], 8);
 
-    this.stop();
+    this.activeSpriteSheet = this.standRight;
     this.sprite = this.activeSpriteSheet.getNextSprite();
   }
 
@@ -24,8 +25,13 @@ export class Player {
   }
 
   stop() {
+    if (this.speed > 0) {
+      this.activeSpriteSheet = this.standRight;
+    }
+    if (this.speed < 0) {
+      this.activeSpriteSheet = this.standLeft;
+    }
     this.speed = 0;
-    this.activeSpriteSheet = this.stand;
   }
 
   tick(screen) {
