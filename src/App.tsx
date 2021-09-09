@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import "./App.css";
-import { runGame } from "./game";
+import { runGame } from "./game/game";
 
 function App() {
   const canvasEl = useRef<HTMLCanvasElement>(null);
