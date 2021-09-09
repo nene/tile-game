@@ -3,22 +3,18 @@ import { ImageLibrary } from "./ImageLibrary";
 import { PixelScreen } from "./PixelScreen";
 import { SpriteSheet, Sprite } from "./SpriteSheet";
 import { GameObject } from "./GameObject";
+import { SpriteAnimation } from "./SpriteAnimation";
 
 export class Grass implements GameObject {
   private coord: Coord;
-  private spriteSheet: SpriteSheet;
-  private sprite: Sprite;
-  private even = false;
+  private animation: SpriteAnimation;
 
   constructor(images: ImageLibrary, screen: PixelScreen) {
     const img = images.get("grass" + (rand(4) + 1));
-    this.spriteSheet = new SpriteSheet(img, [32, 32], 6);
-
-    this.sprite = this.spriteSheet.getSprite(0);
-    const spriteStartIndex = 2 + rand(6);
-    for (let i = 0; i < spriteStartIndex; i++) {
-      this.sprite = this.spriteSheet.getNextSprite();
-    }
+    this.animation = new SpriteAnimation(
+      new SpriteSheet(img, [32, 32], 6),
+      { ticksPerFrame: 2, currentFrame: rand(6) }
+    );
 
     this.coord = [
       rand(screen.width() + 32) - 32,
@@ -27,16 +23,11 @@ export class Grass implements GameObject {
   }
 
   tick() {
-    if (this.even) {
-      this.sprite = this.spriteSheet.getNextSprite();
-      this.even = false;
-    } else {
-      this.even = true;
-    }
+    this.animation.tick();
   }
 
   paint(screen: PixelScreen) {
-    screen.drawSprite(this.sprite, this.coord);
+    screen.drawSprite(this.animation.getSprite(), this.coord);
   }
 
   zIndex(): number {

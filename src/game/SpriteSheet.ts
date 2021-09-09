@@ -41,4 +41,8 @@ export class SpriteSheet {
   getSpriteHeight(): number {
     return this.size[1];
   }
+
+  getCount(): number {
+    return this.count;
+  }
 }
