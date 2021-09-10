@@ -5,6 +5,7 @@ import { ImageLibrary } from "./ImageLibrary";
 import { Grass } from "./Grass";
 import { GameObject } from "./GameObject";
 import { GameGrid } from "./GameGrid";
+import { Background } from "./Background";
 
 export async function runGame(ctx: CanvasRenderingContext2D) {
   const screen = new PixelScreen(ctx, { width: 1024, height: 1024, scale: 4 });
@@ -22,7 +23,8 @@ export async function runGame(ctx: CanvasRenderingContext2D) {
     gameObjects.push(new Grass(images, screen));
   }
 
-  drawField(screen, grid, new SpriteSheet(images.get('grassBg'), [32, 32], 1));
+  const background = new Background(grid, images);
+  background.paint(screen);
   screen.saveBg();
 
   gameLoop(() => {
@@ -94,10 +96,4 @@ function paintLoop(onPaint: (time: number) => void) {
     window.requestAnimationFrame(paint);
   }
   window.requestAnimationFrame(paint);
-}
-
-function drawField(screen: PixelScreen, grid: GameGrid, fieldSprites: SpriteSheet) {
-  grid.forEachTile((coord) => {
-    screen.drawSprite(fieldSprites.getSprite(0), coord);
-  });
 }
