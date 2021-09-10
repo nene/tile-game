@@ -13,6 +13,7 @@ type Direction = 'up' | 'down' | 'left' | 'right';
 export class Player implements GameObject {
   private coord: Coord;
   private speed: Coord;
+  private offset: Coord = [-8, -16];
   private standRight: SpriteAnimation;
   private standLeft: SpriteAnimation;
   private standBack: SpriteAnimation;
@@ -24,7 +25,7 @@ export class Player implements GameObject {
   private animation: SpriteAnimation;
 
   constructor(images: ImageLibrary) {
-    this.coord = [0, 0];
+    this.coord = [0, 16];
     this.speed = [0, 0];
 
     this.standRight = new SpriteAnimation(new SpriteSheet(images.get("walkRight"), [32, 32], 1));
@@ -131,8 +132,8 @@ export class Player implements GameObject {
 
   tick(screen: PixelScreen) {
     this.coord = coordAdd(this.coord, this.speed);
-    if (this.coord[0] > screen.width() - 32) {
-      this.coord = [screen.width() - 32, this.coord[1]];
+    if (this.coord[0] > screen.width() - 16) {
+      this.coord = [screen.width() - 16, this.coord[1]];
     }
     if (this.coord[0] < 0) {
       this.coord = [0, this.coord[1]];
@@ -140,14 +141,14 @@ export class Player implements GameObject {
     if (this.coord[1] < 0) {
       this.coord = [this.coord[0], 0];
     }
-    if (this.coord[1] > screen.height() - 32) {
-      this.coord = [this.coord[0], screen.height() - 32];
+    if (this.coord[1] > screen.height() - 16) {
+      this.coord = [this.coord[0], screen.height() - 16];
     }
     this.animation.tick();
   }
 
   paint(screen: PixelScreen) {
-    screen.drawSprite(this.animation.getSprite(), this.coord);
+    screen.drawSprite(this.animation.getSprite(), coordAdd(this.coord, this.offset));
   }
 
   zIndex(): number {

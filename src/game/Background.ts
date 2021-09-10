@@ -18,7 +18,7 @@ export class Background implements GameObject {
     if (!this.initialized) {
       this.grid.forEachTile((coord) => {
         screen.drawSprite(this.bgSprites.getSprite(0), coord);
-      });
+      }, [32, 32]);
       screen.saveBg();
       this.initialized = true;
     } else {
