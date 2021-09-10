@@ -4,9 +4,11 @@ import { Player } from "./Player";
 import { ImageLibrary } from "./ImageLibrary";
 import { Grass } from "./Grass";
 import { GameObject } from "./GameObject";
+import { GameGrid } from "./GameGrid";
 
 export async function runGame(ctx: CanvasRenderingContext2D) {
   const screen = new PixelScreen(ctx, { width: 1024, height: 1024, scale: 4 });
+  const grid = new GameGrid({ rows: screen.width() / 32, cols: screen.height() / 32, tileSize: [32, 32] });
 
   const gameObjects: GameObject[] = [];
 
@@ -20,7 +22,7 @@ export async function runGame(ctx: CanvasRenderingContext2D) {
     gameObjects.push(new Grass(images, screen));
   }
 
-  drawField(screen, new SpriteSheet(images.get('grassBg'), [32, 32], 1));
+  drawField(screen, grid, new SpriteSheet(images.get('grassBg'), [32, 32], 1));
   screen.saveBg();
 
   gameLoop(() => {
@@ -94,10 +96,8 @@ function paintLoop(onPaint: (time: number) => void) {
   window.requestAnimationFrame(paint);
 }
 
-function drawField(screen: PixelScreen, fieldSprites: SpriteSheet) {
-  for (let y = 0; y < screen.height(); y += fieldSprites.getSpriteHeight()) {
-    for (let x = 0; x < screen.width(); x += fieldSprites.getSpriteWidth()) {
-      screen.drawSprite(fieldSprites.getSprite(0), [x, y]);
-    }
-  }
+function drawField(screen: PixelScreen, grid: GameGrid, fieldSprites: SpriteSheet) {
+  grid.forEachTile((coord) => {
+    screen.drawSprite(fieldSprites.getSprite(0), coord);
+  });
 }
