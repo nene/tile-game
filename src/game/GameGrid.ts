@@ -25,6 +25,12 @@ export class GameGrid {
     }
   }
 
+  allTiles(): Coord[] {
+    const tiles: Coord[] = [];
+    this.forEachTile((tile) => tiles.push(tile));
+    return tiles;
+  }
+
   tileToScreenCoord([x, y]: Coord): Coord {
     return [x * this.tileSize[0], y * this.tileSize[1]];
   }

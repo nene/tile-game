@@ -6,6 +6,7 @@ import { Grass } from "./Grass";
 import { GameObject } from "./GameObject";
 import { GameGrid } from "./GameGrid";
 import { Background } from "./Background";
+import { shuffle, take } from "lodash";
 
 export async function runGame(ctx: CanvasRenderingContext2D) {
   const screen = new PixelScreen(ctx, { width: 1024, height: 1024, scale: 4 });
@@ -21,9 +22,9 @@ export async function runGame(ctx: CanvasRenderingContext2D) {
   const player = new Player(images);
   gameObjects.push(player);
 
-  for (let i = 0; i < 50; i++) {
-    gameObjects.push(new Grass(images, grid));
-  }
+  gameObjects.push(
+    ...take(shuffle(grid.allTiles()), 50).map((coord) => new Grass(images, coord))
+  );
 
   gameLoop(() => {
     gameObjects.forEach((obj) => obj.tick(screen));
