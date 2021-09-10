@@ -74,18 +74,7 @@ export class Player implements GameObject {
 
   changeSpeed(newSpeed: Coord) {
     const oldSpeed = this.speed;
-    if (this.isStanding(oldSpeed) && this.isMoving(newSpeed)) {
-      // started moving, begin new animation
-      this.animation = this.pickByDirection(newSpeed, {
-        right: this.walkRight,
-        left: this.walkLeft,
-        up: this.walkBack,
-        down: this.walkForward,
-      });
-      this.animation.setFrame(0);
-    }
-    else if (this.isMoving(oldSpeed) && this.isMoving(newSpeed)) {
-      // was already moving, preserve current animation frame
+    if (this.isMoving(newSpeed)) {
       const oldAnimation = this.animation;
       this.animation = this.pickByDirection(newSpeed, {
         right: this.walkRight,
@@ -93,19 +82,24 @@ export class Player implements GameObject {
         up: this.walkBack,
         down: this.walkForward,
       });
-      this.animation.setFrame(oldAnimation.getFrame());
-    }
-    else if (this.isMoving(oldSpeed) && this.isStanding(newSpeed)) {
-      // was moving, now stopped
-      this.animation = this.pickByDirection(oldSpeed, {
-        right: this.standRight,
-        left: this.standLeft,
-        up: this.standBack,
-        down: this.standForward,
-      });
+      if (this.isStanding(oldSpeed)) {
+        // started moving, begin new animation
+        this.animation.setFrame(0);
+      } else {
+        // was already moving, preserve current animation frame
+        this.animation.setFrame(oldAnimation.getFrame());
+      }
     }
     else {
-      // continue standing
+      if (this.isMoving(oldSpeed)) {
+        // was moving, now stopped
+        this.animation = this.pickByDirection(oldSpeed, {
+          right: this.standRight,
+          left: this.standLeft,
+          up: this.standBack,
+          down: this.standForward,
+        });
+      }
     }
     this.speed = newSpeed;
   }
