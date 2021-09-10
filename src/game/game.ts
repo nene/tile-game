@@ -16,16 +16,14 @@ export async function runGame(ctx: CanvasRenderingContext2D) {
   const images = new ImageLibrary();
   await images.load();
 
+  gameObjects.push(new Background(grid, images));
+
   const player = new Player(images);
   gameObjects.push(player);
 
   for (let i = 0; i < 50; i++) {
     gameObjects.push(new Grass(images, screen));
   }
-
-  const background = new Background(grid, images);
-  background.paint(screen);
-  screen.saveBg();
 
   gameLoop(() => {
     gameObjects.forEach((obj) => obj.tick(screen));
@@ -35,7 +33,6 @@ export async function runGame(ctx: CanvasRenderingContext2D) {
   });
 
   paintLoop(() => {
-    screen.restoreBg();
     gameObjects.forEach((obj) => obj.paint(screen));
   });
 
