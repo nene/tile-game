@@ -20,8 +20,20 @@ export class GameGrid {
   forEachTile(callback: (coord: Coord) => void) {
     for (let y = 0; y < this.cols; y++) {
       for (let x = 0; x < this.rows; x++) {
-        callback([x * this.tileSize[0], y * this.tileSize[1]]);
+        callback(this.tileToScreenCoord([x, y]));
       }
     }
+  }
+
+  tileToScreenCoord([x, y]: Coord): Coord {
+    return [x * this.tileSize[0], y * this.tileSize[1]];
+  }
+
+  getRows() {
+    return this.rows;
+  }
+
+  getCols() {
+    return this.cols;
   }
 }

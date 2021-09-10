@@ -22,7 +22,7 @@ export async function runGame(ctx: CanvasRenderingContext2D) {
   gameObjects.push(player);
 
   for (let i = 0; i < 50; i++) {
-    gameObjects.push(new Grass(images, screen));
+    gameObjects.push(new Grass(images, grid));
   }
 
   gameLoop(() => {
