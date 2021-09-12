@@ -4,6 +4,7 @@ import { GameObject } from "./GameObject";
 import { ImageLibrary } from "./ImageLibrary";
 import { PixelScreen } from "./PixelScreen";
 import { SpriteSheet2D } from "./SpriteSheet2D";
+import SimplexNoise from "simplex-noise";
 
 export class Ground implements GameObject {
   private stones: SpriteSheet2D;
@@ -37,10 +38,11 @@ export class Ground implements GameObject {
 
   paint(screen: PixelScreen) {
     const ground = this.empty2dArray(this.grid.getRows(), this.grid.getCols());
+    const noise = new SimplexNoise();
 
     // decide which tiles contain stones
     this.grid.forEachTile((coord, [x, y]) => {
-      ground[x][y] = rand(4) > 0 ? 1 : 0; // 0 or 1
+      ground[x][y] = noise.noise2D(x / 10, y / 10) > 0.3 ? 1 : 0;
     });
 
     // depending on surrounding tiles, decide the type of stone tile and paint it
@@ -87,8 +89,4 @@ export class Ground implements GameObject {
   zIndex() {
     return -1;
   }
-}
-
-function rand(n: number): number {
-  return Math.floor(Math.random() * n);
 }
