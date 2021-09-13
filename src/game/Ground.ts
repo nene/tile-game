@@ -19,9 +19,12 @@ export class Ground implements GameObject {
     const surface = generateSurface(this.grid);
 
     // depending on surrounding tiles, decide the type of stone tile and paint it
-    this.grid.forEachTile((coord, [x, y]) => {
+    this.grid.forEachTile(([x, y]) => {
       if (surface[x][y] === SurfaceType.stone) {
-        screen.drawSprite(this.stones.getSprite([x, y], surface), coord);
+        screen.drawSprite(
+          this.stones.getSprite([x, y], surface),
+          this.grid.tileToScreenCoord([x, y]),
+        );
       }
     });
   }

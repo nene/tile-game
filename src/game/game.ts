@@ -23,7 +23,7 @@ export async function runGame(ctx: CanvasRenderingContext2D) {
   gameObjects.push(player);
 
   gameObjects.push(
-    ...take(shuffle(grid.allTiles()), 50).map((coord) => new Grass(images, coord))
+    ...take(shuffle(grid.allTiles()), 50).map((colRow) => new Grass(images, grid.tileToScreenCoord(colRow)))
   );
 
   gameLoop(() => {

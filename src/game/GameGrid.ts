@@ -17,13 +17,10 @@ export class GameGrid {
     this.tileSize = cfg.tileSize;
   }
 
-  forEachTile(callback: (coord: Coord, colRow: Coord) => void, size: Coord = this.tileSize) {
+  forEachTile(callback: (colRow: Coord) => void) {
     for (let x = 0; x < this.cols; x++) {
       for (let y = 0; y < this.rows; y++) {
-        const coord = this.tileToScreenCoord([x, y]);
-        if (coord[0] % size[0] === 0 && coord[1] % size[1] === 0) {
-          callback(coord, [x, y]);
-        }
+        callback([x, y]);
       }
     }
   }

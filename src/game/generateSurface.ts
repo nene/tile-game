@@ -7,7 +7,7 @@ export function generateSurface(grid: GameGrid): SurfaceMap {
   const noise = new SimplexNoise();
 
   // decide which tiles contain stones
-  grid.forEachTile((coord, [x, y]) => {
+  grid.forEachTile(([x, y]) => {
     surface[x][y] = noise.noise2D(x / 10, y / 10) > 0.3 ? SurfaceType.stone : SurfaceType.grass;
   });
 

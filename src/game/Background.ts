@@ -19,9 +19,11 @@ export class Background implements GameObject {
 
   paint(screen: PixelScreen) {
     if (!this.initialized) {
-      this.grid.forEachTile((coord) => {
-        screen.drawSprite(this.bgSprites.getSprite(0), coord);
-      }, [32, 32]);
+      this.grid.forEachTile(([x, y]) => {
+        if (isEven(x) && isEven(y)) {
+          screen.drawSprite(this.bgSprites.getSprite(0), this.grid.tileToScreenCoord([x, y]));
+        }
+      });
       this.ground.paint(screen);
 
       screen.saveBg();
@@ -34,4 +36,8 @@ export class Background implements GameObject {
   zIndex() {
     return -1;
   }
+}
+
+function isEven(x: number): boolean {
+  return x % 2 === 0;
 }
