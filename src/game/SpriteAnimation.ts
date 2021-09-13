@@ -1,4 +1,4 @@
-import { Sprite } from "./SpriteSheet";
+import { Sprite } from "./Sprite";
 import { SpriteSheet2D } from "./SpriteSheet2D";
 
 interface AnimationConfig {

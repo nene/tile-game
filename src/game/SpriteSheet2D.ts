@@ -1,5 +1,5 @@
 import { Coord } from "./Coord";
-import { Sprite } from "./SpriteSheet";
+import { Sprite } from "./Sprite";
 
 export class SpriteSheet2D {
   constructor(

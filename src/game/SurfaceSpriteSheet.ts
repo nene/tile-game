@@ -1,6 +1,6 @@
 import { Coord } from "./Coord";
 import { ImageLibrary } from "./ImageLibrary";
-import { Sprite } from "./SpriteSheet";
+import { Sprite } from "./Sprite";
 import { SpriteSheet2D } from "./SpriteSheet2D";
 import { SurfaceMap, SurfaceType } from "./SurfaceMap";
 
