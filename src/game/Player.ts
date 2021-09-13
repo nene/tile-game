@@ -3,7 +3,7 @@ import { PixelScreen } from "./PixelScreen";
 import { GameObject } from "./GameObject";
 import { Coord, coordAdd } from "./Coord";
 import { SpriteAnimation } from "./SpriteAnimation";
-import { SpriteSheet2D } from "./SpriteSheet2D";
+import { SpriteSheet } from "./SpriteSheet";
 
 const max = Math.max;
 const min = Math.min;
@@ -28,15 +28,15 @@ export class Player implements GameObject {
     this.coord = [0, 16];
     this.speed = [0, 0];
 
-    this.standRight = new SpriteAnimation(new SpriteSheet2D(images.get("walkRight"), [32, 32], [1, 1]));
-    this.standLeft = new SpriteAnimation(new SpriteSheet2D(images.get("walkLeft"), [32, 32], [1, 1]));
-    this.standBack = new SpriteAnimation(new SpriteSheet2D(images.get("walkBack"), [32, 32], [1, 1]));
-    this.standForward = new SpriteAnimation(new SpriteSheet2D(images.get("walkForward"), [32, 32], [1, 1]));
+    this.standRight = new SpriteAnimation(new SpriteSheet(images.get("walkRight"), [32, 32], [1, 1]));
+    this.standLeft = new SpriteAnimation(new SpriteSheet(images.get("walkLeft"), [32, 32], [1, 1]));
+    this.standBack = new SpriteAnimation(new SpriteSheet(images.get("walkBack"), [32, 32], [1, 1]));
+    this.standForward = new SpriteAnimation(new SpriteSheet(images.get("walkForward"), [32, 32], [1, 1]));
 
-    this.walkRight = new SpriteAnimation(new SpriteSheet2D(images.get("walkRight"), [32, 32], [1, 8]));
-    this.walkLeft = new SpriteAnimation(new SpriteSheet2D(images.get("walkLeft"), [32, 32], [1, 8]));
-    this.walkBack = new SpriteAnimation(new SpriteSheet2D(images.get("walkBack"), [32, 32], [1, 8]));
-    this.walkForward = new SpriteAnimation(new SpriteSheet2D(images.get("walkForward"), [32, 32], [1, 8]));
+    this.walkRight = new SpriteAnimation(new SpriteSheet(images.get("walkRight"), [32, 32], [1, 8]));
+    this.walkLeft = new SpriteAnimation(new SpriteSheet(images.get("walkLeft"), [32, 32], [1, 8]));
+    this.walkBack = new SpriteAnimation(new SpriteSheet(images.get("walkBack"), [32, 32], [1, 8]));
+    this.walkForward = new SpriteAnimation(new SpriteSheet(images.get("walkForward"), [32, 32], [1, 8]));
 
     this.animation = this.standRight;
   }

@@ -3,7 +3,7 @@ import { ImageLibrary } from "./ImageLibrary";
 import { PixelScreen } from "./PixelScreen";
 import { GameObject } from "./GameObject";
 import { SpriteAnimation } from "./SpriteAnimation";
-import { SpriteSheet2D } from "./SpriteSheet2D";
+import { SpriteSheet } from "./SpriteSheet";
 
 export class Grass implements GameObject {
   private coord: Coord;
@@ -13,7 +13,7 @@ export class Grass implements GameObject {
   constructor(images: ImageLibrary, coord: Coord) {
     const img = images.get("grass" + (rand(4) + 1));
     this.animation = new SpriteAnimation(
-      new SpriteSheet2D(img, [32, 32], [1, 6]),
+      new SpriteSheet(img, [32, 32], [1, 6]),
       { ticksPerFrame: 2, currentFrame: rand(6) }
     );
     this.coord = coord;

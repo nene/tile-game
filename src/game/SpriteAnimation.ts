@@ -1,5 +1,5 @@
 import { Sprite } from "./Sprite";
-import { SpriteSheet2D } from "./SpriteSheet2D";
+import { SpriteSheet } from "./SpriteSheet";
 
 interface AnimationConfig {
   ticksPerFrame?: number;
@@ -12,7 +12,7 @@ export class SpriteAnimation {
   private ticksPerFrame = 1;
   private currentFrame = 0;
 
-  constructor(private spriteSheet: SpriteSheet2D, cfg: AnimationConfig = {}) {
+  constructor(private spriteSheet: SpriteSheet, cfg: AnimationConfig = {}) {
     this.ticksPerFrame = cfg.ticksPerFrame ?? 1;
     this.currentFrame = cfg.currentFrame ?? 0;
   }

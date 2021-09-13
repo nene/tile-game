@@ -1,7 +1,7 @@
 import { Coord } from "./Coord";
 import { Sprite } from "./Sprite";
 
-export class SpriteSheet2D {
+export class SpriteSheet {
   constructor(
     private image: HTMLImageElement,
     private size: Coord,

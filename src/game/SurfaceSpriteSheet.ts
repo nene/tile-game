@@ -1,7 +1,7 @@
 import { Coord } from "./Coord";
 import { ImageLibrary } from "./ImageLibrary";
 import { Sprite } from "./Sprite";
-import { SpriteSheet2D } from "./SpriteSheet2D";
+import { SpriteSheet } from "./SpriteSheet";
 import { SurfaceMap, SurfaceType } from "./SurfaceMap";
 
 const patternMap: Record<string, Coord> = {
@@ -27,11 +27,11 @@ const patternMap: Record<string, Coord> = {
 };
 
 export class SurfaceSpriteSheet {
-  private spriteSheet: SpriteSheet2D;
+  private spriteSheet: SpriteSheet;
   private type: SurfaceType;
 
   constructor(image: HTMLImageElement, type: SurfaceType) {
-    this.spriteSheet = new SpriteSheet2D(image, [16, 16], [4, 4]);
+    this.spriteSheet = new SpriteSheet(image, [16, 16], [4, 4]);
     this.type = type;
   }
 
