@@ -1,5 +1,4 @@
 import { PixelScreen } from "./PixelScreen";
-import { SpriteSheet } from "./SpriteSheet";
 import { Player } from "./Player";
 import { ImageLibrary } from "./ImageLibrary";
 import { Grass } from "./Grass";

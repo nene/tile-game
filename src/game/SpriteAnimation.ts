@@ -1,4 +1,5 @@
-import { Sprite, SpriteSheet } from "./SpriteSheet";
+import { Sprite } from "./SpriteSheet";
+import { SpriteSheet2D } from "./SpriteSheet2D";
 
 interface AnimationConfig {
   ticksPerFrame?: number;
@@ -11,13 +12,13 @@ export class SpriteAnimation {
   private ticksPerFrame = 1;
   private currentFrame = 0;
 
-  constructor(private spriteSheet: SpriteSheet, cfg: AnimationConfig = {}) {
+  constructor(private spriteSheet: SpriteSheet2D, cfg: AnimationConfig = {}) {
     this.ticksPerFrame = cfg.ticksPerFrame ?? 1;
     this.currentFrame = cfg.currentFrame ?? 0;
   }
 
   getSprite(): Sprite {
-    return this.spriteSheet.getSprite(this.currentFrame);
+    return this.spriteSheet.getSprite([0, this.currentFrame]);
   }
 
   tick() {
