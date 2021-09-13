@@ -22,7 +22,7 @@ export async function runGame(ctx: CanvasRenderingContext2D) {
   const player = new Player(images);
   gameObjects.push(player);
 
-  gameObjects.push(...generateGrass(grid, images));
+  gameObjects.push(...generateGrass(grid, surface, images));
 
   gameLoop(() => {
     gameObjects.forEach((obj) => obj.tick(screen));
