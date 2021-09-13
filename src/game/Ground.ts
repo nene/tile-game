@@ -8,9 +8,11 @@ import { generateSurface } from "./generateSurface";
 
 export class Ground implements GameObject {
   private stones: SurfaceSpriteSheet;
+  private water: SurfaceSpriteSheet;
 
   constructor(private grid: GameGrid, images: ImageLibrary) {
     this.stones = new SurfaceSpriteSheet(images.get('stones'), SurfaceType.stone);
+    this.water = new SurfaceSpriteSheet(images.get('water'), SurfaceType.water);
   }
 
   tick() { }
@@ -23,6 +25,12 @@ export class Ground implements GameObject {
       if (surface[x][y] === SurfaceType.stone) {
         screen.drawSprite(
           this.stones.getSprite([x, y], surface),
+          this.grid.tileToScreenCoord([x, y]),
+        );
+      }
+      if (surface[x][y] === SurfaceType.water) {
+        screen.drawSprite(
+          this.water.getSprite([x, y], surface),
           this.grid.tileToScreenCoord([x, y]),
         );
       }

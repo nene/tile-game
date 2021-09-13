@@ -8,10 +8,20 @@ export function generateSurface(grid: GameGrid): SurfaceMap {
 
   // decide which tiles contain stones
   grid.forEachTile(([x, y]) => {
-    surface[x][y] = noise.noise2D(x / 10, y / 10) > 0.3 ? SurfaceType.stone : SurfaceType.grass;
+    surface[x][y] = pickSurfaceType(noise.noise2D(x / 10, y / 10));
   });
 
   return surface;
+}
+
+function pickSurfaceType(x: number): SurfaceType {
+  if (x > 0.3) {
+    return SurfaceType.stone;
+  }
+  if (x < -0.6) {
+    return SurfaceType.water;
+  }
+  return SurfaceType.grass;
 }
 
 function emptySurface(width: number, height: number): SurfaceMap {

@@ -6,6 +6,7 @@ import grass3 from "./sprites/grass3.png";
 import grass4 from "./sprites/grass4.png";
 import grass13d from "./sprites/grass1-3d.png";
 import stones from "./sprites/stones.png";
+import water from "./sprites/water.png";
 import walkLeft from "./sprites/walk-left.png";
 import walkRight from "./sprites/walk-right.png";
 import walkForward from "./sprites/walk-forward.png";
@@ -24,6 +25,7 @@ export class ImageLibrary {
     this.images.grass13d = await loadImage(grass13d);
 
     this.images.stones = await loadImage(stones);
+    this.images.water = await loadImage(water);
 
     this.images.walkLeft = await loadImage(walkLeft);
     this.images.walkRight = await loadImage(walkRight);
