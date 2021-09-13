@@ -5,17 +5,19 @@ import { GameObject } from "./GameObject";
 import { GameGrid } from "./GameGrid";
 import { Background } from "./Background";
 import { generateGrass } from "./generateGrass";
+import { generateSurface } from "./generateSurface";
 
 export async function runGame(ctx: CanvasRenderingContext2D) {
   const screen = new PixelScreen(ctx, { width: 1024, height: 1024, scale: 4 });
   const grid = new GameGrid({ rows: screen.width() / 16, cols: screen.height() / 16, tileSize: [16, 16] });
+  const surface = generateSurface(grid);
 
   const gameObjects: GameObject[] = [];
 
   const images = new ImageLibrary();
   await images.load();
 
-  gameObjects.push(new Background(grid, images));
+  gameObjects.push(new Background(grid, surface, images));
 
   const player = new Player(images);
   gameObjects.push(player);
