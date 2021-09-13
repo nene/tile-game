@@ -5,7 +5,7 @@ import { GameObject } from "./GameObject";
 import { SpriteAnimation } from "./SpriteAnimation";
 import { SpriteSheet } from "./SpriteSheet";
 
-export class Grass implements GameObject {
+export class GrassPlant implements GameObject {
   private coord: Coord;
   private animation: SpriteAnimation;
   private offset: Coord = [-8, -16];

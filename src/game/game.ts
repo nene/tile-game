@@ -4,7 +4,7 @@ import { ImageLibrary } from "./ImageLibrary";
 import { GameObject } from "./GameObject";
 import { GameGrid } from "./GameGrid";
 import { Background } from "./Background";
-import { generateGrass } from "./generateGrass";
+import { generatePlants } from "./generatePlants";
 import { generateSurface } from "./generateSurface";
 
 export async function runGame(ctx: CanvasRenderingContext2D) {
@@ -22,7 +22,7 @@ export async function runGame(ctx: CanvasRenderingContext2D) {
   const player = new Player(images);
   gameObjects.push(player);
 
-  gameObjects.push(...generateGrass(grid, surface, images));
+  gameObjects.push(...generatePlants(grid, surface, images));
 
   gameLoop(() => {
     gameObjects.forEach((obj) => obj.tick(screen));
