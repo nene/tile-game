@@ -33,15 +33,15 @@ export function generatePlants(grid: GameGrid, surface: SurfaceMap, images: Imag
 
 function pickGrassPlantType(x: number): GrassPlantType {
   if (x > 0.5) {
-    return 1;
+    return GrassPlantType.wheat;
   }
   if (x > 0) {
-    return 2;
+    return GrassPlantType.cabbage;
   }
   if (x > -0.5) {
-    return 3;
+    return GrassPlantType.pepper;
   }
-  return 4;
+  return GrassPlantType.marygold;
 }
 
 function pickWaterPlantType(x: number): WaterPlantType {

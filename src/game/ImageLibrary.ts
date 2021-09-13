@@ -1,10 +1,9 @@
 import { loadImage } from "./loadImage";
 import grassBg from "./sprites/grass-bg.png";
-import grass1 from "./sprites/grass1.png";
-import grass2 from "./sprites/grass2.png";
-import grass3 from "./sprites/grass3.png";
-import grass4 from "./sprites/grass4.png";
-import grass13d from "./sprites/grass1-3d.png";
+import cabbage from "./sprites/cabbage.png";
+import wheat from "./sprites/wheat.png";
+import pepper from "./sprites/pepper.png";
+import marygold from "./sprites/marygold.png";
 import reed from "./sprites/reed.png";
 import waterLily from "./sprites/water-lily.png";
 import stones from "./sprites/stones.png";
@@ -20,11 +19,10 @@ export class ImageLibrary {
   async load() {
     this.images.grassBg = await loadImage(grassBg);
 
-    this.images.grass1 = await loadImage(grass1);
-    this.images.grass2 = await loadImage(grass2);
-    this.images.grass3 = await loadImage(grass3);
-    this.images.grass4 = await loadImage(grass4);
-    this.images.grass13d = await loadImage(grass13d);
+    this.images.cabbage = await loadImage(cabbage);
+    this.images.wheat = await loadImage(wheat);
+    this.images.pepper = await loadImage(pepper);
+    this.images.marygold = await loadImage(marygold);
 
     this.images.reed = await loadImage(reed);
     this.images.waterLily = await loadImage(waterLily);
