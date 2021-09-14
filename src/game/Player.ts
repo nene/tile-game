@@ -22,6 +22,8 @@ export class Player implements GameObject {
   private walkLeft: SpriteAnimation;
   private walkBack: SpriteAnimation;
   private walkForward: SpriteAnimation;
+  private digRightSheet: SpriteSheet;
+  private digging = false;
   private animation: SpriteAnimation;
 
   constructor(images: ImageLibrary) {
@@ -37,6 +39,8 @@ export class Player implements GameObject {
     this.walkLeft = new SpriteAnimation(new SpriteSheet(images.get("walkLeft"), [32, 32], [1, 8]));
     this.walkBack = new SpriteAnimation(new SpriteSheet(images.get("walkBack"), [32, 32], [1, 8]));
     this.walkForward = new SpriteAnimation(new SpriteSheet(images.get("walkForward"), [32, 32], [1, 8]));
+
+    this.digRightSheet = new SpriteSheet(images.get("digRight"), [32, 32], [1, 5]);
 
     this.animation = this.standRight;
   }
@@ -130,7 +134,28 @@ export class Player implements GameObject {
     return 'up';
   }
 
+  startDigging() {
+    if (!this.digging) {
+      this.digging = true;
+      this.animation = new SpriteAnimation(this.digRightSheet);
+      this.speed = [0, 0];
+    }
+  }
+
+  stopDigging() {
+    this.digging = false;
+    this.animation = this.standRight;
+  }
+
   tick(screen: PixelScreen) {
+    this.updatePosition(screen);
+    this.animation.tick();
+    if (this.digging && this.animation.isFinished()) {
+      this.stopDigging();
+    }
+  }
+
+  updatePosition(screen: PixelScreen) {
     this.coord = coordAdd(this.coord, this.speed);
     if (this.coord[0] > screen.width() - 16) {
       this.coord = [screen.width() - 16, this.coord[1]];
@@ -144,7 +169,6 @@ export class Player implements GameObject {
     if (this.coord[1] > screen.height() - 16) {
       this.coord = [this.coord[0], screen.height() - 16];
     }
-    this.animation.tick();
   }
 
   paint(screen: PixelScreen) {

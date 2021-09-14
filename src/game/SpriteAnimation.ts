@@ -11,6 +11,7 @@ export class SpriteAnimation {
   private ticks = 0;
   private ticksPerFrame = 1;
   private currentFrame = 0;
+  private finished = false;
 
   constructor(private spriteSheet: SpriteSheet, cfg: AnimationConfig = {}) {
     this.ticksPerFrame = cfg.ticksPerFrame ?? 1;
@@ -35,9 +36,16 @@ export class SpriteAnimation {
 
   nextFrame() {
     this.setFrame(this.currentFrame + 1);
+    if (!this.finished && this.currentFrame === 0) {
+      this.finished = true;
+    }
   }
 
   setFrame(n: number) {
     this.currentFrame = n % this.spriteSheet.getCount();
+  }
+
+  isFinished(): boolean {
+    return this.finished;
   }
 }

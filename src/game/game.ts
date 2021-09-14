@@ -50,6 +50,9 @@ export async function runGame(ctx: CanvasRenderingContext2D) {
         case "ArrowDown":
           player.moveDown();
           break;
+        case " ":
+          player.startDigging();
+          break;
         default: // do nothing
       }
     },
