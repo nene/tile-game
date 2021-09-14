@@ -6,6 +6,7 @@ import { GameGrid } from "./GameGrid";
 import { Background } from "./Background";
 import { generatePlants } from "./generatePlants";
 import { generateSurface } from "./generateSurface";
+import { Snail } from "./Snail";
 
 export async function runGame(ctx: CanvasRenderingContext2D) {
   const screen = new PixelScreen(ctx, { width: 1024, height: 1024, scale: 4 });
@@ -21,6 +22,8 @@ export async function runGame(ctx: CanvasRenderingContext2D) {
 
   const player = new Player(images);
   gameObjects.push(player);
+
+  gameObjects.push(new Snail(images, [256, 128]));
 
   gameObjects.push(...generatePlants(grid, surface, images));
 

@@ -13,6 +13,7 @@ import walkRight from "./sprites/walk-right.png";
 import walkForward from "./sprites/walk-forward.png";
 import walkBack from "./sprites/walk-back.png";
 import digRight from "./sprites/dig-right.png";
+import snail from "./sprites/snail.png";
 
 export class ImageLibrary {
   private images: Record<string, HTMLImageElement> = {};
@@ -37,6 +38,8 @@ export class ImageLibrary {
     this.images.walkBack = await loadImage(walkBack);
 
     this.images.digRight = await loadImage(digRight);
+
+    this.images.snail = await loadImage(snail);
   }
 
   get(name: string): HTMLImageElement {
