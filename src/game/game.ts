@@ -23,7 +23,13 @@ export async function runGame(ctx: CanvasRenderingContext2D) {
   const player = new Player(images);
   gameObjects.push(player);
 
-  gameObjects.push(new Snail(images, [128, 32]));
+  gameObjects.push(...[
+    new Snail(images, [128, 32]),
+    new Snail(images, [256, 64]),
+    new Snail(images, [300, 100]),
+    new Snail(images, [320, 150]),
+    new Snail(images, [350, 200]),
+  ]);
 
   gameObjects.push(...generatePlants(grid, surface, images));
 

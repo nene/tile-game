@@ -12,15 +12,16 @@ export class Snail implements GameObject {
 
   constructor(images: ImageLibrary, private coord: Coord) {
     this.animation = new SpriteAnimation(new SpriteSheet(images.get("snail"), [32, 32], [1, 5]));
-    this.killAnimation = new SpriteAnimation(new SpriteSheet(images.get("snailKill"), [32, 32], [1, 5]));
+    this.killAnimation = new SpriteAnimation(new SpriteSheet(images.get("snailKill"), [112, 40], [1, 11]));
   }
 
   kill() {
     this.animation = this.killAnimation;
+    this.offset = [-48, -24];
   }
 
   tick(screen: PixelScreen) {
-    if (this.animation === this.killAnimation && this.animation.getFrame() === 4) {
+    if (this.animation === this.killAnimation && this.animation.getFrame() === 10) {
       return; // stop when killed
     }
 
