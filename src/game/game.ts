@@ -23,7 +23,7 @@ export async function runGame(ctx: CanvasRenderingContext2D) {
   const player = new Player(images);
   gameObjects.push(player);
 
-  gameObjects.push(new Snail(images, [256, 128]));
+  gameObjects.push(new Snail(images, [128, 32]));
 
   gameObjects.push(...generatePlants(grid, surface, images));
 
@@ -54,7 +54,7 @@ export async function runGame(ctx: CanvasRenderingContext2D) {
           player.moveDown();
           break;
         case " ":
-          player.startDigging();
+          player.startDigging(gameObjects);
           break;
         default: // do nothing
       }

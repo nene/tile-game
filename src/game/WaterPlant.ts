@@ -30,4 +30,8 @@ export class WaterPlant implements GameObject {
   zIndex(): number {
     return this.coord[1];
   }
+
+  getCoord() {
+    return this.coord;
+  }
 }

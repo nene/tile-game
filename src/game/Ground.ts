@@ -4,6 +4,7 @@ import { ImageLibrary } from "./ImageLibrary";
 import { PixelScreen } from "./PixelScreen";
 import { SurfaceSpriteSheet } from "./SurfaceSpriteSheet";
 import { SurfaceMap, SurfaceType } from "./SurfaceMap";
+import { Coord } from "./Coord";
 
 export class Ground implements GameObject {
   private stones: SurfaceSpriteSheet;
@@ -36,5 +37,9 @@ export class Ground implements GameObject {
 
   zIndex() {
     return -1;
+  }
+
+  getCoord(): Coord {
+    return [0, 0];
   }
 }

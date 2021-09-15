@@ -1,3 +1,4 @@
+import { Coord } from "./Coord";
 import { GameGrid } from "./GameGrid";
 import { GameObject } from "./GameObject";
 import { Ground } from "./Ground";
@@ -36,6 +37,10 @@ export class Background implements GameObject {
 
   zIndex() {
     return -1;
+  }
+
+  getCoord(): Coord {
+    return [0, 0];
   }
 }
 

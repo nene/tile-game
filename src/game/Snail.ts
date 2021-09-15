@@ -6,16 +6,24 @@ import { SpriteAnimation } from "./SpriteAnimation";
 import { SpriteSheet } from "./SpriteSheet";
 
 export class Snail implements GameObject {
-  private spriteSheet: SpriteSheet;
   private animation: SpriteAnimation;
+  private killAnimation: SpriteAnimation;
   private offset: Coord = [-8, -16];
 
   constructor(images: ImageLibrary, private coord: Coord) {
-    this.spriteSheet = new SpriteSheet(images.get("snail"), [32, 32], [1, 5]);
-    this.animation = new SpriteAnimation(this.spriteSheet);
+    this.animation = new SpriteAnimation(new SpriteSheet(images.get("snail"), [32, 32], [1, 5]));
+    this.killAnimation = new SpriteAnimation(new SpriteSheet(images.get("snailKill"), [32, 32], [1, 5]));
+  }
+
+  kill() {
+    this.animation = this.killAnimation;
   }
 
   tick(screen: PixelScreen) {
+    if (this.animation === this.killAnimation && this.animation.getFrame() === 4) {
+      return; // stop when killed
+    }
+
     this.animation.tick();
     if (this.animation.isFinished() && this.animation.getFrame() === 0) {
       this.coord = coordAdd(this.coord, [-3, 0]);
@@ -31,5 +39,9 @@ export class Snail implements GameObject {
 
   zIndex() {
     return this.coord[1];
+  }
+
+  getCoord() {
+    return this.coord;
   }
 }
