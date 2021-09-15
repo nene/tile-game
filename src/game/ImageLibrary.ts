@@ -14,6 +14,7 @@ import walkForward from "./sprites/walk-forward.png";
 import walkBack from "./sprites/walk-back.png";
 import digRight from "./sprites/dig-right.png";
 import snail from "./sprites/snail.png";
+import snailKill from "./sprites/snail-kill.png";
 
 export class ImageLibrary {
   private images: Record<string, HTMLImageElement> = {};
@@ -40,6 +41,7 @@ export class ImageLibrary {
     this.images.digRight = await loadImage(digRight);
 
     this.images.snail = await loadImage(snail);
+    this.images.snailKill = await loadImage(snailKill);
   }
 
   get(name: string): HTMLImageElement {
