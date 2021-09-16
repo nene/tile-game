@@ -7,6 +7,7 @@ import { Background } from "./Background";
 import { generatePlants } from "./generatePlants";
 import { generateSurface } from "./generateSurface";
 import { Snail } from "./Snail";
+import { GameWorld } from "./GameWorld";
 
 export async function runGame(ctx: CanvasRenderingContext2D) {
   const screen = new PixelScreen(ctx, { width: 1024, height: 1024, scale: 4 });
@@ -14,6 +15,7 @@ export async function runGame(ctx: CanvasRenderingContext2D) {
   const surface = generateSurface(grid);
 
   const gameObjects: GameObject[] = [];
+  const world = new GameWorld(gameObjects);
 
   const images = new ImageLibrary();
   await images.load();
@@ -60,7 +62,7 @@ export async function runGame(ctx: CanvasRenderingContext2D) {
           player.moveDown();
           break;
         case " ":
-          player.startDigging(gameObjects);
+          player.startDigging(world);
           break;
         default: // do nothing
       }

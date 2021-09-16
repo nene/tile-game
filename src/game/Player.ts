@@ -5,6 +5,7 @@ import { Coord, coordAdd } from "./Coord";
 import { SpriteAnimation } from "./SpriteAnimation";
 import { SpriteSheet } from "./SpriteSheet";
 import { Snail } from "./Snail";
+import { GameWorld } from "./GameWorld";
 
 const max = Math.max;
 const min = Math.min;
@@ -135,25 +136,18 @@ export class Player implements GameObject {
     return 'up';
   }
 
-  startDigging(gameObjects: GameObject[]) {
+  startDigging(world: GameWorld) {
     if (!this.digging) {
       this.digging = true;
       this.animation = new SpriteAnimation(this.digRightSheet);
       this.speed = [0, 0];
 
-      const obj = this.getRightHandObject(gameObjects);
+      const obj = world.getRightHandObject(this.coord);
       if (obj instanceof Snail) {
         obj.kill();
         this.coord = coordAdd(obj.getCoord(), [-17, -3]);
       }
     }
-  }
-
-  getRightHandObject(gameObjects: GameObject[]): GameObject | undefined {
-    return gameObjects.find((obj) => {
-      const diff = coordSubtract(obj.getCoord(), this.coord);
-      return diff[0] > 0 && diff[0] <= 32 && diff[1] > -8 && diff[1] < 8;
-    });
   }
 
   stopDigging() {
@@ -196,8 +190,4 @@ export class Player implements GameObject {
   getCoord(): Coord {
     return this.coord;
   }
-}
-
-function coordSubtract(a: Coord, b: Coord): Coord {
-  return [a[0] - b[0], a[1] - b[1]];
 }
