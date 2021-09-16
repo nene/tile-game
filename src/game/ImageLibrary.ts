@@ -20,28 +20,30 @@ export class ImageLibrary {
   private images: Record<string, HTMLImageElement> = {};
 
   async load() {
-    this.images.grassBg = await loadImage(grassBg);
+    this.images = {
+      'grass-bg': await loadImage(grassBg),
 
-    this.images.cabbage = await loadImage(cabbage);
-    this.images.wheat = await loadImage(wheat);
-    this.images.pepper = await loadImage(pepper);
-    this.images.marygold = await loadImage(marygold);
+      'cabbage': await loadImage(cabbage),
+      'wheat': await loadImage(wheat),
+      'pepper': await loadImage(pepper),
+      'marygold': await loadImage(marygold),
 
-    this.images.reed = await loadImage(reed);
-    this.images.waterLily = await loadImage(waterLily);
+      'reed': await loadImage(reed),
+      'water-lily': await loadImage(waterLily),
 
-    this.images.stones = await loadImage(stones);
-    this.images.water = await loadImage(water);
+      'stones': await loadImage(stones),
+      'water': await loadImage(water),
 
-    this.images.walkLeft = await loadImage(walkLeft);
-    this.images.walkRight = await loadImage(walkRight);
-    this.images.walkForward = await loadImage(walkForward);
-    this.images.walkBack = await loadImage(walkBack);
+      'walk-left': await loadImage(walkLeft),
+      'walk-right': await loadImage(walkRight),
+      'walk-forward': await loadImage(walkForward),
+      'walk-back': await loadImage(walkBack),
 
-    this.images.digRight = await loadImage(digRight);
+      'dig-right': await loadImage(digRight),
 
-    this.images.snail = await loadImage(snail);
-    this.images.snailKill = await loadImage(snailKill);
+      'snail': await loadImage(snail),
+      'snail-kill': await loadImage(snailKill),
+    };
   }
 
   get(name: string): HTMLImageElement {
