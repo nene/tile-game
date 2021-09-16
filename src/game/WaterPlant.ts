@@ -1,22 +1,18 @@
 import { Coord, coordAdd } from "./Coord";
-import { ImageLibrary } from "./ImageLibrary";
 import { PixelScreen } from "./PixelScreen";
 import { GameObject } from "./GameObject";
 import { SpriteSheet } from "./SpriteSheet";
 
 export enum WaterPlantType {
   reed = "reed",
-  waterLily = "waterLily",
+  waterLily = "water-lily",
 }
 
 export class WaterPlant implements GameObject {
   private coord: Coord;
-  private spriteSheet: SpriteSheet;
   private offset: Coord = [-8, -16];
 
-  constructor(images: ImageLibrary, type: WaterPlantType, coord: Coord) {
-    const img = images.get(type);
-    this.spriteSheet = new SpriteSheet(img, [32, 32], [1, 6]);
+  constructor(private spriteSheet: SpriteSheet, coord: Coord) {
     this.coord = coord;
   }
 

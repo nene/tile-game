@@ -7,6 +7,7 @@ import { generateNPCs } from "./generateNPCs";
 import { generatePlants } from "./generatePlants";
 import { generateSurface } from "./generateSurface";
 import { GameWorld } from "./GameWorld";
+import { SpriteLibrary } from "./SpriteLibrary";
 
 export async function runGame(ctx: CanvasRenderingContext2D) {
   const screen = new PixelScreen(ctx, { width: 256, height: 256, scale: 4 });
@@ -17,14 +18,15 @@ export async function runGame(ctx: CanvasRenderingContext2D) {
 
   const images = new ImageLibrary();
   await images.load();
+  const sprites = new SpriteLibrary(images);
 
-  const background = new Background(grid, surface, images);
+  const background = new Background(grid, surface, sprites);
 
-  const player = new Player(images);
+  const player = new Player(sprites);
   world.add(player);
 
-  world.add(...generateNPCs(images));
-  world.add(...generatePlants(grid, surface, images));
+  world.add(...generateNPCs(sprites));
+  world.add(...generatePlants(grid, surface, sprites));
 
   gameLoop(() => {
     world.allObjects().forEach((obj) => obj.tick(world));

@@ -1,16 +1,16 @@
 import { GameGrid } from "./GameGrid";
-import { ImageLibrary } from "./ImageLibrary";
 import { PixelScreen } from "./PixelScreen";
 import { SurfaceSpriteSheet } from "./SurfaceSpriteSheet";
 import { SurfaceMap, SurfaceType } from "./SurfaceMap";
+import { SpriteLibrary } from "./SpriteLibrary";
 
 export class Ground {
   private stones: SurfaceSpriteSheet;
   private water: SurfaceSpriteSheet;
 
-  constructor(private grid: GameGrid, private surface: SurfaceMap, images: ImageLibrary) {
-    this.stones = new SurfaceSpriteSheet(images.get('stones'), SurfaceType.stone);
-    this.water = new SurfaceSpriteSheet(images.get('water'), SurfaceType.water);
+  constructor(private grid: GameGrid, private surface: SurfaceMap, sprites: SpriteLibrary) {
+    this.stones = new SurfaceSpriteSheet(sprites.get('stones'), SurfaceType.stone);
+    this.water = new SurfaceSpriteSheet(sprites.get('water'), SurfaceType.water);
   }
 
   paint(screen: PixelScreen) {

@@ -26,12 +26,7 @@ const patternMap: Record<string, Coord> = {
 };
 
 export class SurfaceSpriteSheet {
-  private spriteSheet: SpriteSheet;
-  private type: SurfaceType;
-
-  constructor(image: HTMLImageElement, type: SurfaceType) {
-    this.spriteSheet = new SpriteSheet(image, [16, 16], [4, 4]);
-    this.type = type;
+  constructor(private spriteSheet: SpriteSheet, private type: SurfaceType) {
   }
 
   public getSprite(coord: Coord, map: SurfaceMap): Sprite {

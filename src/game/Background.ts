@@ -1,7 +1,7 @@
 import { GameGrid } from "./GameGrid";
 import { Ground } from "./Ground";
-import { ImageLibrary } from "./ImageLibrary";
 import { PixelScreen } from "./PixelScreen";
+import { SpriteLibrary } from "./SpriteLibrary";
 import { SpriteSheet } from "./SpriteSheet";
 import { SurfaceMap } from "./SurfaceMap";
 
@@ -10,9 +10,9 @@ export class Background {
   private bgSprites: SpriteSheet;
   private ground: Ground;
 
-  constructor(private grid: GameGrid, surface: SurfaceMap, images: ImageLibrary) {
-    this.bgSprites = new SpriteSheet(images.get('grassBg'), [32, 32], [1, 1]);
-    this.ground = new Ground(grid, surface, images);
+  constructor(private grid: GameGrid, surface: SurfaceMap, sprites: SpriteLibrary) {
+    this.bgSprites = sprites.get('grass-bg');
+    this.ground = new Ground(grid, surface, sprites);
   }
 
   paint(screen: PixelScreen) {

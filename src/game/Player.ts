@@ -1,11 +1,10 @@
-import { ImageLibrary } from "./ImageLibrary";
 import { PixelScreen } from "./PixelScreen";
 import { GameObject } from "./GameObject";
 import { Coord, coordAdd } from "./Coord";
 import { SpriteAnimation } from "./SpriteAnimation";
-import { SpriteSheet } from "./SpriteSheet";
 import { Snail } from "./Snail";
 import { GameWorld } from "./GameWorld";
+import { SpriteLibrary } from "./SpriteLibrary";
 
 const max = Math.max;
 const min = Math.min;
@@ -24,25 +23,24 @@ export class Player implements GameObject {
   private walkLeft: SpriteAnimation;
   private walkBack: SpriteAnimation;
   private walkForward: SpriteAnimation;
-  private digRightSheet: SpriteSheet;
+  private sprites: SpriteLibrary;
   private digging = false;
   private animation: SpriteAnimation;
 
-  constructor(images: ImageLibrary) {
+  constructor(sprites: SpriteLibrary) {
     this.coord = [0, 16];
     this.speed = [0, 0];
+    this.sprites = sprites;
 
-    this.standRight = new SpriteAnimation(new SpriteSheet(images.get("walkRight"), [32, 32], [1, 1]));
-    this.standLeft = new SpriteAnimation(new SpriteSheet(images.get("walkLeft"), [32, 32], [1, 1]));
-    this.standBack = new SpriteAnimation(new SpriteSheet(images.get("walkBack"), [32, 32], [1, 1]));
-    this.standForward = new SpriteAnimation(new SpriteSheet(images.get("walkForward"), [32, 32], [1, 1]));
+    this.standRight = new SpriteAnimation(sprites.get("stand-right"));
+    this.standLeft = new SpriteAnimation(sprites.get("stand-left"));
+    this.standBack = new SpriteAnimation(sprites.get("stand-back"));
+    this.standForward = new SpriteAnimation(sprites.get("stand-forward"));
 
-    this.walkRight = new SpriteAnimation(new SpriteSheet(images.get("walkRight"), [32, 32], [1, 8]));
-    this.walkLeft = new SpriteAnimation(new SpriteSheet(images.get("walkLeft"), [32, 32], [1, 8]));
-    this.walkBack = new SpriteAnimation(new SpriteSheet(images.get("walkBack"), [32, 32], [1, 8]));
-    this.walkForward = new SpriteAnimation(new SpriteSheet(images.get("walkForward"), [32, 32], [1, 8]));
-
-    this.digRightSheet = new SpriteSheet(images.get("digRight"), [32, 32], [1, 5]);
+    this.walkRight = new SpriteAnimation(sprites.get("walk-right"));
+    this.walkLeft = new SpriteAnimation(sprites.get("walk-left"));
+    this.walkBack = new SpriteAnimation(sprites.get("walk-back"));
+    this.walkForward = new SpriteAnimation(sprites.get("walk-forward"));
 
     this.animation = this.standRight;
   }
@@ -146,7 +144,7 @@ export class Player implements GameObject {
   startDigging(world: GameWorld) {
     if (!this.digging) {
       this.digging = true;
-      this.animation = new SpriteAnimation(this.digRightSheet);
+      this.animation = new SpriteAnimation(this.sprites.get('dig-right'));
       this.speed = [0, 0];
 
       const obj = world.getRightHandObject(this.coord);
