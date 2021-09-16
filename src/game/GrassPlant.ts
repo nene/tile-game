@@ -11,10 +11,7 @@ export enum GrassPlantType {
 }
 
 export class GrassPlant implements GameObject {
-  private coord: Coord;
-
-  constructor(private spriteSheet: SpriteSheet, coord: Coord) {
-    this.coord = coord;
+  constructor(private spriteSheet: SpriteSheet, private coord: Coord) {
   }
 
   tick() {
