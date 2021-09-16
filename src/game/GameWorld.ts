@@ -2,7 +2,20 @@ import { Coord } from "./Coord";
 import { GameObject } from "./GameObject";
 
 export class GameWorld {
-  constructor(private gameObjects: GameObject[]) {
+  private gameObjects: GameObject[] = [];
+
+  add(...objects: GameObject[]) {
+    this.gameObjects.push(...objects);
+  }
+
+  allObjects(): GameObject[] {
+    return this.gameObjects;
+  }
+
+  sortObjects() {
+    this.gameObjects.sort((a, b) => {
+      return a.zIndex() - b.zIndex();
+    });
   }
 
   getRightHandObject(coord: Coord): GameObject | undefined {
