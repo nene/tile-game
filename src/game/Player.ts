@@ -162,18 +162,18 @@ export class Player implements GameObject {
     this.animation = this.standRight;
   }
 
-  tick(screen: PixelScreen) {
-    this.updatePosition(screen);
+  tick(world: GameWorld) {
+    this.updatePosition(world);
     this.animation.tick();
     if (this.digging && this.animation.isFinished()) {
       this.stopDigging();
     }
   }
 
-  updatePosition(screen: PixelScreen) {
+  updatePosition(world: GameWorld) {
     this.coord = coordAdd(this.coord, this.speed);
-    if (this.coord[0] > screen.width() - 16) {
-      this.coord = [screen.width() - 16, this.coord[1]];
+    if (this.coord[0] > world.width() - 16) {
+      this.coord = [world.width() - 16, this.coord[1]];
     }
     if (this.coord[0] < 0) {
       this.coord = [0, this.coord[1]];
@@ -181,8 +181,8 @@ export class Player implements GameObject {
     if (this.coord[1] < 0) {
       this.coord = [this.coord[0], 0];
     }
-    if (this.coord[1] > screen.height() - 16) {
-      this.coord = [this.coord[0], screen.height() - 16];
+    if (this.coord[1] > world.height() - 16) {
+      this.coord = [this.coord[0], world.height() - 16];
     }
   }
 

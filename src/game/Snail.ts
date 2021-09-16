@@ -1,5 +1,6 @@
 import { Coord, coordAdd } from "./Coord";
 import { GameObject } from "./GameObject";
+import { GameWorld } from "./GameWorld";
 import { ImageLibrary } from "./ImageLibrary";
 import { PixelScreen } from "./PixelScreen";
 import { SpriteAnimation } from "./SpriteAnimation";
@@ -20,7 +21,7 @@ export class Snail implements GameObject {
     this.offset = [-48, -24];
   }
 
-  tick(screen: PixelScreen) {
+  tick(world: GameWorld) {
     if (this.animation === this.killAnimation && this.animation.getFrame() === 10) {
       return; // stop when killed
     }
@@ -29,7 +30,7 @@ export class Snail implements GameObject {
     if (this.animation.isFinished() && this.animation.getFrame() === 0) {
       this.coord = coordAdd(this.coord, [-3, 0]);
       if (this.coord[0] < 0) {
-        this.coord = [screen.width(), this.coord[1]];
+        this.coord = [world.width(), this.coord[1]];
       }
     }
   }

@@ -1,8 +1,24 @@
 import { Coord, coordSubtract } from "./Coord";
 import { GameObject } from "./GameObject";
 
+interface WorldConfig {
+  width: number;
+  height: number;
+}
+
 export class GameWorld {
   private gameObjects: GameObject[] = [];
+
+  constructor(private cfg: WorldConfig) {
+  }
+
+  width() {
+    return this.cfg.width;
+  }
+
+  height() {
+    return this.cfg.height;
+  }
 
   add(...objects: GameObject[]) {
     this.gameObjects.push(...objects);

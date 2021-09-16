@@ -13,7 +13,7 @@ export async function runGame(ctx: CanvasRenderingContext2D) {
   const grid = new GameGrid({ rows: screen.width() / 16, cols: screen.height() / 16, tileSize: [16, 16] });
   const surface = generateSurface(grid);
 
-  const world = new GameWorld();
+  const world = new GameWorld({ width: screen.width(), height: screen.height() });
 
   const images = new ImageLibrary();
   await images.load();
@@ -34,7 +34,7 @@ export async function runGame(ctx: CanvasRenderingContext2D) {
   world.add(...generatePlants(grid, surface, images));
 
   gameLoop(() => {
-    world.allObjects().forEach((obj) => obj.tick(screen));
+    world.allObjects().forEach((obj) => obj.tick(world));
     world.sortObjects();
   });
 
