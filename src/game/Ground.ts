@@ -1,12 +1,10 @@
 import { GameGrid } from "./GameGrid";
-import { GameObject } from "./GameObject";
 import { ImageLibrary } from "./ImageLibrary";
 import { PixelScreen } from "./PixelScreen";
 import { SurfaceSpriteSheet } from "./SurfaceSpriteSheet";
 import { SurfaceMap, SurfaceType } from "./SurfaceMap";
-import { Coord } from "./Coord";
 
-export class Ground implements GameObject {
+export class Ground {
   private stones: SurfaceSpriteSheet;
   private water: SurfaceSpriteSheet;
 
@@ -14,8 +12,6 @@ export class Ground implements GameObject {
     this.stones = new SurfaceSpriteSheet(images.get('stones'), SurfaceType.stone);
     this.water = new SurfaceSpriteSheet(images.get('water'), SurfaceType.water);
   }
-
-  tick() { }
 
   paint(screen: PixelScreen) {
     // depending on surrounding tiles, decide the type of stone tile and paint it
@@ -33,13 +29,5 @@ export class Ground implements GameObject {
         );
       }
     });
-  }
-
-  zIndex() {
-    return -1;
-  }
-
-  getCoord(): Coord {
-    return [0, 0];
   }
 }

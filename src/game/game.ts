@@ -18,7 +18,7 @@ export async function runGame(ctx: CanvasRenderingContext2D) {
   const images = new ImageLibrary();
   await images.load();
 
-  world.add(new Background(grid, surface, images));
+  const background = new Background(grid, surface, images);
 
   const player = new Player(images);
   world.add(player);
@@ -39,6 +39,7 @@ export async function runGame(ctx: CanvasRenderingContext2D) {
   });
 
   paintLoop(() => {
+    background.paint(screen);
     world.allObjects().forEach((obj) => obj.paint(screen));
   });
 

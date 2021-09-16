@@ -1,13 +1,11 @@
-import { Coord } from "./Coord";
 import { GameGrid } from "./GameGrid";
-import { GameObject } from "./GameObject";
 import { Ground } from "./Ground";
 import { ImageLibrary } from "./ImageLibrary";
 import { PixelScreen } from "./PixelScreen";
 import { SpriteSheet } from "./SpriteSheet";
 import { SurfaceMap } from "./SurfaceMap";
 
-export class Background implements GameObject {
+export class Background {
   private initialized = false;
   private bgSprites: SpriteSheet;
   private ground: Ground;
@@ -16,8 +14,6 @@ export class Background implements GameObject {
     this.bgSprites = new SpriteSheet(images.get('grassBg'), [32, 32], [1, 1]);
     this.ground = new Ground(grid, surface, images);
   }
-
-  tick() { }
 
   paint(screen: PixelScreen) {
     if (!this.initialized) {
@@ -33,14 +29,6 @@ export class Background implements GameObject {
     } else {
       screen.restoreBg();
     }
-  }
-
-  zIndex() {
-    return -1;
-  }
-
-  getCoord(): Coord {
-    return [0, 0];
   }
 }
 
