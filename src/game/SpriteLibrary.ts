@@ -3,7 +3,7 @@ import { ImageLibrary } from "./ImageLibrary";
 import { SpriteSheet } from "./SpriteSheet";
 
 const PLANT_OFFSET: Coord = [-8, -16];
-const PLAYER_OFFSET: Coord = [-8, -16];
+const PLAYER_OFFSET: Coord = [-16, -31];
 
 export class SpriteLibrary {
   private sprites: Record<string, SpriteSheet> = {};
@@ -31,8 +31,8 @@ export class SpriteLibrary {
       'stand-back': new SpriteSheet(images.get("walk-back"), { size: [32, 32], colsRows: [1, 1], offset: PLAYER_OFFSET }),
       'dig-right': new SpriteSheet(images.get("dig-right"), { size: [32, 32], colsRows: [1, 5], offset: PLAYER_OFFSET }),
 
-      'snail': new SpriteSheet(images.get("snail"), { size: [32, 32], colsRows: [1, 5], offset: [-8, -16] }),
-      'snail-kill': new SpriteSheet(images.get("snail-kill"), { size: [112, 40], colsRows: [1, 11], offset: [-48, -24] }),
+      'snail': new SpriteSheet(images.get("snail"), { size: [32, 32], colsRows: [1, 5], offset: [-16, -28] }),
+      'snail-kill': new SpriteSheet(images.get("snail-kill"), { size: [112, 40], colsRows: [1, 11], offset: [-56, -36] }),
     };
   }
 

@@ -26,8 +26,8 @@ export class Player implements GameObject {
   private digging = false;
   private animation: SpriteAnimation;
 
-  constructor(sprites: SpriteLibrary) {
-    this.coord = [0, 16];
+  constructor(sprites: SpriteLibrary, coord: Coord) {
+    this.coord = coord;
     this.speed = [0, 0];
     this.sprites = sprites;
 
@@ -149,7 +149,7 @@ export class Player implements GameObject {
       const obj = world.getRightHandObject(this.coord);
       if (obj instanceof Snail) {
         obj.kill();
-        this.coord = coordAdd(obj.getCoord(), [-17, -3]);
+        this.coord = coordAdd(obj.getCoord(), [-17, 0]);
       }
     }
   }
@@ -168,18 +168,19 @@ export class Player implements GameObject {
   }
 
   updatePosition(world: GameWorld) {
+    const BORDER = 8;
     this.coord = coordAdd(this.coord, this.speed);
-    if (this.coord[0] > world.width() - 16) {
-      this.coord = [world.width() - 16, this.coord[1]];
+    if (this.coord[0] > world.width() - BORDER) {
+      this.coord = [world.width() - BORDER, this.coord[1]];
     }
-    if (this.coord[0] < 0) {
-      this.coord = [0, this.coord[1]];
+    if (this.coord[0] < BORDER) {
+      this.coord = [BORDER, this.coord[1]];
     }
-    if (this.coord[1] < 0) {
-      this.coord = [this.coord[0], 0];
+    if (this.coord[1] < BORDER) {
+      this.coord = [this.coord[0], BORDER];
     }
-    if (this.coord[1] > world.height() - 16) {
-      this.coord = [this.coord[0], world.height() - 16];
+    if (this.coord[1] > world.height() - BORDER) {
+      this.coord = [this.coord[0], world.height() - BORDER];
     }
   }
 
