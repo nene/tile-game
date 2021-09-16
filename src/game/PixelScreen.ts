@@ -1,4 +1,4 @@
-import { Coord } from "./Coord";
+import { Coord, coordAdd } from "./Coord";
 import { Sprite } from "./Sprite";
 
 interface PixelScreenOptions {
@@ -24,14 +24,15 @@ export class PixelScreen {
   }
 
   drawSprite(sprite: Sprite, coord: Coord) {
+    const adjustedCoord = coordAdd(coord, sprite.offset);
     this.ctx.drawImage(
       sprite.image,
       sprite.coord[0],
       sprite.coord[1],
       sprite.size[0],
       sprite.size[1],
-      coord[0],
-      coord[1],
+      adjustedCoord[0],
+      adjustedCoord[1],
       sprite.size[0],
       sprite.size[1]
     );

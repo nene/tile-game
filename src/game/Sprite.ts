@@ -4,4 +4,5 @@ export interface Sprite {
   image: HTMLImageElement,
   coord: Coord,
   size: Coord,
+  offset: Coord,
 }
