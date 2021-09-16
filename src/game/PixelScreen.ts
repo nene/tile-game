@@ -9,15 +9,15 @@ interface PixelScreenOptions {
 
 export class PixelScreen {
   private ctx: CanvasRenderingContext2D;
-  private rawWidth: number;
-  private rawHeight: number;
+  private virtualWidth: number;
+  private virtualHeight: number;
   private scale: number;
   private bg?: ImageData;
 
   constructor(ctx: CanvasRenderingContext2D, { width, height, scale }: PixelScreenOptions) {
     this.ctx = ctx;
-    this.rawWidth = width;
-    this.rawHeight = height;
+    this.virtualWidth = width;
+    this.virtualHeight = height;
     this.scale = scale;
     this.ctx.scale(scale, scale);
     this.ctx.imageSmoothingEnabled = false;
@@ -38,7 +38,7 @@ export class PixelScreen {
   }
 
   saveBg() {
-    this.bg = this.ctx.getImageData(0, 0, this.rawWidth, this.rawHeight);
+    this.bg = this.ctx.getImageData(0, 0, this.virtualWidth * this.scale, this.virtualHeight * this.scale);
   }
 
   restoreBg() {
@@ -48,10 +48,10 @@ export class PixelScreen {
   }
 
   width(): number {
-    return this.rawWidth / this.scale;
+    return this.virtualWidth;
   }
 
   height(): number {
-    return this.rawHeight / this.scale;
+    return this.virtualHeight;
   }
 }

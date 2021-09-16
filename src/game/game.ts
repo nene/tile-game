@@ -9,7 +9,7 @@ import { Snail } from "./Snail";
 import { GameWorld } from "./GameWorld";
 
 export async function runGame(ctx: CanvasRenderingContext2D) {
-  const screen = new PixelScreen(ctx, { width: 1024, height: 1024, scale: 4 });
+  const screen = new PixelScreen(ctx, { width: 256, height: 256, scale: 4 });
   const grid = new GameGrid({ rows: screen.width() / 16, cols: screen.height() / 16, tileSize: [16, 16] });
   const surface = generateSurface(grid);
 
