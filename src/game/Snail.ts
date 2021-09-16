@@ -8,7 +8,6 @@ import { SpriteLibrary } from "./SpriteLibrary";
 export class Snail implements GameObject {
   private animation: SpriteAnimation;
   private killAnimation: SpriteAnimation;
-  private offset: Coord = [-8, -16];
 
   constructor(sprites: SpriteLibrary, private coord: Coord) {
     this.animation = new SpriteAnimation(sprites.get("snail"));
@@ -17,7 +16,6 @@ export class Snail implements GameObject {
 
   kill() {
     this.animation = this.killAnimation;
-    this.offset = [-48, -24];
   }
 
   tick(world: GameWorld) {
@@ -35,7 +33,7 @@ export class Snail implements GameObject {
   }
 
   paint(screen: PixelScreen) {
-    screen.drawSprite(this.animation.getSprite(), coordAdd(this.coord, this.offset));
+    screen.drawSprite(this.animation.getSprite(), this.coord);
   }
 
   zIndex() {

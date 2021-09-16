@@ -14,7 +14,6 @@ type Direction = 'up' | 'down' | 'left' | 'right';
 export class Player implements GameObject {
   private coord: Coord;
   private speed: Coord;
-  private offset: Coord = [-8, -16];
   private standRight: SpriteAnimation;
   private standLeft: SpriteAnimation;
   private standBack: SpriteAnimation;
@@ -185,7 +184,7 @@ export class Player implements GameObject {
   }
 
   paint(screen: PixelScreen) {
-    screen.drawSprite(this.animation.getSprite(), coordAdd(this.coord, this.offset));
+    screen.drawSprite(this.animation.getSprite(), this.coord);
   }
 
   zIndex(): number {

@@ -1,4 +1,4 @@
-import { Coord, coordAdd } from "./Coord";
+import { Coord } from "./Coord";
 import { PixelScreen } from "./PixelScreen";
 import { GameObject } from "./GameObject";
 import { SpriteSheet } from "./SpriteSheet";
@@ -12,7 +12,6 @@ export enum GrassPlantType {
 
 export class GrassPlant implements GameObject {
   private coord: Coord;
-  private offset: Coord = [-8, -16];
 
   constructor(private spriteSheet: SpriteSheet, coord: Coord) {
     this.coord = coord;
@@ -22,7 +21,7 @@ export class GrassPlant implements GameObject {
   }
 
   paint(screen: PixelScreen) {
-    screen.drawSprite(this.spriteSheet.getSprite([0, 0]), coordAdd(this.coord, this.offset));
+    screen.drawSprite(this.spriteSheet.getSprite([0, 0]), this.coord);
   }
 
   zIndex(): number {
