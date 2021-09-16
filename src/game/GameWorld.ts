@@ -1,4 +1,4 @@
-import { Coord } from "./Coord";
+import { Coord, coordSubtract } from "./Coord";
 import { GameObject } from "./GameObject";
 
 export class GameWorld {
@@ -24,8 +24,4 @@ export class GameWorld {
       return diff[0] > 0 && diff[0] <= 32 && diff[1] > -8 && diff[1] < 8;
     });
   }
-}
-
-function coordSubtract(a: Coord, b: Coord): Coord {
-  return [a[0] - b[0], a[1] - b[1]];
 }
