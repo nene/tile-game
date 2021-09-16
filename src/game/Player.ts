@@ -47,36 +47,43 @@ export class Player implements GameObject {
     this.animation = this.standRight;
   }
 
-  moveRight() {
-    this.changeSpeed([3, this.speed[1]]);
+  handleKeyDown(key: string, world: GameWorld) {
+    switch (key) {
+      case "ArrowLeft":
+        this.changeSpeed([-3, this.speed[1]]);
+        break;
+      case "ArrowRight":
+        this.changeSpeed([3, this.speed[1]]);
+        break;
+      case "ArrowUp":
+        this.changeSpeed([this.speed[0], -3]);
+        break;
+      case "ArrowDown":
+        this.changeSpeed([this.speed[0], 3]);
+        break;
+      case " ":
+        this.startDigging(world);
+        break;
+      default: // do nothing
+    }
   }
 
-  moveLeft() {
-    this.changeSpeed([-3, this.speed[1]]);
-  }
-
-  moveUp() {
-    this.changeSpeed([this.speed[0], -3]);
-  }
-
-  moveDown() {
-    this.changeSpeed([this.speed[0], 3]);
-  }
-
-  stopRight() {
-    this.changeSpeed([min(0, this.speed[0]), this.speed[1]]);
-  }
-
-  stopLeft() {
-    this.changeSpeed([max(0, this.speed[0]), this.speed[1]]);
-  }
-
-  stopDown() {
-    this.changeSpeed([this.speed[0], min(0, this.speed[1])]);
-  }
-
-  stopUp() {
-    this.changeSpeed([this.speed[0], max(0, this.speed[1])]);
+  handleKeyUp(key: string, world: GameWorld) {
+    switch (key) {
+      case "ArrowLeft":
+        this.changeSpeed([max(0, this.speed[0]), this.speed[1]]);
+        break;
+      case "ArrowRight":
+        this.changeSpeed([min(0, this.speed[0]), this.speed[1]]);
+        break;
+      case "ArrowUp":
+        this.changeSpeed([this.speed[0], max(0, this.speed[1])]);
+        break;
+      case "ArrowDown":
+        this.changeSpeed([this.speed[0], min(0, this.speed[1])]);
+        break;
+      default: // do nothing
+    }
   }
 
   changeSpeed(newSpeed: Coord) {

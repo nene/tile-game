@@ -44,41 +44,10 @@ export async function runGame(ctx: CanvasRenderingContext2D) {
 
   return {
     onKeyDown: (key: string) => {
-      switch (key) {
-        case "ArrowLeft":
-          player.moveLeft();
-          break;
-        case "ArrowRight":
-          player.moveRight();
-          break;
-        case "ArrowUp":
-          player.moveUp();
-          break;
-        case "ArrowDown":
-          player.moveDown();
-          break;
-        case " ":
-          player.startDigging(world);
-          break;
-        default: // do nothing
-      }
+      player.handleKeyDown(key, world);
     },
     onKeyUp: (key: string) => {
-      switch (key) {
-        case "ArrowLeft":
-          player.stopLeft();
-          break;
-        case "ArrowRight":
-          player.stopRight();
-          break;
-        case "ArrowUp":
-          player.stopUp();
-          break;
-        case "ArrowDown":
-          player.stopDown();
-          break;
-        default: // do nothing
-      }
+      player.handleKeyUp(key, world);
     },
   };
 }
