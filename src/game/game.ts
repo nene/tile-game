@@ -3,9 +3,9 @@ import { Player } from "./Player";
 import { ImageLibrary } from "./ImageLibrary";
 import { GameGrid } from "./GameGrid";
 import { Background } from "./Background";
+import { generateNPCs } from "./generateNPCs";
 import { generatePlants } from "./generatePlants";
 import { generateSurface } from "./generateSurface";
-import { Snail } from "./Snail";
 import { GameWorld } from "./GameWorld";
 
 export async function runGame(ctx: CanvasRenderingContext2D) {
@@ -23,14 +23,7 @@ export async function runGame(ctx: CanvasRenderingContext2D) {
   const player = new Player(images);
   world.add(player);
 
-  world.add(...[
-    new Snail(images, [128, 32]),
-    new Snail(images, [256, 64]),
-    new Snail(images, [300, 100]),
-    new Snail(images, [320, 150]),
-    new Snail(images, [350, 200]),
-  ]);
-
+  world.add(...generateNPCs(images));
   world.add(...generatePlants(grid, surface, images));
 
   gameLoop(() => {
