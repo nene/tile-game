@@ -4,8 +4,8 @@ import { SpriteSheet } from "./SpriteSheet";
 
 const PLANT_OFFSET: Coord = [-8, -16];
 
-const PLAYER_SIZE: Coord = [32, 36];
-const PLAYER_OFFSET: Coord = [-16, -33];
+const PLAYER_SIZE: Coord = [32, 40];
+const PLAYER_OFFSET: Coord = [-16, -37];
 
 export class SpriteLibrary {
   private sprites: Record<string, SpriteSheet> = {};
