@@ -27,11 +27,11 @@ export class SpriteAnimation {
     this.currentFrame = cfg.currentFrame ?? 0;
   }
 
-  getSprite(): Sprite {
+  public getSprite(): Sprite {
     return this.spriteSheet.getSprite(this.frames[this.currentFrame]);
   }
 
-  tick() {
+  public tick() {
     this.ticks++;
     if (this.ticks >= this.ticksPerFrame) {
       this.ticks = 0;
@@ -39,22 +39,22 @@ export class SpriteAnimation {
     }
   }
 
-  getFrame(): number {
+  public getFrame(): number {
     return this.currentFrame;
   }
 
-  nextFrame() {
+  private nextFrame() {
     this.setFrame(this.currentFrame + 1);
     if (!this.finished && this.currentFrame === 0) {
       this.finished = true;
     }
   }
 
-  setFrame(n: number) {
+  public setFrame(n: number) {
     this.currentFrame = n % this.frames.length;
   }
 
-  isFinished(): boolean {
+  public isFinished(): boolean {
     return this.finished;
   }
 }
