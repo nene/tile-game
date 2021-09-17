@@ -23,7 +23,7 @@ export class SpriteLibrary {
       'reed': new SpriteSheet(images.get('reed'), { size: [32, 32], colsRows: [1, 1], offset: PLANT_OFFSET }),
       'water-lily': new SpriteSheet(images.get('water-lily'), { size: [32, 32], colsRows: [1, 1], offset: PLANT_OFFSET }),
 
-      'player': new SpriteSheet(images.get("player"), { size: PLAYER_SIZE, colsRows: [1, 4], offset: PLAYER_OFFSET }),
+      'player': new SpriteSheet(images.get("player"), { size: PLAYER_SIZE, colsRows: [4, 4], offset: PLAYER_OFFSET }),
       'dig-right': new SpriteSheet(images.get("dig-right"), { size: [32, 32], colsRows: [1, 5], offset: [-16, -31] }),
 
       'snail': new SpriteSheet(images.get("snail"), { size: [32, 32], colsRows: [1, 5], offset: [-16, -28] }),

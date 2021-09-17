@@ -36,10 +36,10 @@ export class Player implements GameObject {
     this.standRight = new SpriteAnimation(sprites.get("player"), { frames: [[0, 2]] });
     this.standLeft = new SpriteAnimation(sprites.get("player"), { frames: [[0, 3]] });
 
-    this.walkForward = new SpriteAnimation(sprites.get("player"), { frames: [[0, 0]] });
-    this.walkBack = new SpriteAnimation(sprites.get("player"), { frames: [[0, 1]] });
-    this.walkRight = new SpriteAnimation(sprites.get("player"), { frames: [[0, 2]] });
-    this.walkLeft = new SpriteAnimation(sprites.get("player"), { frames: [[0, 3]] });
+    this.walkForward = new SpriteAnimation(sprites.get("player"), { frames: { from: [0, 0], to: [3, 0] } });
+    this.walkBack = new SpriteAnimation(sprites.get("player"), { frames: { from: [0, 1], to: [3, 1] } });
+    this.walkRight = new SpriteAnimation(sprites.get("player"), { frames: { from: [0, 2], to: [3, 2] } });
+    this.walkLeft = new SpriteAnimation(sprites.get("player"), { frames: { from: [0, 3], to: [3, 3] } });
 
     this.animation = this.standRight;
   }
