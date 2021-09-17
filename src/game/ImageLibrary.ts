@@ -8,10 +8,7 @@ import reed from "./sprites/reed.png";
 import waterLily from "./sprites/water-lily.png";
 import stones from "./sprites/stones.png";
 import water from "./sprites/water.png";
-import walkLeft from "./sprites/player-left.png";
-import walkRight from "./sprites/player-right.png";
-import walkForward from "./sprites/player-forward.png";
-import walkBack from "./sprites/player-back.png";
+import player from "./sprites/player.png";
 import digRight from "./sprites/dig-right.png";
 import snail from "./sprites/snail.png";
 import snailKill from "./sprites/snail-kill.png";
@@ -34,11 +31,7 @@ export class ImageLibrary {
       'stones': await loadImage(stones),
       'water': await loadImage(water),
 
-      'walk-left': await loadImage(walkLeft),
-      'walk-right': await loadImage(walkRight),
-      'walk-forward': await loadImage(walkForward),
-      'walk-back': await loadImage(walkBack),
-
+      'player': await loadImage(player),
       'dig-right': await loadImage(digRight),
 
       'snail': await loadImage(snail),

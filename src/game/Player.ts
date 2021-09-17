@@ -31,15 +31,15 @@ export class Player implements GameObject {
     this.speed = [0, 0];
     this.sprites = sprites;
 
-    this.standRight = new SpriteAnimation(sprites.get("stand-right"));
-    this.standLeft = new SpriteAnimation(sprites.get("stand-left"));
-    this.standBack = new SpriteAnimation(sprites.get("stand-back"));
-    this.standForward = new SpriteAnimation(sprites.get("stand-forward"));
+    this.standForward = new SpriteAnimation(sprites.get("player"), { frames: [[0, 0]] });
+    this.standBack = new SpriteAnimation(sprites.get("player"), { frames: [[0, 1]] });
+    this.standRight = new SpriteAnimation(sprites.get("player"), { frames: [[0, 2]] });
+    this.standLeft = new SpriteAnimation(sprites.get("player"), { frames: [[0, 3]] });
 
-    this.walkRight = new SpriteAnimation(sprites.get("walk-right"));
-    this.walkLeft = new SpriteAnimation(sprites.get("walk-left"));
-    this.walkBack = new SpriteAnimation(sprites.get("walk-back"));
-    this.walkForward = new SpriteAnimation(sprites.get("walk-forward"));
+    this.walkForward = new SpriteAnimation(sprites.get("player"), { frames: [[0, 0]] });
+    this.walkBack = new SpriteAnimation(sprites.get("player"), { frames: [[0, 1]] });
+    this.walkRight = new SpriteAnimation(sprites.get("player"), { frames: [[0, 2]] });
+    this.walkLeft = new SpriteAnimation(sprites.get("player"), { frames: [[0, 3]] });
 
     this.animation = this.standRight;
   }
@@ -143,7 +143,9 @@ export class Player implements GameObject {
   startDigging(world: GameWorld) {
     if (!this.digging) {
       this.digging = true;
-      this.animation = new SpriteAnimation(this.sprites.get('dig-right'));
+      this.animation = new SpriteAnimation(this.sprites.get('dig-right'), {
+        frames: [[0, 0], [0, 1], [0, 2], [0, 3], [0, 4]],
+      });
       this.speed = [0, 0];
 
       const obj = world.getRightHandObject(this.coord);

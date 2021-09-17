@@ -10,8 +10,12 @@ export class Snail implements GameObject {
   private killAnimation: SpriteAnimation;
 
   constructor(sprites: SpriteLibrary, private coord: Coord) {
-    this.animation = new SpriteAnimation(sprites.get("snail"));
-    this.killAnimation = new SpriteAnimation(sprites.get("snail-kill"));
+    this.animation = new SpriteAnimation(sprites.get("snail"), {
+      frames: [[0, 0], [0, 1], [0, 2], [0, 3], [0, 4]],
+    });
+    this.killAnimation = new SpriteAnimation(sprites.get("snail-kill"), {
+      frames: [[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10]],
+    });
   }
 
   kill() {

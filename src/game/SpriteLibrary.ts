@@ -23,14 +23,7 @@ export class SpriteLibrary {
       'reed': new SpriteSheet(images.get('reed'), { size: [32, 32], colsRows: [1, 1], offset: PLANT_OFFSET }),
       'water-lily': new SpriteSheet(images.get('water-lily'), { size: [32, 32], colsRows: [1, 1], offset: PLANT_OFFSET }),
 
-      'walk-right': new SpriteSheet(images.get("walk-right"), { size: PLAYER_SIZE, colsRows: [1, 1], offset: PLAYER_OFFSET }),
-      'walk-left': new SpriteSheet(images.get("walk-left"), { size: PLAYER_SIZE, colsRows: [1, 1], offset: PLAYER_OFFSET }),
-      'walk-forward': new SpriteSheet(images.get("walk-forward"), { size: PLAYER_SIZE, colsRows: [1, 1], offset: PLAYER_OFFSET }),
-      'walk-back': new SpriteSheet(images.get("walk-back"), { size: PLAYER_SIZE, colsRows: [1, 1], offset: PLAYER_OFFSET }),
-      'stand-right': new SpriteSheet(images.get("walk-right"), { size: PLAYER_SIZE, colsRows: [1, 1], offset: PLAYER_OFFSET }),
-      'stand-left': new SpriteSheet(images.get("walk-left"), { size: PLAYER_SIZE, colsRows: [1, 1], offset: PLAYER_OFFSET }),
-      'stand-forward': new SpriteSheet(images.get("walk-forward"), { size: PLAYER_SIZE, colsRows: [1, 1], offset: PLAYER_OFFSET }),
-      'stand-back': new SpriteSheet(images.get("walk-back"), { size: PLAYER_SIZE, colsRows: [1, 1], offset: PLAYER_OFFSET }),
+      'player': new SpriteSheet(images.get("player"), { size: PLAYER_SIZE, colsRows: [1, 4], offset: PLAYER_OFFSET }),
       'dig-right': new SpriteSheet(images.get("dig-right"), { size: [32, 32], colsRows: [1, 5], offset: [-16, -31] }),
 
       'snail': new SpriteSheet(images.get("snail"), { size: [32, 32], colsRows: [1, 5], offset: [-16, -28] }),
