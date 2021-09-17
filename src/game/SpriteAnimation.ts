@@ -3,9 +3,14 @@ import { Sprite } from "./Sprite";
 import { SpriteSheet } from "./SpriteSheet";
 
 interface AnimationConfig {
-  frames?: Coord[];
+  frames: Coord[] | FrameRange;
   ticksPerFrame?: number;
   currentFrame?: number;
+}
+
+interface FrameRange {
+  from: Coord;
+  to: Coord;
 }
 
 // An animated sprite
@@ -16,8 +21,8 @@ export class SpriteAnimation {
   private currentFrame = 0;
   private finished = false;
 
-  constructor(private spriteSheet: SpriteSheet, cfg: AnimationConfig = {}) {
-    this.frames = cfg.frames ?? [[0, 0]];
+  constructor(private spriteSheet: SpriteSheet, cfg: AnimationConfig) {
+    this.frames = cfg.frames instanceof Array ? cfg.frames : expandFrameRange(cfg.frames);
     this.ticksPerFrame = cfg.ticksPerFrame ?? 1;
     this.currentFrame = cfg.currentFrame ?? 0;
   }
@@ -52,4 +57,14 @@ export class SpriteAnimation {
   isFinished(): boolean {
     return this.finished;
   }
+}
+
+function expandFrameRange({ from, to }: FrameRange): Coord[] {
+  const frames: Coord[] = [];
+  for (let y = from[1]; y <= to[1]; y++) {
+    for (let x = from[0]; x <= to[0]; x++) {
+      frames.push([x, y]);
+    }
+  }
+  return frames;
 }

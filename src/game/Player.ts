@@ -144,7 +144,7 @@ export class Player implements GameObject {
     if (!this.digging) {
       this.digging = true;
       this.animation = new SpriteAnimation(this.sprites.get('dig-right'), {
-        frames: [[0, 0], [0, 1], [0, 2], [0, 3], [0, 4]],
+        frames: { from: [0, 0], to: [0, 4] },
       });
       this.speed = [0, 0];
 

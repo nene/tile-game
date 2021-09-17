@@ -11,10 +11,10 @@ export class Snail implements GameObject {
 
   constructor(sprites: SpriteLibrary, private coord: Coord) {
     this.animation = new SpriteAnimation(sprites.get("snail"), {
-      frames: [[0, 0], [0, 1], [0, 2], [0, 3], [0, 4]],
+      frames: { from: [0, 0], to: [0, 4] },
     });
     this.killAnimation = new SpriteAnimation(sprites.get("snail-kill"), {
-      frames: [[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10]],
+      frames: { from: [0, 0], to: [0, 10] },
     });
   }
 
