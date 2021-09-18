@@ -27,17 +27,19 @@ export class PixelScreen {
 
   drawSprite(sprite: Sprite, coord: Coord) {
     const adjustedCoord = coordSub(coordAdd(coord, sprite.offset), this.offset);
-    this.ctx.drawImage(
-      sprite.image,
-      sprite.coord[0],
-      sprite.coord[1],
-      sprite.size[0],
-      sprite.size[1],
-      adjustedCoord[0],
-      adjustedCoord[1],
-      sprite.size[0],
-      sprite.size[1]
-    );
+    if (rectOverlaps([coordAdd(coord, sprite.offset), sprite.size], [this.offset, this.virtualSize])) {
+      this.ctx.drawImage(
+        sprite.image,
+        sprite.coord[0],
+        sprite.coord[1],
+        sprite.size[0],
+        sprite.size[1],
+        adjustedCoord[0],
+        adjustedCoord[1],
+        sprite.size[0],
+        sprite.size[1]
+      );
+    }
   }
 
   saveBg() {
@@ -61,4 +63,15 @@ export class PixelScreen {
   getOffset(): Coord {
     return this.offset;
   }
+}
+
+type Rect = [Coord, Coord];
+
+function rectOverlaps([a1, aSize]: Rect, [b1, bSize]: Rect) {
+  const a2 = coordAdd(a1, aSize);
+  const b2 = coordAdd(b1, bSize);
+
+  const xOverlaps = a1[0] <= b2[0] && a2[0] >= b1[0];
+  const yOverlaps = a1[1] <= b2[1] && a2[1] >= b1[1];
+  return xOverlaps && yOverlaps;
 }
