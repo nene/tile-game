@@ -172,8 +172,8 @@ export class Player implements GameObject {
   updatePosition(world: GameWorld) {
     const BORDER = 16 + 8;
     this.coord = coordAdd(this.coord, this.speed);
-    if (this.coord[0] > world.width() - BORDER) {
-      this.coord = [world.width() - BORDER, this.coord[1]];
+    if (this.coord[0] > world.size()[0] - BORDER) {
+      this.coord = [world.size()[0] - BORDER, this.coord[1]];
     }
     if (this.coord[0] < BORDER) {
       this.coord = [BORDER, this.coord[1]];
@@ -181,8 +181,8 @@ export class Player implements GameObject {
     if (this.coord[1] < BORDER) {
       this.coord = [this.coord[0], BORDER];
     }
-    if (this.coord[1] > world.height() - BORDER) {
-      this.coord = [this.coord[0], world.height() - BORDER];
+    if (this.coord[1] > world.size()[1] - BORDER) {
+      this.coord = [this.coord[0], world.size()[1] - BORDER];
     }
   }
 

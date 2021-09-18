@@ -1,4 +1,4 @@
-import { Coord, coordAdd, coordSubtract } from "./Coord";
+import { Coord, coordAdd, coordConstrain, coordDiv, coordSub } from "./Coord";
 import { GameWorld } from "./GameWorld";
 import { Sprite } from "./Sprite";
 
@@ -11,16 +11,14 @@ interface PixelScreenOptions {
 
 export class PixelScreen {
   private ctx: CanvasRenderingContext2D;
-  private virtualWidth: number;
-  private virtualHeight: number;
+  private virtualSize: Coord;
   private scale: number;
   private offset: Coord;
   private bg?: ImageData;
 
   constructor(ctx: CanvasRenderingContext2D, { width, height, scale, offset }: PixelScreenOptions) {
     this.ctx = ctx;
-    this.virtualWidth = width;
-    this.virtualHeight = height;
+    this.virtualSize = [width, height];
     this.scale = scale;
     this.offset = offset;
     this.ctx.scale(scale, scale);
@@ -28,7 +26,7 @@ export class PixelScreen {
   }
 
   drawSprite(sprite: Sprite, coord: Coord) {
-    const adjustedCoord = coordSubtract(coordAdd(coord, sprite.offset), this.offset);
+    const adjustedCoord = coordSub(coordAdd(coord, sprite.offset), this.offset);
     this.ctx.drawImage(
       sprite.image,
       sprite.coord[0],
@@ -43,15 +41,15 @@ export class PixelScreen {
   }
 
   saveBg() {
-    this.bg = this.ctx.getImageData(0, 0, this.virtualWidth * this.scale, this.virtualHeight * this.scale);
+    this.bg = this.ctx.getImageData(0, 0, this.virtualSize[0] * this.scale, this.virtualSize[1] * this.scale);
   }
 
   centerTo(coord: Coord, world: GameWorld) {
-    const halfScreenSize: Coord = [this.virtualWidth / 2, this.virtualHeight / 2];
+    const halfScreenSize: Coord = coordDiv(this.virtualSize, [2, 2]);
     const minOffset: Coord = [16, 16];
-    const maxOffset: Coord = coordSubtract([world.width(), world.height()], coordAdd([this.virtualWidth, this.virtualHeight], [16, 16]));
+    const maxOffset: Coord = coordSub(world.size(), coordAdd(this.virtualSize, [16, 16]));
 
-    this.offset = constrainCoord(coordSubtract(coord, halfScreenSize), minOffset, maxOffset);
+    this.offset = coordConstrain(coordSub(coord, halfScreenSize), minOffset, maxOffset);
   }
 
   restoreBg() {
@@ -59,28 +57,4 @@ export class PixelScreen {
       this.ctx.putImageData(this.bg, 0, 0);
     }
   }
-
-  width(): number {
-    return this.virtualWidth;
-  }
-
-  height(): number {
-    return this.virtualHeight;
-  }
-}
-
-function constrainCoord([x, y]: Coord, [minX, minY]: Coord, [maxX, maxY]: Coord): Coord {
-  if (x < minX) {
-    x = minX;
-  }
-  if (x > maxX) {
-    x = maxX;
-  }
-  if (y < minY) {
-    y = minY;
-  }
-  if (y > maxY) {
-    y = maxY;
-  }
-  return [x, y];
 }

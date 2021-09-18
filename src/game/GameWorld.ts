@@ -1,4 +1,4 @@
-import { Coord, coordSubtract } from "./Coord";
+import { Coord, coordSub } from "./Coord";
 import { GameObject } from "./GameObject";
 
 interface WorldConfig {
@@ -12,12 +12,8 @@ export class GameWorld {
   constructor(private cfg: WorldConfig) {
   }
 
-  width() {
-    return this.cfg.width;
-  }
-
-  height() {
-    return this.cfg.height;
+  size(): Coord {
+    return [this.cfg.width, this.cfg.height];
   }
 
   add(...objects: GameObject[]) {
@@ -36,7 +32,7 @@ export class GameWorld {
 
   getRightHandObject(coord: Coord): GameObject | undefined {
     return this.gameObjects.find((obj) => {
-      const diff = coordSubtract(obj.getCoord(), coord);
+      const diff = coordSub(obj.getCoord(), coord);
       return diff[0] > 0 && diff[0] <= 32 && diff[1] > -8 && diff[1] < 8;
     });
   }
