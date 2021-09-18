@@ -3,6 +3,7 @@ import { PixelScreen } from "./PixelScreen";
 import { SurfaceSpriteSheet } from "./SurfaceSpriteSheet";
 import { SurfaceMap, SurfaceType } from "./SurfaceMap";
 import { SpriteLibrary } from "./SpriteLibrary";
+import { Coord, coordAdd } from "./Coord";
 
 export class Ground {
   private stones: SurfaceSpriteSheet;
@@ -15,19 +16,21 @@ export class Ground {
 
   paint(screen: PixelScreen) {
     // depending on surrounding tiles, decide the type of stone tile and paint it
-    this.grid.forEachTile(([x, y]) => {
-      if (this.surface[x][y] === SurfaceType.stone) {
-        screen.drawSprite(
-          this.stones.getSprite([x, y], this.surface),
-          this.grid.tileToScreenCoord([x, y]),
-        );
+    for (let y = -1; y < this.grid.getRows(); y++) {
+      for (let x = -1; x < this.grid.getCols(); x++) {
+        this.maybeDrawSprite(screen, this.stones, [x, y]);
+        this.maybeDrawSprite(screen, this.water, [x, y]);
       }
-      if (this.surface[x][y] === SurfaceType.water) {
-        screen.drawSprite(
-          this.water.getSprite([x, y], this.surface),
-          this.grid.tileToScreenCoord([x, y]),
-        );
-      }
-    });
+    }
+  }
+
+  maybeDrawSprite(screen: PixelScreen, spriteSheet: SurfaceSpriteSheet, coord: Coord) {
+    const stoneSprite = spriteSheet.getSprite(coord, this.surface);
+    if (stoneSprite) {
+      screen.drawSprite(
+        stoneSprite,
+        coordAdd(this.grid.tileToScreenCoord(coord), [8, 8]),
+      );
+    }
   }
 }
