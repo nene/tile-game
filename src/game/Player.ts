@@ -170,7 +170,7 @@ export class Player implements GameObject {
   }
 
   updatePosition(world: GameWorld) {
-    const BORDER = 8;
+    const BORDER = 16 + 8;
     this.coord = coordAdd(this.coord, this.speed);
     if (this.coord[0] > world.width() - BORDER) {
       this.coord = [world.width() - BORDER, this.coord[1]];

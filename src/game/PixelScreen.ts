@@ -1,10 +1,11 @@
-import { Coord, coordAdd } from "./Coord";
+import { Coord, coordAdd, coordSubtract } from "./Coord";
 import { Sprite } from "./Sprite";
 
 interface PixelScreenOptions {
   width: number;
   height: number;
   scale: number;
+  offset: Coord;
 }
 
 export class PixelScreen {
@@ -12,19 +13,21 @@ export class PixelScreen {
   private virtualWidth: number;
   private virtualHeight: number;
   private scale: number;
+  private offset: Coord;
   private bg?: ImageData;
 
-  constructor(ctx: CanvasRenderingContext2D, { width, height, scale }: PixelScreenOptions) {
+  constructor(ctx: CanvasRenderingContext2D, { width, height, scale, offset }: PixelScreenOptions) {
     this.ctx = ctx;
     this.virtualWidth = width;
     this.virtualHeight = height;
     this.scale = scale;
+    this.offset = offset;
     this.ctx.scale(scale, scale);
     this.ctx.imageSmoothingEnabled = false;
   }
 
   drawSprite(sprite: Sprite, coord: Coord) {
-    const adjustedCoord = coordAdd(coord, sprite.offset);
+    const adjustedCoord = coordSubtract(coordAdd(coord, sprite.offset), this.offset);
     this.ctx.drawImage(
       sprite.image,
       sprite.coord[0],

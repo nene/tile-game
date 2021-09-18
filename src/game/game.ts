@@ -10,11 +10,11 @@ import { GameWorld } from "./GameWorld";
 import { SpriteLibrary } from "./SpriteLibrary";
 
 export async function runGame(ctx: CanvasRenderingContext2D) {
-  const screen = new PixelScreen(ctx, { width: 256, height: 256, scale: 4 });
-  const grid = new GameGrid({ rows: screen.width() / 16, cols: screen.height() / 16, tileSize: [16, 16] });
+  const screen = new PixelScreen(ctx, { width: 256, height: 256, scale: 4, offset: [16, 16] });
+  const grid = new GameGrid({ rows: screen.width() / 16 + 2, cols: screen.height() / 16 + 2, tileSize: [16, 16] });
   const surface = generateSurface(grid);
 
-  const world = new GameWorld({ width: screen.width(), height: screen.height() });
+  const world = new GameWorld({ width: grid.getCols() * 16, height: grid.getRows() * 16 });
 
   const images = new ImageLibrary();
   await images.load();
@@ -22,7 +22,7 @@ export async function runGame(ctx: CanvasRenderingContext2D) {
 
   const background = new Background(grid, surface, sprites);
 
-  const player = new Player(sprites, [16, 32]);
+  const player = new Player(sprites, [32, 64]);
   world.add(player);
 
   world.add(...generateNPCs(sprites));
