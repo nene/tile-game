@@ -2,7 +2,7 @@ import { Coord } from "./Coord";
 import { ImageLibrary } from "./ImageLibrary";
 import { SpriteSheet } from "./SpriteSheet";
 
-const PLANT_OFFSET: Coord = [-8, -16];
+const PLANT_OFFSET: Coord = [-16, -28];
 
 const PLAYER_SIZE: Coord = [32, 40];
 const PLAYER_OFFSET: Coord = [-16, -37];

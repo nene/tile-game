@@ -1,4 +1,5 @@
 import SimplexNoise from "simplex-noise";
+import { coordAdd } from "./Coord";
 import { GameGrid } from "./GameGrid";
 import { GameObject } from "./GameObject";
 import { GrassPlant, GrassPlantType } from "./GrassPlant";
@@ -18,12 +19,12 @@ export function generatePlants(grid: GameGrid, surface: SurfaceMap, sprites: Spr
       if (surface[x][y] === SurfaceType.grass) {
         return new GrassPlant(
           sprites.get(pickGrassPlantType(plantTypeNoise.noise2D(x / 10, y / 10))),
-          grid.tileToScreenCoord([x, y]),
+          coordAdd(grid.tileToScreenCoord([x, y]), [8, 12]),
         );
       } else {
         return new WaterPlant(
           sprites.get(pickWaterPlantType(waterPlantTypeNoise.noise2D(x / 10, y / 10))),
-          grid.tileToScreenCoord([x, y]),
+          coordAdd(grid.tileToScreenCoord([x, y]), [8, 12]),
         );
       }
     });
