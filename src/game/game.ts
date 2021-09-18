@@ -8,13 +8,16 @@ import { generatePlants } from "./generatePlants";
 import { generateSurface } from "./generateSurface";
 import { GameWorld } from "./GameWorld";
 import { SpriteLibrary } from "./SpriteLibrary";
+import { Coord } from "./Coord";
+
+const WORLD_SIZE: Coord = [32, 32]; // in tiles
 
 export async function runGame(ctx: CanvasRenderingContext2D) {
   const screen = new PixelScreen(ctx, { width: 256, height: 256, scale: 4, offset: [16, 16] });
-  const grid = new GameGrid({ rows: screen.width() / 16 + 2, cols: screen.height() / 16 + 2, tileSize: [16, 16] });
+  const grid = new GameGrid({ rows: WORLD_SIZE[0], cols: WORLD_SIZE[1], tileSize: [16, 16] });
   const surface = generateSurface(grid);
 
-  const world = new GameWorld({ width: grid.getCols() * 16, height: grid.getRows() * 16 });
+  const world = new GameWorld({ width: WORLD_SIZE[0] * 16, height: WORLD_SIZE[1] * 16 });
 
   const images = new ImageLibrary();
   await images.load();
@@ -34,6 +37,7 @@ export async function runGame(ctx: CanvasRenderingContext2D) {
   });
 
   paintLoop(() => {
+    screen.centerTo(player.getCoord(), world);
     background.paint(screen);
     world.allObjects().forEach((obj) => obj.paint(screen));
   });

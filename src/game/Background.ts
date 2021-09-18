@@ -6,7 +6,6 @@ import { SpriteSheet } from "./SpriteSheet";
 import { SurfaceMap } from "./SurfaceMap";
 
 export class Background {
-  private initialized = false;
   private bgSprites: SpriteSheet;
   private ground: Ground;
 
@@ -16,19 +15,13 @@ export class Background {
   }
 
   paint(screen: PixelScreen) {
-    if (!this.initialized) {
-      this.grid.forEachTile(([x, y]) => {
-        if (isEven(x) && isEven(y)) {
-          screen.drawSprite(this.bgSprites.getSprite([0, 0]), this.grid.tileToScreenCoord([x, y]));
-        }
-      });
-      this.ground.paint(screen);
+    this.grid.forEachTile(([x, y]) => {
+      if (isEven(x) && isEven(y)) {
+        screen.drawSprite(this.bgSprites.getSprite([0, 0]), this.grid.tileToScreenCoord([x, y]));
+      }
+    });
 
-      screen.saveBg();
-      this.initialized = true;
-    } else {
-      screen.restoreBg();
-    }
+    this.ground.paint(screen);
   }
 }
 

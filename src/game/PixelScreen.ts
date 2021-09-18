@@ -1,4 +1,5 @@
 import { Coord, coordAdd, coordSubtract } from "./Coord";
+import { GameWorld } from "./GameWorld";
 import { Sprite } from "./Sprite";
 
 interface PixelScreenOptions {
@@ -45,6 +46,14 @@ export class PixelScreen {
     this.bg = this.ctx.getImageData(0, 0, this.virtualWidth * this.scale, this.virtualHeight * this.scale);
   }
 
+  centerTo(coord: Coord, world: GameWorld) {
+    const halfScreenSize: Coord = [this.virtualWidth / 2, this.virtualHeight / 2];
+    const minOffset: Coord = [16, 16];
+    const maxOffset: Coord = coordSubtract([world.width(), world.height()], coordAdd([this.virtualWidth, this.virtualHeight], [16, 16]));
+
+    this.offset = constrainCoord(coordSubtract(coord, halfScreenSize), minOffset, maxOffset);
+  }
+
   restoreBg() {
     if (this.bg) {
       this.ctx.putImageData(this.bg, 0, 0);
@@ -58,4 +67,20 @@ export class PixelScreen {
   height(): number {
     return this.virtualHeight;
   }
+}
+
+function constrainCoord([x, y]: Coord, [minX, minY]: Coord, [maxX, maxY]: Coord): Coord {
+  if (x < minX) {
+    x = minX;
+  }
+  if (x > maxX) {
+    x = maxX;
+  }
+  if (y < minY) {
+    y = minY;
+  }
+  if (y > maxY) {
+    y = maxY;
+  }
+  return [x, y];
 }
