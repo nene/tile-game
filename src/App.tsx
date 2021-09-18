@@ -11,7 +11,7 @@ function App() {
       if (!ctx) {
         throw new Error("Unable to access canvas 2D context");
       }
-      const events = await runGame(ctx);
+      const events = await runGame(ctx, "blah");
 
       document.addEventListener("keydown", (e) => {
         e.preventDefault();

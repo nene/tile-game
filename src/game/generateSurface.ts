@@ -2,9 +2,9 @@ import SimplexNoise from "simplex-noise";
 import { GameGrid } from "./GameGrid";
 import { SurfaceMap, SurfaceType } from "./SurfaceMap";
 
-export function generateSurface(grid: GameGrid): SurfaceMap {
+export function generateSurface(grid: GameGrid, seed: string): SurfaceMap {
   const surface = emptySurface(grid.getRows(), grid.getCols());
-  const noise = new SimplexNoise();
+  const noise = new SimplexNoise(seed);
 
   // decide which tiles contain stones
   grid.forEachTile(([x, y]) => {

@@ -26,8 +26,8 @@ export class PixelScreen {
   }
 
   drawSprite(sprite: Sprite, coord: Coord) {
-    const adjustedCoord = coordSub(coordAdd(coord, sprite.offset), this.offset);
     if (rectOverlaps([coordAdd(coord, sprite.offset), sprite.size], [this.offset, this.virtualSize])) {
+      const adjustedCoord = coordSub(coordAdd(coord, sprite.offset), this.offset);
       this.ctx.drawImage(
         sprite.image,
         sprite.coord[0],
