@@ -8,9 +8,9 @@ import { SurfaceMap, SurfaceType } from "./SurfaceMap";
 import { WaterPlant, WaterPlantType } from "./WaterPlant";
 
 export function generatePlants(grid: GameGrid, surface: SurfaceMap, sprites: SpriteLibrary, seed: string): GameObject[] {
-  const plantExistanceNoise = new SimplexNoise(deriveSeed(seed));
-  const plantTypeNoise = new SimplexNoise(deriveSeed(deriveSeed(seed)));
-  const waterPlantTypeNoise = new SimplexNoise(deriveSeed(deriveSeed(deriveSeed(seed))));
+  const plantExistanceNoise = new SimplexNoise(deriveSeed(seed, "plant-perhaps"));
+  const plantTypeNoise = new SimplexNoise(deriveSeed(seed, "grass-plant"));
+  const waterPlantTypeNoise = new SimplexNoise(deriveSeed(seed, "water-plant"));
 
   return grid.allTiles()
     .filter(([x, y]) => surface[x][y] === SurfaceType.grass || surface[x][y] === SurfaceType.water)
@@ -30,8 +30,8 @@ export function generatePlants(grid: GameGrid, surface: SurfaceMap, sprites: Spr
     });
 }
 
-function deriveSeed(seed: string): string {
-  return String(new SimplexNoise(seed).noise2D(1, 1));
+function deriveSeed(seed: string, suffix: string): string {
+  return seed + suffix;
 }
 
 function pickGrassPlantType(x: number): GrassPlantType {
