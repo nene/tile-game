@@ -57,4 +57,8 @@ export class PixelScreen {
       this.ctx.putImageData(this.bg, 0, 0);
     }
   }
+
+  getOffset(): Coord {
+    return this.offset;
+  }
 }

@@ -16,6 +16,10 @@ export function coordDiv(a: Coord, b: Coord): Coord {
   return [a[0] / b[0], a[1] / b[1]];
 }
 
+export function coordEq(a: Coord, b: Coord): boolean {
+  return a[0] === b[0] && a[1] === b[1];
+}
+
 export function coordConstrain([x, y]: Coord, [minX, minY]: Coord, [maxX, maxY]: Coord): Coord {
   if (x < minX) {
     x = minX;
