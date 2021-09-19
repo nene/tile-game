@@ -9,10 +9,11 @@ import { generateSurface } from "./generateSurface";
 import { GameWorld } from "./GameWorld";
 import { SpriteLibrary } from "./SpriteLibrary";
 import { Coord } from "./Coord";
+import { SoundLibrary } from "./SoundLibrary";
 
 const WORLD_SIZE: Coord = [32, 32]; // in tiles
 
-export async function runGame(ctx: CanvasRenderingContext2D, seed: string, audio: HTMLAudioElement) {
+export async function runGame(ctx: CanvasRenderingContext2D, seed: string) {
   const screen = new PixelScreen(ctx, { width: 256, height: 256, scale: 4, offset: [16, 16] });
   const grid = new GameGrid({ rows: WORLD_SIZE[0], cols: WORLD_SIZE[1], tileSize: [16, 16] });
   const surface = generateSurface(grid, seed);
@@ -23,9 +24,12 @@ export async function runGame(ctx: CanvasRenderingContext2D, seed: string, audio
   await images.load();
   const sprites = new SpriteLibrary(images);
 
+  const sounds = new SoundLibrary();
+  sounds.load();
+
   const background = new Background(grid, surface, sprites);
 
-  const player = new Player(sprites, [32, 64], audio);
+  const player = new Player(sprites, sounds, [32, 64]);
   world.add(player);
 
   world.add(...generateNPCs(sprites));

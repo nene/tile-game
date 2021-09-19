@@ -5,6 +5,7 @@ import { SpriteAnimation } from "./SpriteAnimation";
 import { Snail } from "./Snail";
 import { GameWorld } from "./GameWorld";
 import { SpriteLibrary } from "./SpriteLibrary";
+import { SoundLibrary } from "./SoundLibrary";
 
 const max = Math.max;
 const min = Math.min;
@@ -23,13 +24,15 @@ export class Player implements GameObject {
   private walkBack: SpriteAnimation;
   private walkForward: SpriteAnimation;
   private sprites: SpriteLibrary;
+  private sounds: SoundLibrary;
   private digging = false;
   private animation: SpriteAnimation;
 
-  constructor(sprites: SpriteLibrary, coord: Coord, private audioEl: HTMLAudioElement) {
+  constructor(sprites: SpriteLibrary, sounds: SoundLibrary, coord: Coord) {
     this.coord = coord;
     this.speed = [0, 0];
     this.sprites = sprites;
+    this.sounds = sounds;
 
     this.standForward = new SpriteAnimation(sprites.get("player"), { frames: [[0, 0]] });
     this.standBack = new SpriteAnimation(sprites.get("player"), { frames: [[0, 1]] });
@@ -152,7 +155,7 @@ export class Player implements GameObject {
       if (obj instanceof Snail) {
         obj.kill();
         this.coord = coordAdd(obj.getCoord(), [-17, 0]);
-        this.playKillSound();
+        this.sounds.play("killSnail");
       }
     }
   }
@@ -160,16 +163,6 @@ export class Player implements GameObject {
   stopDigging() {
     this.digging = false;
     this.animation = this.standRight;
-  }
-
-  playKillSound() {
-    const audioContext = new AudioContext();
-    const track = audioContext.createMediaElementSource(this.audioEl);
-    track.connect(audioContext.destination);
-    if (audioContext.state === 'suspended') {
-      audioContext.resume();
-    }
-    this.audioEl.play();
   }
 
   tick(world: GameWorld) {
