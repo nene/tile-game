@@ -12,7 +12,7 @@ import { Coord } from "./Coord";
 
 const WORLD_SIZE: Coord = [32, 32]; // in tiles
 
-export async function runGame(ctx: CanvasRenderingContext2D, seed: string) {
+export async function runGame(ctx: CanvasRenderingContext2D, seed: string, audio: HTMLAudioElement) {
   const screen = new PixelScreen(ctx, { width: 256, height: 256, scale: 4, offset: [16, 16] });
   const grid = new GameGrid({ rows: WORLD_SIZE[0], cols: WORLD_SIZE[1], tileSize: [16, 16] });
   const surface = generateSurface(grid, seed);
@@ -25,7 +25,7 @@ export async function runGame(ctx: CanvasRenderingContext2D, seed: string) {
 
   const background = new Background(grid, surface, sprites);
 
-  const player = new Player(sprites, [32, 64]);
+  const player = new Player(sprites, [32, 64], audio);
   world.add(player);
 
   world.add(...generateNPCs(sprites));

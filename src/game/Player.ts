@@ -26,7 +26,7 @@ export class Player implements GameObject {
   private digging = false;
   private animation: SpriteAnimation;
 
-  constructor(sprites: SpriteLibrary, coord: Coord) {
+  constructor(sprites: SpriteLibrary, coord: Coord, private audioEl: HTMLAudioElement) {
     this.coord = coord;
     this.speed = [0, 0];
     this.sprites = sprites;
@@ -152,6 +152,7 @@ export class Player implements GameObject {
       if (obj instanceof Snail) {
         obj.kill();
         this.coord = coordAdd(obj.getCoord(), [-17, 0]);
+        this.playKillSound();
       }
     }
   }
@@ -159,6 +160,16 @@ export class Player implements GameObject {
   stopDigging() {
     this.digging = false;
     this.animation = this.standRight;
+  }
+
+  playKillSound() {
+    const audioContext = new AudioContext();
+    const track = audioContext.createMediaElementSource(this.audioEl);
+    track.connect(audioContext.destination);
+    if (audioContext.state === 'suspended') {
+      audioContext.resume();
+    }
+    this.audioEl.play();
   }
 
   tick(world: GameWorld) {
