@@ -17,6 +17,7 @@ export class SoundLibrary {
 
   play(soundName: string) {
     const audioEl = this.sounds[soundName];
+    audioEl.currentTime = 0;
     audioEl.play();
   }
 }
