@@ -1,4 +1,4 @@
-import { Coord, coordAdd, coordEq, coordSub, coordUnit } from "./Coord";
+import { Coord, coordAdd, coordEq, coordMul, coordSub, coordUnit } from "./Coord";
 import { GameObject } from "./GameObject";
 import { GameWorld } from "./GameWorld";
 import { PixelScreen } from "./PixelScreen";
@@ -31,7 +31,7 @@ export class Bursh implements GameObject {
 
     const targetCoord = this.getActivePathStep(world);
     if (targetCoord) {
-      this.speed = coordUnit(coordSub(targetCoord, this.coord));
+      this.speed = coordMul(coordUnit(coordSub(targetCoord, this.coord)), [2, 2]);
 
       this.coord = coordAdd(this.coord, this.speed);
     }
@@ -43,7 +43,8 @@ export class Bursh implements GameObject {
     }
     const current = this.path?.[0];
     if (current && coordEq(this.coord, current)) {
-      return this.path?.shift();
+      this.path?.shift();
+      return this.path?.[0];
     }
     return current;
   }
