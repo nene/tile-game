@@ -2,8 +2,6 @@ import { Coord } from "./Coord";
 import { ImageLibrary } from "./ImageLibrary";
 import { SpriteSheet } from "./SpriteSheet";
 
-const PLANT_OFFSET: Coord = [-16, -28];
-
 const PLAYER_SIZE: Coord = [32, 40];
 const PLAYER_OFFSET: Coord = [-16, -37];
 
@@ -13,15 +11,6 @@ export class SpriteLibrary {
   constructor(images: ImageLibrary) {
     this.sprites = {
       'cfe-bg': new SpriteSheet(images.get('cfe-bg'), { size: [16, 16], colsRows: [1, 3] }),
-      'stones': new SpriteSheet(images.get('stones'), { size: [16, 16], colsRows: [5, 3] }),
-      'water': new SpriteSheet(images.get('water'), { size: [16, 16], colsRows: [5, 3] }),
-
-      'cabbage': new SpriteSheet(images.get('cabbage'), { size: [32, 32], colsRows: [1, 1], offset: PLANT_OFFSET }),
-      'wheat': new SpriteSheet(images.get('wheat'), { size: [32, 32], colsRows: [1, 1], offset: PLANT_OFFSET }),
-      'pepper': new SpriteSheet(images.get('pepper'), { size: [32, 32], colsRows: [1, 1], offset: PLANT_OFFSET }),
-      'marygold': new SpriteSheet(images.get('marygold'), { size: [32, 32], colsRows: [1, 1], offset: PLANT_OFFSET }),
-      'reed': new SpriteSheet(images.get('reed'), { size: [32, 32], colsRows: [1, 1], offset: PLANT_OFFSET }),
-      'water-lily': new SpriteSheet(images.get('water-lily'), { size: [32, 32], colsRows: [1, 1], offset: PLANT_OFFSET }),
 
       'player': new SpriteSheet(images.get("player"), { size: PLAYER_SIZE, colsRows: [4, 4], offset: PLAYER_OFFSET }),
       'dig-right': new SpriteSheet(images.get("dig-right"), { size: [32, 32], colsRows: [1, 5], offset: [-16, -31] }),
