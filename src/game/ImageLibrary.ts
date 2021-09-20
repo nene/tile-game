@@ -1,6 +1,6 @@
 import { loadImage } from "./loadImage";
 import cfeBg from "./sprites/cfe-bg.png";
-import player from "./sprites/player.png";
+import cfeReb from "./sprites/cfe-reb.png";
 import digRight from "./sprites/dig-right.png";
 import snail from "./sprites/snail.png";
 import snailKill from "./sprites/snail-kill.png";
@@ -12,7 +12,7 @@ export class ImageLibrary {
     this.images = {
       'cfe-bg': await loadImage(cfeBg),
 
-      'player': await loadImage(player),
+      'cfe-reb': await loadImage(cfeReb),
       'dig-right': await loadImage(digRight),
 
       'snail': await loadImage(snail),
