@@ -9,9 +9,9 @@ export class Snail implements GameObject {
   private animation: SpriteAnimation;
   private killAnimation: SpriteAnimation;
 
-  constructor(sprites: SpriteLibrary, private coord: Coord) {
+  constructor(sprites: SpriteLibrary, private coord: Coord, type: 0 | 1 | 2) {
     this.animation = new SpriteAnimation(sprites.get("cfe-ksv"), {
-      frames: [[0, 0]],
+      frames: [[type, 0]],
     });
     this.killAnimation = new SpriteAnimation(sprites.get("snail-kill"), {
       frames: { from: [0, 0], to: [0, 10] },
