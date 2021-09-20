@@ -28,7 +28,7 @@ export async function runGame(ctx: CanvasRenderingContext2D, seed: string) {
 
   const background = new Background(grid, surface, sprites);
 
-  const player = new Player(sprites, sounds, [32, 64]);
+  const player = new Player(sprites, [32, 64]);
   world.add(player);
 
   world.add(...generateNPCs(sprites));

@@ -2,10 +2,8 @@ import { PixelScreen } from "./PixelScreen";
 import { GameObject } from "./GameObject";
 import { Coord, coordAdd } from "./Coord";
 import { SpriteAnimation } from "./SpriteAnimation";
-import { Snail } from "./Snail";
 import { GameWorld } from "./GameWorld";
 import { SpriteLibrary } from "./SpriteLibrary";
-import { SoundLibrary } from "./SoundLibrary";
 
 const max = Math.max;
 const min = Math.min;
@@ -23,16 +21,11 @@ export class Player implements GameObject {
   private walkLeft: SpriteAnimation;
   private walkBack: SpriteAnimation;
   private walkForward: SpriteAnimation;
-  private sprites: SpriteLibrary;
-  private sounds: SoundLibrary;
-  private digging = false;
   private animation: SpriteAnimation;
 
-  constructor(sprites: SpriteLibrary, sounds: SoundLibrary, coord: Coord) {
+  constructor(sprites: SpriteLibrary, coord: Coord) {
     this.coord = coord;
     this.speed = [0, 0];
-    this.sprites = sprites;
-    this.sounds = sounds;
 
     this.standForward = new SpriteAnimation(sprites.get("cfe-reb"), { frames: [[0, 0]] });
     this.standBack = new SpriteAnimation(sprites.get("cfe-reb"), { frames: [[0, 0]] });
@@ -60,9 +53,6 @@ export class Player implements GameObject {
         break;
       case "ArrowDown":
         this.changeSpeed([this.speed[0], 3]);
-        break;
-      case " ":
-        this.startDigging(world);
         break;
       default: // do nothing
     }
@@ -143,34 +133,9 @@ export class Player implements GameObject {
     return 'up';
   }
 
-  startDigging(world: GameWorld) {
-    if (!this.digging) {
-      this.digging = true;
-      this.animation = new SpriteAnimation(this.sprites.get('dig-right'), {
-        frames: { from: [0, 0], to: [0, 4] },
-      });
-      this.speed = [0, 0];
-
-      const obj = world.getRightHandObject(this.coord);
-      if (obj instanceof Snail) {
-        obj.kill();
-        this.coord = coordAdd(obj.getCoord(), [-17, 0]);
-        this.sounds.play("killSnail");
-      }
-    }
-  }
-
-  stopDigging() {
-    this.digging = false;
-    this.animation = this.standRight;
-  }
-
   tick(world: GameWorld) {
     this.updatePosition(world);
     this.animation.tick();
-    if (this.digging && this.animation.isFinished()) {
-      this.stopDigging();
-    }
   }
 
   updatePosition(world: GameWorld) {
