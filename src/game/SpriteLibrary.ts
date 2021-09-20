@@ -10,7 +10,8 @@ export class SpriteLibrary {
 
   constructor(images: ImageLibrary) {
     this.sprites = {
-      'cfe-bg': new SpriteSheet(images.get('cfe-bg'), { size: [16, 16], colsRows: [1, 1] }),
+      'cfe-bg': new SpriteSheet(images.get('cfe-bg'), { size: [16, 16], colsRows: [1, 3] }),
+      'cfe-wall': new SpriteSheet(images.get('cfe-bg'), { size: [16, 32], colsRows: [1, 1] }),
 
       'cfe-reb': new SpriteSheet(images.get("cfe-reb"), { size: PLAYER_SIZE, colsRows: [4, 4], offset: PLAYER_OFFSET }),
 

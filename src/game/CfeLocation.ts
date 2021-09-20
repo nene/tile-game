@@ -27,7 +27,7 @@ export class CfeLocation implements GameLocation {
 
     // simplistic room plan
     this.grid.forEachTile(([x, y]) => {
-      if (y === 2) {
+      if (y === 1) {
         objects.push(new Wall(this.grid.tileToScreenCoord([x, y]), this.sprites));
       }
     });

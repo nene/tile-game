@@ -1,21 +1,20 @@
-import { Coord, coordSub } from "./Coord";
+import { Coord } from "./Coord";
 import { GameObject } from "./GameObject";
 import { PixelScreen } from "./PixelScreen";
+import { Sprite } from "./Sprite";
 import { SpriteLibrary } from "./SpriteLibrary";
-import { SpriteSheet } from "./SpriteSheet";
 
 export class Wall implements GameObject {
-  private wallSprites: SpriteSheet;
+  private sprite: Sprite;
 
   constructor(private coord: Coord, sprites: SpriteLibrary) {
-    this.wallSprites = sprites.get("cfe-bg");
+    this.sprite = sprites.get("cfe-wall").getSprite([0, 0]);
   }
 
   tick() { }
 
   paint(screen: PixelScreen) {
-    screen.drawSprite(this.wallSprites.getSprite([0, 0]), coordSub(this.coord, [0, 16]));
-    screen.drawSprite(this.wallSprites.getSprite([0, 1]), this.coord);
+    screen.drawSprite(this.sprite, this.coord);
   }
 
   getCoord() {
@@ -31,6 +30,6 @@ export class Wall implements GameObject {
   }
 
   tileSize(): Coord {
-    return [1, 1];
+    return [1, 2];
   }
 }
