@@ -12,7 +12,7 @@ export class SpriteLibrary {
 
   constructor(images: ImageLibrary) {
     this.sprites = {
-      'grass-bg': new SpriteSheet(images.get('grass-bg'), { size: [32, 32], colsRows: [1, 1] }),
+      'cfe-bg': new SpriteSheet(images.get('cfe-bg'), { size: [16, 16], colsRows: [1, 3] }),
       'stones': new SpriteSheet(images.get('stones'), { size: [16, 16], colsRows: [5, 3] }),
       'water': new SpriteSheet(images.get('water'), { size: [16, 16], colsRows: [5, 3] }),
 

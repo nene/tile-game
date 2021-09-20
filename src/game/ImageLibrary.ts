@@ -1,5 +1,5 @@
 import { loadImage } from "./loadImage";
-import grassBg from "./sprites/grass-bg.png";
+import cfeBg from "./sprites/cfe-bg.png";
 import cabbage from "./sprites/cabbage.png";
 import wheat from "./sprites/wheat.png";
 import pepper from "./sprites/pepper.png";
@@ -18,7 +18,7 @@ export class ImageLibrary {
 
   async load() {
     this.images = {
-      'grass-bg': await loadImage(grassBg),
+      'cfe-bg': await loadImage(cfeBg),
 
       'cabbage': await loadImage(cabbage),
       'wheat': await loadImage(wheat),
