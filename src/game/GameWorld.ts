@@ -1,4 +1,4 @@
-import { Coord, coordMul } from "./Coord";
+import { Coord, coordEq, coordMul } from "./Coord";
 import { GameLocation } from "./GameLocation";
 import { GameObject } from "./GameObject";
 
@@ -25,5 +25,11 @@ export class GameWorld {
     this.gameObjects.sort((a, b) => {
       return a.zIndex() - b.zIndex();
     });
+  }
+
+  getObjectsInTile(screenCoord: Coord): GameObject[] {
+    const grid = this.location.getGrid();
+    const tileCoord = grid.screenToTileCoord(screenCoord);
+    return this.gameObjects.filter((obj) => coordEq(tileCoord, grid.screenToTileCoord(obj.getCoord())));
   }
 }

@@ -4,6 +4,7 @@ import { Coord, coordAdd, coordConstrain, coordSub } from "./Coord";
 import { SpriteAnimation } from "./SpriteAnimation";
 import { GameWorld } from "./GameWorld";
 import { SpriteLibrary } from "./SpriteLibrary";
+import { Wall } from "./Wall";
 
 const max = Math.max;
 const min = Math.min;
@@ -139,16 +140,20 @@ export class Player implements GameObject {
   }
 
   private updatePosition(world: GameWorld) {
-    this.coord = coordAdd(this.coord, this.speed);
+    const newCoord = coordAdd(this.coord, this.speed);
 
-    this.coord = this.constrainToWorld(this.coord, world);
+    if (world.getObjectsInTile(newCoord).some((obj) => obj instanceof Wall)) {
+      return; // Don't move through walls
+    }
+
+    this.coord = this.constrainToWorld(newCoord, world);
   }
 
   private constrainToWorld(coord: Coord, world: GameWorld): Coord {
     const BORDER = 16 + 8;
     const topLeft: Coord = [BORDER, BORDER];
     const bottomRight = coordSub(world.size(), [BORDER, BORDER]);
-    return coordConstrain(this.coord, topLeft, bottomRight);
+    return coordConstrain(coord, topLeft, bottomRight);
   }
 
   paint(screen: PixelScreen) {
