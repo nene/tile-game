@@ -8,6 +8,7 @@ import { SpriteLibrary } from "./SpriteLibrary";
 export class Bursh implements GameObject {
   private animation: SpriteAnimation;
   private destination?: Coord;
+  private path?: Coord[];
   private speed: Coord = [0, 0];
 
   constructor(sprites: SpriteLibrary, private coord: Coord, type: 0 | 1 | 2) {
@@ -28,9 +29,23 @@ export class Bursh implements GameObject {
       return;
     }
 
-    this.speed = coordUnit(coordSub(this.destination, this.coord));
+    const targetCoord = this.getActivePathStep(world);
+    if (targetCoord) {
+      this.speed = coordUnit(coordSub(targetCoord, this.coord));
 
-    this.coord = coordAdd(this.coord, this.speed);
+      this.coord = coordAdd(this.coord, this.speed);
+    }
+  }
+
+  private getActivePathStep(world: GameWorld): Coord | undefined {
+    if (this.destination && !this.path) {
+      this.path = world.findPath(this.coord, this.destination);
+    }
+    const current = this.path?.[0];
+    if (current && coordEq(this.coord, current)) {
+      return this.path?.shift();
+    }
+    return current;
   }
 
   paint(screen: PixelScreen) {
@@ -46,7 +61,7 @@ export class Bursh implements GameObject {
   }
 
   isSolid() {
-    return true;
+    return false;
   }
 
   tileSize(): Coord {

@@ -62,7 +62,7 @@ export class CfeLocation implements GameLocation {
   private spawnBursh(coord: Coord, type: 0 | 1 | 2): Bursh {
     const bursh = new Bursh(this.sprites, coord, type);
     const table = this.staticObjects.find((obj) => obj instanceof Table) as Table;
-    const chairOffset = coordAdd([8, -1], [type * 16, 0])
+    const chairOffset = coordAdd([8, -8], [type * 16, 0]);
     bursh.moveTo(coordAdd(table.getCoord(), chairOffset));
     return bursh;
   }

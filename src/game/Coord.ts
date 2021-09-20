@@ -42,3 +42,8 @@ export function coordConstrain([x, y]: Coord, [minX, minY]: Coord, [maxX, maxY]:
 export function coordUnit(coord: Coord): Coord {
   return coord.map((x) => x > 0 ? 1 : (x < 0 ? -1 : 0)) as Coord;
 }
+
+export function coordDistance(coord1: Coord, coord2: Coord): number {
+  const [a, b] = coordSub(coord1, coord2).map(Math.abs);
+  return Math.sqrt(a * a + b * b);
+}
