@@ -8,4 +8,5 @@ export interface GameObject {
   paint: (screen: PixelScreen) => void;
   tick: (world: GameWorld) => void;
   isSolid: () => boolean;
+  tileSize: () => Coord;
 }

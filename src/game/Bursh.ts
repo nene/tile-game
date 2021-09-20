@@ -37,4 +37,8 @@ export class Bursh implements GameObject {
   isSolid() {
     return true;
   }
+
+  tileSize(): Coord {
+    return [1, 1];
+  }
 }

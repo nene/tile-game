@@ -28,4 +28,8 @@ export class Table implements GameObject {
   isSolid() {
     return true;
   }
+
+  tileSize(): Coord {
+    return [4, 1];
+  }
 }
