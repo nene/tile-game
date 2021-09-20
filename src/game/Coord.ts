@@ -35,3 +35,10 @@ export function coordConstrain([x, y]: Coord, [minX, minY]: Coord, [maxX, maxY]:
   }
   return [x, y];
 }
+
+// Takes any coord of any numbers and converts it to a coord that can only contain numbers -1, 0, 1
+// coordUnit([-5, 8]) --> [-1, 1]
+// coordUnit([0, 0.3]) -> [0, 1]
+export function coordUnit(coord: Coord): Coord {
+  return coord.map((x) => x > 0 ? 1 : (x < 0 ? -1 : 0)) as Coord;
+}

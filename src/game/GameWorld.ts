@@ -10,6 +10,7 @@ export class GameWorld {
 
   constructor(private location: GameLocation) {
     this.gameObjects.push(...this.location.getStaticObjects());
+    this.gameObjects.push(...this.location.getDynamicObjects());
   }
 
   size(): Coord {

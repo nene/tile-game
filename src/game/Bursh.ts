@@ -1,4 +1,4 @@
-import { Coord, coordAdd } from "./Coord";
+import { Coord, coordAdd, coordEq, coordSub, coordUnit } from "./Coord";
 import { GameObject } from "./GameObject";
 import { GameWorld } from "./GameWorld";
 import { PixelScreen } from "./PixelScreen";
@@ -7,6 +7,8 @@ import { SpriteLibrary } from "./SpriteLibrary";
 
 export class Bursh implements GameObject {
   private animation: SpriteAnimation;
+  private destination?: Coord;
+  private speed: Coord = [0, 0];
 
   constructor(sprites: SpriteLibrary, private coord: Coord, type: 0 | 1 | 2) {
     this.animation = new SpriteAnimation(sprites.get("cfe-ksv"), {
@@ -14,12 +16,21 @@ export class Bursh implements GameObject {
     });
   }
 
+  moveTo(coord: Coord) {
+    this.destination = coord;
+  }
+
   tick(world: GameWorld) {
     this.animation.tick();
-    this.coord = coordAdd(this.coord, [-1, 0]);
-    if (this.coord[0] < 0) {
-      this.coord = [world.size()[0], this.coord[1]];
+
+    if (!this.destination || coordEq(this.coord, this.destination)) {
+      this.speed = [0, 0];
+      return;
     }
+
+    this.speed = coordUnit(coordSub(this.destination, this.coord));
+
+    this.coord = coordAdd(this.coord, this.speed);
   }
 
   paint(screen: PixelScreen) {

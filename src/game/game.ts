@@ -2,7 +2,6 @@ import { PixelScreen } from "./PixelScreen";
 import { Player } from "./Player";
 import { ImageLibrary } from "./ImageLibrary";
 import { Background } from "./Background";
-import { generateNPCs } from "./generateNPCs";
 import { GameWorld } from "./GameWorld";
 import { SpriteLibrary } from "./SpriteLibrary";
 import { SoundLibrary } from "./SoundLibrary";
@@ -25,8 +24,6 @@ export async function runGame(ctx: CanvasRenderingContext2D, seed: string) {
 
   const player = new Player(sprites, [32, 64]);
   world.add(player);
-
-  world.add(...generateNPCs(sprites));
 
   gameLoop(() => {
     world.allObjects().forEach((obj) => obj.tick(world));

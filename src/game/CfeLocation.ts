@@ -1,5 +1,6 @@
+import { Bursh } from "./Bursh";
 import { CfeBackground } from "./CfeBackground";
-import { Coord } from "./Coord";
+import { Coord, coordAdd } from "./Coord";
 import { GameGrid } from "./GameGrid";
 import { GameLocation } from "./GameLocation";
 import { GameObject } from "./GameObject";
@@ -22,7 +23,7 @@ export class CfeLocation implements GameLocation {
     this.staticObjects = this.createStaticObjects();
   }
 
-  createStaticObjects(): GameObject[] {
+  private createStaticObjects(): GameObject[] {
     const objects: GameObject[] = [];
 
     // simplistic room plan
@@ -48,5 +49,18 @@ export class CfeLocation implements GameLocation {
 
   getStaticObjects() {
     return this.staticObjects;
+  }
+
+  getDynamicObjects(): GameObject[] {
+    return [
+      this.spawnBush(),
+    ];
+  }
+
+  private spawnBush(): Bursh {
+    const bursh = new Bursh(this.sprites, [150, 150], 0);
+    const table = this.staticObjects.find((obj) => obj instanceof Table) as Table;
+    bursh.moveTo(coordAdd(table.getCoord(), [8, -1]));
+    return bursh;
   }
 }
