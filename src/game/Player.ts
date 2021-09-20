@@ -1,6 +1,6 @@
 import { PixelScreen } from "./PixelScreen";
 import { GameObject } from "./GameObject";
-import { Coord, coordAdd } from "./Coord";
+import { Coord, coordAdd, coordConstrain, coordSub } from "./Coord";
 import { SpriteAnimation } from "./SpriteAnimation";
 import { GameWorld } from "./GameWorld";
 import { SpriteLibrary } from "./SpriteLibrary";
@@ -138,21 +138,17 @@ export class Player implements GameObject {
     this.animation.tick();
   }
 
-  updatePosition(world: GameWorld) {
-    const BORDER = 16 + 8;
+  private updatePosition(world: GameWorld) {
     this.coord = coordAdd(this.coord, this.speed);
-    if (this.coord[0] > world.size()[0] - BORDER) {
-      this.coord = [world.size()[0] - BORDER, this.coord[1]];
-    }
-    if (this.coord[0] < BORDER) {
-      this.coord = [BORDER, this.coord[1]];
-    }
-    if (this.coord[1] < BORDER) {
-      this.coord = [this.coord[0], BORDER];
-    }
-    if (this.coord[1] > world.size()[1] - BORDER) {
-      this.coord = [this.coord[0], world.size()[1] - BORDER];
-    }
+
+    this.coord = this.constrainToWorld(this.coord, world);
+  }
+
+  private constrainToWorld(coord: Coord, world: GameWorld): Coord {
+    const BORDER = 16 + 8;
+    const topLeft: Coord = [BORDER, BORDER];
+    const bottomRight = coordSub(world.size(), [BORDER, BORDER]);
+    return coordConstrain(this.coord, topLeft, bottomRight);
   }
 
   paint(screen: PixelScreen) {
