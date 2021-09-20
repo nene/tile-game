@@ -25,4 +25,8 @@ export class Wall implements GameObject {
   zIndex() {
     return this.coord[1];
   }
+
+  isSolid() {
+    return true;
+  }
 }

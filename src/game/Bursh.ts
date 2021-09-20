@@ -33,4 +33,8 @@ export class Bursh implements GameObject {
   getCoord() {
     return this.coord;
   }
+
+  isSolid() {
+    return true;
+  }
 }

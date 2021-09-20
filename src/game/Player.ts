@@ -4,7 +4,6 @@ import { Coord, coordAdd, coordConstrain, coordSub } from "./Coord";
 import { SpriteAnimation } from "./SpriteAnimation";
 import { GameWorld } from "./GameWorld";
 import { SpriteLibrary } from "./SpriteLibrary";
-import { Wall } from "./Wall";
 
 const max = Math.max;
 const min = Math.min;
@@ -142,7 +141,7 @@ export class Player implements GameObject {
   private updatePosition(world: GameWorld) {
     const newCoord = coordAdd(this.coord, this.speed);
 
-    if (world.getObjectsInTile(newCoord).some((obj) => obj instanceof Wall)) {
+    if (world.getObjectsInTile(newCoord).some((obj) => obj.isSolid() && obj !== this)) {
       return; // Don't move through walls
     }
 
@@ -166,5 +165,9 @@ export class Player implements GameObject {
 
   getCoord(): Coord {
     return this.coord;
+  }
+
+  isSolid() {
+    return true;
   }
 }
