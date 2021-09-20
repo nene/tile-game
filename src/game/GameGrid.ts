@@ -1,25 +1,22 @@
 import { Coord } from "./Coord";
 
 interface GameGridConfig {
-  rows: number;
-  cols: number;
+  gridSize: Coord;
   tileSize: Coord;
 }
 
 export class GameGrid {
-  private rows: number;
-  private cols: number;
+  private gridSize: Coord;
   private tileSize: Coord;
 
   constructor(cfg: GameGridConfig) {
-    this.rows = cfg.rows;
-    this.cols = cfg.cols;
+    this.gridSize = cfg.gridSize;
     this.tileSize = cfg.tileSize;
   }
 
   forEachTile(callback: (colRow: Coord) => void) {
-    for (let x = 0; x < this.cols; x++) {
-      for (let y = 0; y < this.rows; y++) {
+    for (let x = 0; x < this.gridSize[1]; x++) {
+      for (let y = 0; y < this.gridSize[0]; y++) {
         callback([x, y]);
       }
     }
@@ -35,11 +32,11 @@ export class GameGrid {
     return [x * this.tileSize[0], y * this.tileSize[1]];
   }
 
-  getRows() {
-    return this.rows;
+  screenToTileCoord([x, y]: Coord): Coord {
+    return [Math.floor(x / this.tileSize[0]), Math.floor(y / this.tileSize[0])];
   }
 
-  getCols() {
-    return this.cols;
+  size() {
+    return this.gridSize;
   }
 }

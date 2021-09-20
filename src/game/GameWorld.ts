@@ -10,7 +10,7 @@ export class GameWorld {
   }
 
   size(): Coord {
-    return coordMul(this.location.gridSize(), [16, 16]);
+    return coordMul(this.location.getGrid().size(), [16, 16]);
   }
 
   add(...objects: GameObject[]) {

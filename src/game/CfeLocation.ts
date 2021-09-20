@@ -14,7 +14,7 @@ export class CfeLocation implements GameLocation {
   private staticObjects: GameObject[];
 
   constructor(private sprites: SpriteLibrary) {
-    this.grid = new GameGrid({ rows: CFE_SIZE[0], cols: CFE_SIZE[1], tileSize: [16, 16] });
+    this.grid = new GameGrid({ gridSize: CFE_SIZE, tileSize: [16, 16] });
 
     this.background = new CfeBackground(this.grid, sprites);
 
@@ -34,8 +34,8 @@ export class CfeLocation implements GameLocation {
     return objects;
   }
 
-  gridSize() {
-    return CFE_SIZE;
+  getGrid() {
+    return this.grid;
   }
 
   getBackground() {
