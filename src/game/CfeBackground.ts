@@ -1,11 +1,12 @@
 import { Coord } from "./Coord";
 import { GameGrid } from "./GameGrid";
+import { GameLocationBackground } from "./GameLocation";
 import { PixelScreen } from "./PixelScreen";
 import { SpriteLibrary } from "./SpriteLibrary";
 import { SpriteSheet } from "./SpriteSheet";
 import { SurfaceMap, SurfaceType } from "./SurfaceMap";
 
-export class CfeBackground {
+export class CfeBackground implements GameLocationBackground {
   private bgSprites: SpriteSheet;
   private tileMap: Record<SurfaceType, Coord> = {
     [SurfaceType.empty]: [-1, -1],

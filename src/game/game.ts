@@ -1,21 +1,18 @@
 import { PixelScreen } from "./PixelScreen";
 import { Player } from "./Player";
 import { ImageLibrary } from "./ImageLibrary";
-import { GameGrid } from "./GameGrid";
 import { Background } from "./Background";
 import { generateNPCs } from "./generateNPCs";
-import { createCfeSurface } from "./createCfeSurface";
 import { GameWorld } from "./GameWorld";
 import { SpriteLibrary } from "./SpriteLibrary";
 import { Coord } from "./Coord";
 import { SoundLibrary } from "./SoundLibrary";
+import { CfeLocation } from "./CfeLocation";
 
 const WORLD_SIZE: Coord = [32, 32]; // in tiles
 
 export async function runGame(ctx: CanvasRenderingContext2D, seed: string) {
   const screen = new PixelScreen(ctx, { width: 256, height: 256, scale: 4, offset: [16, 16] });
-  const grid = new GameGrid({ rows: WORLD_SIZE[0], cols: WORLD_SIZE[1], tileSize: [16, 16] });
-  const surface = createCfeSurface(grid);
 
   const world = new GameWorld({ width: WORLD_SIZE[0] * 16, height: WORLD_SIZE[1] * 16 });
 
@@ -26,7 +23,8 @@ export async function runGame(ctx: CanvasRenderingContext2D, seed: string) {
   const sounds = new SoundLibrary();
   await sounds.load();
 
-  const background = new Background(grid, surface, sprites);
+  const location = new CfeLocation(sprites);
+  const background = new Background(location.getBackground());
 
   const player = new Player(sprites, [32, 64]);
   world.add(player);

@@ -1,17 +1,11 @@
 import { Coord, coordEq } from "./Coord";
-import { GameGrid } from "./GameGrid";
 import { PixelScreen } from "./PixelScreen";
-import { CfeBackground } from "./CfeBackground";
-import { SpriteLibrary } from "./SpriteLibrary";
-import { SurfaceMap } from "./SurfaceMap";
+import { GameLocationBackground } from "./GameLocation";
 
 export class Background {
-  private cfeBg: CfeBackground;
   private previousOffset: Coord = [-1, -1];
 
-  constructor(grid: GameGrid, surface: SurfaceMap, sprites: SpriteLibrary) {
-    this.cfeBg = new CfeBackground(grid, surface, sprites);
-  }
+  constructor(private bg: GameLocationBackground) { }
 
   paint(screen: PixelScreen) {
     if (coordEq(screen.getOffset(), this.previousOffset)) {
@@ -19,7 +13,7 @@ export class Background {
       return;
     }
 
-    this.cfeBg.paint(screen);
+    this.bg.paint(screen);
     screen.saveBg();
     this.previousOffset = screen.getOffset();
   }
