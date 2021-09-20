@@ -15,7 +15,7 @@ export class SpriteLibrary {
       'cfe-reb': new SpriteSheet(images.get("cfe-reb"), { size: PLAYER_SIZE, colsRows: [4, 4], offset: PLAYER_OFFSET }),
       'dig-right': new SpriteSheet(images.get("dig-right"), { size: [32, 32], colsRows: [1, 5], offset: [-16, -31] }),
 
-      'snail': new SpriteSheet(images.get("snail"), { size: [32, 32], colsRows: [1, 5], offset: [-16, -28] }),
+      'cfe-ksv': new SpriteSheet(images.get("cfe-ksv"), { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET }),
       'snail-kill': new SpriteSheet(images.get("snail-kill"), { size: [112, 40], colsRows: [1, 11], offset: [-56, -36] }),
     };
   }
