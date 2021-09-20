@@ -1,6 +1,6 @@
 import { Bursh } from "./Bursh";
 import { CfeBackground } from "./CfeBackground";
-import { Coord, coordAdd } from "./Coord";
+import { Coord, coordAdd, coordMul } from "./Coord";
 import { GameGrid } from "./GameGrid";
 import { GameLocation } from "./GameLocation";
 import { GameObject } from "./GameObject";
@@ -53,14 +53,17 @@ export class CfeLocation implements GameLocation {
 
   getDynamicObjects(): GameObject[] {
     return [
-      this.spawnBush(),
+      this.spawnBush([150, 150], 0),
+      this.spawnBush([200, 80], 1),
+      this.spawnBush([30, 240], 2),
     ];
   }
 
-  private spawnBush(): Bursh {
-    const bursh = new Bursh(this.sprites, [150, 150], 0);
+  private spawnBush(coord: Coord, type: 0 | 1 | 2): Bursh {
+    const bursh = new Bursh(this.sprites, coord, type);
     const table = this.staticObjects.find((obj) => obj instanceof Table) as Table;
-    bursh.moveTo(coordAdd(table.getCoord(), [8, -1]));
+    const chairOffset = coordAdd([8, -1], [type * 16, 0])
+    bursh.moveTo(coordAdd(table.getCoord(), chairOffset));
     return bursh;
   }
 }
