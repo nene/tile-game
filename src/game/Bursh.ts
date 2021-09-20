@@ -5,7 +5,7 @@ import { PixelScreen } from "./PixelScreen";
 import { SpriteAnimation } from "./SpriteAnimation";
 import { SpriteLibrary } from "./SpriteLibrary";
 
-export class Snail implements GameObject {
+export class Bursh implements GameObject {
   private animation: SpriteAnimation;
 
   constructor(sprites: SpriteLibrary, private coord: Coord, type: 0 | 1 | 2) {
