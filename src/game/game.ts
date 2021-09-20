@@ -5,16 +5,11 @@ import { Background } from "./Background";
 import { generateNPCs } from "./generateNPCs";
 import { GameWorld } from "./GameWorld";
 import { SpriteLibrary } from "./SpriteLibrary";
-import { Coord } from "./Coord";
 import { SoundLibrary } from "./SoundLibrary";
 import { CfeLocation } from "./CfeLocation";
 
-const WORLD_SIZE: Coord = [32, 32]; // in tiles
-
 export async function runGame(ctx: CanvasRenderingContext2D, seed: string) {
   const screen = new PixelScreen(ctx, { width: 256, height: 256, scale: 4, offset: [16, 16] });
-
-  const world = new GameWorld({ width: WORLD_SIZE[0] * 16, height: WORLD_SIZE[1] * 16 });
 
   const images = new ImageLibrary();
   await images.load();
@@ -25,6 +20,8 @@ export async function runGame(ctx: CanvasRenderingContext2D, seed: string) {
 
   const location = new CfeLocation(sprites);
   const background = new Background(location.getBackground());
+
+  const world = new GameWorld(location);
 
   const player = new Player(sprites, [32, 64]);
   world.add(player);

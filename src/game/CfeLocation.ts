@@ -5,7 +5,7 @@ import { GameGrid } from "./GameGrid";
 import { GameLocation } from "./GameLocation";
 import { SpriteLibrary } from "./SpriteLibrary";
 
-const CFE_SIZE: Coord = [32, 32];
+const CFE_SIZE: Coord = [32, 32]; // Size in tiles
 
 export class CfeLocation implements GameLocation {
   private background: CfeBackground;
@@ -18,7 +18,7 @@ export class CfeLocation implements GameLocation {
     this.background = new CfeBackground(this.grid, surface, sprites);
   }
 
-  size() {
+  gridSize() {
     return CFE_SIZE;
   }
 
