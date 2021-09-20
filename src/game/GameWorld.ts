@@ -6,6 +6,7 @@ export class GameWorld {
   private gameObjects: GameObject[] = [];
 
   constructor(private location: GameLocation) {
+    this.gameObjects.push(...this.location.getStaticObjects());
   }
 
   size(): Coord {
