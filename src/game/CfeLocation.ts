@@ -4,6 +4,7 @@ import { GameGrid } from "./GameGrid";
 import { GameLocation } from "./GameLocation";
 import { GameObject } from "./GameObject";
 import { SpriteLibrary } from "./SpriteLibrary";
+import { Table } from "./Table";
 import { Wall } from "./Wall";
 
 const CFE_SIZE: Coord = [32, 32]; // Size in tiles
@@ -30,6 +31,9 @@ export class CfeLocation implements GameLocation {
         objects.push(new Wall(this.grid.tileToScreenCoord([x, y]), this.sprites));
       }
     });
+
+    // A table
+    objects.push(new Table(this.grid.tileToScreenCoord([2, 5]), this.sprites));
 
     return objects;
   }

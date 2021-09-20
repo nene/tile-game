@@ -2,6 +2,7 @@ import { loadImage } from "./loadImage";
 import cfeBg from "./sprites/cfe-bg.png";
 import cfeReb from "./sprites/cfe-reb.png";
 import cfeKsv from "./sprites/cfe-ksv.png";
+import table from "./sprites/table.png";
 
 export class ImageLibrary {
   private images: Record<string, HTMLImageElement> = {};
@@ -13,6 +14,8 @@ export class ImageLibrary {
       'cfe-reb': await loadImage(cfeReb),
 
       'cfe-ksv': await loadImage(cfeKsv),
+
+      'table': await loadImage(table),
     };
   }
 

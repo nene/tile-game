@@ -15,6 +15,8 @@ export class SpriteLibrary {
       'cfe-reb': new SpriteSheet(images.get("cfe-reb"), { size: PLAYER_SIZE, colsRows: [4, 4], offset: PLAYER_OFFSET }),
 
       'cfe-ksv': new SpriteSheet(images.get("cfe-ksv"), { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET }),
+
+      'table': new SpriteSheet(images.get("table"), { size: [64, 22], colsRows: [1, 1], offset: [0, -6] }),
     };
   }
 
