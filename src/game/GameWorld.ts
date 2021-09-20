@@ -32,7 +32,7 @@ export class GameWorld {
     this.tileMap = this.sortToTiles(this.gameObjects);
   }
 
-  sortToTiles(objects: GameObject[]): TileMap {
+  private sortToTiles(objects: GameObject[]): TileMap {
     const grid = this.location.getGrid();
     const tileMap: TileMap = {};
     objects.forEach((obj) => {
