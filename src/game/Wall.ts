@@ -37,5 +37,5 @@ export class Wall implements GameObject {
     return { coord: [0, 0], size: [16, 48] };
   }
 
-  onClick() { }
+  onInteract() { }
 }

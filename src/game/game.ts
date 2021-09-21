@@ -5,7 +5,7 @@ import { GameWorld } from "./GameWorld";
 import { SpriteLibrary } from "./SpriteLibrary";
 import { SoundLibrary } from "./SoundLibrary";
 import { CfeLocation } from "./CfeLocation";
-import { Coord, coordAdd } from "./Coord";
+import { Coord, coordAdd, coordDistance } from "./Coord";
 
 const PIXEL_SCALE = 4;
 
@@ -46,7 +46,10 @@ export async function runGame(ctx: CanvasRenderingContext2D, seed: string) {
     onClick: ([x, y]: Coord) => {
       const screenCoord: Coord = [Math.floor(x / PIXEL_SCALE), Math.floor(y / PIXEL_SCALE)];
       const worldCoord = coordAdd(screenCoord, screen.getOffset());
-      world.getObjectVisibleOnCoord(worldCoord)?.onClick();
+      const obj = world.getObjectVisibleOnCoord(worldCoord);
+      if (obj && coordDistance(player.getCoord(), obj.getCoord()) < 16 + 8) {
+        obj.onInteract();
+      }
     }
   };
 }

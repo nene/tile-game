@@ -73,7 +73,7 @@ export class Bursh implements GameObject {
     return { coord: [-7, -29], size: [14, 30] };
   }
 
-  onClick() {
-    console.log("clicked on bvil!");
+  onInteract() {
+    console.log("You talked to ksv!");
   }
 }

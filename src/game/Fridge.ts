@@ -37,5 +37,7 @@ export class Fridge implements GameObject {
     return { coord: [0, -32], size: [16, 45] };
   }
 
-  onClick() { }
+  onInteract() {
+    console.log("You opened the fridge");
+  }
 }

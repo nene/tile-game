@@ -37,5 +37,7 @@ export class BeerCabinet implements GameObject {
     return { coord: [0, -32], size: [32, 45] };
   }
 
-  onClick() { }
+  onInteract() {
+    console.log("You opened the beer-cabinet");
+  }
 }
