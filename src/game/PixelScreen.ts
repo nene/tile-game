@@ -9,6 +9,10 @@ interface PixelScreenOptions {
   offset?: Coord;
 }
 
+interface DrawSpriteOptions {
+  showCenter?: boolean;
+}
+
 export class PixelScreen {
   private ctx: CanvasRenderingContext2D;
   private virtualSize: Coord;
@@ -25,7 +29,7 @@ export class PixelScreen {
     this.ctx.imageSmoothingEnabled = false;
   }
 
-  drawSprite(sprite: Sprite, coord: Coord) {
+  drawSprite(sprite: Sprite, coord: Coord, opts?: DrawSpriteOptions) {
     if (rectOverlaps([coordAdd(coord, sprite.offset), sprite.size], [this.offset, this.virtualSize])) {
       const adjustedCoord = coordSub(coordAdd(coord, sprite.offset), this.offset);
       this.ctx.drawImage(
@@ -39,6 +43,12 @@ export class PixelScreen {
         sprite.size[0],
         sprite.size[1]
       );
+      if (opts?.showCenter) {
+        this.ctx.fillStyle = "red";
+        const center = coordSub(coord, this.offset);
+        this.ctx.fillRect(center[0] - 2, center[1], 5, 1);
+        this.ctx.fillRect(center[0], center[1] - 2, 1, 5);
+      }
     }
   }
 
