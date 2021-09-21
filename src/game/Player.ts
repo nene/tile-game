@@ -1,6 +1,6 @@
 import { PixelScreen } from "./PixelScreen";
 import { GameObject } from "./GameObject";
-import { Coord, coordAdd, coordConstrain, coordSub } from "./Coord";
+import { Coord, coordAdd, coordConstrain, coordSub, Rect } from "./Coord";
 import { SpriteAnimation } from "./SpriteAnimation";
 import { GameWorld } from "./GameWorld";
 import { SpriteLibrary } from "./SpriteLibrary";
@@ -173,5 +173,9 @@ export class Player implements GameObject {
 
   tileSize(): Coord {
     return [1, 1];
+  }
+
+  hitBox(): Rect {
+    return { coord: [-7, -29], size: [14, 30] };
   }
 }

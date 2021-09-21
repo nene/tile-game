@@ -1,4 +1,4 @@
-import { Coord, coordAdd, coordEq, coordMul, coordSub, coordUnit } from "./Coord";
+import { Coord, coordAdd, coordEq, coordMul, coordSub, coordUnit, Rect } from "./Coord";
 import { GameObject } from "./GameObject";
 import { GameWorld } from "./GameWorld";
 import { PixelScreen } from "./PixelScreen";
@@ -67,5 +67,9 @@ export class Bursh implements GameObject {
 
   tileSize(): Coord {
     return [1, 1];
+  }
+
+  hitBox(): Rect {
+    return { coord: [-7, -29], size: [14, 30] };
   }
 }

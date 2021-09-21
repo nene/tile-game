@@ -1,4 +1,4 @@
-import { Coord } from "./Coord";
+import { Coord, Rect } from "./Coord";
 import { GameObject } from "./GameObject";
 import { PixelScreen } from "./PixelScreen";
 import { Sprite } from "./Sprite";
@@ -31,5 +31,9 @@ export class Table implements GameObject {
 
   tileSize(): Coord {
     return [4, 1];
+  }
+
+  hitBox(): Rect {
+    return { coord: [0, -6], size: [64, 17] };
   }
 }

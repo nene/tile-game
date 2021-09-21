@@ -1,4 +1,4 @@
-import { Coord } from "./Coord";
+import { Coord, Rect } from "./Coord";
 import { GameWorld } from "./GameWorld";
 import { PixelScreen } from "./PixelScreen";
 
@@ -9,4 +9,5 @@ export interface GameObject {
   tick: (world: GameWorld) => void;
   isSolid: () => boolean;
   tileSize: () => Coord;
+  hitBox: () => Rect;
 }
