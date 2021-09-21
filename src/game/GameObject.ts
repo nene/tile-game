@@ -10,4 +10,5 @@ export interface GameObject {
   isSolid: () => boolean;
   tileSize: () => Coord;
   hitBox: () => Rect;
+  onClick: () => void;
 }

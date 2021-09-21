@@ -1,4 +1,4 @@
-import { Coord, coordAdd, coordMul } from "./Coord";
+import { Coord, coordAdd, coordMul, isCoordInRect } from "./Coord";
 import { GameLocation } from "./GameLocation";
 import { GameObject } from "./GameObject";
 import { PathFinder } from "./PathFinder";
@@ -52,6 +52,19 @@ export class GameWorld {
     });
 
     return tileMap;
+  }
+
+  /**
+   * Looks up objects based on their hitBox,
+   * returns the first visible object (others might be behind it)
+   */
+  getObjectVisibleOnCoord(screenCoord: Coord): GameObject | undefined {
+    // Loop through objects from front to back
+    return [...this.gameObjects].reverse().find((obj) => {
+      const hitBox = obj.hitBox();
+      const topLeft = coordAdd(obj.getCoord(), hitBox.coord);
+      return isCoordInRect(screenCoord, { coord: topLeft, size: hitBox.size });
+    });
   }
 
   getObjectsOnCoord(screenCoord: Coord): GameObject[] {

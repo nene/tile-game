@@ -36,4 +36,6 @@ export class Table implements GameObject {
   hitBox(): Rect {
     return { coord: [0, -6], size: [64, 17] };
   }
+
+  onClick() { }
 }

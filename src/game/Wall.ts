@@ -36,4 +36,6 @@ export class Wall implements GameObject {
   hitBox(): Rect {
     return { coord: [0, 0], size: [16, 48] };
   }
+
+  onClick() { }
 }

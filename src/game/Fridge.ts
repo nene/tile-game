@@ -36,4 +36,6 @@ export class Fridge implements GameObject {
   hitBox(): Rect {
     return { coord: [0, -32], size: [16, 45] };
   }
+
+  onClick() { }
 }

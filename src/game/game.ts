@@ -46,7 +46,7 @@ export async function runGame(ctx: CanvasRenderingContext2D, seed: string) {
     onClick: ([x, y]: Coord) => {
       const screenCoord: Coord = [Math.floor(x / PIXEL_SCALE), Math.floor(y / PIXEL_SCALE)];
       const worldCoord = coordAdd(screenCoord, screen.getOffset());
-      console.log(worldCoord);
+      world.getObjectVisibleOnCoord(worldCoord)?.onClick();
     }
   };
 }

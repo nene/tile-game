@@ -36,4 +36,6 @@ export class BeerCabinet implements GameObject {
   hitBox(): Rect {
     return { coord: [0, -32], size: [32, 45] };
   }
+
+  onClick() { }
 }

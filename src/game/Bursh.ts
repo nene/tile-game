@@ -72,4 +72,8 @@ export class Bursh implements GameObject {
   hitBox(): Rect {
     return { coord: [-7, -29], size: [14, 30] };
   }
+
+  onClick() {
+    console.log("clicked on bvil!");
+  }
 }

@@ -48,3 +48,8 @@ export function coordDistance(coord1: Coord, coord2: Coord): number {
   const [a, b] = coordSub(coord1, coord2).map(Math.abs);
   return Math.sqrt(a * a + b * b);
 }
+
+export function isCoordInRect([x, y]: Coord, { coord: [x1, y1], size }: Rect): boolean {
+  const [x2, y2] = coordAdd([x1, y1], size);
+  return x >= x1 && y >= y1 && x <= x2 && y <= y2;
+}

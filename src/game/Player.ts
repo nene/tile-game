@@ -178,4 +178,7 @@ export class Player implements GameObject {
   hitBox(): Rect {
     return { coord: [-7, -29], size: [14, 30] };
   }
+
+  onClick() {
+  }
 }
