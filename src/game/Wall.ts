@@ -30,6 +30,6 @@ export class Wall implements GameObject {
   }
 
   tileSize(): Coord {
-    return [1, 2];
+    return [1, 3];
   }
 }

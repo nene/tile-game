@@ -13,7 +13,7 @@ export class CfeBackground implements GameLocationBackground {
 
   paint(screen: PixelScreen) {
     this.grid.forEachTile((tileCoord) => {
-      screen.drawSprite(this.bgSprites.getSprite([0, 2]), this.grid.tileToScreenCoord(tileCoord));
+      screen.drawSprite(this.bgSprites.getSprite([0, 3]), this.grid.tileToScreenCoord(tileCoord));
     });
   }
 }

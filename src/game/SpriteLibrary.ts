@@ -18,8 +18,8 @@ export class SpriteLibrary {
     const cfeBgImage = await loadImage(cfeBg);
 
     this.sprites = {
-      'cfe-bg': new SpriteSheet(cfeBgImage, { size: [16, 16], colsRows: [1, 3] }),
-      'cfe-wall': new SpriteSheet(cfeBgImage, { size: [16, 32], colsRows: [1, 1] }),
+      'cfe-bg': new SpriteSheet(cfeBgImage, { size: [16, 16], colsRows: [1, 4] }),
+      'cfe-wall': new SpriteSheet(cfeBgImage, { size: [16, 48], colsRows: [1, 1] }),
 
       'cfe-reb': new SpriteSheet(await loadImage(cfeReb), { size: PLAYER_SIZE, colsRows: [4, 4], offset: PLAYER_OFFSET }),
 
