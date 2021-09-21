@@ -2,6 +2,7 @@ import cfeBg from "./sprites/cfe-bg.png";
 import cfeReb from "./sprites/cfe-reb.png";
 import cfeKsv from "./sprites/cfe-ksv.png";
 import table from "./sprites/table.png";
+import fridge from "./sprites/fridge.png";
 import { Coord } from "./Coord";
 import { SpriteSheet } from "./SpriteSheet";
 import { loadImage } from "./loadImage";
@@ -24,6 +25,7 @@ export class SpriteLibrary {
       'cfe-ksv': new SpriteSheet(await loadImage(cfeKsv), { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET }),
 
       'table': new SpriteSheet(await loadImage(table), { size: [64, 22], colsRows: [1, 1], offset: [0, -6] }),
+      'fridge': new SpriteSheet(await loadImage(fridge), { size: [16, 45], colsRows: [1, 1], offset: [0, -32] }),
     };
   }
 

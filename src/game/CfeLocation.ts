@@ -1,6 +1,7 @@
 import { Bursh } from "./Bursh";
 import { CfeBackground } from "./CfeBackground";
 import { Coord, coordAdd } from "./Coord";
+import { Fridge } from "./Fridge";
 import { GameGrid } from "./GameGrid";
 import { GameLocation } from "./GameLocation";
 import { GameObject } from "./GameObject";
@@ -35,6 +36,8 @@ export class CfeLocation implements GameLocation {
 
     // A table
     objects.push(new Table(this.grid.tileToScreenCoord([2, 5]), this.sprites));
+    // A fridge
+    objects.push(new Fridge(this.grid.tileToScreenCoord([10, 3]), this.sprites));
 
     return objects;
   }
