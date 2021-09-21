@@ -1,6 +1,7 @@
-import { Coord, coordAdd, coordEq, coordMul, coordSub, coordUnit, Rect } from "./Coord";
+import { Coord, Rect } from "./Coord";
 import { GameObject } from "./GameObject";
 import { GameWorld } from "./GameWorld";
+import { Activity, MoveActivity } from "./MoveActivity";
 import { PixelScreen } from "./PixelScreen";
 import { SpriteAnimation } from "./SpriteAnimation";
 import { SpriteLibrary } from "./SpriteLibrary";
@@ -12,10 +13,8 @@ interface BurshConfig {
 
 export class Bursh implements GameObject {
   private animation: SpriteAnimation;
-  private destination?: Coord;
-  private path?: Coord[];
-  private speed: Coord = [0, 0];
   private name: string;
+  private actions: Activity[] = [];
 
   constructor(private coord: Coord, sprites: SpriteLibrary, cfg: BurshConfig) {
     this.name = cfg.name;
@@ -24,36 +23,24 @@ export class Bursh implements GameObject {
     });
   }
 
-  moveTo(coord: Coord) {
-    this.destination = coord;
+  moveTo(destination: Coord) {
+    this.actions.push(new MoveActivity(this.coord, destination));
   }
 
   tick(world: GameWorld) {
+    // run actions in queue
+    if (this.actions.length > 0) {
+      const action = this.actions[0];
+      const updates = action.tick(world);
+      if (updates.coord) {
+        this.coord = updates.coord;
+      }
+      if (updates.finished) {
+        this.actions.shift();
+      }
+    }
+
     this.animation.tick();
-
-    if (!this.destination || coordEq(this.coord, this.destination)) {
-      this.speed = [0, 0];
-      return;
-    }
-
-    const targetCoord = this.getActivePathStep(world);
-    if (targetCoord) {
-      this.speed = coordMul(coordUnit(coordSub(targetCoord, this.coord)), [2, 2]);
-
-      this.coord = coordAdd(this.coord, this.speed);
-    }
-  }
-
-  private getActivePathStep(world: GameWorld): Coord | undefined {
-    if (this.destination && !this.path) {
-      this.path = world.findPath(this.coord, this.destination);
-    }
-    const current = this.path?.[0];
-    if (current && coordEq(this.coord, current)) {
-      this.path?.shift();
-      return this.path?.[0];
-    }
-    return current;
   }
 
   paint(screen: PixelScreen) {
