@@ -1,3 +1,4 @@
+import { BeerCabinet } from "./BeerCabinet";
 import { Bursh } from "./Bursh";
 import { CfeBackground } from "./CfeBackground";
 import { Coord, coordAdd } from "./Coord";
@@ -38,6 +39,8 @@ export class CfeLocation implements GameLocation {
     objects.push(new Table(this.grid.tileToScreenCoord([2, 5]), this.sprites));
     // A fridge
     objects.push(new Fridge(this.grid.tileToScreenCoord([10, 3]), this.sprites));
+    // A storage of beer glasses
+    objects.push(new BeerCabinet(this.grid.tileToScreenCoord([12, 3]), this.sprites));
 
     return objects;
   }
