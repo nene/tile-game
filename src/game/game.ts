@@ -5,9 +5,12 @@ import { GameWorld } from "./GameWorld";
 import { SpriteLibrary } from "./SpriteLibrary";
 import { SoundLibrary } from "./SoundLibrary";
 import { CfeLocation } from "./CfeLocation";
+import { Coord, coordAdd } from "./Coord";
+
+const PIXEL_SCALE = 4;
 
 export async function runGame(ctx: CanvasRenderingContext2D, seed: string) {
-  const screen = new PixelScreen(ctx, { width: 256, height: 256, scale: 4 });
+  const screen = new PixelScreen(ctx, { width: 256, height: 256, scale: PIXEL_SCALE });
 
   const sprites = new SpriteLibrary();
   await sprites.load();
@@ -40,6 +43,11 @@ export async function runGame(ctx: CanvasRenderingContext2D, seed: string) {
     onKeyUp: (key: string) => {
       player.handleKeyUp(key, world);
     },
+    onClick: ([x, y]: Coord) => {
+      const screenCoord: Coord = [Math.floor(x / PIXEL_SCALE), Math.floor(y / PIXEL_SCALE)];
+      const worldCoord = coordAdd(screenCoord, screen.getOffset());
+      console.log(worldCoord);
+    }
   };
 }
 
