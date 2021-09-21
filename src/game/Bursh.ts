@@ -1,8 +1,10 @@
+import { CallFuxActivity } from "./CallFuxActivity";
 import { Coord, Rect } from "./Coord";
 import { GameObject } from "./GameObject";
 import { GameWorld } from "./GameWorld";
 import { Activity, MoveActivity } from "./MoveActivity";
 import { PixelScreen } from "./PixelScreen";
+import { Sprite } from "./Sprite";
 import { SpriteAnimation } from "./SpriteAnimation";
 import { SpriteLibrary } from "./SpriteLibrary";
 
@@ -14,9 +16,10 @@ interface BurshConfig {
 export class Bursh implements GameObject {
   private animation: SpriteAnimation;
   private name: string;
-  private actions: Activity[] = [];
+  private activities: Activity[] = [];
+  private extraSprite?: Sprite;
 
-  constructor(private coord: Coord, sprites: SpriteLibrary, cfg: BurshConfig) {
+  constructor(private coord: Coord, private sprites: SpriteLibrary, cfg: BurshConfig) {
     this.name = cfg.name;
     this.animation = new SpriteAnimation(sprites.get("cfe-ksv"), {
       frames: [[cfg.spriteType, 0]],
@@ -24,19 +27,21 @@ export class Bursh implements GameObject {
   }
 
   moveTo(destination: Coord) {
-    this.actions.push(new MoveActivity(this.coord, destination));
+    this.activities.push(new MoveActivity(this.coord, destination));
+    this.activities.push(new CallFuxActivity(this.sprites));
   }
 
   tick(world: GameWorld) {
-    // run actions in queue
-    if (this.actions.length > 0) {
-      const action = this.actions[0];
-      const updates = action.tick(world);
+    // run activities in queue
+    if (this.activities.length > 0) {
+      const activity = this.activities[0];
+      const updates = activity.tick(world);
       if (updates.coord) {
         this.coord = updates.coord;
       }
+      this.extraSprite = updates.extraSprite;
       if (updates.finished) {
-        this.actions.shift();
+        this.activities.shift();
       }
     }
 
@@ -45,6 +50,9 @@ export class Bursh implements GameObject {
 
   paint(screen: PixelScreen) {
     screen.drawSprite(this.animation.getSprite(), this.coord);
+    if (this.extraSprite) {
+      screen.drawSprite(this.extraSprite, this.coord);
+    }
   }
 
   zIndex() {

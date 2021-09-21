@@ -1,9 +1,11 @@
 import { Coord, coordEq, coordMul, coordUnit, coordSub, coordAdd } from "./Coord";
 import { GameWorld } from "./GameWorld";
+import { Sprite } from "./Sprite";
 
 export interface ActivityUpdates {
   finished?: boolean;
   coord?: Coord;
+  extraSprite?: Sprite;
 }
 
 export interface Activity {
