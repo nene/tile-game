@@ -59,16 +59,16 @@ export class CfeLocation implements GameLocation {
 
   getDynamicObjects(): GameObject[] {
     return [
-      this.spawnBursh([150, 150], 0),
-      this.spawnBursh([200, 80], 1),
-      this.spawnBursh([30, 240], 2),
+      this.spawnBursh([150, 150], 0, "ksv! Juhan Juurikas"),
+      this.spawnBursh([200, 80], 1, "vil! Jaanus Simm"),
+      this.spawnBursh([30, 240], 2, "ksv! Richard Kappel"),
     ];
   }
 
-  private spawnBursh(coord: Coord, type: 0 | 1 | 2): Bursh {
-    const bursh = new Bursh(this.sprites, coord, type);
+  private spawnBursh(coord: Coord, spriteType: 0 | 1 | 2, name: string): Bursh {
+    const bursh = new Bursh(coord, this.sprites, { spriteType, name });
     const table = this.staticObjects.find((obj) => obj instanceof Table) as Table;
-    const chairOffset = coordAdd([8, -8], [type * 16, 0]);
+    const chairOffset = coordAdd([8, -8], [spriteType * 16, 0]);
     bursh.moveTo(coordAdd(table.getCoord(), chairOffset));
     return bursh;
   }

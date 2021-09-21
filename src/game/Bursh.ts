@@ -5,15 +5,22 @@ import { PixelScreen } from "./PixelScreen";
 import { SpriteAnimation } from "./SpriteAnimation";
 import { SpriteLibrary } from "./SpriteLibrary";
 
+interface BurshConfig {
+  spriteType: 0 | 1 | 2;
+  name: string;
+}
+
 export class Bursh implements GameObject {
   private animation: SpriteAnimation;
   private destination?: Coord;
   private path?: Coord[];
   private speed: Coord = [0, 0];
+  private name: string;
 
-  constructor(sprites: SpriteLibrary, private coord: Coord, type: 0 | 1 | 2) {
+  constructor(private coord: Coord, sprites: SpriteLibrary, cfg: BurshConfig) {
+    this.name = cfg.name;
     this.animation = new SpriteAnimation(sprites.get("cfe-ksv"), {
-      frames: [[type, 0]],
+      frames: [[cfg.spriteType, 0]],
     });
   }
 
@@ -74,6 +81,6 @@ export class Bursh implements GameObject {
   }
 
   onInteract() {
-    console.log("You talked to ksv!");
+    console.log("You talked to " + this.name);
   }
 }
