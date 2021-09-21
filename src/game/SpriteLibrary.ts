@@ -1,6 +1,10 @@
+import cfeBg from "./sprites/cfe-bg.png";
+import cfeReb from "./sprites/cfe-reb.png";
+import cfeKsv from "./sprites/cfe-ksv.png";
+import table from "./sprites/table.png";
 import { Coord } from "./Coord";
-import { ImageLibrary } from "./ImageLibrary";
 import { SpriteSheet } from "./SpriteSheet";
+import { loadImage } from "./loadImage";
 
 const PLAYER_SIZE: Coord = [16, 32];
 const PLAYER_OFFSET: Coord = [-8, -30];
@@ -8,16 +12,18 @@ const PLAYER_OFFSET: Coord = [-8, -30];
 export class SpriteLibrary {
   private sprites: Record<string, SpriteSheet> = {};
 
-  constructor(images: ImageLibrary) {
+  async load() {
+    const cfeBgImage = await loadImage(cfeBg);
+
     this.sprites = {
-      'cfe-bg': new SpriteSheet(images.get('cfe-bg'), { size: [16, 16], colsRows: [1, 3] }),
-      'cfe-wall': new SpriteSheet(images.get('cfe-bg'), { size: [16, 32], colsRows: [1, 1] }),
+      'cfe-bg': new SpriteSheet(cfeBgImage, { size: [16, 16], colsRows: [1, 3] }),
+      'cfe-wall': new SpriteSheet(cfeBgImage, { size: [16, 32], colsRows: [1, 1] }),
 
-      'cfe-reb': new SpriteSheet(images.get("cfe-reb"), { size: PLAYER_SIZE, colsRows: [4, 4], offset: PLAYER_OFFSET }),
+      'cfe-reb': new SpriteSheet(await loadImage(cfeReb), { size: PLAYER_SIZE, colsRows: [4, 4], offset: PLAYER_OFFSET }),
 
-      'cfe-ksv': new SpriteSheet(images.get("cfe-ksv"), { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET }),
+      'cfe-ksv': new SpriteSheet(await loadImage(cfeKsv), { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET }),
 
-      'table': new SpriteSheet(images.get("table"), { size: [64, 22], colsRows: [1, 1], offset: [0, -6] }),
+      'table': new SpriteSheet(await loadImage(table), { size: [64, 22], colsRows: [1, 1], offset: [0, -6] }),
     };
   }
 

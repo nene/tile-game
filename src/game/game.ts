@@ -1,6 +1,5 @@
 import { PixelScreen } from "./PixelScreen";
 import { Player } from "./Player";
-import { ImageLibrary } from "./ImageLibrary";
 import { Background } from "./Background";
 import { GameWorld } from "./GameWorld";
 import { SpriteLibrary } from "./SpriteLibrary";
@@ -10,10 +9,8 @@ import { CfeLocation } from "./CfeLocation";
 export async function runGame(ctx: CanvasRenderingContext2D, seed: string) {
   const screen = new PixelScreen(ctx, { width: 256, height: 256, scale: 4, offset: [16, 16] });
 
-  const images = new ImageLibrary();
-  await images.load();
-  const sprites = new SpriteLibrary(images);
-
+  const sprites = new SpriteLibrary();
+  await sprites.load();
   const sounds = new SoundLibrary();
   await sounds.load();
 
