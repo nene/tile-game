@@ -7,7 +7,7 @@ import { SoundLibrary } from "./SoundLibrary";
 import { CfeLocation } from "./CfeLocation";
 
 export async function runGame(ctx: CanvasRenderingContext2D, seed: string) {
-  const screen = new PixelScreen(ctx, { width: 256, height: 256, scale: 4, offset: [16, 16] });
+  const screen = new PixelScreen(ctx, { width: 256, height: 256, scale: 4 });
 
   const sprites = new SpriteLibrary();
   await sprites.load();

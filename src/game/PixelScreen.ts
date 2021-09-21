@@ -6,7 +6,7 @@ interface PixelScreenOptions {
   width: number;
   height: number;
   scale: number;
-  offset: Coord;
+  offset?: Coord;
 }
 
 export class PixelScreen {
@@ -20,7 +20,7 @@ export class PixelScreen {
     this.ctx = ctx;
     this.virtualSize = [width, height];
     this.scale = scale;
-    this.offset = offset;
+    this.offset = offset ?? [0, 0];
     this.ctx.scale(scale, scale);
     this.ctx.imageSmoothingEnabled = false;
   }
@@ -48,8 +48,8 @@ export class PixelScreen {
 
   centerTo(coord: Coord, world: GameWorld) {
     const halfScreenSize: Coord = coordDiv(this.virtualSize, [2, 2]);
-    const minOffset: Coord = [16, 16];
-    const maxOffset: Coord = coordSub(world.size(), coordAdd(this.virtualSize, [16, 16]));
+    const minOffset: Coord = [0, 0];
+    const maxOffset: Coord = coordSub(world.size(), this.virtualSize);
 
     this.offset = coordConstrain(coordSub(coord, halfScreenSize), minOffset, maxOffset);
   }

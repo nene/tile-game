@@ -149,7 +149,7 @@ export class Player implements GameObject {
   }
 
   private constrainToWorld(coord: Coord, world: GameWorld): Coord {
-    const BORDER = 16 + 8;
+    const BORDER = 8;
     const topLeft: Coord = [BORDER, BORDER];
     const bottomRight = coordSub(world.size(), [BORDER, BORDER]);
     return coordConstrain(coord, topLeft, bottomRight);
