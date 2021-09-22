@@ -5,11 +5,12 @@ import { ObjectInventoryCmp } from "./cmp/ObjectInventoryCmp";
 import { Coord, coordSub } from "./game/Coord";
 import { runGame } from "./game/game";
 import { Inventory } from "./game/Inventory";
-import { GameItem } from "./game/items/GameItem";
 
 export function App() {
   const canvasEl = useRef<HTMLCanvasElement>(null);
-  const [inventoryItems, setInventoryItems] = useState<GameItem[]>([]);
+  const [playerInventory, setPlayerInventory] = useState<Inventory>(
+    new Inventory({ size: 5 })
+  );
   const [objectInventory, setObjectInventory] = useState<
     Inventory | undefined
   >();
@@ -49,8 +50,7 @@ export function App() {
         events.onClick(coord);
       });
 
-      events.inventory.onChange(setInventoryItems);
-      setInventoryItems(events.inventory.items());
+      setPlayerInventory(events.inventory);
     };
     game();
   }, []);
@@ -58,11 +58,24 @@ export function App() {
   return (
     <AppWrapper>
       <canvas id="canvas" width="1024" height="1024" ref={canvasEl}></canvas>
-      <InventoryCmp items={inventoryItems} size={5} />
+      <InventoryCmp
+        items={playerInventory.items()}
+        size={playerInventory.size()}
+        onItemClick={(item) => {
+          if (objectInventory) {
+            playerInventory.remove(item);
+            objectInventory.add(item);
+          }
+        }}
+      />
       {objectInventory && (
         <ObjectInventoryCmp
           inventory={objectInventory}
           onClose={() => setObjectInventory(undefined)}
+          onItemClick={(item) => {
+            objectInventory.remove(item);
+            playerInventory.add(item);
+          }}
         />
       )}
     </AppWrapper>

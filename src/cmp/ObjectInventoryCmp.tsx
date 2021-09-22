@@ -1,20 +1,27 @@
 import styled from "styled-components";
 import { Inventory } from "../game/Inventory";
+import { GameItem } from "../game/items/GameItem";
 import { InventoryCmp } from "./InventoryCmp";
 
 interface ObjectInventoryCmpProps {
   inventory: Inventory;
   onClose: () => void;
+  onItemClick: (item: GameItem) => void;
 }
 
 export const ObjectInventoryCmp = ({
   inventory,
   onClose,
+  onItemClick,
 }: ObjectInventoryCmpProps) => {
   return (
     <Overlay onClick={onClose}>
       <Container>
-        <InventoryCmp items={inventory.items()} size={inventory.size()} />
+        <InventoryCmp
+          items={inventory.items()}
+          size={inventory.size()}
+          onItemClick={onItemClick}
+        />
       </Container>
     </Overlay>
   );

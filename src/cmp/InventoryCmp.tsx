@@ -6,16 +6,24 @@ import { Sprite } from "../game/Sprite";
 export const InventoryCmp = ({
   items,
   size,
+  onItemClick,
 }: {
   items: GameItem[];
   size: number;
+  onItemClick: (item: GameItem) => void;
 }) => {
   const activeIndex = 0;
   return (
     <InventoryContainer>
       {items.map((item, i) => (
         <InventorySlot active={i === activeIndex} key={i}>
-          <InventoryItem sprite={item.getSprite()} />
+          <InventoryItem
+            sprite={item.getSprite()}
+            onClick={(e) => {
+              e.stopPropagation();
+              onItemClick(item);
+            }}
+          />
         </InventorySlot>
       ))}
       {range(items.length, size).map((i) => (
@@ -57,4 +65,5 @@ const InventoryItem = styled.span<{ sprite: Sprite }>`
       .join(" ")};
   width: 64px;
   height: 64px;
+  cursor: pointer;
 `;
