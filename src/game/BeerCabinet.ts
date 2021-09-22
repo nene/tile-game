@@ -1,14 +1,26 @@
 import { Coord, Rect } from "./Coord";
-import { GameObject } from "./GameObject";
+import { GameObject, UiController } from "./GameObject";
+import { Inventory } from "./Inventory";
 import { PixelScreen } from "./PixelScreen";
 import { Sprite } from "./Sprite";
 import { SpriteLibrary } from "./SpriteLibrary";
+import { BeerGlass } from "./items/BeerGlass";
 
 export class BeerCabinet implements GameObject {
   private sprite: Sprite;
+  private inventory: Inventory;
 
   constructor(private coord: Coord, sprites: SpriteLibrary) {
     this.sprite = sprites.get("beer-cabinet").getSprite([0, 0]);
+    this.inventory = new Inventory({
+      size: 9,
+      items: [
+        new BeerGlass(sprites),
+        new BeerGlass(sprites),
+        new BeerGlass(sprites),
+        new BeerGlass(sprites),
+      ],
+    });
   }
 
   tick() { }
@@ -37,7 +49,7 @@ export class BeerCabinet implements GameObject {
     return { coord: [0, -32], size: [32, 45] };
   }
 
-  onInteract() {
-    console.log("You opened the beer-cabinet");
+  onInteract(ui: UiController) {
+    ui.showInventory(this.inventory);
   }
 }
