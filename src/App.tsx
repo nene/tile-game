@@ -49,7 +49,7 @@ export function App() {
   return (
     <AppWrapper>
       <canvas id="canvas" width="1024" height="1024" ref={canvasEl}></canvas>
-      <InventoryCmp items={inventoryItems} />
+      <InventoryCmp items={inventoryItems} size={5} />
     </AppWrapper>
   );
 }

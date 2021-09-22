@@ -1,17 +1,29 @@
+import { range } from "lodash";
 import styled from "styled-components";
 import { GameItem } from "../game/items/GameItem";
 import { Sprite } from "../game/Sprite";
 
-export const InventoryCmp = ({ items }: { items: GameItem[] }) => (
-  <InventoryContainer>
-    {items.map((item, i) => (
-      <InventorySlot active={true} key={i}>
-        <InventoryItem sprite={item.getSprite()} />
-      </InventorySlot>
-    ))}
-    <InventorySlot />
-  </InventoryContainer>
-);
+export const InventoryCmp = ({
+  items,
+  size,
+}: {
+  items: GameItem[];
+  size: number;
+}) => {
+  const activeIndex = 0;
+  return (
+    <InventoryContainer>
+      {items.map((item, i) => (
+        <InventorySlot active={i === activeIndex} key={i}>
+          <InventoryItem sprite={item.getSprite()} />
+        </InventorySlot>
+      ))}
+      {range(items.length, size).map((i) => (
+        <InventorySlot active={i === activeIndex} key={i} />
+      ))}
+    </InventoryContainer>
+  );
+};
 
 const InventoryContainer = styled.div`
   display: flex;
