@@ -4,7 +4,7 @@ import { Inventory } from "./cmp/Inventory";
 import { Coord } from "./game/Coord";
 import { runGame } from "./game/game";
 
-function App() {
+export function App() {
   const canvasEl = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -46,5 +46,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
