@@ -37,11 +37,11 @@ export async function runGame(ctx: CanvasRenderingContext2D, seed: string) {
   });
 
   return {
-    onKeyDown: (key: string) => {
-      player.handleKeyDown(key, world);
+    onKeyDown: (key: string): boolean => {
+      return player.handleKeyDown(key);
     },
-    onKeyUp: (key: string) => {
-      player.handleKeyUp(key, world);
+    onKeyUp: (key: string): boolean => {
+      return player.handleKeyUp(key);
     },
     onClick: ([x, y]: Coord) => {
       const screenCoord: Coord = [Math.floor(x / PIXEL_SCALE), Math.floor(y / PIXEL_SCALE)];

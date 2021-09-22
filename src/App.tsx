@@ -20,12 +20,14 @@ export function App() {
       const events = await runGame(ctx, "blah");
 
       document.addEventListener("keydown", (e) => {
-        e.preventDefault();
-        events.onKeyDown(e.key);
+        if (events.onKeyDown(e.key)) {
+          e.preventDefault();
+        }
       });
       document.addEventListener("keyup", (e) => {
-        e.preventDefault();
-        events.onKeyUp(e.key);
+        if (events.onKeyUp(e.key)) {
+          e.preventDefault();
+        }
       });
 
       canvas.addEventListener("click", (e) => {

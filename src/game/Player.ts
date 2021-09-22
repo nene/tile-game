@@ -40,39 +40,41 @@ export class Player implements GameObject {
     this.animation = this.standRight;
   }
 
-  handleKeyDown(key: string, world: GameWorld) {
+  handleKeyDown(key: string): boolean {
     switch (key) {
       case "ArrowLeft":
         this.changeSpeed([-3, this.speed[1]]);
-        break;
+        return true;
       case "ArrowRight":
         this.changeSpeed([3, this.speed[1]]);
-        break;
+        return true;
       case "ArrowUp":
         this.changeSpeed([this.speed[0], -3]);
-        break;
+        return true;
       case "ArrowDown":
         this.changeSpeed([this.speed[0], 3]);
-        break;
-      default: // do nothing
+        return true;
+      default:
+        return false; // Inform that we didn't handle the keypress
     }
   }
 
-  handleKeyUp(key: string, world: GameWorld) {
+  handleKeyUp(key: string): boolean {
     switch (key) {
       case "ArrowLeft":
         this.changeSpeed([max(0, this.speed[0]), this.speed[1]]);
-        break;
+        return true;
       case "ArrowRight":
         this.changeSpeed([min(0, this.speed[0]), this.speed[1]]);
-        break;
+        return true;
       case "ArrowUp":
         this.changeSpeed([this.speed[0], max(0, this.speed[1])]);
-        break;
+        return true;
       case "ArrowDown":
         this.changeSpeed([this.speed[0], min(0, this.speed[1])]);
-        break;
-      default: // do nothing
+        return true;
+      default:
+        return false; // Inform that we didn't handle the keypress
     }
   }
 
