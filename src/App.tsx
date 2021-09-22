@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
-import { Inventory } from "./cmp/Inventory";
+import { InventoryCmp } from "./cmp/InventoryCmp";
 import { Coord } from "./game/Coord";
 import { runGame } from "./game/game";
 
@@ -44,7 +44,7 @@ export function App() {
   return (
     <AppWrapper>
       <canvas id="canvas" width="1024" height="1024" ref={canvasEl}></canvas>
-      <Inventory />
+      <InventoryCmp />
     </AppWrapper>
   );
 }

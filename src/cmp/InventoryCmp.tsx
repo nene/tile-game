@@ -18,7 +18,7 @@ const bottleSprites: ItemSpriteSheet = {
   size: [3, 2],
 };
 
-export const Inventory = () => (
+export const InventoryCmp = () => (
   <InventoryContainer>
     <InventorySlot active={true}>
       <InventoryItem sprites={beerSprites} coord={[1, 0]} />
