@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import "./App.css";
+import styled from "styled-components";
 import { Inventory } from "./cmp/Inventory";
 import { Coord } from "./game/Coord";
 import { runGame } from "./game/game";
@@ -40,9 +40,14 @@ export function App() {
   });
 
   return (
-    <div className="App">
+    <AppWrapper>
       <canvas id="canvas" width="1024" height="1024" ref={canvasEl}></canvas>
       <Inventory />
-    </div>
+    </AppWrapper>
   );
 }
+
+const AppWrapper = styled.div`
+  text-align: center;
+  padding: 2em;
+`;
