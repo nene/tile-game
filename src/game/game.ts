@@ -48,7 +48,7 @@ export async function runGame(ctx: CanvasRenderingContext2D, seed: string) {
       const worldCoord = coordAdd(screenCoord, screen.getOffset());
       const obj = world.getObjectVisibleOnCoord(worldCoord);
       if (obj && coordDistance(player.getCoord(), obj.getCoord()) < 16 + 8) {
-        obj.onInteract();
+        obj.onInteract(player);
       }
     },
     inventory: player.getInventory(),

@@ -13,7 +13,7 @@ export class Inventory {
 
   add(item: GameItem) {
     if (this._items.length < this._size) {
-      this._items.push(item);
+      this._items = [...this._items, item];
       this.notify();
     }
   }

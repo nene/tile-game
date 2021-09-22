@@ -1,13 +1,15 @@
 import { Coord, Rect } from "./Coord";
 import { GameObject } from "./GameObject";
+import { BeerBottle } from "./items/BeerBottle";
 import { PixelScreen } from "./PixelScreen";
+import { Player } from "./Player";
 import { Sprite } from "./Sprite";
 import { SpriteLibrary } from "./SpriteLibrary";
 
 export class Fridge implements GameObject {
   private sprite: Sprite;
 
-  constructor(private coord: Coord, sprites: SpriteLibrary) {
+  constructor(private coord: Coord, private sprites: SpriteLibrary) {
     this.sprite = sprites.get("fridge").getSprite([0, 0]);
   }
 
@@ -37,7 +39,7 @@ export class Fridge implements GameObject {
     return { coord: [0, -32], size: [16, 45] };
   }
 
-  onInteract() {
-    console.log("You opened the fridge");
+  onInteract(player: Player) {
+    player.getInventory().add(new BeerBottle(Math.floor(Math.random() * 3), this.sprites));
   }
 }
