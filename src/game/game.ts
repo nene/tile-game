@@ -6,10 +6,11 @@ import { SpriteLibrary } from "./SpriteLibrary";
 import { SoundLibrary } from "./SoundLibrary";
 import { CfeLocation } from "./CfeLocation";
 import { Coord, coordAdd, coordDistance } from "./Coord";
+import { UiController } from "./GameObject";
 
 const PIXEL_SCALE = 4;
 
-export async function runGame(ctx: CanvasRenderingContext2D, seed: string) {
+export async function runGame(ctx: CanvasRenderingContext2D, uiController: UiController) {
   const screen = new PixelScreen(ctx, { width: 256, height: 256, scale: PIXEL_SCALE });
 
   const sprites = new SpriteLibrary();
@@ -48,7 +49,7 @@ export async function runGame(ctx: CanvasRenderingContext2D, seed: string) {
       const worldCoord = coordAdd(screenCoord, screen.getOffset());
       const obj = world.getObjectVisibleOnCoord(worldCoord);
       if (obj && coordDistance(player.getCoord(), obj.getCoord()) < 16 + 8) {
-        obj.onInteract(player);
+        obj.onInteract(uiController);
       }
     },
     inventory: player.getInventory(),

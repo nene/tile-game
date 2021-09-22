@@ -3,12 +3,13 @@ import { GameItem } from "./items/GameItem";
 type OnChangeCallback = (items: GameItem[]) => void;
 
 export class Inventory {
-  private _items: GameItem[] = [];
+  private _items: GameItem[];
   private _size: number;
   private _callbacks: OnChangeCallback[] = [];
 
-  constructor(cfg: { size: number }) {
+  constructor(cfg: { size: number, items?: GameItem[] }) {
     this._size = cfg.size;
+    this._items = cfg.items || [];
   }
 
   add(item: GameItem) {

@@ -28,6 +28,7 @@ export const InventoryCmp = ({
 const InventoryContainer = styled.div`
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 `;
 
 const InventorySlot = styled.span<{ active?: boolean }>`
@@ -38,6 +39,9 @@ const InventorySlot = styled.span<{ active?: boolean }>`
   height: 64px;
   padding: 4px;
   margin-right: 4px;
+  &:last-child {
+    margin-right: 0;
+  }
 `;
 
 const InventoryItem = styled.span<{ sprite: Sprite }>`

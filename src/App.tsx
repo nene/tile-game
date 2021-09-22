@@ -1,13 +1,18 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { InventoryCmp } from "./cmp/InventoryCmp";
-import { Coord } from "./game/Coord";
+import { ObjectInventoryCmp } from "./cmp/ObjectInventoryCmp";
+import { Coord, coordSub } from "./game/Coord";
 import { runGame } from "./game/game";
+import { Inventory } from "./game/Inventory";
 import { GameItem } from "./game/items/GameItem";
 
 export function App() {
   const canvasEl = useRef<HTMLCanvasElement>(null);
   const [inventoryItems, setInventoryItems] = useState<GameItem[]>([]);
+  const [objectInventory, setObjectInventory] = useState<
+    Inventory | undefined
+  >();
 
   useEffect(() => {
     const game = async () => {
@@ -19,7 +24,11 @@ export function App() {
       if (!ctx) {
         throw new Error("Unable to access canvas 2D context");
       }
-      const events = await runGame(ctx, "blah");
+      ctx.resetTransform();
+
+      const events = await runGame(ctx, {
+        showInventory: setObjectInventory,
+      });
 
       document.addEventListener("keydown", (e) => {
         if (events.onKeyDown(e.key)) {
@@ -33,10 +42,10 @@ export function App() {
       });
 
       canvas.addEventListener("click", (e) => {
-        const coord: Coord = [
-          e.clientX - canvas.offsetLeft - 1,
-          e.clientY - canvas.offsetTop - 1,
-        ];
+        const coord = coordSub(
+          coordSub([e.clientX, e.clientY], getPosition(canvas)),
+          [-1, -1]
+        );
         events.onClick(coord);
       });
 
@@ -50,11 +59,41 @@ export function App() {
     <AppWrapper>
       <canvas id="canvas" width="1024" height="1024" ref={canvasEl}></canvas>
       <InventoryCmp items={inventoryItems} size={5} />
+      {objectInventory && (
+        <ObjectInventoryCmp
+          inventory={objectInventory}
+          onClose={() => setObjectInventory(undefined)}
+        />
+      )}
     </AppWrapper>
   );
 }
 
 const AppWrapper = styled.div`
-  text-align: center;
-  padding: 2em;
+  position: relative;
+  width: 1024px;
+  margin: 0 auto;
 `;
+
+// helper function to get an element's exact position
+function getPosition(el: HTMLElement | null): Coord {
+  var xPosition = 0;
+  var yPosition = 0;
+
+  while (el) {
+    if (el.tagName === "BODY") {
+      // deal with browser quirks with body/window/document and page scroll
+      var xScrollPos = el.scrollLeft || document.documentElement.scrollLeft;
+      var yScrollPos = el.scrollTop || document.documentElement.scrollTop;
+
+      xPosition += el.offsetLeft - xScrollPos + el.clientLeft;
+      yPosition += el.offsetTop - yScrollPos + el.clientTop;
+    } else {
+      xPosition += el.offsetLeft - el.scrollLeft + el.clientLeft;
+      yPosition += el.offsetTop - el.scrollTop + el.clientTop;
+    }
+
+    el = el.offsetParent as HTMLElement | null;
+  }
+  return [xPosition, yPosition];
+}

@@ -1,7 +1,11 @@
 import { Coord, Rect } from "./Coord";
 import { GameWorld } from "./GameWorld";
+import { Inventory } from "./Inventory";
 import { PixelScreen } from "./PixelScreen";
-import { Player } from "./Player";
+
+export interface UiController {
+  showInventory: (inventory: Inventory) => void;
+}
 
 export interface GameObject {
   zIndex: () => number;
@@ -11,5 +15,5 @@ export interface GameObject {
   isSolid: () => boolean;
   tileSize: () => Coord;
   hitBox: () => Rect;
-  onInteract: (player: Player) => void;
+  onInteract: (ui: UiController) => void;
 }
