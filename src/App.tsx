@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import "./App.css";
 import { Coord } from "./game/Coord";
 import { runGame } from "./game/game";
+import beer from "./game/sprites/beer.png";
 
 function App() {
   const canvasEl = useRef<HTMLCanvasElement>(null);
@@ -41,6 +42,9 @@ function App() {
   return (
     <div className="App">
       <canvas id="canvas" width="1024" height="1024" ref={canvasEl}></canvas>
+      <p>
+        <img src={beer} alt="beer" className="Image" />
+      </p>
     </div>
   );
 }
