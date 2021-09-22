@@ -1,14 +1,37 @@
 import beer from "../game/sprites/beer.png";
+import bottle from "../game/sprites/bottle.png";
 import styled from "styled-components";
+import { Coord } from "../game/Coord";
+
+interface ItemSpriteSheet {
+  src: string;
+  size: Coord;
+}
+
+const beerSprites: ItemSpriteSheet = {
+  src: beer,
+  size: [1, 2],
+};
+
+const bottleSprites: ItemSpriteSheet = {
+  src: bottle,
+  size: [3, 2],
+};
 
 export const Inventory = () => (
   <InventoryContainer>
     <InventorySlot active={true}>
-      <InventoryItem />
+      <InventoryItem sprites={beerSprites} coord={[1, 0]} />
     </InventorySlot>
-    <InventorySlot />
-    <InventorySlot />
-    <InventorySlot />
+    <InventorySlot>
+      <InventoryItem sprites={bottleSprites} coord={[1, 0]} />
+    </InventorySlot>
+    <InventorySlot>
+      <InventoryItem sprites={bottleSprites} coord={[1, 1]} />
+    </InventorySlot>
+    <InventorySlot>
+      <InventoryItem sprites={bottleSprites} coord={[1, 2]} />
+    </InventorySlot>
     <InventorySlot />
   </InventoryContainer>
 );
@@ -28,14 +51,18 @@ const InventorySlot = styled.span<{ active?: boolean }>`
   margin-right: 4px;
 `;
 
-const InventoryItem = styled.span`
+const InventoryItem = styled.span<{ sprites: ItemSpriteSheet; coord: Coord }>`
   display: block;
   image-rendering: crisp-edges;
-  background-image: url(${beer});
+  background-image: url(${({ sprites }) => sprites.src});
   background-repeat: no-repeat;
-  background-position-x: -64px;
-  background-position-y: 0px;
-  background-size: 128px 64px;
+  background-position-x: ${({ coord }) => -coord[0] * 16 * 4}px;
+  background-position-y: ${({ coord }) => -coord[1] * 16 * 4}px;
+  background-size: ${({ sprites }) =>
+    sprites.size
+      .map((x) => x * 16 * 4 + "px")
+      .reverse()
+      .join(" ")};
   width: 64px;
   height: 64px;
 `;
