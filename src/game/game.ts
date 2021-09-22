@@ -50,7 +50,8 @@ export async function runGame(ctx: CanvasRenderingContext2D, seed: string) {
       if (obj && coordDistance(player.getCoord(), obj.getCoord()) < 16 + 8) {
         obj.onInteract();
       }
-    }
+    },
+    inventory: player.getInventory(),
   };
 }
 

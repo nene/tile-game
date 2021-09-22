@@ -5,6 +5,8 @@ import callout from "./sprites/callout.png";
 import table from "./sprites/table.png";
 import fridge from "./sprites/fridge.png";
 import beerCabinet from "./sprites/beer-cabinet.png";
+import beer from "./sprites/beer.png";
+import bottle from "./sprites/bottle.png";
 import { Coord } from "./Coord";
 import { SpriteSheet } from "./SpriteSheet";
 import { loadImage } from "./loadImage";
@@ -30,6 +32,9 @@ export class SpriteLibrary {
       'table': new SpriteSheet(await loadImage(table), { size: [64, 22], colsRows: [1, 1], offset: [0, -6] }),
       'fridge': new SpriteSheet(await loadImage(fridge), { size: [16, 45], colsRows: [1, 1], offset: [0, -32] }),
       'beer-cabinet': new SpriteSheet(await loadImage(beerCabinet), { size: [32, 45], colsRows: [1, 1], offset: [0, -32] }),
+
+      'beer': new SpriteSheet(await loadImage(beer), { size: [16, 16], colsRows: [2, 1] }),
+      'bottle': new SpriteSheet(await loadImage(bottle), { size: [16, 16], colsRows: [2, 3] }),
     };
   }
 

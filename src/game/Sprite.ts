@@ -5,4 +5,5 @@ export interface Sprite {
   coord: Coord,
   size: Coord,
   offset: Coord,
+  sheetSize: Coord,
 }

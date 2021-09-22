@@ -1,4 +1,4 @@
-import { Coord } from "./Coord";
+import { Coord, coordMul } from "./Coord";
 import { Sprite } from "./Sprite";
 
 interface SpriteSheetConfig {
@@ -11,11 +11,13 @@ export class SpriteSheet {
   private size: Coord;
   private colsRows: Coord;
   private offset: Coord;
+  private sheetSize: Coord;
 
   constructor(private image: HTMLImageElement, config: SpriteSheetConfig) {
     this.size = config.size;
     this.colsRows = config.colsRows;
     this.offset = config.offset ?? [0, 0];
+    this.sheetSize = coordMul(config.colsRows, config.size);
   }
 
   getSprite(colRow: Coord): Sprite {
@@ -24,6 +26,7 @@ export class SpriteSheet {
       coord: this.getSpriteCoord(colRow),
       size: this.size,
       offset: this.offset,
+      sheetSize: this.sheetSize,
     };
   }
 

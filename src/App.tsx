@@ -1,11 +1,13 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { InventoryCmp } from "./cmp/InventoryCmp";
 import { Coord } from "./game/Coord";
 import { runGame } from "./game/game";
+import { GameItem } from "./game/items/GameItem";
 
 export function App() {
   const canvasEl = useRef<HTMLCanvasElement>(null);
+  const [inventoryItems, setInventoryItems] = useState<GameItem[]>([]);
 
   useEffect(() => {
     const game = async () => {
@@ -37,14 +39,17 @@ export function App() {
         ];
         events.onClick(coord);
       });
+
+      events.inventory.onChange(setInventoryItems);
+      setInventoryItems(events.inventory.items());
     };
     game();
-  });
+  }, []);
 
   return (
     <AppWrapper>
       <canvas id="canvas" width="1024" height="1024" ref={canvasEl}></canvas>
-      <InventoryCmp />
+      <InventoryCmp items={inventoryItems} />
     </AppWrapper>
   );
 }
