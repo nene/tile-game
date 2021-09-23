@@ -11,7 +11,7 @@ export class Inventory {
   }
 
   add(item: GameItem) {
-    if (this._items.length < this.maxItems()) {
+    if (!this.isFull()) {
       this._items = [...this._items, item];
     }
   }
@@ -35,5 +35,9 @@ export class Inventory {
 
   maxItems(): number {
     return this._size[0] * this._size[1];
+  }
+
+  isFull(): boolean {
+    return this._items.length >= this.maxItems();
   }
 }

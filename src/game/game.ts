@@ -49,6 +49,9 @@ export async function runGame(ctx: CanvasRenderingContext2D) {
     },
     onClick: ([x, y]: Coord) => {
       const screenCoord: Coord = [Math.floor(x / PIXEL_SCALE), Math.floor(y / PIXEL_SCALE)];
+      if (inventoryController.handleClick(screenCoord)) {
+        return; // The click was handled by UI
+      }
       const worldCoord = coordAdd(screenCoord, screen.getOffset());
       const obj = world.getObjectVisibleOnCoord(worldCoord);
       if (obj && coordDistance(player.getCoord(), obj.getCoord()) < 16 + 8) {
