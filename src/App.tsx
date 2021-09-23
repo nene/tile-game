@@ -1,19 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import styled from "styled-components";
-import { InventoryCmp } from "./cmp/InventoryCmp";
-import { ObjectInventoryCmp } from "./cmp/ObjectInventoryCmp";
 import { Coord, coordSub } from "./game/Coord";
 import { runGame } from "./game/game";
-import { Inventory } from "./game/Inventory";
 
 export function App() {
   const canvasEl = useRef<HTMLCanvasElement>(null);
-  const [playerInventory, setPlayerInventory] = useState<Inventory>(
-    new Inventory({ size: 5 })
-  );
-  const [objectInventory, setObjectInventory] = useState<
-    Inventory | undefined
-  >();
 
   useEffect(() => {
     const game = async () => {
@@ -27,9 +18,7 @@ export function App() {
       }
       ctx.resetTransform();
 
-      const events = await runGame(ctx, {
-        showInventory: setObjectInventory,
-      });
+      const events = await runGame(ctx);
 
       document.addEventListener("keydown", (e) => {
         if (events.onKeyDown(e.key)) {
@@ -49,8 +38,6 @@ export function App() {
         );
         events.onClick(coord);
       });
-
-      setPlayerInventory(events.inventory);
     };
     game();
   }, []);
@@ -63,26 +50,6 @@ export function App() {
         height="800"
         ref={canvasEl}
       ></GameCanvas>
-      <InventoryCmp
-        items={playerInventory.items()}
-        size={playerInventory.size()}
-        onItemClick={(item) => {
-          if (objectInventory) {
-            playerInventory.remove(item);
-            objectInventory.add(item);
-          }
-        }}
-      />
-      {objectInventory && (
-        <ObjectInventoryCmp
-          inventory={objectInventory}
-          onClose={() => setObjectInventory(undefined)}
-          onItemClick={(item) => {
-            objectInventory.remove(item);
-            playerInventory.add(item);
-          }}
-        />
-      )}
     </AppWrapper>
   );
 }
