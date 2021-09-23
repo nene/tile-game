@@ -13,7 +13,7 @@ export class InventoryView {
 
   paint(screen: PixelScreen) {
     screen.drawRect(
-      [this.coord, coordAdd([1, 1], coordMul([21, 21], [this.inventory.size(), 1]))],
+      { coord: this.coord, size: coordAdd([1, 1], coordMul([21, 21], [this.inventory.size(), 1])) },
       "#c8b997",
       { fixed: true },
     );

@@ -1,4 +1,4 @@
-import { Coord, coordAdd, coordConstrain, coordDiv, coordSub } from "./Coord";
+import { Coord, coordAdd, coordConstrain, coordDiv, coordSub, Rect } from "./Coord";
 import { GameWorld } from "./GameWorld";
 import { Sprite } from "./Sprite";
 
@@ -33,7 +33,7 @@ export class PixelScreen {
   drawSprite(sprite: Sprite, coord: Coord, opts?: DrawSpriteOptions) {
     const screenOffset: Coord = opts?.fixed ? [0, 0] : this.offset;
 
-    if (rectOverlaps([coordAdd(coord, sprite.offset), sprite.size], [screenOffset, this.virtualSize])) {
+    if (rectOverlaps({ coord: coordAdd(coord, sprite.offset), size: sprite.size }, { coord: screenOffset, size: this.virtualSize })) {
       const adjustedCoord = coordSub(coordAdd(coord, sprite.offset), screenOffset);
       this.ctx.drawImage(
         sprite.image,
@@ -58,13 +58,13 @@ export class PixelScreen {
   drawRect(rect: Rect, color: string, opts?: DrawSpriteOptions) {
     const screenOffset: Coord = opts?.fixed ? [0, 0] : this.offset;
 
-    const adjustedCoord = coordSub(rect[0], screenOffset);
+    const adjustedCoord = coordSub(rect.coord, screenOffset);
     this.ctx.fillStyle = color;
     this.ctx.fillRect(
       adjustedCoord[0],
       adjustedCoord[1],
-      rect[1][0],
-      rect[1][1],
+      rect.size[0],
+      rect.size[1],
     );
   }
 
@@ -96,9 +96,7 @@ export class PixelScreen {
   }
 }
 
-type Rect = [Coord, Coord];
-
-function rectOverlaps([a1, aSize]: Rect, [b1, bSize]: Rect) {
+function rectOverlaps({ coord: a1, size: aSize }: Rect, { coord: b1, size: bSize }: Rect) {
   const a2 = coordAdd(a1, aSize);
   const b2 = coordAdd(b1, bSize);
 
