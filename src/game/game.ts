@@ -12,7 +12,7 @@ import { InventoryView } from "./InventoryView";
 const PIXEL_SCALE = 4;
 
 export async function runGame(ctx: CanvasRenderingContext2D, uiController: UiController) {
-  const screen = new PixelScreen(ctx, { width: 256, height: 256, scale: PIXEL_SCALE });
+  const screen = new PixelScreen(ctx, { width: 320, height: 200, scale: PIXEL_SCALE });
 
   const sprites = new SpriteLibrary();
   await sprites.load();
@@ -27,7 +27,7 @@ export async function runGame(ctx: CanvasRenderingContext2D, uiController: UiCon
   const player = new Player(sprites, [32, 64]);
   world.add(player);
 
-  const inventoryView = new InventoryView(player.getInventory(), [75, 256 - 22], sprites);
+  const inventoryView = new InventoryView(player.getInventory(), [107, 200 - 22], sprites);
 
   gameLoop(() => {
     world.allObjects().forEach((obj) => obj.tick(world));

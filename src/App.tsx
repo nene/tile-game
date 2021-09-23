@@ -59,8 +59,8 @@ export function App() {
     <AppWrapper>
       <GameCanvas
         id="canvas"
-        width="1024"
-        height="1024"
+        width="1280"
+        height="800"
         ref={canvasEl}
       ></GameCanvas>
       <InventoryCmp
@@ -94,7 +94,7 @@ const GameCanvas = styled.canvas`
 
 const AppWrapper = styled.div`
   position: relative;
-  width: 1024px;
+  width: 1280px;
   margin: 0 auto;
 `;
 
