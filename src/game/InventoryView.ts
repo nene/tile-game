@@ -13,18 +13,21 @@ export class InventoryView {
 
   paint(screen: PixelScreen) {
     screen.drawRect(
-      { coord: this.coord, size: coordAdd([1, 1], coordMul([21, 21], [this.inventory.maxItems(), 1])) },
+      { coord: this.coord, size: coordAdd([1, 1], coordMul([21, 21], this.inventory.size())) },
       "#c8b997",
       { fixed: true },
     );
 
     const startCoord = coordAdd(this.coord, [1, 1]);
-    for (let i = 0; i < this.inventory.maxItems(); i++) {
-      const slotCoord = coordAdd(startCoord, coordMul([21, 0], [i, i]));
-      screen.drawSprite(this.slotSprites.getSprite([0, 0]), slotCoord, { fixed: true });
-      const item = this.inventory.items()[i];
-      if (item) {
-        screen.drawSprite(item.getSprite(), coordAdd(slotCoord, [2, 2]), { fixed: true });
+    const [cols, rows] = this.inventory.size();
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        const slotCoord = coordAdd(startCoord, coordMul([21, 21], [x, y]));
+        screen.drawSprite(this.slotSprites.getSprite([0, 0]), slotCoord, { fixed: true });
+        const item = this.inventory.itemAt([x, y]);
+        if (item) {
+          screen.drawSprite(item.getSprite(), coordAdd(slotCoord, [2, 2]), { fixed: true });
+        }
       }
     }
   }

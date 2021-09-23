@@ -24,6 +24,15 @@ export class Inventory {
     return this._items;
   }
 
+  size(): Coord {
+    return this._size;
+  }
+
+  itemAt([x, y]: Coord): GameItem | undefined {
+    const index = this._size[1] * y + x;
+    return this._items[index];
+  }
+
   maxItems(): number {
     return this._size[0] * this._size[1];
   }
