@@ -13,13 +13,13 @@ export class InventoryView {
 
   paint(screen: PixelScreen) {
     screen.drawRect(
-      { coord: this.coord, size: coordAdd([1, 1], coordMul([21, 21], [this.inventory.size(), 1])) },
+      { coord: this.coord, size: coordAdd([1, 1], coordMul([21, 21], [this.inventory.maxItems(), 1])) },
       "#c8b997",
       { fixed: true },
     );
 
     const startCoord = coordAdd(this.coord, [1, 1]);
-    for (let i = 0; i < this.inventory.size(); i++) {
+    for (let i = 0; i < this.inventory.maxItems(); i++) {
       const slotCoord = coordAdd(startCoord, coordMul([21, 0], [i, i]));
       screen.drawSprite(this.slotSprites.getSprite([0, 0]), slotCoord, { fixed: true });
       const item = this.inventory.items()[i];

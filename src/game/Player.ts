@@ -23,7 +23,7 @@ export class Player implements GameObject {
   private walkBack: SpriteAnimation;
   private walkForward: SpriteAnimation;
   private animation: SpriteAnimation;
-  private inventory = new Inventory({ size: 5 });
+  private inventory = new Inventory({ size: [5, 1] });
 
   constructor(sprites: SpriteLibrary, coord: Coord) {
     this.coord = coord;
