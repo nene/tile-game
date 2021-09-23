@@ -11,6 +11,7 @@ interface PixelScreenOptions {
 
 interface DrawSpriteOptions {
   showCenter?: boolean;
+  fixed?: boolean;
 }
 
 export class PixelScreen {
@@ -30,8 +31,10 @@ export class PixelScreen {
   }
 
   drawSprite(sprite: Sprite, coord: Coord, opts?: DrawSpriteOptions) {
-    if (rectOverlaps([coordAdd(coord, sprite.offset), sprite.size], [this.offset, this.virtualSize])) {
-      const adjustedCoord = coordSub(coordAdd(coord, sprite.offset), this.offset);
+    const screenOffset: Coord = opts?.fixed ? [0, 0] : this.offset;
+
+    if (rectOverlaps([coordAdd(coord, sprite.offset), sprite.size], [screenOffset, this.virtualSize])) {
+      const adjustedCoord = coordSub(coordAdd(coord, sprite.offset), screenOffset);
       this.ctx.drawImage(
         sprite.image,
         sprite.coord[0],
@@ -45,7 +48,7 @@ export class PixelScreen {
       );
       if (opts?.showCenter) {
         this.ctx.fillStyle = "red";
-        const center = coordSub(coord, this.offset);
+        const center = coordSub(coord, screenOffset);
         this.ctx.fillRect(center[0] - 2, center[1], 5, 1);
         this.ctx.fillRect(center[0], center[1] - 2, 1, 5);
       }
