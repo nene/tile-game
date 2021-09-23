@@ -1,4 +1,4 @@
-import { Coord, coordAdd, coordConstrain, coordDiv, coordSub, Rect } from "./Coord";
+import { Coord, coordAdd, coordConstrain, coordDiv, coordSub, Rect, rectOverlaps } from "./Coord";
 import { GameWorld } from "./GameWorld";
 import { Sprite } from "./Sprite";
 
@@ -94,13 +94,4 @@ export class PixelScreen {
   getOffset(): Coord {
     return this.offset;
   }
-}
-
-function rectOverlaps({ coord: a1, size: aSize }: Rect, { coord: b1, size: bSize }: Rect) {
-  const a2 = coordAdd(a1, aSize);
-  const b2 = coordAdd(b1, bSize);
-
-  const xOverlaps = a1[0] <= b2[0] && a2[0] >= b1[0];
-  const yOverlaps = a1[1] <= b2[1] && a2[1] >= b1[1];
-  return xOverlaps && yOverlaps;
 }
