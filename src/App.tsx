@@ -57,7 +57,12 @@ export function App() {
 
   return (
     <AppWrapper>
-      <canvas id="canvas" width="1024" height="1024" ref={canvasEl}></canvas>
+      <GameCanvas
+        id="canvas"
+        width="1024"
+        height="1024"
+        ref={canvasEl}
+      ></GameCanvas>
       <InventoryCmp
         items={playerInventory.items()}
         size={playerInventory.size()}
@@ -81,6 +86,11 @@ export function App() {
     </AppWrapper>
   );
 }
+
+const GameCanvas = styled.canvas`
+  font-smooth: never;
+  -webkit-font-smoothing: none;
+`;
 
 const AppWrapper = styled.div`
   position: relative;

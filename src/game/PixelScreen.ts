@@ -52,6 +52,11 @@ export class PixelScreen {
     }
   }
 
+  drawText(text: string, coord: Coord) {
+    this.ctx.font = "7px OldSchoolAdventures";
+    this.ctx.fillText(text, coord[0], coord[1]);
+  }
+
   saveBg() {
     this.bg = this.ctx.getImageData(0, 0, this.virtualSize[0] * this.scale, this.virtualSize[1] * this.scale);
   }
