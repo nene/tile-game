@@ -7,6 +7,7 @@ import { SoundLibrary } from "./SoundLibrary";
 import { CfeLocation } from "./CfeLocation";
 import { Coord, coordAdd, coordDistance } from "./Coord";
 import { UiController } from "./GameObject";
+import { InventoryView } from "./InventoryView";
 
 const PIXEL_SCALE = 4;
 
@@ -26,6 +27,8 @@ export async function runGame(ctx: CanvasRenderingContext2D, uiController: UiCon
   const player = new Player(sprites, [32, 64]);
   world.add(player);
 
+  const inventoryView = new InventoryView(player.getInventory(), [75, 256 - 22], sprites);
+
   gameLoop(() => {
     world.allObjects().forEach((obj) => obj.tick(world));
     world.sortObjects();
@@ -35,6 +38,7 @@ export async function runGame(ctx: CanvasRenderingContext2D, uiController: UiCon
     screen.centerTo(player.getCoord(), world);
     background.paint(screen);
     world.allObjects().forEach((obj) => obj.paint(screen));
+    inventoryView.paint(screen);
   });
 
   return {

@@ -55,6 +55,19 @@ export class PixelScreen {
     }
   }
 
+  drawRect(rect: Rect, color: string, opts?: DrawSpriteOptions) {
+    const screenOffset: Coord = opts?.fixed ? [0, 0] : this.offset;
+
+    const adjustedCoord = coordSub(rect[0], screenOffset);
+    this.ctx.fillStyle = color;
+    this.ctx.fillRect(
+      adjustedCoord[0],
+      adjustedCoord[1],
+      rect[1][0],
+      rect[1][1],
+    );
+  }
+
   drawText(text: string, coord: Coord) {
     this.ctx.font = "7px OldSchoolAdventures";
     this.ctx.fillText(text, coord[0], coord[1]);
