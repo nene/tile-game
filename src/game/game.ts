@@ -6,7 +6,7 @@ import { SpriteLibrary } from "./SpriteLibrary";
 import { SoundLibrary } from "./SoundLibrary";
 import { CfeLocation } from "./CfeLocation";
 import { Coord, coordAdd, coordDistance } from "./Coord";
-import { InventoryView } from "./InventoryView";
+import { InventoryController } from "./InventoryController";
 
 const PIXEL_SCALE = 4;
 
@@ -26,7 +26,7 @@ export async function runGame(ctx: CanvasRenderingContext2D) {
   const player = new Player(sprites, [32, 64]);
   world.add(player);
 
-  const inventoryView = new InventoryView(player.getInventory(), [107, 200 - 22], sprites);
+  const inventoryController = new InventoryController(player.getInventory(), sprites);
 
   gameLoop(() => {
     world.allObjects().forEach((obj) => obj.tick(world));
@@ -37,7 +37,7 @@ export async function runGame(ctx: CanvasRenderingContext2D) {
     screen.centerTo(player.getCoord(), world);
     background.paint(screen);
     world.allObjects().forEach((obj) => obj.paint(screen));
-    inventoryView.paint(screen);
+    inventoryController.paint(screen);
   });
 
   return {
@@ -52,7 +52,7 @@ export async function runGame(ctx: CanvasRenderingContext2D) {
       const worldCoord = coordAdd(screenCoord, screen.getOffset());
       const obj = world.getObjectVisibleOnCoord(worldCoord);
       if (obj && coordDistance(player.getCoord(), obj.getCoord()) < 16 + 8) {
-        obj.onInteract({ showInventory: () => { } });
+        obj.onInteract(inventoryController);
       }
     },
   };
