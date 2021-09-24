@@ -8,6 +8,8 @@ import { PixelScreen } from "./PixelScreen";
 import { Sprite } from "./Sprite";
 import { SpriteLibrary } from "./SpriteLibrary";
 import { DrinkActivity } from "./activities/DrinkActivity";
+import { UiController } from "./UiController";
+import { BeerGlass } from "./items/BeerGlass";
 
 interface BurshConfig {
   spriteType: 0 | 1 | 2;
@@ -26,7 +28,6 @@ export class Bursh implements GameObject {
   }
 
   moveTo(destination: Coord) {
-    this.activities.push(new DrinkActivity(this.spriteLib));
     this.activities.push(new MoveActivity(this.coord, destination, this.type, this.spriteLib));
     this.activities.push(new CallFuxActivity(this.type, this.spriteLib));
   }
@@ -72,7 +73,12 @@ export class Bursh implements GameObject {
     return { coord: [-7, -29], size: [14, 30] };
   }
 
-  onInteract() {
-    console.log("You talked to " + this.name);
+  onInteract(uiController: UiController) {
+    if (uiController.getSelectedItem() instanceof BeerGlass) {
+      uiController.removeSelectedItem();
+      this.activities.unshift(new DrinkActivity(this.spriteLib));
+    } else {
+      console.log("You talked to " + this.name);
+    }
   }
 }

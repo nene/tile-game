@@ -19,6 +19,14 @@ export class UiController {
     this.cursor = sprites.get("cursor").getSprite([0, 0]);
   }
 
+  getSelectedItem(): GameItem | undefined {
+    return this.selectedItem;
+  }
+
+  removeSelectedItem() {
+    this.selectedItem = undefined;
+  }
+
   showInventory(inventory: Inventory) {
     this.objectInventory = inventory;
     this.objectInventoryView = new InventoryView(inventory, [130, 50], this.sprites);
