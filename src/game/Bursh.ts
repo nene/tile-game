@@ -74,9 +74,10 @@ export class Bursh implements GameObject {
   }
 
   onInteract(uiController: UiController) {
-    if (uiController.getSelectedItem() instanceof BeerGlass) {
+    const item = uiController.getSelectedItem();
+    if (item instanceof BeerGlass) {
       uiController.removeSelectedItem();
-      this.activities.unshift(new DrinkActivity(this.spriteLib));
+      this.activities.unshift(new DrinkActivity(item, this.spriteLib));
     } else {
       console.log("You talked to " + this.name);
     }
