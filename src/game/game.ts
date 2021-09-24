@@ -7,6 +7,7 @@ import { SoundLibrary } from "./SoundLibrary";
 import { CfeLocation } from "./CfeLocation";
 import { Coord, coordAdd, coordDistance } from "./Coord";
 import { InventoryController } from "./InventoryController";
+import { Loops } from "./Loops";
 
 const PIXEL_SCALE = 4;
 
@@ -37,13 +38,14 @@ export async function runGame(ctx: CanvasRenderingContext2D): Promise<GameApi> {
 
   const inventoryController = new InventoryController(player.getInventory(), sprites);
 
-  const cleanupGameLoop = gameLoop(() => {
+  const loops = new Loops();
+  loops.runGameLoop(() => {
     world.allObjects().forEach((obj) => obj.tick(world));
     world.sortObjects();
     screenNeedsRepaint = true;
   });
 
-  const cleanupPaintLoop = paintLoop(() => {
+  loops.runPaintLoop(() => {
     if (!screenNeedsRepaint) {
       return; // Don't paint when app state hasn't changed
     }
@@ -83,40 +85,7 @@ export async function runGame(ctx: CanvasRenderingContext2D): Promise<GameApi> {
       }
     },
     cleanup: () => {
-      cleanupGameLoop();
-      cleanupPaintLoop();
+      loops.cleanup();
     },
   };
-}
-
-type CleanupFn = () => void;
-
-// setInterval() will fire about 1x per second when in background tab
-function gameLoop(onTick: () => void): CleanupFn {
-  const duration = 100;
-  let prevTime = Date.now();
-
-  const intervalHandle = setInterval(() => {
-    const time = Date.now();
-    while (prevTime + duration < time) {
-      onTick();
-      prevTime += duration;
-    }
-  }, duration / 2);
-
-  return () => clearInterval(intervalHandle);
-}
-
-function paintLoop(onPaint: (time: number) => void): CleanupFn {
-  let running = true;
-
-  function paint(time: number) {
-    onPaint(time);
-    if (running) {
-      window.requestAnimationFrame(paint);
-    }
-  }
-  window.requestAnimationFrame(paint);
-
-  return () => { running = false; };
 }
