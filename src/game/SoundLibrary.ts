@@ -1,10 +1,10 @@
-import killSound from "./sounds/kill.mp3";
+import pouringBeer from "./sounds/pouring-beer.mp3";
 
 export class SoundLibrary {
   private sounds: Record<string, HTMLAudioElement> = {};
 
   async load() {
-    this.sounds.killSnail = await this.loadAudio(killSound);
+    this.sounds['pouring-beer'] = await this.loadAudio(pouringBeer);
   }
 
   private async loadAudio(src: string): Promise<HTMLAudioElement> {

@@ -6,22 +6,23 @@ import { Sprite } from "../Sprite";
 import { SpriteLibrary } from "../SpriteLibrary";
 import { BeerGlass, BeerLevel } from "../items/BeerGlass";
 import { UiController } from "../UiController";
+import { SoundLibrary } from "../SoundLibrary";
 
 export class BeerCabinet implements GameObject {
   private sprite: Sprite;
   private inventory: Inventory;
 
-  constructor(private coord: Coord, sprites: SpriteLibrary) {
+  constructor(private coord: Coord, sprites: SpriteLibrary, sounds: SoundLibrary) {
     this.sprite = sprites.get("beer-cabinet").getSprite([0, 0]);
     this.inventory = new Inventory({
       size: [3, 3],
       items: [
-        new BeerGlass(BeerLevel.empty, sprites),
-        new BeerGlass(BeerLevel.empty, sprites),
-        new BeerGlass(BeerLevel.empty, sprites),
-        new BeerGlass(BeerLevel.empty, sprites),
-        new BeerGlass(BeerLevel.empty, sprites),
-        new BeerGlass(BeerLevel.empty, sprites),
+        new BeerGlass(BeerLevel.empty, sprites, sounds),
+        new BeerGlass(BeerLevel.empty, sprites, sounds),
+        new BeerGlass(BeerLevel.empty, sprites, sounds),
+        new BeerGlass(BeerLevel.empty, sprites, sounds),
+        new BeerGlass(BeerLevel.empty, sprites, sounds),
+        new BeerGlass(BeerLevel.empty, sprites, sounds),
       ],
     });
   }

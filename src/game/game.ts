@@ -28,7 +28,7 @@ export async function runGame(ctx: CanvasRenderingContext2D): Promise<GameApi> {
   const sounds = new SoundLibrary();
   await sounds.load();
 
-  const location = new CfeLocation(sprites);
+  const location = new CfeLocation(sprites, sounds);
   const background = new Background(location.getBackground());
 
   const world = new GameWorld(location);

@@ -1,3 +1,4 @@
+import { SoundLibrary } from "../SoundLibrary";
 import { Sprite } from "../Sprite";
 import { SpriteLibrary } from "../SpriteLibrary";
 import { SpriteSheet } from "../SpriteSheet";
@@ -16,7 +17,7 @@ export class BeerGlass implements GameItem {
   private spriteSheet: SpriteSheet;
   private smallSpriteSheet: SpriteSheet;
 
-  constructor(private level: BeerLevel, sprites: SpriteLibrary) {
+  constructor(private level: BeerLevel, sprites: SpriteLibrary, private sounds: SoundLibrary) {
     this.spriteSheet = sprites.get("beer-lg");
     this.smallSpriteSheet = sprites.get("beer-sm");
   }
@@ -25,6 +26,7 @@ export class BeerGlass implements GameItem {
     if (item instanceof BeerBottle && !item.isEmpty() && this.level === BeerLevel.empty) {
       item.empty();
       this.fill();
+      this.sounds.play("pouring-beer");
       return [this, item];
     }
     return [];

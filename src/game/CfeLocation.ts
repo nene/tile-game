@@ -9,6 +9,7 @@ import { GameObject } from "./GameObject";
 import { SpriteLibrary } from "./SpriteLibrary";
 import { Table } from "./furniture/Table";
 import { Wall } from "./furniture/Wall";
+import { SoundLibrary } from "./SoundLibrary";
 
 const CFE_SIZE: Coord = [32, 32]; // Size in tiles
 
@@ -17,7 +18,7 @@ export class CfeLocation implements GameLocation {
   private grid: GameGrid;
   private staticObjects: GameObject[];
 
-  constructor(private sprites: SpriteLibrary) {
+  constructor(private sprites: SpriteLibrary, private sounds: SoundLibrary) {
     this.grid = new GameGrid({ gridSize: CFE_SIZE, tileSize: [16, 16] });
 
     this.background = new CfeBackground(this.grid, sprites);
@@ -40,7 +41,7 @@ export class CfeLocation implements GameLocation {
     // A fridge
     objects.push(new Fridge(this.grid.tileToScreenCoord([3, 3]), this.sprites));
     // A storage of beer glasses
-    objects.push(new BeerCabinet(this.grid.tileToScreenCoord([5, 3]), this.sprites));
+    objects.push(new BeerCabinet(this.grid.tileToScreenCoord([5, 3]), this.sprites, this.sounds));
 
     return objects;
   }
