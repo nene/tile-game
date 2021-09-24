@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
-import { Coord, coordSub } from "./game/Coord";
 import { runGame } from "./game/game";
+import { mouseCoordRelativeTo } from "./mouseCoord";
 
 export function App() {
   const canvasEl = useRef<HTMLCanvasElement>(null);
@@ -32,11 +32,7 @@ export function App() {
       });
 
       canvas.addEventListener("click", (e) => {
-        const coord = coordSub(
-          coordSub([e.clientX, e.clientY], getPosition(canvas)),
-          [-1, -1]
-        );
-        events.onClick(coord);
+        events.onClick(mouseCoordRelativeTo(e, canvas));
       });
     };
     game();
@@ -64,26 +60,3 @@ const AppWrapper = styled.div`
   width: 1280px;
   margin: 0 auto;
 `;
-
-// helper function to get an element's exact position
-function getPosition(el: HTMLElement | null): Coord {
-  var xPosition = 0;
-  var yPosition = 0;
-
-  while (el) {
-    if (el.tagName === "BODY") {
-      // deal with browser quirks with body/window/document and page scroll
-      var xScrollPos = el.scrollLeft || document.documentElement.scrollLeft;
-      var yScrollPos = el.scrollTop || document.documentElement.scrollTop;
-
-      xPosition += el.offsetLeft - xScrollPos + el.clientLeft;
-      yPosition += el.offsetTop - yScrollPos + el.clientTop;
-    } else {
-      xPosition += el.offsetLeft - el.scrollLeft + el.clientLeft;
-      yPosition += el.offsetTop - el.scrollTop + el.clientTop;
-    }
-
-    el = el.offsetParent as HTMLElement | null;
-  }
-  return [xPosition, yPosition];
-}
