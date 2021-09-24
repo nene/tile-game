@@ -5,7 +5,7 @@ import { Sprite } from "../Sprite";
 export interface ActivityUpdates {
   finished?: boolean;
   coord?: Coord;
-  extraSprite?: Sprite;
+  extraSprites?: Sprite[];
 }
 
 export interface Activity {

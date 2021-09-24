@@ -16,7 +16,7 @@ export class CallFuxActivity implements Activity {
   tick(): ActivityUpdates {
     this.counter++;
     return {
-      extraSprite: this.isShouting() ? this.extraSprite : undefined,
+      extraSprites: this.isShouting() ? [this.extraSprite] : [],
       finished: this.counter > 90,
     };
   }

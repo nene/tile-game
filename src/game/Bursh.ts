@@ -18,7 +18,7 @@ export class Bursh implements GameObject {
   private animation: SpriteAnimation;
   private name: string;
   private activities: Activity[] = [];
-  private extraSprite?: Sprite;
+  private extraSprites: Sprite[] = [];
 
   constructor(private coord: Coord, private sprites: SpriteLibrary, cfg: BurshConfig) {
     this.name = cfg.name;
@@ -40,7 +40,7 @@ export class Bursh implements GameObject {
       if (updates.coord) {
         this.coord = updates.coord;
       }
-      this.extraSprite = updates.extraSprite;
+      this.extraSprites = updates.extraSprites || [];
       if (updates.finished) {
         this.activities.shift();
       }
@@ -51,9 +51,9 @@ export class Bursh implements GameObject {
 
   paint(screen: PixelScreen) {
     screen.drawSprite(this.animation.getSprite(), this.coord);
-    if (this.extraSprite) {
-      screen.drawSprite(this.extraSprite, this.coord);
-    }
+    this.extraSprites.forEach((sprite) => {
+      screen.drawSprite(sprite, this.coord);
+    });
   }
 
   zIndex() {
