@@ -71,6 +71,7 @@ const GameCanvas = styled.canvas`
   font-smooth: never;
   -webkit-font-smoothing: none;
   cursor: none;
+  border: 4px solid #5c2d24;
 `;
 
 const AppWrapper = styled.div`
