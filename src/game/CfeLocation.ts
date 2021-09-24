@@ -1,14 +1,14 @@
-import { BeerCabinet } from "./BeerCabinet";
+import { BeerCabinet } from "./furniture/BeerCabinet";
 import { Bursh } from "./Bursh";
 import { CfeBackground } from "./CfeBackground";
 import { Coord, coordAdd } from "./Coord";
-import { Fridge } from "./Fridge";
+import { Fridge } from "./furniture/Fridge";
 import { GameGrid } from "./GameGrid";
 import { GameLocation } from "./GameLocation";
 import { GameObject } from "./GameObject";
 import { SpriteLibrary } from "./SpriteLibrary";
-import { Table } from "./Table";
-import { Wall } from "./Wall";
+import { Table } from "./furniture/Table";
+import { Wall } from "./furniture/Wall";
 
 const CFE_SIZE: Coord = [32, 32]; // Size in tiles
 

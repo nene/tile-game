@@ -1,11 +1,11 @@
-import { Coord, Rect } from "./Coord";
-import { GameObject } from "./GameObject";
-import { Inventory } from "./Inventory";
-import { PixelScreen } from "./PixelScreen";
-import { Sprite } from "./Sprite";
-import { SpriteLibrary } from "./SpriteLibrary";
-import { BeerGlass, BeerLevel } from "./items/BeerGlass";
-import { UiController } from "./UiController";
+import { Coord, Rect } from "../Coord";
+import { GameObject } from "../GameObject";
+import { Inventory } from "../Inventory";
+import { PixelScreen } from "../PixelScreen";
+import { Sprite } from "../Sprite";
+import { SpriteLibrary } from "../SpriteLibrary";
+import { BeerGlass, BeerLevel } from "../items/BeerGlass";
+import { UiController } from "../UiController";
 
 export class BeerCabinet implements GameObject {
   private sprite: Sprite;
