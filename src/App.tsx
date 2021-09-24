@@ -70,6 +70,7 @@ export function App() {
 const GameCanvas = styled.canvas`
   font-smooth: never;
   -webkit-font-smoothing: none;
+  cursor: none;
 `;
 
 const AppWrapper = styled.div`

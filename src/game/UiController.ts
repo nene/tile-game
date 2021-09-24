@@ -4,6 +4,7 @@ import { SpriteLibrary } from "./SpriteLibrary";
 import { InventoryView } from "./InventoryView";
 import { Coord, coordSub } from "./Coord";
 import { GameItem } from "./items/GameItem";
+import { Sprite } from "./Sprite";
 
 export class UiController {
   private playerInventoryView: InventoryView;
@@ -11,9 +12,11 @@ export class UiController {
   private objectInventoryView?: InventoryView;
   private mouseCoord: Coord = [0, 0];
   private selectedItem?: GameItem;
+  private cursor: Sprite;
 
   constructor(private playerInventory: Inventory, private sprites: SpriteLibrary) {
     this.playerInventoryView = new InventoryView(playerInventory, [107, 200 - 22], sprites);
+    this.cursor = sprites.get("cursor").getSprite([0, 0]);
   }
 
   showInventory(inventory: Inventory) {
@@ -35,6 +38,8 @@ export class UiController {
     if (this.selectedItem) {
       screen.drawSprite(this.selectedItem.getSprite(), coordSub(this.mouseCoord, [8, 8]), { fixed: true });
     }
+
+    screen.drawSprite(this.cursor, this.mouseCoord, { fixed: true });
   }
 
   handleClick(screenCoord: Coord): boolean {
