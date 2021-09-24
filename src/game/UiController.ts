@@ -89,10 +89,18 @@ export class UiController {
       this.selectedItem = undefined;
     }
     else if (item && this.selectedItem) {
-      // Swap item at hand with item in inventory
-      inventory.remove(item);
-      inventory.addAt(slotCoord, this.selectedItem);
-      this.selectedItem = item;
+      // Combine these items if possible
+      const combinedItems = item.combine(this.selectedItem);
+      if (combinedItems.length > 0) {
+        inventory.addAt(slotCoord, combinedItems[0]);
+        this.selectedItem = combinedItems[1]; // possibly nothing
+      }
+      else {
+        // Otherwise swap item at hand with item in inventory
+        inventory.remove(item);
+        inventory.addAt(slotCoord, this.selectedItem);
+        this.selectedItem = item;
+      }
     }
   }
 }

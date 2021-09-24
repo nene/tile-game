@@ -1,6 +1,7 @@
 import { Sprite } from "../Sprite";
 import { SpriteLibrary } from "../SpriteLibrary";
 import { SpriteSheet } from "../SpriteSheet";
+import { BeerBottle } from "./BeerBottle";
 import { GameItem } from "./GameItem";
 
 export enum BeerLevel {
@@ -20,8 +21,20 @@ export class BeerGlass implements GameItem {
     this.smallSpriteSheet = sprites.get("beer-sm");
   }
 
+  combine(item: GameItem): GameItem[] {
+    if (item instanceof BeerBottle) {
+      this.fill();
+      return [this];
+    }
+    return [];
+  }
+
   getName() {
     return "Glass of beer";
+  }
+
+  fill() {
+    this.level = BeerLevel.full;
   }
 
   drink() {

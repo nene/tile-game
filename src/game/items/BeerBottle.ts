@@ -1,5 +1,6 @@
 import { Sprite } from "../Sprite";
 import { SpriteLibrary } from "../SpriteLibrary";
+import { BeerGlass } from "./BeerGlass";
 import { GameItem } from "./GameItem";
 
 export enum BeerType {
@@ -27,5 +28,13 @@ export class BeerBottle implements GameItem {
 
   getSprite(): Sprite {
     return this.sprite;
+  }
+
+  combine(item: GameItem): GameItem[] {
+    if (item instanceof BeerGlass) {
+      item.fill();
+      return [item];
+    }
+    return [];
   }
 }
