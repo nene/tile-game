@@ -25,7 +25,7 @@ export class BeerBottle implements GameItem {
   }
 
   getName() {
-    return beerNames[this.type];
+    return this.full ? beerNames[this.type] : "Tühi pudel";
   }
 
   empty() {

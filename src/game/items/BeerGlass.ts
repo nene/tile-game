@@ -33,7 +33,13 @@ export class BeerGlass implements GameItem {
   }
 
   getName() {
-    return "Glass of beer";
+    switch (this.level) {
+      case BeerLevel.empty: return "Tühi shoppen";
+      case BeerLevel.almostEmpty: return "Peaaegu tühi shoppen";
+      case BeerLevel.half: return "Poolik shoppen";
+      case BeerLevel.almostFull: return "Peaaegu täis shoppen";
+      case BeerLevel.full: return "Shoppen õllega";
+    }
   }
 
   fill() {
