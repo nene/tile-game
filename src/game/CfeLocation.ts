@@ -36,11 +36,11 @@ export class CfeLocation implements GameLocation {
     });
 
     // A table
-    objects.push(new Table(this.grid.tileToScreenCoord([2, 5]), this.sprites));
+    objects.push(new Table(this.grid.tileToScreenCoord([2, 8]), this.sprites));
     // A fridge
-    objects.push(new Fridge(this.grid.tileToScreenCoord([10, 3]), this.sprites));
+    objects.push(new Fridge(this.grid.tileToScreenCoord([3, 3]), this.sprites));
     // A storage of beer glasses
-    objects.push(new BeerCabinet(this.grid.tileToScreenCoord([12, 3]), this.sprites));
+    objects.push(new BeerCabinet(this.grid.tileToScreenCoord([5, 3]), this.sprites));
 
     return objects;
   }
