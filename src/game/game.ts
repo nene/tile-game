@@ -12,6 +12,7 @@ const PIXEL_SCALE = 4;
 
 export async function runGame(ctx: CanvasRenderingContext2D) {
   const screen = new PixelScreen(ctx, { width: 320, height: 200, scale: PIXEL_SCALE });
+  let screenNeedsRepaint = true;
 
   const sprites = new SpriteLibrary();
   await sprites.load();
@@ -31,23 +32,31 @@ export async function runGame(ctx: CanvasRenderingContext2D) {
   gameLoop(() => {
     world.allObjects().forEach((obj) => obj.tick(world));
     world.sortObjects();
+    screenNeedsRepaint = true;
   });
 
   paintLoop(() => {
+    if (!screenNeedsRepaint) {
+      return; // Don't paint when app state hasn't changed
+    }
     screen.centerTo(player.getCoord(), world);
     background.paint(screen);
     world.allObjects().forEach((obj) => obj.paint(screen));
     inventoryController.paint(screen);
+    screenNeedsRepaint = false;
   });
 
   return {
     onKeyDown: (key: string): boolean => {
+      screenNeedsRepaint = true;
       return player.handleKeyDown(key);
     },
     onKeyUp: (key: string): boolean => {
+      screenNeedsRepaint = true;
       return player.handleKeyUp(key);
     },
     onClick: ([x, y]: Coord) => {
+      screenNeedsRepaint = true;
       const screenCoord: Coord = [Math.floor(x / PIXEL_SCALE), Math.floor(y / PIXEL_SCALE)];
       if (inventoryController.handleClick(screenCoord)) {
         return; // The click was handled by UI
@@ -59,6 +68,7 @@ export async function runGame(ctx: CanvasRenderingContext2D) {
       }
     },
     onHover: ([x, y]: Coord) => {
+      screenNeedsRepaint = true;
       const screenCoord: Coord = [Math.floor(x / PIXEL_SCALE), Math.floor(y / PIXEL_SCALE)];
       if (inventoryController.handleHover(screenCoord)) {
         return; // The click was handled by UI
