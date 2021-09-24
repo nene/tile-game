@@ -7,6 +7,7 @@ import { MoveActivity } from "./activities/MoveActivity";
 import { PixelScreen } from "./PixelScreen";
 import { Sprite } from "./Sprite";
 import { SpriteLibrary } from "./SpriteLibrary";
+import { DrinkActivity } from "./activities/DrinkActivity";
 
 interface BurshConfig {
   spriteType: 0 | 1 | 2;
@@ -25,6 +26,7 @@ export class Bursh implements GameObject {
   }
 
   moveTo(destination: Coord) {
+    this.activities.push(new DrinkActivity(this.spriteLib));
     this.activities.push(new MoveActivity(this.coord, destination, this.type, this.spriteLib));
     this.activities.push(new CallFuxActivity(this.type, this.spriteLib));
   }
