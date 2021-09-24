@@ -5,6 +5,7 @@ import { InventoryView } from "./InventoryView";
 import { Coord, coordAdd, coordSub } from "./Coord";
 import { GameItem } from "./items/GameItem";
 import { Sprite } from "./Sprite";
+import { debounce } from "lodash";
 
 export class UiController {
   private playerInventoryView: InventoryView;
@@ -74,9 +75,14 @@ export class UiController {
 
   handleHover(screenCoord: Coord): boolean {
     this.mouseCoord = screenCoord;
-    this.hoveredItem = this.getHoveredInventoryItem(screenCoord);
+    this.hoveredItem = undefined;
+    this.showTooltipAfterDelay(screenCoord);
     return true;
   }
+
+  private showTooltipAfterDelay = debounce((screenCoord: Coord) => {
+    this.hoveredItem = this.getHoveredInventoryItem(screenCoord);
+  }, 500);
 
   private getHoveredInventoryItem(coord: Coord): GameItem | undefined {
     const item = this.getInventoryItemAtCoord(coord, this.playerInventory, this.playerInventoryView);
