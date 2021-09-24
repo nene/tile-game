@@ -1,7 +1,7 @@
-import { coordAdd } from "./Coord";
-import { Activity, ActivityUpdates } from "./MoveActivity";
-import { Sprite } from "./Sprite";
-import { SpriteLibrary } from "./SpriteLibrary";
+import { coordAdd } from "../Coord";
+import { Activity, ActivityUpdates } from "./Activity";
+import { Sprite } from "../Sprite";
+import { SpriteLibrary } from "../SpriteLibrary";
 
 export class CallFuxActivity implements Activity {
   private counter = 0;

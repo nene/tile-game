@@ -1,16 +1,6 @@
-import { Coord, coordEq, coordMul, coordUnit, coordSub, coordAdd } from "./Coord";
-import { GameWorld } from "./GameWorld";
-import { Sprite } from "./Sprite";
-
-export interface ActivityUpdates {
-  finished?: boolean;
-  coord?: Coord;
-  extraSprite?: Sprite;
-}
-
-export interface Activity {
-  tick: (world: GameWorld) => ActivityUpdates;
-}
+import { Coord, coordEq, coordMul, coordUnit, coordSub, coordAdd } from "../Coord";
+import { GameWorld } from "../GameWorld";
+import { Activity, ActivityUpdates } from "./Activity";
 
 export class MoveActivity implements Activity {
   private speed: Coord = [0, 0];

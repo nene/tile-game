@@ -1,8 +1,9 @@
-import { CallFuxActivity } from "./CallFuxActivity";
+import { CallFuxActivity } from "./activities/CallFuxActivity";
 import { Coord, Rect } from "./Coord";
 import { GameObject } from "./GameObject";
 import { GameWorld } from "./GameWorld";
-import { Activity, MoveActivity } from "./MoveActivity";
+import { Activity } from "./activities/Activity";
+import { MoveActivity } from "./activities/MoveActivity";
 import { PixelScreen } from "./PixelScreen";
 import { Sprite } from "./Sprite";
 import { SpriteAnimation } from "./SpriteAnimation";
