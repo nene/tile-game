@@ -1,11 +1,7 @@
 import { Coord, Rect } from "./Coord";
 import { GameWorld } from "./GameWorld";
-import { Inventory } from "./Inventory";
 import { PixelScreen } from "./PixelScreen";
-
-export interface UiController {
-  showInventory: (inventory: Inventory) => void;
-}
+import { UiController } from "./UiController";
 
 export interface GameObject {
   zIndex: () => number;

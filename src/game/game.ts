@@ -6,7 +6,7 @@ import { SpriteLibrary } from "./SpriteLibrary";
 import { SoundLibrary } from "./SoundLibrary";
 import { CfeLocation } from "./CfeLocation";
 import { Coord, coordAdd, coordDistance } from "./Coord";
-import { InventoryController } from "./InventoryController";
+import { UiController } from "./UiController";
 import { Loops } from "./Loops";
 
 const PIXEL_SCALE = 4;
@@ -36,7 +36,7 @@ export async function runGame(ctx: CanvasRenderingContext2D): Promise<GameApi> {
   const player = new Player(sprites, [32, 64]);
   world.add(player);
 
-  const inventoryController = new InventoryController(player.getInventory(), sprites);
+  const uiController = new UiController(player.getInventory(), sprites);
 
   const loops = new Loops();
   loops.runGameLoop(() => {
@@ -52,7 +52,7 @@ export async function runGame(ctx: CanvasRenderingContext2D): Promise<GameApi> {
     screen.centerTo(player.getCoord(), world);
     background.paint(screen);
     world.allObjects().forEach((obj) => obj.paint(screen));
-    inventoryController.paint(screen);
+    uiController.paint(screen);
     screenNeedsRepaint = false;
   });
 
@@ -68,19 +68,19 @@ export async function runGame(ctx: CanvasRenderingContext2D): Promise<GameApi> {
     onClick: ([x, y]: Coord) => {
       screenNeedsRepaint = true;
       const screenCoord: Coord = [Math.floor(x / PIXEL_SCALE), Math.floor(y / PIXEL_SCALE)];
-      if (inventoryController.handleClick(screenCoord)) {
+      if (uiController.handleClick(screenCoord)) {
         return; // The click was handled by UI
       }
       const worldCoord = coordAdd(screenCoord, screen.getOffset());
       const obj = world.getObjectVisibleOnCoord(worldCoord);
       if (obj && coordDistance(player.getCoord(), obj.getCoord()) < 16 + 8) {
-        obj.onInteract(inventoryController);
+        obj.onInteract(uiController);
       }
     },
     onHover: ([x, y]: Coord) => {
       screenNeedsRepaint = true;
       const screenCoord: Coord = [Math.floor(x / PIXEL_SCALE), Math.floor(y / PIXEL_SCALE)];
-      if (inventoryController.handleHover(screenCoord)) {
+      if (uiController.handleHover(screenCoord)) {
         return; // The click was handled by UI
       }
     },

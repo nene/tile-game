@@ -1,10 +1,11 @@
 import { Coord, Rect } from "./Coord";
-import { GameObject, UiController } from "./GameObject";
+import { GameObject } from "./GameObject";
 import { Inventory } from "./Inventory";
 import { BeerBottle, BeerType } from "./items/BeerBottle";
 import { PixelScreen } from "./PixelScreen";
 import { Sprite } from "./Sprite";
 import { SpriteLibrary } from "./SpriteLibrary";
+import { UiController } from "./UiController";
 
 export class Fridge implements GameObject {
   private sprite: Sprite;

@@ -2,11 +2,10 @@ import { Inventory } from "./Inventory";
 import { PixelScreen } from "./PixelScreen";
 import { SpriteLibrary } from "./SpriteLibrary";
 import { InventoryView } from "./InventoryView";
-import { UiController } from "./GameObject";
 import { Coord, coordSub } from "./Coord";
 import { GameItem } from "./items/GameItem";
 
-export class InventoryController implements UiController {
+export class UiController {
   private playerInventoryView: InventoryView;
   private objectInventory?: Inventory;
   private objectInventoryView?: InventoryView;
