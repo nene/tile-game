@@ -1,6 +1,5 @@
 import { Coord, coordAdd, coordMul, isCoordInRect, Rect } from "./Coord";
 import { Inventory } from "./Inventory";
-import { GameItem } from "./items/GameItem";
 import { PixelScreen } from "./PixelScreen";
 import { SpriteLibrary } from "./SpriteLibrary";
 import { SpriteSheet } from "./SpriteSheet";
@@ -39,12 +38,7 @@ export class InventoryView {
     return isCoordInRect(screenCoord, this.rect);
   }
 
-  getItemAtCoord(screenCoord: Coord): GameItem | undefined {
-    const slot = this.getSlotAtCoord(screenCoord);
-    return slot && this.inventory.itemAt(slot);
-  }
-
-  private getSlotAtCoord(screenCoord: Coord): Coord | undefined {
+  getSlotAtCoord(screenCoord: Coord): Coord | undefined {
     const startCoord = coordAdd(this.coord, [1, 1]);
     const [cols, rows] = this.inventory.size();
     for (let y = 0; y < rows; y++) {

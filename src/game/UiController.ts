@@ -59,7 +59,12 @@ export class UiController {
   }
 
   private handleInventoryClick(coord: Coord, inventory: Inventory, inventoryView: InventoryView) {
-    const item = inventoryView.getItemAtCoord(coord);
+    const slotCoord = inventoryView.getSlotAtCoord(coord);
+    if (!slotCoord) {
+      return; // no slot clicked
+    }
+
+    const item = inventory.itemAt(slotCoord);
     if (item && !this.selectedItem) {
       // Take item from inventory
       inventory.remove(item);
@@ -67,13 +72,13 @@ export class UiController {
     }
     else if (!item && this.selectedItem && !inventory.isFull()) {
       // Place item at hand to inventory
-      inventory.add(this.selectedItem);
+      inventory.addAt(slotCoord, this.selectedItem);
       this.selectedItem = undefined;
     }
     else if (item && this.selectedItem) {
       // Swap item at hand with item in inventory
       inventory.remove(item);
-      inventory.add(this.selectedItem);
+      inventory.addAt(slotCoord, this.selectedItem);
       this.selectedItem = item;
     }
   }
