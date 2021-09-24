@@ -5,18 +5,20 @@ import { SpriteLibrary } from "../SpriteLibrary";
 
 export class CallFuxActivity implements Activity {
   private counter = 0;
-  private extraSprite: Sprite;
+  private sprite: Sprite;
+  private calloutSprite: Sprite;
 
-  constructor(sprites: SpriteLibrary) {
-    this.extraSprite = sprites.get("callout").getSprite([0, 0]);
+  constructor(type: 0 | 1 | 2, sprites: SpriteLibrary) {
+    this.sprite = sprites.get("cfe-ksv").getSprite([type, 0]);
+    this.calloutSprite = sprites.get("callout").getSprite([0, 0]);
     // Place above the head
-    this.extraSprite.offset = coordAdd(this.extraSprite.offset, [0, -32]);
+    this.calloutSprite.offset = coordAdd(this.calloutSprite.offset, [0, -32]);
   }
 
   tick(): ActivityUpdates {
     this.counter++;
     return {
-      extraSprites: this.isShouting() ? [this.extraSprite] : [],
+      sprites: this.isShouting() ? [this.sprite, this.calloutSprite] : [this.sprite],
       finished: this.counter > 90,
     };
   }

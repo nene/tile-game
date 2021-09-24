@@ -1,15 +1,26 @@
 import { Coord, coordEq, coordMul, coordUnit, coordSub, coordAdd } from "../Coord";
 import { GameWorld } from "../GameWorld";
+import { SpriteAnimation } from "../SpriteAnimation";
+import { SpriteLibrary } from "../SpriteLibrary";
 import { Activity, ActivityUpdates } from "./Activity";
 
 export class MoveActivity implements Activity {
   private speed: Coord = [0, 0];
   private path?: Coord[];
-  constructor(private coord: Coord, private destination: Coord) { }
+  private animation: SpriteAnimation;
+
+  constructor(private coord: Coord, private destination: Coord, type: 0 | 1 | 2, sprites: SpriteLibrary) {
+    this.animation = new SpriteAnimation(sprites.get("cfe-ksv"), {
+      frames: [[type, 0]],
+    });
+  }
 
   public tick(world: GameWorld): ActivityUpdates {
+    this.animation.tick();
+    const sprites = [this.animation.getSprite()];
+
     if (coordEq(this.coord, this.destination)) {
-      return { finished: true };
+      return { finished: true, sprites };
     }
 
     const targetCoord = this.getActivePathStep(world);
@@ -17,9 +28,9 @@ export class MoveActivity implements Activity {
       this.speed = coordMul(coordUnit(coordSub(targetCoord, this.coord)), [2, 2]);
 
       this.coord = coordAdd(this.coord, this.speed);
-      return { coord: this.coord };
+      return { coord: this.coord, sprites };
     }
-    return { finished: true };
+    return { finished: true, sprites };
   }
 
   private getActivePathStep(world: GameWorld): Coord | undefined {

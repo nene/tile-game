@@ -6,7 +6,6 @@ import { Activity } from "./activities/Activity";
 import { MoveActivity } from "./activities/MoveActivity";
 import { PixelScreen } from "./PixelScreen";
 import { Sprite } from "./Sprite";
-import { SpriteAnimation } from "./SpriteAnimation";
 import { SpriteLibrary } from "./SpriteLibrary";
 
 interface BurshConfig {
@@ -15,21 +14,19 @@ interface BurshConfig {
 }
 
 export class Bursh implements GameObject {
-  private animation: SpriteAnimation;
+  private type: 0 | 1 | 2;
   private name: string;
   private activities: Activity[] = [];
-  private extraSprites: Sprite[] = [];
+  private sprites: Sprite[] = [];
 
-  constructor(private coord: Coord, private sprites: SpriteLibrary, cfg: BurshConfig) {
+  constructor(private coord: Coord, private spriteLib: SpriteLibrary, cfg: BurshConfig) {
+    this.type = cfg.spriteType;
     this.name = cfg.name;
-    this.animation = new SpriteAnimation(sprites.get("cfe-ksv"), {
-      frames: [[cfg.spriteType, 0]],
-    });
   }
 
   moveTo(destination: Coord) {
-    this.activities.push(new MoveActivity(this.coord, destination));
-    this.activities.push(new CallFuxActivity(this.sprites));
+    this.activities.push(new MoveActivity(this.coord, destination, this.type, this.spriteLib));
+    this.activities.push(new CallFuxActivity(this.type, this.spriteLib));
   }
 
   tick(world: GameWorld) {
@@ -40,18 +37,15 @@ export class Bursh implements GameObject {
       if (updates.coord) {
         this.coord = updates.coord;
       }
-      this.extraSprites = updates.extraSprites || [];
+      this.sprites = updates.sprites || [];
       if (updates.finished) {
         this.activities.shift();
       }
     }
-
-    this.animation.tick();
   }
 
   paint(screen: PixelScreen) {
-    screen.drawSprite(this.animation.getSprite(), this.coord);
-    this.extraSprites.forEach((sprite) => {
+    this.sprites.forEach((sprite) => {
       screen.drawSprite(sprite, this.coord);
     });
   }
