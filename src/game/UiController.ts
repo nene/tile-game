@@ -10,7 +10,7 @@ export class UiController {
   private playerInventoryView: InventoryView;
   private objectInventory?: Inventory;
   private objectInventoryView?: InventoryView;
-  private mouseCoord: Coord = [0, 0];
+  private mouseCoord: Coord = [-16, -16];
   private selectedItem?: GameItem;
   private cursor: Sprite;
 
