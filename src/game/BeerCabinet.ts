@@ -17,9 +17,11 @@ export class BeerCabinet implements GameObject {
       size: [3, 3],
       items: [
         new BeerGlass(BeerLevel.empty, sprites),
-        new BeerGlass(BeerLevel.half, sprites),
-        new BeerGlass(BeerLevel.almostFull, sprites),
-        new BeerGlass(BeerLevel.full, sprites),
+        new BeerGlass(BeerLevel.empty, sprites),
+        new BeerGlass(BeerLevel.empty, sprites),
+        new BeerGlass(BeerLevel.empty, sprites),
+        new BeerGlass(BeerLevel.empty, sprites),
+        new BeerGlass(BeerLevel.empty, sprites),
       ],
     });
   }
