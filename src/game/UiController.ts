@@ -2,7 +2,7 @@ import { Inventory } from "./Inventory";
 import { PixelScreen } from "./PixelScreen";
 import { SpriteLibrary } from "./SpriteLibrary";
 import { InventoryView } from "./InventoryView";
-import { Coord, coordSub } from "./Coord";
+import { Coord, coordAdd, coordSub } from "./Coord";
 import { GameItem } from "./items/GameItem";
 import { Sprite } from "./Sprite";
 
@@ -12,6 +12,7 @@ export class UiController {
   private objectInventoryView?: InventoryView;
   private mouseCoord: Coord = [-16, -16];
   private selectedItem?: GameItem;
+  private hoveredItem?: GameItem;
   private cursor: Sprite;
 
   constructor(private playerInventory: Inventory, private sprites: SpriteLibrary) {
@@ -46,11 +47,16 @@ export class UiController {
     if (this.selectedItem) {
       screen.drawSprite(this.selectedItem.getSprite(), coordSub(this.mouseCoord, [8, 8]), { fixed: true });
     }
+    if (this.hoveredItem) {
+      screen.drawText(this.hoveredItem.getName(), "#3e2821", "#c8b997", coordAdd(this.mouseCoord, [10, 10]));
+    }
 
     screen.drawSprite(this.cursor, this.mouseCoord, { fixed: true });
   }
 
   handleClick(screenCoord: Coord): boolean {
+    this.hoveredItem = undefined;
+
     if (this.playerInventoryView.isCoordInView(screenCoord)) {
       this.handleInventoryClick(screenCoord, this.playerInventory, this.playerInventoryView);
       return true;
@@ -68,7 +74,27 @@ export class UiController {
 
   handleHover(screenCoord: Coord): boolean {
     this.mouseCoord = screenCoord;
+    this.hoveredItem = this.getHoveredInventoryItem(screenCoord);
     return true;
+  }
+
+  private getHoveredInventoryItem(coord: Coord): GameItem | undefined {
+    const item = this.getInventoryItemAtCoord(coord, this.playerInventory, this.playerInventoryView);
+    if (item) {
+      return item;
+    }
+    if (this.objectInventory && this.objectInventoryView) {
+      return this.getInventoryItemAtCoord(coord, this.objectInventory, this.objectInventoryView);
+    }
+    return undefined;
+  }
+
+  private getInventoryItemAtCoord(coord: Coord, inventory: Inventory, inventoryView: InventoryView): GameItem | undefined {
+    if (inventoryView.isCoordInView(coord)) {
+      const slot = inventoryView.getSlotAtCoord(coord);
+      return slot && inventory.itemAt(slot);
+    }
+    return undefined;
   }
 
   private handleInventoryClick(coord: Coord, inventory: Inventory, inventoryView: InventoryView) {
