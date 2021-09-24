@@ -32,8 +32,7 @@ export class BeerBottle implements GameItem {
 
   combine(item: GameItem): GameItem[] {
     if (item instanceof BeerGlass) {
-      item.fill();
-      return [item];
+      return item.combine(this); // Keep main logic in beer-glass
     }
     return [];
   }
