@@ -65,9 +65,9 @@ export async function runGame(ctx: CanvasRenderingContext2D): Promise<GameApi> {
       screenNeedsRepaint = true;
       return player.handleKeyUp(key);
     },
-    onClick: ([x, y]: Coord) => {
+    onClick: (coord: Coord) => {
       screenNeedsRepaint = true;
-      const screenCoord: Coord = [Math.floor(x / PIXEL_SCALE), Math.floor(y / PIXEL_SCALE)];
+      const screenCoord = toPixelScale(coord);
       if (uiController.handleClick(screenCoord)) {
         return; // The click was handled by UI
       }
@@ -77,9 +77,9 @@ export async function runGame(ctx: CanvasRenderingContext2D): Promise<GameApi> {
         obj.onInteract(uiController);
       }
     },
-    onHover: ([x, y]: Coord) => {
+    onHover: (coord: Coord) => {
       screenNeedsRepaint = true;
-      const screenCoord: Coord = [Math.floor(x / PIXEL_SCALE), Math.floor(y / PIXEL_SCALE)];
+      const screenCoord = toPixelScale(coord);
       if (uiController.handleHover(screenCoord)) {
         return; // The click was handled by UI
       }
@@ -88,4 +88,8 @@ export async function runGame(ctx: CanvasRenderingContext2D): Promise<GameApi> {
       loops.cleanup();
     },
   };
+}
+
+function toPixelScale([x, y]: Coord): Coord {
+  return [Math.floor(x / PIXEL_SCALE), Math.floor(y / PIXEL_SCALE)];
 }
