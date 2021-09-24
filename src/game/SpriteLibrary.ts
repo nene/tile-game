@@ -45,7 +45,7 @@ export class SpriteLibrary {
 
       'beer-lg': new SpriteSheet(await loadImage(beerLg), { size: [16, 16], colsRows: [5, 1] }),
       'beer-sm': new SpriteSheet(await loadImage(beerSm), { size: [10, 10], colsRows: [5, 1] }),
-      'bottle': new SpriteSheet(await loadImage(bottle), { size: [16, 16], colsRows: [2, 3] }),
+      'bottle': new SpriteSheet(await loadImage(bottle), { size: [16, 16], colsRows: [2, 4] }),
     };
   }
 

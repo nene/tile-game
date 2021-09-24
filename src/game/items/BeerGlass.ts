@@ -22,9 +22,10 @@ export class BeerGlass implements GameItem {
   }
 
   combine(item: GameItem): GameItem[] {
-    if (item instanceof BeerBottle) {
+    if (item instanceof BeerBottle && !item.isEmpty() && this.level === BeerLevel.empty) {
+      item.empty();
       this.fill();
-      return [this];
+      return [this, item];
     }
     return [];
   }

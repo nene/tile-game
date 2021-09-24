@@ -92,6 +92,7 @@ export class UiController {
       // Combine these items if possible
       const combinedItems = item.combine(this.selectedItem);
       if (combinedItems.length > 0) {
+        inventory.remove(item);
         inventory.addAt(slotCoord, combinedItems[0]);
         this.selectedItem = combinedItems[1]; // possibly nothing
       }
