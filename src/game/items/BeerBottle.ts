@@ -5,14 +5,12 @@ import { BeerGlass } from "./BeerGlass";
 import { GameItem } from "./GameItem";
 
 export enum BeerType {
-  empty = 0,
   alexander = 1,
   heineken = 2,
   special = 3,
 }
 
 const beerNames = {
-  [BeerType.empty]: "Tühi pudel",
   [BeerType.alexander]: "Alexander",
   [BeerType.heineken]: "Heineken",
   [BeerType.special]: "Special",
@@ -20,6 +18,7 @@ const beerNames = {
 
 export class BeerBottle implements GameItem {
   private spriteSheet: SpriteSheet;
+  private full = true;
 
   constructor(private type: BeerType, sprites: SpriteLibrary) {
     this.spriteSheet = sprites.get("bottle");
@@ -30,15 +29,19 @@ export class BeerBottle implements GameItem {
   }
 
   empty() {
-    this.type = BeerType.empty;
+    this.full = false;
   }
 
   isEmpty(): boolean {
-    return this.type === BeerType.empty;
+    return !this.full;
   }
 
   getSprite(): Sprite {
-    return this.spriteSheet.getSprite([1, this.type]);
+    if (this.full) {
+      return this.spriteSheet.getSprite([1, this.type]);
+    } else {
+      return this.spriteSheet.getSprite([1, 0]);
+    }
   }
 
   combine(item: GameItem): GameItem[] {
