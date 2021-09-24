@@ -6,7 +6,7 @@ import table from "./sprites/table.png";
 import fridge from "./sprites/fridge.png";
 import beerCabinet from "./sprites/beer-cabinet.png";
 import slot from "./sprites/slot.png";
-import beer from "./sprites/beer.png";
+import beerLg from "./sprites/beer-lg.png";
 import bottle from "./sprites/bottle.png";
 import { Coord } from "./Coord";
 import { SpriteSheet } from "./SpriteSheet";
@@ -36,7 +36,7 @@ export class SpriteLibrary {
 
       'slot': new SpriteSheet(await loadImage(slot), { size: [20, 20], colsRows: [2, 1] }),
 
-      'beer': new SpriteSheet(await loadImage(beer), { size: [16, 16], colsRows: [2, 1] }),
+      'beer-lg': new SpriteSheet(await loadImage(beerLg), { size: [16, 16], colsRows: [5, 1] }),
       'bottle': new SpriteSheet(await loadImage(bottle), { size: [16, 16], colsRows: [2, 3] }),
     };
   }

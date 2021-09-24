@@ -4,7 +4,7 @@ import { Inventory } from "./Inventory";
 import { PixelScreen } from "./PixelScreen";
 import { Sprite } from "./Sprite";
 import { SpriteLibrary } from "./SpriteLibrary";
-import { BeerGlass } from "./items/BeerGlass";
+import { BeerGlass, BeerLevel } from "./items/BeerGlass";
 
 export class BeerCabinet implements GameObject {
   private sprite: Sprite;
@@ -15,10 +15,10 @@ export class BeerCabinet implements GameObject {
     this.inventory = new Inventory({
       size: [3, 3],
       items: [
-        new BeerGlass(sprites),
-        new BeerGlass(sprites),
-        new BeerGlass(sprites),
-        new BeerGlass(sprites),
+        new BeerGlass(BeerLevel.empty, sprites),
+        new BeerGlass(BeerLevel.half, sprites),
+        new BeerGlass(BeerLevel.almostFull, sprites),
+        new BeerGlass(BeerLevel.full, sprites),
       ],
     });
   }

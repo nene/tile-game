@@ -1,12 +1,21 @@
 import { Sprite } from "../Sprite";
 import { SpriteLibrary } from "../SpriteLibrary";
+import { SpriteSheet } from "../SpriteSheet";
 import { GameItem } from "./GameItem";
 
-export class BeerGlass implements GameItem {
-  private sprite: Sprite;
+export enum BeerLevel {
+  empty = 0,
+  almostEmpty = 1,
+  half = 2,
+  almostFull = 3,
+  full = 4,
+}
 
-  constructor(sprites: SpriteLibrary) {
-    this.sprite = sprites.get("beer").getSprite([1, 0]);
+export class BeerGlass implements GameItem {
+  private spriteSheet: SpriteSheet;
+
+  constructor(private level: BeerLevel, sprites: SpriteLibrary) {
+    this.spriteSheet = sprites.get("beer-lg");
   }
 
   getName() {
@@ -14,6 +23,6 @@ export class BeerGlass implements GameItem {
   }
 
   getSprite(): Sprite {
-    return this.sprite;
+    return this.spriteSheet.getSprite([this.level, 0]);
   }
 }
