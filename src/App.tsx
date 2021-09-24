@@ -34,6 +34,9 @@ export function App() {
       canvas.addEventListener("click", (e) => {
         events.onClick(mouseCoordRelativeTo(e, canvas));
       });
+      canvas.addEventListener("mousemove", (e) => {
+        events.onHover(mouseCoordRelativeTo(e, canvas));
+      });
     };
     game();
   }, []);

@@ -58,6 +58,12 @@ export async function runGame(ctx: CanvasRenderingContext2D) {
         obj.onInteract(inventoryController);
       }
     },
+    onHover: ([x, y]: Coord) => {
+      const screenCoord: Coord = [Math.floor(x / PIXEL_SCALE), Math.floor(y / PIXEL_SCALE)];
+      if (inventoryController.handleHover(screenCoord)) {
+        return; // The click was handled by UI
+      }
+    },
   };
 }
 

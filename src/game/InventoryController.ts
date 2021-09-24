@@ -3,12 +3,15 @@ import { PixelScreen } from "./PixelScreen";
 import { SpriteLibrary } from "./SpriteLibrary";
 import { InventoryView } from "./InventoryView";
 import { UiController } from "./GameObject";
-import { Coord } from "./Coord";
+import { Coord, coordSub } from "./Coord";
+import { GameItem } from "./items/GameItem";
 
 export class InventoryController implements UiController {
   private playerInventoryView: InventoryView;
   private objectInventory?: Inventory;
   private objectInventoryView?: InventoryView;
+  private mouseCoord: Coord = [0, 0];
+  private selectedItem?: GameItem;
 
   constructor(private playerInventory: Inventory, private sprites: SpriteLibrary) {
     this.playerInventoryView = new InventoryView(playerInventory, [107, 200 - 22], sprites);
@@ -30,16 +33,19 @@ export class InventoryController implements UiController {
       this.objectInventoryView.paint(screen);
     }
     this.playerInventoryView.paint(screen);
+    if (this.selectedItem) {
+      screen.drawSprite(this.selectedItem.getSprite(), coordSub(this.mouseCoord, [8, 8]), { fixed: true });
+    }
   }
 
   handleClick(screenCoord: Coord): boolean {
     if (this.playerInventoryView.isCoordInView(screenCoord)) {
-      this.handlePlayerInventoryClick(screenCoord);
+      this.handleInventoryClick(screenCoord, this.playerInventory, this.playerInventoryView);
       return true;
     }
-    else if (this.objectInventoryView) {
+    else if (this.objectInventory && this.objectInventoryView) {
       if (this.objectInventoryView.isCoordInView(screenCoord)) {
-        this.handleObjectInventoryClick(screenCoord);
+        this.handleInventoryClick(screenCoord, this.objectInventory, this.objectInventoryView);
       } else {
         this.hideInventory();
       }
@@ -48,19 +54,28 @@ export class InventoryController implements UiController {
     return false;
   }
 
-  private handlePlayerInventoryClick(screenCoord: Coord) {
-    const item = this.playerInventoryView.getItemAtCoord(screenCoord);
-    if (item && this.objectInventory && !this.objectInventory.isFull()) {
-      this.playerInventory.remove(item);
-      this.objectInventory.add(item);
-    }
+  handleHover(screenCoord: Coord): boolean {
+    this.mouseCoord = screenCoord;
+    return true;
   }
 
-  private handleObjectInventoryClick(screenCoord: Coord) {
-    const item = this.objectInventoryView?.getItemAtCoord(screenCoord);
-    if (item && !this.playerInventory.isFull()) {
-      this.objectInventory?.remove(item);
-      this.playerInventory.add(item);
+  private handleInventoryClick(coord: Coord, inventory: Inventory, inventoryView: InventoryView) {
+    const item = inventoryView.getItemAtCoord(coord);
+    if (item && !this.selectedItem) {
+      // Take item from inventory
+      inventory.remove(item);
+      this.selectedItem = item;
+    }
+    else if (!item && this.selectedItem && !inventory.isFull()) {
+      // Place item at hand to inventory
+      inventory.add(this.selectedItem);
+      this.selectedItem = undefined;
+    }
+    else if (item && this.selectedItem) {
+      // Swap item at hand with item in inventory
+      inventory.remove(item);
+      inventory.add(this.selectedItem);
+      this.selectedItem = item;
     }
   }
 }
