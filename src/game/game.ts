@@ -10,7 +10,15 @@ import { InventoryController } from "./InventoryController";
 
 const PIXEL_SCALE = 4;
 
-export async function runGame(ctx: CanvasRenderingContext2D) {
+export interface GameApi {
+  onKeyDown: (key: string) => boolean;
+  onKeyUp: (key: string) => boolean;
+  onClick: (coord: Coord) => void;
+  onHover: (coord: Coord) => void;
+  cleanup: () => void;
+}
+
+export async function runGame(ctx: CanvasRenderingContext2D): Promise<GameApi> {
   const screen = new PixelScreen(ctx, { width: 320, height: 200, scale: PIXEL_SCALE });
   let screenNeedsRepaint = true;
 
@@ -29,13 +37,13 @@ export async function runGame(ctx: CanvasRenderingContext2D) {
 
   const inventoryController = new InventoryController(player.getInventory(), sprites);
 
-  gameLoop(() => {
+  const cleanupGameLoop = gameLoop(() => {
     world.allObjects().forEach((obj) => obj.tick(world));
     world.sortObjects();
     screenNeedsRepaint = true;
   });
 
-  paintLoop(() => {
+  const cleanupPaintLoop = paintLoop(() => {
     if (!screenNeedsRepaint) {
       return; // Don't paint when app state hasn't changed
     }
@@ -74,26 +82,41 @@ export async function runGame(ctx: CanvasRenderingContext2D) {
         return; // The click was handled by UI
       }
     },
+    cleanup: () => {
+      cleanupGameLoop();
+      cleanupPaintLoop();
+    },
   };
 }
 
+type CleanupFn = () => void;
+
 // setInterval() will fire about 1x per second when in background tab
-function gameLoop(onTick: () => void) {
+function gameLoop(onTick: () => void): CleanupFn {
   const duration = 100;
   let prevTime = Date.now();
-  setInterval(() => {
+
+  const intervalHandle = setInterval(() => {
     const time = Date.now();
     while (prevTime + duration < time) {
       onTick();
       prevTime += duration;
     }
   }, duration / 2);
+
+  return () => clearInterval(intervalHandle);
 }
 
-function paintLoop(onPaint: (time: number) => void) {
+function paintLoop(onPaint: (time: number) => void): CleanupFn {
+  let running = true;
+
   function paint(time: number) {
     onPaint(time);
-    window.requestAnimationFrame(paint);
+    if (running) {
+      window.requestAnimationFrame(paint);
+    }
   }
   window.requestAnimationFrame(paint);
+
+  return () => { running = false; };
 }
