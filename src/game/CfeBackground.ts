@@ -7,8 +7,8 @@ import { SpriteSheet } from "./SpriteSheet";
 export class CfeBackground implements GameLocationBackground {
   private bgSprites: SpriteSheet;
 
-  constructor(private grid: GameGrid, sprites: SpriteLibrary) {
-    this.bgSprites = sprites.get('cfe-bg');
+  constructor(private grid: GameGrid) {
+    this.bgSprites = SpriteLibrary.get('cfe-bg');
   }
 
   paint(screen: PixelScreen) {

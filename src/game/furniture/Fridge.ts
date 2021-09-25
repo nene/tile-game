@@ -11,20 +11,20 @@ export class Fridge implements GameObject {
   private sprite: Sprite;
   private inventory: Inventory;
 
-  constructor(private coord: Coord, sprites: SpriteLibrary) {
-    this.sprite = sprites.get("fridge").getSprite([0, 0]);
+  constructor(private coord: Coord) {
+    this.sprite = SpriteLibrary.get("fridge").getSprite([0, 0]);
     this.inventory = new Inventory({
       size: [3, 3],
       items: [
-        new BeerBottle(BeerType.alexander, sprites),
-        new BeerBottle(BeerType.alexander, sprites),
-        new BeerBottle(BeerType.alexander, sprites),
-        new BeerBottle(BeerType.heineken, sprites),
-        new BeerBottle(BeerType.heineken, sprites),
-        new BeerBottle(BeerType.heineken, sprites),
-        new BeerBottle(BeerType.special, sprites),
-        new BeerBottle(BeerType.special, sprites),
-        new BeerBottle(BeerType.special, sprites),
+        new BeerBottle(BeerType.alexander),
+        new BeerBottle(BeerType.alexander),
+        new BeerBottle(BeerType.alexander),
+        new BeerBottle(BeerType.heineken),
+        new BeerBottle(BeerType.heineken),
+        new BeerBottle(BeerType.heineken),
+        new BeerBottle(BeerType.special),
+        new BeerBottle(BeerType.special),
+        new BeerBottle(BeerType.special),
       ],
     });
   }

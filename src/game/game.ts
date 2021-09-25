@@ -23,19 +23,18 @@ export async function runGame(ctx: CanvasRenderingContext2D): Promise<GameApi> {
   const screen = new PixelScreen(ctx, { width: 320, height: 200, scale: PIXEL_SCALE });
   let screenNeedsRepaint = true;
 
-  const sprites = new SpriteLibrary();
-  await sprites.load();
+  await SpriteLibrary.load();
   await SoundLibrary.load();
 
-  const location = new CfeLocation(sprites);
+  const location = new CfeLocation();
   const background = new Background(location.getBackground());
 
   const world = new GameWorld(location);
 
-  const player = new Player(sprites, [32, 64]);
+  const player = new Player([32, 64]);
   world.add(player);
 
-  const uiController = new UiController(player.getInventory(), sprites);
+  const uiController = new UiController(player.getInventory());
 
   const loops = new Loops();
   loops.runGameLoop(() => {

@@ -7,8 +7,8 @@ import { GameItem } from "./GameItem";
 export class BottleOpener implements GameItem {
   private sprite: Sprite;
 
-  constructor(sprites: SpriteLibrary) {
-    this.sprite = sprites.get("bottle-opener").getSprite([0, 0]);
+  constructor() {
+    this.sprite = SpriteLibrary.get("bottle-opener").getSprite([0, 0]);
   }
 
   getName() {

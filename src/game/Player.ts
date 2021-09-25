@@ -26,23 +26,23 @@ export class Player implements GameObject {
   private animation: SpriteAnimation;
   private inventory = new Inventory({ size: [5, 1] });
 
-  constructor(sprites: SpriteLibrary, coord: Coord) {
+  constructor(coord: Coord) {
     this.coord = coord;
     this.speed = [0, 0];
 
-    this.standForward = new SpriteAnimation(sprites.get("cfe-reb"), { frames: [[0, 0]] });
-    this.standBack = new SpriteAnimation(sprites.get("cfe-reb"), { frames: [[0, 0]] });
-    this.standRight = new SpriteAnimation(sprites.get("cfe-reb"), { frames: [[0, 0]] });
-    this.standLeft = new SpriteAnimation(sprites.get("cfe-reb"), { frames: [[0, 0]] });
+    this.standForward = new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: [[0, 0]] });
+    this.standBack = new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: [[0, 0]] });
+    this.standRight = new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: [[0, 0]] });
+    this.standLeft = new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: [[0, 0]] });
 
-    this.walkForward = new SpriteAnimation(sprites.get("cfe-reb"), { frames: { from: [0, 0], to: [0, 0] } });
-    this.walkBack = new SpriteAnimation(sprites.get("cfe-reb"), { frames: { from: [0, 0], to: [0, 0] } });
-    this.walkRight = new SpriteAnimation(sprites.get("cfe-reb"), { frames: { from: [0, 0], to: [0, 0] } });
-    this.walkLeft = new SpriteAnimation(sprites.get("cfe-reb"), { frames: { from: [0, 0], to: [0, 0] } });
+    this.walkForward = new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: { from: [0, 0], to: [0, 0] } });
+    this.walkBack = new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: { from: [0, 0], to: [0, 0] } });
+    this.walkRight = new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: { from: [0, 0], to: [0, 0] } });
+    this.walkLeft = new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: { from: [0, 0], to: [0, 0] } });
 
     this.animation = this.standRight;
 
-    this.inventory.add(new BottleOpener(sprites));
+    this.inventory.add(new BottleOpener());
   }
 
   getInventory() {

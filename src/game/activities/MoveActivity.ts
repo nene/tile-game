@@ -9,8 +9,8 @@ export class MoveActivity implements Activity {
   private path?: Coord[];
   private animation: SpriteAnimation;
 
-  constructor(private coord: Coord, private destination: Coord, type: 0 | 1 | 2, sprites: SpriteLibrary) {
-    this.animation = new SpriteAnimation(sprites.get("cfe-ksv"), {
+  constructor(private coord: Coord, private destination: Coord, type: 0 | 1 | 2) {
+    this.animation = new SpriteAnimation(SpriteLibrary.get("cfe-ksv"), {
       frames: [[type, 0]],
     });
   }

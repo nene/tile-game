@@ -7,8 +7,8 @@ import { SpriteLibrary } from "../SpriteLibrary";
 export class Table implements GameObject {
   private sprite: Sprite;
 
-  constructor(private coord: Coord, sprites: SpriteLibrary) {
-    this.sprite = sprites.get("table").getSprite([0, 0]);
+  constructor(private coord: Coord) {
+    this.sprite = SpriteLibrary.get("table").getSprite([0, 0]);
   }
 
   tick() { }

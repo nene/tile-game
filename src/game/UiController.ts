@@ -16,9 +16,9 @@ export class UiController {
   private hoveredItem?: GameItem;
   private cursor: Sprite;
 
-  constructor(private playerInventory: Inventory, private sprites: SpriteLibrary) {
-    this.playerInventoryView = new InventoryView(playerInventory, [107, 200 - 22], sprites);
-    this.cursor = sprites.get("cursor").getSprite([0, 0]);
+  constructor(private playerInventory: Inventory) {
+    this.playerInventoryView = new InventoryView(playerInventory, [107, 200 - 22]);
+    this.cursor = SpriteLibrary.get("cursor").getSprite([0, 0]);
   }
 
   getSelectedItem(): GameItem | undefined {
@@ -31,7 +31,7 @@ export class UiController {
 
   showInventory(inventory: Inventory) {
     this.objectInventory = inventory;
-    this.objectInventoryView = new InventoryView(inventory, [130, 50], this.sprites);
+    this.objectInventoryView = new InventoryView(inventory, [130, 50]);
   }
 
   hideInventory() {

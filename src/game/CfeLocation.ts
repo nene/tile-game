@@ -6,7 +6,6 @@ import { Fridge } from "./furniture/Fridge";
 import { GameGrid } from "./GameGrid";
 import { GameLocation } from "./GameLocation";
 import { GameObject } from "./GameObject";
-import { SpriteLibrary } from "./SpriteLibrary";
 import { Table } from "./furniture/Table";
 import { Wall } from "./furniture/Wall";
 
@@ -17,10 +16,10 @@ export class CfeLocation implements GameLocation {
   private grid: GameGrid;
   private staticObjects: GameObject[];
 
-  constructor(private sprites: SpriteLibrary) {
+  constructor() {
     this.grid = new GameGrid({ gridSize: CFE_SIZE, tileSize: [16, 16] });
 
-    this.background = new CfeBackground(this.grid, sprites);
+    this.background = new CfeBackground(this.grid);
 
     this.staticObjects = this.createStaticObjects();
   }
@@ -31,16 +30,16 @@ export class CfeLocation implements GameLocation {
     // simplistic room plan
     this.grid.forEachTile(([x, y]) => {
       if (y === 0) {
-        objects.push(new Wall(this.grid.tileToScreenCoord([x, y]), this.sprites));
+        objects.push(new Wall(this.grid.tileToScreenCoord([x, y])));
       }
     });
 
     // A table
-    objects.push(new Table(this.grid.tileToScreenCoord([2, 8]), this.sprites));
+    objects.push(new Table(this.grid.tileToScreenCoord([2, 8])));
     // A fridge
-    objects.push(new Fridge(this.grid.tileToScreenCoord([3, 3]), this.sprites));
+    objects.push(new Fridge(this.grid.tileToScreenCoord([3, 3])));
     // A storage of beer glasses
-    objects.push(new BeerCabinet(this.grid.tileToScreenCoord([5, 3]), this.sprites));
+    objects.push(new BeerCabinet(this.grid.tileToScreenCoord([5, 3])));
 
     return objects;
   }
@@ -66,7 +65,7 @@ export class CfeLocation implements GameLocation {
   }
 
   private spawnBursh(coord: Coord, spriteType: 0 | 1 | 2, name: string): Bursh {
-    const bursh = new Bursh(coord, this.sprites, { spriteType, name });
+    const bursh = new Bursh(coord, { spriteType, name });
     const table = this.staticObjects.find((obj) => obj instanceof Table) as Table;
     const chairOffset = coordAdd([8, -8], [spriteType * 16, 0]);
     bursh.moveTo(coordAdd(table.getCoord(), chairOffset));

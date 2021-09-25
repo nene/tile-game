@@ -11,17 +11,17 @@ export class BeerCabinet implements GameObject {
   private sprite: Sprite;
   private inventory: Inventory;
 
-  constructor(private coord: Coord, sprites: SpriteLibrary) {
-    this.sprite = sprites.get("beer-cabinet").getSprite([0, 0]);
+  constructor(private coord: Coord) {
+    this.sprite = SpriteLibrary.get("beer-cabinet").getSprite([0, 0]);
     this.inventory = new Inventory({
       size: [3, 3],
       items: [
-        new BeerGlass(BeerLevel.empty, sprites),
-        new BeerGlass(BeerLevel.empty, sprites),
-        new BeerGlass(BeerLevel.empty, sprites),
-        new BeerGlass(BeerLevel.empty, sprites),
-        new BeerGlass(BeerLevel.empty, sprites),
-        new BeerGlass(BeerLevel.empty, sprites),
+        new BeerGlass(BeerLevel.empty),
+        new BeerGlass(BeerLevel.empty),
+        new BeerGlass(BeerLevel.empty),
+        new BeerGlass(BeerLevel.empty),
+        new BeerGlass(BeerLevel.empty),
+        new BeerGlass(BeerLevel.empty),
       ],
     });
   }

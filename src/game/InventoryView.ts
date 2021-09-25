@@ -8,8 +8,8 @@ export class InventoryView {
   private slotSprites: SpriteSheet;
   private rect: Rect;
 
-  constructor(private inventory: Inventory, private coord: Coord, sprites: SpriteLibrary) {
-    this.slotSprites = sprites.get("slot");
+  constructor(private inventory: Inventory, private coord: Coord) {
+    this.slotSprites = SpriteLibrary.get("slot");
     this.rect = { coord, size: coordAdd([1, 1], coordMul([21, 21], inventory.size())) };
   }
 

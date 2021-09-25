@@ -6,7 +6,6 @@ import { Activity } from "./activities/Activity";
 import { MoveActivity } from "./activities/MoveActivity";
 import { PixelScreen } from "./PixelScreen";
 import { Sprite } from "./Sprite";
-import { SpriteLibrary } from "./SpriteLibrary";
 import { DrinkActivity } from "./activities/DrinkActivity";
 import { UiController } from "./UiController";
 import { BeerGlass } from "./items/BeerGlass";
@@ -22,14 +21,14 @@ export class Bursh implements GameObject {
   private activities: Activity[] = [];
   private sprites: Sprite[] = [];
 
-  constructor(private coord: Coord, private spriteLib: SpriteLibrary, cfg: BurshConfig) {
+  constructor(private coord: Coord, cfg: BurshConfig) {
     this.type = cfg.spriteType;
     this.name = cfg.name;
   }
 
   moveTo(destination: Coord) {
-    this.activities.push(new MoveActivity(this.coord, destination, this.type, this.spriteLib));
-    this.activities.push(new CallFuxActivity(this.type, this.spriteLib));
+    this.activities.push(new MoveActivity(this.coord, destination, this.type));
+    this.activities.push(new CallFuxActivity(this.type));
   }
 
   tick(world: GameWorld) {
@@ -77,7 +76,7 @@ export class Bursh implements GameObject {
     const item = uiController.getSelectedItem();
     if (item instanceof BeerGlass) {
       uiController.removeSelectedItem();
-      this.activities.unshift(new DrinkActivity(item, this.spriteLib));
+      this.activities.unshift(new DrinkActivity(item));
     } else {
       console.log("You talked to " + this.name);
     }

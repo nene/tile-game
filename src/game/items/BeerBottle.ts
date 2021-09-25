@@ -27,8 +27,8 @@ export class BeerBottle implements GameItem {
   private full = true;
   private capState = CapState.closed;
 
-  constructor(private type: BeerType, sprites: SpriteLibrary) {
-    this.spriteSheet = sprites.get("bottle");
+  constructor(private type: BeerType) {
+    this.spriteSheet = SpriteLibrary.get("bottle");
   }
 
   getName() {

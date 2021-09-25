@@ -9,9 +9,9 @@ export class DrinkActivity implements Activity {
   private sprite: Sprite;
   private handSprite: Sprite;
 
-  constructor(private beer: BeerGlass, sprites: SpriteLibrary) {
-    this.sprite = sprites.get("cfe-ksv-drinking").getSprite([0, 0]);
-    this.handSprite = sprites.get("cfe-ksv-hand").getSprite([0, 0]);
+  constructor(private beer: BeerGlass) {
+    this.sprite = SpriteLibrary.get("cfe-ksv-drinking").getSprite([0, 0]);
+    this.handSprite = SpriteLibrary.get("cfe-ksv-hand").getSprite([0, 0]);
   }
 
   tick(): ActivityUpdates {

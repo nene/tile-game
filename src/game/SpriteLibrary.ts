@@ -21,9 +21,9 @@ const PLAYER_SIZE: Coord = [16, 32];
 const PLAYER_OFFSET: Coord = [-8, -30];
 
 export class SpriteLibrary {
-  private sprites: Record<string, SpriteSheet> = {};
+  private static sprites: Record<string, SpriteSheet> = {};
 
-  async load() {
+  public static async load() {
     const cfeBgImage = await loadImage(cfeBg);
 
     this.sprites = {
@@ -51,7 +51,7 @@ export class SpriteLibrary {
     };
   }
 
-  get(name: string): SpriteSheet {
+  public static get(name: string): SpriteSheet {
     return this.sprites[name];
   }
 }
