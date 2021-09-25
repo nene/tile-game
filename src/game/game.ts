@@ -33,7 +33,7 @@ export async function runGame(ctx: CanvasRenderingContext2D): Promise<GameApi> {
 
   const world = new GameWorld(location);
 
-  const player = new Player(sprites, [32, 64]);
+  const player = new Player(sprites, sounds, [32, 64]);
   world.add(player);
 
   const uiController = new UiController(player.getInventory(), sprites);
