@@ -9,6 +9,7 @@ import { Sprite } from "./Sprite";
 import { DrinkActivity } from "./activities/DrinkActivity";
 import { UiController } from "./UiController";
 import { BeerGlass } from "./items/BeerGlass";
+import { Dialog } from "./Dialog";
 
 export enum BurshType {
   gray = "cfe-ksv-1",
@@ -30,6 +31,10 @@ export class Bursh implements GameObject {
   constructor(private coord: Coord, cfg: BurshConfig) {
     this.type = cfg.type;
     this.name = cfg.name;
+  }
+
+  getName() {
+    return this.name;
   }
 
   moveTo(destination: Coord) {
@@ -84,7 +89,7 @@ export class Bursh implements GameObject {
       uiController.removeSelectedItem();
       this.activities.unshift(new DrinkActivity(item, this.type));
     } else {
-      console.log("You talked to " + this.name);
+      uiController.showDialog(new Dialog(this, "Tere, uus rebane!\n\nKüll on tore, et sa meiega liitusid."));
     }
   }
 }

@@ -6,6 +6,7 @@ import { Coord, coordAdd, coordSub } from "./Coord";
 import { GameItem } from "./items/GameItem";
 import { Sprite } from "./Sprite";
 import { debounce } from "lodash";
+import { Dialog } from "./Dialog";
 
 export class UiController {
   private playerInventoryView: InventoryView;
@@ -15,6 +16,7 @@ export class UiController {
   private selectedItem?: GameItem;
   private hoveredItem?: GameItem;
   private cursor: Sprite;
+  private dialog?: Dialog;
 
   constructor(private playerInventory: Inventory) {
     this.playerInventoryView = new InventoryView(playerInventory, [107, 200 - 22]);
@@ -41,10 +43,17 @@ export class UiController {
 
   paint(screen: PixelScreen) {
     if (this.objectInventoryView) {
-      screen.drawRect({ coord: [0, 0], size: [320, 200] }, "rgba(0,0,0,0.5)", { fixed: true });
+      this.drawOverlay(screen);
       this.objectInventoryView.paint(screen);
     }
-    this.playerInventoryView.paint(screen);
+
+    if (this.dialog) {
+      this.drawOverlay(screen);
+      this.dialog.paint(screen);
+    } else {
+      this.playerInventoryView.paint(screen);
+    }
+
     if (this.selectedItem) {
       screen.drawSprite(this.selectedItem.getSprite(), coordSub(this.mouseCoord, [8, 8]), { fixed: true });
     }
@@ -55,10 +64,20 @@ export class UiController {
     screen.drawSprite(this.cursor, this.mouseCoord, { fixed: true });
   }
 
+  drawOverlay(screen: PixelScreen) {
+    screen.drawRect({ coord: [0, 0], size: [320, 200] }, "rgba(0,0,0,0.5)", { fixed: true });
+  }
+
   handleClick(screenCoord: Coord): boolean {
     this.hoveredItem = undefined;
 
-    if (this.playerInventoryView.isCoordInView(screenCoord)) {
+    if (this.dialog) {
+      if (this.dialog.isCoordInView(screenCoord)) {
+        this.dialog = undefined; // Close the dialog
+      }
+      return true;
+    }
+    else if (this.playerInventoryView.isCoordInView(screenCoord)) {
       this.handleInventoryClick(screenCoord, this.playerInventory, this.playerInventoryView);
       return true;
     }
@@ -135,5 +154,9 @@ export class UiController {
         this.selectedItem = item;
       }
     }
+  }
+
+  showDialog(dialog: Dialog) {
+    this.dialog = dialog;
   }
 }
