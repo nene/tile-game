@@ -2,6 +2,8 @@ import { Activity, ActivityUpdates } from "./Activity";
 import { Sprite } from "../Sprite";
 import { SpriteLibrary } from "../SpriteLibrary";
 import { BeerGlass, BeerLevel } from "../items/BeerGlass";
+import { BurshType } from "../Bursh";
+import { coordAdd } from "../Coord";
 
 export class DrinkActivity implements Activity {
   private ticks = 0;
@@ -9,9 +11,9 @@ export class DrinkActivity implements Activity {
   private sprite: Sprite;
   private handSprite: Sprite;
 
-  constructor(private beer: BeerGlass) {
-    this.sprite = SpriteLibrary.get("cfe-ksv-drinking").getSprite([0, 0]);
-    this.handSprite = SpriteLibrary.get("cfe-ksv-hand").getSprite([0, 0]);
+  constructor(private beer: BeerGlass, type: BurshType) {
+    this.sprite = SpriteLibrary.get(type).getSprite([1, 0]);
+    this.handSprite = SpriteLibrary.get(type).getSprite([2, 0]);
   }
 
   tick(): ActivityUpdates {
@@ -30,8 +32,11 @@ export class DrinkActivity implements Activity {
   }
 
   private getHandSprite(): Sprite {
-    this.handSprite.offset = this.isHandUp && this.beer.getLevel() !== BeerLevel.empty ? [-8, -15] : [-8, -13];
-    return this.handSprite;
+    if (this.isHandUp && this.beer.getLevel() !== BeerLevel.empty) {
+      return { ...this.handSprite, offset: coordAdd(this.handSprite.offset, [0, -2]) }
+    } else {
+      return this.handSprite;
+    }
   }
 
   private getBeerSprite(): Sprite {

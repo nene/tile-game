@@ -1,3 +1,4 @@
+import { BurshType } from "../Bursh";
 import { Coord, coordEq, coordMul, coordUnit, coordSub, coordAdd } from "../Coord";
 import { GameWorld } from "../GameWorld";
 import { SpriteAnimation } from "../SpriteAnimation";
@@ -9,9 +10,9 @@ export class MoveActivity implements Activity {
   private path?: Coord[];
   private animation: SpriteAnimation;
 
-  constructor(private coord: Coord, private destination: Coord, type: 0 | 1 | 2) {
-    this.animation = new SpriteAnimation(SpriteLibrary.get("cfe-ksv"), {
-      frames: [[type, 0]],
+  constructor(private coord: Coord, private destination: Coord, type: BurshType) {
+    this.animation = new SpriteAnimation(SpriteLibrary.get(type), {
+      frames: [[0, 0]],
     });
   }
 

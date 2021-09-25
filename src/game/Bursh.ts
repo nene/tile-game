@@ -10,19 +10,25 @@ import { DrinkActivity } from "./activities/DrinkActivity";
 import { UiController } from "./UiController";
 import { BeerGlass } from "./items/BeerGlass";
 
+export enum BurshType {
+  gray = "cfe-ksv-1",
+  brown = "cfe-ksv-2",
+  blue = "cfe-ksv-3",
+}
+
 interface BurshConfig {
-  spriteType: 0 | 1 | 2;
+  type: BurshType;
   name: string;
 }
 
 export class Bursh implements GameObject {
-  private type: 0 | 1 | 2;
+  private type: BurshType;
   private name: string;
   private activities: Activity[] = [];
   private sprites: Sprite[] = [];
 
   constructor(private coord: Coord, cfg: BurshConfig) {
-    this.type = cfg.spriteType;
+    this.type = cfg.type;
     this.name = cfg.name;
   }
 
@@ -76,7 +82,7 @@ export class Bursh implements GameObject {
     const item = uiController.getSelectedItem();
     if (item instanceof BeerGlass) {
       uiController.removeSelectedItem();
-      this.activities.unshift(new DrinkActivity(item));
+      this.activities.unshift(new DrinkActivity(item, this.type));
     } else {
       console.log("You talked to " + this.name);
     }

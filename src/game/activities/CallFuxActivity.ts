@@ -2,14 +2,15 @@ import { coordAdd } from "../Coord";
 import { Activity, ActivityUpdates } from "./Activity";
 import { Sprite } from "../Sprite";
 import { SpriteLibrary } from "../SpriteLibrary";
+import { BurshType } from "../Bursh";
 
 export class CallFuxActivity implements Activity {
   private counter = 0;
   private sprite: Sprite;
   private calloutSprite: Sprite;
 
-  constructor(type: 0 | 1 | 2) {
-    this.sprite = SpriteLibrary.get("cfe-ksv").getSprite([type, 0]);
+  constructor(type: BurshType) {
+    this.sprite = SpriteLibrary.get(type).getSprite([0, 0]);
     this.calloutSprite = SpriteLibrary.get("callout").getSprite([0, 0]);
     // Place above the head
     this.calloutSprite.offset = coordAdd(this.calloutSprite.offset, [0, -32]);

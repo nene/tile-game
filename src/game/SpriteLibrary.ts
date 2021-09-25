@@ -1,8 +1,8 @@
 import cfeBg from "./sprites/cfe-bg.png";
 import cfeReb from "./sprites/cfe-reb.png";
-import cfeKsv from "./sprites/cfe-ksv.png";
-import cfeKsvDrinking from "./sprites/cfe-ksv-drinking.png";
-import cfeKsvHand from "./sprites/cfe-ksv-hand.png";
+import cfeKsv1 from "./sprites/cfe-ksv-1.png";
+import cfeKsv2 from "./sprites/cfe-ksv-2.png";
+import cfeKsv3 from "./sprites/cfe-ksv-3.png";
 import callout from "./sprites/callout.png";
 import table from "./sprites/table.png";
 import fridge from "./sprites/fridge.png";
@@ -29,9 +29,9 @@ const imageFiles = {
 
   'cfe-reb': spriteDef({ src: cfeReb, cfg: { size: PLAYER_SIZE, colsRows: [4, 4], offset: PLAYER_OFFSET } }),
 
-  'cfe-ksv': spriteDef({ src: cfeKsv, cfg: { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET } }),
-  'cfe-ksv-drinking': spriteDef({ src: cfeKsvDrinking, cfg: { size: PLAYER_SIZE, colsRows: [1, 1], offset: PLAYER_OFFSET } }),
-  'cfe-ksv-hand': spriteDef({ src: cfeKsvHand, cfg: { size: [7, 6], colsRows: [1, 1] } }),
+  'cfe-ksv-1': spriteDef({ src: cfeKsv1, cfg: { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET } }),
+  'cfe-ksv-2': spriteDef({ src: cfeKsv2, cfg: { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET } }),
+  'cfe-ksv-3': spriteDef({ src: cfeKsv3, cfg: { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET } }),
   'callout': spriteDef({ src: callout, cfg: { size: [26, 14], colsRows: [1, 1], offset: [-10, -13] } }),
 
   'table': spriteDef({ src: table, cfg: { size: [64, 22], colsRows: [1, 1], offset: [0, -6] } }),
