@@ -5,6 +5,7 @@ import { SpriteAnimation } from "./SpriteAnimation";
 import { GameWorld } from "./GameWorld";
 import { SpriteLibrary } from "./SpriteLibrary";
 import { Inventory } from "./Inventory";
+import { BottleOpener } from "./items/BottleOpener";
 
 const max = Math.max;
 const min = Math.min;
@@ -40,6 +41,8 @@ export class Player implements GameObject {
     this.walkLeft = new SpriteAnimation(sprites.get("cfe-reb"), { frames: { from: [0, 0], to: [0, 0] } });
 
     this.animation = this.standRight;
+
+    this.inventory.add(new BottleOpener(sprites));
   }
 
   getInventory() {

@@ -23,7 +23,7 @@ export class BeerGlass implements GameItem {
   }
 
   combine(item: GameItem): GameItem[] {
-    if (item instanceof BeerBottle && !item.isEmpty() && this.level === BeerLevel.empty) {
+    if (item instanceof BeerBottle && !item.isEmpty() && item.isOpen() && this.level === BeerLevel.empty) {
       item.empty();
       this.fill();
       this.sounds.play("pouring-beer");

@@ -12,6 +12,7 @@ import cursor from "./sprites/cursor.png";
 import beerLg from "./sprites/beer-lg.png";
 import beerSm from "./sprites/beer-sm.png";
 import bottle from "./sprites/bottle.png";
+import bottleOpener from "./sprites/bottle-opener.png";
 import { Coord } from "./Coord";
 import { SpriteSheet } from "./SpriteSheet";
 import { loadImage } from "./loadImage";
@@ -45,7 +46,8 @@ export class SpriteLibrary {
 
       'beer-lg': new SpriteSheet(await loadImage(beerLg), { size: [16, 16], colsRows: [5, 1] }),
       'beer-sm': new SpriteSheet(await loadImage(beerSm), { size: [10, 10], colsRows: [5, 1] }),
-      'bottle': new SpriteSheet(await loadImage(bottle), { size: [16, 16], colsRows: [2, 4] }),
+      'bottle': new SpriteSheet(await loadImage(bottle), { size: [16, 16], colsRows: [3, 4] }),
+      'bottle-opener': new SpriteSheet(await loadImage(bottleOpener), { size: [16, 16], colsRows: [1, 1] }),
     };
   }
 
