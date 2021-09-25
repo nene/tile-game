@@ -6,7 +6,6 @@ import { GameWorld } from "./GameWorld";
 import { SpriteLibrary } from "./SpriteLibrary";
 import { Inventory } from "./Inventory";
 import { BottleOpener } from "./items/BottleOpener";
-import { SoundLibrary } from "./SoundLibrary";
 
 const max = Math.max;
 const min = Math.min;
@@ -27,7 +26,7 @@ export class Player implements GameObject {
   private animation: SpriteAnimation;
   private inventory = new Inventory({ size: [5, 1] });
 
-  constructor(sprites: SpriteLibrary, sounds: SoundLibrary, coord: Coord) {
+  constructor(sprites: SpriteLibrary, coord: Coord) {
     this.coord = coord;
     this.speed = [0, 0];
 
@@ -43,7 +42,7 @@ export class Player implements GameObject {
 
     this.animation = this.standRight;
 
-    this.inventory.add(new BottleOpener(sprites, sounds));
+    this.inventory.add(new BottleOpener(sprites));
   }
 
   getInventory() {

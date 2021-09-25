@@ -7,7 +7,7 @@ import { GameItem } from "./GameItem";
 export class BottleOpener implements GameItem {
   private sprite: Sprite;
 
-  constructor(sprites: SpriteLibrary, private sounds: SoundLibrary) {
+  constructor(sprites: SpriteLibrary) {
     this.sprite = sprites.get("bottle-opener").getSprite([0, 0]);
   }
 
@@ -22,7 +22,7 @@ export class BottleOpener implements GameItem {
   combine(item: GameItem): GameItem[] {
     if (item instanceof BeerBottle && !item.isOpen()) {
       item.open();
-      this.sounds.play("opening-beer");
+      SoundLibrary.play("opening-beer");
       return [this, item];
     }
     return [];

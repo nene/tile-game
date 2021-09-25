@@ -25,15 +25,14 @@ export async function runGame(ctx: CanvasRenderingContext2D): Promise<GameApi> {
 
   const sprites = new SpriteLibrary();
   await sprites.load();
-  const sounds = new SoundLibrary();
-  await sounds.load();
+  await SoundLibrary.load();
 
-  const location = new CfeLocation(sprites, sounds);
+  const location = new CfeLocation(sprites);
   const background = new Background(location.getBackground());
 
   const world = new GameWorld(location);
 
-  const player = new Player(sprites, sounds, [32, 64]);
+  const player = new Player(sprites, [32, 64]);
   world.add(player);
 
   const uiController = new UiController(player.getInventory(), sprites);
