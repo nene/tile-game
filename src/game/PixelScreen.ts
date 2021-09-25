@@ -83,10 +83,11 @@ export class PixelScreen {
 
   centerTo(coord: Coord, world: GameWorld) {
     const halfScreenSize: Coord = coordDiv(this.virtualSize, [2, 2]);
-    const minOffset: Coord = [0, 0];
-    const maxOffset: Coord = coordSub(world.size(), this.virtualSize);
 
-    this.offset = coordConstrain(coordSub(coord, halfScreenSize), minOffset, maxOffset);
+    this.offset = coordConstrain(
+      coordSub(coord, halfScreenSize),
+      { coord: [0, 0], size: coordSub(world.size(), this.virtualSize) },
+    );
   }
 
   restoreBg() {

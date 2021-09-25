@@ -21,7 +21,9 @@ export function coordEq(a: Coord, b: Coord): boolean {
   return a[0] === b[0] && a[1] === b[1];
 }
 
-export function coordConstrain([x, y]: Coord, [minX, minY]: Coord, [maxX, maxY]: Coord): Coord {
+export function coordConstrain([x, y]: Coord, { coord: [minX, minY], size }: Rect): Coord {
+  const [maxX, maxY] = coordAdd([minX, minY], size);
+
   if (x < minX) {
     x = minX;
   }

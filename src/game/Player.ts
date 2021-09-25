@@ -160,10 +160,8 @@ export class Player implements GameObject {
   }
 
   private constrainToWorld(coord: Coord, world: GameWorld): Coord {
-    const BORDER = 8;
-    const topLeft: Coord = [BORDER, BORDER];
-    const bottomRight = coordSub(world.size(), [BORDER, BORDER]);
-    return coordConstrain(coord, topLeft, bottomRight);
+    const bounds = this.boundingBox();
+    return coordConstrain(coord, { coord: coordSub([0, 0], bounds.coord), size: coordSub(world.size(), bounds.size) });
   }
 
   paint(screen: PixelScreen) {
