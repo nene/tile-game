@@ -1,7 +1,7 @@
 import { Coord, coordMul } from "./Coord";
 import { Sprite } from "./Sprite";
 
-interface SpriteSheetConfig {
+export interface SpriteSheetConfig {
   size: Coord;
   colsRows: Coord;
   offset?: Coord;
