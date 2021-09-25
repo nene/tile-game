@@ -20,7 +20,7 @@ export class BottleOpener implements GameItem {
   }
 
   combine(item: GameItem): GameItem[] {
-    if (item instanceof BeerBottle) {
+    if (item instanceof BeerBottle && !item.isOpen()) {
       item.open();
       this.sounds.play("opening-beer");
       return [this, item];
