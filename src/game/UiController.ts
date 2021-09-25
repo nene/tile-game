@@ -64,7 +64,7 @@ export class UiController {
     screen.drawSprite(this.cursor, this.mouseCoord, { fixed: true });
   }
 
-  drawOverlay(screen: PixelScreen) {
+  private drawOverlay(screen: PixelScreen) {
     screen.drawRect({ coord: [0, 0], size: [320, 200] }, "rgba(0,0,0,0.5)", { fixed: true });
   }
 
