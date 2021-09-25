@@ -11,5 +11,6 @@ export interface GameObject {
   isSolid: () => boolean;
   tileSize: () => Coord;
   hitBox: () => Rect;
+  boundingBox: () => Rect;
   onInteract: (ui: UiController) => void;
 }

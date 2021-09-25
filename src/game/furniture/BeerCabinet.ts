@@ -53,6 +53,10 @@ export class BeerCabinet implements GameObject {
     return { coord: [0, -32], size: [32, 45] };
   }
 
+  boundingBox(): Rect {
+    return { coord: [0, 0], size: [32, 13] };
+  }
+
   onInteract(ui: UiController) {
     SoundLibrary.play('opening-cabinet-door');
     ui.showInventory(this.inventory, "Shoppeniriiul");

@@ -37,5 +37,9 @@ export class Table implements GameObject {
     return { coord: [0, -6], size: [64, 17] };
   }
 
+  boundingBox(): Rect {
+    return { coord: [0, 0], size: [64, 16] };
+  }
+
   onInteract() { }
 }

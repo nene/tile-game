@@ -56,6 +56,10 @@ export class Fridge implements GameObject {
     return { coord: [0, -32], size: [16, 45] };
   }
 
+  boundingBox(): Rect {
+    return { coord: [0, 0], size: [16, 13] };
+  }
+
   onInteract(ui: UiController) {
     SoundLibrary.play('opening-fridge-door');
     ui.showInventory(this.inventory, "Külmik");

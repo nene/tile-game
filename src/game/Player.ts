@@ -190,6 +190,10 @@ export class Player implements GameObject {
     return { coord: [-7, -29], size: [14, 30] };
   }
 
+  boundingBox(): Rect {
+    return { coord: [-8, -3], size: [16, 5] };
+  }
+
   onInteract() {
   }
 }
