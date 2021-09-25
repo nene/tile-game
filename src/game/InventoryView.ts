@@ -8,9 +8,9 @@ export class InventoryView {
   private slotSprites: SpriteSheet;
   private rect: Rect;
 
-  constructor(private inventory: Inventory, private coord: Coord) {
+  constructor(private inventory: Inventory, private coord: Coord, private title?: string) {
     this.slotSprites = SpriteLibrary.get("slot");
-    this.rect = { coord, size: coordAdd([1, 1], coordMul([21, 21], inventory.size())) };
+    this.rect = { coord, size: coordAdd(this.titleSize(), coordMul([21, 21], inventory.size())) };
   }
 
   paint(screen: PixelScreen) {
@@ -19,8 +19,11 @@ export class InventoryView {
       "#c8b997",
       { fixed: true },
     );
+    if (this.title) {
+      this.drawTitle(this.title, screen);
+    }
 
-    const startCoord = coordAdd(this.coord, [1, 1]);
+    const startCoord = coordAdd(this.coord, this.titleSize());
     const [cols, rows] = this.inventory.size();
     for (let y = 0; y < rows; y++) {
       for (let x = 0; x < cols; x++) {
@@ -34,12 +37,16 @@ export class InventoryView {
     }
   }
 
+  private drawTitle(text: string, screen: PixelScreen) {
+    screen.drawText(text, "#8f563b", "#c8b997", coordAdd(this.coord, [1, 9]));
+  }
+
   isCoordInView(screenCoord: Coord): boolean {
     return isCoordInRect(screenCoord, this.rect);
   }
 
   getSlotAtCoord(screenCoord: Coord): Coord | undefined {
-    const startCoord = coordAdd(this.coord, [1, 1]);
+    const startCoord = coordAdd(this.coord, this.titleSize());
     const [cols, rows] = this.inventory.size();
     for (let y = 0; y < rows; y++) {
       for (let x = 0; x < cols; x++) {
@@ -50,5 +57,9 @@ export class InventoryView {
       }
     }
     return undefined;
+  }
+
+  private titleSize(): Coord {
+    return this.title ? [1, 10] : [1, 1];
   }
 }

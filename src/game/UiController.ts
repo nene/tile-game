@@ -31,9 +31,9 @@ export class UiController {
     this.selectedItem = undefined;
   }
 
-  showInventory(inventory: Inventory) {
+  showInventory(inventory: Inventory, title?: string) {
     this.objectInventory = inventory;
-    this.objectInventoryView = new InventoryView(inventory, [130, 50]);
+    this.objectInventoryView = new InventoryView(inventory, [130, 50], title);
   }
 
   hideInventory() {
