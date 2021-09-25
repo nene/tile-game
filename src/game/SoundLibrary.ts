@@ -1,12 +1,20 @@
 import pouringBeer from "./sounds/pouring-beer.mp3";
 import openingBeer from "./sounds/opening-beer.mp3";
 
+const soundFiles = {
+  'pouring-beer': pouringBeer,
+  'opening-beer': openingBeer,
+};
+
+type SoundName = keyof typeof soundFiles;
+
 export class SoundLibrary {
   private static sounds: Record<string, HTMLAudioElement> = {};
 
   public static async load() {
-    this.sounds['pouring-beer'] = await this.loadAudio(pouringBeer);
-    this.sounds['opening-beer'] = await this.loadAudio(openingBeer);
+    for (const [name, fileName] of Object.entries(soundFiles)) {
+      this.sounds[name] = await this.loadAudio(fileName);
+    }
   }
 
   private static async loadAudio(src: string): Promise<HTMLAudioElement> {
@@ -17,7 +25,7 @@ export class SoundLibrary {
     });
   }
 
-  public static play(soundName: string) {
+  public static play(soundName: SoundName) {
     const audioEl = this.sounds[soundName];
     audioEl.currentTime = 0;
     audioEl.play();
