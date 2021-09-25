@@ -50,7 +50,7 @@ export function coordDistance(coord1: Coord, coord2: Coord): number {
 }
 
 export function isCoordInRect([x, y]: Coord, { coord: [x1, y1], size }: Rect): boolean {
-  const [x2, y2] = coordAdd([x1, y1], size);
+  const [x2, y2] = coordAdd([x1, y1], coordSub(size, [1, 1]));
   return x >= x1 && y >= y1 && x <= x2 && y <= y2;
 }
 
