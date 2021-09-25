@@ -1,9 +1,13 @@
 import pouringBeer from "./sounds/pouring-beer.mp3";
 import openingBeer from "./sounds/opening-beer.mp3";
+import openingCabinetDoor from "./sounds/opening-cabinet-door.mp3";
+import openingFridgeDoor from "./sounds/opening-fridge-door.mp3";
 
 const soundFiles = {
   'pouring-beer': pouringBeer,
   'opening-beer': openingBeer,
+  'opening-cabinet-door': openingCabinetDoor,
+  'opening-fridge-door': openingFridgeDoor,
 };
 
 type SoundName = keyof typeof soundFiles;

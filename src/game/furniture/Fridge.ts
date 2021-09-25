@@ -3,6 +3,7 @@ import { GameObject } from "../GameObject";
 import { Inventory } from "../Inventory";
 import { BeerBottle, BeerType } from "../items/BeerBottle";
 import { PixelScreen } from "../PixelScreen";
+import { SoundLibrary } from "../SoundLibrary";
 import { Sprite } from "../Sprite";
 import { SpriteLibrary } from "../SpriteLibrary";
 import { UiController } from "../UiController";
@@ -56,6 +57,7 @@ export class Fridge implements GameObject {
   }
 
   onInteract(ui: UiController) {
+    SoundLibrary.play('opening-fridge-door');
     ui.showInventory(this.inventory);
   }
 }
