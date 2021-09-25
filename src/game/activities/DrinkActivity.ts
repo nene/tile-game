@@ -32,16 +32,18 @@ export class DrinkActivity implements Activity {
   }
 
   private getHandSprite(): Sprite {
-    if (this.isHandUp && this.beer.getLevel() !== BeerLevel.empty) {
-      return { ...this.handSprite, offset: coordAdd(this.handSprite.offset, [0, -2]) }
-    } else {
-      return this.handSprite;
-    }
+    return this.spriteAtHandPosition(this.handSprite);
   }
 
   private getBeerSprite(): Sprite {
-    const beerSprite = this.beer.getSmallSprite();
-    beerSprite.offset = this.isHandUp && this.beer.getLevel() !== BeerLevel.empty ? [-2, -19] : [-2, -17];
-    return beerSprite;
+    return this.spriteAtHandPosition(this.beer.getSmallSprite());
+  }
+
+  private spriteAtHandPosition(sprite: Sprite) {
+    if (this.isHandUp && this.beer.getLevel() !== BeerLevel.empty) {
+      return { ...sprite, offset: coordAdd(sprite.offset, [0, -2]) };
+    } else {
+      return sprite;
+    }
   }
 }

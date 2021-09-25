@@ -42,7 +42,7 @@ const imageFiles = {
   'cursor': spriteDef({ src: cursor, cfg: { size: [16, 16], colsRows: [1, 1] } }),
 
   'beer-lg': spriteDef({ src: beerLg, cfg: { size: [16, 16], colsRows: [5, 1] } }),
-  'beer-sm': spriteDef({ src: beerSm, cfg: { size: [10, 10], colsRows: [5, 1] } }),
+  'beer-sm': spriteDef({ src: beerSm, cfg: { size: [10, 10], colsRows: [5, 1], offset: [-2, -17] } }),
   'bottle': spriteDef({ src: bottle, cfg: { size: [16, 16], colsRows: [3, 4] } }),
   'bottle-opener': spriteDef({ src: bottleOpener, cfg: { size: [16, 16], colsRows: [1, 1] } }),
 };
