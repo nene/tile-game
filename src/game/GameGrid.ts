@@ -15,8 +15,8 @@ export class GameGrid {
   }
 
   forEachTile(callback: (colRow: Coord) => void) {
-    for (let x = 0; x < this.gridSize[1]; x++) {
-      for (let y = 0; y < this.gridSize[0]; y++) {
+    for (let x = 0; x < this.gridSize[0]; x++) {
+      for (let y = 0; y < this.gridSize[1]; y++) {
         callback([x, y]);
       }
     }

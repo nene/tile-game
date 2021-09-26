@@ -9,7 +9,7 @@ import { GameObject } from "./GameObject";
 import { Table } from "./furniture/Table";
 import { Wall } from "./furniture/Wall";
 
-const CFE_SIZE: Coord = [32, 32]; // Size in tiles
+const CFE_SIZE: Coord = [21, 16]; // Size in tiles
 
 export class CfeLocation implements GameLocation {
   private background: CfeBackground;
