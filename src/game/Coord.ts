@@ -64,3 +64,13 @@ export function rectOverlaps({ coord: a1, size: aSize }: Rect, { coord: b1, size
   const yOverlaps = a1[1] <= b2[1] && a2[1] >= b1[1];
   return xOverlaps && yOverlaps;
 }
+
+const TILE_SIZE: Coord = [16, 16];
+
+export function tileToScreenCoord(tileCoord: Coord): Coord {
+  return coordMul(tileCoord, TILE_SIZE);
+}
+
+export function screenToTileCoord(screenCoord: Coord): Coord {
+  return coordDiv(screenCoord, TILE_SIZE).map(Math.floor) as Coord;
+}

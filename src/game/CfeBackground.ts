@@ -1,5 +1,4 @@
-import { Coord } from "./Coord";
-import { tileToScreenCoord } from "./GameGrid";
+import { Coord, tileToScreenCoord } from "./Coord";
 import { GameLocationBackground } from "./GameLocation";
 import { PixelScreen } from "./PixelScreen";
 import { Sprite } from "./Sprite";

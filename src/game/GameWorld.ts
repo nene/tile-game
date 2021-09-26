@@ -1,5 +1,4 @@
-import { Coord, coordAdd, coordMul, isCoordInRect } from "./Coord";
-import { screenToTileCoord, tileToScreenCoord } from "./GameGrid";
+import { Coord, coordAdd, coordMul, isCoordInRect, screenToTileCoord, tileToScreenCoord } from "./Coord";
 import { GameLocation } from "./GameLocation";
 import { GameObject } from "./GameObject";
 import { PathFinder } from "./PathFinder";

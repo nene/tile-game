@@ -1,9 +1,8 @@
 import { BeerCabinet } from "./furniture/BeerCabinet";
 import { Bursh, BurshType } from "./Bursh";
 import { CfeBackground } from "./CfeBackground";
-import { Coord, coordAdd } from "./Coord";
+import { Coord, coordAdd, tileToScreenCoord } from "./Coord";
 import { Fridge } from "./furniture/Fridge";
-import { tileToScreenCoord } from "./GameGrid";
 import { GameLocation } from "./GameLocation";
 import { GameObject } from "./GameObject";
 import { Table } from "./furniture/Table";
