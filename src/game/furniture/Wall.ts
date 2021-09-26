@@ -1,4 +1,4 @@
-import { Coord, Rect } from "../Coord";
+import { Coord, coordAdd, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
 import { PixelScreen } from "../PixelScreen";
 import { Sprite } from "../Sprite";
@@ -7,14 +7,16 @@ import { SpriteLibrary } from "../SpriteLibrary";
 export class Wall implements GameObject {
   private sprite: Sprite;
 
-  constructor(private coord: Coord) {
+  constructor(private coord: Coord, private widthInTiles: number = 1) {
     this.sprite = SpriteLibrary.get("cfe-wall").getSprite([0, 0]);
   }
 
   tick() { }
 
   paint(screen: PixelScreen) {
-    screen.drawSprite(this.sprite, this.coord);
+    for (let i = 0; i < this.widthInTiles; i++) {
+      screen.drawSprite(this.sprite, coordAdd(this.coord, [i * 16, 0]));
+    }
   }
 
   getCoord() {
@@ -30,15 +32,15 @@ export class Wall implements GameObject {
   }
 
   tileSize(): Coord {
-    return [1, 3];
+    return [this.widthInTiles, 3];
   }
 
   hitBox(): Rect {
-    return { coord: [0, 0], size: [16, 48] };
+    return { coord: [0, 0], size: [16 * this.widthInTiles, 48] };
   }
 
   boundingBox(): Rect {
-    return { coord: [0, 0], size: [16, 48] };
+    return { coord: [0, 0], size: [16 * this.widthInTiles, 48] };
   }
 
   onInteract() { }

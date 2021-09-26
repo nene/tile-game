@@ -27,12 +27,8 @@ export class CfeLocation implements GameLocation {
   private createStaticObjects(): GameObject[] {
     const objects: GameObject[] = [];
 
-    // simplistic room plan
-    this.grid.forEachTile(([x, y]) => {
-      if (y === 0) {
-        objects.push(new Wall(this.grid.tileToScreenCoord([x, y])));
-      }
-    });
+    // long wall (the length of whole room)
+    objects.push(new Wall(this.grid.tileToScreenCoord([0, 0]), this.grid.size()[0]));
 
     // A table
     objects.push(new Table(this.grid.tileToScreenCoord([2, 8])));
