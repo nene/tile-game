@@ -19,13 +19,13 @@ export class Dialog {
   }
 
   private drawTitle(text: string, screen: PixelScreen) {
-    screen.drawRect({ coord: [60, 100], size: [200, 11] }, "#8f563b", { fixed: true });
+    screen.drawRect({ coord: [60, 100], size: [200, 12] }, "#8f563b", { fixed: true });
     screen.drawText(text, "#3e2821", "#8f563b", [62, 109]);
   }
 
   private drawContent(text: string, screen: PixelScreen) {
-    const start: Coord = [62, 121];
-    const lineHeight = 9;
+    const start: Coord = [62, 123];
+    const lineHeight = 12;
     text.split("\n").forEach((line, i) => {
       screen.drawText(line, "#8f563b", "#c8b997", coordAdd(start, [0, lineHeight * i]));
     });

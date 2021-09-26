@@ -60,6 +60,6 @@ export class InventoryView {
   }
 
   private titleSize(): Coord {
-    return this.title ? [1, 10] : [1, 1];
+    return this.title ? [1, 12] : [1, 1];
   }
 }

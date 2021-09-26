@@ -28,7 +28,7 @@ export class PixelScreen {
     this.offset = offset ?? [0, 0];
     this.ctx.scale(scale, scale);
     this.ctx.imageSmoothingEnabled = false;
-    this.ctx.font = "7px OldSchoolAdventures";
+    this.ctx.font = "9px NineteenNinetySix";
   }
 
   drawSprite(sprite: Sprite, coord: Coord, opts?: DrawSpriteOptions) {
@@ -71,7 +71,7 @@ export class PixelScreen {
 
   drawText(text: string, color: string, bgColor: string, coord: Coord) {
     const { width } = this.ctx.measureText(text);
-    this.drawRect({ coord: coordAdd(coord, [-1, -8]), size: [width + 1, 9] }, bgColor, { fixed: true });
+    this.drawRect({ coord: coordAdd(coord, [-1, -9]), size: [width + 1, 12] }, bgColor, { fixed: true });
 
     this.ctx.fillStyle = color;
     this.ctx.fillText(text, coord[0], coord[1]);
