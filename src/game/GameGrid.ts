@@ -14,14 +14,6 @@ export class GameGrid {
     this.tileSize = cfg.tileSize;
   }
 
-  forEachTile(callback: (colRow: Coord) => void) {
-    for (let x = 0; x < this.gridSize[0]; x++) {
-      for (let y = 0; y < this.gridSize[1]; y++) {
-        callback([x, y]);
-      }
-    }
-  }
-
   tileToScreenCoord([x, y]: Coord): Coord {
     return [x * this.tileSize[0], y * this.tileSize[1]];
   }
