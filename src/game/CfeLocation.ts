@@ -3,7 +3,7 @@ import { Bursh, BurshType } from "./Bursh";
 import { CfeBackground } from "./CfeBackground";
 import { Coord, coordAdd } from "./Coord";
 import { Fridge } from "./furniture/Fridge";
-import { GameGrid } from "./GameGrid";
+import { GameGrid, tileToScreenCoord } from "./GameGrid";
 import { GameLocation } from "./GameLocation";
 import { GameObject } from "./GameObject";
 import { Table } from "./furniture/Table";
@@ -17,7 +17,7 @@ export class CfeLocation implements GameLocation {
   private staticObjects: GameObject[];
 
   constructor() {
-    this.grid = new GameGrid({ gridSize: CFE_SIZE, tileSize: [16, 16] });
+    this.grid = new GameGrid({ gridSize: CFE_SIZE });
 
     this.background = new CfeBackground(this.grid);
 
@@ -28,14 +28,14 @@ export class CfeLocation implements GameLocation {
     const objects: GameObject[] = [];
 
     // long wall (the length of whole room)
-    objects.push(new Wall(this.grid.tileToScreenCoord([0, 0]), this.grid.size()[0]));
+    objects.push(new Wall(tileToScreenCoord([0, 0]), this.grid.size()[0]));
 
     // A table
-    objects.push(new Table(this.grid.tileToScreenCoord([2, 8])));
+    objects.push(new Table(tileToScreenCoord([2, 8])));
     // A fridge
-    objects.push(new Fridge(this.grid.tileToScreenCoord([3, 3])));
+    objects.push(new Fridge(tileToScreenCoord([3, 3])));
     // A storage of beer glasses
-    objects.push(new BeerCabinet(this.grid.tileToScreenCoord([5, 3])));
+    objects.push(new BeerCabinet(tileToScreenCoord([5, 3])));
 
     return objects;
   }

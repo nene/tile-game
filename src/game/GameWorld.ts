@@ -1,4 +1,5 @@
 import { Coord, coordAdd, coordMul, isCoordInRect } from "./Coord";
+import { screenToTileCoord, tileToScreenCoord } from "./GameGrid";
 import { GameLocation } from "./GameLocation";
 import { GameObject } from "./GameObject";
 import { PathFinder } from "./PathFinder";
@@ -37,10 +38,9 @@ export class GameWorld {
   }
 
   private sortToTiles(objects: GameObject[]): TileMap {
-    const grid = this.location.getGrid();
     const tileMap: TileMap = {};
     objects.forEach((obj) => {
-      const tileCoord = grid.screenToTileCoord(obj.getCoord());
+      const tileCoord = screenToTileCoord(obj.getCoord());
       for (let dx = 0; dx < obj.tileSize()[0]; dx++) {
         for (let dy = 0; dy < obj.tileSize()[1]; dy++) {
           const key = coordAdd(tileCoord, [dx, dy]).join(",");
@@ -68,8 +68,7 @@ export class GameWorld {
   }
 
   getObjectsOnCoord(screenCoord: Coord): GameObject[] {
-    const grid = this.location.getGrid();
-    return this.getObjectsInTile(grid.screenToTileCoord(screenCoord));
+    return this.getObjectsInTile(screenToTileCoord(screenCoord));
   }
 
   private getObjectsInTile(tileCoord: Coord): GameObject[] {
@@ -86,10 +85,9 @@ export class GameWorld {
   }
 
   findPath(coord1: Coord, coord2: Coord): Coord[] | undefined {
-    const grid = this.location.getGrid();
     return this.pathFinder.findPath(
-      grid.screenToTileCoord(coord1),
-      grid.screenToTileCoord(coord2)
-    )?.map((coord) => coordAdd(grid.tileToScreenCoord(coord), [8, 8]));
+      screenToTileCoord(coord1),
+      screenToTileCoord(coord2)
+    )?.map((coord) => coordAdd(tileToScreenCoord(coord), [8, 8]));
   }
 }

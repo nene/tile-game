@@ -1,28 +1,27 @@
-import { Coord } from "./Coord";
+import { Coord, coordDiv, coordMul } from "./Coord";
 
 interface GameGridConfig {
   gridSize: Coord;
-  tileSize: Coord;
 }
+
+const TILE_SIZE: Coord = [16, 16];
 
 export class GameGrid {
   private gridSize: Coord;
-  private tileSize: Coord;
 
   constructor(cfg: GameGridConfig) {
     this.gridSize = cfg.gridSize;
-    this.tileSize = cfg.tileSize;
-  }
-
-  tileToScreenCoord([x, y]: Coord): Coord {
-    return [x * this.tileSize[0], y * this.tileSize[1]];
-  }
-
-  screenToTileCoord([x, y]: Coord): Coord {
-    return [Math.floor(x / this.tileSize[0]), Math.floor(y / this.tileSize[0])];
   }
 
   size() {
     return this.gridSize;
   }
+}
+
+export function tileToScreenCoord(tileCoord: Coord): Coord {
+  return coordMul(tileCoord, TILE_SIZE);
+}
+
+export function screenToTileCoord(screenCoord: Coord): Coord {
+  return coordDiv(screenCoord, TILE_SIZE).map(Math.floor) as Coord;
 }

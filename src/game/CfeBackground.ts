@@ -1,4 +1,4 @@
-import { GameGrid } from "./GameGrid";
+import { GameGrid, tileToScreenCoord } from "./GameGrid";
 import { GameLocationBackground } from "./GameLocation";
 import { PixelScreen } from "./PixelScreen";
 import { Sprite } from "./Sprite";
@@ -15,7 +15,7 @@ export class CfeBackground implements GameLocationBackground {
     const [width, height] = this.grid.size();
     for (let x = 0; x < width; x++) {
       for (let y = 0; y < height; y++) {
-        screen.drawSprite(this.floorSprite, this.grid.tileToScreenCoord([x, y]));
+        screen.drawSprite(this.floorSprite, tileToScreenCoord([x, y]));
       }
     }
   }
