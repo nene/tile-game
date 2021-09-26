@@ -8,7 +8,7 @@ export class CfeBackground implements GameLocationBackground {
   private floorSprite: Sprite;
 
   constructor(private grid: GameGrid) {
-    this.floorSprite = SpriteLibrary.get('cfe-bg').getSprite([0, 3]);
+    this.floorSprite = SpriteLibrary.get('cfe-floor').getSprite([0, 0]);
   }
 
   paint(screen: PixelScreen) {
