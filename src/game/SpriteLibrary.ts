@@ -16,7 +16,6 @@ import bottle from "./sprites/bottle.png";
 import bottleOpener from "./sprites/bottle-opener.png";
 import { Coord } from "./Coord";
 import { SpriteSheet, SpriteSheetConfig } from "./SpriteSheet";
-import { loadImage } from "./loadImage";
 
 const PLAYER_SIZE: Coord = [16, 32];
 const PLAYER_OFFSET: Coord = [-8, -30];
@@ -55,11 +54,19 @@ export class SpriteLibrary {
 
   public static async load() {
     for (const [name, { src, cfg }] of Object.entries(imageFiles)) {
-      this.sprites[name] = new SpriteSheet(await loadImage(src), cfg);
+      this.sprites[name] = new SpriteSheet(await this.loadImage(src), cfg);
     }
   }
 
   public static get(name: SpriteName): SpriteSheet {
     return this.sprites[name];
+  }
+
+  private static async loadImage(src: string): Promise<HTMLImageElement> {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.addEventListener("load", () => resolve(img));
+      img.src = src;
+    });
   }
 }
