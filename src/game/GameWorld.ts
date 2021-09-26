@@ -19,7 +19,7 @@ export class GameWorld {
   }
 
   size(): Coord {
-    return coordMul(this.location.getGrid().size(), [16, 16]);
+    return coordMul(this.location.getGridSize(), [16, 16]);
   }
 
   add(...objects: GameObject[]) {
@@ -77,7 +77,7 @@ export class GameWorld {
   }
 
   private isTileEmpty([x, y]: Coord): boolean {
-    const [maxX, maxY] = this.location.getGrid().size();
+    const [maxX, maxY] = this.location.getGridSize();
     if (x < 0 || y < 0 || x >= maxX || y >= maxY) {
       return false;
     }

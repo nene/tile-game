@@ -1,4 +1,4 @@
-import { GameGrid } from "./GameGrid";
+import { Coord } from "./Coord";
 import { GameObject } from "./GameObject";
 import { PixelScreen } from "./PixelScreen";
 
@@ -7,7 +7,7 @@ export interface GameLocationBackground {
 }
 
 export interface GameLocation {
-  getGrid: () => GameGrid;
+  getGridSize: () => Coord;
   getBackground: () => GameLocationBackground;
   getStaticObjects: () => GameObject[];
   getDynamicObjects: () => GameObject[];

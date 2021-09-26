@@ -3,7 +3,7 @@ import { Bursh, BurshType } from "./Bursh";
 import { CfeBackground } from "./CfeBackground";
 import { Coord, coordAdd } from "./Coord";
 import { Fridge } from "./furniture/Fridge";
-import { GameGrid, tileToScreenCoord } from "./GameGrid";
+import { tileToScreenCoord } from "./GameGrid";
 import { GameLocation } from "./GameLocation";
 import { GameObject } from "./GameObject";
 import { Table } from "./furniture/Table";
@@ -13,13 +13,10 @@ const CFE_SIZE: Coord = [21, 16]; // Size in tiles
 
 export class CfeLocation implements GameLocation {
   private background: CfeBackground;
-  private grid: GameGrid;
   private staticObjects: GameObject[];
 
   constructor() {
-    this.grid = new GameGrid({ gridSize: CFE_SIZE });
-
-    this.background = new CfeBackground(this.grid);
+    this.background = new CfeBackground(CFE_SIZE);
 
     this.staticObjects = this.createStaticObjects();
   }
@@ -28,7 +25,7 @@ export class CfeLocation implements GameLocation {
     const objects: GameObject[] = [];
 
     // long wall (the length of whole room)
-    objects.push(new Wall(tileToScreenCoord([0, 0]), this.grid.size()[0]));
+    objects.push(new Wall(tileToScreenCoord([0, 0]), CFE_SIZE[0]));
 
     // A table
     objects.push(new Table(tileToScreenCoord([2, 8])));
@@ -40,8 +37,8 @@ export class CfeLocation implements GameLocation {
     return objects;
   }
 
-  getGrid() {
-    return this.grid;
+  getGridSize(): Coord {
+    return CFE_SIZE;
   }
 
   getBackground() {
