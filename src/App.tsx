@@ -3,6 +3,10 @@ import styled from "styled-components";
 import { GameApi, runGame } from "./game/game";
 import { mouseCoordRelativeTo } from "./mouseCoord";
 
+const WIDTH = 320;
+const HEIGHT = 200;
+const PIXEL_SCALE = 4;
+
 export function App() {
   const canvasEl = useRef<HTMLCanvasElement>(null);
 
@@ -36,7 +40,11 @@ export function App() {
     };
 
     const game = async () => {
-      gameApi = await runGame(ctx);
+      gameApi = await runGame(ctx, {
+        width: WIDTH,
+        height: HEIGHT,
+        scale: PIXEL_SCALE,
+      });
 
       document.addEventListener("keydown", onKeyDown);
       document.addEventListener("keyup", onKeyUp);
@@ -59,8 +67,8 @@ export function App() {
     <AppWrapper>
       <GameCanvas
         id="canvas"
-        width="1280"
-        height="800"
+        width={WIDTH * PIXEL_SCALE}
+        height={HEIGHT * PIXEL_SCALE}
         ref={canvasEl}
       ></GameCanvas>
     </AppWrapper>

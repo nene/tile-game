@@ -2,7 +2,7 @@ import { Coord, coordAdd, coordConstrain, coordDiv, coordSub, Rect, rectOverlaps
 import { GameWorld } from "./GameWorld";
 import { Sprite } from "./Sprite";
 
-interface PixelScreenOptions {
+export interface PixelScreenOptions {
   width: number;
   height: number;
   scale: number;

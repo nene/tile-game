@@ -1,4 +1,4 @@
-import { PixelScreen } from "./PixelScreen";
+import { PixelScreen, PixelScreenOptions } from "./PixelScreen";
 import { Player } from "./Player";
 import { Background } from "./Background";
 import { GameWorld } from "./GameWorld";
@@ -9,8 +9,6 @@ import { Coord, coordAdd, coordDistance } from "./Coord";
 import { UiController } from "./UiController";
 import { Loops } from "./Loops";
 
-const PIXEL_SCALE = 4;
-
 export interface GameApi {
   onKeyDown: (key: string) => boolean;
   onKeyUp: (key: string) => boolean;
@@ -19,8 +17,8 @@ export interface GameApi {
   cleanup: () => void;
 }
 
-export async function runGame(ctx: CanvasRenderingContext2D): Promise<GameApi> {
-  const screen = new PixelScreen(ctx, { width: 320, height: 200, scale: PIXEL_SCALE });
+export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScreenOptions): Promise<GameApi> {
+  const screen = new PixelScreen(ctx, screenCfg);
   let screenNeedsRepaint = true;
 
   await SpriteLibrary.load();
@@ -65,7 +63,7 @@ export async function runGame(ctx: CanvasRenderingContext2D): Promise<GameApi> {
     },
     onClick: (coord: Coord) => {
       screenNeedsRepaint = true;
-      const screenCoord = toPixelScale(coord);
+      const screenCoord = toPixelScale(coord, screenCfg.scale);
       if (uiController.handleClick(screenCoord)) {
         return; // The click was handled by UI
       }
@@ -77,7 +75,7 @@ export async function runGame(ctx: CanvasRenderingContext2D): Promise<GameApi> {
     },
     onHover: (coord: Coord) => {
       screenNeedsRepaint = true;
-      const screenCoord = toPixelScale(coord);
+      const screenCoord = toPixelScale(coord, screenCfg.scale);
       if (uiController.handleHover(screenCoord)) {
         return; // The click was handled by UI
       }
@@ -88,6 +86,6 @@ export async function runGame(ctx: CanvasRenderingContext2D): Promise<GameApi> {
   };
 }
 
-function toPixelScale([x, y]: Coord): Coord {
-  return [Math.floor(x / PIXEL_SCALE), Math.floor(y / PIXEL_SCALE)];
+function toPixelScale([x, y]: Coord, scale: number): Coord {
+  return [Math.floor(x / scale), Math.floor(y / scale)];
 }
