@@ -27,7 +27,8 @@ export class OpeningGame implements MiniGame {
   private captureStatus = CaptureStatus.miss;
   private captureThreshold = 5;
   private noise: SimplexNoise;
-  private counter = 0;
+  private tickCounter = 0;
+  private finishAtTick = 60 * 10; // Total amount of time for opening the bottle
 
   constructor(private bottle: BeerBottle, private opener: BottleOpener) {
     this.bgSprite = SpriteLibrary.get("opening-game-bg").getSprite([0, 0]);
@@ -44,25 +45,38 @@ export class OpeningGame implements MiniGame {
   }
 
   private nextNoiseCoord(): Coord {
-    this.counter++;
-    const x = this.noise.noise2D(this.counter / NOISE_SCALE, 1);
-    const y = this.noise.noise2D(1, this.counter / NOISE_SCALE);
+    this.tickCounter++;
+    const x = this.noise.noise2D(this.tickCounter / NOISE_SCALE, 1);
+    const y = this.noise.noise2D(1, this.tickCounter / NOISE_SCALE);
     return coordMul([x, y], BOUNDING_BOX).map(Math.floor) as Coord;
   }
 
   paint(screen: PixelScreen) {
     this.drawBackground(screen);
     screen.drawSprite(this.bottleSprite, this.bottleCoord, { fixed: true });
-    screen.drawSprite(this.bottleCapSprites.getSprite([this.captureStatus, 0]), this.bottleCoord, { fixed: true });
+
+    if (this.bottle.isOpen()) {
+      // For open bottle, keep the cap inside opener
+      screen.drawSprite(this.bottleCapSprites.getSprite([0, 0]), this.openerCoord, { fixed: true });
+    } else {
+      // For closed bottle, keep the cap on the bottle
+      screen.drawSprite(this.bottleCapSprites.getSprite([this.captureStatus, 0]), this.bottleCoord, { fixed: true });
+    }
+
     screen.drawSprite(this.openerSprite, this.openerCoord, { fixed: true });
   }
 
   handleClick(coord: Coord) {
     this.openerCoord = coord;
     this.captureStatus = this.checkCaptureStatus();
-    if (this.captureStatus === CaptureStatus.hit) {
+    if (this.captureStatus === CaptureStatus.hit && !this.bottle.isOpen()) {
+      this.finishAtTick = this.tickCounter + 50; // Wait max 5 seconds before closing the minigame screen
       this.bottle.open();
       SoundLibrary.play("opening-beer");
+    }
+    else if (this.bottle.isOpen()) {
+      // when already open, finish on the second click
+      this.finishAtTick = this.tickCounter;
     }
   }
 
@@ -72,7 +86,7 @@ export class OpeningGame implements MiniGame {
   }
 
   isFinished(): boolean {
-    return this.bottle.isOpen();
+    return this.tickCounter > this.finishAtTick;
   }
 
   private checkCaptureStatus(): CaptureStatus {
