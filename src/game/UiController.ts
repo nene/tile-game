@@ -5,13 +5,16 @@ import { GameItem } from "./items/GameItem";
 import { InventoryController } from "./InventoryController";
 import { Dialog } from "./Dialog";
 import { Overlay } from "./Overlay";
+import { CursorController } from "./CursorController";
 
 export class UiController {
   private inventoryController: InventoryController;
+  private cursorController: CursorController;
   private dialog?: Dialog;
 
-  constructor(private playerInventory: Inventory) {
+  constructor(playerInventory: Inventory) {
     this.inventoryController = new InventoryController(playerInventory);
+    this.cursorController = new CursorController();
   }
 
   getSelectedItem(): GameItem | undefined {
@@ -33,6 +36,9 @@ export class UiController {
     } else {
       this.inventoryController.paint(screen);
     }
+
+    // Cursor is always painted on top
+    this.cursorController.paint(screen);
   }
 
   handleClick(screenCoord: Coord): boolean {
@@ -46,6 +52,7 @@ export class UiController {
   }
 
   handleHover(screenCoord: Coord): boolean {
+    this.cursorController.handleHover(screenCoord);
     return this.inventoryController.handleHover(screenCoord);
   }
 

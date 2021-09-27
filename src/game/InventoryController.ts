@@ -1,10 +1,8 @@
 import { Inventory } from "./Inventory";
 import { PixelScreen } from "./PixelScreen";
-import { SpriteLibrary } from "./SpriteLibrary";
 import { InventoryView } from "./InventoryView";
 import { Coord, coordAdd, coordSub } from "./Coord";
 import { GameItem } from "./items/GameItem";
-import { Sprite } from "./Sprite";
 import { debounce } from "lodash";
 import { Overlay } from "./Overlay";
 
@@ -15,11 +13,9 @@ export class InventoryController {
   private mouseCoord: Coord = [-16, -16];
   private selectedItem?: GameItem;
   private hoveredItem?: GameItem;
-  private cursor: Sprite;
 
   constructor(private playerInventory: Inventory) {
     this.playerInventoryView = new InventoryView(playerInventory, [107, 200 - 22]);
-    this.cursor = SpriteLibrary.get("cursor").getSprite([0, 0]);
   }
 
   getSelectedItem(): GameItem | undefined {
@@ -54,8 +50,6 @@ export class InventoryController {
     if (this.hoveredItem) {
       screen.drawText(this.hoveredItem.getName(), "#3e2821", "#c8b997", coordAdd(this.mouseCoord, [10, 10]));
     }
-
-    screen.drawSprite(this.cursor, this.mouseCoord, { fixed: true });
   }
 
   handleClick(screenCoord: Coord): boolean {
