@@ -36,7 +36,7 @@ export function App() {
       gameApi.onClick(mouseCoordRelativeTo(e, canvas));
     };
     const onMouseMove = (e: MouseEvent) => {
-      gameApi.onHover(mouseCoordRelativeTo(e, canvas));
+      gameApi.onMouseMove(mouseCoordRelativeTo(e, canvas));
     };
 
     const game = async () => {

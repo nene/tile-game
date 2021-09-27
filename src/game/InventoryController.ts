@@ -70,7 +70,7 @@ export class InventoryController {
     return false;
   }
 
-  handleHover(screenCoord: Coord): boolean {
+  handleMouseMove(screenCoord: Coord): boolean {
     this.mouseCoord = screenCoord;
     this.hoveredItem = undefined;
     this.showTooltipAfterDelay(screenCoord);

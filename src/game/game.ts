@@ -14,7 +14,7 @@ export interface GameApi {
   onKeyDown: (key: string) => boolean;
   onKeyUp: (key: string) => boolean;
   onClick: (coord: Coord) => void;
-  onHover: (coord: Coord) => void;
+  onMouseMove: (coord: Coord) => void;
   cleanup: () => void;
 }
 
@@ -80,13 +80,13 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
         obj.onInteract(uiController);
       }
     },
-    onHover: (coord: Coord) => {
+    onMouseMove: (coord: Coord) => {
       screenNeedsRepaint = true;
       const screenCoord = toPixelScale(coord, screenCfg.scale);
       if (miniGame.handleMouseMove(screenCoord)) {
         return; // The hover was handled by MiniGame
       }
-      if (uiController.handleHover(screenCoord)) {
+      if (uiController.handleMouseMove(screenCoord)) {
         return; // The hover was handled by UI
       }
     },

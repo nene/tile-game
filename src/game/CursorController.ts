@@ -15,7 +15,7 @@ export class CursorController {
     screen.drawSprite(this.cursor, this.mouseCoord, { fixed: true });
   }
 
-  handleHover(screenCoord: Coord): boolean {
+  handleMouseMove(screenCoord: Coord): boolean {
     this.mouseCoord = screenCoord;
     return true;
   }

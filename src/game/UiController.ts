@@ -51,9 +51,9 @@ export class UiController {
     return this.inventoryController.handleClick(screenCoord);
   }
 
-  handleHover(screenCoord: Coord): boolean {
-    this.cursorController.handleHover(screenCoord);
-    return this.inventoryController.handleHover(screenCoord);
+  handleMouseMove(screenCoord: Coord): boolean {
+    this.cursorController.handleMouseMove(screenCoord);
+    return this.inventoryController.handleMouseMove(screenCoord);
   }
 
   showDialog(dialog: Dialog) {
