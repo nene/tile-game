@@ -15,7 +15,9 @@ enum CaptureStatus {
 }
 
 const NOISE_SCALE = 100;
-const BOUNDING_BOX: Coord = [100, 100];
+
+const BOTTLE_START_COORD: Coord = [100, 100];
+const BOTTLE_MAX_MOVEMENT: Coord = [100, 100]; // +/- movement in each direction
 
 export class OpeningGame implements MiniGame {
   private bgSprite: Sprite;
@@ -35,20 +37,21 @@ export class OpeningGame implements MiniGame {
     this.bottleSprite = SpriteLibrary.get("bottle-xl").getSprite([0, 0]);
     this.bottleCapSprites = SpriteLibrary.get("bottle-cap-xl");
     this.openerSprite = SpriteLibrary.get("bottle-opener-xl").getSprite([0, 0]);
-    this.bottleCoord = [100, 100];
-    this.openerCoord = [120, 120];
     this.noise = new SimplexNoise();
+    this.bottleCoord = this.nextBottleCoord();
+    this.openerCoord = [0, 0];
   }
 
   tick() {
-    this.bottleCoord = coordAdd([100, 100], this.nextNoiseCoord());
+    this.bottleCoord = this.nextBottleCoord();
   }
 
-  private nextNoiseCoord(): Coord {
+  private nextBottleCoord(): Coord {
     this.tickCounter++;
     const x = this.noise.noise2D(this.tickCounter / NOISE_SCALE, 1);
     const y = this.noise.noise2D(1, this.tickCounter / NOISE_SCALE);
-    return coordMul([x, y], BOUNDING_BOX).map(Math.floor) as Coord;
+    const offset = coordMul([x, y], BOTTLE_MAX_MOVEMENT).map(Math.floor) as Coord;
+    return coordAdd(BOTTLE_START_COORD, offset);
   }
 
   paint(screen: PixelScreen) {

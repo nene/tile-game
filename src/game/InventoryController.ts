@@ -147,6 +147,8 @@ export class InventoryController {
       } else {
         // A minigame is used for combining
         this.miniGame = combinedItems;
+        // Ensure we start minigame with current mouse coordinate
+        this.miniGame.handleMouseMove(this.mouseCoord);
       }
     }
   }
