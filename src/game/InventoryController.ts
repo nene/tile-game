@@ -6,6 +6,7 @@ import { Coord, coordAdd, coordSub } from "./Coord";
 import { GameItem } from "./items/GameItem";
 import { Sprite } from "./Sprite";
 import { debounce } from "lodash";
+import { Overlay } from "./Overlay";
 
 export class InventoryController {
   private playerInventoryView: InventoryView;
@@ -41,7 +42,7 @@ export class InventoryController {
 
   paint(screen: PixelScreen) {
     if (this.objectInventoryView) {
-      this.drawOverlay(screen);
+      Overlay.paint(screen);
       this.objectInventoryView.paint(screen);
     }
 
@@ -55,10 +56,6 @@ export class InventoryController {
     }
 
     screen.drawSprite(this.cursor, this.mouseCoord, { fixed: true });
-  }
-
-  private drawOverlay(screen: PixelScreen) {
-    screen.drawRect({ coord: [0, 0], size: [320, 200] }, "rgba(0,0,0,0.5)", { fixed: true });
   }
 
   handleClick(screenCoord: Coord): boolean {

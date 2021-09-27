@@ -4,6 +4,7 @@ import { Coord } from "./Coord";
 import { GameItem } from "./items/GameItem";
 import { InventoryController } from "./InventoryController";
 import { Dialog } from "./Dialog";
+import { Overlay } from "./Overlay";
 
 export class UiController {
   private inventoryController: InventoryController;
@@ -27,15 +28,11 @@ export class UiController {
 
   paint(screen: PixelScreen) {
     if (this.dialog) {
-      this.drawOverlay(screen);
+      Overlay.paint(screen);
       this.dialog.paint(screen);
     } else {
       this.inventoryController.paint(screen);
     }
-  }
-
-  private drawOverlay(screen: PixelScreen) {
-    screen.drawRect({ coord: [0, 0], size: [320, 200] }, "rgba(0,0,0,0.5)", { fixed: true });
   }
 
   handleClick(screenCoord: Coord): boolean {
