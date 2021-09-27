@@ -5,6 +5,7 @@ import { Coord, coordAdd, coordSub } from "./Coord";
 import { GameItem } from "./items/GameItem";
 import { debounce } from "lodash";
 import { Overlay } from "./Overlay";
+import { MiniGame } from "./minigames/MiniGame";
 
 export class InventoryController {
   private playerInventoryView: InventoryView;
@@ -13,6 +14,7 @@ export class InventoryController {
   private mouseCoord: Coord = [-16, -16];
   private selectedItem?: GameItem;
   private hoveredItem?: GameItem;
+  private miniGame?: MiniGame;
 
   constructor(private playerInventory: Inventory) {
     this.playerInventoryView = new InventoryView(playerInventory, [107, 200 - 22]);
@@ -31,9 +33,20 @@ export class InventoryController {
     this.objectInventoryView = new InventoryView(inventory, [130, 50], title);
   }
 
+  getMiniGame(): MiniGame | undefined {
+    return this.miniGame;
+  }
+
   private hideInventory() {
     this.objectInventory = undefined;
     this.objectInventoryView = undefined;
+  }
+
+  tick() {
+    this.miniGame?.tick();
+    if (this.miniGame?.isFinished()) {
+      this.miniGame = undefined;
+    }
   }
 
   paint(screen: PixelScreen) {
@@ -70,11 +83,10 @@ export class InventoryController {
     return false;
   }
 
-  handleMouseMove(screenCoord: Coord): boolean {
+  handleMouseMove(screenCoord: Coord) {
     this.mouseCoord = screenCoord;
     this.hoveredItem = undefined;
     this.showTooltipAfterDelay(screenCoord);
-    return true;
   }
 
   private showTooltipAfterDelay = debounce((screenCoord: Coord) => {
@@ -120,16 +132,21 @@ export class InventoryController {
     else if (item && this.selectedItem) {
       // Combine these items if possible
       const combinedItems = item.combine(this.selectedItem);
-      if (combinedItems.length > 0) {
-        inventory.remove(item);
-        inventory.addAt(slotCoord, combinedItems[0]);
-        this.selectedItem = combinedItems[1]; // possibly nothing
-      }
-      else {
-        // Otherwise swap item at hand with item in inventory
-        inventory.remove(item);
-        inventory.addAt(slotCoord, this.selectedItem);
-        this.selectedItem = item;
+      if (combinedItems instanceof Array) {
+        if (combinedItems.length > 0) {
+          inventory.remove(item);
+          inventory.addAt(slotCoord, combinedItems[0]);
+          this.selectedItem = combinedItems[1]; // possibly nothing
+        }
+        else {
+          // Otherwise swap item at hand with item in inventory
+          inventory.remove(item);
+          inventory.addAt(slotCoord, this.selectedItem);
+          this.selectedItem = item;
+        }
+      } else {
+        // A minigame is used for combining
+        this.miniGame = combinedItems;
       }
     }
   }

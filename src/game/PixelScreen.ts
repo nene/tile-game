@@ -99,4 +99,8 @@ export class PixelScreen {
   getOffset(): Coord {
     return this.offset;
   }
+
+  getSize(): Coord {
+    return this.virtualSize;
+  }
 }

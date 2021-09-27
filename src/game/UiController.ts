@@ -6,6 +6,7 @@ import { InventoryController } from "./InventoryController";
 import { Dialog } from "./Dialog";
 import { Overlay } from "./Overlay";
 import { CursorController } from "./CursorController";
+import { MiniGame } from "./minigames/MiniGame";
 
 export class UiController {
   private inventoryController: InventoryController;
@@ -29,7 +30,16 @@ export class UiController {
     this.inventoryController.showInventory(inventory, title);
   }
 
+  tick() {
+    this.inventoryController.tick();
+  }
+
   paint(screen: PixelScreen) {
+    if (this.getMiniGame()) {
+      this.getMiniGame()?.paint(screen);
+      return;
+    }
+
     if (this.dialog) {
       Overlay.paint(screen);
       this.dialog.paint(screen);
@@ -42,6 +52,11 @@ export class UiController {
   }
 
   handleClick(screenCoord: Coord): boolean {
+    if (this.getMiniGame()) {
+      this.getMiniGame()?.handleClick(screenCoord);
+      return true;
+    }
+
     if (this.dialog) {
       if (this.dialog.isCoordInView(screenCoord)) {
         this.dialog = undefined; // Close the dialog
@@ -51,9 +66,15 @@ export class UiController {
     return this.inventoryController.handleClick(screenCoord);
   }
 
-  handleMouseMove(screenCoord: Coord): boolean {
+  handleMouseMove(screenCoord: Coord) {
+    this.getMiniGame()?.handleMouseMove(screenCoord);
+
     this.cursorController.handleMouseMove(screenCoord);
-    return this.inventoryController.handleMouseMove(screenCoord);
+    this.inventoryController.handleMouseMove(screenCoord);
+  }
+
+  private getMiniGame(): MiniGame | undefined {
+    return this.inventoryController.getMiniGame();
   }
 
   showDialog(dialog: Dialog) {

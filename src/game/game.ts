@@ -8,7 +8,6 @@ import { CfeLocation } from "./CfeLocation";
 import { Coord, coordAdd, coordDistance } from "./Coord";
 import { UiController } from "./UiController";
 import { Loops } from "./Loops";
-import { OpeningGame } from "./minigames/OpeningGame";
 
 export interface GameApi {
   onKeyDown: (key: string) => boolean;
@@ -34,13 +33,12 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
   world.add(player);
 
   const uiController = new UiController(player.getInventory());
-  const miniGame = new OpeningGame(screenCfg);
 
   const loops = new Loops();
   loops.runGameLoop(() => {
     world.allObjects().forEach((obj) => obj.tick(world));
     world.sortObjects();
-    miniGame.tick();
+    uiController.tick();
     screenNeedsRepaint = true;
   });
 
@@ -52,7 +50,6 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
     background.paint(screen);
     world.allObjects().forEach((obj) => obj.paint(screen));
     uiController.paint(screen);
-    miniGame.paint(screen);
     screenNeedsRepaint = false;
   });
 
@@ -68,9 +65,6 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
     onClick: (coord: Coord) => {
       screenNeedsRepaint = true;
       const screenCoord = toPixelScale(coord, screenCfg.scale);
-      if (miniGame.handleClick(screenCoord)) {
-        return; // The click was handled by MiniGame
-      }
       if (uiController.handleClick(screenCoord)) {
         return; // The click was handled by UI
       }
@@ -83,12 +77,7 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
     onMouseMove: (coord: Coord) => {
       screenNeedsRepaint = true;
       const screenCoord = toPixelScale(coord, screenCfg.scale);
-      if (miniGame.handleMouseMove(screenCoord)) {
-        return; // The hover was handled by MiniGame
-      }
-      if (uiController.handleMouseMove(screenCoord)) {
-        return; // The hover was handled by UI
-      }
+      uiController.handleMouseMove(screenCoord);
     },
     cleanup: () => {
       loops.cleanup();

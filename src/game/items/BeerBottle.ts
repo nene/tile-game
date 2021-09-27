@@ -1,3 +1,4 @@
+import { MiniGame } from "../minigames/MiniGame";
 import { Sprite } from "../Sprite";
 import { SpriteLibrary } from "../SpriteLibrary";
 import { SpriteSheet } from "../SpriteSheet";
@@ -62,12 +63,12 @@ export class BeerBottle implements GameItem {
     }
   }
 
-  combine(item: GameItem): GameItem[] {
+  combine(item: GameItem): GameItem[] | MiniGame {
     if (item instanceof BeerGlass) {
       return item.combine(this).reverse(); // Keep main logic in beer-glass
     }
     if (item instanceof BottleOpener) {
-      return item.combine(this).reverse(); // Keep main logic in bottle-opener
+      return item.combine(this); // Keep main logic in bottle-opener
     }
     return [];
   }

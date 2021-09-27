@@ -1,4 +1,5 @@
-import { SoundLibrary } from "../SoundLibrary";
+import { MiniGame } from "../minigames/MiniGame";
+import { OpeningGame } from "../minigames/OpeningGame";
 import { Sprite } from "../Sprite";
 import { SpriteLibrary } from "../SpriteLibrary";
 import { BeerBottle } from "./BeerBottle";
@@ -19,11 +20,9 @@ export class BottleOpener implements GameItem {
     return this.sprite;
   }
 
-  combine(item: GameItem): GameItem[] {
+  combine(item: GameItem): GameItem[] | MiniGame {
     if (item instanceof BeerBottle && !item.isOpen()) {
-      item.open();
-      SoundLibrary.play("opening-beer");
-      return [this, item];
+      return new OpeningGame(item, this);
     }
     return [];
   }
