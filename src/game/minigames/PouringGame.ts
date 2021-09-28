@@ -17,6 +17,7 @@ export class PouringGame implements MiniGame {
   private bottleCoord: Coord;
   private beerCoord: Coord;
   private tickCounter = 0;
+  private flowing = false;
 
   constructor() {
     this.bgSprite = SpriteLibrary.get("pouring-game-bg").getSprite([0, 0]);
@@ -35,7 +36,9 @@ export class PouringGame implements MiniGame {
 
   paint(screen: PixelScreen) {
     this.drawBackground(screen);
-    screen.drawRect({ coord: coordAdd(this.bottleCoord, [-1, -1]), size: [this.getFlowAmount(), 200] }, "rgba(252,225,180,185)");
+    if (this.flowing) {
+      screen.drawRect({ coord: coordAdd(this.bottleCoord, [-1, -1]), size: [this.getFlowAmount(), 200] }, "rgba(252,225,180,185)");
+    }
     screen.drawSprite(this.bottleSprite, this.bottleCoord, { fixed: true });
     screen.drawSprite(this.beerFoamSprite, GLASS_COORD, { fixed: true })
     screen.drawSprite(this.beerSprite, this.beerCoord, { fixed: true })
@@ -50,9 +53,13 @@ export class PouringGame implements MiniGame {
     this.bottleCoord = coord;
   }
 
-  handleMouseDown() { }
+  handleMouseDown() {
+    this.flowing = true;
+  }
 
-  handleMouseUp() { }
+  handleMouseUp() {
+    this.flowing = false;
+  }
 
   private getFlowAmount(): number {
     const glassTop = GLASS_COORD[1];
