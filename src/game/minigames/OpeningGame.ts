@@ -30,6 +30,7 @@ export class OpeningGame implements MiniGame {
   private captureThreshold = 5;
   private noise: SimplexNoise;
   private tickCounter = 0;
+  private clicksAfterOpen = 0;
   private finishAtTick = 60 * 10; // Total amount of time for opening the bottle
 
   constructor(private bottle: BeerBottle, private opener: BottleOpener) {
@@ -69,17 +70,13 @@ export class OpeningGame implements MiniGame {
     screen.drawSprite(this.openerSprite, this.openerCoord, { fixed: true });
   }
 
-  handleClick(coord: Coord) {
-    this.openerCoord = coord;
-    this.captureStatus = this.checkCaptureStatus();
-    if (this.captureStatus === CaptureStatus.hit && !this.bottle.isOpen()) {
-      this.finishAtTick = this.tickCounter + 50; // Wait max 5 seconds before closing the minigame screen
-      this.bottle.open();
-      SoundLibrary.play("opening-beer");
-    }
-    else if (this.bottle.isOpen()) {
-      // when already open, finish on the second click
-      this.finishAtTick = this.tickCounter;
+  handleClick() {
+    if (this.bottle.isOpen()) {
+      this.clicksAfterOpen++;
+      if (this.clicksAfterOpen === 2) {
+        // when already open, finish on the second click
+        this.finishAtTick = this.tickCounter;
+      }
     }
   }
 
@@ -88,7 +85,15 @@ export class OpeningGame implements MiniGame {
     this.captureStatus = this.checkCaptureStatus();
   }
 
-  handleMouseDown() { }
+  handleMouseDown(coord: Coord) {
+    this.openerCoord = coord;
+    this.captureStatus = this.checkCaptureStatus();
+    if (this.captureStatus === CaptureStatus.hit && !this.bottle.isOpen()) {
+      this.finishAtTick = this.tickCounter + 50; // Wait max 5 seconds before closing the minigame screen
+      this.bottle.open();
+      SoundLibrary.play("opening-beer");
+    }
+  }
 
   handleMouseUp() { }
 
