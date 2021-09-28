@@ -18,6 +18,11 @@ import openingGameBg from "./sprites/opening-game-bg.png";
 import bottleXl from "./sprites/bottle-xl.png";
 import bottleCapXl from "./sprites/bottle-cap-xl.png";
 import bottleOpenerXl from "./sprites/bottle-opener-xl.png";
+import pouringGameBg from "./sprites/pouring-game-bg.png";
+import beerGlassXl from "./sprites/beer-glass-xl.png";
+import beerXl from "./sprites/beer-xl.png";
+import beerFoamXl from "./sprites/beer-foam-xl.png";
+
 import { Coord } from "./Coord";
 import { SpriteSheet, SpriteSheetConfig } from "./SpriteSheet";
 
@@ -55,6 +60,12 @@ const imageFiles = {
   'bottle-xl': spriteDef({ src: bottleXl, cfg: { size: [109, 107], colsRows: [1, 1], offset: [-103, -101] } }),
   'bottle-cap-xl': spriteDef({ src: bottleCapXl, cfg: { size: [14, 14], colsRows: [2, 1], offset: [-6, -6] } }),
   'bottle-opener-xl': spriteDef({ src: bottleOpenerXl, cfg: { size: [32, 31], colsRows: [1, 1], offset: [-10, -10] } }),
+
+  // beer-pouring game
+  'pouring-game-bg': spriteDef({ src: pouringGameBg, cfg: { size: [16, 16], colsRows: [1, 1] } }),
+  'beer-glass-xl': spriteDef({ src: beerGlassXl, cfg: { size: [76, 91], colsRows: [1, 1], offset: [-4, 0] } }),
+  'beer-xl': spriteDef({ src: beerXl, cfg: { size: [47, 59], colsRows: [1, 1] } }),
+  'beer-foam-xl': spriteDef({ src: beerFoamXl, cfg: { size: [47, 86], colsRows: [1, 1], offset: [0, -8] } }),
 };
 
 type SpriteName = keyof typeof imageFiles;
