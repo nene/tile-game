@@ -5,8 +5,8 @@ import { SpriteLibrary } from "../SpriteLibrary";
 import { MiniGame } from "./MiniGame";
 
 const GLASS_COORD: Coord = [136, 98];
-const BEER_MIN_LEVEL: Coord = [136, 176];
-const BEER_MAX_LEVEL: Coord = [136, 117];
+const MIN_LEVEL: Coord = [136, 176];
+const MAX_LEVEL: Coord = [136, 90];
 const MAX_FLOW = 6;
 
 export class PouringGame implements MiniGame {
@@ -17,9 +17,8 @@ export class PouringGame implements MiniGame {
   private beerSprite: Sprite;
   private beerFoamSprite: Sprite;
   private bottleCoord: Coord;
-  private beerCoord: Coord;
   private pouring = false;
-  private beerInBottle = 100;
+  private beerInBottle = 69;
   private beerInGlass = 0;
   private foamInGlass = 0;
 
@@ -31,14 +30,13 @@ export class PouringGame implements MiniGame {
     this.beerSprite = SpriteLibrary.get("beer-xl").getSprite([0, 0]);
     this.beerFoamSprite = SpriteLibrary.get("beer-foam-xl").getSprite([0, 0]);
     this.bottleCoord = [0, 0];
-    this.beerCoord = coordAdd(GLASS_COORD, [0, 19]);
   }
 
   tick() {
     if (this.isFlowing()) {
       this.beerInBottle -= this.getFlowAmount();
       this.beerInGlass = Math.min(100, this.beerInGlass + this.getFlowAmount());
-      this.foamInGlass = Math.min(100, this.foamInGlass + this.getFlowAmount() / 3);
+      this.foamInGlass = Math.min(100 - this.beerInGlass, this.foamInGlass + (this.getFlowAmount() * this.getFlowAmount()) / 3);
     }
   }
 
@@ -49,11 +47,11 @@ export class PouringGame implements MiniGame {
     }
     screen.drawSprite(this.bottleSprite, this.bottleCoord, { fixed: true });
 
-    const beerY = this.beerInGlass / 100 * (BEER_MIN_LEVEL[1] - BEER_MAX_LEVEL[1]);
-    const foamY = beerY + (this.foamInGlass / 100 * (BEER_MIN_LEVEL[1] - BEER_MAX_LEVEL[1]));
-    screen.drawSprite(this.beerFoamSprite, coordSub(BEER_MIN_LEVEL, [0, foamY]), { fixed: true });
+    const beerY = this.beerInGlass / 100 * (MIN_LEVEL[1] - MAX_LEVEL[1]);
+    const foamY = beerY + (this.foamInGlass / 100 * (MIN_LEVEL[1] - MAX_LEVEL[1]));
+    screen.drawSprite(this.beerFoamSprite, coordSub(MIN_LEVEL, [0, foamY]), { fixed: true });
 
-    screen.drawSprite(this.beerSprite, coordSub(BEER_MIN_LEVEL, [0, beerY]), { fixed: true });
+    screen.drawSprite(this.beerSprite, coordSub(MIN_LEVEL, [0, beerY]), { fixed: true });
 
     this.drawTable(screen);
     screen.drawSprite(this.beerGlassSprite, GLASS_COORD, { fixed: true });
@@ -75,7 +73,7 @@ export class PouringGame implements MiniGame {
   }
 
   private isFlowing(): boolean {
-    return this.pouring && this.beerInBottle > 0;
+    return this.pouring && this.beerInBottle > 0 && this.beerInGlass + this.foamInGlass < 100;
   }
 
   private getFlowAmount(): number {
