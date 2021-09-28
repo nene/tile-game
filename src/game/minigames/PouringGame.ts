@@ -21,6 +21,7 @@ export class PouringGame implements MiniGame {
   private beerInBottle = 69;
   private beerInGlass = 0;
   private foamInGlass = 0;
+  private clicksAfterFinished = 0;
 
   constructor() {
     this.bgSprite = SpriteLibrary.get("pouring-game-bg").getSprite([0, 0]);
@@ -58,6 +59,9 @@ export class PouringGame implements MiniGame {
   }
 
   handleClick(coord: Coord) {
+    if (this.isGlassFull() || this.beerInBottle <= 0) {
+      this.clicksAfterFinished++;
+    }
   }
 
   handleMouseMove(coord: Coord) {
@@ -73,7 +77,11 @@ export class PouringGame implements MiniGame {
   }
 
   private isFlowing(): boolean {
-    return this.pouring && this.beerInBottle > 0 && this.beerInGlass + this.foamInGlass < 100;
+    return this.pouring && this.beerInBottle > 0 && !this.isGlassFull();
+  }
+
+  private isGlassFull() {
+    return this.beerInGlass + this.foamInGlass >= 100;
   }
 
   private getFlowAmount(): number {
@@ -92,7 +100,7 @@ export class PouringGame implements MiniGame {
   }
 
   isFinished(): boolean {
-    return false;
+    return this.clicksAfterFinished >= 2;
   }
 
   private drawBackground(screen: PixelScreen) {
