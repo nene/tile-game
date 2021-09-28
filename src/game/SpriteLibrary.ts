@@ -64,7 +64,7 @@ const imageFiles = {
   // beer-pouring game
   'pouring-game-bg': spriteDef({ src: pouringGameBg, cfg: { size: [16, 16], colsRows: [1, 1] } }),
   'beer-glass-xl': spriteDef({ src: beerGlassXl, cfg: { size: [76, 91], colsRows: [1, 1], offset: [-4, 0] } }),
-  'beer-xl': spriteDef({ src: beerXl, cfg: { size: [47, 59], colsRows: [1, 1] } }),
+  'beer-xl': spriteDef({ src: beerXl, cfg: { size: [47, 59], colsRows: [15, 1] } }),
   'beer-foam-xl': spriteDef({ src: beerFoamXl, cfg: { size: [47, 86], colsRows: [1, 1] } }),
 };
 

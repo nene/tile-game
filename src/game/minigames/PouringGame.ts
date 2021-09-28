@@ -4,6 +4,7 @@ import { BeerGlass, BeerLevel } from "../items/BeerGlass";
 import { PixelScreen } from "../PixelScreen";
 import { SoundLibrary } from "../SoundLibrary";
 import { Sprite } from "../Sprite";
+import { SpriteAnimation } from "../SpriteAnimation";
 import { SpriteLibrary } from "../SpriteLibrary";
 import { MiniGame } from "./MiniGame";
 
@@ -17,7 +18,7 @@ export class PouringGame implements MiniGame {
   private tableSprite: Sprite;
   private bottleSprite: Sprite;
   private beerGlassSprite: Sprite;
-  private beerSprite: Sprite;
+  private beerAnimation: SpriteAnimation;
   private beerFoamSprite: Sprite;
   private bottleCoord: Coord;
   private pouring = false;
@@ -31,12 +32,13 @@ export class PouringGame implements MiniGame {
     this.tableSprite = SpriteLibrary.get("opening-game-bg").getSprite([0, 0]);
     this.bottleSprite = SpriteLibrary.get("bottle-xl").getSprite([0, 0]);
     this.beerGlassSprite = SpriteLibrary.get("beer-glass-xl").getSprite([0, 0]);
-    this.beerSprite = SpriteLibrary.get("beer-xl").getSprite([0, 0]);
+    this.beerAnimation = new SpriteAnimation(SpriteLibrary.get("beer-xl"), { frames: { from: [0, 0], to: [14, 0] } });
     this.beerFoamSprite = SpriteLibrary.get("beer-foam-xl").getSprite([0, 0]);
     this.bottleCoord = [0, 0];
   }
 
   tick() {
+    this.beerAnimation.tick();
     if (this.isFlowing()) {
       this.beerInBottle -= this.getFlowAmount();
       this.beerInGlass = Math.min(100, this.beerInGlass + this.getFlowAmount());
@@ -75,7 +77,7 @@ export class PouringGame implements MiniGame {
     const foamY = beerY + (this.foamInGlass / 100 * (MIN_LEVEL[1] - MAX_LEVEL[1]));
     screen.drawSprite(this.beerFoamSprite, coordSub(MIN_LEVEL, [0, foamY]), { fixed: true });
 
-    screen.drawSprite(this.beerSprite, coordSub(MIN_LEVEL, [0, beerY]), { fixed: true });
+    screen.drawSprite(this.beerAnimation.getSprite(), coordSub(MIN_LEVEL, [0, beerY]), { fixed: true });
 
     this.drawTable(screen);
     screen.drawSprite(this.beerGlassSprite, GLASS_COORD, { fixed: true });
