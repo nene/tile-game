@@ -6,7 +6,6 @@ import { GameItem } from "./items/GameItem";
 import { debounce } from "lodash";
 import { Overlay } from "./Overlay";
 import { MiniGame } from "./minigames/MiniGame";
-import { PouringGame } from "./minigames/PouringGame";
 
 export class InventoryController {
   private playerInventoryView: InventoryView;
@@ -19,7 +18,6 @@ export class InventoryController {
 
   constructor(private playerInventory: Inventory) {
     this.playerInventoryView = new InventoryView(playerInventory, [107, 200 - 22]);
-    this.miniGame = new PouringGame();
   }
 
   getSelectedItem(): GameItem | undefined {

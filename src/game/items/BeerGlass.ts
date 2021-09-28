@@ -1,4 +1,5 @@
-import { SoundLibrary } from "../SoundLibrary";
+import { MiniGame } from "../minigames/MiniGame";
+import { PouringGame } from "../minigames/PouringGame";
 import { Sprite } from "../Sprite";
 import { SpriteLibrary } from "../SpriteLibrary";
 import { SpriteSheet } from "../SpriteSheet";
@@ -22,12 +23,9 @@ export class BeerGlass implements GameItem {
     this.smallSpriteSheet = SpriteLibrary.get("beer-sm");
   }
 
-  combine(item: GameItem): GameItem[] {
+  combine(item: GameItem): GameItem[] | MiniGame {
     if (item instanceof BeerBottle && !item.isEmpty() && item.isOpen() && this.level === BeerLevel.empty) {
-      item.empty();
-      this.fill();
-      SoundLibrary.play("pouring-beer");
-      return [this, item];
+      return new PouringGame(this, item);
     }
     return [];
   }

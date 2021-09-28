@@ -1,5 +1,8 @@
 import { Coord, coordAdd, coordDiv, coordSub, Rect, tileToScreenCoord } from "../Coord";
+import { BeerBottle } from "../items/BeerBottle";
+import { BeerGlass } from "../items/BeerGlass";
 import { PixelScreen } from "../PixelScreen";
+import { SoundLibrary } from "../SoundLibrary";
 import { Sprite } from "../Sprite";
 import { SpriteLibrary } from "../SpriteLibrary";
 import { MiniGame } from "./MiniGame";
@@ -23,7 +26,7 @@ export class PouringGame implements MiniGame {
   private foamInGlass = 0;
   private clicksAfterFinished = 0;
 
-  constructor() {
+  constructor(private glass: BeerGlass, private bottle: BeerBottle) {
     this.bgSprite = SpriteLibrary.get("pouring-game-bg").getSprite([0, 0]);
     this.tableSprite = SpriteLibrary.get("opening-game-bg").getSprite([0, 0]);
     this.bottleSprite = SpriteLibrary.get("bottle-xl").getSprite([0, 0]);
@@ -38,6 +41,10 @@ export class PouringGame implements MiniGame {
       this.beerInBottle -= this.getFlowAmount();
       this.beerInGlass = Math.min(100, this.beerInGlass + this.getFlowAmount());
       this.foamInGlass = Math.min(100 - this.beerInGlass, this.foamInGlass + (this.getFlowAmount() * this.getFlowAmount()) / 3);
+    }
+    if (this.isFinished()) {
+      this.bottle.empty();
+      this.glass.fill();
     }
   }
 
@@ -70,6 +77,9 @@ export class PouringGame implements MiniGame {
 
   handleMouseDown() {
     this.pouring = true;
+    if (!this.isGlassFull()) {
+      SoundLibrary.play("pouring-beer");
+    }
   }
 
   handleMouseUp() {

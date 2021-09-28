@@ -65,7 +65,7 @@ export class BeerBottle implements GameItem {
 
   combine(item: GameItem): GameItem[] | MiniGame {
     if (item instanceof BeerGlass) {
-      return item.combine(this).reverse(); // Keep main logic in beer-glass
+      return item.combine(this); // Keep main logic in beer-glass
     }
     if (item instanceof BottleOpener) {
       return item.combine(this); // Keep main logic in bottle-opener
