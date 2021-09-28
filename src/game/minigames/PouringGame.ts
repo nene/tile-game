@@ -1,6 +1,6 @@
 import { Coord, coordAdd, coordDiv, coordSub, Rect, tileToScreenCoord } from "../Coord";
 import { BeerBottle } from "../items/BeerBottle";
-import { BeerGlass } from "../items/BeerGlass";
+import { BeerGlass, BeerLevel } from "../items/BeerGlass";
 import { PixelScreen } from "../PixelScreen";
 import { SoundLibrary } from "../SoundLibrary";
 import { Sprite } from "../Sprite";
@@ -44,8 +44,24 @@ export class PouringGame implements MiniGame {
     }
     if (this.isFinished()) {
       this.bottle.empty();
-      this.glass.fill();
+      this.glass.fill(this.getBeerLevel());
     }
+  }
+
+  private getBeerLevel(): BeerLevel {
+    if (this.beerInBottle <= 0) {
+      return BeerLevel.full;
+    }
+    if (this.beerInBottle <= 17) {
+      return BeerLevel.almostFull;
+    }
+    if (this.beerInBottle <= 35) {
+      return BeerLevel.half;
+    }
+    if (this.beerInBottle <= 52) {
+      return BeerLevel.almostEmpty;
+    }
+    return BeerLevel.empty;
   }
 
   paint(screen: PixelScreen) {
@@ -77,7 +93,7 @@ export class PouringGame implements MiniGame {
 
   handleMouseDown() {
     this.pouring = true;
-    if (!this.isGlassFull()) {
+    if (this.isFlowing()) {
       SoundLibrary.play("pouring-beer");
     }
   }

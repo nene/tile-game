@@ -40,8 +40,8 @@ export class BeerGlass implements GameItem {
     }
   }
 
-  fill() {
-    this.level = BeerLevel.full;
+  fill(level: BeerLevel) {
+    this.level = level;
   }
 
   drink() {
