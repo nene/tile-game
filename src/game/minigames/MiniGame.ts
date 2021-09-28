@@ -6,5 +6,7 @@ export interface MiniGame {
   paint: (screen: PixelScreen) => void;
   handleClick: (coord: Coord) => void;
   handleMouseMove: (coord: Coord) => void;
+  handleMouseDown: (coord: Coord) => void;
+  handleMouseUp: (coord: Coord) => void;
   isFinished: () => boolean;
 }

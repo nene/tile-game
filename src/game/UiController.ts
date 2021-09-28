@@ -73,6 +73,14 @@ export class UiController {
     this.inventoryController.handleMouseMove(screenCoord);
   }
 
+  handleMouseDown(screenCoord: Coord) {
+    this.getMiniGame()?.handleMouseDown(screenCoord);
+  }
+
+  handleMouseUp(screenCoord: Coord) {
+    this.getMiniGame()?.handleMouseUp(screenCoord);
+  }
+
   private getMiniGame(): MiniGame | undefined {
     return this.inventoryController.getMiniGame();
   }

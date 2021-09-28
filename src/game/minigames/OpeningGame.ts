@@ -88,6 +88,10 @@ export class OpeningGame implements MiniGame {
     this.captureStatus = this.checkCaptureStatus();
   }
 
+  handleMouseDown() { }
+
+  handleMouseUp() { }
+
   isFinished(): boolean {
     return this.tickCounter > this.finishAtTick;
   }

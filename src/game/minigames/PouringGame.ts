@@ -50,7 +50,11 @@ export class PouringGame implements MiniGame {
     this.bottleCoord = coord;
   }
 
-  getFlowAmount(): number {
+  handleMouseDown() { }
+
+  handleMouseUp() { }
+
+  private getFlowAmount(): number {
     const glassTop = GLASS_COORD[1];
     const bottleY = this.bottleCoord[1];
     const ceilingY = 32;

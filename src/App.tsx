@@ -38,6 +38,12 @@ export function App() {
     const onMouseMove = (e: MouseEvent) => {
       gameApi.onMouseMove(mouseCoordRelativeTo(e, canvas));
     };
+    const onMouseDown = (e: MouseEvent) => {
+      gameApi.onMouseDown(mouseCoordRelativeTo(e, canvas));
+    };
+    const onMouseUp = (e: MouseEvent) => {
+      gameApi.onMouseUp(mouseCoordRelativeTo(e, canvas));
+    };
 
     const game = async () => {
       gameApi = await runGame(ctx, {
@@ -51,6 +57,8 @@ export function App() {
 
       canvas.addEventListener("click", onClick);
       canvas.addEventListener("mousemove", onMouseMove);
+      canvas.addEventListener("mousedown", onMouseDown);
+      canvas.addEventListener("mouseup", onMouseUp);
     };
     game();
 
@@ -60,6 +68,8 @@ export function App() {
       document.removeEventListener("keyup", onKeyUp);
       canvas.removeEventListener("click", onClick);
       canvas.removeEventListener("mousemove", onMouseMove);
+      canvas.removeEventListener("mousedown", onMouseDown);
+      canvas.removeEventListener("mouseup", onMouseUp);
     };
   }, []);
 
