@@ -37,7 +37,7 @@ export class InventoryController {
     return this.miniGame;
   }
 
-  isGamePaused(): boolean {
+  isObjectInventoryShown(): boolean {
     return Boolean(this.objectInventory);
   }
 

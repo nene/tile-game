@@ -51,8 +51,8 @@ export class UiController {
     this.cursorController.paint(screen);
   }
 
-  isGamePaused(): boolean {
-    return this.inventoryController.isGamePaused() || Boolean(this.dialog);
+  isGameWorldActive(): boolean {
+    return !this.inventoryController.isObjectInventoryShown() && !this.dialog;
   }
 
   isGameWorldVisible(): boolean {

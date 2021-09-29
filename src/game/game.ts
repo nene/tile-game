@@ -38,7 +38,7 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
 
   const loops = new Loops();
   loops.runGameLoop(() => {
-    if (!uiController.isGamePaused()) {
+    if (uiController.isGameWorldActive()) {
       world.allObjects().forEach((obj) => obj.tick(world));
       world.sortObjects();
     }
