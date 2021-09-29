@@ -1,4 +1,4 @@
-import { Coord, coordAdd, coordDiv, coordSub, Rect, tileToScreenCoord } from "../Coord";
+import { Coord, coordAdd, coordDiv, coordSub, isCoordInRect, Rect, tileToScreenCoord } from "../Coord";
 import { BeerBottle } from "../items/BeerBottle";
 import { BeerGlass, BeerLevel } from "../items/BeerGlass";
 import { PixelScreen } from "../PixelScreen";
@@ -11,6 +11,7 @@ import { MiniGame } from "./MiniGame";
 const GLASS_COORD: Coord = [136, 98];
 const MIN_LEVEL: Coord = [136, 176];
 const MAX_LEVEL: Coord = [136, 90];
+const POURING_AREA: Rect = { coord: [136, 0], size: [47, 98] };
 const MAX_FLOW = 6;
 
 export class PouringGame implements MiniGame {
@@ -40,9 +41,11 @@ export class PouringGame implements MiniGame {
   tick() {
     this.beerAnimation.tick();
     if (this.isFlowing()) {
-      this.beerInBottle -= this.getFlowAmount();
-      this.beerInGlass = Math.min(100, this.beerInGlass + this.getFlowAmount());
-      this.foamInGlass = Math.min(100 - this.beerInGlass, this.foamInGlass + (this.getFlowAmount() * this.getFlowAmount()) / 3);
+      this.beerInBottle = Math.max(0, this.beerInBottle - this.getFlowAmount());
+      if (this.isPouringToGlass()) {
+        this.beerInGlass = Math.min(100, this.beerInGlass + this.getFlowAmount());
+        this.foamInGlass = Math.min(100 - this.beerInGlass, this.foamInGlass + (this.getFlowAmount() * this.getFlowAmount()) / 3);
+      }
     }
     if (this.isFinished()) {
       this.bottle.empty();
@@ -50,17 +53,21 @@ export class PouringGame implements MiniGame {
     }
   }
 
+  private isPouringToGlass(): boolean {
+    return isCoordInRect(this.bottleCoord, POURING_AREA);
+  }
+
   private getBeerLevel(): BeerLevel {
-    if (this.beerInBottle <= 0) {
+    if (this.beerInGlass > 52) {
       return BeerLevel.full;
     }
-    if (this.beerInBottle <= 17) {
+    if (this.beerInGlass > 35) {
       return BeerLevel.almostFull;
     }
-    if (this.beerInBottle <= 35) {
+    if (this.beerInGlass > 17) {
       return BeerLevel.half;
     }
-    if (this.beerInBottle <= 52) {
+    if (this.beerInGlass > 0) {
       return BeerLevel.almostEmpty;
     }
     return BeerLevel.empty;
@@ -81,6 +88,8 @@ export class PouringGame implements MiniGame {
 
     this.drawTable(screen);
     screen.drawSprite(this.beerGlassSprite, GLASS_COORD, { fixed: true });
+
+    screen.drawText("In glass: " + this.beerInGlass, "#000", [10, 10]);
   }
 
   handleClick(coord: Coord) {
