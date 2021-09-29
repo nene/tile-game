@@ -50,9 +50,11 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
     if (!screenNeedsRepaint) {
       return; // Don't paint when app state hasn't changed
     }
-    screen.centerTo(player.getCoord(), world);
-    background.paint(screen);
-    world.allObjects().forEach((obj) => obj.paint(screen));
+    if (uiController.isGameWorldVisible()) {
+      screen.centerTo(player.getCoord(), world);
+      background.paint(screen);
+      world.allObjects().forEach((obj) => obj.paint(screen));
+    }
     uiController.paint(screen);
     screenNeedsRepaint = false;
   });

@@ -55,6 +55,10 @@ export class UiController {
     return this.inventoryController.isGamePaused() || Boolean(this.dialog);
   }
 
+  isGameWorldVisible(): boolean {
+    return !this.inventoryController.getMiniGame();
+  }
+
   handleClick(screenCoord: Coord): boolean {
     if (this.getMiniGame()) {
       this.getMiniGame()?.handleClick(screenCoord);
