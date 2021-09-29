@@ -1,7 +1,8 @@
 import { Coord, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
 import { Inventory } from "../Inventory";
-import { BeerBottle, BeerType } from "../items/BeerBottle";
+import { BeerBottle, BeerType, CapState } from "../items/BeerBottle";
+import { BeerGlass, BeerLevel } from "../items/BeerGlass";
 import { PixelScreen } from "../PixelScreen";
 import { SoundLibrary } from "../SoundLibrary";
 import { Sprite } from "../Sprite";
@@ -24,8 +25,8 @@ export class Fridge implements GameObject {
         new BeerBottle(BeerType.heineken),
         new BeerBottle(BeerType.heineken),
         new BeerBottle(BeerType.special),
-        new BeerBottle(BeerType.special),
-        new BeerBottle(BeerType.special),
+        new BeerBottle(BeerType.special, CapState.open),
+        new BeerGlass(BeerLevel.empty),
       ],
     });
   }

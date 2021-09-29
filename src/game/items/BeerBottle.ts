@@ -12,7 +12,7 @@ export enum BeerType {
   special = 3,
 }
 
-enum CapState {
+export enum CapState {
   closed = 1,
   open = 2,
 }
@@ -26,9 +26,8 @@ const beerNames = {
 export class BeerBottle implements GameItem {
   private spriteSheet: SpriteSheet;
   private full = true;
-  private capState = CapState.closed;
 
-  constructor(private type: BeerType) {
+  constructor(private type: BeerType, private capState = CapState.closed) {
     this.spriteSheet = SpriteLibrary.get("bottle");
   }
 
