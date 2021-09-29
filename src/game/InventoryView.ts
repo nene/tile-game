@@ -38,7 +38,7 @@ export class InventoryView {
   }
 
   private drawTitle(text: string, screen: PixelScreen) {
-    screen.drawText(text, "#8f563b", coordAdd(this.coord, [1, 9]));
+    screen.drawText(text, "#8f563b", coordAdd(this.coord, [1, 1]));
   }
 
   isCoordInView(screenCoord: Coord): boolean {

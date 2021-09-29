@@ -29,6 +29,7 @@ export class PixelScreen {
     this.ctx.scale(scale, scale);
     this.ctx.imageSmoothingEnabled = false;
     this.ctx.font = "9px NineteenNinetySix";
+    this.ctx.textBaseline = "top";
   }
 
   drawSprite(sprite: Sprite, coord: Coord, opts?: DrawSpriteOptions) {
@@ -71,12 +72,15 @@ export class PixelScreen {
 
   drawText(text: string, color: string, coord: Coord) {
     this.ctx.fillStyle = color;
-    this.ctx.fillText(text, coord[0], coord[1]);
+    // We're using 9px font, but we're better off leaving 1px extra room at the top
+    // so that if we want to pad the text we can add the same amount of room to each side.
+    this.ctx.fillText(text, coord[0], coord[1] + 1);
   }
 
   measureText(text: string): Coord {
+    // for some reason the text is measured 1px larger than it actually is
     const { width } = this.ctx.measureText(text);
-    return [width, 9]; // We're using 9px font
+    return [width - 1, 10]; // Report 9px font as 10px (see comment above)
   }
 
   saveBg() {

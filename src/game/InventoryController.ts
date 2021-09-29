@@ -70,9 +70,10 @@ export class InventoryController {
   }
 
   private drawTooltip(item: GameItem, screen: PixelScreen) {
+    const tipCoord = coordAdd(this.mouseCoord, [9, 1]);
     const textSize = screen.measureText(item.getName());
-    screen.drawRect({ coord: coordAdd(this.mouseCoord, [9, 1]), size: coordAdd(textSize, [1, 3]) }, "#c8b997");
-    screen.drawText(item.getName(), "#3e2821", coordAdd(this.mouseCoord, [10, 10]));
+    screen.drawRect({ coord: tipCoord, size: coordAdd(textSize, [4, 2]) }, "#c8b997");
+    screen.drawText(item.getName(), "#3e2821", coordAdd(tipCoord, [2, 1]));
   }
 
   handleClick(screenCoord: Coord): boolean {
