@@ -1,5 +1,5 @@
 import { Bursh } from "./Bursh";
-import { Coord, coordAdd, coordSub, isCoordInRect, Rect } from "./Coord";
+import { Coord, coordAdd, isCoordInRect, Rect, rectGrow } from "./Coord";
 import { PixelScreen } from "./PixelScreen";
 
 export class Dialog {
@@ -14,7 +14,7 @@ export class Dialog {
   }
 
   private drawContainer(screen: PixelScreen) {
-    screen.drawRect({ coord: coordSub(this.rect.coord, [1, 1]), size: coordAdd(this.rect.size, [2, 2]) }, "#3e2821", { fixed: true });
+    screen.drawRect(rectGrow(this.rect, [1, 1]), "#3e2821", { fixed: true });
     screen.drawRect(this.rect, "#c8b997", { fixed: true });
   }
 

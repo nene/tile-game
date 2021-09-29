@@ -1,7 +1,7 @@
 import { Inventory } from "./Inventory";
 import { PixelScreen } from "./PixelScreen";
 import { InventoryView } from "./InventoryView";
-import { Coord, coordAdd, coordSub } from "./Coord";
+import { Coord, coordAdd, coordSub, rectGrow } from "./Coord";
 import { GameItem } from "./items/GameItem";
 import { debounce } from "lodash";
 import { Overlay } from "./Overlay";
@@ -70,10 +70,10 @@ export class InventoryController {
   }
 
   private drawTooltip(item: GameItem, screen: PixelScreen) {
-    const tipCoord = coordAdd(this.mouseCoord, [9, 1]);
+    const textCoord = coordAdd(this.mouseCoord, [11, 2]);
     const textSize = screen.measureText(item.getName());
-    screen.drawRect({ coord: tipCoord, size: coordAdd(textSize, [4, 2]) }, "#c8b997");
-    screen.drawText(item.getName(), "#3e2821", coordAdd(tipCoord, [2, 1]));
+    screen.drawRect(rectGrow({ coord: textCoord, size: textSize }, [2, 1]), "#c8b997");
+    screen.drawText(item.getName(), "#3e2821", textCoord);
   }
 
   handleClick(screenCoord: Coord): boolean {

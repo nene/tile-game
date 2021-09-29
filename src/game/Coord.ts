@@ -65,6 +65,10 @@ export function rectOverlaps({ coord: a1, size: aSize }: Rect, { coord: b1, size
   return xOverlaps && yOverlaps;
 }
 
+export function rectGrow({ coord, size }: Rect, padding: Coord): Rect {
+  return { coord: coordSub(coord, padding), size: coordAdd(size, coordMul(padding, [2, 2])) };
+}
+
 const TILE_SIZE: Coord = [16, 16];
 
 export function tileToScreenCoord(tileCoord: Coord): Coord {
