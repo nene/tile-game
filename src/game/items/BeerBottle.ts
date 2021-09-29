@@ -24,7 +24,7 @@ export class BeerBottle implements GameItem {
     if (!this.full) {
       return "Tühi pudel";
     }
-    return this.beer.name + " " + (this.isOpen() ? "(avatud)" : "(kinni)");
+    return this.beer.name + (this.isOpen() ? " (avatud)" : "");
   }
 
   empty() {
