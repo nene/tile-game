@@ -37,6 +37,10 @@ export class InventoryController {
     return this.miniGame;
   }
 
+  isGamePaused(): boolean {
+    return Boolean(this.objectInventory);
+  }
+
   private hideInventory() {
     this.objectInventory = undefined;
     this.objectInventoryView = undefined;

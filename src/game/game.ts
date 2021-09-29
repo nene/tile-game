@@ -38,8 +38,10 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
 
   const loops = new Loops();
   loops.runGameLoop(() => {
-    world.allObjects().forEach((obj) => obj.tick(world));
-    world.sortObjects();
+    if (!uiController.isGamePaused()) {
+      world.allObjects().forEach((obj) => obj.tick(world));
+      world.sortObjects();
+    }
     uiController.tick();
     screenNeedsRepaint = true;
   });

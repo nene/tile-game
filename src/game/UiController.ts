@@ -51,6 +51,10 @@ export class UiController {
     this.cursorController.paint(screen);
   }
 
+  isGamePaused(): boolean {
+    return this.inventoryController.isGamePaused() || Boolean(this.dialog);
+  }
+
   handleClick(screenCoord: Coord): boolean {
     if (this.getMiniGame()) {
       this.getMiniGame()?.handleClick(screenCoord);
