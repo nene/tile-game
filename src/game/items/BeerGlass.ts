@@ -19,8 +19,8 @@ export class BeerGlass implements GameItem {
   private smallSpriteSheet: SpriteSheet;
 
   constructor(private level: BeerLevel) {
-    this.spriteSheet = SpriteLibrary.get("beer-lg");
-    this.smallSpriteSheet = SpriteLibrary.get("beer-sm");
+    this.spriteSheet = SpriteLibrary.get("beer-glass-lg");
+    this.smallSpriteSheet = SpriteLibrary.get("beer-glass-sm");
   }
 
   combine(item: GameItem): GameItem[] | MiniGame {

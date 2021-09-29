@@ -10,8 +10,8 @@ import fridge from "./sprites/fridge.png";
 import beerCabinet from "./sprites/beer-cabinet.png";
 import slot from "./sprites/slot.png";
 import cursor from "./sprites/cursor.png";
-import beerLg from "./sprites/beer-lg.png";
-import beerSm from "./sprites/beer-sm.png";
+import beerGlassLg from "./sprites/beer-glass-lg.png";
+import beerGlassSm from "./sprites/beer-glass-sm.png";
 import bottle from "./sprites/bottle.png";
 import bottleOpener from "./sprites/bottle-opener.png";
 import openingGameBg from "./sprites/opening-game-bg.png";
@@ -50,8 +50,8 @@ const imageFiles = {
   'slot': spriteDef({ src: slot, cfg: { size: [20, 20], colsRows: [2, 1] } }),
   'cursor': spriteDef({ src: cursor, cfg: { size: [16, 16], colsRows: [1, 1] } }),
 
-  'beer-lg': spriteDef({ src: beerLg, cfg: { size: [16, 16], colsRows: [5, 1] } }),
-  'beer-sm': spriteDef({ src: beerSm, cfg: { size: [10, 10], colsRows: [5, 1], offset: [-2, -17] } }),
+  'beer-glass-lg': spriteDef({ src: beerGlassLg, cfg: { size: [16, 16], colsRows: [5, 1] } }),
+  'beer-glass-sm': spriteDef({ src: beerGlassSm, cfg: { size: [10, 10], colsRows: [5, 1], offset: [-2, -17] } }),
   'bottle': spriteDef({ src: bottle, cfg: { size: [16, 16], colsRows: [3, 4] } }),
   'bottle-opener': spriteDef({ src: bottleOpener, cfg: { size: [16, 16], colsRows: [1, 1] } }),
 
