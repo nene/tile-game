@@ -89,7 +89,8 @@ export class PouringGame implements MiniGame {
     this.drawTable(screen);
     screen.drawSprite(this.beerGlassSprite, GLASS_COORD, { fixed: true });
 
-    screen.drawText("In glass: " + this.beerInGlass, "#000", [10, 10]);
+    screen.drawText("Pudelis õlut: " + Math.round(this.beerInBottle / 69 * 100) + "%", "#000", [200, 5]);
+    screen.drawText("Shoppen täis: " + Math.round(this.beerInGlass + this.foamInGlass) + "%", "#000", [200 - 6, 16]);
   }
 
   handleClick(coord: Coord) {
