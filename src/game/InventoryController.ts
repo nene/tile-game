@@ -65,10 +65,14 @@ export class InventoryController {
       screen.drawSprite(this.selectedItem.getSprite(), coordSub(this.mouseCoord, [8, 8]), { fixed: true });
     }
     if (this.hoveredItem) {
-      const textSize = screen.measureText(this.hoveredItem.getName());
-      screen.drawRect({ coord: coordAdd(this.mouseCoord, [9, 1]), size: coordAdd(textSize, [1, 3]) }, "#c8b997");
-      screen.drawText(this.hoveredItem.getName(), "#3e2821", coordAdd(this.mouseCoord, [10, 10]));
+      this.drawTooltip(this.hoveredItem, screen)
     }
+  }
+
+  private drawTooltip(item: GameItem, screen: PixelScreen) {
+    const textSize = screen.measureText(item.getName());
+    screen.drawRect({ coord: coordAdd(this.mouseCoord, [9, 1]), size: coordAdd(textSize, [1, 3]) }, "#c8b997");
+    screen.drawText(item.getName(), "#3e2821", coordAdd(this.mouseCoord, [10, 10]));
   }
 
   handleClick(screenCoord: Coord): boolean {
