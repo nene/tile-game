@@ -1,7 +1,8 @@
 import { Coord, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
 import { Inventory } from "../Inventory";
-import { BeerBottle, BeerType, CapState } from "../items/BeerBottle";
+import { getBeer } from "../items/Beer";
+import { BeerBottle, CapState } from "../items/BeerBottle";
 import { BeerGlass, BeerLevel } from "../items/BeerGlass";
 import { PixelScreen } from "../PixelScreen";
 import { SoundLibrary } from "../SoundLibrary";
@@ -18,14 +19,14 @@ export class Fridge implements GameObject {
     this.inventory = new Inventory({
       size: [3, 3],
       items: [
-        new BeerBottle(BeerType.alexander),
-        new BeerBottle(BeerType.alexander),
-        new BeerBottle(BeerType.alexander),
-        new BeerBottle(BeerType.heineken),
-        new BeerBottle(BeerType.heineken),
-        new BeerBottle(BeerType.heineken),
-        new BeerBottle(BeerType.special),
-        new BeerBottle(BeerType.special, CapState.open),
+        new BeerBottle(getBeer("alexander")),
+        new BeerBottle(getBeer("alexander")),
+        new BeerBottle(getBeer("alexander")),
+        new BeerBottle(getBeer("heineken")),
+        new BeerBottle(getBeer("heineken")),
+        new BeerBottle(getBeer("heineken")),
+        new BeerBottle(getBeer("special")),
+        new BeerBottle(getBeer("special"), CapState.open),
         new BeerGlass(BeerLevel.empty),
       ],
     });

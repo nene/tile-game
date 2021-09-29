@@ -3,31 +3,20 @@ import { Sprite } from "../Sprite";
 import { SpriteLibrary } from "../SpriteLibrary";
 import { SpriteSheet } from "../SpriteSheet";
 import { BeerGlass } from "./BeerGlass";
+import { Beer } from "./Beer";
 import { BottleOpener } from "./BottleOpener";
 import { GameItem } from "./GameItem";
-
-export enum BeerType {
-  alexander = 1,
-  heineken = 2,
-  special = 3,
-}
 
 export enum CapState {
   closed = 1,
   open = 2,
 }
 
-const beerNames = {
-  [BeerType.alexander]: "Alexander",
-  [BeerType.heineken]: "Heineken",
-  [BeerType.special]: "Special",
-}
-
 export class BeerBottle implements GameItem {
   private spriteSheet: SpriteSheet;
   private full = true;
 
-  constructor(private type: BeerType, private capState = CapState.closed) {
+  constructor(private beer: Beer, private capState = CapState.closed) {
     this.spriteSheet = SpriteLibrary.get("bottle");
   }
 
@@ -35,7 +24,7 @@ export class BeerBottle implements GameItem {
     if (!this.full) {
       return "Tühi pudel";
     }
-    return beerNames[this.type] + " " + (this.isOpen() ? "(avatud)" : "(kinni)");
+    return this.beer.name + " " + (this.isOpen() ? "(avatud)" : "(kinni)");
   }
 
   empty() {
@@ -56,7 +45,7 @@ export class BeerBottle implements GameItem {
 
   getSprite(): Sprite {
     if (this.full) {
-      return this.spriteSheet.getSprite([this.capState, this.type]);
+      return this.spriteSheet.getSprite([this.capState, this.beer.spriteIndex]);
     } else {
       return this.spriteSheet.getSprite([1, 0]);
     }
