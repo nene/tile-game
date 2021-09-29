@@ -65,7 +65,9 @@ export class InventoryController {
       screen.drawSprite(this.selectedItem.getSprite(), coordSub(this.mouseCoord, [8, 8]), { fixed: true });
     }
     if (this.hoveredItem) {
-      screen.drawText(this.hoveredItem.getName(), "#3e2821", "#c8b997", coordAdd(this.mouseCoord, [10, 10]));
+      const textSize = screen.measureText(this.hoveredItem.getName());
+      screen.drawRect({ coord: coordAdd(this.mouseCoord, [9, 1]), size: coordAdd(textSize, [1, 3]) }, "#c8b997");
+      screen.drawText(this.hoveredItem.getName(), "#3e2821", coordAdd(this.mouseCoord, [10, 10]));
     }
   }
 

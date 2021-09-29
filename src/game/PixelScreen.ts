@@ -69,12 +69,14 @@ export class PixelScreen {
     );
   }
 
-  drawText(text: string, color: string, bgColor: string, coord: Coord) {
-    const { width } = this.ctx.measureText(text);
-    this.drawRect({ coord: coordAdd(coord, [-1, -9]), size: [width + 1, 12] }, bgColor, { fixed: true });
-
+  drawText(text: string, color: string, coord: Coord) {
     this.ctx.fillStyle = color;
     this.ctx.fillText(text, coord[0], coord[1]);
+  }
+
+  measureText(text: string): Coord {
+    const { width } = this.ctx.measureText(text);
+    return [width, 9]; // We're using 9px font
   }
 
   saveBg() {
