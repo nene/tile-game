@@ -20,13 +20,13 @@ export class Fridge implements GameObject {
       size: [3, 3],
       items: [
         new BeerBottle(getBeer("pilsner")),
-        new BeerBottle(getBeer("special")),
+        new BeerBottle(getBeer("porter")),
         new BeerBottle(getBeer("alexander")),
         new BeerBottle(getBeer("tommu-hiid")),
         new BeerBottle(getBeer("limonaad")),
         new BeerBottle(getBeer("paulaner")),
         new BeerBottle(getBeer("kriek")),
-        new BeerBottle(getBeer("heineken"), CapState.open),
+        new BeerBottle(getBeer("bock"), CapState.open),
         new BeerGlass(BeerLevel.empty),
       ],
     });

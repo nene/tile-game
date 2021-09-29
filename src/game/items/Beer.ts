@@ -66,6 +66,20 @@ const beers = {
     foamStrength: 4 / 5,
     capStrength: 4 / 5,
   }),
+  "bock": beerDef({
+    name: "Double Bock",
+    spriteIndex: 9,
+    alcohol: 7,
+    foamStrength: 3 / 5,
+    capStrength: 3 / 5,
+  }),
+  "porter": beerDef({
+    name: "Sokolaadi porter",
+    spriteIndex: 10,
+    alcohol: 6.9,
+    foamStrength: 5 / 5,
+    capStrength: 2 / 5,
+  }),
 }
 
 export type BeerType = keyof typeof beers;
