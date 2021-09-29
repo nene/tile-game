@@ -61,12 +61,18 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
 
   return {
     onKeyDown: (key: string): boolean => {
-      screenNeedsRepaint = true;
-      return player.handleKeyDown(key);
+      if (uiController.isGameWorldActive() && uiController.isGameWorldVisible()) {
+        screenNeedsRepaint = true;
+        return player.handleKeyDown(key);
+      }
+      return false;
     },
     onKeyUp: (key: string): boolean => {
-      screenNeedsRepaint = true;
-      return player.handleKeyUp(key);
+      if (uiController.isGameWorldActive() && uiController.isGameWorldVisible()) {
+        screenNeedsRepaint = true;
+        return player.handleKeyUp(key);
+      }
+      return false;
     },
     onClick: (coord: Coord) => {
       screenNeedsRepaint = true;
