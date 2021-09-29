@@ -31,6 +31,41 @@ const beers = {
     foamStrength: 1 / 5,
     capStrength: 3 / 5,
   }),
+  "pilsner": beerDef({
+    name: "Pilku",
+    spriteIndex: 4,
+    alcohol: 4.2,
+    foamStrength: 1 / 5,
+    capStrength: 1 / 5,
+  }),
+  "tommu-hiid": beerDef({
+    name: "Tõmmu hiid",
+    spriteIndex: 5,
+    alcohol: 4.7,
+    foamStrength: 4 / 5,
+    capStrength: 2 / 5,
+  }),
+  "kriek": beerDef({
+    name: "Kriek",
+    spriteIndex: 6,
+    alcohol: 3.5,
+    foamStrength: 4 / 5,
+    capStrength: 5 / 5,
+  }),
+  "limonaad": beerDef({
+    name: "Limpa",
+    spriteIndex: 7,
+    alcohol: 0,
+    foamStrength: 0,
+    capStrength: 0,
+  }),
+  "paulaner": beerDef({
+    name: "Hefeweisen",
+    spriteIndex: 8,
+    alcohol: 5.5,
+    foamStrength: 4 / 5,
+    capStrength: 4 / 5,
+  }),
 }
 
 export type BeerType = keyof typeof beers;
