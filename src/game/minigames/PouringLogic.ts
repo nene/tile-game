@@ -15,23 +15,32 @@ export class PouringLogic {
   constructor(private foamStrength: number) { }
 
   /**
-   * Pours a fraction of beer out of bottle
-   * @param wantedAmount number between 1/600 .. 1/30 (0.0016 .. 0.033)
-   *
-   * Amount is determined by bottle distance from glass: 3..60px
-   * Fastest rate: 3 sec ->  30 ticks (amount 1/30)  @60px height
-   * Slowest rate: 60sec -> 600 ticks (amount 1/600)  @3px height
+   * Pours beer at certain rate
+   * @param flowRate number between 0.01 .. 1
    */
-  pourToGlass(wantedAmount: number) {
-    const amount = this.takeBeerFromBottle(wantedAmount);
+  pourToGlass(flowRate: number) {
+    const amount = this.takeBeerFromBottle(this.flowToAmount(flowRate));
     this.beerInBottle -= amount;
     const [beer, foam] = this.splitBeerAndFoam(amount);
     this.beerInGlass = Math.min(this.glassSize - this.foamInGlass, this.beerInGlass + beer);
     this.foamInGlass = Math.min(this.glassSize - this.beerInGlass, this.foamInGlass + foam);
   }
 
-  pourToGround(wantedAmount: number) {
-    this.beerInBottle -= this.takeBeerFromBottle(wantedAmount);
+  pourToGround(flowRate: number) {
+    this.beerInBottle -= this.takeBeerFromBottle(this.flowToAmount(flowRate));
+  }
+
+  // How much beer flows out of bottle at certain rate
+  // - Fastest rate: 3 sec ->  30 ticks (amount 1/30)
+  // - Slowest rate: 60sec -> 600 ticks (amount 1/600)
+  flowToAmount(x: number): number {
+    // The following is a result of solving linear equation:
+    // f(x) = ax + b
+    // where f(1) = 30
+    // where f(0.01) = 600
+    const a = (600 - 30) * 100 / -99;
+    const b = 30 - a;
+    return 1 / (a * x + b);
   }
 
   private takeBeerFromBottle(amount: number): number {

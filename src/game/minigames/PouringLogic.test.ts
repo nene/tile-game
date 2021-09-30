@@ -7,7 +7,7 @@ describe("PouringLogic", () => {
     it("causes no foam when poured slowly", () => {
       const pouring = new PouringLogic(0);
       times(600, () => {
-        pouring.pourToGlass(1 / 600);
+        pouring.pourToGlass(0.1);
       });
       expect(pouring.getBeerInBottle()).toBeLessThan(0.0001)
       expect(pouring.getBeerInGlass()).toBeGreaterThan(0.9999);
@@ -15,11 +15,11 @@ describe("PouringLogic", () => {
       expect(pouring.isFinished()).toBe(true);
     });
 
-    // Pouring in 1 seconds (10 ticks)
+    // Pouring in 3 seconds (30 ticks)
     it("causes no foam when poured quickly", () => {
       const pouring = new PouringLogic(0);
-      times(10, () => {
-        pouring.pourToGlass(1 / 10);
+      times(30, () => {
+        pouring.pourToGlass(1);
       });
       expect(pouring.getBeerInBottle()).toBeLessThan(0.0001)
       expect(pouring.getBeerInGlass()).toBeGreaterThan(0.9999);
@@ -29,8 +29,8 @@ describe("PouringLogic", () => {
 
     it("finishes when poured to ground", () => {
       const pouring = new PouringLogic(0);
-      times(10, () => {
-        pouring.pourToGround(1 / 10);
+      times(30, () => {
+        pouring.pourToGround(1);
       });
       expect(pouring.getBeerInBottle()).toBeLessThan(0.0001)
       expect(pouring.getBeerInGlass()).toBeLessThan(0.0001);
