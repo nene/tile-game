@@ -1,4 +1,5 @@
-import { Coord, coordAdd, coordDiv, coordSub, isCoordInRect, Rect, tileToScreenCoord } from "../Coord";
+import SimplexNoise from "simplex-noise";
+import { Coord, coordAdd, coordDiv, coordMul, coordSub, isCoordInRect, Rect, tileToScreenCoord } from "../Coord";
 import { BeerBottle } from "../items/BeerBottle";
 import { BeerGlass, BeerLevel } from "../items/BeerGlass";
 import { PixelScreen } from "../PixelScreen";
@@ -16,6 +17,9 @@ const MAX_BEER_HEIGHT = MIN_LEVEL[1] - MAX_LEVEL[1];
 const POURING_AREA: Rect = { coord: [136, 0], size: [47, 98] };
 const DEBUG = false;
 
+const NOISE_SCALE = 100;
+const BOTTLE_MAX_MOVEMENT: Coord = [40, 25]; // +/- movement in each direction
+
 export class PouringGame implements MiniGame {
   private sprites: Record<"bg" | "table" | "bottle" | "beerGlass" | "beerFoam", Sprite>;
   private beerAnimation: SpriteAnimation;
@@ -24,6 +28,8 @@ export class PouringGame implements MiniGame {
   private mouseDown = false;
   private clicksAfterFinished = 0;
   private pouring: PouringLogic;
+  private tickCounter = 0;
+  private noise: SimplexNoise;
 
   constructor(private glass: BeerGlass, private bottle: BeerBottle) {
     this.sprites = {
@@ -37,9 +43,11 @@ export class PouringGame implements MiniGame {
     this.beerAnimation = new SpriteAnimation(SpriteLibrary.get("beer-xl"), { frames: { from: [0, 0], to: [14, 0] } });
     this.bottleCoord = [0, 0];
     this.pouring = new PouringLogic(bottle.getBeer().foam);
+    this.noise = new SimplexNoise();
   }
 
   tick() {
+    this.tickCounter++;
     this.beerAnimation.tick();
 
     if (this.isFlowing()) {
@@ -56,7 +64,7 @@ export class PouringGame implements MiniGame {
   }
 
   private isPouringToGlass(): boolean {
-    return isCoordInRect(this.bottleCoord, POURING_AREA);
+    return isCoordInRect(this.adjustedBottleCoord(), POURING_AREA);
   }
 
   private getBeerLevel(): BeerLevel {
@@ -78,9 +86,9 @@ export class PouringGame implements MiniGame {
   paint(screen: PixelScreen) {
     this.drawBackground(screen);
     if (this.isFlowing()) {
-      screen.drawRect({ coord: coordAdd(this.bottleCoord, [-1, -1]), size: [Math.ceil(this.getFlowRate() * 6), 200] }, "rgba(252,225,180,185)");
+      screen.drawRect({ coord: coordAdd(this.adjustedBottleCoord(), [-1, -1]), size: [Math.ceil(this.getFlowRate() * 6), 200] }, "rgba(252,225,180,185)");
     }
-    screen.drawSprite(this.sprites.bottle, this.bottleCoord, { fixed: true });
+    screen.drawSprite(this.sprites.bottle, this.adjustedBottleCoord(), { fixed: true });
 
     const beerHeight = Math.floor(this.pouring.getLiquidInGlass() * MAX_BEER_HEIGHT);
     const foamHeight = Math.floor(this.pouring.getFoamInGlass() * MAX_BEER_HEIGHT);
@@ -98,6 +106,16 @@ export class PouringGame implements MiniGame {
       screen.drawText("Vedelik: " + Math.round(this.pouring.getLiquidInGlass() * 100) + "%", "#000", [200 - 6, 36]);
       screen.drawText("Flow: " + Math.round(this.getFlowRate() * 100) + "%", "#000", [200 - 6, 46]);
     }
+  }
+
+  private adjustedBottleCoord() {
+    return coordAdd(this.bottleCoord, this.bottleOffset());
+  }
+
+  private bottleOffset(): Coord {
+    const x = this.noise.noise2D(this.tickCounter / NOISE_SCALE, 1);
+    const y = this.noise.noise2D(1, this.tickCounter / NOISE_SCALE);
+    return coordMul([x, y], BOTTLE_MAX_MOVEMENT).map(Math.floor) as Coord;
   }
 
   handleClick() {
@@ -127,7 +145,7 @@ export class PouringGame implements MiniGame {
 
   private getFlowRate(): number {
     const glassTop = GLASS_COORD[1] - 8;
-    const bottleY = this.bottleCoord[1];
+    const bottleY = this.adjustedBottleCoord()[1];
     const ceilingY = 32;
     if (bottleY >= glassTop) {
       return 0.01;
