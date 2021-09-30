@@ -1,7 +1,4 @@
-export interface Foaminess {
-  min: number;
-  max: number;
-}
+import { Foaminess } from "../items/Beer";
 
 export class PouringLogic {
   private foamInGlass = 0;
