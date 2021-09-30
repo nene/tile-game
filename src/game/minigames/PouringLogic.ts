@@ -98,4 +98,9 @@ export class PouringLogic {
   private isGlassFull(): boolean {
     return this.liquidInGlass + this.foamInGlass >= this.glassSize - 0.0001;
   }
+
+  // How full is the glass: 0..1
+  getFillLevel(): number {
+    return (this.liquidInGlass + this.foamInGlass) / this.glassSize;
+  }
 }

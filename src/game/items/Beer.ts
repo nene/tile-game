@@ -12,12 +12,12 @@ export interface Foaminess {
 }
 
 const foamLevel: Foaminess[] = [
-  { min: 0, max: 0 }, // #0
-  { min: 0, max: 10 }, // #1
-  { min: 0, max: 20 }, // #2
-  { min: 0, max: 0 }, // #3
-  { min: 0, max: 0 }, // #4
-  { min: 0, max: 0 }, // #5
+  { min: 0.00, max: 0.00 }, // #0
+  { min: 0.00, max: 0.10 }, // #1
+  { min: 0.05, max: 0.20 }, // #2
+  { min: 0.10, max: 0.40 }, // #3
+  { min: 0.15, max: 0.60 }, // #4
+  { min: 0.20, max: 0.90 }, // #5
 ];
 
 // Typecheck helper for the below definitions

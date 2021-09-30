@@ -27,6 +27,10 @@ export class BeerBottle implements GameItem {
     return this.beer.name + (this.isOpen() ? " (avatud)" : "");
   }
 
+  getBeer(): Beer {
+    return this.beer;
+  }
+
   empty() {
     this.full = false;
   }
