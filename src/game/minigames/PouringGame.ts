@@ -78,12 +78,12 @@ export class PouringGame implements MiniGame {
   paint(screen: PixelScreen) {
     this.drawBackground(screen);
     if (this.isFlowing()) {
-      screen.drawRect({ coord: coordAdd(this.bottleCoord, [-1, -1]), size: [this.getFlowRate() * 6, 200] }, "rgba(252,225,180,185)");
+      screen.drawRect({ coord: coordAdd(this.bottleCoord, [-1, -1]), size: [Math.ceil(this.getFlowRate() * 6), 200] }, "rgba(252,225,180,185)");
     }
     screen.drawSprite(this.sprites.bottle, this.bottleCoord, { fixed: true });
 
-    const beerHeight = this.pouring.getLiquidInGlass() * MAX_BEER_HEIGHT;
-    const foamHeight = this.pouring.getFoamInGlass() * MAX_BEER_HEIGHT;
+    const beerHeight = Math.floor(this.pouring.getLiquidInGlass() * MAX_BEER_HEIGHT);
+    const foamHeight = Math.floor(this.pouring.getFoamInGlass() * MAX_BEER_HEIGHT);
 
     screen.drawSprite(this.sprites.beerFoam, coordSub(MIN_LEVEL, [0, foamHeight + beerHeight]), { fixed: true });
     screen.drawSprite(this.beerAnimation.getSprite(), coordSub(MIN_LEVEL, [0, beerHeight]), { fixed: true });
