@@ -5,8 +5,8 @@ export interface Foaminess {
 
 export class PouringLogic {
   private foamInGlass = 0;
-  private beerInGlass = 0;
-  private beerInBottle = 1;
+  private liquidInGlass = 0;
+  private liquidInBottle = 1;
   // Must be > 1 (1 means the glass can contain 1 bottle of beer, but no foam)
   private glassSize = 1.2; // 90% of beer + 30% of foam
 
@@ -29,15 +29,15 @@ export class PouringLogic {
     if (this.isFinished()) {
       return;
     }
-    const amount = this.takeBeerFromBottle(this.flowToAmount(flowRate));
-    this.beerInBottle -= amount;
+    const amount = this.takeFromBottle(this.flowToAmount(flowRate));
+    this.liquidInBottle -= amount;
     const [beer, foam] = this.splitBeerAndFoam(flowRate, amount);
-    this.beerInGlass = Math.min(this.glassSize - this.foamInGlass, this.beerInGlass + beer);
-    this.foamInGlass = Math.min(this.glassSize - this.beerInGlass, this.foamInGlass + foam);
+    this.liquidInGlass = Math.min(this.glassSize - this.foamInGlass, this.liquidInGlass + beer);
+    this.foamInGlass = Math.min(this.glassSize - this.liquidInGlass, this.foamInGlass + foam);
   }
 
   pourToGround(flowRate: number) {
-    this.beerInBottle -= this.takeBeerFromBottle(this.flowToAmount(flowRate));
+    this.liquidInBottle -= this.takeFromBottle(this.flowToAmount(flowRate));
   }
 
   // How much beer flows out of bottle at certain rate
@@ -47,9 +47,9 @@ export class PouringLogic {
     return 1 / this.scaleToRange(flowRate, 600, 30);
   }
 
-  private takeBeerFromBottle(amount: number): number {
-    if (amount > this.beerInBottle) {
-      return this.beerInBottle;
+  private takeFromBottle(amount: number): number {
+    if (amount > this.liquidInBottle) {
+      return this.liquidInBottle;
     } else {
       return amount;
     }
@@ -77,12 +77,17 @@ export class PouringLogic {
     return this.foamInGlass;
   }
 
-  getBeerInGlass(): number {
-    return this.beerInGlass;
+  getLiquidInGlass(): number {
+    return this.liquidInGlass;
   }
 
-  getBeerInBottle(): number {
-    return this.beerInBottle;
+  getLiquidInBottle(): number {
+    return this.liquidInBottle;
+  }
+
+  // The total of liquid beer + foamed beer
+  getTotalInGlass(): number {
+    return this.liquidInGlass + this.foamInGlass / 3;
   }
 
   isFinished(): boolean {
@@ -90,10 +95,10 @@ export class PouringLogic {
   }
 
   private isBottleEmpty(): boolean {
-    return this.beerInBottle <= 0.0001;
+    return this.liquidInBottle <= 0.0001;
   }
 
   private isGlassFull(): boolean {
-    return this.beerInGlass + this.foamInGlass >= this.glassSize - 0.0001;
+    return this.liquidInGlass + this.foamInGlass >= this.glassSize - 0.0001;
   }
 }

@@ -17,9 +17,10 @@ describe("PouringLogic", () => {
       times(600, () => {
         pouring.pourToGlass(0.01);
       });
-      expectRoughly(pouring.getBeerInBottle(), 0);
-      expectRoughly(pouring.getBeerInGlass(), 1);
+      expectRoughly(pouring.getLiquidInBottle(), 0);
+      expectRoughly(pouring.getLiquidInGlass(), 1);
       expectRoughly(pouring.getFoamInGlass(), 0);
+      expectRoughly(pouring.getTotalInGlass(), 1);
       expect(pouring.isFinished()).toBe(true);
     });
 
@@ -29,20 +30,10 @@ describe("PouringLogic", () => {
       times(30, () => {
         pouring.pourToGlass(1);
       });
-      expectRoughly(pouring.getBeerInBottle(), 0);
-      expectRoughly(pouring.getBeerInGlass(), 1);
+      expectRoughly(pouring.getLiquidInBottle(), 0);
+      expectRoughly(pouring.getLiquidInGlass(), 1);
       expectRoughly(pouring.getFoamInGlass(), 0);
-      expect(pouring.isFinished()).toBe(true);
-    });
-
-    it("finishes when poured to ground", () => {
-      const pouring = new PouringLogic(foaminess);
-      times(30, () => {
-        pouring.pourToGround(1);
-      });
-      expectRoughly(pouring.getBeerInBottle(), 0);
-      expectRoughly(pouring.getBeerInGlass(), 0);
-      expectRoughly(pouring.getFoamInGlass(), 0);
+      expectRoughly(pouring.getTotalInGlass(), 1);
       expect(pouring.isFinished()).toBe(true);
     });
   });
@@ -58,9 +49,10 @@ describe("PouringLogic", () => {
         ticks++;
       }
       expect(ticks).toBe(600); // ~60 secs
-      expectRoughly(pouring.getBeerInBottle(), 0);
-      expectRoughly(pouring.getBeerInGlass(), 0.9);
+      expectRoughly(pouring.getLiquidInBottle(), 0);
+      expectRoughly(pouring.getLiquidInGlass(), 0.9);
       expectRoughly(pouring.getFoamInGlass(), 0.3);
+      expectRoughly(pouring.getTotalInGlass(), 1);
     });
 
     it("causes the medium amount of foam when poured at avg speed", () => {
@@ -71,9 +63,10 @@ describe("PouringLogic", () => {
         ticks++;
       }
       expect(ticks).toBe(294); // ~30 secs
-      expectRoughly(pouring.getBeerInBottle(), 0.0751);
-      expectRoughly(pouring.getBeerInGlass(), 0.7866);
+      expectRoughly(pouring.getLiquidInBottle(), 0.0751);
+      expectRoughly(pouring.getLiquidInGlass(), 0.7866);
       expectRoughly(pouring.getFoamInGlass(), 0.4133);
+      expectRoughly(pouring.getTotalInGlass(), 0.9244);
     });
 
     it("causes the foam to fill glass to max when poured fast", () => {
@@ -84,9 +77,10 @@ describe("PouringLogic", () => {
         ticks++;
       }
       expect(ticks).toBe(26); // 2.6 secs
-      expectRoughly(pouring.getBeerInBottle(), 0.1333);
-      expectRoughly(pouring.getBeerInGlass(), 0.6933);
+      expectRoughly(pouring.getLiquidInBottle(), 0.1333);
+      expectRoughly(pouring.getLiquidInGlass(), 0.6933);
       expectRoughly(pouring.getFoamInGlass(), 0.5066);
+      expectRoughly(pouring.getTotalInGlass(), 0.8622);
     });
 
     it("doesn't allow to pour more than fits to glass", () => {
@@ -94,9 +88,10 @@ describe("PouringLogic", () => {
       times(30, () => {
         pouring.pourToGlass(1);
       });
-      expectRoughly(pouring.getBeerInBottle(), 0.1333);
-      expectRoughly(pouring.getBeerInGlass(), 0.6933);
+      expectRoughly(pouring.getLiquidInBottle(), 0.1333);
+      expectRoughly(pouring.getLiquidInGlass(), 0.6933);
       expectRoughly(pouring.getFoamInGlass(), 0.5066);
+      expectRoughly(pouring.getTotalInGlass(), 0.8622);
     });
   });
 
@@ -111,9 +106,10 @@ describe("PouringLogic", () => {
         ticks++;
       }
       expect(ticks).toBe(600); // ~60 secs
-      expectRoughly(pouring.getBeerInBottle(), 0);
-      expectRoughly(pouring.getBeerInGlass(), 0);
+      expectRoughly(pouring.getLiquidInBottle(), 0);
+      expectRoughly(pouring.getLiquidInGlass(), 0);
       expectRoughly(pouring.getFoamInGlass(), 0);
+      expectRoughly(pouring.getTotalInGlass(), 0);
     });
   });
 });
