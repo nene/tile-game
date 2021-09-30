@@ -5,8 +5,23 @@ export class PouringLogic {
   // Must be > 1 (1 means the glass can contain 1 bottle of beer, but no foam)
   private glassSize = 1.3; // 66px of beer + 20px foam
 
+  /**
+   * Effecting factors:
+   *
+   * - Foaminess of beer (determines the amount of foam generated)
+   * - drunkenness of player (increases/reduces wobble of the pouring hand)
+   * - pouring skill (reduces foaminess)
+   */
   constructor(private foamStrength: number) { }
 
+  /**
+   * Pours a fraction of beer out of bottle
+   * @param wantedAmount number between 1/600 .. 1/30 (0.0016 .. 0.033)
+   *
+   * Amount is determined by bottle distance from glass: 3..60px
+   * Fastest rate: 3 sec ->  30 ticks (amount 1/30)  @60px height
+   * Slowest rate: 60sec -> 600 ticks (amount 1/600)  @3px height
+   */
   pourToGlass(wantedAmount: number) {
     const amount = this.takeBeerFromBottle(wantedAmount);
     this.beerInBottle -= amount;
@@ -15,8 +30,8 @@ export class PouringLogic {
     this.foamInGlass = Math.min(this.glassSize - this.beerInGlass, this.foamInGlass + foam);
   }
 
-  pourToGround(amount: number) {
-    this.beerInBottle -= this.takeBeerFromBottle(amount);
+  pourToGround(wantedAmount: number) {
+    this.beerInBottle -= this.takeBeerFromBottle(wantedAmount);
   }
 
   private takeBeerFromBottle(amount: number): number {
