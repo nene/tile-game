@@ -1,27 +1,37 @@
+export interface Foaminess {
+  min: number;
+  max: number;
+}
+
 export class PouringLogic {
   private foamInGlass = 0;
   private beerInGlass = 0;
   private beerInBottle = 1;
   // Must be > 1 (1 means the glass can contain 1 bottle of beer, but no foam)
-  private glassSize = 1.3; // 66px of beer + 20px foam
+  private glassSize = 1.2; // 90% of beer + 30% of foam
 
   /**
    * Effecting factors:
    *
    * - Foaminess of beer (determines the amount of foam generated)
+   *   - min : the minimum proportion of beer that turns to foam (when poured slowest)
+   *   - max : the max proportion of beer that turns to foam (when poured fastest)
    * - drunkenness of player (increases/reduces wobble of the pouring hand)
    * - pouring skill (reduces foaminess)
    */
-  constructor(private foamStrength: number) { }
+  constructor(private foam: Foaminess) { }
 
   /**
    * Pours beer at certain rate
    * @param flowRate number between 0.01 .. 1
    */
   pourToGlass(flowRate: number) {
+    if (this.isFinished()) {
+      return;
+    }
     const amount = this.takeBeerFromBottle(this.flowToAmount(flowRate));
     this.beerInBottle -= amount;
-    const [beer, foam] = this.splitBeerAndFoam(amount);
+    const [beer, foam] = this.splitBeerAndFoam(flowRate, amount);
     this.beerInGlass = Math.min(this.glassSize - this.foamInGlass, this.beerInGlass + beer);
     this.foamInGlass = Math.min(this.glassSize - this.beerInGlass, this.foamInGlass + foam);
   }
@@ -33,14 +43,8 @@ export class PouringLogic {
   // How much beer flows out of bottle at certain rate
   // - Fastest rate: 3 sec ->  30 ticks (amount 1/30)
   // - Slowest rate: 60sec -> 600 ticks (amount 1/600)
-  flowToAmount(x: number): number {
-    // The following is a result of solving linear equation:
-    // f(x) = ax + b
-    // where f(1) = 30
-    // where f(0.01) = 600
-    const a = (600 - 30) * 100 / -99;
-    const b = 30 - a;
-    return 1 / (a * x + b);
+  flowToAmount(flowRate: number): number {
+    return 1 / this.scaleToRange(flowRate, 600, 30);
   }
 
   private takeBeerFromBottle(amount: number): number {
@@ -51,8 +55,22 @@ export class PouringLogic {
     }
   }
 
-  private splitBeerAndFoam(amount: number): [number, number] {
-    return [amount, 0];
+  // Foam will take 3x the same volume as beer it was generated from
+  private splitBeerAndFoam(flowRate: number, amount: number): [number, number] {
+    const foamRatio = this.scaleToRange(flowRate, this.foam.min, this.foam.max);
+    const foamPart = amount * foamRatio;
+    const liquidPart = amount - foamPart;
+    return [liquidPart, foamPart * 3];
+  }
+
+  // The following is a result of solving linear equation:
+  // f(x) = ax + b
+  // where f(0.01) = min
+  // where f(1) = max
+  private scaleToRange(x: number, min: number, max: number) {
+    const a = (min - max) * 100 / -99;
+    const b = max - a;
+    return (a * x + b);
   }
 
   getFoamInGlass(): number {
