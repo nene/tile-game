@@ -2,12 +2,10 @@ export class PouringLogic {
   private foamInGlass = 0;
   private beerInGlass = 0;
   private beerInBottle = 1;
+  // Must be > 1 (1 means the glass can contain 1 bottle of beer, but no foam)
+  private glassSize = 1.3; // 66px of beer + 20px foam
 
-  /**
-   * @param glassSize Must be > 1 (1 means the glass can contain 1 bottle of beer, but no foam)
-   * @param foamStrength Number between 0..1 (0 means no foam)
-   */
-  constructor(private glassSize: number, private foamStrength: number) { }
+  constructor(private foamStrength: number) { }
 
   pourToGlass(wantedAmount: number) {
     const amount = this.takeBeerFromBottle(wantedAmount);

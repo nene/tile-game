@@ -5,7 +5,7 @@ describe("PouringLogic", () => {
   describe("pouring non-foaming liquid", () => {
     // Pouring in 60 seconds (600 ticks)
     it("causes no foam when poured slowly", () => {
-      const pouring = new PouringLogic(1.2, 0);
+      const pouring = new PouringLogic(0);
       times(600, () => {
         pouring.pourToGlass(1 / 600);
       });
@@ -17,7 +17,7 @@ describe("PouringLogic", () => {
 
     // Pouring in 1 seconds (10 ticks)
     it("causes no foam when poured quickly", () => {
-      const pouring = new PouringLogic(1.2, 0);
+      const pouring = new PouringLogic(0);
       times(10, () => {
         pouring.pourToGlass(1 / 10);
       });
@@ -28,7 +28,7 @@ describe("PouringLogic", () => {
     });
 
     it("finishes when poured to ground", () => {
-      const pouring = new PouringLogic(1.2, 0);
+      const pouring = new PouringLogic(0);
       times(10, () => {
         pouring.pourToGround(1 / 10);
       });
