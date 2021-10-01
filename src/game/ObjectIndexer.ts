@@ -1,6 +1,6 @@
-import { Coord, screenToTileCoord } from "./Coord";
+import { Coord, Rect, rectOverlaps, rectTranslate, screenToTileCoord } from "./Coord";
 import { GameObject } from "./GameObject";
-import { groupByTiles } from "./groupByTiles";
+import { groupByTiles, tilesCoveredBy } from "./groupByTiles";
 
 type TileMap = Record<string, GameObject[]>;
 
@@ -11,6 +11,12 @@ export class ObjectIndexer {
 
   updateObjects(gameObjects: GameObject[]) {
     this.tileMap = groupByTiles(gameObjects);
+  }
+
+  getObjectsInRect(rect: Rect): GameObject[] {
+    return tilesCoveredBy(rect)
+      .flatMap(this.getObjectsInTile, this)
+      .filter((obj) => rectOverlaps(rect, rectTranslate(obj.boundingBox(), obj.getCoord())));
   }
 
   getObjectsOnCoord(screenCoord: Coord): GameObject[] {

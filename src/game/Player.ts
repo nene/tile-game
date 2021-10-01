@@ -1,6 +1,6 @@
 import { PixelScreen } from "./PixelScreen";
 import { GameObject } from "./GameObject";
-import { Coord, coordAdd, coordConstrain, coordSub, Rect } from "./Coord";
+import { Coord, coordAdd, coordConstrain, coordSub, Rect, rectTranslate } from "./Coord";
 import { SpriteAnimation } from "./SpriteAnimation";
 import { GameWorld } from "./GameWorld";
 import { SpriteLibrary } from "./SpriteLibrary";
@@ -151,8 +151,9 @@ export class Player implements GameObject {
 
   private updatePosition(world: GameWorld) {
     const newCoord = coordAdd(this.coord, this.speed);
+    const bounds = rectTranslate(this.boundingBox(), newCoord);
 
-    if (world.getObjectsOnCoord(newCoord).some((obj) => obj.isSolid() && obj !== this)) {
+    if (world.getObjectsInRect(bounds).some((obj) => obj.isSolid() && obj !== this)) {
       return; // Don't move through walls
     }
 

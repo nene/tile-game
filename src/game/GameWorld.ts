@@ -1,4 +1,4 @@
-import { Coord, coordAdd, coordMul, isCoordInRect, screenToTileCoord, tileToScreenCoord } from "./Coord";
+import { Coord, coordAdd, coordMul, isCoordInRect, Rect, screenToTileCoord, tileToScreenCoord } from "./Coord";
 import { GameLocation } from "./GameLocation";
 import { GameObject } from "./GameObject";
 import { ObjectIndexer } from "./ObjectIndexer";
@@ -49,8 +49,8 @@ export class GameWorld {
     });
   }
 
-  getObjectsOnCoord(screenCoord: Coord): GameObject[] {
-    return this.indexer.getObjectsOnCoord(screenCoord);
+  getObjectsInRect(rect: Rect): GameObject[] {
+    return this.indexer.getObjectsInRect(rect);
   }
 
   findPath(coord1: Coord, coord2: Coord): Coord[] | undefined {
