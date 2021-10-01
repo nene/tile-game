@@ -9,7 +9,6 @@ export interface GameObject {
   paint: (screen: PixelScreen) => void;
   tick: (world: GameWorld) => void;
   isSolid: () => boolean;
-  tileSize: () => Coord;
   hitBox: () => Rect;
   boundingBox: () => Rect;
   onInteract: (ui: UiController) => void;

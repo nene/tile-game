@@ -75,10 +75,6 @@ export class Bursh implements GameObject {
     return false;
   }
 
-  tileSize(): Coord {
-    return [1, 1];
-  }
-
   hitBox(): Rect {
     return { coord: [-7, -29], size: [14, 30] };
   }

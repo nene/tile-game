@@ -29,10 +29,6 @@ export class Table implements GameObject {
     return true;
   }
 
-  tileSize(): Coord {
-    return [4, 1];
-  }
-
   hitBox(): Rect {
     return { coord: [0, -6], size: [64, 17] };
   }

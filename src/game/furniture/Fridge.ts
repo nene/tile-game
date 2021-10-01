@@ -50,10 +50,6 @@ export class Fridge implements GameObject {
     return true;
   }
 
-  tileSize(): Coord {
-    return [1, 1];
-  }
-
   hitBox(): Rect {
     return { coord: [0, -32], size: [16, 45] };
   }

@@ -31,10 +31,6 @@ export class Wall implements GameObject {
     return true;
   }
 
-  tileSize(): Coord {
-    return [this.widthInTiles, 3];
-  }
-
   hitBox(): Rect {
     return { coord: [0, 0], size: [16 * this.widthInTiles, 48] };
   }

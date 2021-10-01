@@ -45,10 +45,6 @@ export class BeerCabinet implements GameObject {
     return true;
   }
 
-  tileSize(): Coord {
-    return [2, 1];
-  }
-
   hitBox(): Rect {
     return { coord: [0, -32], size: [32, 45] };
   }
