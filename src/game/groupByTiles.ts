@@ -1,13 +1,14 @@
 import { Coord, coordAdd, Rect, screenToFractionalTileCoord, screenToTileCoord } from "./Coord";
 
-type ObjectWithBounds = { boundingBox: () => Rect }
+type ObjectWithBounds = { getCoord: () => Coord; boundingBox: () => Rect }
 
 type GroupMap<T> = Record<string, T[]>;
 
 export function groupByTiles<T extends ObjectWithBounds>(objects: T[]): GroupMap<T> {
   const tileMap: GroupMap<T> = {};
   objects.forEach((obj) => {
-    const { coord, size } = obj.boundingBox();
+    const { coord: offset, size } = obj.boundingBox();
+    const coord = coordAdd(obj.getCoord(), offset);
     const topLeftTile = screenToTileCoord(coord);
     const bottomRightTile = screenToFractionalTileCoord(coordAdd(coord, size)).map(Math.ceil) as Coord;
 
