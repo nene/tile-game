@@ -76,5 +76,9 @@ export function tileToScreenCoord(tileCoord: Coord): Coord {
 }
 
 export function screenToTileCoord(screenCoord: Coord): Coord {
-  return coordDiv(screenCoord, TILE_SIZE).map(Math.floor) as Coord;
+  return screenToFractionalTileCoord(screenCoord).map(Math.floor) as Coord;
+}
+
+export function screenToFractionalTileCoord(screenCoord: Coord): Coord {
+  return coordDiv(screenCoord, TILE_SIZE);
 }
