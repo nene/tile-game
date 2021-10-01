@@ -1,5 +1,5 @@
 import { Inventory } from "./Inventory";
-import { PixelScreen } from "./PixelScreen";
+import { PixelScreen, TextStyle } from "./PixelScreen";
 import { InventoryView } from "./InventoryView";
 import { Coord, coordAdd, coordSub, rectGrow } from "./Coord";
 import { GameItem } from "./items/GameItem";
@@ -70,10 +70,11 @@ export class InventoryController {
   }
 
   private drawTooltip(item: GameItem, screen: PixelScreen) {
+    const style: TextStyle = { color: "#3e2821" };
     const textCoord = coordAdd(this.mouseCoord, [11, 2]);
-    const textSize = screen.measureText(item.getName());
+    const textSize = screen.measureText(item.getName(), style);
     screen.drawRect(rectGrow({ coord: textCoord, size: textSize }, [2, 1]), "#c8b997");
-    screen.drawText(item.getName(), "#3e2821", textCoord);
+    screen.drawText(item.getName(), textCoord, style);
   }
 
   handleClick(screenCoord: Coord): boolean {

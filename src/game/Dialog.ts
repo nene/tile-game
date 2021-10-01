@@ -21,14 +21,14 @@ export class Dialog {
   private drawTitle(text: string, screen: PixelScreen) {
     const [, textHeight] = screen.measureText(text);
     screen.drawRect({ coord: this.rect.coord, size: [this.rect.size[0], textHeight + 4] }, "#8f563b", { fixed: true });
-    screen.drawText(text, "#3e2821", coordAdd(this.rect.coord, [2, 2]));
+    screen.drawText(text, coordAdd(this.rect.coord, [2, 2]), { color: "#3e2821" });
   }
 
   private drawContent(text: string, screen: PixelScreen) {
     const start: Coord = coordAdd(this.rect.coord, [2, 16]);
     const lineHeight = 12;
     text.split("\n").forEach((line, i) => {
-      screen.drawText(line, "#8f563b", coordAdd(start, [0, lineHeight * i]));
+      screen.drawText(line, coordAdd(start, [0, lineHeight * i]), { color: "#8f563b" });
     });
   }
 

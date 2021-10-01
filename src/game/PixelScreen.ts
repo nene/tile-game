@@ -14,6 +14,11 @@ interface DrawSpriteOptions {
   fixed?: boolean;
 }
 
+export interface TextStyle {
+  color?: string;
+  size?: "small" | "large";
+}
+
 export class PixelScreen {
   private ctx: CanvasRenderingContext2D;
   private virtualSize: Coord;
@@ -28,7 +33,6 @@ export class PixelScreen {
     this.offset = offset ?? [0, 0];
     this.ctx.scale(scale, scale);
     this.ctx.imageSmoothingEnabled = false;
-    this.ctx.font = "9px NineteenNinetySix";
     this.ctx.textBaseline = "top";
   }
 
@@ -70,17 +74,27 @@ export class PixelScreen {
     );
   }
 
-  drawText(text: string, color: string, coord: Coord) {
-    this.ctx.fillStyle = color;
+  drawText(text: string, coord: Coord, style: TextStyle = {}) {
+    this.setTextStyle(style);
     // We're using 9px font, but we're better off leaving 1px extra room at the top
     // so that if we want to pad the text we can add the same amount of room to each side.
     this.ctx.fillText(text, coord[0], coord[1] + 1);
   }
 
-  measureText(text: string): Coord {
+  measureText(text: string, style: TextStyle = {}): Coord {
+    this.setTextStyle(style);
     // for some reason the text is measured 1px larger than it actually is
     const { width } = this.ctx.measureText(text);
-    return [width - 1, 10]; // Report 9px font as 10px (see comment above)
+    return [width - 1, style.size === "small" ? 5 : 10]; // Report 9px font as 10px (see comment above)
+  }
+
+  private setTextStyle({ size, color }: TextStyle) {
+    if (size === "small") {
+      this.ctx.font = "4.5px NineteenNinetySix";
+    } else {
+      this.ctx.font = "9px NineteenNinetySix";
+    }
+    this.ctx.fillStyle = color ?? "#000";
   }
 
   saveBg() {

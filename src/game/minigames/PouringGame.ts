@@ -99,12 +99,12 @@ export class PouringGame implements MiniGame {
     this.drawTable(screen);
     screen.drawSprite(this.sprites.beerGlass, GLASS_COORD, { fixed: true });
 
-    screen.drawText("Pudelis veel: " + Math.round(this.pouring.getLiquidInBottle() * 100) + "%", "#000", [200, 5]);
-    screen.drawText("Shoppen täis: " + Math.round(this.pouring.getFillLevel() * 100) + "%", "#000", [200 - 6, 16]);
+    screen.drawText("Pudelis veel: " + Math.round(this.pouring.getLiquidInBottle() * 100) + "%", [200, 5]);
+    screen.drawText("Shoppen täis: " + Math.round(this.pouring.getFillLevel() * 100) + "%", [200 - 6, 16]);
     if (DEBUG) {
-      screen.drawText("Vaht: " + Math.round(this.pouring.getFoamInGlass() * 100) + "%", "#000", [200 - 6, 26]);
-      screen.drawText("Vedelik: " + Math.round(this.pouring.getLiquidInGlass() * 100) + "%", "#000", [200 - 6, 36]);
-      screen.drawText("Flow: " + Math.round(this.getFlowRate() * 100) + "%", "#000", [200 - 6, 46]);
+      screen.drawText("Vaht: " + Math.round(this.pouring.getFoamInGlass() * 100) + "%", [200 - 6, 26]);
+      screen.drawText("Vedelik: " + Math.round(this.pouring.getLiquidInGlass() * 100) + "%", [200 - 6, 36]);
+      screen.drawText("Flow: " + Math.round(this.getFlowRate() * 100) + "%", [200 - 6, 46]);
     }
   }
 
