@@ -56,7 +56,7 @@ export function isCoordInRect([x, y]: Coord, { coord: [x1, y1], size }: Rect): b
   return x >= x1 && y >= y1 && x <= x2 && y <= y2;
 }
 
-export function rectOverlaps({ coord: a1, size: aSize }: Rect, { coord: b1, size: bSize }: Rect) {
+export function rectOverlaps({ coord: a1, size: aSize }: Rect, { coord: b1, size: bSize }: Rect): boolean {
   const a2 = coordAdd(a1, aSize);
   const b2 = coordAdd(b1, bSize);
 
@@ -71,6 +71,16 @@ export function rectGrow({ coord, size }: Rect, padding: Coord): Rect {
 
 export function rectTranslate({ coord, size }: Rect, offset: Coord): Rect {
   return { coord: coordAdd(coord, offset), size };
+}
+
+export function rectDistance({ coord: a1, size: aSize }: Rect, { coord: b1, size: bSize }: Rect): number {
+  const a2 = coordAdd(a1, aSize);
+  const b2 = coordAdd(b1, bSize);
+
+  const xDistance = a2[0] < b1[0] ? b1[0] - a2[0] : (b2[0] < a1[0] ? a1[0] - b2[0] : 0);
+  const yDistance = a2[1] < b1[1] ? b1[1] - a2[1] : (b2[1] < a1[1] ? a1[1] - b2[1] : 0);
+
+  return Math.sqrt(xDistance ** 2 + yDistance ** 2);
 }
 
 const TILE_SIZE: Coord = [16, 16];

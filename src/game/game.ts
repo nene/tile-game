@@ -5,9 +5,10 @@ import { GameWorld } from "./GameWorld";
 import { SpriteLibrary } from "./SpriteLibrary";
 import { SoundLibrary } from "./SoundLibrary";
 import { CfeLocation } from "./CfeLocation";
-import { Coord, coordAdd, coordDistance } from "./Coord";
+import { Coord, coordAdd, Rect, rectDistance, rectTranslate } from "./Coord";
 import { UiController } from "./UiController";
 import { Loops } from "./Loops";
+import { GameObject } from "./GameObject";
 
 export interface GameApi {
   onKeyDown: (key: string) => boolean;
@@ -82,7 +83,7 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
       }
       const worldCoord = coordAdd(screenCoord, screen.getOffset());
       const obj = world.getObjectVisibleOnCoord(worldCoord);
-      if (obj && coordDistance(player.getCoord(), obj.getCoord()) < 16 + 8) {
+      if (obj && isObjectsCloseby(player, obj)) {
         obj.onInteract(uiController);
       }
     },
@@ -109,4 +110,12 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
 
 function toPixelScale([x, y]: Coord, scale: number): Coord {
   return [Math.floor(x / scale), Math.floor(y / scale)];
+}
+
+function isObjectsCloseby(obj1: GameObject, obj2: GameObject) {
+  return rectDistance(objectBounds(obj1), objectBounds(obj2)) < 5;
+}
+
+function objectBounds(obj: GameObject): Rect {
+  return rectTranslate(obj.boundingBox(), obj.getCoord());
 }
