@@ -1,21 +1,20 @@
 import { Coord, coordAdd, coordMul, isCoordInRect, screenToTileCoord, tileToScreenCoord } from "./Coord";
 import { GameLocation } from "./GameLocation";
 import { GameObject } from "./GameObject";
-import { groupByTiles } from "./groupByTiles";
+import { ObjectIndexer } from "./ObjectIndexer";
 import { PathFinder } from "./PathFinder";
-
-type TileMap = Record<string, GameObject[]>;
 
 export class GameWorld {
   private gameObjects: GameObject[] = [];
-  private tileMap: TileMap = {};
+  private indexer: ObjectIndexer;
   private pathFinder: PathFinder;
 
   constructor(private location: GameLocation) {
+    this.indexer = new ObjectIndexer(location.getGridSize());
     this.gameObjects.push(...this.location.getStaticObjects());
     this.gameObjects.push(...this.location.getDynamicObjects());
     this.sortObjects();
-    this.pathFinder = new PathFinder(this.isTileEmpty.bind(this));
+    this.pathFinder = new PathFinder(this.indexer.isTileEmpty.bind(this.indexer));
   }
 
   size(): Coord {
@@ -34,7 +33,7 @@ export class GameWorld {
     this.gameObjects.sort((a, b) => {
       return a.zIndex() - b.zIndex();
     });
-    this.tileMap = groupByTiles(this.gameObjects);
+    this.indexer.updateObjects(this.gameObjects);
   }
 
   /**
@@ -51,20 +50,7 @@ export class GameWorld {
   }
 
   getObjectsOnCoord(screenCoord: Coord): GameObject[] {
-    return this.getObjectsInTile(screenToTileCoord(screenCoord));
-  }
-
-  private getObjectsInTile(tileCoord: Coord): GameObject[] {
-    const key = tileCoord.join(",");
-    return this.tileMap[key] || [];
-  }
-
-  private isTileEmpty([x, y]: Coord): boolean {
-    const [maxX, maxY] = this.location.getGridSize();
-    if (x < 0 || y < 0 || x >= maxX || y >= maxY) {
-      return false;
-    }
-    return !this.getObjectsInTile([x, y]).some((obj) => obj.isSolid());
+    return this.indexer.getObjectsOnCoord(screenCoord);
   }
 
   findPath(coord1: Coord, coord2: Coord): Coord[] | undefined {
