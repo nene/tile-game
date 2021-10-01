@@ -1,6 +1,7 @@
 import { Coord, coordAdd, coordMul, isCoordInRect, screenToTileCoord, tileToScreenCoord } from "./Coord";
 import { GameLocation } from "./GameLocation";
 import { GameObject } from "./GameObject";
+import { groupByTiles } from "./groupByTiles";
 import { PathFinder } from "./PathFinder";
 
 type TileMap = Record<string, GameObject[]>;
@@ -33,24 +34,7 @@ export class GameWorld {
     this.gameObjects.sort((a, b) => {
       return a.zIndex() - b.zIndex();
     });
-    this.tileMap = this.sortToTiles(this.gameObjects);
-  }
-
-  private sortToTiles(objects: GameObject[]): TileMap {
-    const tileMap: TileMap = {};
-    objects.forEach((obj) => {
-      const tileCoord = screenToTileCoord(obj.getCoord());
-      for (let dx = 0; dx < obj.tileSize()[0]; dx++) {
-        for (let dy = 0; dy < obj.tileSize()[1]; dy++) {
-          const key = coordAdd(tileCoord, [dx, dy]).join(",");
-          const array = tileMap[key] ?? [];
-          array.push(obj);
-          tileMap[key] = array;
-        }
-      }
-    });
-
-    return tileMap;
+    this.tileMap = groupByTiles(this.gameObjects);
   }
 
   /**
