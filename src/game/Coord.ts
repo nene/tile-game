@@ -69,6 +69,10 @@ export function rectGrow({ coord, size }: Rect, padding: Coord): Rect {
   return { coord: coordSub(coord, padding), size: coordAdd(size, coordMul(padding, [2, 2])) };
 }
 
+export function rectTranslate({ coord, size }: Rect, offset: Coord): Rect {
+  return { coord: coordAdd(coord, offset), size };
+}
+
 const TILE_SIZE: Coord = [16, 16];
 
 export function tileToScreenCoord(tileCoord: Coord): Coord {

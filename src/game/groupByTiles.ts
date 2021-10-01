@@ -1,4 +1,4 @@
-import { Coord, coordAdd, Rect, screenToFractionalTileCoord, screenToTileCoord } from "./Coord";
+import { Coord, coordAdd, Rect, rectTranslate, screenToFractionalTileCoord, screenToTileCoord } from "./Coord";
 
 type ObjectWithBounds = { getCoord: () => Coord; boundingBox: () => Rect }
 
@@ -7,7 +7,8 @@ type GroupMap<T> = Record<string, T[]>;
 export function groupByTiles<T extends ObjectWithBounds>(objects: T[]): GroupMap<T> {
   const tileMap: GroupMap<T> = {};
   objects.forEach((obj) => {
-    tilesCoveredBy(obj).forEach((tileCoord) => {
+    const rect = rectTranslate(obj.boundingBox(), obj.getCoord());
+    tilesCoveredBy(rect).forEach((tileCoord) => {
       const key = tileCoord.join(",");
       const array = tileMap[key] ?? [];
       array.push(obj);
@@ -18,9 +19,7 @@ export function groupByTiles<T extends ObjectWithBounds>(objects: T[]): GroupMap
   return tileMap;
 }
 
-export function tilesCoveredBy<T extends ObjectWithBounds>(obj: T): Coord[] {
-  const { coord: offset, size } = obj.boundingBox();
-  const coord = coordAdd(obj.getCoord(), offset);
+export function tilesCoveredBy({ coord, size }: Rect): Coord[] {
   const topLeftTile = screenToTileCoord(coord);
   const bottomRightTile = screenToFractionalTileCoord(coordAdd(coord, size)).map(Math.ceil) as Coord;
 
