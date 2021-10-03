@@ -1,22 +1,24 @@
 import { Coord, coordAdd, Rect, rectTranslate } from "../Coord";
-import { getBeer } from "../items/Beer";
-import { BeerBottle } from "../items/BeerBottle";
-import { GameItem } from "../items/GameItem";
+import { Beer, getBeer } from "../items/Beer";
 import { PixelScreen } from "../PixelScreen";
+import { SpriteLibrary } from "../SpriteLibrary";
+import { SpriteSheet } from "../SpriteSheet";
 import { UI_BG_COLOR, UI_HIGHLIGHT_COLOR, UI_SHADOW_COLOR } from "../ui-utils";
 
 const ITEM_HEIGHT = 21;
 
 export class ShopListView {
-  private items: GameItem[];
+  private items: Beer[];
+  private beerSprites: SpriteSheet;
 
   constructor(private rect: Rect) {
     this.items = [
-      new BeerBottle(getBeer("alexander")),
-      new BeerBottle(getBeer("pilsner")),
-      new BeerBottle(getBeer("tommu-hiid")),
-      new BeerBottle(getBeer("limonaad")),
+      getBeer("alexander"),
+      getBeer("pilsner"),
+      getBeer("tommu-hiid"),
+      getBeer("limonaad"),
     ];
+    this.beerSprites = SpriteLibrary.get("bottle");
   }
 
   paint(screen: PixelScreen) {
@@ -28,9 +30,9 @@ export class ShopListView {
       const offset: Coord = [0, i * ITEM_HEIGHT];
       screen.drawRect(rectTranslate(itemRect, offset), UI_BG_COLOR);
       screen.drawRect(rectTranslate(iconRect, offset), UI_HIGHLIGHT_COLOR);
-      screen.drawSprite(item.getSprite(), coordAdd(iconRect.coord, offset));
-      screen.drawText(item.getName(), coordAdd(nameCoord, offset), { shadowColor: UI_SHADOW_COLOR });
-      screen.drawText(item.getName(), coordAdd(descriptionCoord, offset), { size: "small" });
+      screen.drawSprite(this.beerSprites.getSprite([1, item.spriteIndex]), coordAdd(iconRect.coord, offset));
+      screen.drawText(item.name, coordAdd(nameCoord, offset), { shadowColor: UI_SHADOW_COLOR });
+      screen.drawText(item.description, coordAdd(descriptionCoord, offset), { size: "small" });
     });
   }
 }
