@@ -43,6 +43,6 @@ export class ShopListView {
     screen.drawText(item.name, coordAdd(iconRect.coord, [18, -1]), { shadowColor: UI_SHADOW_COLOR });
     screen.drawText(item.description, coordAdd(iconRect.coord, [18, 9]), { size: "small" });
     screen.drawSprite(this.goldSprite, goldCoord);
-    screen.drawText(item.price + "", coordAdd(goldCoord, [-2, -1]), { align: "right", shadowColor: UI_SHADOW_COLOR });
+    screen.drawText(item.price, coordAdd(goldCoord, [-2, -1]), { align: "right", shadowColor: UI_SHADOW_COLOR });
   }
 }

@@ -87,16 +87,16 @@ export class PixelScreen {
     return opts?.fixed ?? this.fixed;
   }
 
-  drawText(text: string, coord: Coord, style: TextStyle = {}) {
+  drawText(text: string | number, coord: Coord, style: TextStyle = {}) {
     // We're using 9px font, but we're better off leaving 1px extra room at the top
     // so that if we want to pad the text we can add the same amount of room to each side.
     const fixedCoord = coordAdd(coord, [0, 1]);
 
     this.setTextStyle(style);
     if (style.shadowColor) {
-      this.drawTextShadow(text, fixedCoord, style.shadowColor);
+      this.drawTextShadow(String(text), fixedCoord, style.shadowColor);
     }
-    this.ctx.fillText(text, fixedCoord[0], fixedCoord[1]);
+    this.ctx.fillText(String(text), fixedCoord[0], fixedCoord[1]);
   }
 
   private drawTextShadow(text: string, coord: Coord, shadowColor: string) {
@@ -106,10 +106,10 @@ export class PixelScreen {
     this.ctx.restore();
   }
 
-  measureText(text: string, style: TextStyle = {}): Coord {
+  measureText(text: string | number, style: TextStyle = {}): Coord {
     this.setTextStyle(style);
     // for some reason the text is measured 1px larger than it actually is
-    const { width } = this.ctx.measureText(text);
+    const { width } = this.ctx.measureText(String(text));
     return [width - 1, style.size === "small" ? 5 : 10]; // Report 9px font as 10px (see comment above)
   }
 
