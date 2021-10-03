@@ -1,6 +1,7 @@
 export interface Beer {
   name: string;
   description: string;
+  price: number;
   spriteIndex: number;
   alcohol: number; // How much alcohol it has (ABV %)
   foam: Foaminess; // How much foam does it generate when pouring
@@ -28,6 +29,7 @@ const beers = {
   "alexander": beerDef({
     name: "Alexander",
     description: "Normaalne õlu normaalsele korporandile.",
+    price: 2,
     spriteIndex: 1,
     alcohol: 5.2,
     foam: foamLevel[2],
@@ -36,6 +38,7 @@ const beers = {
   "heineken": beerDef({
     name: "Heineken",
     description: "",
+    price: 3,
     spriteIndex: 2,
     alcohol: 5,
     foam: foamLevel[1],
@@ -44,6 +47,7 @@ const beers = {
   "special": beerDef({
     name: "Special",
     description: "",
+    price: 3,
     spriteIndex: 3,
     alcohol: 5.2,
     foam: foamLevel[1],
@@ -52,6 +56,7 @@ const beers = {
   "pilsner": beerDef({
     name: "Pilsner",
     description: "EÜSnikute lemmiknaps.",
+    price: 1,
     spriteIndex: 4,
     alcohol: 4.2,
     foam: foamLevel[1],
@@ -60,6 +65,7 @@ const beers = {
   "tommu-hiid": beerDef({
     name: "Tõmmu hiid",
     description: "Vana vilistlase rammujook.",
+    price: 4,
     spriteIndex: 5,
     alcohol: 4.7,
     foam: foamLevel[4],
@@ -68,6 +74,7 @@ const beers = {
   "kriek": beerDef({
     name: "Kriek",
     description: "",
+    price: 6,
     spriteIndex: 6,
     alcohol: 3.5,
     foam: foamLevel[4],
@@ -76,6 +83,7 @@ const beers = {
   "limonaad": beerDef({
     name: "Limpa limonaad",
     description: "See magus jook kipub shoppeni põhja kleepuma.",
+    price: 1,
     spriteIndex: 7,
     alcohol: 0,
     foam: foamLevel[0],
@@ -84,6 +92,7 @@ const beers = {
   "paulaner": beerDef({
     name: "Paulaner Hefeweisen",
     description: "Saksamaine nisuõlu.",
+    price: 5,
     spriteIndex: 8,
     alcohol: 5.5,
     foam: foamLevel[4],
@@ -92,6 +101,7 @@ const beers = {
   "bock": beerDef({
     name: "Double Bock",
     description: "Revelia pidusöök.",
+    price: 3,
     spriteIndex: 9,
     alcohol: 7,
     foam: foamLevel[3],
@@ -100,6 +110,7 @@ const beers = {
   "porter": beerDef({
     name: "Sokolaadi porter",
     description: "",
+    price: 4,
     spriteIndex: 10,
     alcohol: 6.9,
     foam: foamLevel[5],
