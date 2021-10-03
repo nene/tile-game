@@ -16,7 +16,7 @@ interface DrawSpriteOptions {
 
 export interface TextStyle {
   color?: string;
-  size?: "small" | "large";
+  size?: "small" | "medium";
   align?: "center" | "end" | "left" | "right" | "start";
   shadowColor?: string;
 }
