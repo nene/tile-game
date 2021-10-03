@@ -10,7 +10,7 @@ export class Wallet {
   }
 
   paint(screen: PixelScreen) {
-    screen.drawSprite(this.bg, [267, 2]);
+    screen.drawSprite(this.bg, [267, 2], { fixed: true });
     screen.drawText(String(this.money), [306, 3], { align: "right", shadowColor: "#8f563b" });
   }
 }
