@@ -1,4 +1,4 @@
-import { Coord, coordAdd, Rect } from "../Coord";
+import { Coord, coordAdd, isCoordInRect, Rect } from "../Coord";
 import { PixelScreen } from "../PixelScreen";
 import { SpriteLibrary } from "../SpriteLibrary";
 import { SpriteSheet } from "../SpriteSheet";
@@ -12,9 +12,32 @@ const SPRITE_BG: Coord = [4, 0];
 
 export class ScrollBar {
   private sprites: SpriteSheet;
+  private buttonPressed = {
+    "up": false,
+    "down": false,
+  };
+  private buttonCoords: Record<"up" | "down", Rect>;
 
   constructor(private rect: Rect) {
     this.sprites = SpriteLibrary.get("scroll-bar");
+
+    this.buttonCoords = {
+      "up": { coord: rect.coord, size: [8, 8] },
+      "down": { coord: coordAdd(rect.coord, [0, rect.size[1] - 8]), size: [8, 8] },
+    };
+  }
+
+  handleMouseEvent(type: string, coord: Coord) {
+    switch (type) {
+      case "mousedown":
+        this.buttonPressed.up = isCoordInRect(coord, this.buttonCoords.up);
+        this.buttonPressed.down = isCoordInRect(coord, this.buttonCoords.down);
+        break;
+      case "mouseup":
+        this.buttonPressed.up = false;
+        this.buttonPressed.down = false;
+        break;
+    }
   }
 
   paint(screen: PixelScreen) {
@@ -29,11 +52,13 @@ export class ScrollBar {
   }
 
   private drawUpButton(screen: PixelScreen) {
-    screen.drawSprite(this.sprites.getSprite(SPRITE_UP), this.rect.coord);
+    const state = this.buttonPressed.up ? SPRITE_UP_PRESSED : SPRITE_UP;
+    screen.drawSprite(this.sprites.getSprite(state), this.buttonCoords.up.coord);
   }
 
   private drawDownButton(screen: PixelScreen) {
-    screen.drawSprite(this.sprites.getSprite(SPRITE_DOWN), coordAdd(this.rect.coord, [0, this.rect.size[1] - 8]));
+    const state = this.buttonPressed.down ? SPRITE_DOWN_PRESSED : SPRITE_DOWN;
+    screen.drawSprite(this.sprites.getSprite(state), this.buttonCoords.down.coord);
   }
 
   private drawSlider(screen: PixelScreen) {

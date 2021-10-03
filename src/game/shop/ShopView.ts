@@ -1,4 +1,4 @@
-import { coordAdd, coordSub, Rect, rectGrow, rectTranslate } from "../Coord";
+import { Coord, coordAdd, coordSub, Rect, rectGrow, rectTranslate } from "../Coord";
 import { PixelScreen } from "../PixelScreen";
 import { drawInset, drawUpset, UI_BG_COLOR, UI_SHADOW_COLOR } from "../ui-utils";
 import { ScrollBar } from "./ScrollBar";
@@ -13,6 +13,10 @@ export class ShopView {
   constructor() {
     this.shopListView = new ShopListView(rectTranslate(rectGrow(this.shopListRect(), [-2.5, -2]), [-0.5, 0]));
     this.scrollBar = new ScrollBar(this.scrollBarRect());
+  }
+
+  handleMouseEvent(type: string, coord: Coord) {
+    this.scrollBar.handleMouseEvent(type, coord);
   }
 
   paint(screen: PixelScreen) {

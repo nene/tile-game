@@ -68,6 +68,8 @@ export class UiController {
   }
 
   handleClick(screenCoord: Coord): boolean {
+    this.shopView.handleMouseEvent("click", screenCoord);
+
     if (this.getMiniGame()) {
       this.getMiniGame()?.handleClick(screenCoord);
       return true;
@@ -87,14 +89,17 @@ export class UiController {
 
     this.cursorController.handleMouseMove(screenCoord);
     this.inventoryController.handleMouseMove(screenCoord);
+    this.shopView.handleMouseEvent("mousemove", screenCoord);
   }
 
   handleMouseDown(screenCoord: Coord) {
     this.getMiniGame()?.handleMouseDown(screenCoord);
+    this.shopView.handleMouseEvent("mousedown", screenCoord);
   }
 
   handleMouseUp(screenCoord: Coord) {
     this.getMiniGame()?.handleMouseUp(screenCoord);
+    this.shopView.handleMouseEvent("mouseup", screenCoord);
   }
 
   private getMiniGame(): MiniGame | undefined {
