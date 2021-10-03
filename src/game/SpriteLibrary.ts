@@ -9,6 +9,7 @@ import table from "./sprites/table.png";
 import fridge from "./sprites/fridge.png";
 import beerCabinet from "./sprites/beer-cabinet.png";
 import slot from "./sprites/slot.png";
+import scrollBar from "./sprites/scroll-bar.png";
 import cursor from "./sprites/cursor.png";
 import wallet from "./sprites/wallet.png";
 import gold from "./sprites/gold.png";
@@ -50,6 +51,7 @@ const imageFiles = {
   'beer-cabinet': spriteDef({ src: beerCabinet, cfg: { size: [32, 45], colsRows: [1, 1], offset: [0, -32] } }),
 
   'slot': spriteDef({ src: slot, cfg: { size: [20, 20], colsRows: [2, 1] } }),
+  'scroll-bar': spriteDef({ src: scrollBar, cfg: { size: [8, 8], colsRows: [5, 1] } }),
   'cursor': spriteDef({ src: cursor, cfg: { size: [16, 16], colsRows: [1, 1] } }),
   'wallet': spriteDef({ src: wallet, cfg: { size: [51, 12], colsRows: [1, 1] } }),
   'gold': spriteDef({ src: gold, cfg: { size: [8, 8], colsRows: [1, 1] } }),

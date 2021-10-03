@@ -1,15 +1,18 @@
-import { coordAdd, coordSub, Rect, rectGrow } from "../Coord";
+import { coordAdd, coordSub, Rect, rectGrow, rectTranslate } from "../Coord";
 import { PixelScreen } from "../PixelScreen";
 import { drawInset, drawUpset, UI_BG_COLOR, UI_SHADOW_COLOR } from "../ui-utils";
+import { ScrollBar } from "./ScrollBar";
 import { ShopListView } from "./ShopListView";
 
 export class ShopView {
   private rect: Rect = { coord: [64, 16], size: [192, 108] };
   private titleHeight = 17;
   private shopListView: ShopListView;
+  private scrollBar: ScrollBar;
 
   constructor() {
-    this.shopListView = new ShopListView(rectGrow(this.shopListRect(), [-2, -2]));
+    this.shopListView = new ShopListView(rectTranslate(rectGrow(this.shopListRect(), [-2.5, -2]), [-0.5, 0]));
+    this.scrollBar = new ScrollBar(this.scrollBarRect());
   }
 
   paint(screen: PixelScreen) {
@@ -22,6 +25,8 @@ export class ShopView {
       screen.drawRect(rectGrow(this.shopListRect(), [-1, -1]), "#000");
 
       this.shopListView.paint(screen);
+
+      this.scrollBar.paint(screen);
     });
   }
 
@@ -33,6 +38,11 @@ export class ShopView {
   private shopListRect(): Rect {
     const { coord, size } = rectGrow(this.rect, [-2, -2]);
     return { coord: coordAdd(coord, [0, this.titleHeight]), size: coordSub(size, [0, this.titleHeight]) };
+  }
+
+  private scrollBarRect(): Rect {
+    const { coord, size } = this.shopListRect();
+    return { coord: coordAdd(coord, [size[0] - 9, 1]), size: [8, size[1] - 2] };
   }
 }
 
