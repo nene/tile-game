@@ -1,10 +1,16 @@
 import { coordAdd, coordSub, Rect, rectGrow } from "../Coord";
 import { PixelScreen } from "../PixelScreen";
 import { drawInset, drawUpset, UI_BG_COLOR, UI_SHADOW_COLOR } from "../ui-utils";
+import { ShopListView } from "./ShopListView";
 
 export class ShopView {
   private rect: Rect = { coord: [64, 16], size: [192, 108] };
   private titleHeight = 17;
+  private shopListView: ShopListView;
+
+  constructor() {
+    this.shopListView = new ShopListView(rectGrow(this.shopListRect(), [-2, -2]));
+  }
 
   paint(screen: PixelScreen) {
     screen.withFixedCoords(() => {
@@ -14,6 +20,8 @@ export class ShopView {
 
       drawInset(screen, this.shopListRect());
       screen.drawRect(rectGrow(this.shopListRect(), [-1, -1]), "#000");
+
+      this.shopListView.paint(screen);
     });
   }
 
