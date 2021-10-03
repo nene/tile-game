@@ -27,6 +27,7 @@ export class PixelScreen {
   private scale: number;
   private offset: Coord;
   private bg?: ImageData;
+  private fixed = false;
 
   constructor(ctx: CanvasRenderingContext2D, { width, height, scale, offset }: PixelScreenOptions) {
     this.ctx = ctx;
@@ -38,8 +39,14 @@ export class PixelScreen {
     this.ctx.textBaseline = "top";
   }
 
+  withFixedCoords(fn: () => void) {
+    this.fixed = true;
+    fn();
+    this.fixed = false;
+  }
+
   drawSprite(sprite: Sprite, coord: Coord, opts?: DrawSpriteOptions) {
-    const screenOffset: Coord = opts?.fixed ? [0, 0] : this.offset;
+    const screenOffset: Coord = this.isFixed(opts) ? [0, 0] : this.offset;
 
     if (rectOverlaps({ coord: coordAdd(coord, sprite.offset), size: sprite.size }, { coord: screenOffset, size: this.virtualSize })) {
       const adjustedCoord = coordSub(coordAdd(coord, sprite.offset), screenOffset);
@@ -64,7 +71,7 @@ export class PixelScreen {
   }
 
   drawRect(rect: Rect, color: string, opts?: DrawSpriteOptions) {
-    const screenOffset: Coord = opts?.fixed ? [0, 0] : this.offset;
+    const screenOffset: Coord = this.isFixed(opts) ? [0, 0] : this.offset;
 
     const adjustedCoord = coordSub(rect.coord, screenOffset);
     this.ctx.fillStyle = color;
@@ -74,6 +81,10 @@ export class PixelScreen {
       rect.size[0],
       rect.size[1],
     );
+  }
+
+  private isFixed(opts?: DrawSpriteOptions): boolean {
+    return opts?.fixed ?? this.fixed;
   }
 
   drawText(text: string, coord: Coord, style: TextStyle = {}) {

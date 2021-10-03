@@ -7,12 +7,14 @@ export class ShopView {
   private titleHeight = 17;
 
   paint(screen: PixelScreen) {
-    screen.drawRect(this.rect, UI_BG_COLOR, { fixed: true });
-    drawUpset(screen, this.rect);
-    this.drawTitle(screen);
+    screen.withFixedCoords(() => {
+      screen.drawRect(this.rect, UI_BG_COLOR);
+      drawUpset(screen, this.rect);
+      this.drawTitle(screen);
 
-    drawInset(screen, this.shopListRect());
-    screen.drawRect(rectGrow(this.shopListRect(), [-1, -1]), "#000", { fixed: true });
+      drawInset(screen, this.shopListRect());
+      screen.drawRect(rectGrow(this.shopListRect(), [-1, -1]), "#000");
+    });
   }
 
   private drawTitle(screen: PixelScreen) {

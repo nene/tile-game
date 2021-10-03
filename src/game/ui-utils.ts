@@ -14,8 +14,8 @@ export function drawInset(screen: PixelScreen, rect: Rect) {
 }
 
 function drawUiBox(screen: PixelScreen, rect: Rect, color1: string, color2: string) {
-  screen.drawRect({ coord: rect.coord, size: [rect.size[0] - 1, 1] }, color1, { fixed: true });
-  screen.drawRect({ coord: rect.coord, size: [1, rect.size[1] - 1] }, color1, { fixed: true });
-  screen.drawRect({ coord: coordAdd(rect.coord, [1, rect.size[1] - 1]), size: [rect.size[0] - 1, 1] }, color2, { fixed: true });
-  screen.drawRect({ coord: coordAdd(rect.coord, [rect.size[0] - 1, 1]), size: [1, rect.size[1] - 1] }, color2, { fixed: true });
+  screen.drawRect({ coord: rect.coord, size: [rect.size[0] - 1, 1] }, color1);
+  screen.drawRect({ coord: rect.coord, size: [1, rect.size[1] - 1] }, color1);
+  screen.drawRect({ coord: coordAdd(rect.coord, [1, rect.size[1] - 1]), size: [rect.size[0] - 1, 1] }, color2);
+  screen.drawRect({ coord: coordAdd(rect.coord, [rect.size[0] - 1, 1]), size: [1, rect.size[1] - 1] }, color2);
 }
