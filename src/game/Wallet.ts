@@ -11,6 +11,6 @@ export class Wallet {
 
   paint(screen: PixelScreen) {
     screen.drawSprite(this.bg, [267, 2]);
-    screen.drawText(String(this.money), [306, 3], { align: "right" });
+    screen.drawText(String(this.money), [306, 3], { align: "right", shadowColor: "#8f563b" });
   }
 }

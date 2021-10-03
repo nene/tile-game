@@ -18,6 +18,7 @@ export interface TextStyle {
   color?: string;
   size?: "small" | "large";
   align?: "center" | "end" | "left" | "right" | "start";
+  shadowColor?: string;
 }
 
 export class PixelScreen {
@@ -76,10 +77,22 @@ export class PixelScreen {
   }
 
   drawText(text: string, coord: Coord, style: TextStyle = {}) {
-    this.setTextStyle(style);
     // We're using 9px font, but we're better off leaving 1px extra room at the top
     // so that if we want to pad the text we can add the same amount of room to each side.
-    this.ctx.fillText(text, coord[0], coord[1] + 1);
+    const fixedCoord = coordAdd(coord, [0, 1]);
+
+    this.setTextStyle(style);
+    if (style.shadowColor) {
+      this.drawTextShadow(text, fixedCoord, style.shadowColor);
+    }
+    this.ctx.fillText(text, fixedCoord[0], fixedCoord[1]);
+  }
+
+  private drawTextShadow(text: string, coord: Coord, shadowColor: string) {
+    this.ctx.save();
+    this.ctx.fillStyle = shadowColor;
+    this.ctx.fillText(text, coord[0] + 0.5, coord[1] + 0.5);
+    this.ctx.restore();
   }
 
   measureText(text: string, style: TextStyle = {}): Coord {
