@@ -17,6 +17,9 @@ export class ScrollBar {
     "down": false,
   };
   private buttonCoords: Record<"up" | "down", Rect>;
+  private sliderPos = 0;
+  private maxSliderPos: number;
+  private sliderSize = 20;
 
   constructor(private rect: Rect) {
     this.sprites = SpriteLibrary.get("scroll-bar");
@@ -25,13 +28,21 @@ export class ScrollBar {
       "up": { coord: rect.coord, size: [8, 8] },
       "down": { coord: coordAdd(rect.coord, [0, rect.size[1] - 8]), size: [8, 8] },
     };
+
+    this.maxSliderPos = rect.size[1] - 16 - this.sliderSize;
   }
 
   handleMouseEvent(type: string, coord: Coord) {
     switch (type) {
       case "mousedown":
-        this.buttonPressed.up = isCoordInRect(coord, this.buttonCoords.up);
-        this.buttonPressed.down = isCoordInRect(coord, this.buttonCoords.down);
+        if (isCoordInRect(coord, this.buttonCoords.up)) {
+          this.buttonPressed.up = true;
+          this.sliderPos = Math.max(0, this.sliderPos - 1);
+        }
+        else if (isCoordInRect(coord, this.buttonCoords.down)) {
+          this.buttonPressed.down = true;
+          this.sliderPos = Math.min(this.maxSliderPos, this.sliderPos + 1);
+        }
         break;
       case "mouseup":
         this.buttonPressed.up = false;
@@ -62,7 +73,7 @@ export class ScrollBar {
   }
 
   private drawSlider(screen: PixelScreen) {
-    const sliderRect: Rect = { coord: coordAdd(this.rect.coord, [0, 8]), size: [8, 20] };
+    const sliderRect: Rect = { coord: coordAdd(this.rect.coord, [0, 8 + this.sliderPos]), size: [8, this.sliderSize] };
     screen.drawRect(sliderRect, UI_BG_COLOR);
     drawUpset(screen, sliderRect);
   }
