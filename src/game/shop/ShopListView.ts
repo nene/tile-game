@@ -35,12 +35,15 @@ export class ShopListView {
 
   private drawItem(screen: PixelScreen, rect: Rect, item: Beer) {
     const iconRect: Rect = { coord: coordAdd(rect.coord, [2, 2]), size: [16, 16] };
+    const nameCoord = coordAdd(iconRect.coord, [18, -1]);
+    const [nameLen] = screen.measureText(item.name);
     const goldCoord: Coord = coordAdd(rect.coord, [rect.size[0] - 10, 2]);
 
     screen.drawRect(rect, UI_BG_COLOR);
     screen.drawRect(iconRect, UI_HIGHLIGHT_COLOR);
     screen.drawSprite(this.beerSprites.getSprite([1, item.spriteIndex]), iconRect.coord);
-    screen.drawText(item.name, coordAdd(iconRect.coord, [18, -1]), { shadowColor: UI_SHADOW_COLOR });
+    screen.drawText(item.name, nameCoord, { shadowColor: UI_SHADOW_COLOR });
+    screen.drawText(item.alcohol + "%", coordAdd(nameCoord, [nameLen + 3, 3.5]), { size: "small", color: "#481a12" });
     screen.drawText(item.description, coordAdd(iconRect.coord, [18, 9]), { size: "small" });
     screen.drawSprite(this.goldSprite, goldCoord);
     screen.drawText(item.price, coordAdd(goldCoord, [-2, -1]), { align: "right", shadowColor: UI_SHADOW_COLOR });
