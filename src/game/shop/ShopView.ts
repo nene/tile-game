@@ -17,17 +17,18 @@ export class ShopView {
 
   paint(screen: PixelScreen) {
     screen.withFixedCoords(() => {
-      screen.drawRect(this.rect, UI_BG_COLOR);
-      drawUpset(screen, this.rect);
+      this.drawBackground(screen);
       this.drawTitle(screen);
-
-      drawInset(screen, this.shopListRect());
-      screen.drawRect(rectGrow(this.shopListRect(), [-1, -1]), "#000");
-
       this.shopListView.paint(screen);
-
       this.scrollBar.paint(screen);
     });
+  }
+
+  private drawBackground(screen: PixelScreen) {
+    screen.drawRect(this.rect, UI_BG_COLOR);
+    drawUpset(screen, this.rect);
+    drawInset(screen, this.shopListRect());
+    screen.drawRect(rectGrow(this.shopListRect(), [-1, -1]), "#000");
   }
 
   private drawTitle(screen: PixelScreen) {
