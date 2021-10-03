@@ -8,12 +8,14 @@ import { Overlay } from "./Overlay";
 import { CursorController } from "./CursorController";
 import { MiniGame } from "./minigames/MiniGame";
 import { Wallet } from "./Wallet";
+import { ShopView } from "./shop/ShopView";
 
 export class UiController {
   private inventoryController: InventoryController;
   private cursorController: CursorController;
   private dialog?: Dialog;
   private wallet = new Wallet(112);
+  private shopView = new ShopView();
 
   constructor(playerInventory: Inventory) {
     this.inventoryController = new InventoryController(playerInventory);
@@ -49,6 +51,8 @@ export class UiController {
       this.inventoryController.paint(screen);
     }
 
+    Overlay.paint(screen);
+    this.shopView.paint(screen);
     this.wallet.paint(screen);
 
     // Cursor is always painted on top
