@@ -1,4 +1,4 @@
-import { Coord, coordAdd, isCoordInRect, Rect } from "../Coord";
+import { Coord, coordAdd, coordConstrain, coordSub, isCoordInRect, Rect } from "../Coord";
 import { PixelScreen } from "../PixelScreen";
 import { SpriteLibrary } from "../SpriteLibrary";
 import { SpriteSheet } from "../SpriteSheet";
@@ -20,6 +20,7 @@ export class ScrollBar {
   private sliderPos = 0;
   private maxSliderPos: number;
   private sliderSize = 20;
+  private sliderGrabbed?: Coord;
 
   constructor(private rect: Rect) {
     this.sprites = SpriteLibrary.get("scroll-bar");
@@ -43,11 +44,19 @@ export class ScrollBar {
           this.buttonPressed.down = true;
           this.sliderPos = Math.min(this.maxSliderPos, this.sliderPos + 1);
         }
+        else if (isCoordInRect(coord, this.sliderRect())) {
+          this.sliderGrabbed = coordSub(coord, [0, this.sliderPos]);
+        }
         break;
       case "mouseup":
         this.buttonPressed.up = false;
         this.buttonPressed.down = false;
+        this.sliderGrabbed = undefined;
         break;
+      case "mousemove":
+        if (this.sliderGrabbed) {
+          this.sliderPos = coordConstrain(coordSub(coord, this.sliderGrabbed), { coord: [0, 0], size: [8, this.maxSliderPos] })[1];
+        }
     }
   }
 
@@ -73,8 +82,11 @@ export class ScrollBar {
   }
 
   private drawSlider(screen: PixelScreen) {
-    const sliderRect: Rect = { coord: coordAdd(this.rect.coord, [0, 8 + this.sliderPos]), size: [8, this.sliderSize] };
-    screen.drawRect(sliderRect, UI_BG_COLOR);
-    drawUpset(screen, sliderRect);
+    screen.drawRect(this.sliderRect(), UI_BG_COLOR);
+    drawUpset(screen, this.sliderRect());
+  }
+
+  private sliderRect(): Rect {
+    return { coord: coordAdd(this.rect.coord, [0, 8 + this.sliderPos]), size: [8, this.sliderSize] };
   }
 }
