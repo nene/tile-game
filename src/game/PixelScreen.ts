@@ -17,6 +17,7 @@ interface DrawSpriteOptions {
 export interface TextStyle {
   color?: string;
   size?: "small" | "large";
+  align?: "center" | "end" | "left" | "right" | "start";
 }
 
 export class PixelScreen {
@@ -88,13 +89,14 @@ export class PixelScreen {
     return [width - 1, style.size === "small" ? 5 : 10]; // Report 9px font as 10px (see comment above)
   }
 
-  private setTextStyle({ size, color }: TextStyle) {
+  private setTextStyle({ size, color, align }: TextStyle) {
     if (size === "small") {
       this.ctx.font = "4.5px NineteenNinetySix";
     } else {
       this.ctx.font = "9px NineteenNinetySix";
     }
     this.ctx.fillStyle = color ?? "#000";
+    this.ctx.textAlign = align ?? "left";
   }
 
   saveBg() {
