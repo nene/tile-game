@@ -15,7 +15,7 @@ export function App() {
     if (!canvas) {
       throw new Error("Unable to access canvas");
     }
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d", { alpha: false });
     if (!ctx) {
       throw new Error("Unable to access canvas 2D context");
     }
