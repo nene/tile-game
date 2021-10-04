@@ -1,4 +1,4 @@
-import { Coord, coordAdd, coordSub, Rect, rectTranslate } from "../Coord";
+import { Coord, coordAdd, coordSub, Rect, rectOverlaps, rectTranslate } from "../Coord";
 import { Beer, getBeer } from "../items/Beer";
 import { PixelScreen } from "../PixelScreen";
 import { Sprite } from "../Sprite";
@@ -35,7 +35,11 @@ export class ShopListView {
     screen.withClippedRegion(this.rect, () => {
       this.items.forEach((item, i) => {
         const offset: Coord = [0, i * (ITEM_HEIGHT + MARGIN_HEIGHT)];
-        this.drawItem(screen, rectTranslate(itemRect, offset), item);
+        const rect = rectTranslate(itemRect, offset);
+        // Only draw the item when it's in visible area
+        if (rectOverlaps(rect, this.rect)) {
+          this.drawItem(screen, rect, item);
+        }
       });
     });
   }
