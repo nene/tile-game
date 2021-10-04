@@ -60,6 +60,10 @@ export class ScrollBar {
     }
   }
 
+  scrollPosition(): number {
+    return this.sliderPos / this.maxSliderPos;
+  }
+
   paint(screen: PixelScreen) {
     this.drawBackground(screen);
     this.drawUpButton(screen);

@@ -23,7 +23,7 @@ export class ShopView {
     screen.withFixedCoords(() => {
       this.drawBackground(screen);
       this.drawTitle(screen);
-      this.shopListView.paint(screen);
+      this.shopListView.paint(screen, this.scrollBar.scrollPosition());
       this.scrollBar.paint(screen);
     });
   }

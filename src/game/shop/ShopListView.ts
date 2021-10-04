@@ -1,4 +1,4 @@
-import { Coord, coordAdd, Rect, rectTranslate } from "../Coord";
+import { Coord, coordAdd, coordSub, Rect, rectTranslate } from "../Coord";
 import { Beer, getBeer } from "../items/Beer";
 import { PixelScreen } from "../PixelScreen";
 import { Sprite } from "../Sprite";
@@ -6,7 +6,8 @@ import { SpriteLibrary } from "../SpriteLibrary";
 import { SpriteSheet } from "../SpriteSheet";
 import { UI_BG_COLOR, UI_HIGHLIGHT_COLOR, UI_SHADOW_COLOR } from "../ui-utils";
 
-const ITEM_HEIGHT = 21;
+const ITEM_HEIGHT = 20;
+const MARGIN_HEIGHT = 1;
 
 export class ShopListView {
   private items: Beer[];
@@ -19,18 +20,31 @@ export class ShopListView {
       getBeer("pilsner"),
       getBeer("tommu-hiid"),
       getBeer("limonaad"),
+      getBeer("bock"),
+      getBeer("porter"),
+      getBeer("special"),
+      getBeer("kriek"),
     ];
     this.beerSprites = SpriteLibrary.get("bottle");
     this.goldSprite = SpriteLibrary.get("gold").getSprite([0, 0]);
   }
 
-  paint(screen: PixelScreen) {
-    const itemRect: Rect = { coord: this.rect.coord, size: [this.rect.size[0] - 7, 20] };
+  paint(screen: PixelScreen, scrollPos: number) {
+    const itemRect: Rect = { coord: coordSub(this.rect.coord, this.scrollCoord(scrollPos)), size: [this.rect.size[0] - 7, 20] };
 
-    this.items.forEach((item, i) => {
-      const offset: Coord = [0, i * ITEM_HEIGHT];
-      this.drawItem(screen, rectTranslate(itemRect, offset), item);
+    screen.withClippedRegion(this.rect, () => {
+      this.items.forEach((item, i) => {
+        const offset: Coord = [0, i * (ITEM_HEIGHT + MARGIN_HEIGHT)];
+        this.drawItem(screen, rectTranslate(itemRect, offset), item);
+      });
     });
+  }
+
+  private scrollCoord(scrollPos: number): Coord {
+    const fullHeight = (ITEM_HEIGHT + MARGIN_HEIGHT) * this.items.length - MARGIN_HEIGHT;
+    const viewHeight = this.rect.size[1];
+    const scrollHeight = Math.max(0, fullHeight - viewHeight);
+    return [0, Math.floor(scrollHeight * scrollPos)];
   }
 
   private drawItem(screen: PixelScreen, rect: Rect, item: Beer) {
