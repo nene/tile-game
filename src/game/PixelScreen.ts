@@ -95,18 +95,12 @@ export class PixelScreen {
     // so that if we want to pad the text we can add the same amount of room to each side.
     const fixedCoord = coordAdd(coord, [0, 1]);
 
-    this.setTextStyle(style);
     if (style.shadowColor) {
-      this.drawTextShadow(String(text), fixedCoord, style.shadowColor);
+      this.setTextStyle({ ...style, color: style.shadowColor });
+      this.ctx.fillText(String(text), fixedCoord[0] + 0.5, fixedCoord[1] + 0.5);
     }
+    this.setTextStyle(style);
     this.ctx.fillText(String(text), fixedCoord[0], fixedCoord[1]);
-  }
-
-  private drawTextShadow(text: string, coord: Coord, shadowColor: string) {
-    this.ctx.save();
-    this.ctx.fillStyle = shadowColor;
-    this.ctx.fillText(text, coord[0] + 0.5, coord[1] + 0.5);
-    this.ctx.restore();
   }
 
   measureText(text: string | number, style: TextStyle = {}): Coord {
