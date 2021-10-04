@@ -70,31 +70,12 @@ export class PixelScreen {
     }
   }
 
-  drawRect(rect: Rect, fill: string | Sprite, opts?: DrawSpriteOptions) {
+  drawRect(rect: Rect, fill: string | CanvasPattern, opts?: DrawSpriteOptions) {
     const screenOffset: Coord = this.isFixed(opts) ? [0, 0] : this.offset;
 
     const adjustedCoord = coordSub(rect.coord, screenOffset);
-    if (typeof fill === "string") {
-      this.fillSolidColorRect(adjustedCoord, rect.size, fill);
-    } else {
-      this.fillSpriteRect(adjustedCoord, rect.size, fill);
-    }
-  }
-
-  private fillSolidColorRect(coord: Coord, size: Coord, color: string) {
-    this.ctx.fillStyle = color;
-    this.ctx.fillRect(coord[0], coord[1], size[0], size[1]);
-  }
-
-  private fillSpriteRect(coord: Coord, size: Coord, sprite: Sprite) {
-    this.withClippedRegion({ coord, size }, () => {
-      const [width, height] = size;
-      for (let x = 0; x < width; x += sprite.size[0]) {
-        for (let y = 0; y < height; y += sprite.size[1]) {
-          this.drawSprite(sprite, coordAdd(coord, [x, y]));
-        }
-      }
-    });
+    this.ctx.fillStyle = fill;
+    this.ctx.fillRect(adjustedCoord[0], adjustedCoord[1], rect.size[0], rect.size[1]);
   }
 
   withClippedRegion({ coord, size }: Rect, fn: () => void) {

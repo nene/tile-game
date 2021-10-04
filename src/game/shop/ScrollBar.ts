@@ -1,4 +1,5 @@
 import { Coord, coordAdd, coordConstrain, coordDiv, coordSub, isCoordInRect, Rect } from "../Coord";
+import { PatternLibrary } from "../PatternLibrary";
 import { PixelScreen } from "../PixelScreen";
 import { SpriteLibrary } from "../SpriteLibrary";
 import { SpriteSheet } from "../SpriteSheet";
@@ -12,6 +13,7 @@ const SPRITE_BG: Coord = [4, 0];
 
 export class ScrollBar {
   private sprites: SpriteSheet;
+  private bgPattern: CanvasPattern;
   private buttonPressed = {
     "up": false,
     "down": false,
@@ -31,6 +33,8 @@ export class ScrollBar {
     };
 
     this.maxSliderPos = rect.size[1] - 16 - this.sliderSize;
+
+    this.bgPattern = PatternLibrary.get("scroll-bar", SPRITE_BG);
   }
 
   handleMouseEvent(type: string, coord: Coord, wheelDelta?: Coord) {
@@ -78,7 +82,7 @@ export class ScrollBar {
   }
 
   private drawBackground(screen: PixelScreen) {
-    screen.drawRect(this.rect, this.sprites.getSprite(SPRITE_BG));
+    screen.drawRect(this.rect, this.bgPattern);
   }
 
   private drawUpButton(screen: PixelScreen) {

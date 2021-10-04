@@ -74,7 +74,7 @@ const imageFiles = {
   'beer-foam-xl': spriteDef({ src: beerFoamXl, cfg: { size: [47, 86], colsRows: [1, 1] } }),
 };
 
-type SpriteName = keyof typeof imageFiles;
+export type SpriteName = keyof typeof imageFiles;
 
 export class SpriteLibrary {
   private static sprites: Record<string, SpriteSheet> = {};
