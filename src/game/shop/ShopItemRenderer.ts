@@ -6,6 +6,8 @@ import { SpriteLibrary } from "../SpriteLibrary";
 import { SpriteSheet } from "../SpriteSheet";
 import { UI_BG_COLOR, UI_HIGHLIGHT_COLOR, UI_SHADOW_COLOR } from "../ui-utils";
 
+const SHOP_ITEM_HIGHLIGHT_COLOR = "#cab59e";
+
 export class ShopItemRenderer {
   private beerSprites: SpriteSheet;
   private goldSprite: Sprite;
@@ -15,7 +17,7 @@ export class ShopItemRenderer {
     this.goldSprite = SpriteLibrary.get("gold").getSprite([0, 0]);
   }
 
-  render(screen: PixelScreen, rect: Rect, item: Beer) {
+  render(screen: PixelScreen, rect: Rect, item: Beer, highlighted: boolean) {
     const iconRect: Rect = { coord: coordAdd(rect.coord, [2, 2]), size: [16, 16] };
     const nameCoord = coordAdd(iconRect.coord, [18, -1]);
     const [nameLen] = screen.measureText(item.name);
@@ -29,5 +31,16 @@ export class ShopItemRenderer {
     screen.drawText(item.description, coordAdd(iconRect.coord, [18, 9]), { size: "small" });
     screen.drawSprite(this.goldSprite, goldCoord);
     screen.drawText(item.price, coordAdd(goldCoord, [-2, -1]), { align: "right", shadowColor: UI_SHADOW_COLOR });
+
+    if (highlighted) {
+      this.strokeRect(screen, rect, SHOP_ITEM_HIGHLIGHT_COLOR);
+    }
+  }
+
+  private strokeRect(screen: PixelScreen, { coord, size }: Rect, color: string) {
+    screen.drawRect({ coord, size: [size[0], 1] }, color);
+    screen.drawRect({ coord, size: [1, size[1]] }, color);
+    screen.drawRect({ coord: [coord[0] + size[0] - 1, coord[1]], size: [1, size[1]] }, color);
+    screen.drawRect({ coord: [coord[0], coord[1] + size[1] - 1], size: [size[0], 1] }, color);
   }
 }

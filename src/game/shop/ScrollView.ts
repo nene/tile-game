@@ -1,4 +1,4 @@
-import { Coord, coordAdd, coordMul, coordSub, Rect, rectGrow, rectOverlaps, rectTranslate } from "../Coord";
+import { Coord, coordAdd, coordMul, coordSub, isCoordInRect, Rect, rectGrow, rectOverlaps, rectTranslate } from "../Coord";
 import { PixelScreen } from "../PixelScreen";
 import { ScrollBar } from "./ScrollBar";
 
@@ -9,11 +9,12 @@ interface ScrollViewCfg<T> {
   itemSeparator: number;
   margin: Coord;
   bgColor: string;
-  renderer: (screen: PixelScreen, rect: Rect, item: T) => void;
+  renderer: (screen: PixelScreen, rect: Rect, item: T, highlighted: boolean) => void;
 }
 
 export class ScrollView<T> {
   private scrollBar: ScrollBar;
+  private highlightedIndex = -1;
 
   constructor(private cfg: ScrollViewCfg<T>) {
     this.scrollBar = new ScrollBar(this.scrollBarRect(), this.cfg.rect);
@@ -21,6 +22,19 @@ export class ScrollView<T> {
 
   handleMouseEvent(type: string, coord: Coord, wheelDelta?: Coord) {
     this.scrollBar.handleMouseEvent(type, coord, wheelDelta);
+    this.highlightHoveredItem(type, coord);
+  }
+
+  highlightHoveredItem(type: string, coord: Coord) {
+    if (!isCoordInRect(coord, this.viewRect())) {
+      this.highlightedIndex = -1;
+      return;
+    }
+
+    switch (type) {
+      case "mousemove":
+        this.highlightedIndex = this.cfg.items.findIndex((item, i) => isCoordInRect(coord, this.itemRect(i)));
+    }
   }
 
   paint(screen: PixelScreen) {
@@ -29,15 +43,13 @@ export class ScrollView<T> {
     this.scrollBar.paint(screen);
 
     const viewRect = this.viewRect();
-    const itemRect: Rect = { coord: coordSub(viewRect.coord, this.scrollCoord()), size: this.cfg.itemSize };
 
     screen.withClippedRegion(viewRect, () => {
       this.cfg.items.forEach((item, i) => {
-        const offset: Coord = [0, i * this.fullItemHeight()];
-        const rect = rectTranslate(itemRect, offset);
+        const rect = this.itemRect(i);
         // Only draw the item when it's in visible area
         if (rectOverlaps(rect, viewRect)) {
-          this.cfg.renderer(screen, rect, item);
+          this.cfg.renderer(screen, rect, item, this.highlightedIndex === i);
         }
       });
     });
@@ -48,6 +60,12 @@ export class ScrollView<T> {
     const viewHeight = this.viewRect().size[1];
     const scrollHeight = Math.max(0, fullHeight - viewHeight);
     return [0, Math.floor(scrollHeight * this.scrollBar.scrollPosition())];
+  }
+
+  private itemRect(i: number): Rect {
+    const itemRect: Rect = { coord: coordSub(this.viewRect().coord, this.scrollCoord()), size: this.cfg.itemSize };
+    const offset: Coord = [0, i * this.fullItemHeight()];
+    return rectTranslate(itemRect, offset);
   }
 
   private viewRect() {
