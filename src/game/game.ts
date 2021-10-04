@@ -17,6 +17,7 @@ export interface GameApi {
   onMouseMove: (coord: Coord) => void;
   onMouseDown: (coord: Coord) => void;
   onMouseUp: (coord: Coord) => void;
+  onWheel: (coord: Coord, wheelDelta: Coord) => void;
   cleanup: () => void;
 }
 
@@ -101,6 +102,11 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
       screenNeedsRepaint = true;
       const screenCoord = toPixelScale(coord, screenCfg.scale);
       uiController.handleMouseUp(screenCoord);
+    },
+    onWheel: (coord: Coord, wheelDelta: Coord) => {
+      screenNeedsRepaint = true;
+      const screenCoord = toPixelScale(coord, screenCfg.scale);
+      uiController.handleWheel(screenCoord, wheelDelta);
     },
     cleanup: () => {
       loops.cleanup();

@@ -16,11 +16,11 @@ export class ScrollView<T> {
   private scrollBar: ScrollBar;
 
   constructor(private cfg: ScrollViewCfg<T>) {
-    this.scrollBar = new ScrollBar(this.scrollBarRect());
+    this.scrollBar = new ScrollBar(this.scrollBarRect(), this.cfg.rect);
   }
 
-  handleMouseEvent(type: string, coord: Coord) {
-    this.scrollBar.handleMouseEvent(type, coord);
+  handleMouseEvent(type: string, coord: Coord, wheelDelta?: Coord) {
+    this.scrollBar.handleMouseEvent(type, coord, wheelDelta);
   }
 
   paint(screen: PixelScreen) {

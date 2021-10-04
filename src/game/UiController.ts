@@ -102,6 +102,10 @@ export class UiController {
     this.shopView.handleMouseEvent("mouseup", screenCoord);
   }
 
+  handleWheel(screenCoord: Coord, wheelDelta: Coord) {
+    this.shopView.handleMouseEvent("wheel", screenCoord, wheelDelta);
+  }
+
   private getMiniGame(): MiniGame | undefined {
     return this.inventoryController.getMiniGame();
   }

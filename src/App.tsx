@@ -44,6 +44,9 @@ export function App() {
     const onMouseUp = (e: MouseEvent) => {
       gameApi.onMouseUp(mouseCoordRelativeTo(e, canvas));
     };
+    const onWheel = (e: WheelEvent) => {
+      gameApi.onWheel(mouseCoordRelativeTo(e, canvas), [e.deltaX, e.deltaY]);
+    };
 
     const game = async () => {
       gameApi = await runGame(ctx, {
@@ -59,6 +62,7 @@ export function App() {
       canvas.addEventListener("mousemove", onMouseMove);
       canvas.addEventListener("mousedown", onMouseDown);
       canvas.addEventListener("mouseup", onMouseUp);
+      canvas.addEventListener("wheel", onWheel);
     };
     game();
 
@@ -70,6 +74,7 @@ export function App() {
       canvas.removeEventListener("mousemove", onMouseMove);
       canvas.removeEventListener("mousedown", onMouseDown);
       canvas.removeEventListener("mouseup", onMouseUp);
+      canvas.removeEventListener("wheel", onWheel);
     };
   }, []);
 

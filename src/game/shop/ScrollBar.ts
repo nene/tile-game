@@ -1,4 +1,4 @@
-import { Coord, coordAdd, coordConstrain, coordSub, isCoordInRect, Rect } from "../Coord";
+import { Coord, coordAdd, coordConstrain, coordDiv, coordSub, isCoordInRect, Rect } from "../Coord";
 import { PixelScreen } from "../PixelScreen";
 import { SpriteLibrary } from "../SpriteLibrary";
 import { SpriteSheet } from "../SpriteSheet";
@@ -22,7 +22,7 @@ export class ScrollBar {
   private sliderSize = 20;
   private sliderGrabbed?: Coord;
 
-  constructor(private rect: Rect) {
+  constructor(private rect: Rect, private scrollArea: Rect) {
     this.sprites = SpriteLibrary.get("scroll-bar");
 
     this.buttonCoords = {
@@ -33,7 +33,7 @@ export class ScrollBar {
     this.maxSliderPos = rect.size[1] - 16 - this.sliderSize;
   }
 
-  handleMouseEvent(type: string, coord: Coord) {
+  handleMouseEvent(type: string, coord: Coord, wheelDelta?: Coord) {
     switch (type) {
       case "mousedown":
         if (isCoordInRect(coord, this.buttonCoords.up)) {
@@ -57,6 +57,12 @@ export class ScrollBar {
         if (this.sliderGrabbed) {
           this.sliderPos = coordConstrain(coordSub(coord, this.sliderGrabbed), { coord: [0, 0], size: [8, this.maxSliderPos] })[1];
         }
+        break;
+      case "wheel":
+        if (wheelDelta && isCoordInRect(coord, this.scrollArea)) {
+          this.sliderPos = coordConstrain(coordAdd([0, this.sliderPos], coordDiv(wheelDelta, [16, 16])), { coord: [0, 0], size: [8, this.maxSliderPos] })[1];
+        }
+        break;
     }
   }
 
