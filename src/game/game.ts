@@ -9,6 +9,7 @@ import { Coord, coordAdd, Rect, rectDistance, rectTranslate } from "./Coord";
 import { UiController } from "./UiController";
 import { Loops } from "./Loops";
 import { GameObject } from "./GameObject";
+import { FpsCounter } from "./FpsCounter";
 
 export interface GameApi {
   onKeyDown: (key: string) => boolean;
@@ -48,7 +49,9 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
     screenNeedsRepaint = true;
   });
 
+  const fps = new FpsCounter();
   loops.runPaintLoop(() => {
+    fps.countFrame();
     if (!screenNeedsRepaint) {
       return; // Don't paint when app state hasn't changed
     }
@@ -58,6 +61,7 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
       world.allObjects().forEach((obj) => obj.paint(screen));
     }
     uiController.paint(screen);
+    fps.paint(screen);
     screenNeedsRepaint = false;
   });
 
