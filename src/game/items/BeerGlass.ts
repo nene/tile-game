@@ -61,4 +61,8 @@ export class BeerGlass implements GameItem {
   getSmallSprite(): Sprite {
     return this.smallSpriteSheet.getSprite([this.level, 0]);
   }
+
+  clone() {
+    return new BeerGlass(this.level);
+  }
 }

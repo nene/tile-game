@@ -64,4 +64,8 @@ export class BeerBottle implements GameItem {
     }
     return [];
   }
+
+  clone() {
+    return new BeerBottle(this.beer, this.capState);
+  }
 }

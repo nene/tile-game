@@ -26,4 +26,8 @@ export class BottleOpener implements GameItem {
     }
     return [];
   }
+
+  clone() {
+    return new BottleOpener();
+  }
 }

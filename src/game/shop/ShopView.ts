@@ -1,29 +1,21 @@
 import { Coord, coordAdd, coordSub, Rect, rectGrow } from "../Coord";
-import { Beer, getBeer } from "../items/Beer";
+import { BeerBottle } from "../items/BeerBottle";
 import { PixelScreen } from "../PixelScreen";
 import { drawInset, drawUpset, UI_BG_COLOR, UI_SHADOW_COLOR } from "../ui-utils";
 import { ScrollView } from "./ScrollView";
+import { Shop } from "./Shop";
 import { ShopItemRenderer } from "./ShopItemRenderer";
 
 export class ShopView {
   private rect: Rect = { coord: [64, 16], size: [192, 108] };
   private titleHeight = 17;
   private shopItemRenderer: ShopItemRenderer;
-  private scrollView: ScrollView<Beer>;
+  private scrollView: ScrollView<BeerBottle>;
 
-  constructor() {
+  constructor(shop: Shop) {
     this.shopItemRenderer = new ShopItemRenderer();
     this.scrollView = new ScrollView({
-      items: [
-        getBeer("alexander"),
-        getBeer("pilsner"),
-        getBeer("tommu-hiid"),
-        getBeer("limonaad"),
-        getBeer("bock"),
-        getBeer("porter"),
-        getBeer("special"),
-        getBeer("kriek"),
-      ],
+      items: shop.getItems(),
       rect: rectGrow(this.shopListRect(), [-1, -1]),
       itemSize: [this.rect.size[0] - 16, 20],
       itemSeparator: 1,

@@ -9,13 +9,25 @@ import { CursorController } from "./CursorController";
 import { MiniGame } from "./minigames/MiniGame";
 import { Wallet } from "./Wallet";
 import { ShopView } from "./shop/ShopView";
+import { Shop } from "./shop/Shop";
+import { BeerBottle } from "./items/BeerBottle";
+import { getBeer } from "./items/Beer";
 
 export class UiController {
   private inventoryController: InventoryController;
   private cursorController: CursorController;
   private dialog?: Dialog;
   private wallet = new Wallet(112);
-  private shopView = new ShopView();
+  private shopView = new ShopView(new Shop([
+    new BeerBottle(getBeer("alexander")),
+    new BeerBottle(getBeer("pilsner")),
+    new BeerBottle(getBeer("tommu-hiid")),
+    new BeerBottle(getBeer("limonaad")),
+    new BeerBottle(getBeer("bock")),
+    new BeerBottle(getBeer("porter")),
+    new BeerBottle(getBeer("special")),
+    new BeerBottle(getBeer("kriek")),
+  ]));
 
   constructor(playerInventory: Inventory) {
     this.inventoryController = new InventoryController(playerInventory);
