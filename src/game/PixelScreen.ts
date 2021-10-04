@@ -87,15 +87,21 @@ export class PixelScreen {
   }
 
   private fillSpriteRect(coord: Coord, size: Coord, sprite: Sprite) {
+    this.withClippedRegion({ coord, size }, () => {
+      const [width, height] = size;
+      for (let x = 0; x < width; x += sprite.size[0]) {
+        for (let y = 0; y < height; y += sprite.size[1]) {
+          this.drawSprite(sprite, coordAdd(coord, [x, y]));
+        }
+      }
+    });
+  }
+
+  withClippedRegion({ coord, size }: Rect, fn: () => void) {
     this.ctx.save();
     this.ctx.rect(coord[0], coord[1], size[0], size[1]);
     this.ctx.clip();
-    const [width, height] = size;
-    for (let x = 0; x < width; x += sprite.size[0]) {
-      for (let y = 0; y < height; y += sprite.size[1]) {
-        this.drawSprite(sprite, coordAdd(coord, [x, y]));
-      }
-    }
+    fn();
     this.ctx.restore();
   }
 
