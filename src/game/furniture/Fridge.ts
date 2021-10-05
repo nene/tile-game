@@ -17,7 +17,7 @@ export class Fridge implements GameObject {
   constructor(private coord: Coord) {
     this.sprite = SpriteLibrary.get("fridge").getSprite([0, 0]);
     this.inventory = new InventoryImpl({
-      size: [3, 3],
+      size: 9,
       items: [
         new BeerBottle(getBeer("pilsner"), CapState.open),
         new BeerBottle(getBeer("porter"), CapState.open),

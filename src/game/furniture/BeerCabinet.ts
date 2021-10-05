@@ -15,7 +15,7 @@ export class BeerCabinet implements GameObject {
   constructor(private coord: Coord) {
     this.sprite = SpriteLibrary.get("beer-cabinet").getSprite([0, 0]);
     this.inventory = new InventoryImpl({
-      size: [3, 3],
+      size: 9,
       items: [
         new BeerGlass(BeerLevel.empty),
         new BeerGlass(BeerLevel.empty),

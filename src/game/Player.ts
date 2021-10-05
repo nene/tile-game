@@ -24,7 +24,7 @@ export class Player implements GameObject {
   private walkBack: SpriteAnimation;
   private walkForward: SpriteAnimation;
   private animation: SpriteAnimation;
-  private inventory = new InventoryImpl({ size: [5, 1] });
+  private inventory = new InventoryImpl({ size: 5 });
 
   constructor(coord: Coord) {
     this.coord = coord;
@@ -42,7 +42,7 @@ export class Player implements GameObject {
 
     this.animation = this.standRight;
 
-    this.inventory.placeAt([0, 0], new BottleOpener());
+    this.inventory.placeAt(0, new BottleOpener());
   }
 
   getInventory() {

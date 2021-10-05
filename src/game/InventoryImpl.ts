@@ -1,47 +1,47 @@
 import { fill } from "lodash";
-import { Coord } from "./Coord";
+import { WritableInventory } from "./inventory/Inventory";
 import { GameItem } from "./items/GameItem";
 
 type Slot = GameItem | undefined;
 
-export class InventoryImpl {
+export class InventoryImpl implements WritableInventory {
   private slots: Slot[];
-  private _size: Coord;
+  private _size: number;
 
-  constructor({ size: [xSize, ySize], items }: { size: Coord, items?: GameItem[] }) {
-    this._size = [xSize, ySize];
-    this.slots = fill(new Array(xSize * ySize), undefined);
-    items?.forEach((item) => this.add(item));
+  constructor({ size, items }: { size: number, items?: GameItem[] }) {
+    this._size = size;
+    this.slots = fill(new Array(size), undefined);
+    items?.forEach((item, i) => {
+      this.slots[i] = item;
+    });
   }
 
-  placeAt(coord: Coord, item: GameItem) {
-    const index = this.coordToIndex(coord);
+  placeAt(index: number, item: GameItem) {
     if (!isFilledSlot(this.slots[index])) {
       this.slots[index] = item;
     }
   }
 
-  private add(item: GameItem) {
-    const index = this.slots.findIndex((slot) => !isFilledSlot(slot));
-    if (index !== -1) {
-      this.slots[index] = item;
-    }
+  isWritable() {
+    return true;
   }
 
-  removeAt(coord: Coord) {
-    this.slots[this.coordToIndex(coord)] = undefined;
+  takeAt(index: number) {
+    const item = this.slots[index];
+    this.slots[index] = undefined;
+    return item;
   }
 
-  size(): Coord {
+  removeAt(index: number) {
+    this.slots[index] = undefined;
+  }
+
+  size(): number {
     return this._size;
   }
 
-  itemAt(coord: Coord): GameItem | undefined {
-    return this.slots[this.coordToIndex(coord)];
-  }
-
-  private coordToIndex([x, y]: Coord): number {
-    return this._size[1] * y + x;
+  itemAt(index: number): GameItem | undefined {
+    return this.slots[index];
   }
 }
 

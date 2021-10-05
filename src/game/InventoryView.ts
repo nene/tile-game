@@ -44,7 +44,7 @@ export class InventoryView {
         for (let x = 0; x < cols; x++) {
           const slotCoord = coordAdd(startCoord, coordMul([21, 21], [x, y]));
           screen.drawSprite(this.slotSprites.getSprite([0, 0]), slotCoord);
-          const item = this.inventory.itemAt([x, y]);
+          const item = this.inventory.itemAt(this.coordToIndex([x, y]));
           if (item) {
             screen.drawSprite(item.getSprite(), coordAdd(slotCoord, [2, 2]));
           }
@@ -61,21 +61,25 @@ export class InventoryView {
     return isCoordInRect(screenCoord, this.rect);
   }
 
-  getSlotAtCoord(screenCoord: Coord): Coord | undefined {
+  getSlotIndexAtCoord(screenCoord: Coord): number {
     const startCoord = coordAdd(this.coord, this.titleSize());
     const [cols, rows] = this.size;
     for (let y = 0; y < rows; y++) {
       for (let x = 0; x < cols; x++) {
         const slotCoord = coordAdd(startCoord, coordMul([21, 21], [x, y]));
         if (isCoordInRect(screenCoord, { coord: slotCoord, size: [20, 20] })) {
-          return [x, y];
+          return this.coordToIndex([x, y]);
         }
       }
     }
-    return undefined;
+    return -1;
   }
 
   private titleSize(): Coord {
     return this.title ? [1, 12] : [1, 1];
+  }
+
+  private coordToIndex([x, y]: Coord): number {
+    return this.size[1] * y + x;
   }
 }

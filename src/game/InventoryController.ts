@@ -133,27 +133,26 @@ export class InventoryController {
 
   private getInventoryItemAtCoord(coord: Coord, inventory: InventoryImpl, inventoryView: InventoryView): GameItem | undefined {
     if (inventoryView.isCoordInView(coord)) {
-      const slot = inventoryView.getSlotAtCoord(coord);
-      return slot && inventory.itemAt(slot);
+      return inventory.itemAt(inventoryView.getSlotIndexAtCoord(coord));
     }
     return undefined;
   }
 
   private handleInventoryClick(coord: Coord, inventory: InventoryImpl, inventoryView: InventoryView) {
-    const slotCoord = inventoryView.getSlotAtCoord(coord);
-    if (!slotCoord) {
+    const slotIndex = inventoryView.getSlotIndexAtCoord(coord);
+    if (slotIndex === -1) {
       return; // no slot clicked
     }
 
-    const item = inventory.itemAt(slotCoord);
+    const item = inventory.itemAt(slotIndex);
     if (item && !this.selectedItem) {
       // Take item from inventory
-      inventory.removeAt(slotCoord);
+      inventory.removeAt(slotIndex);
       this.selectedItem = item;
     }
     else if (!item && this.selectedItem) {
       // Place item at hand to inventory
-      inventory.placeAt(slotCoord, this.selectedItem);
+      inventory.placeAt(slotIndex, this.selectedItem);
       this.selectedItem = undefined;
     }
     else if (item && this.selectedItem) {
@@ -161,14 +160,14 @@ export class InventoryController {
       const combinedItems = item.combine(this.selectedItem);
       if (combinedItems instanceof Array) {
         if (combinedItems.length > 0) {
-          inventory.removeAt(slotCoord);
-          inventory.placeAt(slotCoord, combinedItems[0]);
+          inventory.removeAt(slotIndex);
+          inventory.placeAt(slotIndex, combinedItems[0]);
           this.selectedItem = combinedItems[1]; // possibly nothing
         }
         else {
           // Otherwise swap item at hand with item in inventory
-          inventory.removeAt(slotCoord);
-          inventory.placeAt(slotCoord, this.selectedItem);
+          inventory.removeAt(slotIndex);
+          inventory.placeAt(slotIndex, this.selectedItem);
           this.selectedItem = item;
         }
       } else {
