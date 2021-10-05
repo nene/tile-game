@@ -8,7 +8,7 @@ import { CursorController } from "./CursorController";
 import { MiniGame } from "./minigames/MiniGame";
 import { WalletView } from "./WalletView";
 import { ShopView } from "./shop/ShopView";
-import { Shop } from "./shop/Shop";
+import { Shop } from "./inventory/Shop";
 import { BeerBottle } from "./items/BeerBottle";
 import { getBeer } from "./items/Beer";
 import { GameEvent } from "./GameEvent";
