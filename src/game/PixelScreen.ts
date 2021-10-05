@@ -9,11 +9,6 @@ export interface PixelScreenOptions {
   offset?: Coord;
 }
 
-interface DrawSpriteOptions {
-  showCenter?: boolean;
-  fixed?: boolean;
-}
-
 export interface TextStyle {
   color?: string;
   size?: "small" | "medium";
@@ -46,8 +41,8 @@ export class PixelScreen {
     this.fixed = oldFixed;
   }
 
-  drawSprite(sprite: Sprite, coord: Coord, opts?: DrawSpriteOptions) {
-    const screenOffset: Coord = this.isFixed(opts) ? [0, 0] : this.offset;
+  drawSprite(sprite: Sprite, coord: Coord) {
+    const screenOffset: Coord = this.fixed ? [0, 0] : this.offset;
 
     if (rectOverlaps({ coord: coordAdd(coord, sprite.offset), size: sprite.size }, { coord: screenOffset, size: this.virtualSize })) {
       const adjustedCoord = coordSub(coordAdd(coord, sprite.offset), screenOffset);
@@ -62,17 +57,11 @@ export class PixelScreen {
         sprite.size[0],
         sprite.size[1]
       );
-      if (opts?.showCenter) {
-        this.ctx.fillStyle = "red";
-        const center = coordSub(coord, screenOffset);
-        this.ctx.fillRect(center[0] - 2, center[1], 5, 1);
-        this.ctx.fillRect(center[0], center[1] - 2, 1, 5);
-      }
     }
   }
 
-  drawRect(rect: Rect, fill: string | CanvasPattern, opts?: DrawSpriteOptions) {
-    const screenOffset: Coord = this.isFixed(opts) ? [0, 0] : this.offset;
+  drawRect(rect: Rect, fill: string | CanvasPattern) {
+    const screenOffset: Coord = this.fixed ? [0, 0] : this.offset;
 
     const adjustedCoord = coordSub(rect.coord, screenOffset);
     this.ctx.fillStyle = fill;
@@ -85,10 +74,6 @@ export class PixelScreen {
     this.ctx.clip();
     fn();
     this.ctx.restore();
-  }
-
-  private isFixed(opts?: DrawSpriteOptions): boolean {
-    return opts?.fixed ?? this.fixed;
   }
 
   drawText(text: string | number, coord: Coord, style: TextStyle = {}) {
