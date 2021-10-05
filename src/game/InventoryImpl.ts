@@ -21,7 +21,7 @@ export class InventoryImpl {
     }
   }
 
-  add(item: GameItem) {
+  private add(item: GameItem) {
     const index = this.slots.findIndex((slot) => !isFilledSlot(slot));
     if (index !== -1) {
       this.slots[index] = item;
