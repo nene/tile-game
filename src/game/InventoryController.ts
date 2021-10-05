@@ -144,7 +144,7 @@ export class InventoryController {
     const item = inventory.itemAt(slotCoord);
     if (item && !this.selectedItem) {
       // Take item from inventory
-      inventory.remove(item);
+      inventory.removeAt(slotCoord);
       this.selectedItem = item;
     }
     else if (!item && this.selectedItem && !inventory.isFull()) {
@@ -157,13 +157,13 @@ export class InventoryController {
       const combinedItems = item.combine(this.selectedItem);
       if (combinedItems instanceof Array) {
         if (combinedItems.length > 0) {
-          inventory.remove(item);
+          inventory.removeAt(slotCoord);
           inventory.placeAt(slotCoord, combinedItems[0]);
           this.selectedItem = combinedItems[1]; // possibly nothing
         }
         else {
           // Otherwise swap item at hand with item in inventory
-          inventory.remove(item);
+          inventory.removeAt(slotCoord);
           inventory.placeAt(slotCoord, this.selectedItem);
           this.selectedItem = item;
         }

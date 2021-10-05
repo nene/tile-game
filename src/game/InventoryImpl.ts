@@ -28,11 +28,8 @@ export class InventoryImpl {
     }
   }
 
-  remove(item: GameItem) {
-    const index = this.slots.findIndex((slot) => slot === item);
-    if (index !== -1) {
-      this.slots[index] = undefined;
-    }
+  removeAt(coord: Coord) {
+    this.slots[this.coordToIndex(coord)] = undefined;
   }
 
   size(): Coord {
