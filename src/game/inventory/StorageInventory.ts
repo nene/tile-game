@@ -1,10 +1,11 @@
 import { fill } from "lodash";
-import { WritableInventory } from "./inventory/Inventory";
-import { GameItem } from "./items/GameItem";
+import { WritableInventory } from "./Inventory";
+import { GameItem } from "../items/GameItem";
 
 type Slot = GameItem | undefined;
 
-export class InventoryImpl implements WritableInventory {
+// Inventory for storing various items, like a chest
+export class StorageInventory implements WritableInventory {
   private slots: Slot[];
   private _size: number;
 
