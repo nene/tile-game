@@ -1,5 +1,5 @@
 import { Coord, coordAdd, coordMul, isCoordInRect, Rect } from "./Coord";
-import { Inventory } from "./Inventory";
+import { InventoryImpl } from "./InventoryImpl";
 import { PixelScreen } from "./PixelScreen";
 import { SpriteLibrary } from "./SpriteLibrary";
 import { SpriteSheet } from "./SpriteSheet";
@@ -8,7 +8,7 @@ export class InventoryView {
   private slotSprites: SpriteSheet;
   private rect: Rect;
 
-  constructor(private inventory: Inventory, private coord: Coord, private title?: string) {
+  constructor(private inventory: InventoryImpl, private coord: Coord, private title?: string) {
     this.slotSprites = SpriteLibrary.get("slot");
     this.rect = { coord, size: coordAdd(this.titleSize(), coordMul([21, 21], inventory.size())) };
   }

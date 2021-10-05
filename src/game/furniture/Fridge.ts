@@ -1,6 +1,6 @@
 import { Coord, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
-import { Inventory } from "../Inventory";
+import { InventoryImpl } from "../InventoryImpl";
 import { getBeer } from "../items/Beer";
 import { BeerBottle, CapState } from "../items/BeerBottle";
 import { BeerGlass, BeerLevel } from "../items/BeerGlass";
@@ -12,11 +12,11 @@ import { UiController } from "../UiController";
 
 export class Fridge implements GameObject {
   private sprite: Sprite;
-  private inventory: Inventory;
+  private inventory: InventoryImpl;
 
   constructor(private coord: Coord) {
     this.sprite = SpriteLibrary.get("fridge").getSprite([0, 0]);
-    this.inventory = new Inventory({
+    this.inventory = new InventoryImpl({
       size: [3, 3],
       items: [
         new BeerBottle(getBeer("pilsner"), CapState.open),

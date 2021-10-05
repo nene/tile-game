@@ -4,7 +4,7 @@ import { GameItem } from "./items/GameItem";
 
 type Slot = GameItem | undefined;
 
-export class Inventory {
+export class InventoryImpl {
   private slots: Slot[];
   private _size: Coord;
 

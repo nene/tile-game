@@ -4,7 +4,7 @@ import { Coord, coordAdd, coordConstrain, coordSub, Rect, rectTranslate } from "
 import { SpriteAnimation } from "./SpriteAnimation";
 import { GameWorld } from "./GameWorld";
 import { SpriteLibrary } from "./SpriteLibrary";
-import { Inventory } from "./Inventory";
+import { InventoryImpl } from "./InventoryImpl";
 import { BottleOpener } from "./items/BottleOpener";
 
 const max = Math.max;
@@ -24,7 +24,7 @@ export class Player implements GameObject {
   private walkBack: SpriteAnimation;
   private walkForward: SpriteAnimation;
   private animation: SpriteAnimation;
-  private inventory = new Inventory({ size: [5, 1] });
+  private inventory = new InventoryImpl({ size: [5, 1] });
 
   constructor(coord: Coord) {
     this.coord = coord;

@@ -1,4 +1,4 @@
-import { Inventory } from "./Inventory";
+import { InventoryImpl } from "./InventoryImpl";
 import { PixelScreen, TextStyle } from "./PixelScreen";
 import { InventoryView } from "./InventoryView";
 import { Coord, coordAdd, coordSub, rectGrow } from "./Coord";
@@ -10,14 +10,14 @@ import { GameEvent } from "./GameEvent";
 
 export class InventoryController {
   private playerInventoryView: InventoryView;
-  private objectInventory?: Inventory;
+  private objectInventory?: InventoryImpl;
   private objectInventoryView?: InventoryView;
   private mouseCoord: Coord = [-16, -16];
   private selectedItem?: GameItem;
   private hoveredItem?: GameItem;
   private miniGame?: MiniGame;
 
-  constructor(private playerInventory: Inventory) {
+  constructor(private playerInventory: InventoryImpl) {
     this.playerInventoryView = new InventoryView(playerInventory, [107, 200 - 22]);
   }
 
@@ -29,7 +29,7 @@ export class InventoryController {
     this.selectedItem = undefined;
   }
 
-  showInventory(inventory: Inventory, title?: string) {
+  showInventory(inventory: InventoryImpl, title?: string) {
     this.objectInventory = inventory;
     this.objectInventoryView = new InventoryView(inventory, [130, 50], title);
   }
@@ -127,7 +127,7 @@ export class InventoryController {
     return undefined;
   }
 
-  private getInventoryItemAtCoord(coord: Coord, inventory: Inventory, inventoryView: InventoryView): GameItem | undefined {
+  private getInventoryItemAtCoord(coord: Coord, inventory: InventoryImpl, inventoryView: InventoryView): GameItem | undefined {
     if (inventoryView.isCoordInView(coord)) {
       const slot = inventoryView.getSlotAtCoord(coord);
       return slot && inventory.itemAt(slot);
@@ -135,7 +135,7 @@ export class InventoryController {
     return undefined;
   }
 
-  private handleInventoryClick(coord: Coord, inventory: Inventory, inventoryView: InventoryView) {
+  private handleInventoryClick(coord: Coord, inventory: InventoryImpl, inventoryView: InventoryView) {
     const slotCoord = inventoryView.getSlotAtCoord(coord);
     if (!slotCoord) {
       return; // no slot clicked

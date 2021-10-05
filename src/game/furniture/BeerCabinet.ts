@@ -1,6 +1,6 @@
 import { Coord, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
-import { Inventory } from "../Inventory";
+import { InventoryImpl } from "../InventoryImpl";
 import { PixelScreen } from "../PixelScreen";
 import { Sprite } from "../Sprite";
 import { SpriteLibrary } from "../SpriteLibrary";
@@ -10,11 +10,11 @@ import { SoundLibrary } from "../SoundLibrary";
 
 export class BeerCabinet implements GameObject {
   private sprite: Sprite;
-  private inventory: Inventory;
+  private inventory: InventoryImpl;
 
   constructor(private coord: Coord) {
     this.sprite = SpriteLibrary.get("beer-cabinet").getSprite([0, 0]);
-    this.inventory = new Inventory({
+    this.inventory = new InventoryImpl({
       size: [3, 3],
       items: [
         new BeerGlass(BeerLevel.empty),

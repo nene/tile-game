@@ -1,4 +1,4 @@
-import { Inventory } from "./Inventory";
+import { InventoryImpl } from "./InventoryImpl";
 import { PixelScreen } from "./PixelScreen";
 import { GameItem } from "./items/GameItem";
 import { InventoryController } from "./InventoryController";
@@ -29,7 +29,7 @@ export class UiController {
     new BeerBottle(getBeer("kriek")),
   ]));
 
-  constructor(playerInventory: Inventory) {
+  constructor(playerInventory: InventoryImpl) {
     this.inventoryController = new InventoryController(playerInventory);
     this.cursorController = new CursorController();
   }
@@ -42,7 +42,7 @@ export class UiController {
     this.inventoryController.removeSelectedItem();
   }
 
-  showInventory(inventory: Inventory, title?: string) {
+  showInventory(inventory: InventoryImpl, title?: string) {
     this.inventoryController.showInventory(inventory, title);
   }
 
