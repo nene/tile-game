@@ -7,28 +7,15 @@ import { Overlay } from "./Overlay";
 import { CursorController } from "./CursorController";
 import { MiniGame } from "./minigames/MiniGame";
 import { WalletView } from "./WalletView";
-import { ShopView } from "./shop/ShopView";
-import { Shop } from "./inventory/Shop";
-import { BeerBottle } from "./items/BeerBottle";
-import { getBeer } from "./items/Beer";
 import { GameEvent } from "./GameEvent";
 import { Wallet } from "./Wallet";
+import { Inventory } from "./inventory/Inventory";
 
 export class UiController {
   private inventoryController: InventoryController;
   private cursorController: CursorController;
   private dialog?: Dialog;
   private walletView = new WalletView(new Wallet(112));
-  private shopView = new ShopView(new Shop([
-    new BeerBottle(getBeer("alexander")),
-    new BeerBottle(getBeer("pilsner")),
-    new BeerBottle(getBeer("tommu-hiid")),
-    new BeerBottle(getBeer("limonaad")),
-    new BeerBottle(getBeer("bock")),
-    new BeerBottle(getBeer("porter")),
-    new BeerBottle(getBeer("special")),
-    new BeerBottle(getBeer("kriek")),
-  ]));
 
   constructor(playerInventory: StorageInventory) {
     this.inventoryController = new InventoryController(playerInventory);
@@ -43,7 +30,7 @@ export class UiController {
     this.inventoryController.removeSelectedItem();
   }
 
-  showInventory(inventory: StorageInventory, title?: string) {
+  showInventory(inventory: Inventory, title?: string) {
     this.inventoryController.showInventory(inventory, title);
   }
 
@@ -65,8 +52,6 @@ export class UiController {
         this.inventoryController.paint(screen);
       }
 
-      // Overlay.paint(screen);
-      // this.shopView.paint(screen);
       this.walletView.paint(screen);
 
       // Cursor is always painted on top
@@ -84,7 +69,6 @@ export class UiController {
 
   handleGameEvent(event: GameEvent): boolean | undefined {
     let stopPropagation: boolean | undefined = undefined;
-    stopPropagation = stopPropagation || this.shopView.handleGameEvent(event);
     stopPropagation = stopPropagation || this.getMiniGame()?.handleGameEvent(event);
     stopPropagation = stopPropagation || this.cursorController.handleGameEvent(event);
     stopPropagation = stopPropagation || this.handleDialogClose(event);

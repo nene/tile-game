@@ -8,6 +8,8 @@ import { debounce } from "lodash";
 import { Overlay } from "./Overlay";
 import { MiniGame } from "./minigames/MiniGame";
 import { GameEvent } from "./GameEvent";
+import { Shop } from "./inventory/Shop";
+import { ShopView } from "./shop/ShopView";
 
 export class InventoryController {
   private playerInventoryView: InventoryView;
@@ -36,7 +38,11 @@ export class InventoryController {
 
   showInventory(inventory: Inventory, title?: string) {
     this.objectInventory = inventory;
-    this.objectInventoryView = new StorageInventoryView({ inventory, coord: [130, 50], title, size: [3, 3] });
+    if (inventory instanceof Shop) {
+      this.objectInventoryView = new ShopView(inventory);
+    } else {
+      this.objectInventoryView = new StorageInventoryView({ inventory, coord: [130, 50], title, size: [3, 3] });
+    }
   }
 
   getMiniGame(): MiniGame | undefined {
@@ -83,12 +89,14 @@ export class InventoryController {
     screen.drawText(item.getName(), textCoord, style);
   }
 
-  handleGameEvent({ type, coord }: GameEvent): boolean | undefined {
-    switch (type) {
+  handleGameEvent(event: GameEvent): boolean | undefined {
+    this.objectInventoryView?.handleGameEvent(event);
+
+    switch (event.type) {
       case "click":
-        return this.handleClick(coord);
+        return this.handleClick(event.coord);
       case "mousemove":
-        this.handleMouseMove(coord);
+        this.handleMouseMove(event.coord);
         break;
     }
   }

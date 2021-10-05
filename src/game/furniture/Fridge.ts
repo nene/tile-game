@@ -1,9 +1,8 @@
 import { Coord, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
-import { StorageInventory } from "../inventory/StorageInventory";
+import { Shop } from "../inventory/Shop";
 import { getBeer } from "../items/Beer";
-import { BeerBottle, CapState } from "../items/BeerBottle";
-import { BeerGlass, BeerLevel } from "../items/BeerGlass";
+import { BeerBottle } from "../items/BeerBottle";
 import { PixelScreen } from "../PixelScreen";
 import { SoundLibrary } from "../SoundLibrary";
 import { Sprite } from "../Sprite";
@@ -12,24 +11,20 @@ import { UiController } from "../UiController";
 
 export class Fridge implements GameObject {
   private sprite: Sprite;
-  private inventory: StorageInventory;
+  private shop: Shop;
 
   constructor(private coord: Coord) {
     this.sprite = SpriteLibrary.get("fridge").getSprite([0, 0]);
-    this.inventory = new StorageInventory({
-      size: 9,
-      items: [
-        new BeerBottle(getBeer("pilsner"), CapState.open),
-        new BeerBottle(getBeer("porter"), CapState.open),
-        new BeerBottle(getBeer("alexander"), CapState.open),
-        new BeerBottle(getBeer("tommu-hiid"), CapState.open),
-        new BeerBottle(getBeer("limonaad"), CapState.open),
-        new BeerBottle(getBeer("paulaner"), CapState.open),
-        new BeerBottle(getBeer("kriek"), CapState.open),
-        new BeerBottle(getBeer("bock"), CapState.open),
-        new BeerGlass(BeerLevel.empty),
-      ],
-    });
+    this.shop = new Shop([
+      new BeerBottle(getBeer("alexander")),
+      new BeerBottle(getBeer("pilsner")),
+      new BeerBottle(getBeer("tommu-hiid")),
+      new BeerBottle(getBeer("limonaad")),
+      new BeerBottle(getBeer("bock")),
+      new BeerBottle(getBeer("porter")),
+      new BeerBottle(getBeer("special")),
+      new BeerBottle(getBeer("kriek")),
+    ])
   }
 
   tick() { }
@@ -60,6 +55,6 @@ export class Fridge implements GameObject {
 
   onInteract(ui: UiController) {
     SoundLibrary.play('opening-fridge-door');
-    ui.showInventory(this.inventory, "Külmik");
+    ui.showInventory(this.shop, "Külmik");
   }
 }
