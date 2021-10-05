@@ -2,6 +2,7 @@ import { GameItem } from "../items/GameItem";
 
 export interface Inventory {
   size: () => number;
+  allItems: () => GameItem[];
   itemAt: (index: number) => GameItem | undefined;
   takeAt: (index: number) => GameItem | undefined;
   isWritable: () => this is WritableInventory;

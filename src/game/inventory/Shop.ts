@@ -21,4 +21,8 @@ export class Shop implements Inventory {
   isWritable() {
     return false;
   }
+
+  allItems() {
+    return this.items;
+  }
 }

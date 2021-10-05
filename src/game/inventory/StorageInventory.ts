@@ -40,6 +40,10 @@ export class StorageInventory implements WritableInventory {
   itemAt(index: number): GameItem | undefined {
     return this.slots[index];
   }
+
+  allItems() {
+    return this.slots.filter(isFilledSlot);
+  }
 }
 
 function isFilledSlot(x: Slot): x is GameItem {
