@@ -91,7 +91,7 @@ export class UiController {
       case "click":
         return this.handleClick(coord);
       case "mousemove":
-        this.cursorController.handleMouseMove(coord);
+        this.cursorController.handleMouseEvent("mousemove", coord);
         this.inventoryController.handleMouseEvent("mousemove", coord);
         break;
     }
