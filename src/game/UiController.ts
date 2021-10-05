@@ -15,7 +15,7 @@ export class UiController {
   private inventoryController: InventoryController;
   private cursorController: CursorController;
   private dialog?: Dialog;
-  private wallet = new Wallet(3);
+  private wallet = new Wallet(10);
   private walletView = new WalletView(this.wallet);
 
   constructor(playerInventory: StorageInventory) {

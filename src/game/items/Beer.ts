@@ -33,7 +33,7 @@ const beers = {
     spriteIndex: 1,
     alcohol: 5.2,
     foam: foamLevel[2],
-    capStrength: 2 / 5,
+    capStrength: 2,
   }),
   "heineken": beerDef({
     name: "Heineken",
@@ -42,7 +42,7 @@ const beers = {
     spriteIndex: 2,
     alcohol: 5,
     foam: foamLevel[1],
-    capStrength: 3 / 5,
+    capStrength: 3,
   }),
   "special": beerDef({
     name: "Special",
@@ -51,7 +51,7 @@ const beers = {
     spriteIndex: 3,
     alcohol: 5.2,
     foam: foamLevel[1],
-    capStrength: 3 / 5,
+    capStrength: 3,
   }),
   "pilsner": beerDef({
     name: "Pilsner",
@@ -60,7 +60,7 @@ const beers = {
     spriteIndex: 4,
     alcohol: 4.2,
     foam: foamLevel[1],
-    capStrength: 1 / 5,
+    capStrength: 1,
   }),
   "tommu-hiid": beerDef({
     name: "Tõmmu hiid",
@@ -69,7 +69,7 @@ const beers = {
     spriteIndex: 5,
     alcohol: 4.7,
     foam: foamLevel[4],
-    capStrength: 2 / 5,
+    capStrength: 2,
   }),
   "kriek": beerDef({
     name: "Kriek",
@@ -78,7 +78,7 @@ const beers = {
     spriteIndex: 6,
     alcohol: 3.5,
     foam: foamLevel[4],
-    capStrength: 5 / 5,
+    capStrength: 5,
   }),
   "limonaad": beerDef({
     name: "Limpa limonaad",
@@ -96,7 +96,7 @@ const beers = {
     spriteIndex: 8,
     alcohol: 5.5,
     foam: foamLevel[4],
-    capStrength: 4 / 5,
+    capStrength: 4,
   }),
   "bock": beerDef({
     name: "Double Bock",
@@ -105,7 +105,7 @@ const beers = {
     spriteIndex: 9,
     alcohol: 7,
     foam: foamLevel[3],
-    capStrength: 3 / 5,
+    capStrength: 3,
   }),
   "porter": beerDef({
     name: "Sokolaadi porter",
@@ -114,7 +114,7 @@ const beers = {
     spriteIndex: 10,
     alcohol: 6.9,
     foam: foamLevel[5],
-    capStrength: 2 / 5,
+    capStrength: 2,
   }),
 }
 

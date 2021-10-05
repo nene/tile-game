@@ -50,10 +50,18 @@ export class OpeningGame implements MiniGame {
 
   private nextBottleCoord(): Coord {
     this.tickCounter++;
-    const x = this.noise.noise2D(this.tickCounter / NOISE_SCALE, 1);
-    const y = this.noise.noise2D(1, this.tickCounter / NOISE_SCALE);
+    if (this.bottle.getBeer().capStrength === 0) {
+      return BOTTLE_START_COORD;
+    }
+    const x = this.noise.noise2D(this.tickCounter / this.getNoiseScale(), 1);
+    const y = this.noise.noise2D(1, this.tickCounter / this.getNoiseScale());
     const offset = coordMul([x, y], BOTTLE_MAX_MOVEMENT).map(Math.floor) as Coord;
     return coordAdd(BOTTLE_START_COORD, offset);
+  }
+
+  private getNoiseScale(): number {
+    const { capStrength } = this.bottle.getBeer();
+    return NOISE_SCALE / capStrength;
   }
 
   paint(screen: PixelScreen) {
