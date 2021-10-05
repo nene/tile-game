@@ -79,9 +79,27 @@ export class UiController {
     return !this.inventoryController.getMiniGame();
   }
 
-  handleClick(screenCoord: Coord): boolean {
-    this.shopView.handleMouseEvent("click", screenCoord);
+  handleMouseEvent(type: string, coord: Coord, wheelDelta?: Coord): boolean | undefined {
+    this.shopView.handleMouseEvent(type, coord, wheelDelta);
 
+    switch (type) {
+      case "click":
+        return this.handleClick(coord);
+      case "mousemove":
+        this.getMiniGame()?.handleMouseMove(coord);
+        this.cursorController.handleMouseMove(coord);
+        this.inventoryController.handleMouseMove(coord);
+        break;
+      case "mousedown":
+        this.getMiniGame()?.handleMouseDown(coord);
+        break;
+      case "mouseup":
+        this.getMiniGame()?.handleMouseUp(coord);
+        break;
+    }
+  }
+
+  private handleClick(screenCoord: Coord): boolean {
     if (this.getMiniGame()) {
       this.getMiniGame()?.handleClick(screenCoord);
       return true;
@@ -94,28 +112,6 @@ export class UiController {
       return true;
     }
     return this.inventoryController.handleClick(screenCoord);
-  }
-
-  handleMouseMove(screenCoord: Coord) {
-    this.getMiniGame()?.handleMouseMove(screenCoord);
-
-    this.cursorController.handleMouseMove(screenCoord);
-    this.inventoryController.handleMouseMove(screenCoord);
-    this.shopView.handleMouseEvent("mousemove", screenCoord);
-  }
-
-  handleMouseDown(screenCoord: Coord) {
-    this.getMiniGame()?.handleMouseDown(screenCoord);
-    this.shopView.handleMouseEvent("mousedown", screenCoord);
-  }
-
-  handleMouseUp(screenCoord: Coord) {
-    this.getMiniGame()?.handleMouseUp(screenCoord);
-    this.shopView.handleMouseEvent("mouseup", screenCoord);
-  }
-
-  handleWheel(screenCoord: Coord, wheelDelta: Coord) {
-    this.shopView.handleMouseEvent("wheel", screenCoord, wheelDelta);
   }
 
   private getMiniGame(): MiniGame | undefined {

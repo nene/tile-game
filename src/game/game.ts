@@ -83,7 +83,7 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
     onClick: (coord: Coord) => {
       screenNeedsRepaint = true;
       const screenCoord = toPixelScale(coord, screenCfg.scale);
-      if (uiController.handleClick(screenCoord)) {
+      if (uiController.handleMouseEvent("click", screenCoord)) {
         return; // The click was handled by UI
       }
       const worldCoord = coordAdd(screenCoord, screen.getOffset());
@@ -95,22 +95,22 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
     onMouseMove: (coord: Coord) => {
       screenNeedsRepaint = true;
       const screenCoord = toPixelScale(coord, screenCfg.scale);
-      uiController.handleMouseMove(screenCoord);
+      uiController.handleMouseEvent("mousemove", screenCoord);
     },
     onMouseDown: (coord: Coord) => {
       screenNeedsRepaint = true;
       const screenCoord = toPixelScale(coord, screenCfg.scale);
-      uiController.handleMouseDown(screenCoord);
+      uiController.handleMouseEvent("mousedown", screenCoord);
     },
     onMouseUp: (coord: Coord) => {
       screenNeedsRepaint = true;
       const screenCoord = toPixelScale(coord, screenCfg.scale);
-      uiController.handleMouseUp(screenCoord);
+      uiController.handleMouseEvent("mouseup", screenCoord);
     },
     onWheel: (coord: Coord, wheelDelta: Coord) => {
       screenNeedsRepaint = true;
       const screenCoord = toPixelScale(coord, screenCfg.scale);
-      uiController.handleWheel(screenCoord, wheelDelta);
+      uiController.handleMouseEvent("wheel", screenCoord, wheelDelta);
     },
     cleanup: () => {
       loops.cleanup();
