@@ -1,5 +1,5 @@
 import { PixelScreen, TextStyle } from "./PixelScreen";
-import { InventoryView } from "./InventoryView";
+import { StorageInventoryView } from "./inventory/StorageInventoryView";
 import { Coord, coordAdd, coordSub, rectGrow } from "./Coord";
 import { GameItem } from "./items/GameItem";
 import { debounce } from "lodash";
@@ -9,16 +9,16 @@ import { GameEvent } from "./GameEvent";
 import { Inventory } from "./inventory/Inventory";
 
 export class InventoryController {
-  private playerInventoryView: InventoryView;
+  private playerInventoryView: StorageInventoryView;
   private objectInventory?: Inventory;
-  private objectInventoryView?: InventoryView;
+  private objectInventoryView?: StorageInventoryView;
   private mouseCoord: Coord = [-16, -16];
   private selectedItem?: GameItem;
   private hoveredItem?: GameItem;
   private miniGame?: MiniGame;
 
   constructor(private playerInventory: Inventory) {
-    this.playerInventoryView = new InventoryView({
+    this.playerInventoryView = new StorageInventoryView({
       inventory: playerInventory,
       coord: [107, 200 - 22],
       size: [5, 1],
@@ -35,7 +35,7 @@ export class InventoryController {
 
   showInventory(inventory: Inventory, title?: string) {
     this.objectInventory = inventory;
-    this.objectInventoryView = new InventoryView({ inventory, coord: [130, 50], title, size: [3, 3] });
+    this.objectInventoryView = new StorageInventoryView({ inventory, coord: [130, 50], title, size: [3, 3] });
   }
 
   getMiniGame(): MiniGame | undefined {
@@ -131,14 +131,14 @@ export class InventoryController {
     return undefined;
   }
 
-  private getInventoryItemAtCoord(coord: Coord, inventory: Inventory, inventoryView: InventoryView): GameItem | undefined {
+  private getInventoryItemAtCoord(coord: Coord, inventory: Inventory, inventoryView: StorageInventoryView): GameItem | undefined {
     if (inventoryView.isCoordInView(coord)) {
       return inventory.itemAt(inventoryView.getSlotIndexAtCoord(coord));
     }
     return undefined;
   }
 
-  private handleInventoryClick(coord: Coord, inventory: Inventory, inventoryView: InventoryView) {
+  private handleInventoryClick(coord: Coord, inventory: Inventory, inventoryView: StorageInventoryView) {
     const slotIndex = inventoryView.getSlotIndexAtCoord(coord);
     if (slotIndex === -1) {
       return; // no slot clicked

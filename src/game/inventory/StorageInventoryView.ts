@@ -1,17 +1,17 @@
-import { Coord, coordAdd, coordMul, isCoordInRect, Rect } from "./Coord";
-import { Inventory } from "./inventory/Inventory";
-import { PixelScreen } from "./PixelScreen";
-import { SpriteLibrary } from "./SpriteLibrary";
-import { SpriteSheet } from "./SpriteSheet";
+import { Coord, coordAdd, coordMul, isCoordInRect, Rect } from "../Coord";
+import { Inventory } from "./Inventory";
+import { PixelScreen } from "../PixelScreen";
+import { SpriteLibrary } from "../SpriteLibrary";
+import { SpriteSheet } from "../SpriteSheet";
 
-interface InventoryViewCfg {
+interface StorageInventoryViewCfg {
   inventory: Inventory;
   size: Coord;
   coord: Coord;
   title?: string;
 }
 
-export class InventoryView {
+export class StorageInventoryView {
   private slotSprites: SpriteSheet;
   private rect: Rect;
   private inventory: Inventory;
@@ -19,7 +19,7 @@ export class InventoryView {
   private coord: Coord;
   private title?: string;
 
-  constructor({ inventory, size, coord, title }: InventoryViewCfg) {
+  constructor({ inventory, size, coord, title }: StorageInventoryViewCfg) {
     this.inventory = inventory;
     this.size = size;
     this.coord = coord;
