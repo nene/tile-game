@@ -58,6 +58,10 @@ export class StorageInventoryView implements InventoryView {
     screen.drawText(text, coordAdd(this.coord, [1, 1]), { color: "#8f563b" });
   }
 
+  handleGameEvent() {
+    return undefined;
+  }
+
   isCoordInView(screenCoord: Coord): boolean {
     return isCoordInRect(screenCoord, this.rect);
   }
