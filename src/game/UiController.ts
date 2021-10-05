@@ -88,7 +88,7 @@ export class UiController {
       case "mousemove":
         this.getMiniGame()?.handleMouseMove(coord);
         this.cursorController.handleMouseMove(coord);
-        this.inventoryController.handleMouseMove(coord);
+        this.inventoryController.handleMouseEvent("mousemove", coord);
         break;
       case "mousedown":
         this.getMiniGame()?.handleMouseDown(coord);
@@ -99,7 +99,7 @@ export class UiController {
     }
   }
 
-  private handleClick(screenCoord: Coord): boolean {
+  private handleClick(screenCoord: Coord): boolean | undefined {
     if (this.getMiniGame()) {
       this.getMiniGame()?.handleClick(screenCoord);
       return true;
@@ -111,7 +111,7 @@ export class UiController {
       }
       return true;
     }
-    return this.inventoryController.handleClick(screenCoord);
+    return this.inventoryController.handleMouseEvent("click", screenCoord);
   }
 
   private getMiniGame(): MiniGame | undefined {

@@ -77,7 +77,17 @@ export class InventoryController {
     screen.drawText(item.getName(), textCoord, style);
   }
 
-  handleClick(screenCoord: Coord): boolean {
+  handleMouseEvent(type: string, coord: Coord): boolean | undefined {
+    switch (type) {
+      case "click":
+        return this.handleClick(coord);
+      case "mousemove":
+        this.handleMouseMove(coord);
+        break;
+    }
+  }
+
+  private handleClick(screenCoord: Coord): boolean {
     this.hoveredItem = undefined;
 
     if (this.playerInventoryView.isCoordInView(screenCoord)) {
@@ -95,7 +105,7 @@ export class InventoryController {
     return false;
   }
 
-  handleMouseMove(screenCoord: Coord) {
+  private handleMouseMove(screenCoord: Coord) {
     this.mouseCoord = screenCoord;
     this.hoveredItem = undefined;
     this.showTooltipAfterDelay(screenCoord);
