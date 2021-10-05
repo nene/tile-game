@@ -4,13 +4,28 @@ import { PixelScreen } from "./PixelScreen";
 import { SpriteLibrary } from "./SpriteLibrary";
 import { SpriteSheet } from "./SpriteSheet";
 
+interface InventoryViewCfg {
+  inventory: InventoryImpl;
+  size: Coord;
+  coord: Coord;
+  title?: string;
+}
+
 export class InventoryView {
   private slotSprites: SpriteSheet;
   private rect: Rect;
+  private inventory: InventoryImpl;
+  private size: Coord;
+  private coord: Coord;
+  private title?: string;
 
-  constructor(private inventory: InventoryImpl, private coord: Coord, private title?: string) {
+  constructor({ inventory, size, coord, title }: InventoryViewCfg) {
+    this.inventory = inventory;
+    this.size = size;
+    this.coord = coord;
+    this.title = title;
     this.slotSprites = SpriteLibrary.get("slot");
-    this.rect = { coord, size: coordAdd(this.titleSize(), coordMul([21, 21], inventory.size())) };
+    this.rect = { coord, size: coordAdd(this.titleSize(), coordMul([21, 21], size)) };
   }
 
   paint(screen: PixelScreen) {
@@ -24,7 +39,7 @@ export class InventoryView {
       }
 
       const startCoord = coordAdd(this.coord, this.titleSize());
-      const [cols, rows] = this.inventory.size();
+      const [cols, rows] = this.size;
       for (let y = 0; y < rows; y++) {
         for (let x = 0; x < cols; x++) {
           const slotCoord = coordAdd(startCoord, coordMul([21, 21], [x, y]));
@@ -48,7 +63,7 @@ export class InventoryView {
 
   getSlotAtCoord(screenCoord: Coord): Coord | undefined {
     const startCoord = coordAdd(this.coord, this.titleSize());
-    const [cols, rows] = this.inventory.size();
+    const [cols, rows] = this.size;
     for (let y = 0; y < rows; y++) {
       for (let x = 0; x < cols; x++) {
         const slotCoord = coordAdd(startCoord, coordMul([21, 21], [x, y]));

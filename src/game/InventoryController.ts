@@ -18,7 +18,11 @@ export class InventoryController {
   private miniGame?: MiniGame;
 
   constructor(private playerInventory: InventoryImpl) {
-    this.playerInventoryView = new InventoryView(playerInventory, [107, 200 - 22]);
+    this.playerInventoryView = new InventoryView({
+      inventory: playerInventory,
+      coord: [107, 200 - 22],
+      size: [5, 1],
+    });
   }
 
   getSelectedItem(): GameItem | undefined {
@@ -31,7 +35,7 @@ export class InventoryController {
 
   showInventory(inventory: InventoryImpl, title?: string) {
     this.objectInventory = inventory;
-    this.objectInventoryView = new InventoryView(inventory, [130, 50], title);
+    this.objectInventoryView = new InventoryView({ inventory, coord: [130, 50], title, size: [3, 3] });
   }
 
   getMiniGame(): MiniGame | undefined {
