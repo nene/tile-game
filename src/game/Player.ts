@@ -42,7 +42,7 @@ export class Player implements GameObject {
 
     this.animation = this.standRight;
 
-    this.inventory.addAt([0, 0], new BottleOpener());
+    this.inventory.placeAt([0, 0], new BottleOpener());
   }
 
   getInventory() {

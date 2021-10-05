@@ -149,7 +149,7 @@ export class InventoryController {
     }
     else if (!item && this.selectedItem && !inventory.isFull()) {
       // Place item at hand to inventory
-      inventory.addAt(slotCoord, this.selectedItem);
+      inventory.placeAt(slotCoord, this.selectedItem);
       this.selectedItem = undefined;
     }
     else if (item && this.selectedItem) {
@@ -158,13 +158,13 @@ export class InventoryController {
       if (combinedItems instanceof Array) {
         if (combinedItems.length > 0) {
           inventory.remove(item);
-          inventory.addAt(slotCoord, combinedItems[0]);
+          inventory.placeAt(slotCoord, combinedItems[0]);
           this.selectedItem = combinedItems[1]; // possibly nothing
         }
         else {
           // Otherwise swap item at hand with item in inventory
           inventory.remove(item);
-          inventory.addAt(slotCoord, this.selectedItem);
+          inventory.placeAt(slotCoord, this.selectedItem);
           this.selectedItem = item;
         }
       } else {

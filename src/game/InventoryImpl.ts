@@ -14,7 +14,7 @@ export class InventoryImpl {
     items?.forEach((item) => this.add(item));
   }
 
-  addAt(coord: Coord, item: GameItem) {
+  placeAt(coord: Coord, item: GameItem) {
     const index = this.coordToIndex(coord);
     if (!isFilledSlot(this.slots[index])) {
       this.slots[index] = item;
