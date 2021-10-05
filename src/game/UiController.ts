@@ -12,12 +12,13 @@ import { Shop } from "./shop/Shop";
 import { BeerBottle } from "./items/BeerBottle";
 import { getBeer } from "./items/Beer";
 import { GameEvent } from "./GameEvent";
+import { Wallet } from "./Wallet";
 
 export class UiController {
   private inventoryController: InventoryController;
   private cursorController: CursorController;
   private dialog?: Dialog;
-  private wallet = new WalletView(112);
+  private walletView = new WalletView(new Wallet(112));
   private shopView = new ShopView(new Shop([
     new BeerBottle(getBeer("alexander")),
     new BeerBottle(getBeer("pilsner")),
@@ -66,7 +67,7 @@ export class UiController {
 
       // Overlay.paint(screen);
       // this.shopView.paint(screen);
-      this.wallet.paint(screen);
+      this.walletView.paint(screen);
 
       // Cursor is always painted on top
       this.cursorController.paint(screen);
