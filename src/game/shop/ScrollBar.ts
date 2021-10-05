@@ -1,4 +1,4 @@
-import { Coord, coordAdd, coordConstrain, coordDiv, coordSub, isCoordInRect, Rect } from "../Coord";
+import { Coord, coordAdd, coordConstrain, coordSub, isCoordInRect, Rect } from "../Coord";
 import { GameEvent } from "../GameEvent";
 import { PatternLibrary } from "../PatternLibrary";
 import { PixelScreen } from "../PixelScreen";
@@ -65,7 +65,7 @@ export class ScrollBar {
         break;
       case "wheel":
         if (isCoordInRect(event.coord, this.scrollArea)) {
-          this.sliderPos = coordConstrain(coordAdd([0, this.sliderPos], coordDiv(event.wheelDelta, [16, 16])), { coord: [0, 0], size: [8, this.maxSliderPos] })[1];
+          this.sliderPos = coordConstrain(coordAdd([0, this.sliderPos], event.wheelDelta), { coord: [0, 0], size: [8, this.maxSliderPos] })[1];
         }
         break;
     }

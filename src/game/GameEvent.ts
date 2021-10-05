@@ -1,4 +1,4 @@
-import { Coord } from "./Coord";
+import { Coord, coordDiv } from "./Coord";
 
 type GameMouseEventType = "click" | "mousemove" | "mousedown" | "mouseup";
 
@@ -24,7 +24,7 @@ export class GameEventFactory {
       if (!wheelDelta) {
         throw new Error("'wheel' event is missing wheelDelta");
       }
-      return { type, coord: this.toPixelScale(rawCoord), wheelDelta };
+      return { type, coord: this.toPixelScale(rawCoord), wheelDelta: coordDiv(wheelDelta, [16, 16]) };
     } else {
       return { type, coord: this.toPixelScale(rawCoord) };
     }
