@@ -10,6 +10,7 @@ import { MiniGame } from "./minigames/MiniGame";
 import { GameEvent } from "./GameEvent";
 import { Shop } from "./inventory/Shop";
 import { ShopView } from "./shop/ShopView";
+import { Wallet } from "./Wallet";
 
 export class InventoryController {
   private playerInventoryView: InventoryView;
@@ -20,7 +21,7 @@ export class InventoryController {
   private hoveredItem?: GameItem;
   private miniGame?: MiniGame;
 
-  constructor(private playerInventory: Inventory) {
+  constructor(private playerInventory: Inventory, private wallet: Wallet) {
     this.playerInventoryView = new StorageInventoryView({
       inventory: playerInventory,
       coord: [107, 200 - 22],
@@ -156,7 +157,7 @@ export class InventoryController {
     const item = inventory.itemAt(slotIndex);
     if (item && !this.selectedItem) {
       // Take item from inventory
-      this.selectedItem = inventory.takeAt(slotIndex);
+      this.selectedItem = inventory.takeAt(slotIndex, this.wallet);
     }
     else if (!item && this.selectedItem && inventory.isWritable()) {
       // Place item at hand to inventory
@@ -168,13 +169,13 @@ export class InventoryController {
       const combinedItems = item.combine(this.selectedItem);
       if (combinedItems instanceof Array) {
         if (combinedItems.length > 0) {
-          inventory.takeAt(slotIndex);
+          inventory.takeAt(slotIndex, this.wallet);
           inventory.placeAt(slotIndex, combinedItems[0]);
           this.selectedItem = combinedItems[1]; // possibly nothing
         }
         else {
           // Otherwise swap item at hand with item in inventory
-          inventory.takeAt(slotIndex);
+          inventory.takeAt(slotIndex, this.wallet);
           inventory.placeAt(slotIndex, this.selectedItem);
           this.selectedItem = item;
         }

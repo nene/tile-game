@@ -4,4 +4,12 @@ export class Wallet {
   getMoney() {
     return this.money;
   }
+
+  add(amount: number) {
+    this.money += amount;
+  }
+
+  remove(amount: number) {
+    this.money -= amount;
+  }
 }

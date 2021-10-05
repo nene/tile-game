@@ -15,10 +15,11 @@ export class UiController {
   private inventoryController: InventoryController;
   private cursorController: CursorController;
   private dialog?: Dialog;
-  private walletView = new WalletView(new Wallet(112));
+  private wallet = new Wallet(112);
+  private walletView = new WalletView(this.wallet);
 
   constructor(playerInventory: StorageInventory) {
-    this.inventoryController = new InventoryController(playerInventory);
+    this.inventoryController = new InventoryController(playerInventory, this.wallet);
     this.cursorController = new CursorController();
   }
 
