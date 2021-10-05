@@ -3,8 +3,7 @@ import { GameWorld } from "./GameWorld";
 import { Sprite } from "./Sprite";
 
 export interface PixelScreenOptions {
-  width: number;
-  height: number;
+  size: Coord;
   scale: number;
   offset?: Coord;
 }
@@ -24,9 +23,9 @@ export class PixelScreen {
   private bg?: ImageData;
   private fixed = false;
 
-  constructor(ctx: CanvasRenderingContext2D, { width, height, scale, offset }: PixelScreenOptions) {
+  constructor(ctx: CanvasRenderingContext2D, { size, scale, offset }: PixelScreenOptions) {
     this.ctx = ctx;
-    this.virtualSize = [width, height];
+    this.virtualSize = size;
     this.scale = scale;
     this.offset = offset ?? [0, 0];
     this.ctx.scale(scale, scale);

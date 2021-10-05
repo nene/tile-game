@@ -50,8 +50,7 @@ export function App() {
 
     const game = async () => {
       gameApi = await runGame(ctx, {
-        width: WIDTH,
-        height: HEIGHT,
+        size: [WIDTH, HEIGHT],
         scale: PIXEL_SCALE,
       });
 
