@@ -40,9 +40,10 @@ export class PixelScreen {
   }
 
   withFixedCoords(fn: () => void) {
+    const oldFixed = this.fixed;
     this.fixed = true;
     fn();
-    this.fixed = false;
+    this.fixed = oldFixed;
   }
 
   drawSprite(sprite: Sprite, coord: Coord, opts?: DrawSpriteOptions) {
