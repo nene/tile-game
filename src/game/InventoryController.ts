@@ -1,4 +1,6 @@
 import { PixelScreen, TextStyle } from "./PixelScreen";
+import { Inventory } from "./inventory/Inventory";
+import { InventoryView } from "./inventory/InventoryView";
 import { StorageInventoryView } from "./inventory/StorageInventoryView";
 import { Coord, coordAdd, coordSub, rectGrow } from "./Coord";
 import { GameItem } from "./items/GameItem";
@@ -6,12 +8,11 @@ import { debounce } from "lodash";
 import { Overlay } from "./Overlay";
 import { MiniGame } from "./minigames/MiniGame";
 import { GameEvent } from "./GameEvent";
-import { Inventory } from "./inventory/Inventory";
 
 export class InventoryController {
-  private playerInventoryView: StorageInventoryView;
+  private playerInventoryView: InventoryView;
   private objectInventory?: Inventory;
-  private objectInventoryView?: StorageInventoryView;
+  private objectInventoryView?: InventoryView;
   private mouseCoord: Coord = [-16, -16];
   private selectedItem?: GameItem;
   private hoveredItem?: GameItem;
@@ -131,14 +132,14 @@ export class InventoryController {
     return undefined;
   }
 
-  private getInventoryItemAtCoord(coord: Coord, inventory: Inventory, inventoryView: StorageInventoryView): GameItem | undefined {
+  private getInventoryItemAtCoord(coord: Coord, inventory: Inventory, inventoryView: InventoryView): GameItem | undefined {
     if (inventoryView.isCoordInView(coord)) {
       return inventory.itemAt(inventoryView.getSlotIndexAtCoord(coord));
     }
     return undefined;
   }
 
-  private handleInventoryClick(coord: Coord, inventory: Inventory, inventoryView: StorageInventoryView) {
+  private handleInventoryClick(coord: Coord, inventory: Inventory, inventoryView: InventoryView) {
     const slotIndex = inventoryView.getSlotIndexAtCoord(coord);
     if (slotIndex === -1) {
       return; // no slot clicked

@@ -1,5 +1,6 @@
 import { Coord, coordAdd, coordMul, isCoordInRect, Rect } from "../Coord";
 import { Inventory } from "./Inventory";
+import { InventoryView } from "./InventoryView";
 import { PixelScreen } from "../PixelScreen";
 import { SpriteLibrary } from "../SpriteLibrary";
 import { SpriteSheet } from "../SpriteSheet";
@@ -11,7 +12,7 @@ interface StorageInventoryViewCfg {
   title?: string;
 }
 
-export class StorageInventoryView {
+export class StorageInventoryView implements InventoryView {
   private slotSprites: SpriteSheet;
   private rect: Rect;
   private inventory: Inventory;
