@@ -14,11 +14,7 @@ import { FpsCounter } from "./FpsCounter";
 export interface GameApi {
   onKeyDown: (key: string) => boolean;
   onKeyUp: (key: string) => boolean;
-  onClick: (coord: Coord) => void;
-  onMouseMove: (coord: Coord) => void;
-  onMouseDown: (coord: Coord) => void;
-  onMouseUp: (coord: Coord) => void;
-  onWheel: (coord: Coord, wheelDelta: Coord) => void;
+  onMouseEvent: (type: string, coord: Coord, wheelDelta?: Coord) => void;
   cleanup: () => void;
 }
 
@@ -65,6 +61,17 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
     screenNeedsRepaint = false;
   });
 
+  function handleClick(screenCoord: Coord) {
+    if (uiController.handleMouseEvent("click", screenCoord)) {
+      return; // The click was handled by UI
+    }
+    const worldCoord = coordAdd(screenCoord, screen.getOffset());
+    const obj = world.getObjectVisibleOnCoord(worldCoord);
+    if (obj && isObjectsCloseby(player, obj)) {
+      obj.onInteract(uiController);
+    }
+  }
+
   return {
     onKeyDown: (key: string): boolean => {
       if (uiController.isGameWorldActive() && uiController.isGameWorldVisible()) {
@@ -80,37 +87,14 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
       }
       return false;
     },
-    onClick: (coord: Coord) => {
+    onMouseEvent: (type: string, coord: Coord, wheelDelta?: Coord) => {
       screenNeedsRepaint = true;
       const screenCoord = toPixelScale(coord, screenCfg.scale);
-      if (uiController.handleMouseEvent("click", screenCoord)) {
-        return; // The click was handled by UI
+      if (type === "click") {
+        handleClick(screenCoord);
+      } else {
+        uiController.handleMouseEvent(type, screenCoord, wheelDelta);
       }
-      const worldCoord = coordAdd(screenCoord, screen.getOffset());
-      const obj = world.getObjectVisibleOnCoord(worldCoord);
-      if (obj && isObjectsCloseby(player, obj)) {
-        obj.onInteract(uiController);
-      }
-    },
-    onMouseMove: (coord: Coord) => {
-      screenNeedsRepaint = true;
-      const screenCoord = toPixelScale(coord, screenCfg.scale);
-      uiController.handleMouseEvent("mousemove", screenCoord);
-    },
-    onMouseDown: (coord: Coord) => {
-      screenNeedsRepaint = true;
-      const screenCoord = toPixelScale(coord, screenCfg.scale);
-      uiController.handleMouseEvent("mousedown", screenCoord);
-    },
-    onMouseUp: (coord: Coord) => {
-      screenNeedsRepaint = true;
-      const screenCoord = toPixelScale(coord, screenCfg.scale);
-      uiController.handleMouseEvent("mouseup", screenCoord);
-    },
-    onWheel: (coord: Coord, wheelDelta: Coord) => {
-      screenNeedsRepaint = true;
-      const screenCoord = toPixelScale(coord, screenCfg.scale);
-      uiController.handleMouseEvent("wheel", screenCoord, wheelDelta);
     },
     cleanup: () => {
       loops.cleanup();

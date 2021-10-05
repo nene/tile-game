@@ -33,19 +33,22 @@ export function App() {
       }
     };
     const onClick = (e: MouseEvent) => {
-      gameApi.onClick(mouseCoordRelativeTo(e, canvas));
+      gameApi.onMouseEvent("click", mouseCoordRelativeTo(e, canvas));
     };
     const onMouseMove = (e: MouseEvent) => {
-      gameApi.onMouseMove(mouseCoordRelativeTo(e, canvas));
+      gameApi.onMouseEvent("mousemove", mouseCoordRelativeTo(e, canvas));
     };
     const onMouseDown = (e: MouseEvent) => {
-      gameApi.onMouseDown(mouseCoordRelativeTo(e, canvas));
+      gameApi.onMouseEvent("mousedown", mouseCoordRelativeTo(e, canvas));
     };
     const onMouseUp = (e: MouseEvent) => {
-      gameApi.onMouseUp(mouseCoordRelativeTo(e, canvas));
+      gameApi.onMouseEvent("mouseup", mouseCoordRelativeTo(e, canvas));
     };
     const onWheel = (e: WheelEvent) => {
-      gameApi.onWheel(mouseCoordRelativeTo(e, canvas), [e.deltaX, e.deltaY]);
+      gameApi.onMouseEvent("wheel", mouseCoordRelativeTo(e, canvas), [
+        e.deltaX,
+        e.deltaY,
+      ]);
     };
 
     const game = async () => {
