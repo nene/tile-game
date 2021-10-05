@@ -20,9 +20,10 @@ export class ScrollView<T> {
     this.scrollBar = new ScrollBar(this.scrollBarRect(), this.cfg.rect);
   }
 
-  handleMouseEvent(type: string, coord: Coord, wheelDelta?: Coord) {
+  handleMouseEvent(type: string, coord: Coord, wheelDelta?: Coord): boolean | undefined {
     this.scrollBar.handleMouseEvent(type, coord, wheelDelta);
     this.highlightHoveredItem(type, coord);
+    return undefined;
   }
 
   highlightHoveredItem(type: string, coord: Coord) {

@@ -118,25 +118,28 @@ export class PouringGame implements MiniGame {
     return coordMul([x, y], BOTTLE_MAX_MOVEMENT).map(Math.floor) as Coord;
   }
 
-  handleClick() {
+  handleMouseEvent(type: string, coord: Coord): boolean | undefined {
+    switch (type) {
+      case "click": return this.handleClick();
+      case "mousemove": this.bottleCoord = coord; break;
+      case "mousedown": this.handleMouseDown(); break;
+      case "mouseup": this.mouseDown = false; break;
+    }
+    return undefined;
+  }
+
+  private handleClick() {
     if (this.pouring.isFinished()) {
       this.clicksAfterFinished++;
     }
+    return true;
   }
 
-  handleMouseMove(coord: Coord) {
-    this.bottleCoord = coord;
-  }
-
-  handleMouseDown() {
+  private handleMouseDown() {
     this.mouseDown = true;
     if (this.isFlowing()) {
       SoundLibrary.play("pouring-beer");
     }
-  }
-
-  handleMouseUp() {
-    this.mouseDown = false;
   }
 
   private isFlowing(): boolean {

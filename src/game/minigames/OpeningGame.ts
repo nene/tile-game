@@ -70,7 +70,16 @@ export class OpeningGame implements MiniGame {
     screen.drawSprite(this.openerSprite, this.openerCoord, { fixed: true });
   }
 
-  handleClick() {
+  handleMouseEvent(type: string, coord: Coord): boolean | undefined {
+    switch (type) {
+      case "click": return this.handleClick();
+      case "mousemove": this.handleMouseMove(coord); break;
+      case "mousedown": this.handleMouseDown(coord); break;
+    }
+    return undefined;
+  }
+
+  private handleClick() {
     if (this.bottle.isOpen()) {
       this.clicksAfterOpen++;
       if (this.clicksAfterOpen === 2) {
@@ -78,14 +87,15 @@ export class OpeningGame implements MiniGame {
         this.finishAtTick = this.tickCounter;
       }
     }
+    return true;
   }
 
-  handleMouseMove(coord: Coord) {
+  private handleMouseMove(coord: Coord) {
     this.openerCoord = coord;
     this.captureStatus = this.checkCaptureStatus();
   }
 
-  handleMouseDown(coord: Coord) {
+  private handleMouseDown(coord: Coord) {
     this.openerCoord = coord;
     this.captureStatus = this.checkCaptureStatus();
     if (this.captureStatus === CaptureStatus.hit && !this.bottle.isOpen()) {
@@ -94,8 +104,6 @@ export class OpeningGame implements MiniGame {
       SoundLibrary.play("opening-beer");
     }
   }
-
-  handleMouseUp() { }
 
   isFinished(): boolean {
     return this.tickCounter > this.finishAtTick;

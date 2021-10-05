@@ -80,31 +80,24 @@ export class UiController {
   }
 
   handleMouseEvent(type: string, coord: Coord, wheelDelta?: Coord): boolean | undefined {
-    this.shopView.handleMouseEvent(type, coord, wheelDelta);
+    let stopPropagation: boolean | undefined = undefined;
+    stopPropagation = stopPropagation || this.shopView.handleMouseEvent(type, coord, wheelDelta);
+    stopPropagation = stopPropagation || this.getMiniGame()?.handleMouseEvent(type, coord, wheelDelta);
+    if (stopPropagation) {
+      return true;
+    }
 
     switch (type) {
       case "click":
         return this.handleClick(coord);
       case "mousemove":
-        this.getMiniGame()?.handleMouseMove(coord);
         this.cursorController.handleMouseMove(coord);
         this.inventoryController.handleMouseEvent("mousemove", coord);
-        break;
-      case "mousedown":
-        this.getMiniGame()?.handleMouseDown(coord);
-        break;
-      case "mouseup":
-        this.getMiniGame()?.handleMouseUp(coord);
         break;
     }
   }
 
   private handleClick(screenCoord: Coord): boolean | undefined {
-    if (this.getMiniGame()) {
-      this.getMiniGame()?.handleClick(screenCoord);
-      return true;
-    }
-
     if (this.dialog) {
       if (this.dialog.isCoordInView(screenCoord)) {
         this.dialog = undefined; // Close the dialog

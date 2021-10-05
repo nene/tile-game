@@ -25,8 +25,8 @@ export class ShopView {
     });
   }
 
-  handleMouseEvent(type: string, coord: Coord, wheelDelta?: Coord) {
-    this.scrollView.handleMouseEvent(type, coord, wheelDelta);
+  handleMouseEvent(type: string, coord: Coord, wheelDelta?: Coord): boolean | undefined {
+    return this.scrollView.handleMouseEvent(type, coord, wheelDelta);
   }
 
   paint(screen: PixelScreen) {
