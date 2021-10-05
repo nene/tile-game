@@ -40,10 +40,6 @@ export class InventoryImpl {
     return this.slots[this.coordToIndex(coord)];
   }
 
-  isFull(): boolean {
-    return this.slots.every(isFilledSlot);
-  }
-
   private coordToIndex([x, y]: Coord): number {
     return this._size[1] * y + x;
   }

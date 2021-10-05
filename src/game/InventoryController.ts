@@ -147,7 +147,7 @@ export class InventoryController {
       inventory.removeAt(slotCoord);
       this.selectedItem = item;
     }
-    else if (!item && this.selectedItem && !inventory.isFull()) {
+    else if (!item && this.selectedItem) {
       // Place item at hand to inventory
       inventory.placeAt(slotCoord, this.selectedItem);
       this.selectedItem = undefined;
