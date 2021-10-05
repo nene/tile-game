@@ -77,7 +77,7 @@ export class InventoryController {
     screen.drawText(item.getName(), textCoord, style);
   }
 
-  handleMouseEvent(type: string, coord: Coord): boolean | undefined {
+  handleMouseEvent(type: string, coord: Coord, wheelDelta?: Coord): boolean | undefined {
     switch (type) {
       case "click":
         return this.handleClick(coord);

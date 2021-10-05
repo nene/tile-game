@@ -63,8 +63,8 @@ export class UiController {
       this.inventoryController.paint(screen);
     }
 
-    Overlay.paint(screen);
-    this.shopView.paint(screen);
+    // Overlay.paint(screen);
+    // this.shopView.paint(screen);
     this.wallet.paint(screen);
 
     // Cursor is always painted on top
@@ -83,28 +83,21 @@ export class UiController {
     let stopPropagation: boolean | undefined = undefined;
     stopPropagation = stopPropagation || this.shopView.handleMouseEvent(type, coord, wheelDelta);
     stopPropagation = stopPropagation || this.getMiniGame()?.handleMouseEvent(type, coord, wheelDelta);
+    stopPropagation = stopPropagation || this.cursorController.handleMouseEvent(type, coord, wheelDelta);
+    stopPropagation = stopPropagation || this.handleDialogClose(type, coord, wheelDelta);
+    stopPropagation = stopPropagation || this.inventoryController.handleMouseEvent(type, coord, wheelDelta);
     if (stopPropagation) {
       return true;
     }
-
-    switch (type) {
-      case "click":
-        return this.handleClick(coord);
-      case "mousemove":
-        this.cursorController.handleMouseEvent("mousemove", coord);
-        this.inventoryController.handleMouseEvent("mousemove", coord);
-        break;
-    }
   }
 
-  private handleClick(screenCoord: Coord): boolean | undefined {
-    if (this.dialog) {
-      if (this.dialog.isCoordInView(screenCoord)) {
+  private handleDialogClose(type: string, coord: Coord, wheelDelta?: Coord): boolean | undefined {
+    if (this.dialog && type === "click") {
+      if (this.dialog.isCoordInView(coord)) {
         this.dialog = undefined; // Close the dialog
       }
       return true;
     }
-    return this.inventoryController.handleMouseEvent("click", screenCoord);
   }
 
   private getMiniGame(): MiniGame | undefined {
