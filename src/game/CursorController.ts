@@ -12,7 +12,7 @@ export class CursorController {
   }
 
   paint(screen: PixelScreen) {
-    screen.drawSprite(this.cursor, this.mouseCoord, { fixed: true });
+    screen.drawSprite(this.cursor, this.mouseCoord);
   }
 
   handleMouseEvent(type: string, screenCoord: Coord, wheelDelta?: Coord): boolean | undefined {

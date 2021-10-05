@@ -14,13 +14,13 @@ export class Dialog {
   }
 
   private drawContainer(screen: PixelScreen) {
-    screen.drawRect(rectGrow(this.rect, [1, 1]), "#3e2821", { fixed: true });
-    screen.drawRect(this.rect, "#c8b997", { fixed: true });
+    screen.drawRect(rectGrow(this.rect, [1, 1]), "#3e2821");
+    screen.drawRect(this.rect, "#c8b997");
   }
 
   private drawTitle(text: string, screen: PixelScreen) {
     const [, textHeight] = screen.measureText(text);
-    screen.drawRect({ coord: this.rect.coord, size: [this.rect.size[0], textHeight + 4] }, "#8f563b", { fixed: true });
+    screen.drawRect({ coord: this.rect.coord, size: [this.rect.size[0], textHeight + 4] }, "#8f563b");
     screen.drawText(text, coordAdd(this.rect.coord, [2, 2]), { color: "#3e2821" });
   }
 

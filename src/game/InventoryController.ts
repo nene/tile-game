@@ -62,7 +62,7 @@ export class InventoryController {
     this.playerInventoryView.paint(screen);
 
     if (this.selectedItem) {
-      screen.drawSprite(this.selectedItem.getSprite(), coordSub(this.mouseCoord, [8, 8]), { fixed: true });
+      screen.drawSprite(this.selectedItem.getSprite(), coordSub(this.mouseCoord, [8, 8]));
     }
     if (this.hoveredItem) {
       this.drawTooltip(this.hoveredItem, screen)
@@ -73,7 +73,7 @@ export class InventoryController {
     const style: TextStyle = { color: "#3e2821" };
     const textCoord = coordAdd(this.mouseCoord, [11, 2]);
     const textSize = screen.measureText(item.getName(), style);
-    screen.drawRect(rectGrow({ coord: textCoord, size: textSize }, [2, 1]), "#c8b997", { fixed: true });
+    screen.drawRect(rectGrow({ coord: textCoord, size: textSize }, [2, 1]), "#c8b997");
     screen.drawText(item.getName(), textCoord, style);
   }
 

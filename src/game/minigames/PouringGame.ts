@@ -84,28 +84,30 @@ export class PouringGame implements MiniGame {
   }
 
   paint(screen: PixelScreen) {
-    this.drawBackground(screen);
-    if (this.isFlowing()) {
-      screen.drawRect({ coord: coordAdd(this.adjustedBottleCoord(), [-1, -1]), size: [Math.ceil(this.getFlowRate() * 6), 200] }, "rgba(252,225,180,185)");
-    }
-    screen.drawSprite(this.sprites.bottle, this.adjustedBottleCoord(), { fixed: true });
+    screen.withFixedCoords(() => {
+      this.drawBackground(screen);
+      if (this.isFlowing()) {
+        screen.drawRect({ coord: coordAdd(this.adjustedBottleCoord(), [-1, -1]), size: [Math.ceil(this.getFlowRate() * 6), 200] }, "rgba(252,225,180,185)");
+      }
+      screen.drawSprite(this.sprites.bottle, this.adjustedBottleCoord());
 
-    const beerHeight = Math.floor(this.pouring.getLiquidInGlass() * MAX_BEER_HEIGHT);
-    const foamHeight = Math.floor(this.pouring.getFoamInGlass() * MAX_BEER_HEIGHT);
+      const beerHeight = Math.floor(this.pouring.getLiquidInGlass() * MAX_BEER_HEIGHT);
+      const foamHeight = Math.floor(this.pouring.getFoamInGlass() * MAX_BEER_HEIGHT);
 
-    screen.drawSprite(this.sprites.beerFoam, coordSub(MIN_LEVEL, [0, foamHeight + beerHeight]), { fixed: true });
-    screen.drawSprite(this.beerAnimation.getSprite(), coordSub(MIN_LEVEL, [0, beerHeight]), { fixed: true });
+      screen.drawSprite(this.sprites.beerFoam, coordSub(MIN_LEVEL, [0, foamHeight + beerHeight]));
+      screen.drawSprite(this.beerAnimation.getSprite(), coordSub(MIN_LEVEL, [0, beerHeight]));
 
-    this.drawTable(screen);
-    screen.drawSprite(this.sprites.beerGlass, GLASS_COORD, { fixed: true });
+      this.drawTable(screen);
+      screen.drawSprite(this.sprites.beerGlass, GLASS_COORD);
 
-    screen.drawText("Pudelis veel: " + Math.round(this.pouring.getLiquidInBottle() * 100) + "%", [200, 5]);
-    screen.drawText("Shoppen täis: " + Math.round(this.pouring.getFillLevel() * 100) + "%", [200 - 6, 16]);
-    if (DEBUG) {
-      screen.drawText("Vaht: " + Math.round(this.pouring.getFoamInGlass() * 100) + "%", [200 - 6, 26]);
-      screen.drawText("Vedelik: " + Math.round(this.pouring.getLiquidInGlass() * 100) + "%", [200 - 6, 36]);
-      screen.drawText("Flow: " + Math.round(this.getFlowRate() * 100) + "%", [200 - 6, 46]);
-    }
+      screen.drawText("Pudelis veel: " + Math.round(this.pouring.getLiquidInBottle() * 100) + "%", [200, 5]);
+      screen.drawText("Shoppen täis: " + Math.round(this.pouring.getFillLevel() * 100) + "%", [200 - 6, 16]);
+      if (DEBUG) {
+        screen.drawText("Vaht: " + Math.round(this.pouring.getFoamInGlass() * 100) + "%", [200 - 6, 26]);
+        screen.drawText("Vedelik: " + Math.round(this.pouring.getLiquidInGlass() * 100) + "%", [200 - 6, 36]);
+        screen.drawText("Flow: " + Math.round(this.getFlowRate() * 100) + "%", [200 - 6, 46]);
+      }
+    });
   }
 
   private adjustedBottleCoord() {
@@ -178,7 +180,7 @@ export class PouringGame implements MiniGame {
     const [width, height] = coordDiv(rect.size, [16, 16]);
     for (let x = 0; x < width; x++) {
       for (let y = 0; y < height; y++) {
-        screen.drawSprite(sprite, coordAdd(rect.coord, tileToScreenCoord([x, y])), { fixed: true });
+        screen.drawSprite(sprite, coordAdd(rect.coord, tileToScreenCoord([x, y])));
       }
     }
   }

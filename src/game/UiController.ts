@@ -51,24 +51,26 @@ export class UiController {
   }
 
   paint(screen: PixelScreen) {
-    if (this.getMiniGame()) {
-      this.getMiniGame()?.paint(screen);
-      return;
-    }
+    screen.withFixedCoords(() => {
+      if (this.getMiniGame()) {
+        this.getMiniGame()?.paint(screen);
+        return;
+      }
 
-    if (this.dialog) {
-      Overlay.paint(screen);
-      this.dialog.paint(screen);
-    } else {
-      this.inventoryController.paint(screen);
-    }
+      if (this.dialog) {
+        Overlay.paint(screen);
+        this.dialog.paint(screen);
+      } else {
+        this.inventoryController.paint(screen);
+      }
 
-    // Overlay.paint(screen);
-    // this.shopView.paint(screen);
-    this.wallet.paint(screen);
+      // Overlay.paint(screen);
+      // this.shopView.paint(screen);
+      this.wallet.paint(screen);
 
-    // Cursor is always painted on top
-    this.cursorController.paint(screen);
+      // Cursor is always painted on top
+      this.cursorController.paint(screen);
+    });
   }
 
   isGameWorldActive(): boolean {

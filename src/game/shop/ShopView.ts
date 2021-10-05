@@ -30,11 +30,9 @@ export class ShopView {
   }
 
   paint(screen: PixelScreen) {
-    screen.withFixedCoords(() => {
-      this.drawBackground(screen);
-      this.drawTitle(screen);
-      this.scrollView.paint(screen);
-    });
+    this.drawBackground(screen);
+    this.drawTitle(screen);
+    this.scrollView.paint(screen);
   }
 
   private drawBackground(screen: PixelScreen) {

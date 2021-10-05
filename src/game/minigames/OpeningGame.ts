@@ -57,17 +57,17 @@ export class OpeningGame implements MiniGame {
 
   paint(screen: PixelScreen) {
     this.drawBackground(screen);
-    screen.drawSprite(this.bottleSprite, this.bottleCoord, { fixed: true });
+    screen.drawSprite(this.bottleSprite, this.bottleCoord);
 
     if (this.bottle.isOpen()) {
       // For open bottle, keep the cap inside opener
-      screen.drawSprite(this.bottleCapSprites.getSprite([0, 0]), this.openerCoord, { fixed: true });
+      screen.drawSprite(this.bottleCapSprites.getSprite([0, 0]), this.openerCoord);
     } else {
       // For closed bottle, keep the cap on the bottle
-      screen.drawSprite(this.bottleCapSprites.getSprite([this.captureStatus, 0]), this.bottleCoord, { fixed: true });
+      screen.drawSprite(this.bottleCapSprites.getSprite([this.captureStatus, 0]), this.bottleCoord);
     }
 
-    screen.drawSprite(this.openerSprite, this.openerCoord, { fixed: true });
+    screen.drawSprite(this.openerSprite, this.openerCoord);
   }
 
   handleMouseEvent(type: string, coord: Coord): boolean | undefined {
@@ -118,7 +118,7 @@ export class OpeningGame implements MiniGame {
     const [width, height] = coordDiv(screen.getSize(), [16, 16]);
     for (let x = 0; x < width; x++) {
       for (let y = 0; y < height; y++) {
-        screen.drawSprite(this.bgSprite, tileToScreenCoord([x, y]), { fixed: true });
+        screen.drawSprite(this.bgSprite, tileToScreenCoord([x, y]));
       }
     }
   }

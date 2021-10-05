@@ -14,27 +14,28 @@ export class InventoryView {
   }
 
   paint(screen: PixelScreen) {
-    screen.drawRect(
-      this.rect,
-      "#c8b997",
-      { fixed: true },
-    );
-    if (this.title) {
-      this.drawTitle(this.title, screen);
-    }
+    screen.withFixedCoords(() => {
+      screen.drawRect(
+        this.rect,
+        "#c8b997",
+      );
+      if (this.title) {
+        this.drawTitle(this.title, screen);
+      }
 
-    const startCoord = coordAdd(this.coord, this.titleSize());
-    const [cols, rows] = this.inventory.size();
-    for (let y = 0; y < rows; y++) {
-      for (let x = 0; x < cols; x++) {
-        const slotCoord = coordAdd(startCoord, coordMul([21, 21], [x, y]));
-        screen.drawSprite(this.slotSprites.getSprite([0, 0]), slotCoord, { fixed: true });
-        const item = this.inventory.itemAt([x, y]);
-        if (item) {
-          screen.drawSprite(item.getSprite(), coordAdd(slotCoord, [2, 2]), { fixed: true });
+      const startCoord = coordAdd(this.coord, this.titleSize());
+      const [cols, rows] = this.inventory.size();
+      for (let y = 0; y < rows; y++) {
+        for (let x = 0; x < cols; x++) {
+          const slotCoord = coordAdd(startCoord, coordMul([21, 21], [x, y]));
+          screen.drawSprite(this.slotSprites.getSprite([0, 0]), slotCoord);
+          const item = this.inventory.itemAt([x, y]);
+          if (item) {
+            screen.drawSprite(item.getSprite(), coordAdd(slotCoord, [2, 2]));
+          }
         }
       }
-    }
+    });
   }
 
   private drawTitle(text: string, screen: PixelScreen) {
