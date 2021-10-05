@@ -73,7 +73,7 @@ export class InventoryController {
     const style: TextStyle = { color: "#3e2821" };
     const textCoord = coordAdd(this.mouseCoord, [11, 2]);
     const textSize = screen.measureText(item.getName(), style);
-    screen.drawRect(rectGrow({ coord: textCoord, size: textSize }, [2, 1]), "#c8b997");
+    screen.drawRect(rectGrow({ coord: textCoord, size: textSize }, [2, 1]), "#c8b997", { fixed: true });
     screen.drawText(item.getName(), textCoord, style);
   }
 
