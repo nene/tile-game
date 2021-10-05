@@ -10,7 +10,7 @@ import { InventoryView } from "../inventory/InventoryView";
 import { Wallet } from "../Wallet";
 
 export class ShopView implements InventoryView {
-  private rect: Rect = { coord: [64, 16], size: [192, 108] };
+  private rect: Rect = { coord: [64, 16], size: [192, 129] };
   private titleHeight = 17;
   private shopItemRenderer: ShopItemRenderer;
   private scrollView: ScrollView<BeerBottle>;
