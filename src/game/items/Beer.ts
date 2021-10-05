@@ -28,7 +28,7 @@ const beerDef = (x: Beer) => x;
 const beers = {
   "alexander": beerDef({
     name: "Alexander",
-    description: "Normaalne õlu normaalsele korporandile.",
+    description: "Sassi läheb kui loed mitu pudelit sai joodud.",
     price: 2,
     spriteIndex: 1,
     alcohol: 5.2,
@@ -37,7 +37,7 @@ const beers = {
   }),
   "heineken": beerDef({
     name: "Heineken",
-    description: "",
+    description: "Väljamaine rüübe rohelises pudelis.",
     price: 3,
     spriteIndex: 2,
     alcohol: 5,
@@ -46,7 +46,7 @@ const beers = {
   }),
   "special": beerDef({
     name: "Special",
-    description: "",
+    description: "Eriline jook puhuks kui paremat pole võtta.",
     price: 3,
     spriteIndex: 3,
     alcohol: 5.2,
@@ -73,7 +73,7 @@ const beers = {
   }),
   "kriek": beerDef({
     name: "Kriek",
-    description: "",
+    description: "Seda hõrku nestet libistavad ka naiskorporandid.",
     price: 6,
     spriteIndex: 6,
     alcohol: 3.5,
@@ -90,8 +90,8 @@ const beers = {
     capStrength: 0,
   }),
   "paulaner": beerDef({
-    name: "Paulaner Hefeweisen",
-    description: "Saksamaine nisuõlu.",
+    name: "Hefeweisen",
+    description: "Saksamaine nisumärjuke (bratwursti kõrvale).",
     price: 5,
     spriteIndex: 8,
     alcohol: 5.5,
@@ -100,7 +100,7 @@ const beers = {
   }),
   "bock": beerDef({
     name: "Double Bock",
-    description: "Revelia pidusöök.",
+    description: "Revelia kvarteriturniiri erikülaline.",
     price: 3,
     spriteIndex: 9,
     alcohol: 7,
@@ -109,7 +109,7 @@ const beers = {
   }),
   "porter": beerDef({
     name: "Sokolaadi porter",
-    description: "",
+    description: "Väidetavalt muudab suure mehe päkapikuks.",
     price: 4,
     spriteIndex: 10,
     alcohol: 6.9,

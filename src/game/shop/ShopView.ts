@@ -54,7 +54,7 @@ export class ShopView implements InventoryView {
 
   private drawTitle(screen: PixelScreen) {
     screen.drawText("Külmkapp", coordAdd(this.rect.coord, [3, 2]), { shadowColor: UI_SHADOW_COLOR });
-    screen.drawText("Kui märjukest soovid, siis ka õllekassasse münt poeta.", coordAdd(this.rect.coord, [3, 12]), { size: "small" });
+    screen.drawText("Kui märjukest võtad, siis ka õllekassasse mündi paned.", coordAdd(this.rect.coord, [3, 12]), { size: "small" });
   }
 
   private shopListRect(): Rect {

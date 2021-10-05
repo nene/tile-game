@@ -24,6 +24,8 @@ export class Fridge implements GameObject {
       new BeerBottle(getBeer("porter")),
       new BeerBottle(getBeer("special")),
       new BeerBottle(getBeer("kriek")),
+      new BeerBottle(getBeer("heineken")),
+      new BeerBottle(getBeer("paulaner")),
     ])
   }
 
