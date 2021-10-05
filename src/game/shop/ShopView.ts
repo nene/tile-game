@@ -1,4 +1,4 @@
-import { coordAdd, coordSub, Rect, rectGrow } from "../Coord";
+import { Coord, coordAdd, coordSub, isCoordInRect, Rect, rectGrow } from "../Coord";
 import { GameEvent } from "../GameEvent";
 import { BeerBottle } from "../items/BeerBottle";
 import { PixelScreen } from "../PixelScreen";
@@ -6,8 +6,9 @@ import { drawInset, drawUpset, UI_BG_COLOR, UI_SHADOW_COLOR } from "../ui-utils"
 import { ScrollView } from "./ScrollView";
 import { Shop } from "../inventory/Shop";
 import { ShopItemRenderer } from "./ShopItemRenderer";
+import { InventoryView } from "../inventory/InventoryView";
 
-export class ShopView {
+export class ShopView implements InventoryView {
   private rect: Rect = { coord: [64, 16], size: [192, 108] };
   private titleHeight = 17;
   private shopItemRenderer: ShopItemRenderer;
@@ -34,6 +35,14 @@ export class ShopView {
     this.drawBackground(screen);
     this.drawTitle(screen);
     this.scrollView.paint(screen);
+  }
+
+  isCoordInView(coord: Coord): boolean {
+    return isCoordInRect(coord, this.rect);
+  }
+
+  getSlotIndexAtCoord(coord: Coord): number {
+    return this.scrollView.getItemIndexAtCoord(coord);
   }
 
   private drawBackground(screen: PixelScreen) {

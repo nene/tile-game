@@ -28,15 +28,23 @@ export class ScrollView<T> {
   }
 
   highlightHoveredItem({ type, coord }: GameEvent) {
-    if (!isCoordInRect(coord, this.viewRect())) {
-      this.highlightedIndex = -1;
-      return;
-    }
-
     switch (type) {
       case "mousemove":
-        this.highlightedIndex = this.cfg.items.findIndex((item, i) => isCoordInRect(coord, this.itemRect(i)));
+        this.highlightedIndex = this.getItemIndexAtCoord(coord);
+        break;
+      default:
+        if (!isCoordInRect(coord, this.viewRect())) {
+          this.highlightedIndex = -1;
+        }
     }
+  }
+
+  getItemIndexAtCoord(coord: Coord) {
+    if (!isCoordInRect(coord, this.viewRect())) {
+      return -1;
+    }
+
+    return this.cfg.items.findIndex((item, i) => isCoordInRect(coord, this.itemRect(i)));
   }
 
   paint(screen: PixelScreen) {
