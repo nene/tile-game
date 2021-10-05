@@ -1,11 +1,11 @@
 import { Coord, coordAdd, coordMul, isCoordInRect, Rect } from "./Coord";
-import { InventoryImpl } from "./InventoryImpl";
+import { Inventory } from "./inventory/Inventory";
 import { PixelScreen } from "./PixelScreen";
 import { SpriteLibrary } from "./SpriteLibrary";
 import { SpriteSheet } from "./SpriteSheet";
 
 interface InventoryViewCfg {
-  inventory: InventoryImpl;
+  inventory: Inventory;
   size: Coord;
   coord: Coord;
   title?: string;
@@ -14,7 +14,7 @@ interface InventoryViewCfg {
 export class InventoryView {
   private slotSprites: SpriteSheet;
   private rect: Rect;
-  private inventory: InventoryImpl;
+  private inventory: Inventory;
   private size: Coord;
   private coord: Coord;
   private title?: string;

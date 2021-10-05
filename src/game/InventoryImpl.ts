@@ -32,10 +32,6 @@ export class InventoryImpl implements WritableInventory {
     return item;
   }
 
-  removeAt(index: number) {
-    this.slots[index] = undefined;
-  }
-
   size(): number {
     return this._size;
   }
