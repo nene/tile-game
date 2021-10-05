@@ -81,13 +81,13 @@ export class UiController {
     return !this.inventoryController.getMiniGame();
   }
 
-  handleMouseEvent(event: GameEvent): boolean | undefined {
+  handleGameEvent(event: GameEvent): boolean | undefined {
     let stopPropagation: boolean | undefined = undefined;
-    stopPropagation = stopPropagation || this.shopView.handleMouseEvent(event);
-    stopPropagation = stopPropagation || this.getMiniGame()?.handleMouseEvent(event);
-    stopPropagation = stopPropagation || this.cursorController.handleMouseEvent(event);
+    stopPropagation = stopPropagation || this.shopView.handleGameEvent(event);
+    stopPropagation = stopPropagation || this.getMiniGame()?.handleGameEvent(event);
+    stopPropagation = stopPropagation || this.cursorController.handleGameEvent(event);
     stopPropagation = stopPropagation || this.handleDialogClose(event);
-    stopPropagation = stopPropagation || this.inventoryController.handleMouseEvent(event);
+    stopPropagation = stopPropagation || this.inventoryController.handleGameEvent(event);
     if (stopPropagation) {
       return true;
     }

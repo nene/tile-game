@@ -63,7 +63,7 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
   });
 
   function handleClick(event: GameEvent) {
-    if (uiController.handleMouseEvent(event)) {
+    if (uiController.handleGameEvent(event)) {
       return; // The click was handled by UI
     }
     const worldCoord = coordAdd(event.coord, screen.getOffset());
@@ -96,7 +96,7 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
       if (type === "click") {
         handleClick(event);
       } else {
-        uiController.handleMouseEvent(event);
+        uiController.handleGameEvent(event);
       }
     },
     cleanup: () => {

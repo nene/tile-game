@@ -21,8 +21,8 @@ export class ScrollView<T> {
     this.scrollBar = new ScrollBar(this.scrollBarRect(), this.cfg.rect);
   }
 
-  handleMouseEvent(event: GameEvent): boolean | undefined {
-    this.scrollBar.handleMouseEvent(event);
+  handleGameEvent(event: GameEvent): boolean | undefined {
+    this.scrollBar.handleGameEvent(event);
     this.highlightHoveredItem(event);
     return undefined;
   }

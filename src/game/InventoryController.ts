@@ -78,7 +78,7 @@ export class InventoryController {
     screen.drawText(item.getName(), textCoord, style);
   }
 
-  handleMouseEvent({ type, coord }: GameEvent): boolean | undefined {
+  handleGameEvent({ type, coord }: GameEvent): boolean | undefined {
     switch (type) {
       case "click":
         return this.handleClick(coord);
@@ -171,7 +171,7 @@ export class InventoryController {
         // A minigame is used for combining
         this.miniGame = combinedItems;
         // Ensure we start minigame with current mouse coordinate
-        this.miniGame.handleMouseEvent({ type: "mousemove", coord: this.mouseCoord });
+        this.miniGame.handleGameEvent({ type: "mousemove", coord: this.mouseCoord });
       }
     }
   }

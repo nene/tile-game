@@ -71,7 +71,7 @@ export class OpeningGame implements MiniGame {
     screen.drawSprite(this.openerSprite, this.openerCoord);
   }
 
-  handleMouseEvent({ type, coord }: GameEvent): boolean | undefined {
+  handleGameEvent({ type, coord }: GameEvent): boolean | undefined {
     switch (type) {
       case "click": return this.handleClick();
       case "mousemove": this.handleMouseMove(coord); break;

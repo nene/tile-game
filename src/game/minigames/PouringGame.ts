@@ -121,7 +121,7 @@ export class PouringGame implements MiniGame {
     return coordMul([x, y], BOTTLE_MAX_MOVEMENT).map(Math.floor) as Coord;
   }
 
-  handleMouseEvent({ type, coord }: GameEvent): boolean | undefined {
+  handleGameEvent({ type, coord }: GameEvent): boolean | undefined {
     switch (type) {
       case "click": return this.handleClick();
       case "mousemove": this.bottleCoord = coord; break;

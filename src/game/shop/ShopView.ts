@@ -26,8 +26,8 @@ export class ShopView {
     });
   }
 
-  handleMouseEvent(event: GameEvent): boolean | undefined {
-    return this.scrollView.handleMouseEvent(event);
+  handleGameEvent(event: GameEvent): boolean | undefined {
+    return this.scrollView.handleGameEvent(event);
   }
 
   paint(screen: PixelScreen) {

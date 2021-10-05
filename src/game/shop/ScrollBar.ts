@@ -38,7 +38,7 @@ export class ScrollBar {
     this.bgPattern = PatternLibrary.get("scroll-bar", SPRITE_BG);
   }
 
-  handleMouseEvent(event: GameEvent) {
+  handleGameEvent(event: GameEvent) {
     switch (event.type) {
       case "mousedown":
         if (isCoordInRect(event.coord, this.buttonCoords.up)) {
