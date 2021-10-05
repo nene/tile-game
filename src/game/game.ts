@@ -10,7 +10,7 @@ import { UiController } from "./UiController";
 import { Loops } from "./Loops";
 import { GameObject } from "./GameObject";
 import { FpsCounter } from "./FpsCounter";
-import { GameEvent, GameEventFactory, GameEventType } from "./GameEvent";
+import { GameEventFactory, GameEventType } from "./GameEvent";
 
 export interface GameApi {
   onKeyDown: (key: string) => boolean;
@@ -62,11 +62,7 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
     screenNeedsRepaint = false;
   });
 
-  function handleClick(event: GameEvent) {
-    if (uiController.handleGameEvent(event)) {
-      return; // The click was handled by UI
-    }
-    const worldCoord = coordAdd(event.coord, screen.getOffset());
+  function handleWorldClick(worldCoord: Coord) {
     const obj = world.getObjectVisibleOnCoord(worldCoord);
     if (obj && isObjectsCloseby(player, obj)) {
       obj.onInteract(uiController);
@@ -94,7 +90,10 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
       screenNeedsRepaint = true;
       const event = eventFactory.createEvent(type, coord, wheelDelta);
       if (type === "click") {
-        handleClick(event);
+        if (!uiController.handleGameEvent(event)) {
+          // When the click was not handled by UI
+          handleWorldClick(coordAdd(event.coord, screen.getOffset()));
+        }
       } else {
         uiController.handleGameEvent(event);
       }
