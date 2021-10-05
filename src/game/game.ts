@@ -10,11 +10,12 @@ import { UiController } from "./UiController";
 import { Loops } from "./Loops";
 import { GameObject } from "./GameObject";
 import { FpsCounter } from "./FpsCounter";
+import { GameEvent, GameEventFactory, GameEventType } from "./GameEvent";
 
 export interface GameApi {
   onKeyDown: (key: string) => boolean;
   onKeyUp: (key: string) => boolean;
-  onMouseEvent: (type: string, coord: Coord, wheelDelta?: Coord) => void;
+  onMouseEvent: (type: GameEventType, coord: Coord, wheelDelta?: Coord) => void;
   cleanup: () => void;
 }
 
@@ -61,16 +62,18 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
     screenNeedsRepaint = false;
   });
 
-  function handleClick(screenCoord: Coord) {
-    if (uiController.handleMouseEvent("click", screenCoord)) {
+  function handleClick(event: GameEvent) {
+    if (uiController.handleMouseEvent(event)) {
       return; // The click was handled by UI
     }
-    const worldCoord = coordAdd(screenCoord, screen.getOffset());
+    const worldCoord = coordAdd(event.coord, screen.getOffset());
     const obj = world.getObjectVisibleOnCoord(worldCoord);
     if (obj && isObjectsCloseby(player, obj)) {
       obj.onInteract(uiController);
     }
   }
+
+  const eventFactory = new GameEventFactory(screenCfg.scale);
 
   return {
     onKeyDown: (key: string): boolean => {
@@ -87,23 +90,19 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
       }
       return false;
     },
-    onMouseEvent: (type: string, coord: Coord, wheelDelta?: Coord) => {
+    onMouseEvent: (type: GameEventType, coord: Coord, wheelDelta?: Coord) => {
       screenNeedsRepaint = true;
-      const screenCoord = toPixelScale(coord, screenCfg.scale);
+      const event = eventFactory.createEvent(type, coord, wheelDelta);
       if (type === "click") {
-        handleClick(screenCoord);
+        handleClick(event);
       } else {
-        uiController.handleMouseEvent(type, screenCoord, wheelDelta);
+        uiController.handleMouseEvent(event);
       }
     },
     cleanup: () => {
       loops.cleanup();
     },
   };
-}
-
-function toPixelScale([x, y]: Coord, scale: number): Coord {
-  return [Math.floor(x / scale), Math.floor(y / scale)];
 }
 
 function isObjectsCloseby(obj1: GameObject, obj2: GameObject) {

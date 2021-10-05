@@ -1,4 +1,5 @@
 import { Coord, coordAdd, coordMul, coordSub, isCoordInRect, Rect, rectGrow, rectOverlaps, rectTranslate } from "../Coord";
+import { GameEvent } from "../GameEvent";
 import { PixelScreen } from "../PixelScreen";
 import { ScrollBar } from "./ScrollBar";
 
@@ -20,13 +21,13 @@ export class ScrollView<T> {
     this.scrollBar = new ScrollBar(this.scrollBarRect(), this.cfg.rect);
   }
 
-  handleMouseEvent(type: string, coord: Coord, wheelDelta?: Coord): boolean | undefined {
-    this.scrollBar.handleMouseEvent(type, coord, wheelDelta);
-    this.highlightHoveredItem(type, coord);
+  handleMouseEvent(event: GameEvent): boolean | undefined {
+    this.scrollBar.handleMouseEvent(event);
+    this.highlightHoveredItem(event);
     return undefined;
   }
 
-  highlightHoveredItem(type: string, coord: Coord) {
+  highlightHoveredItem({ type, coord }: GameEvent) {
     if (!isCoordInRect(coord, this.viewRect())) {
       this.highlightedIndex = -1;
       return;

@@ -6,6 +6,7 @@ import { GameItem } from "./items/GameItem";
 import { debounce } from "lodash";
 import { Overlay } from "./Overlay";
 import { MiniGame } from "./minigames/MiniGame";
+import { GameEvent } from "./GameEvent";
 
 export class InventoryController {
   private playerInventoryView: InventoryView;
@@ -77,7 +78,7 @@ export class InventoryController {
     screen.drawText(item.getName(), textCoord, style);
   }
 
-  handleMouseEvent(type: string, coord: Coord, wheelDelta?: Coord): boolean | undefined {
+  handleMouseEvent({ type, coord }: GameEvent): boolean | undefined {
     switch (type) {
       case "click":
         return this.handleClick(coord);
@@ -170,7 +171,7 @@ export class InventoryController {
         // A minigame is used for combining
         this.miniGame = combinedItems;
         // Ensure we start minigame with current mouse coordinate
-        this.miniGame.handleMouseEvent("mousemove", this.mouseCoord);
+        this.miniGame.handleMouseEvent({ type: "mousemove", coord: this.mouseCoord });
       }
     }
   }

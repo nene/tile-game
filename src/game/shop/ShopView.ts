@@ -1,4 +1,5 @@
-import { Coord, coordAdd, coordSub, Rect, rectGrow } from "../Coord";
+import { coordAdd, coordSub, Rect, rectGrow } from "../Coord";
+import { GameEvent } from "../GameEvent";
 import { BeerBottle } from "../items/BeerBottle";
 import { PixelScreen } from "../PixelScreen";
 import { drawInset, drawUpset, UI_BG_COLOR, UI_SHADOW_COLOR } from "../ui-utils";
@@ -25,8 +26,8 @@ export class ShopView {
     });
   }
 
-  handleMouseEvent(type: string, coord: Coord, wheelDelta?: Coord): boolean | undefined {
-    return this.scrollView.handleMouseEvent(type, coord, wheelDelta);
+  handleMouseEvent(event: GameEvent): boolean | undefined {
+    return this.scrollView.handleMouseEvent(event);
   }
 
   paint(screen: PixelScreen) {

@@ -1,4 +1,5 @@
 import { Coord, coordAdd, coordConstrain, coordDiv, coordSub, isCoordInRect, Rect } from "../Coord";
+import { GameEvent } from "../GameEvent";
 import { PatternLibrary } from "../PatternLibrary";
 import { PixelScreen } from "../PixelScreen";
 import { SpriteLibrary } from "../SpriteLibrary";
@@ -37,19 +38,19 @@ export class ScrollBar {
     this.bgPattern = PatternLibrary.get("scroll-bar", SPRITE_BG);
   }
 
-  handleMouseEvent(type: string, coord: Coord, wheelDelta?: Coord) {
-    switch (type) {
+  handleMouseEvent(event: GameEvent) {
+    switch (event.type) {
       case "mousedown":
-        if (isCoordInRect(coord, this.buttonCoords.up)) {
+        if (isCoordInRect(event.coord, this.buttonCoords.up)) {
           this.buttonPressed.up = true;
           this.sliderPos = Math.max(0, this.sliderPos - 1);
         }
-        else if (isCoordInRect(coord, this.buttonCoords.down)) {
+        else if (isCoordInRect(event.coord, this.buttonCoords.down)) {
           this.buttonPressed.down = true;
           this.sliderPos = Math.min(this.maxSliderPos, this.sliderPos + 1);
         }
-        else if (isCoordInRect(coord, this.sliderRect())) {
-          this.sliderGrabbed = coordSub(coord, [0, this.sliderPos]);
+        else if (isCoordInRect(event.coord, this.sliderRect())) {
+          this.sliderGrabbed = coordSub(event.coord, [0, this.sliderPos]);
         }
         break;
       case "mouseup":
@@ -59,12 +60,12 @@ export class ScrollBar {
         break;
       case "mousemove":
         if (this.sliderGrabbed) {
-          this.sliderPos = coordConstrain(coordSub(coord, this.sliderGrabbed), { coord: [0, 0], size: [8, this.maxSliderPos] })[1];
+          this.sliderPos = coordConstrain(coordSub(event.coord, this.sliderGrabbed), { coord: [0, 0], size: [8, this.maxSliderPos] })[1];
         }
         break;
       case "wheel":
-        if (wheelDelta && isCoordInRect(coord, this.scrollArea)) {
-          this.sliderPos = coordConstrain(coordAdd([0, this.sliderPos], coordDiv(wheelDelta, [16, 16])), { coord: [0, 0], size: [8, this.maxSliderPos] })[1];
+        if (isCoordInRect(event.coord, this.scrollArea)) {
+          this.sliderPos = coordConstrain(coordAdd([0, this.sliderPos], coordDiv(event.wheelDelta, [16, 16])), { coord: [0, 0], size: [8, this.maxSliderPos] })[1];
         }
         break;
     }

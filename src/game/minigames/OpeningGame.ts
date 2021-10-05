@@ -8,6 +8,7 @@ import { SpriteLibrary } from "../SpriteLibrary";
 import { SpriteSheet } from "../SpriteSheet";
 import { MiniGame } from "./MiniGame";
 import SimplexNoise from "simplex-noise";
+import { GameEvent } from "../GameEvent";
 
 enum CaptureStatus {
   miss = 0,
@@ -70,7 +71,7 @@ export class OpeningGame implements MiniGame {
     screen.drawSprite(this.openerSprite, this.openerCoord);
   }
 
-  handleMouseEvent(type: string, coord: Coord): boolean | undefined {
+  handleMouseEvent({ type, coord }: GameEvent): boolean | undefined {
     switch (type) {
       case "click": return this.handleClick();
       case "mousemove": this.handleMouseMove(coord); break;

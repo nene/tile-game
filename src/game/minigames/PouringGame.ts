@@ -1,5 +1,6 @@
 import SimplexNoise from "simplex-noise";
 import { Coord, coordAdd, coordDiv, coordMul, coordSub, isCoordInRect, Rect, tileToScreenCoord } from "../Coord";
+import { GameEvent } from "../GameEvent";
 import { BeerBottle } from "../items/BeerBottle";
 import { BeerGlass, BeerLevel } from "../items/BeerGlass";
 import { PixelScreen } from "../PixelScreen";
@@ -120,7 +121,7 @@ export class PouringGame implements MiniGame {
     return coordMul([x, y], BOTTLE_MAX_MOVEMENT).map(Math.floor) as Coord;
   }
 
-  handleMouseEvent(type: string, coord: Coord): boolean | undefined {
+  handleMouseEvent({ type, coord }: GameEvent): boolean | undefined {
     switch (type) {
       case "click": return this.handleClick();
       case "mousemove": this.bottleCoord = coord; break;

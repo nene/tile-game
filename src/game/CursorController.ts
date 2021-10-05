@@ -2,6 +2,7 @@ import { PixelScreen } from "./PixelScreen";
 import { SpriteLibrary } from "./SpriteLibrary";
 import { Coord } from "./Coord";
 import { Sprite } from "./Sprite";
+import { GameEvent } from "./GameEvent";
 
 export class CursorController {
   private mouseCoord: Coord = [-16, -16];
@@ -15,9 +16,9 @@ export class CursorController {
     screen.drawSprite(this.cursor, this.mouseCoord);
   }
 
-  handleMouseEvent(type: string, screenCoord: Coord, wheelDelta?: Coord): boolean | undefined {
+  handleMouseEvent({ type, coord }: GameEvent): boolean | undefined {
     if (type === "mousemove") {
-      this.mouseCoord = screenCoord;
+      this.mouseCoord = coord;
     }
     return undefined;
   }

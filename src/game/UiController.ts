@@ -1,6 +1,5 @@
 import { Inventory } from "./Inventory";
 import { PixelScreen } from "./PixelScreen";
-import { Coord } from "./Coord";
 import { GameItem } from "./items/GameItem";
 import { InventoryController } from "./InventoryController";
 import { Dialog } from "./Dialog";
@@ -12,6 +11,7 @@ import { ShopView } from "./shop/ShopView";
 import { Shop } from "./shop/Shop";
 import { BeerBottle } from "./items/BeerBottle";
 import { getBeer } from "./items/Beer";
+import { GameEvent } from "./GameEvent";
 
 export class UiController {
   private inventoryController: InventoryController;
@@ -81,21 +81,21 @@ export class UiController {
     return !this.inventoryController.getMiniGame();
   }
 
-  handleMouseEvent(type: string, coord: Coord, wheelDelta?: Coord): boolean | undefined {
+  handleMouseEvent(event: GameEvent): boolean | undefined {
     let stopPropagation: boolean | undefined = undefined;
-    stopPropagation = stopPropagation || this.shopView.handleMouseEvent(type, coord, wheelDelta);
-    stopPropagation = stopPropagation || this.getMiniGame()?.handleMouseEvent(type, coord, wheelDelta);
-    stopPropagation = stopPropagation || this.cursorController.handleMouseEvent(type, coord, wheelDelta);
-    stopPropagation = stopPropagation || this.handleDialogClose(type, coord, wheelDelta);
-    stopPropagation = stopPropagation || this.inventoryController.handleMouseEvent(type, coord, wheelDelta);
+    stopPropagation = stopPropagation || this.shopView.handleMouseEvent(event);
+    stopPropagation = stopPropagation || this.getMiniGame()?.handleMouseEvent(event);
+    stopPropagation = stopPropagation || this.cursorController.handleMouseEvent(event);
+    stopPropagation = stopPropagation || this.handleDialogClose(event);
+    stopPropagation = stopPropagation || this.inventoryController.handleMouseEvent(event);
     if (stopPropagation) {
       return true;
     }
   }
 
-  private handleDialogClose(type: string, coord: Coord, wheelDelta?: Coord): boolean | undefined {
-    if (this.dialog && type === "click") {
-      if (this.dialog.isCoordInView(coord)) {
+  private handleDialogClose(event: GameEvent): boolean | undefined {
+    if (this.dialog && event.type === "click") {
+      if (this.dialog.isCoordInView(event.coord)) {
         this.dialog = undefined; // Close the dialog
       }
       return true;
