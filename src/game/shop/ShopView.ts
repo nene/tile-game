@@ -7,6 +7,7 @@ import { ScrollView } from "./ScrollView";
 import { Shop } from "../inventory/Shop";
 import { ShopItemRenderer } from "./ShopItemRenderer";
 import { InventoryView } from "../inventory/InventoryView";
+import { Wallet } from "../Wallet";
 
 export class ShopView implements InventoryView {
   private rect: Rect = { coord: [64, 16], size: [192, 108] };
@@ -14,8 +15,8 @@ export class ShopView implements InventoryView {
   private shopItemRenderer: ShopItemRenderer;
   private scrollView: ScrollView<BeerBottle>;
 
-  constructor(shop: Shop) {
-    this.shopItemRenderer = new ShopItemRenderer();
+  constructor(shop: Shop, wallet: Wallet) {
+    this.shopItemRenderer = new ShopItemRenderer(wallet);
     this.scrollView = new ScrollView({
       items: shop.allItems(),
       rect: rectGrow(this.shopListRect(), [-1, -1]),
