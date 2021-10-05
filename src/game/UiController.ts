@@ -6,7 +6,7 @@ import { Dialog } from "./Dialog";
 import { Overlay } from "./Overlay";
 import { CursorController } from "./CursorController";
 import { MiniGame } from "./minigames/MiniGame";
-import { Wallet } from "./Wallet";
+import { WalletView } from "./WalletView";
 import { ShopView } from "./shop/ShopView";
 import { Shop } from "./shop/Shop";
 import { BeerBottle } from "./items/BeerBottle";
@@ -17,7 +17,7 @@ export class UiController {
   private inventoryController: InventoryController;
   private cursorController: CursorController;
   private dialog?: Dialog;
-  private wallet = new Wallet(112);
+  private wallet = new WalletView(112);
   private shopView = new ShopView(new Shop([
     new BeerBottle(getBeer("alexander")),
     new BeerBottle(getBeer("pilsner")),

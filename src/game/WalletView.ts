@@ -2,7 +2,7 @@ import { PixelScreen } from "./PixelScreen";
 import { Sprite } from "./Sprite";
 import { SpriteLibrary } from "./SpriteLibrary";
 
-export class Wallet {
+export class WalletView {
   private bg: Sprite;
 
   constructor(private money: number) {
