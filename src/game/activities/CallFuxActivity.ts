@@ -39,9 +39,13 @@ export class CallFuxActivity implements Activity {
   }
 
   interact(ui: UiController) {
-    this.expectedBeer = this.character.favoriteBeers[0];
+    this.expectedBeer = this.chooseBeer(this.character.favoriteBeers);
     ui.showDialog(new Dialog(this.character, `Hea rebane,\nPalun too mulle üks ${this.expectedBeer.name}.`));
     ui.giveMoney(this.expectedBeer.price);
+  }
+
+  private chooseBeer(beers: Beer[]): Beer {
+    return beers[Math.floor(Math.random() * beers.length)];
   }
 
   nextActivity() {

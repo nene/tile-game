@@ -8,6 +8,7 @@ export interface Character {
   startCoord: Coord;
   chairIndex: number;
   favoriteBeers: Beer[];
+  hatedBeers?: Beer[];
 }
 
 const charDef = (o: Character) => o;
@@ -18,21 +19,24 @@ const characterDefs = {
     spriteSet: "cfe-ksv-1",
     startCoord: [150, 150],
     chairIndex: 0,
-    favoriteBeers: [getBeer("bock")],
+    favoriteBeers: [getBeer("bock"), getBeer("pilsner")],
+    hatedBeers: [getBeer("limonaad"), getBeer("paulaner"), getBeer("porter")],
   }),
   "sass": charDef({
     name: "vil! Aleksander Popov",
     spriteSet: "cfe-ksv-2",
     startCoord: [200, 80],
     chairIndex: 1,
-    favoriteBeers: [getBeer("alexander")],
+    favoriteBeers: [getBeer("alexander"), getBeer("tommu-hiid")],
+    hatedBeers: [getBeer("porter"), getBeer("limonaad")],
   }),
   "pikmets": charDef({
     name: "bvil! Richard Pikmets",
     spriteSet: "cfe-ksv-3",
     startCoord: [30, 240],
     chairIndex: 2,
-    favoriteBeers: [getBeer("special")],
+    favoriteBeers: [getBeer("special"), getBeer("kriek")],
+    hatedBeers: [getBeer("alexander"), getBeer("pilsner")],
   }),
 };
 
