@@ -6,12 +6,13 @@ import { Character } from "../npc/Character";
 import { UiController } from "../UiController";
 import { Dialog } from "../Dialog";
 import { WaitingBeerActivity } from "./WaitingBeerActivity";
+import { Beer } from "../items/Beer";
 
 export class CallFuxActivity implements Activity {
   private counter = 0;
   private sprite: Sprite;
   private calloutSprite: Sprite;
-  private finished = false;
+  private expectedBeer?: Beer;
 
   constructor(private character: Character) {
     this.sprite = SpriteLibrary.get(character.spriteSet).getSprite([0, 0]);
@@ -34,18 +35,18 @@ export class CallFuxActivity implements Activity {
   }
 
   isFinished() {
-    return this.finished;
+    return Boolean(this.expectedBeer);
   }
 
   interact(ui: UiController) {
-    ui.showDialog(new Dialog(this.character, "Hea rebane,\nPalun too mulle shoppen õlut."));
-    ui.giveMoney(3);
-    this.finished = true;
+    this.expectedBeer = this.character.favoriteBeers[0];
+    ui.showDialog(new Dialog(this.character, `Hea rebane,\nPalun too mulle üks ${this.expectedBeer.name}.`));
+    ui.giveMoney(this.expectedBeer.price);
   }
 
   nextActivity() {
-    if (this.finished) {
-      return new WaitingBeerActivity(this.character);
+    if (this.expectedBeer) {
+      return new WaitingBeerActivity(this.character, this.expectedBeer);
     }
   }
 }
