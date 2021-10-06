@@ -10,36 +10,24 @@ import { DrinkActivity } from "./activities/DrinkActivity";
 import { UiController } from "./UiController";
 import { BeerGlass } from "./items/BeerGlass";
 import { Dialog } from "./Dialog";
-
-export enum BurshType {
-  gray = "cfe-ksv-1",
-  brown = "cfe-ksv-2",
-  blue = "cfe-ksv-3",
-}
-
-interface BurshConfig {
-  type: BurshType;
-  name: string;
-}
+import { Character } from "./npc/Character";
 
 export class Bursh implements GameObject {
-  private type: BurshType;
-  private name: string;
+  private coord: Coord;
   private activities: Activity[] = [];
   private sprites: Sprite[] = [];
 
-  constructor(private coord: Coord, cfg: BurshConfig) {
-    this.type = cfg.type;
-    this.name = cfg.name;
+  constructor(private character: Character) {
+    this.coord = character.startCoord;
   }
 
   getName() {
-    return this.name;
+    return this.character.name;
   }
 
   moveTo(destination: Coord) {
-    this.activities.push(new MoveActivity(this.coord, destination, this.type));
-    this.activities.push(new CallFuxActivity(this.type));
+    this.activities.push(new MoveActivity(this.coord, destination, this.character));
+    this.activities.push(new CallFuxActivity(this.character));
   }
 
   tick(world: GameWorld) {
@@ -87,7 +75,7 @@ export class Bursh implements GameObject {
     const item = uiController.getSelectedItem();
     if (item instanceof BeerGlass) {
       uiController.removeSelectedItem();
-      this.activities.unshift(new DrinkActivity(item, this.type));
+      this.activities.unshift(new DrinkActivity(item, this.character));
     } else {
       uiController.showDialog(new Dialog(this, "Tere, uus rebane!\n\nKüll on tore, et sa meiega liitusid."));
     }

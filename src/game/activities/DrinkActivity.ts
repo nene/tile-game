@@ -2,8 +2,8 @@ import { Activity, ActivityUpdates } from "./Activity";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { BeerGlass, BeerLevel } from "../items/BeerGlass";
-import { BurshType } from "../Bursh";
 import { coordAdd } from "../Coord";
+import { Character } from "../npc/Character";
 
 export class DrinkActivity implements Activity {
   private ticks = 0;
@@ -11,9 +11,9 @@ export class DrinkActivity implements Activity {
   private sprite: Sprite;
   private handSprite: Sprite;
 
-  constructor(private beer: BeerGlass, type: BurshType) {
-    this.sprite = SpriteLibrary.get(type).getSprite([1, 0]);
-    this.handSprite = SpriteLibrary.get(type).getSprite([2, 0]);
+  constructor(private beer: BeerGlass, character: Character) {
+    this.sprite = SpriteLibrary.get(character.spriteSet).getSprite([1, 0]);
+    this.handSprite = SpriteLibrary.get(character.spriteSet).getSprite([2, 0]);
   }
 
   tick(): ActivityUpdates {
