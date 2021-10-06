@@ -9,7 +9,7 @@ import { Overlay } from "./Overlay";
 import { MiniGame } from "./minigames/MiniGame";
 import { GameEvent } from "./GameEvent";
 import { Shop } from "./inventory/Shop";
-import { ShopView } from "./shop/ShopView";
+import { ShopView } from "./inventory/ShopView";
 import { Wallet } from "./Wallet";
 
 export class InventoryController {

@@ -3,10 +3,10 @@ import { GameEvent } from "../GameEvent";
 import { BeerBottle } from "../items/BeerBottle";
 import { PixelScreen } from "../PixelScreen";
 import { drawInset, drawUpset, UI_BG_COLOR, UI_SHADOW_COLOR } from "../ui-utils";
-import { ScrollView } from "./ScrollView";
-import { Shop } from "../inventory/Shop";
+import { ScrollView } from "../ui/ScrollView";
+import { Shop } from "./Shop";
 import { ShopItemRenderer } from "./ShopItemRenderer";
-import { InventoryView } from "../inventory/InventoryView";
+import { InventoryView } from "./InventoryView";
 import { Wallet } from "../Wallet";
 
 export class ShopView implements InventoryView {
