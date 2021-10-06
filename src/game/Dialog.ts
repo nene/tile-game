@@ -1,34 +1,33 @@
 import { Bursh } from "./Bursh";
 import { Coord, coordAdd, isCoordInRect, Rect, rectGrow } from "./Coord";
 import { PixelScreen } from "./PixelScreen";
+import { UI_SHADOW_COLOR } from "./ui/ui-utils";
+import { Window } from "./ui/Window";
 
 export class Dialog {
   private rect: Rect = { coord: [60, 100], size: [200, 100] };
+  private window: Window;
 
-  constructor(private person: Bursh, private text: string) { }
+  constructor(private person: Bursh, private text: string) {
+    this.window = new Window({
+      headline: {
+        title: person.getName() + ":",
+        description: "",
+      },
+      rect: this.rect,
+    });
+  }
 
   paint(screen: PixelScreen) {
-    this.drawContainer(screen);
-    this.drawTitle(this.person.getName() + ":", screen);
+    this.window.paint(screen);
     this.drawContent(this.text, screen);
   }
 
-  private drawContainer(screen: PixelScreen) {
-    screen.drawRect(rectGrow(this.rect, [1, 1]), "#3e2821");
-    screen.drawRect(this.rect, "#c8b997");
-  }
-
-  private drawTitle(text: string, screen: PixelScreen) {
-    const [, textHeight] = screen.measureText(text);
-    screen.drawRect({ coord: this.rect.coord, size: [this.rect.size[0], textHeight + 4] }, "#8f563b");
-    screen.drawText(text, coordAdd(this.rect.coord, [2, 2]), { color: "#3e2821" });
-  }
-
   private drawContent(text: string, screen: PixelScreen) {
-    const start: Coord = coordAdd(this.rect.coord, [2, 16]);
+    const start: Coord = rectGrow(this.window.contentAreaRect(), [-2, -2]).coord;
     const lineHeight = 12;
     text.split("\n").forEach((line, i) => {
-      screen.drawText(line, coordAdd(start, [0, lineHeight * i]), { color: "#8f563b" });
+      screen.drawText(line, coordAdd(start, [0, lineHeight * i]), { color: "#000", shadowColor: UI_SHADOW_COLOR });
     });
   }
 
