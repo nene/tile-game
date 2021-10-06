@@ -3,6 +3,7 @@ import { PouringGame } from "../minigames/PouringGame";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { SpriteSheet } from "../sprites/SpriteSheet";
+import { Beer } from "./Beer";
 import { BeerBottle } from "./BeerBottle";
 import { GameItem } from "./GameItem";
 
@@ -17,6 +18,7 @@ export enum BeerLevel {
 export class BeerGlass implements GameItem {
   private spriteSheet: SpriteSheet;
   private smallSpriteSheet: SpriteSheet;
+  private beer?: Beer;
 
   constructor(private level: BeerLevel) {
     this.spriteSheet = SpriteLibrary.get("beer-glass-lg");
@@ -40,7 +42,8 @@ export class BeerGlass implements GameItem {
     }
   }
 
-  fill(level: BeerLevel) {
+  fill(beer: Beer, level: BeerLevel) {
+    this.beer = beer;
     this.level = level;
   }
 
@@ -52,6 +55,10 @@ export class BeerGlass implements GameItem {
 
   getLevel(): BeerLevel {
     return this.level;
+  }
+
+  getBeer(): Beer | undefined {
+    return this.beer;
   }
 
   getSprite(): Sprite {

@@ -60,7 +60,7 @@ export class PouringGame implements MiniGame {
     }
     if (this.isFinished()) {
       this.bottle.empty();
-      this.glass.fill(this.getBeerLevel());
+      this.glass.fill(this.bottle.getBeer(), this.getBeerLevel());
     }
   }
 
