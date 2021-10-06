@@ -2,7 +2,7 @@ import { Coord, coordAdd, coordSub, isCoordInRect, Rect, rectGrow } from "../Coo
 import { GameEvent } from "../GameEvent";
 import { BeerBottle } from "../items/BeerBottle";
 import { PixelScreen } from "../PixelScreen";
-import { drawInset, drawUpset, UI_BG_COLOR, UI_SHADOW_COLOR } from "../ui-utils";
+import { drawInset, drawUpset, UI_BG_COLOR, UI_SHADOW_COLOR } from "../ui/ui-utils";
 import { ScrollView } from "../ui/ScrollView";
 import { Shop } from "./Shop";
 import { ShopItemRenderer } from "./ShopItemRenderer";

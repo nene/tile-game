@@ -5,7 +5,7 @@ import { PixelScreen } from "../PixelScreen";
 import { Sprite } from "../Sprite";
 import { SpriteLibrary } from "../SpriteLibrary";
 import { SpriteSheet } from "../SpriteSheet";
-import { UI_BG_COLOR, UI_HIGHLIGHT_COLOR, UI_SHADOW_COLOR } from "../ui-utils";
+import { UI_BG_COLOR, UI_HIGHLIGHT_COLOR, UI_SHADOW_COLOR } from "../ui/ui-utils";
 import { Wallet } from "../Wallet";
 
 const SHOP_ITEM_HIGHLIGHT_COLOR = "#cab59e";

@@ -4,7 +4,7 @@ import { PatternLibrary } from "../PatternLibrary";
 import { PixelScreen } from "../PixelScreen";
 import { SpriteLibrary } from "../SpriteLibrary";
 import { SpriteSheet } from "../SpriteSheet";
-import { drawUpset, UI_BG_COLOR } from "../ui-utils";
+import { drawUpset, UI_BG_COLOR } from "./ui-utils";
 
 const SPRITE_UP: Coord = [0, 0];
 const SPRITE_UP_PRESSED: Coord = [1, 0];

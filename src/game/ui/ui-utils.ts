@@ -1,5 +1,5 @@
-import { coordAdd, Rect } from "./Coord";
-import { PixelScreen } from "./PixelScreen";
+import { coordAdd, Rect } from "../Coord";
+import { PixelScreen } from "../PixelScreen";
 
 export const UI_BG_COLOR = "#b88f61";
 export const UI_SHADOW_COLOR = "#8f563b";
