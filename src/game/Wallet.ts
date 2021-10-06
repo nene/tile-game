@@ -1,3 +1,5 @@
+import { SoundLibrary } from "./SoundLibrary";
+
 export class Wallet {
   constructor(private money: number) { }
 
@@ -11,5 +13,6 @@ export class Wallet {
 
   remove(amount: number) {
     this.money -= amount;
+    SoundLibrary.play("coins");
   }
 }
