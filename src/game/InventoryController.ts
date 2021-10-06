@@ -1,7 +1,7 @@
 import { PixelScreen, TextStyle } from "./PixelScreen";
 import { Inventory, WritableInventory } from "./inventory/Inventory";
 import { InventoryView } from "./inventory/InventoryView";
-import { StorageInventoryView } from "./inventory/StorageInventoryView";
+import { GridInventoryView } from "./inventory/GridInventoryView";
 import { Coord, coordAdd, coordSub, rectGrow } from "./Coord";
 import { GameItem } from "./items/GameItem";
 import { debounce } from "lodash";
@@ -22,7 +22,7 @@ export class InventoryController {
   private miniGame?: MiniGame;
 
   constructor(private playerInventory: WritableInventory, private wallet: Wallet) {
-    this.playerInventoryView = new StorageInventoryView({
+    this.playerInventoryView = new GridInventoryView({
       inventory: playerInventory,
       coord: [107, 200 - 22],
       size: [5, 1],
@@ -42,7 +42,7 @@ export class InventoryController {
     if (inventory instanceof Shop) {
       this.objectInventoryView = new ShopView(inventory, this.wallet);
     } else {
-      this.objectInventoryView = new StorageInventoryView({ inventory, coord: [130, 50], size: [3, 3] });
+      this.objectInventoryView = new GridInventoryView({ inventory, coord: [130, 50], size: [3, 3] });
     }
   }
 

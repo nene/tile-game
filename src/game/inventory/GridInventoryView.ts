@@ -5,20 +5,20 @@ import { PixelScreen } from "../PixelScreen";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { SpriteSheet } from "../sprites/SpriteSheet";
 
-interface StorageInventoryViewCfg {
+interface GridInventoryViewCfg {
   inventory: Inventory;
   size: Coord;
   coord: Coord;
 }
 
-export class StorageInventoryView implements InventoryView {
+export class GridInventoryView implements InventoryView {
   private slotSprites: SpriteSheet;
   private rect: Rect;
   private inventory: Inventory;
   private size: Coord;
   private coord: Coord;
 
-  constructor({ inventory, size, coord }: StorageInventoryViewCfg) {
+  constructor({ inventory, size, coord }: GridInventoryViewCfg) {
     this.inventory = inventory;
     this.size = size;
     this.coord = coord;
