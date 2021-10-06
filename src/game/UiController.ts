@@ -87,7 +87,7 @@ export class UiController {
 
   private handleDialogClose(event: GameEvent): boolean | undefined {
     if (this.dialog && event.type === "click") {
-      if (this.dialog.isCoordInView(event.coord)) {
+      if (!this.dialog.isCoordInView(event.coord)) {
         this.dialog = undefined; // Close the dialog
       }
       return true;
