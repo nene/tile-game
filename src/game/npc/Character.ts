@@ -8,7 +8,7 @@ export interface Character {
   startCoord: Coord;
   chairIndex: number;
   favoriteBeers: Beer[];
-  hatedBeers?: Beer[];
+  hatedBeers: Beer[];
 }
 
 const charDef = (o: Character) => o;
