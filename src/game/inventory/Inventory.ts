@@ -11,4 +11,5 @@ export interface Inventory {
 
 export interface WritableInventory extends Inventory {
   placeAt: (index: number, item: GameItem) => void;
+  isFull: () => boolean;
 }

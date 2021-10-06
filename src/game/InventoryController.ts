@@ -1,5 +1,5 @@
 import { PixelScreen, TextStyle } from "./PixelScreen";
-import { Inventory } from "./inventory/Inventory";
+import { Inventory, WritableInventory } from "./inventory/Inventory";
 import { InventoryView } from "./inventory/InventoryView";
 import { StorageInventoryView } from "./inventory/StorageInventoryView";
 import { Coord, coordAdd, coordSub, rectGrow } from "./Coord";
@@ -21,7 +21,7 @@ export class InventoryController {
   private hoveredItem?: GameItem;
   private miniGame?: MiniGame;
 
-  constructor(private playerInventory: Inventory, private wallet: Wallet) {
+  constructor(private playerInventory: WritableInventory, private wallet: Wallet) {
     this.playerInventoryView = new StorageInventoryView({
       inventory: playerInventory,
       coord: [107, 200 - 22],
@@ -156,8 +156,11 @@ export class InventoryController {
 
     const item = inventory.itemAt(slotIndex);
     if (item && !this.selectedItem) {
-      // Take item from inventory
-      this.selectedItem = inventory.takeAt(slotIndex, this.wallet);
+      if (inventory === this.playerInventory || !this.playerInventory.isFull()) {
+        // Take item from inventory
+        // (only take from non-player-inventory when player-inventory has some room)
+        this.selectedItem = inventory.takeAt(slotIndex, this.wallet);
+      }
     }
     else if (!item && this.selectedItem && inventory.isWritable()) {
       // Place item at hand to inventory
