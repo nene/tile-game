@@ -1,7 +1,7 @@
 import { coordAdd } from "../Coord";
 import { Activity, ActivityUpdates } from "./Activity";
-import { Sprite } from "../Sprite";
-import { SpriteLibrary } from "../SpriteLibrary";
+import { Sprite } from "../sprites/Sprite";
+import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { BurshType } from "../Bursh";
 
 export class CallFuxActivity implements Activity {

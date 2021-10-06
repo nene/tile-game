@@ -2,8 +2,8 @@ import { Coord, coordAdd, coordMul, isCoordInRect, Rect } from "../Coord";
 import { Inventory } from "./Inventory";
 import { InventoryView } from "./InventoryView";
 import { PixelScreen } from "../PixelScreen";
-import { SpriteLibrary } from "../SpriteLibrary";
-import { SpriteSheet } from "../SpriteSheet";
+import { SpriteLibrary } from "../sprites/SpriteLibrary";
+import { SpriteSheet } from "../sprites/SpriteSheet";
 
 interface StorageInventoryViewCfg {
   inventory: Inventory;

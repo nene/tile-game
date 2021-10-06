@@ -2,8 +2,8 @@ import { Coord, coordAdd, coordConstrain, coordSub, isCoordInRect, Rect } from "
 import { GameEvent } from "../GameEvent";
 import { PatternLibrary } from "../PatternLibrary";
 import { PixelScreen } from "../PixelScreen";
-import { SpriteLibrary } from "../SpriteLibrary";
-import { SpriteSheet } from "../SpriteSheet";
+import { SpriteLibrary } from "../sprites/SpriteLibrary";
+import { SpriteSheet } from "../sprites/SpriteSheet";
 import { drawUpset, UI_BG_COLOR } from "./ui-utils";
 
 const SPRITE_UP: Coord = [0, 0];

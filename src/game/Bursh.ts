@@ -5,7 +5,7 @@ import { GameWorld } from "./GameWorld";
 import { Activity } from "./activities/Activity";
 import { MoveActivity } from "./activities/MoveActivity";
 import { PixelScreen } from "./PixelScreen";
-import { Sprite } from "./Sprite";
+import { Sprite } from "./sprites/Sprite";
 import { DrinkActivity } from "./activities/DrinkActivity";
 import { UiController } from "./UiController";
 import { BeerGlass } from "./items/BeerGlass";

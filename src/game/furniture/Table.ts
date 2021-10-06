@@ -1,8 +1,8 @@
 import { Coord, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
 import { PixelScreen } from "../PixelScreen";
-import { Sprite } from "../Sprite";
-import { SpriteLibrary } from "../SpriteLibrary";
+import { Sprite } from "../sprites/Sprite";
+import { SpriteLibrary } from "../sprites/SpriteLibrary";
 
 export class Table implements GameObject {
   private sprite: Sprite;

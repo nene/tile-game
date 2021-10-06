@@ -1,6 +1,6 @@
 import { PixelScreen } from "./PixelScreen";
-import { Sprite } from "./Sprite";
-import { SpriteLibrary } from "./SpriteLibrary";
+import { Sprite } from "./sprites/Sprite";
+import { SpriteLibrary } from "./sprites/SpriteLibrary";
 import { Wallet } from "./Wallet";
 
 export class WalletView {

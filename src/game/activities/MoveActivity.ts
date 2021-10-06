@@ -1,8 +1,8 @@
 import { BurshType } from "../Bursh";
 import { Coord, coordEq, coordMul, coordUnit, coordSub, coordAdd } from "../Coord";
 import { GameWorld } from "../GameWorld";
-import { SpriteAnimation } from "../SpriteAnimation";
-import { SpriteLibrary } from "../SpriteLibrary";
+import { SpriteAnimation } from "../sprites/SpriteAnimation";
+import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { Activity, ActivityUpdates } from "./Activity";
 
 export class MoveActivity implements Activity {

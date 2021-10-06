@@ -1,6 +1,6 @@
 import { Activity, ActivityUpdates } from "./Activity";
-import { Sprite } from "../Sprite";
-import { SpriteLibrary } from "../SpriteLibrary";
+import { Sprite } from "../sprites/Sprite";
+import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { BeerGlass, BeerLevel } from "../items/BeerGlass";
 import { BurshType } from "../Bursh";
 import { coordAdd } from "../Coord";

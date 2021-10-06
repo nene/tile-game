@@ -1,6 +1,6 @@
 import { Coord, coordAdd, coordConstrain, coordDiv, coordSub, Rect, rectOverlaps } from "./Coord";
 import { GameWorld } from "./GameWorld";
-import { Sprite } from "./Sprite";
+import { Sprite } from "./sprites/Sprite";
 
 export interface PixelScreenOptions {
   size: Coord;

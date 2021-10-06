@@ -1,7 +1,7 @@
 import { PixelScreen } from "./PixelScreen";
-import { SpriteLibrary } from "./SpriteLibrary";
+import { SpriteLibrary } from "./sprites/SpriteLibrary";
 import { Coord } from "./Coord";
-import { Sprite } from "./Sprite";
+import { Sprite } from "./sprites/Sprite";
 import { GameEvent } from "./GameEvent";
 
 export class CursorController {

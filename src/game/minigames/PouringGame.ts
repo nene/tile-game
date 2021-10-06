@@ -5,9 +5,9 @@ import { BeerBottle } from "../items/BeerBottle";
 import { BeerGlass, BeerLevel } from "../items/BeerGlass";
 import { PixelScreen } from "../PixelScreen";
 import { SoundLibrary } from "../SoundLibrary";
-import { Sprite } from "../Sprite";
-import { SpriteAnimation } from "../SpriteAnimation";
-import { SpriteLibrary } from "../SpriteLibrary";
+import { Sprite } from "../sprites/Sprite";
+import { SpriteAnimation } from "../sprites/SpriteAnimation";
+import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { MiniGame } from "./MiniGame";
 import { PouringLogic } from "./PouringLogic";
 

@@ -1,8 +1,8 @@
 import { Coord, tileToScreenCoord } from "./Coord";
 import { GameLocationBackground } from "./GameLocation";
 import { PixelScreen } from "./PixelScreen";
-import { Sprite } from "./Sprite";
-import { SpriteLibrary } from "./SpriteLibrary";
+import { Sprite } from "./sprites/Sprite";
+import { SpriteLibrary } from "./sprites/SpriteLibrary";
 
 export class CfeBackground implements GameLocationBackground {
   private floorSprite: Sprite;

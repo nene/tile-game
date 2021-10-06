@@ -1,6 +1,6 @@
 import { Coord } from "../Coord";
 import { GameWorld } from "../GameWorld";
-import { Sprite } from "../Sprite";
+import { Sprite } from "../sprites/Sprite";
 
 export interface ActivityUpdates {
   finished?: boolean;

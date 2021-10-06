@@ -1,6 +1,6 @@
 import { Coord } from "./Coord";
 import { createOffScreenCanvas } from "./createOffScreenCanvas";
-import { SpriteLibrary, SpriteName } from "./SpriteLibrary";
+import { SpriteLibrary, SpriteName } from "./sprites/SpriteLibrary";
 
 export class PatternLibrary {
   private static patterns: Record<string, CanvasPattern> = {};

@@ -1,9 +1,9 @@
 import { PixelScreen } from "./PixelScreen";
 import { GameObject } from "./GameObject";
 import { Coord, coordAdd, coordConstrain, coordSub, Rect, rectTranslate } from "./Coord";
-import { SpriteAnimation } from "./SpriteAnimation";
+import { SpriteAnimation } from "./sprites/SpriteAnimation";
 import { GameWorld } from "./GameWorld";
-import { SpriteLibrary } from "./SpriteLibrary";
+import { SpriteLibrary } from "./sprites/SpriteLibrary";
 import { StorageInventory } from "./inventory/StorageInventory";
 import { BottleOpener } from "./items/BottleOpener";
 

@@ -2,9 +2,9 @@ import { Coord, coordAdd, Rect } from "../Coord";
 import { Beer } from "../items/Beer";
 import { BeerBottle } from "../items/BeerBottle";
 import { PixelScreen } from "../PixelScreen";
-import { Sprite } from "../Sprite";
-import { SpriteLibrary } from "../SpriteLibrary";
-import { SpriteSheet } from "../SpriteSheet";
+import { Sprite } from "../sprites/Sprite";
+import { SpriteLibrary } from "../sprites/SpriteLibrary";
+import { SpriteSheet } from "../sprites/SpriteSheet";
 import { UI_BG_COLOR, UI_HIGHLIGHT_COLOR, UI_SHADOW_COLOR } from "../ui/ui-utils";
 import { Wallet } from "../Wallet";
 

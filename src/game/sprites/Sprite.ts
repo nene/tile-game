@@ -1,4 +1,4 @@
-import { Coord } from "./Coord";
+import { Coord } from "../Coord";
 
 export interface Sprite {
   image: HTMLImageElement,

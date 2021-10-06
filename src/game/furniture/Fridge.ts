@@ -5,8 +5,8 @@ import { getBeer } from "../items/Beer";
 import { BeerBottle } from "../items/BeerBottle";
 import { PixelScreen } from "../PixelScreen";
 import { SoundLibrary } from "../SoundLibrary";
-import { Sprite } from "../Sprite";
-import { SpriteLibrary } from "../SpriteLibrary";
+import { Sprite } from "../sprites/Sprite";
+import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { UiController } from "../UiController";
 
 export class Fridge implements GameObject {

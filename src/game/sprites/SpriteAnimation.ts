@@ -1,4 +1,4 @@
-import { Coord } from "./Coord";
+import { Coord } from "../Coord";
 import { Sprite } from "./Sprite";
 import { SpriteSheet } from "./SpriteSheet";
 

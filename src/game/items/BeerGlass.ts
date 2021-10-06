@@ -1,8 +1,8 @@
 import { MiniGame } from "../minigames/MiniGame";
 import { PouringGame } from "../minigames/PouringGame";
-import { Sprite } from "../Sprite";
-import { SpriteLibrary } from "../SpriteLibrary";
-import { SpriteSheet } from "../SpriteSheet";
+import { Sprite } from "../sprites/Sprite";
+import { SpriteLibrary } from "../sprites/SpriteLibrary";
+import { SpriteSheet } from "../sprites/SpriteSheet";
 import { BeerBottle } from "./BeerBottle";
 import { GameItem } from "./GameItem";
 

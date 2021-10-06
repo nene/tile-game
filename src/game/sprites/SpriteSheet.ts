@@ -1,4 +1,4 @@
-import { Coord, coordMul } from "./Coord";
+import { Coord, coordMul } from "../Coord";
 import { Sprite } from "./Sprite";
 
 export interface SpriteSheetConfig {

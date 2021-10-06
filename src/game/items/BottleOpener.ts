@@ -1,7 +1,7 @@
 import { MiniGame } from "../minigames/MiniGame";
 import { OpeningGame } from "../minigames/OpeningGame";
-import { Sprite } from "../Sprite";
-import { SpriteLibrary } from "../SpriteLibrary";
+import { Sprite } from "../sprites/Sprite";
+import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { BeerBottle } from "./BeerBottle";
 import { GameItem } from "./GameItem";
 

@@ -2,7 +2,7 @@ import { PixelScreen, PixelScreenOptions } from "./PixelScreen";
 import { Player } from "./Player";
 import { Background } from "./Background";
 import { GameWorld } from "./GameWorld";
-import { SpriteLibrary } from "./SpriteLibrary";
+import { SpriteLibrary } from "./sprites/SpriteLibrary";
 import { SoundLibrary } from "./SoundLibrary";
 import { CfeLocation } from "./CfeLocation";
 import { Coord, coordAdd, Rect, rectDistance, rectTranslate } from "./Coord";
