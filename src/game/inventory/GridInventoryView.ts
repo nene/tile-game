@@ -75,6 +75,6 @@ export class GridInventoryView implements InventoryView {
   }
 
   private coordToIndex([x, y]: Coord): number {
-    return this.size[1] * y + x;
+    return this.size[0] * y + x;
   }
 }
