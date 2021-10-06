@@ -11,6 +11,7 @@ import { GameEvent } from "./GameEvent";
 import { Wallet } from "./Wallet";
 import { Inventory } from "./inventory/Inventory";
 import { Headline } from "./ui/Window";
+import { Character } from "./npc/Character";
 
 export class UiController {
   private inventoryController: InventoryController;
@@ -97,7 +98,7 @@ export class UiController {
     return this.inventoryController.getMiniGame();
   }
 
-  showDialog(dialog: Dialog) {
-    this.dialog = dialog;
+  showDialog(character: Character, text: string) {
+    this.dialog = new Dialog(character, text);
   }
 }

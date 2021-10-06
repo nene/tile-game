@@ -1,4 +1,3 @@
-import { Dialog } from "../Dialog";
 import { Beer } from "../items/Beer";
 import { BeerBottle } from "../items/BeerBottle";
 import { BeerGlass, BeerLevel } from "../items/BeerGlass";
@@ -28,20 +27,20 @@ export class WaitingBeerActivity implements Activity {
   interact(ui: UiController) {
     const item = ui.getSelectedItem();
     if ((item instanceof BeerBottle || item instanceof BeerGlass) && item.getBeer() !== this.expectedBeer) {
-      ui.showDialog(new Dialog(this.character, `See pole see õlu mis ma palusin.\nToo mulle ${this.expectedBeer.name}.`));
+      ui.showDialog(this.character, `See pole see õlu mis ma palusin.\nToo mulle ${this.expectedBeer.name}.`);
     }
     else if (item instanceof BeerGlass) {
-      ui.showDialog(new Dialog(this.character, this.getThanks(item)));
+      ui.showDialog(this.character, this.getThanks(item));
       if (item.getLevel() > BeerLevel.empty) {
         ui.removeSelectedItem();
         this.receivedBeerGlass = item;
       }
     }
     else if (item instanceof BeerBottle && !item.isOpen()) {
-      ui.showDialog(new Dialog(this.character, "Aitäh.\nTee palun pudel lahti ja vala\nshoppenisse ka."));
+      ui.showDialog(this.character, "Aitäh.\nTee palun pudel lahti ja vala\nshoppenisse ka.");
     }
     else if (item instanceof BeerBottle && item.isOpen()) {
-      ui.showDialog(new Dialog(this.character, "Aitäh.\nVala õlu shoppenisse ka."));
+      ui.showDialog(this.character, "Aitäh.\nVala õlu shoppenisse ka.");
     }
   }
 

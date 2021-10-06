@@ -4,7 +4,6 @@ import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { Character } from "../npc/Character";
 import { UiController } from "../UiController";
-import { Dialog } from "../Dialog";
 import { WaitingBeerActivity } from "./WaitingBeerActivity";
 import { Beer } from "../items/Beer";
 
@@ -40,7 +39,7 @@ export class CallFuxActivity implements Activity {
 
   interact(ui: UiController) {
     this.expectedBeer = this.chooseBeer(this.character.favoriteBeers);
-    ui.showDialog(new Dialog(this.character, `Hea rebane,\nPalun too mulle üks ${this.expectedBeer.name}.`));
+    ui.showDialog(this.character, `Hea rebane,\nPalun too mulle üks ${this.expectedBeer.name}.`);
     ui.giveMoney(this.expectedBeer.price);
   }
 
