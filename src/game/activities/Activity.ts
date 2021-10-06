@@ -10,4 +10,5 @@ export interface ActivityUpdates {
 
 export interface Activity {
   tick: (world: GameWorld) => ActivityUpdates;
+  isFinished: () => boolean;
 }

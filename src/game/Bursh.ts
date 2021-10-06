@@ -1,8 +1,6 @@
-import { CallFuxActivity } from "./activities/CallFuxActivity";
 import { Coord, Rect } from "./Coord";
 import { GameObject } from "./GameObject";
 import { GameWorld } from "./GameWorld";
-import { Activity } from "./activities/Activity";
 import { MoveActivity } from "./activities/MoveActivity";
 import { PixelScreen } from "./PixelScreen";
 import { Sprite } from "./sprites/Sprite";
@@ -11,14 +9,16 @@ import { UiController } from "./UiController";
 import { BeerGlass } from "./items/BeerGlass";
 import { Dialog } from "./Dialog";
 import { Character } from "./npc/Character";
+import { Desires } from "./npc/Desires";
 
 export class Bursh implements GameObject {
   private coord: Coord;
-  private activities: Activity[] = [];
+  private desires: Desires;
   private sprites: Sprite[] = [];
 
   constructor(private character: Character) {
     this.coord = character.startCoord;
+    this.desires = new Desires(character);
   }
 
   getName() {
@@ -26,23 +26,17 @@ export class Bursh implements GameObject {
   }
 
   moveTo(destination: Coord) {
-    this.activities.push(new MoveActivity(this.coord, destination, this.character));
-    this.activities.push(new CallFuxActivity(this.character));
+    this.desires.startActivity(new MoveActivity(this.coord, destination, this.character));
   }
 
   tick(world: GameWorld) {
-    // run activities in queue
-    if (this.activities.length > 0) {
-      const activity = this.activities[0];
-      const updates = activity.tick(world);
-      if (updates.coord) {
-        this.coord = updates.coord;
-      }
-      this.sprites = updates.sprites || [];
-      if (updates.finished) {
-        this.activities.shift();
-      }
+    const activity = this.desires.currentActivity();
+
+    const updates = activity.tick(world);
+    if (updates.coord) {
+      this.coord = updates.coord;
     }
+    this.sprites = updates.sprites || [];
   }
 
   paint(screen: PixelScreen) {
@@ -75,7 +69,8 @@ export class Bursh implements GameObject {
     const item = uiController.getSelectedItem();
     if (item instanceof BeerGlass) {
       uiController.removeSelectedItem();
-      this.activities.unshift(new DrinkActivity(item, this.character));
+      this.desires.finishCurrentActivity();
+      this.desires.startActivity(new DrinkActivity(item, this.character));
     } else {
       uiController.showDialog(new Dialog(this, "Tere, uus rebane!\n\nKüll on tore, et sa meiega liitusid."));
     }

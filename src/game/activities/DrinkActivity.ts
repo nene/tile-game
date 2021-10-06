@@ -27,7 +27,7 @@ export class DrinkActivity implements Activity {
     }
     return {
       sprites: [this.sprite, this.getBeerSprite(), this.getHandSprite()],
-      finished: this.beer.getLevel() === BeerLevel.empty,
+      finished: this.isFinished(),
     };
   }
 
@@ -45,5 +45,9 @@ export class DrinkActivity implements Activity {
     } else {
       return sprite;
     }
+  }
+
+  isFinished() {
+    return this.beer.getLevel() === BeerLevel.empty;
   }
 }

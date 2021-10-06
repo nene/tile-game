@@ -20,7 +20,7 @@ export class CallFuxActivity implements Activity {
     this.counter++;
     return {
       sprites: this.isShouting() ? [this.sprite, this.calloutSprite] : [this.sprite],
-      finished: this.counter > 90,
+      finished: this.isFinished(),
     };
   }
 
@@ -28,5 +28,9 @@ export class CallFuxActivity implements Activity {
   private isShouting(): boolean {
     const currentSecond = Math.floor(this.counter / 10);
     return currentSecond % 2 === 0;
+  }
+
+  isFinished() {
+    return this.counter > 90;
   }
 }
