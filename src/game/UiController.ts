@@ -36,6 +36,10 @@ export class UiController {
     this.inventoryController.showInventory(inventory, headline);
   }
 
+  giveMoney(amount: number) {
+    this.wallet.add(amount);
+  }
+
   tick() {
     this.inventoryController.tick();
   }

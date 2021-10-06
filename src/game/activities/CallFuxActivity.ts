@@ -39,6 +39,7 @@ export class CallFuxActivity implements Activity {
 
   interact(ui: UiController) {
     ui.showDialog(new Dialog(this.character, "Hea rebane,\nPalun too mulle shoppen õlut."));
+    ui.giveMoney(3);
     this.finished = true;
   }
 
