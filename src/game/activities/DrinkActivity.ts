@@ -27,7 +27,6 @@ export class DrinkActivity implements Activity {
     }
     return {
       sprites: [this.sprite, this.getBeerSprite(), this.getHandSprite()],
-      finished: this.isFinished(),
     };
   }
 

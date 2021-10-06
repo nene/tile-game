@@ -23,7 +23,7 @@ export class MoveActivity implements Activity {
 
     if (coordEq(this.coord, this.destination)) {
       this.finished = true;
-      return { finished: true, sprites };
+      return { sprites };
     }
 
     const targetCoord = this.getActivePathStep(world);
@@ -34,7 +34,7 @@ export class MoveActivity implements Activity {
       return { coord: this.coord, sprites };
     }
     this.finished = true;
-    return { finished: true, sprites };
+    return { sprites };
   }
 
   public isFinished() {

@@ -4,7 +4,6 @@ import { Sprite } from "../sprites/Sprite";
 import { UiController } from "../UiController";
 
 export interface ActivityUpdates {
-  finished?: boolean;
   coord?: Coord;
   sprites: Sprite[];
 }

@@ -20,7 +20,6 @@ export class CallFuxActivity implements Activity {
     this.counter++;
     return {
       sprites: this.isShouting() ? [this.sprite, this.calloutSprite] : [this.sprite],
-      finished: this.isFinished(),
     };
   }
 
