@@ -8,6 +8,7 @@ import callout from "./data/callout.png";
 import table from "./data/table.png";
 import fridge from "./data/fridge.png";
 import beerCabinet from "./data/beer-cabinet.png";
+import beerBox from "./data/beer-box.png";
 import slot from "./data/slot.png";
 import scrollBar from "./data/scroll-bar.png";
 import cursor from "./data/cursor.png";
@@ -49,6 +50,7 @@ const imageFiles = {
   'table': spriteDef({ src: table, cfg: { size: [64, 22], colsRows: [1, 1], offset: [0, -6] } }),
   'fridge': spriteDef({ src: fridge, cfg: { size: [16, 45], colsRows: [1, 1], offset: [0, -32] } }),
   'beer-cabinet': spriteDef({ src: beerCabinet, cfg: { size: [32, 45], colsRows: [1, 1], offset: [0, -32] } }),
+  'beer-box': spriteDef({ src: beerBox, cfg: { size: [11, 14], colsRows: [1, 1], offset: [3, -4] } }),
 
   'slot': spriteDef({ src: slot, cfg: { size: [20, 20], colsRows: [2, 1] } }),
   'scroll-bar': spriteDef({ src: scrollBar, cfg: { size: [8, 8], colsRows: [5, 1] } }),

@@ -7,6 +7,7 @@ import { GameLocation } from "./GameLocation";
 import { GameObject } from "./GameObject";
 import { Table } from "./furniture/Table";
 import { Wall } from "./furniture/Wall";
+import { BeerBox } from "./furniture/BeerBox";
 
 const CFE_SIZE: Coord = [21, 16]; // Size in tiles
 
@@ -32,6 +33,8 @@ export class CfeLocation implements GameLocation {
     objects.push(new Fridge(tileToScreenCoord([3, 3])));
     // A storage of beer glasses
     objects.push(new BeerCabinet(tileToScreenCoord([5, 3])));
+    // Place for empty bottles
+    objects.push(new BeerBox(tileToScreenCoord([8, 3])));
 
     return objects;
   }
