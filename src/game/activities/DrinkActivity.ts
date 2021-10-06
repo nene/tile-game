@@ -50,4 +50,6 @@ export class DrinkActivity implements Activity {
   isFinished() {
     return this.beer.getLevel() === BeerLevel.empty;
   }
+
+  interact() { }
 }

@@ -33,4 +33,6 @@ export class CallFuxActivity implements Activity {
   isFinished() {
     return this.counter > 90;
   }
+
+  interact() { }
 }

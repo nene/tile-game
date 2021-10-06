@@ -52,4 +52,6 @@ export class MoveActivity implements Activity {
     }
     return current;
   }
+
+  interact() { }
 }

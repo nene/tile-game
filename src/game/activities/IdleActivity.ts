@@ -17,4 +17,6 @@ export class IdleActivity implements Activity {
   isFinished() {
     return false;
   }
+
+  interact() { }
 }
