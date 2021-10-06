@@ -12,4 +12,5 @@ export interface Activity {
   tick: (world: GameWorld) => ActivityUpdates;
   isFinished: () => boolean;
   interact: (ui: UiController) => void;
+  nextActivity(): Activity | undefined;
 }

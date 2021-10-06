@@ -51,4 +51,8 @@ export class DrinkActivity implements Activity {
   }
 
   interact() { }
+
+  nextActivity() {
+    return undefined;
+  }
 }

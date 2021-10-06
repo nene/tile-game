@@ -3,13 +3,17 @@ import { Activity, ActivityUpdates } from "./Activity";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { Character } from "../npc/Character";
+import { UiController } from "../UiController";
+import { Dialog } from "../Dialog";
+import { WaitingBeerActivity } from "./WaitingBeerActivity";
 
 export class CallFuxActivity implements Activity {
   private counter = 0;
   private sprite: Sprite;
   private calloutSprite: Sprite;
+  private finished = false;
 
-  constructor(character: Character) {
+  constructor(private character: Character) {
     this.sprite = SpriteLibrary.get(character.spriteSet).getSprite([0, 0]);
     this.calloutSprite = SpriteLibrary.get("callout").getSprite([0, 0]);
     // Place above the head
@@ -30,8 +34,17 @@ export class CallFuxActivity implements Activity {
   }
 
   isFinished() {
-    return this.counter > 90;
+    return this.finished;
   }
 
-  interact() { }
+  interact(ui: UiController) {
+    ui.showDialog(new Dialog(this.character, "Hea rebane,\nPalun too mulle shoppen õlut."));
+    this.finished = true;
+  }
+
+  nextActivity() {
+    if (this.finished) {
+      return new WaitingBeerActivity(this.character);
+    }
+  }
 }

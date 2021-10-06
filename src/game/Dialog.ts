@@ -1,5 +1,5 @@
-import { Bursh } from "./Bursh";
 import { Coord, coordAdd, isCoordInRect, Rect, rectGrow } from "./Coord";
+import { Character } from "./npc/Character";
 import { PixelScreen } from "./PixelScreen";
 import { UI_SHADOW_COLOR } from "./ui/ui-utils";
 import { Window } from "./ui/Window";
@@ -8,10 +8,10 @@ export class Dialog {
   private rect: Rect = { coord: [60, 100], size: [200, 100] };
   private window: Window;
 
-  constructor(private person: Bursh, private text: string) {
+  constructor(private character: Character, private text: string) {
     this.window = new Window({
       headline: {
-        title: person.getName() + ":",
+        title: character.name + ":",
         description: "",
       },
       rect: this.rect,

@@ -19,4 +19,8 @@ export class IdleActivity implements Activity {
   }
 
   interact() { }
+
+  nextActivity() {
+    return undefined;
+  }
 }

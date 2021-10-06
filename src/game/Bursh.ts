@@ -4,10 +4,7 @@ import { GameWorld } from "./GameWorld";
 import { MoveActivity } from "./activities/MoveActivity";
 import { PixelScreen } from "./PixelScreen";
 import { Sprite } from "./sprites/Sprite";
-import { DrinkActivity } from "./activities/DrinkActivity";
 import { UiController } from "./UiController";
-import { BeerGlass } from "./items/BeerGlass";
-import { Dialog } from "./Dialog";
 import { Character } from "./npc/Character";
 import { Desires } from "./npc/Desires";
 
@@ -66,13 +63,7 @@ export class Bursh implements GameObject {
   }
 
   onInteract(uiController: UiController) {
-    const item = uiController.getSelectedItem();
-    if (item instanceof BeerGlass) {
-      uiController.removeSelectedItem();
-      this.desires.finishCurrentActivity();
-      this.desires.startActivity(new DrinkActivity(item, this.character));
-    } else {
-      uiController.showDialog(new Dialog(this, "Tere, uus rebane!\n\nKüll on tore, et sa meiega liitusid."));
-    }
+    const activity = this.desires.currentActivity();
+    activity.interact(uiController);
   }
 }

@@ -32,7 +32,11 @@ export class Desires {
     }
 
     if (this.queue[0].isFinished()) {
-      this.queue.shift();
+      const nextActivity = this.queue[0].nextActivity();
+      this.finishCurrentActivity();
+      if (nextActivity) {
+        this.startActivity(nextActivity);
+      }
       return this.currentActivity();
     }
     return this.queue[0];
