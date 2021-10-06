@@ -7,20 +7,17 @@ import { Shop } from "./Shop";
 import { ShopItemRenderer } from "./ShopItemRenderer";
 import { InventoryView } from "./InventoryView";
 import { Wallet } from "../Wallet";
-import { Window } from "../ui/Window";
+import { Headline, Window } from "../ui/Window";
 
 export class ShopView implements InventoryView {
   private shopItemRenderer: ShopItemRenderer;
   private scrollView: ScrollView<BeerBottle>;
   private window: Window;
 
-  constructor(shop: Shop, wallet: Wallet) {
+  constructor(shop: Shop, wallet: Wallet, headline: Headline) {
     this.window = new Window({
       rect: { coord: [64, 16], size: [192, 129] },
-      headline: {
-        title: "Külmkapp",
-        description: "Kui märjukest võtad, siis ka õllekassasse mündi paned.",
-      },
+      headline,
     });
 
     const contentRect = this.window.contentAreaRect();
