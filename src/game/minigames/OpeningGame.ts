@@ -2,7 +2,7 @@ import { Coord, coordAdd, coordDistance, coordDiv, coordMul, tileToScreenCoord }
 import { BeerBottle } from "../items/BeerBottle";
 import { BottleOpener } from "../items/BottleOpener";
 import { PixelScreen } from "../PixelScreen";
-import { SoundLibrary } from "../SoundLibrary";
+import { SoundLibrary } from "../sounds/SoundLibrary";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { SpriteSheet } from "../sprites/SpriteSheet";

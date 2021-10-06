@@ -1,4 +1,4 @@
-import { SoundLibrary } from "./SoundLibrary";
+import { SoundLibrary } from "./sounds/SoundLibrary";
 
 export class Wallet {
   constructor(private money: number) { }

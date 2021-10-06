@@ -1,8 +1,8 @@
-import pouringBeer from "./sounds/pouring-beer.mp3";
-import openingBeer from "./sounds/opening-beer.mp3";
-import openingCabinetDoor from "./sounds/opening-cabinet-door.mp3";
-import openingFridgeDoor from "./sounds/opening-fridge-door.mp3";
-import coins from "./sounds/coins.wav";
+import pouringBeer from "./data/pouring-beer.mp3";
+import openingBeer from "./data/opening-beer.mp3";
+import openingCabinetDoor from "./data/opening-cabinet-door.mp3";
+import openingFridgeDoor from "./data/opening-fridge-door.mp3";
+import coins from "./data/coins.wav";
 
 const soundFiles = {
   'pouring-beer': pouringBeer,

@@ -4,7 +4,7 @@ import { Shop } from "../inventory/Shop";
 import { getBeer } from "../items/Beer";
 import { BeerBottle } from "../items/BeerBottle";
 import { PixelScreen } from "../PixelScreen";
-import { SoundLibrary } from "../SoundLibrary";
+import { SoundLibrary } from "../sounds/SoundLibrary";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { UiController } from "../UiController";

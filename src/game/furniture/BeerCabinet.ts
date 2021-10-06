@@ -6,7 +6,7 @@ import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { BeerGlass, BeerLevel } from "../items/BeerGlass";
 import { UiController } from "../UiController";
-import { SoundLibrary } from "../SoundLibrary";
+import { SoundLibrary } from "../sounds/SoundLibrary";
 
 export class BeerCabinet implements GameObject {
   private sprite: Sprite;
