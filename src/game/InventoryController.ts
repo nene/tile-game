@@ -42,7 +42,7 @@ export class InventoryController {
     if (inventory instanceof Shop) {
       this.objectInventoryView = new ShopView(inventory, this.wallet);
     } else {
-      this.objectInventoryView = new StorageInventoryView({ inventory, coord: [130, 50], title, size: [3, 3] });
+      this.objectInventoryView = new StorageInventoryView({ inventory, coord: [130, 50], size: [3, 3] });
     }
   }
 

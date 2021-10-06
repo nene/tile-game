@@ -9,7 +9,6 @@ interface StorageInventoryViewCfg {
   inventory: Inventory;
   size: Coord;
   coord: Coord;
-  title?: string;
 }
 
 export class StorageInventoryView implements InventoryView {
@@ -18,15 +17,13 @@ export class StorageInventoryView implements InventoryView {
   private inventory: Inventory;
   private size: Coord;
   private coord: Coord;
-  private title?: string;
 
-  constructor({ inventory, size, coord, title }: StorageInventoryViewCfg) {
+  constructor({ inventory, size, coord }: StorageInventoryViewCfg) {
     this.inventory = inventory;
     this.size = size;
     this.coord = coord;
-    this.title = title;
     this.slotSprites = SpriteLibrary.get("slot");
-    this.rect = { coord, size: coordAdd(this.titleSize(), coordMul([21, 21], size)) };
+    this.rect = { coord, size: coordAdd(coordMul([21, 21], size), [1, 1]) };
   }
 
   paint(screen: PixelScreen) {
@@ -35,11 +32,8 @@ export class StorageInventoryView implements InventoryView {
         this.rect,
         "#c8b997",
       );
-      if (this.title) {
-        this.drawTitle(this.title, screen);
-      }
 
-      const startCoord = coordAdd(this.coord, this.titleSize());
+      const startCoord = coordAdd(this.coord, [1, 1]);
       const [cols, rows] = this.size;
       for (let y = 0; y < rows; y++) {
         for (let x = 0; x < cols; x++) {
@@ -54,10 +48,6 @@ export class StorageInventoryView implements InventoryView {
     });
   }
 
-  private drawTitle(text: string, screen: PixelScreen) {
-    screen.drawText(text, coordAdd(this.coord, [1, 1]), { color: "#8f563b" });
-  }
-
   handleGameEvent() {
     return undefined;
   }
@@ -67,7 +57,7 @@ export class StorageInventoryView implements InventoryView {
   }
 
   getSlotIndexAtCoord(screenCoord: Coord): number {
-    const startCoord = coordAdd(this.coord, this.titleSize());
+    const startCoord = coordAdd(this.coord, [1, 1]);
     const [cols, rows] = this.size;
     for (let y = 0; y < rows; y++) {
       for (let x = 0; x < cols; x++) {
@@ -78,10 +68,6 @@ export class StorageInventoryView implements InventoryView {
       }
     }
     return -1;
-  }
-
-  private titleSize(): Coord {
-    return this.title ? [1, 12] : [1, 1];
   }
 
   private coordToIndex([x, y]: Coord): number {
