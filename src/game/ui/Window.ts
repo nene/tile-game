@@ -3,21 +3,23 @@ import { PixelScreen } from "../PixelScreen";
 import { drawInset, drawUpset, UI_BG_COLOR, UI_SHADOW_COLOR } from "../ui/ui-utils";
 
 interface WindowCfg {
+  headline: Headline;
+  rect: Rect;
+}
+
+export interface Headline {
   title: string;
   description: string;
-  rect: Rect;
 }
 
 const TITLE_HEIGHT = 17;
 
 export class Window {
-  private title: string;
-  private description: string;
+  private headline: Headline;
   private rect: Rect;
 
-  constructor({ title, description, rect }: WindowCfg) {
-    this.title = title;
-    this.description = description;
+  constructor({ headline, rect }: WindowCfg) {
+    this.headline = headline;
     this.rect = rect;
   }
 
@@ -25,16 +27,16 @@ export class Window {
     screen.drawRect(this.rect, UI_BG_COLOR);
     drawUpset(screen, this.rect);
     drawInset(screen, rectGrow(this.contentAreaRect(), [1, 1]));
-    this.drawTitle(screen);
+    this.drawHeadline(screen);
   }
 
   isCoordInView(coord: Coord): boolean {
     return isCoordInRect(coord, this.rect);
   }
 
-  private drawTitle(screen: PixelScreen) {
-    screen.drawText(this.title, coordAdd(this.rect.coord, [3, 2]), { shadowColor: UI_SHADOW_COLOR });
-    screen.drawText(this.description, coordAdd(this.rect.coord, [3, 12]), { size: "small" });
+  private drawHeadline(screen: PixelScreen) {
+    screen.drawText(this.headline.title, coordAdd(this.rect.coord, [3, 2]), { shadowColor: UI_SHADOW_COLOR });
+    screen.drawText(this.headline.description, coordAdd(this.rect.coord, [3, 12]), { size: "small" });
   }
 
   contentAreaRect(): Rect {

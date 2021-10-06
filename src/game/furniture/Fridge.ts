@@ -57,6 +57,6 @@ export class Fridge implements GameObject {
 
   onInteract(ui: UiController) {
     SoundLibrary.play('opening-fridge-door');
-    ui.showInventory(this.shop, "Külmik");
+    ui.showInventory(this.shop, { title: "Külmik", description: "" });
   }
 }

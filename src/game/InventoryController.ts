@@ -11,6 +11,8 @@ import { GameEvent } from "./GameEvent";
 import { Shop } from "./inventory/Shop";
 import { ShopView } from "./inventory/ShopView";
 import { Wallet } from "./Wallet";
+import { StorageInventoryView } from "./inventory/StorageInventoryView";
+import { Headline } from "./ui/Window";
 
 export class InventoryController {
   private playerInventoryView: InventoryView;
@@ -37,12 +39,12 @@ export class InventoryController {
     this.selectedItem = undefined;
   }
 
-  showInventory(inventory: Inventory, title?: string) {
+  showInventory(inventory: Inventory, headline: Headline) {
     this.objectInventory = inventory;
     if (inventory instanceof Shop) {
       this.objectInventoryView = new ShopView(inventory, this.wallet);
     } else {
-      this.objectInventoryView = new GridInventoryView({ inventory, coord: [130, 50], size: [3, 3] });
+      this.objectInventoryView = new StorageInventoryView({ inventory, rect: { coord: [115, 45], size: [91, 87] }, size: [4, 3], headline });
     }
   }
 

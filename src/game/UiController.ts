@@ -10,6 +10,7 @@ import { WalletView } from "./WalletView";
 import { GameEvent } from "./GameEvent";
 import { Wallet } from "./Wallet";
 import { Inventory } from "./inventory/Inventory";
+import { Headline } from "./ui/Window";
 
 export class UiController {
   private inventoryController: InventoryController;
@@ -31,8 +32,8 @@ export class UiController {
     this.inventoryController.removeSelectedItem();
   }
 
-  showInventory(inventory: Inventory, title?: string) {
-    this.inventoryController.showInventory(inventory, title);
+  showInventory(inventory: Inventory, headline: Headline) {
+    this.inventoryController.showInventory(inventory, headline);
   }
 
   tick() {

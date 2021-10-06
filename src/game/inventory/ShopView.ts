@@ -17,8 +17,10 @@ export class ShopView implements InventoryView {
   constructor(shop: Shop, wallet: Wallet) {
     this.window = new Window({
       rect: { coord: [64, 16], size: [192, 129] },
-      title: "Külmkapp",
-      description: "Kui märjukest võtad, siis ka õllekassasse mündi paned.",
+      headline: {
+        title: "Külmkapp",
+        description: "Kui märjukest võtad, siis ka õllekassasse mündi paned.",
+      },
     });
 
     const contentRect = this.window.contentAreaRect();
