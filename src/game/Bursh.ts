@@ -18,14 +18,6 @@ export class Bursh implements GameObject {
     this.defaultSprite = SpriteLibrary.get(character.spriteSet).getSprite([0, 0]);
   }
 
-  getName() {
-    return this.character.name;
-  }
-
-  getCharacter() {
-    return this.character;
-  }
-
   tick(world: GameWorld) {
     const activity = this.desires.currentActivity();
 
