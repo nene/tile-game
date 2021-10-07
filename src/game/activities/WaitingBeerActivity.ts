@@ -63,13 +63,6 @@ export class WaitingBeerActivity implements Activity {
     return false;
   }
 
-  private receiveRandomBeer(ui: UiController, item: BeerGlass | BeerBottle) {
-    const beer = item.getBeer();
-    if (beer && this.character.favoriteBeers.includes(beer)) {
-      ui.showDialog(this.character, "Oo...\nSee on ju minu lemmik jook!");
-    }
-  }
-
   nextActivity() {
     if (this.receivedBeerGlass) {
       return new DrinkActivity(this.receivedBeerGlass, this.character);
