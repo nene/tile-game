@@ -15,7 +15,7 @@ export class MoveToTableActivity implements Activity {
     this.sprite = SpriteLibrary.get(character.spriteSet).getSprite([0, 0]);
   }
 
-  public tick(world: GameWorld): ActivityUpdates {
+  public tick(coord: Coord, world: GameWorld): ActivityUpdates {
     const table = world.allObjects().find((o) => o instanceof Table) as Table;
     const chairOffset = coordAdd([8, -8], [this.character.chairIndex * 16, 0]);
     this.targetCoord = coordAdd(table.getCoord(), chairOffset);
@@ -31,7 +31,7 @@ export class MoveToTableActivity implements Activity {
 
   nextActivity() {
     if (this.targetCoord) {
-      return new MoveActivity(this.character.startCoord, this.targetCoord, this.character);
+      return new MoveActivity(this.targetCoord, this.character);
     }
   }
 }

@@ -11,27 +11,27 @@ export class MoveActivity implements Activity {
   private animation: SpriteAnimation;
   private finished = false;
 
-  constructor(private coord: Coord, private destination: Coord, character: Character) {
+  constructor(private destination: Coord, character: Character) {
     this.animation = new SpriteAnimation(SpriteLibrary.get(character.spriteSet), {
       frames: [[0, 0]],
     });
   }
 
-  public tick(world: GameWorld): ActivityUpdates {
+  public tick(coord: Coord, world: GameWorld): ActivityUpdates {
     this.animation.tick();
     const sprites = [this.animation.getSprite()];
 
-    if (coordEq(this.coord, this.destination)) {
+    if (coordEq(coord, this.destination)) {
       this.finished = true;
       return { sprites };
     }
 
-    const targetCoord = this.getActivePathStep(world);
+    const targetCoord = this.getActivePathStep(coord, world);
     if (targetCoord) {
-      this.speed = coordMul(coordUnit(coordSub(targetCoord, this.coord)), [2, 2]);
+      this.speed = coordMul(coordUnit(coordSub(targetCoord, coord)), [2, 2]);
 
-      this.coord = coordAdd(this.coord, this.speed);
-      return { coord: this.coord, sprites };
+      coord = coordAdd(coord, this.speed);
+      return { coord, sprites };
     }
     this.finished = true;
     return { sprites };
@@ -41,12 +41,12 @@ export class MoveActivity implements Activity {
     return this.finished;
   }
 
-  private getActivePathStep(world: GameWorld): Coord | undefined {
+  private getActivePathStep(coord: Coord, world: GameWorld): Coord | undefined {
     if (this.destination && !this.path) {
-      this.path = world.findPath(this.coord, this.destination);
+      this.path = world.findPath(coord, this.destination);
     }
     const current = this.path?.[0];
-    if (current && coordEq(this.coord, current)) {
+    if (current && coordEq(coord, current)) {
       this.path?.shift();
       return this.path?.[0];
     }

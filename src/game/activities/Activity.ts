@@ -9,7 +9,7 @@ export interface ActivityUpdates {
 }
 
 export interface Activity {
-  tick: (world: GameWorld) => ActivityUpdates;
+  tick: (coord: Coord, world: GameWorld) => ActivityUpdates;
   isFinished: () => boolean;
   interact: (ui: UiController) => void;
   nextActivity(): Activity | undefined;
