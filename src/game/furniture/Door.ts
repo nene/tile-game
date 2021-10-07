@@ -1,17 +1,36 @@
-import { Coord, Rect } from "../Coord";
+import { Bursh } from "../Bursh";
+import { Coord, coordAdd, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
+import { GameWorld } from "../GameWorld";
+import { Character, getAllCharacters } from "../npc/Character";
 import { PixelScreen } from "../PixelScreen";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 
 export class Door implements GameObject {
   private sprite: Sprite;
+  private tickCount: number = 0;
 
   constructor(private coord: Coord) {
     this.sprite = SpriteLibrary.get("door").getSprite([0, 0]);
   }
 
-  tick() { }
+  tick(world: GameWorld) {
+    this.tickCount++;
+
+    const character = this.trySpawnCharacter();
+    if (character) {
+      world.add(new Bursh(this.spawnPoint(), character));
+    }
+  }
+
+  private trySpawnCharacter(): Character | undefined {
+    return getAllCharacters().find((char) => char.spawnTime === this.tickCount);
+  }
+
+  private spawnPoint(): Coord {
+    return coordAdd(this.coord, [8, 8]);
+  }
 
   paint(screen: PixelScreen) {
     screen.drawSprite(this.sprite, this.coord);

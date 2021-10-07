@@ -10,5 +10,4 @@ export interface GameLocation {
   getGridSize: () => Coord;
   getBackground: () => GameLocationBackground;
   getStaticObjects: () => GameObject[];
-  getDynamicObjects: () => GameObject[];
 }

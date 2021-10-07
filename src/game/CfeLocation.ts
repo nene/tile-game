@@ -1,5 +1,4 @@
 import { BeerCabinet } from "./furniture/BeerCabinet";
-import { Bursh } from "./Bursh";
 import { CfeBackground } from "./CfeBackground";
 import { Coord, tileToScreenCoord } from "./Coord";
 import { Fridge } from "./furniture/Fridge";
@@ -8,7 +7,6 @@ import { GameObject } from "./GameObject";
 import { Table } from "./furniture/Table";
 import { Wall } from "./furniture/Wall";
 import { BeerBox } from "./furniture/BeerBox";
-import { getCharacter } from "./npc/Character";
 import { Door } from "./furniture/Door";
 
 const CFE_SIZE: Coord = [21, 16]; // Size in tiles
@@ -53,13 +51,5 @@ export class CfeLocation implements GameLocation {
 
   getStaticObjects() {
     return this.staticObjects;
-  }
-
-  getDynamicObjects(): GameObject[] {
-    return [
-      new Bursh(getCharacter("koppel")),
-      new Bursh(getCharacter("sass")),
-      new Bursh(getCharacter("pikmets")),
-    ];
   }
 }

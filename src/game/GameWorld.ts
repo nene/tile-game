@@ -12,7 +12,6 @@ export class GameWorld {
   constructor(private location: GameLocation) {
     this.indexer = new ObjectIndexer(location.getGridSize());
     this.gameObjects.push(...this.location.getStaticObjects());
-    this.gameObjects.push(...this.location.getDynamicObjects());
     this.sortObjects();
     this.pathFinder = new PathFinder(this.indexer.isTileEmpty.bind(this.indexer));
   }

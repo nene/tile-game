@@ -8,12 +8,10 @@ import { Character } from "./npc/Character";
 import { Desires } from "./npc/Desires";
 
 export class Bursh implements GameObject {
-  private coord: Coord;
   private desires: Desires;
   private sprites: Sprite[] = [];
 
-  constructor(private character: Character) {
-    this.coord = character.startCoord;
+  constructor(private coord: Coord, private character: Character) {
     this.desires = new Desires(character);
   }
 
