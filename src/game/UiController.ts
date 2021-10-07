@@ -11,7 +11,7 @@ import { GameEvent } from "./GameEvent";
 import { Wallet } from "./Wallet";
 import { Inventory } from "./inventory/Inventory";
 import { Headline } from "./ui/Window";
-import { Character } from "./npc/Character";
+import { Character, getCharacter } from "./npc/Character";
 
 export class UiController {
   private inventoryController: InventoryController;
@@ -23,6 +23,7 @@ export class UiController {
   constructor(playerInventory: StorageInventory) {
     this.inventoryController = new InventoryController(playerInventory, this.wallet);
     this.cursorController = new CursorController();
+    this.dialog = new Dialog(getCharacter("koppel"), "See ei lähe!\nMa palusin sul tuua shoppeni täie õlut,\naga sina tood mulle mingi tilga shoppeni põhjas.");
   }
 
   getSelectedItem(): GameItem | undefined {

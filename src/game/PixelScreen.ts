@@ -1,6 +1,7 @@
 import { Coord, coordAdd, coordConstrain, coordDiv, coordSub, Rect, rectOverlaps } from "./Coord";
 import { GameWorld } from "./GameWorld";
 import { Sprite } from "./sprites/Sprite";
+import { TextMeasurer } from "./ui/fitText";
 
 export interface PixelScreenOptions {
   size: Coord;
@@ -15,7 +16,7 @@ export interface TextStyle {
   shadowColor?: string;
 }
 
-export class PixelScreen {
+export class PixelScreen implements TextMeasurer {
   private ctx: CanvasRenderingContext2D;
   private virtualSize: Coord;
   private scale: number;
