@@ -5,6 +5,7 @@ import { MoveToTableActivity } from "../activities/MoveToTableActivity";
 import { MoveToDoorActivity } from "../activities/MoveToDoorActivity";
 import { DespawnActivity } from "../activities/DespawnActivity";
 import { Character } from "./Character";
+import { PauseActivity } from "../activities/PauseActivity";
 
 export class Desires {
   private queue: Activity[] = [];
@@ -13,6 +14,7 @@ export class Desires {
   constructor(character: Character) {
     this.idle = new IdleActivity(character);
     this.queue = [
+      new PauseActivity(5, character),
       new MoveToTableActivity(character),
       new CallFuxActivity(character),
       new MoveToDoorActivity(character),
