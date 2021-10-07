@@ -9,6 +9,7 @@ import { Table } from "./furniture/Table";
 import { Wall } from "./furniture/Wall";
 import { BeerBox } from "./furniture/BeerBox";
 import { Character, getCharacter } from "./npc/Character";
+import { Door } from "./furniture/Door";
 
 const CFE_SIZE: Coord = [21, 16]; // Size in tiles
 
@@ -36,6 +37,8 @@ export class CfeLocation implements GameLocation {
     objects.push(new BeerCabinet(tileToScreenCoord([5, 3])));
     // Place for empty bottles
     objects.push(new BeerBox(tileToScreenCoord([8, 3])));
+    // A door
+    objects.push(new Door(tileToScreenCoord([15, 3])));
 
     return objects;
   }
