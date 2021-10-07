@@ -1,4 +1,5 @@
 import { Coord, coordEq, coordMul, coordUnit, coordSub, coordAdd } from "../Coord";
+import { GameObject } from "../GameObject";
 import { GameWorld } from "../GameWorld";
 import { Character } from "../npc/Character";
 import { SpriteAnimation } from "../sprites/SpriteAnimation";
@@ -17,7 +18,8 @@ export class MoveActivity implements Activity {
     });
   }
 
-  public tick(coord: Coord, world: GameWorld): ActivityUpdates {
+  public tick(entity: GameObject, world: GameWorld): ActivityUpdates {
+    const coord = entity.getCoord();
     this.animation.tick();
     const sprites = [this.animation.getSprite()];
 
@@ -30,8 +32,7 @@ export class MoveActivity implements Activity {
     if (targetCoord) {
       this.speed = coordMul(coordUnit(coordSub(targetCoord, coord)), [2, 2]);
 
-      coord = coordAdd(coord, this.speed);
-      return { coord, sprites };
+      return { coord: coordAdd(coord, this.speed), sprites };
     }
     this.finished = true;
     return { sprites };

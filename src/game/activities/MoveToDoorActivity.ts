@@ -1,5 +1,6 @@
 import { Coord, coordAdd } from "../Coord";
 import { Door } from "../furniture/Door";
+import { GameObject } from "../GameObject";
 import { GameWorld } from "../GameWorld";
 import { Character } from "../npc/Character";
 import { Sprite } from "../sprites/Sprite";
@@ -15,7 +16,7 @@ export class MoveToDoorActivity implements Activity {
     this.sprite = SpriteLibrary.get(character.spriteSet).getSprite([0, 0]);
   }
 
-  public tick(coord: Coord, world: GameWorld): ActivityUpdates {
+  public tick(entity: GameObject, world: GameWorld): ActivityUpdates {
     const door = world.allObjects().find((o) => o instanceof Door) as Door;
     this.targetCoord = coordAdd(door.getCoord(), [8, 8]);
 

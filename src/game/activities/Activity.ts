@@ -1,4 +1,5 @@
 import { Coord } from "../Coord";
+import { GameObject } from "../GameObject";
 import { GameWorld } from "../GameWorld";
 import { Sprite } from "../sprites/Sprite";
 import { UiController } from "../UiController";
@@ -9,7 +10,7 @@ export interface ActivityUpdates {
 }
 
 export interface Activity {
-  tick: (coord: Coord, world: GameWorld) => ActivityUpdates;
+  tick: (entity: GameObject, world: GameWorld) => ActivityUpdates;
   isFinished: () => boolean;
   interact: (ui: UiController) => void;
   nextActivity(): Activity | undefined;

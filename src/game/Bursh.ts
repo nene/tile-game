@@ -26,7 +26,7 @@ export class Bursh implements GameObject {
   tick(world: GameWorld) {
     const activity = this.desires.currentActivity();
 
-    const updates = activity.tick(this.coord, world);
+    const updates = activity.tick(this, world);
     if (updates.coord) {
       this.coord = updates.coord;
     }

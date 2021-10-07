@@ -1,5 +1,4 @@
-import { Bursh } from "../Bursh";
-import { Coord } from "../Coord";
+import { GameObject } from "../GameObject";
 import { GameWorld } from "../GameWorld";
 import { Character } from "../npc/Character";
 import { Sprite } from "../sprites/Sprite";
@@ -14,8 +13,7 @@ export class DespawnActivity implements Activity {
     this.sprite = SpriteLibrary.get(character.spriteSet).getSprite([0, 0]);
   }
 
-  public tick(coord: Coord, world: GameWorld): ActivityUpdates {
-    const bursh = world.allObjects().find((obj) => obj instanceof Bursh && obj.getCharacter() === this.character) as Bursh;
+  public tick(bursh: GameObject, world: GameWorld): ActivityUpdates {
     world.remove(bursh);
     this.removed = true;
 

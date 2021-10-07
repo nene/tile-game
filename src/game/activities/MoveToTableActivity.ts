@@ -1,5 +1,6 @@
 import { Coord, coordAdd } from "../Coord";
 import { Table } from "../furniture/Table";
+import { GameObject } from "../GameObject";
 import { GameWorld } from "../GameWorld";
 import { Character } from "../npc/Character";
 import { Sprite } from "../sprites/Sprite";
@@ -15,7 +16,7 @@ export class MoveToTableActivity implements Activity {
     this.sprite = SpriteLibrary.get(character.spriteSet).getSprite([0, 0]);
   }
 
-  public tick(coord: Coord, world: GameWorld): ActivityUpdates {
+  public tick(entity: GameObject, world: GameWorld): ActivityUpdates {
     const table = world.allObjects().find((o) => o instanceof Table) as Table;
     const chairOffset = coordAdd([8, -8], [this.character.chairIndex * 16, 0]);
     this.targetCoord = coordAdd(table.getCoord(), chairOffset);
