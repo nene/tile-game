@@ -1,14 +1,14 @@
 import { BeerCabinet } from "./furniture/BeerCabinet";
 import { Bursh } from "./Bursh";
 import { CfeBackground } from "./CfeBackground";
-import { Coord, coordAdd, tileToScreenCoord } from "./Coord";
+import { Coord, tileToScreenCoord } from "./Coord";
 import { Fridge } from "./furniture/Fridge";
 import { GameLocation } from "./GameLocation";
 import { GameObject } from "./GameObject";
 import { Table } from "./furniture/Table";
 import { Wall } from "./furniture/Wall";
 import { BeerBox } from "./furniture/BeerBox";
-import { Character, getCharacter } from "./npc/Character";
+import { getCharacter } from "./npc/Character";
 import { Door } from "./furniture/Door";
 
 const CFE_SIZE: Coord = [21, 16]; // Size in tiles
@@ -57,17 +57,9 @@ export class CfeLocation implements GameLocation {
 
   getDynamicObjects(): GameObject[] {
     return [
-      this.spawnBursh(getCharacter("koppel")),
-      this.spawnBursh(getCharacter("sass")),
-      this.spawnBursh(getCharacter("pikmets")),
+      new Bursh(getCharacter("koppel")),
+      new Bursh(getCharacter("sass")),
+      new Bursh(getCharacter("pikmets")),
     ];
-  }
-
-  private spawnBursh(character: Character): Bursh {
-    const bursh = new Bursh(character);
-    const table = this.staticObjects.find((obj) => obj instanceof Table) as Table;
-    const chairOffset = coordAdd([8, -8], [character.chairIndex * 16, 0]);
-    bursh.moveTo(coordAdd(table.getCoord(), chairOffset));
-    return bursh;
   }
 }

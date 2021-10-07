@@ -1,7 +1,6 @@
 import { Coord, Rect } from "./Coord";
 import { GameObject } from "./GameObject";
 import { GameWorld } from "./GameWorld";
-import { MoveActivity } from "./activities/MoveActivity";
 import { PixelScreen } from "./PixelScreen";
 import { Sprite } from "./sprites/Sprite";
 import { UiController } from "./UiController";
@@ -20,10 +19,6 @@ export class Bursh implements GameObject {
 
   getName() {
     return this.character.name;
-  }
-
-  moveTo(destination: Coord) {
-    this.desires.startActivity(new MoveActivity(this.coord, destination, this.character));
   }
 
   tick(world: GameWorld) {
