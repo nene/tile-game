@@ -6,13 +6,16 @@ import { Sprite } from "./sprites/Sprite";
 import { UiController } from "./UiController";
 import { Character } from "./npc/Character";
 import { Desires } from "./npc/Desires";
+import { SpriteLibrary } from "./sprites/SpriteLibrary";
 
 export class Bursh implements GameObject {
   private desires: Desires;
   private sprites: Sprite[] = [];
+  private defaultSprite: Sprite;
 
   constructor(private coord: Coord, private character: Character) {
     this.desires = new Desires(character);
+    this.defaultSprite = SpriteLibrary.get(character.spriteSet).getSprite([0, 0]);
   }
 
   getName() {
@@ -34,6 +37,11 @@ export class Bursh implements GameObject {
   }
 
   paint(screen: PixelScreen) {
+    if (this.sprites.length === 0) {
+      screen.drawSprite(this.defaultSprite, this.coord);
+      return;
+    }
+
     this.sprites.forEach((sprite) => {
       screen.drawSprite(sprite, this.coord);
     });

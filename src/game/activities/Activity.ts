@@ -6,7 +6,7 @@ import { UiController } from "../UiController";
 
 export interface ActivityUpdates {
   coord?: Coord;
-  sprites: Sprite[];
+  sprites?: Sprite[];
 }
 
 export interface Activity {

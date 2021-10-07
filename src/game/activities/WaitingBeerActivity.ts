@@ -2,22 +2,18 @@ import { Beer } from "../items/Beer";
 import { BeerBottle } from "../items/BeerBottle";
 import { BeerGlass, BeerLevel } from "../items/BeerGlass";
 import { Character } from "../npc/Character";
-import { Sprite } from "../sprites/Sprite";
-import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { UiController } from "../UiController";
 import { Activity } from "./Activity";
 import { DrinkActivity } from "./DrinkActivity";
 
 export class WaitingBeerActivity implements Activity {
-  private sprite: Sprite;
   private receivedBeerGlass?: BeerGlass;
 
   constructor(private character: Character, private expectedBeer?: Beer) {
-    this.sprite = SpriteLibrary.get(character.spriteSet).getSprite([0, 0]);
   }
 
   tick() {
-    return { sprites: [this.sprite] };
+    return {};
   }
 
   isFinished() {
