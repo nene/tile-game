@@ -18,8 +18,8 @@ export class MoveActivity implements Activity {
     });
   }
 
-  public tick(entity: GameObject, world: GameWorld): ActivityUpdates {
-    const coord = entity.getCoord();
+  public tick(figure: GameObject, world: GameWorld): ActivityUpdates {
+    const coord = figure.getCoord();
     this.animation.tick();
     const sprites = [this.animation.getSprite()];
 

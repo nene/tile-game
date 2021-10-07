@@ -1,4 +1,4 @@
-import { Bursh } from "../Bursh";
+import { CharacterFigure } from "../npc/CharacterFigure";
 import { Coord, coordAdd, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
 import { GameWorld } from "../GameWorld";
@@ -20,7 +20,7 @@ export class Door implements GameObject {
 
     const character = this.trySpawnCharacter();
     if (character) {
-      world.add(new Bursh(this.spawnPoint(), character));
+      world.add(new CharacterFigure(this.spawnPoint(), character));
     }
   }
 

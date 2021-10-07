@@ -12,7 +12,7 @@ export class MoveToTableActivity implements Activity {
   constructor(private character: Character) {
   }
 
-  public tick(entity: GameObject, world: GameWorld): ActivityUpdates {
+  public tick(figure: GameObject, world: GameWorld): ActivityUpdates {
     const table = world.allObjects().find((o) => o instanceof Table) as Table;
     const chairOffset = coordAdd([8, -8], [this.character.chairIndex * 16, 0]);
     this.targetCoord = coordAdd(table.getCoord(), chairOffset);

@@ -1,14 +1,14 @@
-import { Coord, Rect } from "./Coord";
-import { GameObject } from "./GameObject";
-import { GameWorld } from "./GameWorld";
-import { PixelScreen } from "./PixelScreen";
-import { Sprite } from "./sprites/Sprite";
-import { UiController } from "./UiController";
-import { Character } from "./npc/Character";
-import { Desires } from "./npc/Desires";
-import { SpriteLibrary } from "./sprites/SpriteLibrary";
+import { Coord, Rect } from "../Coord";
+import { GameObject } from "../GameObject";
+import { GameWorld } from "../GameWorld";
+import { PixelScreen } from "../PixelScreen";
+import { Sprite } from "../sprites/Sprite";
+import { UiController } from "../UiController";
+import { Character } from "./Character";
+import { Desires } from "./Desires";
+import { SpriteLibrary } from "../sprites/SpriteLibrary";
 
-export class Bursh implements GameObject {
+export class CharacterFigure implements GameObject {
   private desires: Desires;
   private sprites: Sprite[] = [];
   private defaultSprite: Sprite;

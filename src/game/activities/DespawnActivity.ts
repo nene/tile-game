@@ -9,8 +9,8 @@ export class DespawnActivity implements Activity {
   constructor(private character: Character) {
   }
 
-  public tick(bursh: GameObject, world: GameWorld): ActivityUpdates {
-    world.remove(bursh);
+  public tick(figure: GameObject, world: GameWorld): ActivityUpdates {
+    world.remove(figure);
     this.removed = true;
     return {};
   }

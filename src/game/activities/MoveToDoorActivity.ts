@@ -12,7 +12,7 @@ export class MoveToDoorActivity implements Activity {
   constructor(private character: Character) {
   }
 
-  public tick(entity: GameObject, world: GameWorld): ActivityUpdates {
+  public tick(figure: GameObject, world: GameWorld): ActivityUpdates {
     const door = world.allObjects().find((o) => o instanceof Door) as Door;
     this.targetCoord = coordAdd(door.getCoord(), [8, 8]);
     return {};
