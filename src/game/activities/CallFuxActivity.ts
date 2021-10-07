@@ -43,11 +43,11 @@ export class CallFuxActivity implements Activity {
     this.finished = true;
     this.expectedBeer = this.chooseBeer(this.character.favoriteBeers);
     if (this.expectedBeer) {
-      ui.showDialog(this.character, `Hea rebane,\nPalun too mulle üks ${this.expectedBeer.name}.`);
+      ui.showDialog(this.character, `Hea rebane, palun too mulle üks ${this.expectedBeer.name}.`);
       ui.giveMoney(this.expectedBeer.price);
     } else {
       const money = random(2, 6);
-      ui.showDialog(this.character, `Hea rebane,\nPalun too mulle üks õlu\nomal valikul.\nSiin sulle ${money} münti.`);
+      ui.showDialog(this.character, `Hea rebane, palun too mulle üks õlu omal valikul. Siin sulle ${money} münti.`);
       ui.giveMoney(money);
     }
   }

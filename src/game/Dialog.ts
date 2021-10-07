@@ -1,6 +1,7 @@
 import { Coord, coordAdd, isCoordInRect, Rect, rectGrow } from "./Coord";
 import { Character } from "./npc/Character";
 import { PixelScreen } from "./PixelScreen";
+import { fitText } from "./ui/fitText";
 import { UI_SHADOW_COLOR } from "./ui/ui-utils";
 import { Window } from "./ui/Window";
 
@@ -24,10 +25,11 @@ export class Dialog {
   }
 
   private drawContent(text: string, screen: PixelScreen) {
-    const start: Coord = rectGrow(this.window.contentAreaRect(), [-2, -2]).coord;
+    const style = { color: "#000", shadowColor: UI_SHADOW_COLOR };
+    const { coord, size } = rectGrow(this.window.contentAreaRect(), [-2, -2]);
     const lineHeight = 12;
-    text.split("\n").forEach((line, i) => {
-      screen.drawText(line, coordAdd(start, [0, lineHeight * i]), { color: "#000", shadowColor: UI_SHADOW_COLOR });
+    fitText(screen, size, text, style).forEach((line, i) => {
+      screen.drawText(line, coordAdd(coord, [0, lineHeight * i]),);
     });
   }
 

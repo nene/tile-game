@@ -39,7 +39,7 @@ export class WaitingBeerActivity implements Activity {
   private acceptBeer(ui: UiController, item: BeerGlass | BeerBottle): item is BeerGlass {
     const beer = item.getBeer();
     if (this.expectedBeer && beer !== this.expectedBeer) {
-      ui.showDialog(this.character, `See pole see õlu mis ma palusin.\nToo mulle ${this.expectedBeer.name}.`);
+      ui.showDialog(this.character, `See pole see õlu mis ma palusin. Too mulle ${this.expectedBeer.name}.`);
       return false;
     }
     else if (item instanceof BeerGlass) {
@@ -53,7 +53,7 @@ export class WaitingBeerActivity implements Activity {
       }
     }
     else if (item instanceof BeerBottle && !item.isOpen()) {
-      ui.showDialog(this.character, "Aitäh.\nTee palun pudel lahti ja vala\nshoppenisse ka.");
+      ui.showDialog(this.character, "Aitäh.\nTee palun pudel lahti ja vala shoppenisse ka.");
       return false;
     }
     else if (item instanceof BeerBottle && item.isOpen()) {
@@ -73,38 +73,38 @@ export class WaitingBeerActivity implements Activity {
     switch (beer.getLevel()) {
       case BeerLevel.full:
         if (isFavorite) {
-          return "Ooo!\nTäis shoppen minu lemmikõllega!\nOled parim rebane.";
+          return "Ooo! Täis shoppen minu lemmikõllega! Oled parim rebane.";
         } else if (isHated) {
-          return "Uhh!\nTerve shoppenitäis sellist jälkust\nKao mu silmist,\nsa igavene.";
+          return "Uhh! Terve shoppenitäis sellist jälkust. Kao mu silmist, sa igavene!";
         } else {
-          return "Ooo!\nSee on ju suurepäraselt täidetud\nshoppen.\nOled tõega kiitust väärt.";
+          return "Ooo! See on ju suurepäraselt täidetud shoppen. Oled tõega kiitust väärt.";
         }
       case BeerLevel.almostFull:
         if (isFavorite) {
-          return "Vau!\nShoppen minu lemmikõllega!\nSuur aitäh!";
+          return "Vau! Shoppen minu lemmikõllega! Suur aitäh!";
         } else if (isHated) {
-          return "Väkk, mis asi!\nKas sa ise jood seda?";
+          return "Väkk, mis asi! Kas sa ise jood seda?";
         } else {
-          return "Aitäh!\nOled üsna tublisti valanud.";
+          return "Aitäh! Oled üsna tublisti valanud.";
         }
       case BeerLevel.half:
         if (isFavorite) {
-          return "Oo...\nMinu lemmikõlu!\nAga miks vaid pool shoppenit?";
+          return "Oo... Minu lemmikõlu! Aga miks vaid pool shoppenit?";
         } else if (isHated) {
-          return "Nojah...\nSee pole just suurem asi...\nVähemalt pole seda palju.";
+          return "Nojah... See pole just suurem asi... Vähemalt pole seda palju.";
         } else {
-          return "No kuule!\nSee on ju poolik shoppen.\nMis jama sa mulle tood!";
+          return "No kuule! See on ju poolik shoppen. Mis jama sa mulle tood!";
         }
       case BeerLevel.almostEmpty:
         if (isFavorite) {
-          return "Oo...\nMinu lemmikõlu!\nAga miks vaid pool shoppenit?";
+          return "Oo... Minu lemmikõlu! Aga miks vaid pool shoppenit?";
         } else if (isHated) {
-          return "Einoh...\nKui seda jama juua,\nsiis rohkem kui lonksu\nma ei võtakski.";
+          return "Einoh... Kui seda jama juua, siis rohkem kui lonksu ma ei võtakski.";
         } else {
-          return "See ei lähe!\nMa palusin sul tuua shoppeni täie õlut,\naga sina tood mulle mingi tilga shoppeni põhjas.";
+          return "See ei lähe! Ma palusin sul tuua shoppeni täie õlut, aga sina tood mulle mingi tilga shoppeni põhjas.";
         }
       case BeerLevel.empty:
-        return "Eee...\njah, see on shoppen.\nAga paluksin õlut ka siia sisse, aitäh.";
+        return "Eee... jah, see on shoppen. Aga paluksin õlut ka siia sisse, aitäh.";
     }
   }
 }
