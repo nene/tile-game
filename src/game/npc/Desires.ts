@@ -2,6 +2,7 @@ import { Activity } from "../activities/Activity";
 import { CallFuxActivity } from "../activities/CallFuxActivity";
 import { IdleActivity } from "../activities/IdleActivity";
 import { MoveToTableActivity } from "../activities/MoveToTableActivity";
+import { MoveToDoorActivity } from "../activities/MoveToDoorActivity";
 import { Character } from "./Character";
 
 export class Desires {
@@ -13,6 +14,7 @@ export class Desires {
     this.queue = [
       new MoveToTableActivity(character),
       new CallFuxActivity(character),
+      new MoveToDoorActivity(character),
     ];
   }
 
