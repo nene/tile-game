@@ -8,6 +8,7 @@ import { Table } from "./furniture/Table";
 import { Wall } from "./furniture/Wall";
 import { BeerBox } from "./furniture/BeerBox";
 import { Door } from "./furniture/Door";
+import { Fireplace } from "./furniture/Fireplace";
 
 const CFE_SIZE: Coord = [21, 16]; // Size in tiles
 
@@ -37,6 +38,8 @@ export class CfeLocation implements GameLocation {
     objects.push(new BeerBox(tileToScreenCoord([8, 3])));
     // A door
     objects.push(new Door(tileToScreenCoord([15, 3])));
+    // Fire
+    objects.push(new Fireplace(tileToScreenCoord([9, 3])));
 
     return objects;
   }
