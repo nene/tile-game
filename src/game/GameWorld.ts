@@ -24,6 +24,10 @@ export class GameWorld {
     this.gameObjects.push(...objects);
   }
 
+  remove(object: GameObject) {
+    this.gameObjects = this.gameObjects.filter((obj) => obj !== object);
+  }
+
   allObjects(): GameObject[] {
     return this.gameObjects;
   }

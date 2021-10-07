@@ -19,6 +19,10 @@ export class Bursh implements GameObject {
     return this.character.name;
   }
 
+  getCharacter() {
+    return this.character;
+  }
+
   tick(world: GameWorld) {
     const activity = this.desires.currentActivity();
 
