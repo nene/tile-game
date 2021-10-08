@@ -6,7 +6,7 @@ import { Dialog } from "./Dialog";
 import { Overlay } from "./Overlay";
 import { CursorController } from "./CursorController";
 import { MiniGame } from "./minigames/MiniGame";
-import { WalletView } from "./WalletView";
+import { ScoreBoard } from "./ScoreBoard";
 import { GameEvent } from "./GameEvent";
 import { Wallet } from "./Wallet";
 import { Inventory } from "./inventory/Inventory";
@@ -18,7 +18,7 @@ export class UiController {
   private cursorController: CursorController;
   private dialog?: Dialog;
   private wallet = new Wallet(10);
-  private walletView = new WalletView(this.wallet);
+  private scoreBoard = new ScoreBoard(this.wallet);
 
   constructor(playerInventory: StorageInventory) {
     this.inventoryController = new InventoryController(playerInventory, this.wallet);
@@ -59,7 +59,7 @@ export class UiController {
         this.inventoryController.paint(screen);
       }
 
-      this.walletView.paint(screen);
+      this.scoreBoard.paint(screen);
 
       // Cursor is always painted on top
       this.cursorController.paint(screen);

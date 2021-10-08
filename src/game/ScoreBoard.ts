@@ -3,11 +3,11 @@ import { Sprite } from "./sprites/Sprite";
 import { SpriteLibrary } from "./sprites/SpriteLibrary";
 import { Wallet } from "./Wallet";
 
-export class WalletView {
+export class ScoreBoard {
   private bg: Sprite;
 
   constructor(private wallet: Wallet) {
-    this.bg = SpriteLibrary.get("wallet").getSprite([0, 0]);
+    this.bg = SpriteLibrary.get("scoreboard").getSprite([0, 0]);
   }
 
   paint(screen: PixelScreen) {

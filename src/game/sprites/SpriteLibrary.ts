@@ -15,7 +15,7 @@ import countertop from "./data/countertop.png";
 import slot from "./data/slot.png";
 import scrollBar from "./data/scroll-bar.png";
 import cursor from "./data/cursor.png";
-import wallet from "./data/wallet.png";
+import scoreboard from "./data/scoreboard.png";
 import gold from "./data/gold.png";
 import beerGlassLg from "./data/beer-glass-lg.png";
 import beerGlassSm from "./data/beer-glass-sm.png";
@@ -61,7 +61,7 @@ const imageFiles = {
   'slot': spriteDef({ src: slot, cfg: { size: [20, 20], colsRows: [2, 1] } }),
   'scroll-bar': spriteDef({ src: scrollBar, cfg: { size: [8, 8], colsRows: [5, 1] } }),
   'cursor': spriteDef({ src: cursor, cfg: { size: [16, 16], colsRows: [1, 1] } }),
-  'wallet': spriteDef({ src: wallet, cfg: { size: [51, 12], colsRows: [1, 1] } }),
+  'scoreboard': spriteDef({ src: scoreboard, cfg: { size: [51, 24], colsRows: [1, 1] } }),
   'gold': spriteDef({ src: gold, cfg: { size: [8, 8], colsRows: [1, 1] } }),
 
   'beer-glass-lg': spriteDef({ src: beerGlassLg, cfg: { size: [16, 16], colsRows: [5, 1] } }),
