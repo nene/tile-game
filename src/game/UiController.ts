@@ -18,7 +18,7 @@ export class UiController {
   private cursorController: CursorController;
   private dialog?: Dialog;
   private wallet = new Wallet(10);
-  private scoreBoard = new ScoreBoard(this.wallet);
+  private scoreBoard = new ScoreBoard([269, 0], this.wallet);
 
   constructor(playerInventory: StorageInventory) {
     this.inventoryController = new InventoryController(playerInventory, this.wallet);

@@ -1,4 +1,5 @@
 import { times } from "lodash";
+import { Coord, coordAdd } from "./Coord";
 import { BeerLevel } from "./items/BeerGlass";
 import { PixelScreen } from "./PixelScreen";
 import { Sprite } from "./sprites/Sprite";
@@ -10,25 +11,25 @@ export class ScoreBoard {
   private bg: Sprite;
   private beerGlass: SpriteSheet;
 
-  constructor(private wallet: Wallet) {
+  constructor(private coord: Coord, private wallet: Wallet) {
     this.bg = SpriteLibrary.get("scoreboard").getSprite([0, 0]);
     this.beerGlass = SpriteLibrary.get("beer-glass-sm");
   }
 
   paint(screen: PixelScreen) {
-    screen.drawSprite(this.bg, [267, 2]);
+    screen.drawSprite(this.bg, this.coord);
     this.drawWallet(screen);
     this.drawAlcoholLevel(screen);
   }
 
   private drawWallet(screen: PixelScreen) {
-    screen.drawText(this.wallet.getMoney(), [306, 3], { align: "right", shadowColor: "#8f563b" });
+    screen.drawText(this.wallet.getMoney(), coordAdd(this.coord, [39, 1]), { align: "right", shadowColor: "#8f563b" });
   }
 
   private drawAlcoholLevel(screen: PixelScreen) {
     times(5, (i: number) => {
       const level = i > 2 ? BeerLevel.full : BeerLevel.empty;
-      screen.drawSprite(this.beerGlass.getSprite([level, 0]), [272 + i * 9, 31]);
+      screen.drawSprite(this.beerGlass.getSprite([level, 0]), coordAdd(this.coord, [5 + i * 9, 29]));
     });
   }
 }
