@@ -10,6 +10,7 @@ import { BeerBox } from "./furniture/BeerBox";
 import { Door } from "./furniture/Door";
 import { Fireplace } from "./furniture/Fireplace";
 import { Countertop } from "./furniture/Countertop";
+import { Painting } from "./furniture/Painting";
 
 const CFE_SIZE: Coord = [21, 16]; // Size in tiles
 
@@ -32,6 +33,8 @@ export class CfeLocation implements GameLocation {
     objects.push(new Wall(tileToScreenCoord([15, 4]), 1));
     objects.push(new Wall(tileToScreenCoord([15, 5]), 6));
 
+    // Color shield on wall
+    objects.push(new Painting(tileToScreenCoord([3, 3]), "color-shield"));
     // A table
     objects.push(new Table(tileToScreenCoord([4, 7])));
     objects.push(new Table(tileToScreenCoord([0, 11])));
