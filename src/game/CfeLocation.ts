@@ -33,19 +33,21 @@ export class CfeLocation implements GameLocation {
     objects.push(new Wall(tileToScreenCoord([15, 5]), 6));
 
     // A table
-    objects.push(new Table(tileToScreenCoord([2, 8])));
-    // A fridge
-    objects.push(new Fridge(tileToScreenCoord([3, 3])));
-    // A storage of beer glasses
-    objects.push(new BeerCabinet(tileToScreenCoord([5, 3])));
-    // Place for empty bottles
-    objects.push(new BeerBox(tileToScreenCoord([8, 3])));
+    objects.push(new Table(tileToScreenCoord([4, 7])));
+    objects.push(new Table(tileToScreenCoord([0, 11])));
     // Fire
-    objects.push(new Fireplace(tileToScreenCoord([9, 3])));
+    objects.push(new Fireplace(tileToScreenCoord([6, 3])));
     // A door
-    objects.push(new Door(tileToScreenCoord([13, 3])));
+    objects.push(new Door(tileToScreenCoord([12, 3])));
+
     // Bar countertop
-    objects.push(new Countertop(tileToScreenCoord([15, 6])));
+    objects.push(new Countertop(tileToScreenCoord([14, 6])));
+    // A storage of beer glasses
+    objects.push(new BeerCabinet(tileToScreenCoord([16, 6])));
+    // A fridge
+    objects.push(new Fridge(tileToScreenCoord([18, 6])));
+    // Place for empty bottles
+    objects.push(new BeerBox(tileToScreenCoord([19, 6])));
 
     return objects;
   }

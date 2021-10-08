@@ -7,12 +7,12 @@ import { SpriteSheet } from "./sprites/SpriteSheet";
 
 // 21 x 16
 const spriteMap = [
-  "TTTTTTTTTTTTTTT4#####",
-  "MMMMMMMMMMMMMMM4#####",
-  "BBBBBBBBBBBBBBB122222",
-  "...............TTTTTT",
-  "...............MMMMMM",
-  "...............BBBBBB",
+  "TTTTTTTTTTTTTT4######",
+  "MMMMMMMMMMMMMM4######",
+  "BBBBBBBBBBBBBB1222222",
+  "..............TTTTTTT",
+  "..............MMMMMMM",
+  "..............BBBBBBB",
   ".....................",
   ".....................",
   ".....................",
