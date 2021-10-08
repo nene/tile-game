@@ -33,11 +33,11 @@ export class Fireplace implements GameObject {
   }
 
   hitBox(): Rect {
-    return { coord: [0, -18], size: [48, 32] };
+    return { coord: [0, -22], size: [48, 32] };
   }
 
   boundingBox(): Rect {
-    return { coord: [1, 0], size: [46, 16] };
+    return { coord: [1, 0], size: [46, 12] };
   }
 
   onInteract() { }
