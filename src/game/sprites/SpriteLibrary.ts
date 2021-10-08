@@ -51,7 +51,7 @@ const imageFiles = {
 
   'table': spriteDef({ src: table, cfg: { size: [64, 22], colsRows: [1, 1], offset: [0, -6] } }),
   'fridge': spriteDef({ src: fridge, cfg: { size: [16, 45], colsRows: [1, 1], offset: [0, -32] } }),
-  'beer-cabinet': spriteDef({ src: beerCabinet, cfg: { size: [32, 45], colsRows: [1, 1], offset: [0, -32] } }),
+  'beer-cabinet': spriteDef({ src: beerCabinet, cfg: { size: [32, 46], colsRows: [1, 1], offset: [0, -32] } }),
   'beer-box': spriteDef({ src: beerBox, cfg: { size: [11, 14], colsRows: [1, 1], offset: [3, -4] } }),
   'door': spriteDef({ src: door, cfg: { size: [20, 35], colsRows: [1, 1], offset: [-2, -34] } }),
   'fireplace': spriteDef({ src: fireplace, cfg: { size: [48, 52], colsRows: [5, 1], offset: [0, -36] } }),
