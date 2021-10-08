@@ -11,6 +11,7 @@ import beerCabinet from "./data/beer-cabinet.png";
 import beerBox from "./data/beer-box.png";
 import door from "./data/door.png";
 import fireplace from "./data/fireplace.png";
+import countertop from "./data/countertop.png";
 import slot from "./data/slot.png";
 import scrollBar from "./data/scroll-bar.png";
 import cursor from "./data/cursor.png";
@@ -55,6 +56,7 @@ const imageFiles = {
   'beer-box': spriteDef({ src: beerBox, cfg: { size: [11, 14], colsRows: [1, 1], offset: [3, -4] } }),
   'door': spriteDef({ src: door, cfg: { size: [20, 35], colsRows: [1, 1], offset: [-2, -34] } }),
   'fireplace': spriteDef({ src: fireplace, cfg: { size: [48, 52], colsRows: [5, 1], offset: [0, -36] } }),
+  'countertop': spriteDef({ src: countertop, cfg: { size: [16, 55], colsRows: [1, 1], offset: [0, -23] } }),
 
   'slot': spriteDef({ src: slot, cfg: { size: [20, 20], colsRows: [2, 1] } }),
   'scroll-bar': spriteDef({ src: scrollBar, cfg: { size: [8, 8], colsRows: [5, 1] } }),
