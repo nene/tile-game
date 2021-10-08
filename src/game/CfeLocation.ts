@@ -26,8 +26,11 @@ export class CfeLocation implements GameLocation {
   private createStaticObjects(): GameObject[] {
     const objects: GameObject[] = [];
 
-    // long wall (the length of whole room)
-    objects.push(new Wall(tileToScreenCoord([0, 0]), CFE_SIZE[0]));
+    // Walls
+    objects.push(new Wall(tileToScreenCoord([0, 2]), 15));
+    objects.push(new Wall(tileToScreenCoord([15, 3]), 1));
+    objects.push(new Wall(tileToScreenCoord([15, 4]), 1));
+    objects.push(new Wall(tileToScreenCoord([15, 5]), 6));
 
     // A table
     objects.push(new Table(tileToScreenCoord([2, 8])));
@@ -40,9 +43,9 @@ export class CfeLocation implements GameLocation {
     // Fire
     objects.push(new Fireplace(tileToScreenCoord([9, 3])));
     // A door
-    objects.push(new Door(tileToScreenCoord([15, 3])));
+    objects.push(new Door(tileToScreenCoord([13, 3])));
     // Bar countertop
-    objects.push(new Countertop(tileToScreenCoord([17, 3])));
+    objects.push(new Countertop(tileToScreenCoord([15, 6])));
 
     return objects;
   }

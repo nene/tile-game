@@ -1,5 +1,4 @@
-import cfeWall from "./data/cfe-wall.png";
-import cfeFloor from "./data/cfe-floor.png";
+import cfeBg from "./data/cfe-bg.png";
 import cfeReb from "./data/cfe-reb.png";
 import cfeKsv1 from "./data/cfe-ksv-1.png";
 import cfeKsv2 from "./data/cfe-ksv-2.png";
@@ -40,8 +39,7 @@ const PLAYER_OFFSET: Coord = [-8, -30];
 const spriteDef = (x: { src: string, cfg: SpriteSheetConfig }) => x;
 
 const imageFiles = {
-  'cfe-wall': spriteDef({ src: cfeWall, cfg: { size: [16, 48], colsRows: [1, 1] } }),
-  'cfe-floor': spriteDef({ src: cfeFloor, cfg: { size: [16, 16], colsRows: [1, 1] } }),
+  'cfe-bg': spriteDef({ src: cfeBg, cfg: { size: [16, 16], colsRows: [4, 4] } }),
 
   'cfe-reb': spriteDef({ src: cfeReb, cfg: { size: PLAYER_SIZE, colsRows: [4, 4], offset: PLAYER_OFFSET } }),
 

@@ -1,23 +1,14 @@
-import { Coord, coordAdd, Rect } from "../Coord";
+import { Coord, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
-import { PixelScreen } from "../PixelScreen";
-import { Sprite } from "../sprites/Sprite";
-import { SpriteLibrary } from "../sprites/SpriteLibrary";
 
+// Invisible in itself, relies on the background map to render the wall itself
 export class Wall implements GameObject {
-  private sprite: Sprite;
-
   constructor(private coord: Coord, private widthInTiles: number = 1) {
-    this.sprite = SpriteLibrary.get("cfe-wall").getSprite([0, 0]);
   }
 
   tick() { }
 
-  paint(screen: PixelScreen) {
-    for (let i = 0; i < this.widthInTiles; i++) {
-      screen.drawSprite(this.sprite, coordAdd(this.coord, [i * 16, 0]));
-    }
-  }
+  paint() { }
 
   getCoord() {
     return this.coord;
@@ -32,11 +23,11 @@ export class Wall implements GameObject {
   }
 
   hitBox(): Rect {
-    return { coord: [0, 0], size: [16 * this.widthInTiles, 48] };
+    return { coord: [0, 0], size: [16 * this.widthInTiles, 16] };
   }
 
   boundingBox(): Rect {
-    return { coord: [0, 0], size: [16 * this.widthInTiles, 48] };
+    return { coord: [0, 0], size: [16 * this.widthInTiles, 16] };
   }
 
   onInteract() { }
