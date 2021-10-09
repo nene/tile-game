@@ -17,7 +17,9 @@ export class Fireplace implements GameObject {
   }
 
   paint(screen: PixelScreen) {
-    screen.drawSprite(this.animation.getSprite(), this.coord);
+    this.animation.getSprites().forEach((sprite) => {
+      screen.drawSprite(sprite, this.coord);
+    });
   }
 
   zIndex() {

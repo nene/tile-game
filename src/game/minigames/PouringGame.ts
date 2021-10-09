@@ -96,7 +96,9 @@ export class PouringGame implements MiniGame {
       const foamHeight = Math.floor(this.pouring.getFoamInGlass() * MAX_BEER_HEIGHT);
 
       screen.drawSprite(this.sprites.beerFoam, coordSub(MIN_LEVEL, [0, foamHeight + beerHeight]));
-      screen.drawSprite(this.beerAnimation.getSprite(), coordSub(MIN_LEVEL, [0, beerHeight]));
+      this.beerAnimation.getSprites().forEach((sprite) => {
+        screen.drawSprite(sprite, coordSub(MIN_LEVEL, [0, beerHeight]));
+      });
 
       this.drawTable(screen);
       screen.drawSprite(this.sprites.beerGlass, GLASS_COORD);

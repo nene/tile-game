@@ -1,4 +1,5 @@
 import { Coord } from "../Coord";
+import { Animation } from "./Animation";
 import { Sprite } from "./Sprite";
 import { SpriteSheet } from "./SpriteSheet";
 
@@ -14,7 +15,7 @@ interface FrameRange {
 }
 
 // An animated sprite
-export class SpriteAnimation {
+export class SpriteAnimation implements Animation {
   private frames: Coord[];
   private ticks = 0;
   private ticksPerFrame = 1;
@@ -27,8 +28,8 @@ export class SpriteAnimation {
     this.currentFrame = cfg.currentFrame ?? 0;
   }
 
-  public getSprite(): Sprite {
-    return this.spriteSheet.getSprite(this.frames[this.currentFrame]);
+  public getSprites(): Sprite[] {
+    return [this.spriteSheet.getSprite(this.frames[this.currentFrame])];
   }
 
   public tick() {

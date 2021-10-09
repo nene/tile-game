@@ -6,6 +6,11 @@ import { GameWorld } from "./GameWorld";
 import { SpriteLibrary } from "./sprites/SpriteLibrary";
 import { StorageInventory } from "./inventory/StorageInventory";
 import { BottleOpener } from "./items/BottleOpener";
+import { UiController } from "./UiController";
+import { BeerGlass, BeerLevel } from "./items/BeerGlass";
+import { DrinkAnimation } from "./sprites/DrinkAnimation";
+import { Animation } from "./sprites/Animation";
+import { GameItem } from "./items/GameItem";
 
 const max = Math.max;
 const min = Math.min;
@@ -23,7 +28,8 @@ export class Player implements GameObject {
   private walkLeft: SpriteAnimation;
   private walkBack: SpriteAnimation;
   private walkForward: SpriteAnimation;
-  private animation: SpriteAnimation;
+  private animation: Animation;
+  private itemAtHand?: GameItem;
   private inventory = new StorageInventory({ size: 5 });
 
   constructor(coord: Coord) {
@@ -50,6 +56,9 @@ export class Player implements GameObject {
   }
 
   handleKeyDown(key: string): boolean {
+    if (this.itemAtHand) {
+      return false;
+    }
     switch (key) {
       case "ArrowLeft":
         this.changeSpeed([-3, this.speed[1]]);
@@ -69,6 +78,9 @@ export class Player implements GameObject {
   }
 
   handleKeyUp(key: string): boolean {
+    if (this.itemAtHand) {
+      return false;
+    }
     switch (key) {
       case "ArrowLeft":
         this.changeSpeed([max(0, this.speed[0]), this.speed[1]]);
@@ -97,12 +109,15 @@ export class Player implements GameObject {
         up: this.walkBack,
         down: this.walkForward,
       });
-      if (this.isStanding(oldSpeed)) {
-        // started moving, begin new animation
-        this.animation.setFrame(0);
-      } else {
-        // was already moving, preserve current animation frame
-        this.animation.setFrame(oldAnimation.getFrame());
+      // A hack for now...
+      if (this.animation instanceof SpriteAnimation && oldAnimation instanceof SpriteAnimation) {
+        if (this.isStanding(oldSpeed)) {
+          // started moving, begin new animation
+          this.animation.setFrame(0);
+        } else {
+          // was already moving, preserve current animation frame
+          this.animation.setFrame(oldAnimation.getFrame());
+        }
       }
     }
     else {
@@ -147,6 +162,8 @@ export class Player implements GameObject {
   tick(world: GameWorld) {
     this.updatePosition(world);
     this.animation.tick();
+
+    this.maybeFinishDrinking();
   }
 
   private updatePosition(world: GameWorld) {
@@ -166,7 +183,9 @@ export class Player implements GameObject {
   }
 
   paint(screen: PixelScreen) {
-    screen.drawSprite(this.animation.getSprite(), this.coord);
+    this.animation.getSprites().forEach((sprite) => {
+      screen.drawSprite(sprite, this.coord);
+    });
   }
 
   zIndex(): number {
@@ -189,6 +208,20 @@ export class Player implements GameObject {
     return { coord: [-8, -3], size: [16, 5] };
   }
 
-  onInteract() {
+  onInteract(ui: UiController) {
+    const glass = ui.getSelectedItem();
+    if (glass instanceof BeerGlass && glass.getLevel() > BeerLevel.empty) {
+      this.itemAtHand = glass;
+      this.animation = new DrinkAnimation(glass, "cfe-reb");
+      ui.removeSelectedItem();
+    }
+  }
+
+  private maybeFinishDrinking() {
+    if (this.itemAtHand && this.animation.isFinished()) {
+      this.animation = this.standForward;
+      this.inventory.add(this.itemAtHand);
+      this.itemAtHand = undefined;
+    }
   }
 }

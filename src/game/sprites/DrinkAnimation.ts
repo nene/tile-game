@@ -2,8 +2,9 @@ import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary, SpriteName } from "../sprites/SpriteLibrary";
 import { BeerGlass, BeerLevel } from "../items/BeerGlass";
 import { coordAdd } from "../Coord";
+import { Animation } from "./Animation";
 
-export class DrinkAnimation {
+export class DrinkAnimation implements Animation {
   private ticks = 0;
   private isHandUp = false;
   private sprite: Sprite;

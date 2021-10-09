@@ -1,4 +1,4 @@
-import { fill } from "lodash";
+import { fill, negate } from "lodash";
 import { WritableInventory } from "./Inventory";
 import { GameItem } from "../items/GameItem";
 
@@ -20,6 +20,15 @@ export class StorageInventory implements WritableInventory {
   placeAt(index: number, item: GameItem) {
     if (!isFilledSlot(this.slots[index])) {
       this.slots[index] = item;
+    }
+  }
+
+  add(item: GameItem) {
+    const emptyIndex = this.slots.findIndex(negate(isFilledSlot));
+    if (emptyIndex > -1) {
+      this.slots[emptyIndex] = item;
+    } else {
+      throw new Error(`Inventory full, can't add ${item.getName()}`);
     }
   }
 
