@@ -1,53 +1,24 @@
 import { Activity, ActivityUpdates } from "./Activity";
-import { Sprite } from "../sprites/Sprite";
-import { SpriteLibrary } from "../sprites/SpriteLibrary";
-import { BeerGlass, BeerLevel } from "../items/BeerGlass";
-import { coordAdd } from "../Coord";
+import { BeerGlass } from "../items/BeerGlass";
 import { Character } from "../npc/Character";
+import { DrinkAnimation } from "../sprites/DrinkAnimation";
 
 export class DrinkActivity implements Activity {
   private ticks = 0;
   private isHandUp = false;
-  private sprite: Sprite;
-  private handSprite: Sprite;
+  private animation: DrinkAnimation;
 
-  constructor(private beer: BeerGlass, character: Character) {
-    this.sprite = SpriteLibrary.get(character.spriteSet).getSprite([1, 0]);
-    this.handSprite = SpriteLibrary.get(character.spriteSet).getSprite([2, 0]);
+  constructor(beer: BeerGlass, character: Character) {
+    this.animation = new DrinkAnimation(beer, character.spriteSet);
   }
 
   tick(): ActivityUpdates {
-    this.ticks++;
-    if (this.ticks > 10) {
-      this.ticks = 0;
-      this.isHandUp = !this.isHandUp;
-      if (!this.isHandUp && this.beer.getLevel() !== BeerLevel.empty) {
-        this.beer.drink();
-      }
-    }
-    return {
-      sprites: [this.sprite, this.getBeerSprite(), this.getHandSprite()],
-    };
-  }
-
-  private getHandSprite(): Sprite {
-    return this.spriteAtHandPosition(this.handSprite);
-  }
-
-  private getBeerSprite(): Sprite {
-    return this.spriteAtHandPosition(this.beer.getSmallSprite());
-  }
-
-  private spriteAtHandPosition(sprite: Sprite) {
-    if (this.isHandUp && this.beer.getLevel() !== BeerLevel.empty) {
-      return { ...sprite, offset: coordAdd(sprite.offset, [0, -2]) };
-    } else {
-      return sprite;
-    }
+    this.animation.tick();
+    return { sprites: this.animation.getSprites() };
   }
 
   isFinished() {
-    return this.beer.getLevel() === BeerLevel.empty;
+    return this.animation.isFinished();
   }
 
   interact() { }
