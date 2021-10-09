@@ -16,6 +16,8 @@ const MIN_LEVEL: Coord = [136, 176];
 const MAX_LEVEL: Coord = [136, 105];
 const MAX_BEER_HEIGHT = MIN_LEVEL[1] - MAX_LEVEL[1];
 const POURING_AREA: Rect = { coord: [136, 0], size: [47, 98] };
+const GLASS_AREA: Rect = { coord: [129, 92], size: [49 + 36, 78 + 6] };
+const TABLE_TOP = 170;
 const DEBUG = false;
 
 const NOISE_SCALE = 100;
@@ -114,7 +116,32 @@ export class PouringGame implements MiniGame {
   }
 
   private adjustedBottleCoord() {
-    return coordAdd(this.bottleCoord, this.bottleOffset());
+    let coord = coordAdd(this.bottleCoord, this.bottleOffset());
+    if (coord[1] > TABLE_TOP) {
+      coord = [coord[0], TABLE_TOP];
+    }
+    if (isCoordInRect(coord, GLASS_AREA)) {
+      return this.moveCoordOutOfRect(coord, GLASS_AREA);
+    }
+    return coord;
+  }
+
+  private moveCoordOutOfRect(coord: Coord, rect: Rect): Coord {
+    const r1 = rect.coord;
+    const r2 = coordAdd(rect.coord, rect.size);
+
+    const toLeft = coord[0] - r1[0];
+    const toRight = r2[0] - coord[0];
+    const toTop = coord[1] - r1[1];
+    if (toLeft < toRight && toLeft < toTop) {
+      return [r1[0], coord[1]];
+    }
+    else if (toRight < toLeft && toRight < toTop) {
+      return [r2[0], coord[1]];
+    }
+    else {
+      return [coord[0], r1[1]];
+    }
   }
 
   private bottleOffset(): Coord {
