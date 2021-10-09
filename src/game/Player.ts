@@ -8,7 +8,6 @@ import { UiController } from "./UiController";
 import { BeerGlass, BeerLevel } from "./items/BeerGlass";
 import { DrinkAnimation } from "./sprites/DrinkAnimation";
 import { Animation } from "./sprites/Animation";
-import { GameItem } from "./items/GameItem";
 import { PlayerAttributes } from "./PlayerAttributes";
 
 const max = Math.max;
@@ -22,7 +21,7 @@ export class Player implements GameObject {
   private standAnimations: Record<Direction, SpriteAnimation>;
   private walkAnimations: Record<Direction, SpriteAnimation>;
   private animation: Animation;
-  private itemAtHand?: GameItem;
+  private itemAtHand?: BeerGlass;
   private attributes = new PlayerAttributes();
 
   constructor(coord: Coord) {
@@ -205,6 +204,7 @@ export class Player implements GameObject {
     if (this.itemAtHand && this.animation.isFinished()) {
       this.animation = this.standAnimations.down;
       this.attributes.inventory.add(this.itemAtHand);
+      this.attributes.drunkenness.consume(this.itemAtHand);
       this.itemAtHand = undefined;
     }
   }

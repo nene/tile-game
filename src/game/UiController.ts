@@ -21,7 +21,7 @@ export class UiController {
   constructor(private attributes: PlayerAttributes) {
     this.inventoryController = new InventoryController(attributes.inventory, attributes.wallet);
     this.cursorController = new CursorController();
-    this.scoreBoard = new ScoreBoard([269, 0], attributes.wallet);
+    this.scoreBoard = new ScoreBoard([269, 0], attributes.wallet, attributes.drunkenness);
   }
 
   getSelectedItem(): GameItem | undefined {

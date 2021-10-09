@@ -1,5 +1,6 @@
 import { times } from "lodash";
 import { Coord, coordAdd } from "./Coord";
+import { Drunkenness } from "./Drunkenness";
 import { BeerLevel } from "./items/BeerGlass";
 import { PixelScreen } from "./PixelScreen";
 import { Sprite } from "./sprites/Sprite";
@@ -11,7 +12,7 @@ export class ScoreBoard {
   private bg: Sprite;
   private beerGlass: SpriteSheet;
 
-  constructor(private coord: Coord, private wallet: Wallet) {
+  constructor(private coord: Coord, private wallet: Wallet, private drunkenness: Drunkenness) {
     this.bg = SpriteLibrary.get("scoreboard").getSprite([0, 0]);
     this.beerGlass = SpriteLibrary.get("beer-glass-sm");
   }
@@ -28,7 +29,7 @@ export class ScoreBoard {
 
   private drawAlcoholLevel(screen: PixelScreen) {
     times(5, (i: number) => {
-      const level = i > 2 ? BeerLevel.full : BeerLevel.empty;
+      const level = 5 - i <= this.drunkenness.getLevel() ? BeerLevel.full : BeerLevel.empty;
       screen.drawSprite(this.beerGlass.getSprite([level, 0]), coordAdd(this.coord, [5 + i * 9, 29]));
     });
   }
