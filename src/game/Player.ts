@@ -195,7 +195,9 @@ export class Player implements GameObject {
     const glass = ui.getSelectedItem();
     if (glass instanceof BeerGlass && glass.getLevel() > BeerLevel.empty) {
       this.itemAtHand = glass;
-      this.animation = new DrinkAnimation(glass, "cfe-reb");
+      this.animation = new DrinkAnimation(glass, "cfe-reb", (beer) => {
+        this.attributes.drunkenness.sip(beer);
+      });
       ui.removeSelectedItem();
     }
   }
@@ -204,7 +206,6 @@ export class Player implements GameObject {
     if (this.itemAtHand && this.animation.isFinished()) {
       this.animation = this.standAnimations.down;
       this.attributes.inventory.add(this.itemAtHand);
-      this.attributes.drunkenness.consume(this.itemAtHand);
       this.itemAtHand = undefined;
     }
   }

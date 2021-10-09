@@ -3,6 +3,7 @@ import { SpriteLibrary, SpriteName } from "../sprites/SpriteLibrary";
 import { BeerGlass, BeerLevel } from "../items/BeerGlass";
 import { coordAdd } from "../Coord";
 import { Animation } from "./Animation";
+import { Beer } from "../items/Beer";
 
 export class DrinkAnimation implements Animation {
   private ticks = 0;
@@ -10,7 +11,7 @@ export class DrinkAnimation implements Animation {
   private sprite: Sprite;
   private handSprite: Sprite;
 
-  constructor(private beerGlass: BeerGlass, spriteName: SpriteName) {
+  constructor(private beerGlass: BeerGlass, spriteName: SpriteName, private onSip?: (beer: Beer) => void) {
     this.sprite = SpriteLibrary.get(spriteName).getSprite([1, 0]);
     this.handSprite = SpriteLibrary.get(spriteName).getSprite([2, 0]);
   }
@@ -21,6 +22,7 @@ export class DrinkAnimation implements Animation {
       this.ticks = 0;
       this.isHandUp = !this.isHandUp;
       if (!this.isHandUp && this.beerGlass.getLevel() !== BeerLevel.empty) {
+        this.onSip && this.onSip(this.beerGlass.getBeer() as Beer);
         this.beerGlass.drink();
       }
     }

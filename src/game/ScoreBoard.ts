@@ -29,8 +29,29 @@ export class ScoreBoard {
 
   private drawAlcoholLevel(screen: PixelScreen) {
     times(5, (i: number) => {
-      const level = 5 - i <= this.drunkenness.getLevel() ? BeerLevel.full : BeerLevel.empty;
+      const level = this.getBeerLevelForStep(4 - i);
       screen.drawSprite(this.beerGlass.getSprite([level, 0]), coordAdd(this.coord, [5 + i * 9, 29]));
     });
+  }
+
+  // alco level goes: 0...5
+  // seps go: 0..4
+  private getBeerLevelForStep(levelStep: number): BeerLevel {
+    const diff = this.drunkenness.getLevel() - levelStep;
+    if (diff >= 1) {
+      return BeerLevel.full;
+    }
+    if (diff >= 0.75) {
+      return BeerLevel.almostFull;
+    }
+    if (diff >= 0.5) {
+      return BeerLevel.half;
+    }
+    if (diff >= 0.25) {
+      return BeerLevel.almostEmpty;
+    }
+    else {
+      return BeerLevel.empty;
+    }
   }
 }
