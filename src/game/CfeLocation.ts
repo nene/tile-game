@@ -45,6 +45,8 @@ export class CfeLocation implements GameLocation {
 
     // Bar countertop
     objects.push(new Countertop(tileToScreenCoord([14, 6])));
+    // Notes
+    objects.push(new Painting(tileToScreenCoord([14, 6]), "bulletin-board"));
     // A storage of beer glasses
     objects.push(new BeerCabinet(tileToScreenCoord([16, 6])));
     // A fridge

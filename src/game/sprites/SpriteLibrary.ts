@@ -10,6 +10,7 @@ import beerCabinet from "./data/beer-cabinet.png";
 import beerBox from "./data/beer-box.png";
 import door from "./data/door.png";
 import colorShield from "./data/color-shield.png";
+import bulletinBoard from "./data/bulletin-board.png";
 import fireplace from "./data/fireplace.png";
 import countertop from "./data/countertop.png";
 import slot from "./data/slot.png";
@@ -55,6 +56,7 @@ const imageFiles = {
   'beer-box': spriteDef({ src: beerBox, cfg: { size: [11, 14], colsRows: [1, 1], offset: [3, -4] } }),
   'door': spriteDef({ src: door, cfg: { size: [20, 35], colsRows: [1, 1], offset: [-2, -34] } }),
   'color-shield': spriteDef({ src: colorShield, cfg: { size: [11, 12], colsRows: [1, 1], offset: [3, -40] } }),
+  'bulletin-board': spriteDef({ src: bulletinBoard, cfg: { size: [13, 17], colsRows: [1, 1], offset: [4, -40] } }),
   'fireplace': spriteDef({ src: fireplace, cfg: { size: [48, 52], colsRows: [5, 1], offset: [0, -36] } }),
   'countertop': spriteDef({ src: countertop, cfg: { size: [16, 55], colsRows: [1, 1], offset: [0, -23] } }),
 
