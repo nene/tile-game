@@ -18,6 +18,7 @@ const MAX_BEER_HEIGHT = MIN_LEVEL[1] - MAX_LEVEL[1];
 const POURING_AREA: Rect = { coord: [136, 0], size: [47, 98] };
 const GLASS_AREA: Rect = { coord: [129, 92], size: [49 + 36, 78 + 6] };
 const TABLE_TOP = 170;
+const BEER_COLOR = "rgba(245, 209, 153, 0.70)";
 const DEBUG = false;
 
 const NOISE_SCALE = 100;
@@ -33,6 +34,7 @@ export class PouringGame implements MiniGame {
   private pouring: PouringLogic;
   private tickCounter = 0;
   private noise: SimplexNoise;
+  private beerOnTable: Record<number, number> = {};
 
   constructor(private glass: BeerGlass, private bottle: BeerBottle) {
     this.sprites = {
@@ -58,12 +60,18 @@ export class PouringGame implements MiniGame {
         this.pouring.pourToGlass(this.getFlowRate());
       } else {
         this.pouring.pourToGround(this.getFlowRate());
+        this.addToTable(this.getFlowRate(), this.adjustedBottleCoord());
       }
     }
     if (this.isFinished()) {
       this.bottle.empty();
       this.glass.fill(this.bottle.getBeer(), this.getBeerLevel());
     }
+  }
+
+  private addToTable(rate: number, coord: Coord) {
+    const x = Math.floor(coord[0] / 8) * 8;
+    this.beerOnTable[x] = (this.beerOnTable[x] || 0) + rate;
   }
 
   private isPouringToGlass(): boolean {
@@ -103,6 +111,7 @@ export class PouringGame implements MiniGame {
       });
 
       this.drawTable(screen);
+      this.drawBeerOnTable(screen);
       screen.drawSprite(this.sprites.beerGlass, GLASS_COORD);
 
       screen.drawText("Pudelis veel: " + Math.round(this.pouring.getLiquidInBottle() * 100) + "%", [200, 5]);
@@ -211,6 +220,17 @@ export class PouringGame implements MiniGame {
     for (let x = 0; x < width; x++) {
       for (let y = 0; y < height; y++) {
         screen.drawSprite(sprite, coordAdd(rect.coord, tileToScreenCoord([x, y])));
+      }
+    }
+  }
+
+  private drawBeerOnTable(screen: PixelScreen) {
+    const len = screen.getSize()[0]
+    for (let i = 0; i < len; i += 8) {
+      const amount = this.beerOnTable[i];
+      if (amount) {
+        const size = amount * 10;
+        screen.drawRect({ coord: [i - Math.floor(size / 2), 176], size: [size, size] }, BEER_COLOR);
       }
     }
   }
