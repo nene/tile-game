@@ -34,7 +34,7 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
   const player = new Player([36, 64]);
   world.add(player);
 
-  const uiController = new UiController(player.getInventory());
+  const uiController = new UiController(player.getAttributes());
 
   const loops = new Loops();
   loops.runGameLoop(() => {

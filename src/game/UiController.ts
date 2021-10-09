@@ -1,4 +1,3 @@
-import { StorageInventory } from "./inventory/StorageInventory";
 import { PixelScreen } from "./PixelScreen";
 import { GameItem } from "./items/GameItem";
 import { InventoryController } from "./InventoryController";
@@ -8,21 +7,21 @@ import { CursorController } from "./CursorController";
 import { MiniGame } from "./minigames/MiniGame";
 import { ScoreBoard } from "./ScoreBoard";
 import { GameEvent } from "./GameEvent";
-import { Wallet } from "./Wallet";
 import { Inventory } from "./inventory/Inventory";
 import { Headline } from "./ui/Window";
 import { Character } from "./npc/Character";
+import { PlayerAttributes } from "./PlayerAttributes";
 
 export class UiController {
   private inventoryController: InventoryController;
   private cursorController: CursorController;
   private dialog?: Dialog;
-  private wallet = new Wallet(10);
-  private scoreBoard = new ScoreBoard([269, 0], this.wallet);
+  private scoreBoard: ScoreBoard;
 
-  constructor(playerInventory: StorageInventory) {
-    this.inventoryController = new InventoryController(playerInventory, this.wallet);
+  constructor(private attributes: PlayerAttributes) {
+    this.inventoryController = new InventoryController(attributes.inventory, attributes.wallet);
     this.cursorController = new CursorController();
+    this.scoreBoard = new ScoreBoard([269, 0], attributes.wallet);
   }
 
   getSelectedItem(): GameItem | undefined {
@@ -38,7 +37,7 @@ export class UiController {
   }
 
   giveMoney(amount: number) {
-    this.wallet.add(amount);
+    this.attributes.wallet.add(amount);
   }
 
   tick() {

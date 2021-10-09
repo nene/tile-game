@@ -4,13 +4,12 @@ import { Coord, coordAdd, coordConstrain, coordSub, Rect, rectTranslate } from "
 import { SpriteAnimation } from "./sprites/SpriteAnimation";
 import { GameWorld } from "./GameWorld";
 import { SpriteLibrary } from "./sprites/SpriteLibrary";
-import { StorageInventory } from "./inventory/StorageInventory";
-import { BottleOpener } from "./items/BottleOpener";
 import { UiController } from "./UiController";
 import { BeerGlass, BeerLevel } from "./items/BeerGlass";
 import { DrinkAnimation } from "./sprites/DrinkAnimation";
 import { Animation } from "./sprites/Animation";
 import { GameItem } from "./items/GameItem";
+import { PlayerAttributes } from "./PlayerAttributes";
 
 const max = Math.max;
 const min = Math.min;
@@ -24,7 +23,7 @@ export class Player implements GameObject {
   private walkAnimations: Record<Direction, SpriteAnimation>;
   private animation: Animation;
   private itemAtHand?: GameItem;
-  private inventory = new StorageInventory({ size: 5 });
+  private attributes = new PlayerAttributes();
 
   constructor(coord: Coord) {
     this.coord = coord;
@@ -44,12 +43,10 @@ export class Player implements GameObject {
     };
 
     this.animation = this.standAnimations.down;
-
-    this.inventory.placeAt(0, new BottleOpener());
   }
 
-  getInventory() {
-    return this.inventory;
+  getAttributes(): PlayerAttributes {
+    return this.attributes;
   }
 
   handleKeyDown(key: string): boolean {
@@ -207,7 +204,7 @@ export class Player implements GameObject {
   private maybeFinishDrinking() {
     if (this.itemAtHand && this.animation.isFinished()) {
       this.animation = this.standAnimations.down;
-      this.inventory.add(this.itemAtHand);
+      this.attributes.inventory.add(this.itemAtHand);
       this.itemAtHand = undefined;
     }
   }
