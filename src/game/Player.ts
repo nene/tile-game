@@ -20,14 +20,8 @@ type Direction = 'up' | 'down' | 'left' | 'right';
 export class Player implements GameObject {
   private coord: Coord;
   private speed: Coord;
-  private standRight: SpriteAnimation;
-  private standLeft: SpriteAnimation;
-  private standBack: SpriteAnimation;
-  private standForward: SpriteAnimation;
-  private walkRight: SpriteAnimation;
-  private walkLeft: SpriteAnimation;
-  private walkBack: SpriteAnimation;
-  private walkForward: SpriteAnimation;
+  private standAnimations: Record<Direction, SpriteAnimation>;
+  private walkAnimations: Record<Direction, SpriteAnimation>;
   private animation: Animation;
   private itemAtHand?: GameItem;
   private inventory = new StorageInventory({ size: 5 });
@@ -36,17 +30,20 @@ export class Player implements GameObject {
     this.coord = coord;
     this.speed = [0, 0];
 
-    this.standForward = new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: [[0, 0]] });
-    this.standBack = new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: [[0, 0]] });
-    this.standRight = new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: [[0, 0]] });
-    this.standLeft = new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: [[0, 0]] });
+    this.standAnimations = {
+      down: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: [[0, 0]] }),
+      up: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: [[0, 0]] }),
+      right: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: [[0, 0]] }),
+      left: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: [[0, 0]] }),
+    }
+    this.walkAnimations = {
+      down: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: { from: [0, 0], to: [0, 0] } }),
+      up: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: { from: [0, 0], to: [0, 0] } }),
+      right: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: { from: [0, 0], to: [0, 0] } }),
+      left: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: { from: [0, 0], to: [0, 0] } }),
+    };
 
-    this.walkForward = new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: { from: [0, 0], to: [0, 0] } });
-    this.walkBack = new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: { from: [0, 0], to: [0, 0] } });
-    this.walkRight = new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: { from: [0, 0], to: [0, 0] } });
-    this.walkLeft = new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: { from: [0, 0], to: [0, 0] } });
-
-    this.animation = this.standRight;
+    this.animation = this.standAnimations.down;
 
     this.inventory.placeAt(0, new BottleOpener());
   }
@@ -103,12 +100,7 @@ export class Player implements GameObject {
     const oldSpeed = this.speed;
     if (this.isMoving(newSpeed)) {
       const oldAnimation = this.animation;
-      this.animation = this.pickByDirection(newSpeed, {
-        right: this.walkRight,
-        left: this.walkLeft,
-        up: this.walkBack,
-        down: this.walkForward,
-      });
+      this.animation = this.pickByDirection(newSpeed, this.walkAnimations);
       // A hack for now...
       if (this.animation instanceof SpriteAnimation && oldAnimation instanceof SpriteAnimation) {
         if (this.isStanding(oldSpeed)) {
@@ -123,12 +115,7 @@ export class Player implements GameObject {
     else {
       if (this.isMoving(oldSpeed)) {
         // was moving, now stopped
-        this.animation = this.pickByDirection(oldSpeed, {
-          right: this.standRight,
-          left: this.standLeft,
-          up: this.standBack,
-          down: this.standForward,
-        });
+        this.animation = this.pickByDirection(oldSpeed, this.standAnimations);
       }
     }
     this.speed = newSpeed;
@@ -219,7 +206,7 @@ export class Player implements GameObject {
 
   private maybeFinishDrinking() {
     if (this.itemAtHand && this.animation.isFinished()) {
-      this.animation = this.standForward;
+      this.animation = this.standAnimations.down;
       this.inventory.add(this.itemAtHand);
       this.itemAtHand = undefined;
     }
