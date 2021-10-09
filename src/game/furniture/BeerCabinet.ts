@@ -4,7 +4,7 @@ import { StorageInventory } from "../inventory/StorageInventory";
 import { PixelScreen } from "../PixelScreen";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
-import { BeerGlass, BeerLevel } from "../items/BeerGlass";
+import { BeerGlass } from "../items/BeerGlass";
 import { UiController } from "../UiController";
 import { SoundLibrary } from "../sounds/SoundLibrary";
 
@@ -17,12 +17,12 @@ export class BeerCabinet implements GameObject {
     this.inventory = new StorageInventory({
       size: 12,
       items: [
-        new BeerGlass(BeerLevel.empty),
-        new BeerGlass(BeerLevel.empty),
-        new BeerGlass(BeerLevel.empty),
-        new BeerGlass(BeerLevel.empty),
-        new BeerGlass(BeerLevel.empty),
-        new BeerGlass(BeerLevel.empty),
+        new BeerGlass(),
+        new BeerGlass(),
+        new BeerGlass(),
+        new BeerGlass(),
+        new BeerGlass(),
+        new BeerGlass(),
       ],
     });
   }
