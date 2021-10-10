@@ -1,6 +1,6 @@
 import { Drunkenness } from "./Drunkenness";
 import { StorageInventory } from "./inventory/StorageInventory";
-import { BottleOpener } from "./items/BottleOpener";
+import { BottleOpener, BottleOpenerType } from "./items/BottleOpener";
 import { Wallet } from "./Wallet";
 
 export class PlayerAttributes {
@@ -9,6 +9,6 @@ export class PlayerAttributes {
   public readonly drunkenness = new Drunkenness();
 
   constructor() {
-    this.inventory.placeAt(0, new BottleOpener());
+    this.inventory.placeAt(0, new BottleOpener(BottleOpenerType.simple));
   }
 }

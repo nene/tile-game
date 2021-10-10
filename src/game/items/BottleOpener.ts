@@ -5,15 +5,23 @@ import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { BeerBottle } from "./BeerBottle";
 import { GameItem } from "./GameItem";
 
+export enum BottleOpenerType {
+  simple = 0,
+  attatched = 1,
+}
+
 export class BottleOpener implements GameItem {
   private sprite: Sprite;
 
-  constructor() {
-    this.sprite = SpriteLibrary.get("bottle-opener").getSprite([0, 0]);
+  constructor(private type: BottleOpenerType) {
+    this.sprite = SpriteLibrary.get("bottle-opener").getSprite([type, 0]);
   }
 
   getName() {
-    return "Pudeliavaja";
+    switch (this.type) {
+      case BottleOpenerType.simple: return "Pudeliavaja";
+      case BottleOpenerType.attatched: return "Konvendi pudeliavaja";
+    }
   }
 
   getSprite(): Sprite {
@@ -28,6 +36,6 @@ export class BottleOpener implements GameItem {
   }
 
   clone() {
-    return new BottleOpener();
+    return new BottleOpener(this.type);
   }
 }
