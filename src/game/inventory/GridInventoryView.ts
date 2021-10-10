@@ -4,6 +4,7 @@ import { InventoryView } from "./InventoryView";
 import { PixelScreen } from "../PixelScreen";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { SpriteSheet } from "../sprites/SpriteSheet";
+import { Sprite } from "../sprites/Sprite";
 
 interface GridInventoryViewCfg {
   inventory: Inventory;
@@ -38,7 +39,7 @@ export class GridInventoryView implements InventoryView {
       for (let y = 0; y < rows; y++) {
         for (let x = 0; x < cols; x++) {
           const slotCoord = coordAdd(startCoord, coordMul([21, 21], [x, y]));
-          screen.drawSprite(this.slotSprites.getSprite([0, 0]), slotCoord);
+          screen.drawSprite(this.getSlotSprite(), slotCoord);
           const item = this.inventory.itemAt(this.coordToIndex([x, y]));
           if (item) {
             screen.drawSprite(item.getSprite(), coordAdd(slotCoord, [2, 2]));
@@ -46,6 +47,10 @@ export class GridInventoryView implements InventoryView {
         }
       }
     });
+  }
+
+  private getSlotSprite(): Sprite {
+    return this.slotSprites.getSprite(this.inventory.isTakeable() ? [0, 0] : [1, 0]);
   }
 
   handleGameEvent() {
