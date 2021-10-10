@@ -1,4 +1,4 @@
-import { Coord, Rect } from "../Coord";
+import { Coord, coordAdd, coordMul, Rect, rectCenter } from "../Coord";
 import { PixelScreen } from "../PixelScreen";
 import { Inventory } from "./Inventory";
 import { InventoryView } from "./InventoryView";
@@ -19,7 +19,11 @@ export class StorageInventoryView implements InventoryView {
 
   constructor({ inventory, rect, size, headline }: StorageInventoryViewCfg) {
     this.window = new Window({ headline, rect });
-    this.grid = new GridInventoryView({ inventory, coord: this.window.contentAreaRect().coord, size });
+    this.grid = new GridInventoryView({ inventory, coord: this.gridRect(size, this.window.contentAreaRect()).coord, size });
+  }
+
+  private gridRect(gridSize: Coord, container: Rect): Rect {
+    return rectCenter({ coord: [0, 0], size: coordAdd(coordMul([21, 21], gridSize), [1, 1]) }, container);
   }
 
   paint(screen: PixelScreen) {
