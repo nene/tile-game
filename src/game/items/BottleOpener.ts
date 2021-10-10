@@ -44,4 +44,8 @@ export class BottleOpener implements GameItem {
       case BottleOpenerType.attatched: return 2;
     }
   }
+
+  hasRibbon(): boolean {
+    return this.type === BottleOpenerType.attatched;
+  }
 }

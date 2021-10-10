@@ -75,6 +75,7 @@ export class OpeningGame implements MiniGame {
       screen.drawSprite(this.bottleCapSprites.getSprite([this.captureStatus, 0]), this.bottleCoord);
     }
 
+    this.drawRibbon(screen);
     screen.drawSprite(this.openerSprite, this.openerCoord);
   }
 
@@ -128,6 +129,18 @@ export class OpeningGame implements MiniGame {
       for (let y = 0; y < height; y++) {
         screen.drawSprite(this.bgSprite, tileToScreenCoord([x, y]));
       }
+    }
+  }
+
+  private drawRibbon(screen: PixelScreen) {
+    if (this.opener.hasRibbon()) {
+      const ctx = screen.getContext();
+      ctx.strokeStyle = "#762323";
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      ctx.moveTo(...coordAdd(this.openerCoord, [19, 19]));
+      ctx.bezierCurveTo(180, 120, 320, 180, 300, 220);
+      ctx.stroke();
     }
   }
 }

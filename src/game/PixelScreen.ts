@@ -132,4 +132,8 @@ export class PixelScreen implements TextMeasurer {
   getSize(): Coord {
     return this.virtualSize;
   }
+
+  getContext(): CanvasRenderingContext2D {
+    return this.ctx;
+  }
 }
