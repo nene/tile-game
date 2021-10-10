@@ -51,6 +51,10 @@ export function coordDistance(coord1: Coord, coord2: Coord): number {
   return Math.sqrt(a * a + b * b);
 }
 
+export function coordFloor(coord: Coord): Coord {
+  return coord.map(Math.floor) as Coord;
+}
+
 export function isCoordInRect([x, y]: Coord, { coord: [x1, y1], size }: Rect): boolean {
   const [x2, y2] = coordAdd([x1, y1], coordSub(size, [1, 1]));
   return x >= x1 && y >= y1 && x <= x2 && y <= y2;
@@ -83,6 +87,11 @@ export function rectDistance({ coord: a1, size: aSize }: Rect, { coord: b1, size
   return Math.sqrt(xDistance ** 2 + yDistance ** 2);
 }
 
+export function rectCenter(rect: Rect, container: Rect): Rect {
+  const offset = coordFloor(coordDiv(coordSub(container.size, rect.size), [2, 2]));
+  return { coord: coordAdd(container.coord, offset), size: rect.size };
+}
+
 const TILE_SIZE: Coord = [16, 16];
 
 export function tileToScreenCoord(tileCoord: Coord): Coord {
@@ -90,7 +99,7 @@ export function tileToScreenCoord(tileCoord: Coord): Coord {
 }
 
 export function screenToTileCoord(screenCoord: Coord): Coord {
-  return screenToFractionalTileCoord(screenCoord).map(Math.floor) as Coord;
+  return coordFloor(screenToFractionalTileCoord(screenCoord));
 }
 
 export function screenToFractionalTileCoord(screenCoord: Coord): Coord {

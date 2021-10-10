@@ -1,4 +1,4 @@
-import { coordConstrain } from "./Coord";
+import { coordConstrain, rectCenter } from "./Coord";
 
 describe("coordConstrain()", () => {
   it("does nothing when coord inside the rectangle", () => {
@@ -21,5 +21,35 @@ describe("coordConstrain()", () => {
     expect(coordConstrain([5, 4], { coord: [10, 15], size: [10, 10] })).toEqual([10, 15]);
     expect(coordConstrain([30, 40], { coord: [10, 15], size: [10, 10] })).toEqual([20, 25]);
     expect(coordConstrain([2, 40], { coord: [10, 15], size: [10, 10] })).toEqual([10, 25]);
+  });
+});
+
+describe("rectCenter()", () => {
+  it("centers a small 0-positioned rectangle inside large 0-positioned rectangle", () => {
+    expect(rectCenter({ coord: [0, 0], size: [32, 32] }, { coord: [0, 0], size: [64, 96] })).toEqual({
+      coord: [16, 32],
+      size: [32, 32]
+    });
+  });
+
+  it("centers a small 0-positioned rectangle inside large 0-positioned rectangle (non-exact)", () => {
+    expect(rectCenter({ coord: [0, 0], size: [32, 32] }, { coord: [0, 0], size: [63, 63] })).toEqual({
+      coord: [15, 15],
+      size: [32, 32]
+    });
+  });
+
+  it("centers a small rectangle inside large rectangle", () => {
+    expect(rectCenter({ coord: [5, 5], size: [32, 32] }, { coord: [20, 25], size: [64, 64] })).toEqual({
+      coord: [36, 41],
+      size: [32, 32]
+    });
+  });
+
+  it("centers a large rectangle around small rectangle", () => {
+    expect(rectCenter({ coord: [0, 0], size: [64, 64] }, { coord: [36, 41], size: [32, 32] })).toEqual({
+      coord: [20, 25],
+      size: [64, 64]
+    });
   });
 });
