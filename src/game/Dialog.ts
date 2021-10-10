@@ -1,4 +1,4 @@
-import { Coord, coordAdd, isCoordInRect, Rect, rectGrow } from "./Coord";
+import { Coord, coordAdd, rectGrow } from "./Coord";
 import { Character } from "./npc/Character";
 import { PixelScreen } from "./PixelScreen";
 import { fitText } from "./ui/fitText";
@@ -6,7 +6,6 @@ import { UI_SHADOW_COLOR } from "./ui/ui-utils";
 import { Window } from "./ui/Window";
 
 export class Dialog {
-  private rect: Rect = { coord: [60, 100], size: [200, 100] };
   private window: Window;
 
   constructor(private character: Character, private text: string) {
@@ -15,7 +14,8 @@ export class Dialog {
         title: character.name + ":",
         description: "",
       },
-      rect: this.rect,
+      coord: [60, 100],
+      size: [200, 100],
     });
   }
 
@@ -34,6 +34,6 @@ export class Dialog {
   }
 
   isCoordInView(coord: Coord): boolean {
-    return isCoordInRect(coord, this.rect);
+    return this.window.isCoordInView(coord);
   }
 }

@@ -49,8 +49,8 @@ export class BeerBox implements GameObject {
     SoundLibrary.play("glass-bottles");
     ui.showInventory(this.inventory, new StorageInventoryView({
       inventory: this.inventory,
-      rect: { coord: [115, 45], size: [91, 87] },
-      size: [4, 3],
+      windowSize: [91, 87],
+      gridSize: [4, 3],
       headline: { title: "Õllekast", description: "Viska siia tühjad pudelid." }
     }));
   }

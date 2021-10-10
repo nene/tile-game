@@ -1,10 +1,11 @@
-import { Coord, coordAdd, coordSub, isCoordInRect, Rect, rectGrow } from "../Coord";
+import { Coord, coordAdd, coordSub, isCoordInRect, Rect, rectCenter, rectGrow } from "../Coord";
 import { PixelScreen } from "../PixelScreen";
 import { drawInset, drawUpset, UI_BG_COLOR, UI_SHADOW_COLOR } from "../ui/ui-utils";
 
 interface WindowCfg {
   headline: Headline;
-  rect: Rect;
+  coord?: Coord;
+  size: Coord;
 }
 
 export interface Headline {
@@ -18,9 +19,9 @@ export class Window {
   private headline: Headline;
   private rect: Rect;
 
-  constructor({ headline, rect }: WindowCfg) {
+  constructor({ headline, coord, size }: WindowCfg) {
     this.headline = headline;
-    this.rect = rect;
+    this.rect = coord ? { coord, size } : rectCenter({ coord: [0, 0], size }, { coord: [0, 0], size: [320, 200] });
   }
 
   paint(screen: PixelScreen) {

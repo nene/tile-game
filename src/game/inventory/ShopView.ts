@@ -16,7 +16,7 @@ export class ShopView implements InventoryView {
 
   constructor(shop: Shop, wallet: Wallet, headline: Headline) {
     this.window = new Window({
-      rect: { coord: [64, 16], size: [192, 129] },
+      size: [192, 129],
       headline,
     });
 

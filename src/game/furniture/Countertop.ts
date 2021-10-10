@@ -50,8 +50,8 @@ export class Countertop implements GameObject {
   onInteract(ui: UiController) {
     ui.showInventory(this.inventory, new StorageInventoryView({
       inventory: this.inventory,
-      rect: { coord: [115, 45], size: [91, 87] },
-      size: [1, 1],
+      windowSize: [91, 87],
+      gridSize: [1, 1],
       headline: { title: "Konvendi avaja", description: "Vaid koha peal kasutamiseks." }
     }));
   }
