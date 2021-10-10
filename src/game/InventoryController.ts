@@ -1,5 +1,5 @@
 import { PixelScreen, TextStyle } from "./PixelScreen";
-import { Inventory, WritableInventory } from "./inventory/Inventory";
+import { Inventory } from "./inventory/Inventory";
 import { InventoryView } from "./inventory/InventoryView";
 import { GridInventoryView } from "./inventory/GridInventoryView";
 import { Coord, coordAdd, coordSub, rectGrow } from "./Coord";
@@ -8,7 +8,7 @@ import { debounce } from "lodash";
 import { Overlay } from "./Overlay";
 import { MiniGame } from "./minigames/MiniGame";
 import { GameEvent } from "./GameEvent";
-import { Wallet } from "./Wallet";
+import { PlayerAttributes } from "./PlayerAttributes";
 
 export class InventoryController {
   private playerInventoryView: InventoryView;
@@ -19,9 +19,9 @@ export class InventoryController {
   private hoveredItem?: GameItem;
   private miniGame?: MiniGame;
 
-  constructor(private playerInventory: WritableInventory, private wallet: Wallet) {
+  constructor(private attributes: PlayerAttributes) {
     this.playerInventoryView = new GridInventoryView({
-      inventory: playerInventory,
+      inventory: this.attributes.inventory,
       coord: [107, 200 - 22],
       size: [5, 1],
     });
@@ -100,7 +100,7 @@ export class InventoryController {
     this.hoveredItem = undefined;
 
     if (this.playerInventoryView.isCoordInView(screenCoord)) {
-      this.handleInventoryClick(screenCoord, this.playerInventory, this.playerInventoryView);
+      this.handleInventoryClick(screenCoord, this.attributes.inventory, this.playerInventoryView);
       return true;
     }
     else if (this.objectInventory && this.objectInventoryView) {
@@ -125,7 +125,7 @@ export class InventoryController {
   }, 500);
 
   private getHoveredInventoryItem(coord: Coord): GameItem | undefined {
-    const item = this.getInventoryItemAtCoord(coord, this.playerInventory, this.playerInventoryView);
+    const item = this.getInventoryItemAtCoord(coord, this.attributes.inventory, this.playerInventoryView);
     if (item) {
       return item;
     }
@@ -150,10 +150,10 @@ export class InventoryController {
 
     const item = inventory.itemAt(slotIndex);
     if (item && !this.selectedItem) {
-      if (inventory.isTakeable() && (inventory === this.playerInventory || !this.playerInventory.isFull())) {
+      if (inventory.isTakeable() && (inventory === this.attributes.inventory || !this.attributes.inventory.isFull())) {
         // Take item from inventory
         // (only take from non-player-inventory when player-inventory has some room)
-        this.selectedItem = inventory.takeAt(slotIndex, this.wallet);
+        this.selectedItem = inventory.takeAt(slotIndex, this.attributes.wallet);
       }
     }
     else if (!item && this.selectedItem && inventory.isWritable()) {
@@ -169,6 +169,7 @@ export class InventoryController {
         this.miniGame = miniGame;
         // Ensure we start minigame with current mouse coordinate
         this.miniGame.handleGameEvent({ type: "mousemove", coord: this.mouseCoord });
+        this.miniGame.setHandShakeAmount(this.attributes.drunkenness.getHandShakeAmount());
       }
     }
   }

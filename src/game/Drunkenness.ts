@@ -15,4 +15,9 @@ export class Drunkenness {
   getLevel() {
     return this.level;
   }
+
+  // Returns number between 0...3
+  getHandShakeAmount(): number {
+    return Math.abs(2 - this.level);
+  }
 }

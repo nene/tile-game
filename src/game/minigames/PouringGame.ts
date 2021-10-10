@@ -35,6 +35,7 @@ export class PouringGame implements MiniGame {
   private tickCounter = 0;
   private noise: SimplexNoise;
   private beerOnTable: Record<number, number> = {};
+  private handShakeAmount = 0;
 
   constructor(private glass: BeerGlass, private bottle: BeerBottle) {
     this.sprites = {
@@ -49,6 +50,10 @@ export class PouringGame implements MiniGame {
     this.bottleCoord = [0, 0];
     this.pouring = new PouringLogic(bottle.getBeer().foam);
     this.noise = new SimplexNoise();
+  }
+
+  setHandShakeAmount(amount: number) {
+    this.handShakeAmount = amount;
   }
 
   tick() {

@@ -19,7 +19,7 @@ export class UiController {
   private scoreBoard: ScoreBoard;
 
   constructor(private attributes: PlayerAttributes) {
-    this.inventoryController = new InventoryController(attributes.inventory, attributes.wallet);
+    this.inventoryController = new InventoryController(attributes);
     this.cursorController = new CursorController();
     this.scoreBoard = new ScoreBoard([269, 0], attributes.wallet, attributes.drunkenness);
   }

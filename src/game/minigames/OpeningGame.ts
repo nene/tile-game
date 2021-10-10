@@ -34,6 +34,7 @@ export class OpeningGame implements MiniGame {
   private tickCounter = 0;
   private clicksAfterOpen = 0;
   private finishAtTick = 60 * 10; // Total amount of time for opening the bottle
+  private handShakeAmount = 0;
 
   constructor(private bottle: BeerBottle, private opener: BottleOpener) {
     this.bgSprite = SpriteLibrary.get("opening-game-bg").getSprite([0, 0]);
@@ -41,6 +42,10 @@ export class OpeningGame implements MiniGame {
     this.bottleCapSprites = SpriteLibrary.get("bottle-cap-xl");
     this.openerSprite = SpriteLibrary.get("bottle-opener-xl").getSprite([0, 0]);
     this.bottleCoord = this.nextBottleCoord();
+  }
+
+  setHandShakeAmount(amount: number) {
+    this.handShakeAmount = amount;
   }
 
   tick() {
