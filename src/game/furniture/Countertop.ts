@@ -1,6 +1,7 @@
 import { Coord, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
 import { StorageInventory } from "../inventory/StorageInventory";
+import { StorageInventoryView } from "../inventory/StorageInventoryView";
 import { BottleOpener, BottleOpenerType } from "../items/BottleOpener";
 import { PixelScreen } from "../PixelScreen";
 import { Sprite } from "../sprites/Sprite";
@@ -47,6 +48,11 @@ export class Countertop implements GameObject {
   }
 
   onInteract(ui: UiController) {
-    ui.showInventory(this.inventory, { title: "Konvendi avaja", description: "Vaid koha peal kasutamiseks." });
+    ui.showInventory(this.inventory, new StorageInventoryView({
+      inventory: this.inventory,
+      rect: { coord: [115, 45], size: [91, 87] },
+      size: [4, 3],
+      headline: { title: "Konvendi avaja", description: "Vaid koha peal kasutamiseks." }
+    }));
   }
 }

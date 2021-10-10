@@ -1,6 +1,7 @@
 import { Coord, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
 import { StorageInventory } from "../inventory/StorageInventory";
+import { StorageInventoryView } from "../inventory/StorageInventoryView";
 import { PixelScreen } from "../PixelScreen";
 import { SoundLibrary } from "../sounds/SoundLibrary";
 import { Sprite } from "../sprites/Sprite";
@@ -46,6 +47,11 @@ export class BeerBox implements GameObject {
 
   onInteract(ui: UiController) {
     SoundLibrary.play("glass-bottles");
-    ui.showInventory(this.inventory, { title: "Õllekast", description: "Viska siia tühjad pudelid." });
+    ui.showInventory(this.inventory, new StorageInventoryView({
+      inventory: this.inventory,
+      rect: { coord: [115, 45], size: [91, 87] },
+      size: [4, 3],
+      headline: { title: "Õllekast", description: "Viska siia tühjad pudelid." }
+    }));
   }
 }

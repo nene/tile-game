@@ -8,11 +8,7 @@ import { debounce } from "lodash";
 import { Overlay } from "./Overlay";
 import { MiniGame } from "./minigames/MiniGame";
 import { GameEvent } from "./GameEvent";
-import { Shop } from "./inventory/Shop";
-import { ShopView } from "./inventory/ShopView";
 import { Wallet } from "./Wallet";
-import { StorageInventoryView } from "./inventory/StorageInventoryView";
-import { Headline } from "./ui/Window";
 
 export class InventoryController {
   private playerInventoryView: InventoryView;
@@ -39,13 +35,9 @@ export class InventoryController {
     this.selectedItem = undefined;
   }
 
-  showInventory(inventory: Inventory, headline: Headline) {
+  showInventory(inventory: Inventory, view: InventoryView) {
     this.objectInventory = inventory;
-    if (inventory instanceof Shop) {
-      this.objectInventoryView = new ShopView(inventory, this.wallet, headline);
-    } else {
-      this.objectInventoryView = new StorageInventoryView({ inventory, rect: { coord: [115, 45], size: [91, 87] }, size: [4, 3], headline });
-    }
+    this.objectInventoryView = view;
   }
 
   getMiniGame(): MiniGame | undefined {

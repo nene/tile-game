@@ -7,6 +7,7 @@ import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { BeerGlass } from "../items/BeerGlass";
 import { UiController } from "../UiController";
 import { SoundLibrary } from "../sounds/SoundLibrary";
+import { StorageInventoryView } from "../inventory/StorageInventoryView";
 
 export class BeerCabinet implements GameObject {
   private sprite: Sprite;
@@ -55,6 +56,11 @@ export class BeerCabinet implements GameObject {
 
   onInteract(ui: UiController) {
     SoundLibrary.play('opening-cabinet-door');
-    ui.showInventory(this.inventory, { title: "Shoppeniriiul", description: "Haara siit paar kannu." });
+    ui.showInventory(this.inventory, new StorageInventoryView({
+      inventory: this.inventory,
+      rect: { coord: [115, 45], size: [91, 87] },
+      size: [4, 3],
+      headline: { title: "Shoppeniriiul", description: "Haara siit paar kannu." }
+    }));
   }
 }

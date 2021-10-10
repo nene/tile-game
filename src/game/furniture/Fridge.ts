@@ -1,6 +1,7 @@
 import { Coord, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
 import { Shop } from "../inventory/Shop";
+import { ShopView } from "../inventory/ShopView";
 import { getBeer } from "../items/Beer";
 import { BeerBottle } from "../items/BeerBottle";
 import { PixelScreen } from "../PixelScreen";
@@ -57,9 +58,9 @@ export class Fridge implements GameObject {
 
   onInteract(ui: UiController) {
     SoundLibrary.play('opening-fridge-door');
-    ui.showInventory(this.shop, {
+    ui.showInventory(this.shop, new ShopView(this.shop, ui.getAttributes().wallet, {
       title: "Külmkapp",
       description: "Kui märjukest võtad, siis ka õllekassasse mündi paned.",
-    });
+    }));
   }
 }

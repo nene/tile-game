@@ -8,7 +8,7 @@ import { MiniGame } from "./minigames/MiniGame";
 import { ScoreBoard } from "./ScoreBoard";
 import { GameEvent } from "./GameEvent";
 import { Inventory } from "./inventory/Inventory";
-import { Headline } from "./ui/Window";
+import { InventoryView } from "./inventory/InventoryView";
 import { Character } from "./npc/Character";
 import { PlayerAttributes } from "./PlayerAttributes";
 
@@ -32,12 +32,16 @@ export class UiController {
     this.inventoryController.removeSelectedItem();
   }
 
-  showInventory(inventory: Inventory, headline: Headline) {
-    this.inventoryController.showInventory(inventory, headline);
+  showInventory(inventory: Inventory, view: InventoryView) {
+    this.inventoryController.showInventory(inventory, view);
   }
 
   giveMoney(amount: number) {
     this.attributes.wallet.add(amount);
+  }
+
+  getAttributes(): PlayerAttributes {
+    return this.attributes;
   }
 
   tick() {
