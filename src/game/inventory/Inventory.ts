@@ -5,11 +5,15 @@ export interface Inventory {
   size: () => number;
   allItems: () => GameItem[];
   itemAt: (index: number) => GameItem | undefined;
-  takeAt: (index: number, wallet: Wallet) => GameItem | undefined;
   isWritable: () => this is WritableInventory;
+  isTakeable: () => this is TakeableInventory;
 }
 
-export interface WritableInventory extends Inventory {
+export interface TakeableInventory extends Inventory {
+  takeAt: (index: number, wallet: Wallet) => GameItem | undefined;
+}
+
+export interface WritableInventory extends TakeableInventory {
   placeAt: (index: number, item: GameItem) => void;
   isFull: () => boolean;
 }

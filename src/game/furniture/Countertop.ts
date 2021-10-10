@@ -1,6 +1,6 @@
 import { Coord, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
-import { StorageInventory } from "../inventory/StorageInventory";
+import { StaticInventory } from "../inventory/StaticInventory";
 import { StorageInventoryView } from "../inventory/StorageInventoryView";
 import { BottleOpener, BottleOpenerType } from "../items/BottleOpener";
 import { PixelScreen } from "../PixelScreen";
@@ -10,7 +10,7 @@ import { UiController } from "../UiController";
 
 export class Countertop implements GameObject {
   private sprite: Sprite;
-  private inventory = new StorageInventory({
+  private inventory = new StaticInventory({
     size: 1,
     items: [
       new BottleOpener(BottleOpenerType.attatched),
@@ -51,7 +51,7 @@ export class Countertop implements GameObject {
     ui.showInventory(this.inventory, new StorageInventoryView({
       inventory: this.inventory,
       rect: { coord: [115, 45], size: [91, 87] },
-      size: [4, 3],
+      size: [1, 1],
       headline: { title: "Konvendi avaja", description: "Vaid koha peal kasutamiseks." }
     }));
   }

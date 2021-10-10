@@ -1,11 +1,10 @@
-import { fill, negate } from "lodash";
-import { WritableInventory } from "./Inventory";
+import { fill } from "lodash";
+import { Inventory } from "./Inventory";
 import { GameItem } from "../items/GameItem";
 
 type Slot = GameItem | undefined;
 
-// Inventory for storing various items, like a chest
-export class StorageInventory implements WritableInventory {
+export class StaticInventory implements Inventory {
   private slots: Slot[];
   private _size: number;
 
@@ -17,27 +16,12 @@ export class StorageInventory implements WritableInventory {
     });
   }
 
-  placeAt(index: number, item: GameItem) {
-    if (!isFilledSlot(this.slots[index])) {
-      this.slots[index] = item;
-    }
-  }
-
-  add(item: GameItem) {
-    const emptyIndex = this.slots.findIndex(negate(isFilledSlot));
-    if (emptyIndex > -1) {
-      this.slots[emptyIndex] = item;
-    } else {
-      throw new Error(`Inventory full, can't add ${item.getName()}`);
-    }
-  }
-
   isWritable() {
-    return true;
+    return false;
   }
 
   isTakeable() {
-    return true;
+    return false;
   }
 
   takeAt(index: number) {
@@ -56,10 +40,6 @@ export class StorageInventory implements WritableInventory {
 
   allItems() {
     return this.slots.filter(isFilledSlot);
-  }
-
-  isFull() {
-    return this._size === this.allItems().length;
   }
 }
 

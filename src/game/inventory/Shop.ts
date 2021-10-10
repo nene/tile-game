@@ -1,8 +1,8 @@
 import { BeerBottle } from "../items/BeerBottle";
 import { Wallet } from "../Wallet";
-import { Inventory } from "./Inventory";
+import { TakeableInventory } from "./Inventory";
 
-export class Shop implements Inventory {
+export class Shop implements TakeableInventory {
   constructor(private items: BeerBottle[]) {
   }
 
@@ -29,6 +29,10 @@ export class Shop implements Inventory {
 
   isWritable() {
     return false;
+  }
+
+  isTakeable() {
+    return true;
   }
 
   allItems() {

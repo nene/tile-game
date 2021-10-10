@@ -150,7 +150,7 @@ export class InventoryController {
 
     const item = inventory.itemAt(slotIndex);
     if (item && !this.selectedItem) {
-      if (inventory === this.playerInventory || !this.playerInventory.isFull()) {
+      if (inventory.isTakeable() && (inventory === this.playerInventory || !this.playerInventory.isFull())) {
         // Take item from inventory
         // (only take from non-player-inventory when player-inventory has some room)
         this.selectedItem = inventory.takeAt(slotIndex, this.wallet);
