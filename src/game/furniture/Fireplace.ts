@@ -39,7 +39,7 @@ export class Fireplace implements GameObject {
   }
 
   boundingBox(): Rect {
-    return { coord: [1, 0], size: [46, 12] };
+    return { coord: [1, 0], size: [62, 12] };
   }
 
   onInteract() { }
