@@ -21,8 +21,8 @@ const TABLE_TOP = 170;
 const BEER_COLOR = "rgba(245, 209, 153, 0.70)";
 const DEBUG = false;
 
-const NOISE_SCALE = 100;
-const BOTTLE_MAX_MOVEMENT: Coord = [40, 25]; // +/- movement in each direction
+const HAND_NOISE_SCALE = 10;
+const HAND_MAX_SHAKE: Coord = [40, 25]; // +/- movement in each direction: ;
 
 export class PouringGame implements MiniGame {
   private sprites: Record<"bg" | "table" | "bottle" | "beerGlass" | "beerFoam", Sprite>;
@@ -159,9 +159,11 @@ export class PouringGame implements MiniGame {
   }
 
   private bottleOffset(): Coord {
-    const x = this.noise.noise2D(this.tickCounter / NOISE_SCALE, 1);
-    const y = this.noise.noise2D(1, this.tickCounter / NOISE_SCALE);
-    return coordMul([x, y], BOTTLE_MAX_MOVEMENT).map(Math.floor) as Coord;
+    const shake = coordMul(HAND_MAX_SHAKE, [this.handShakeAmount, this.handShakeAmount]);
+    const scale = HAND_NOISE_SCALE / this.handShakeAmount;
+    const x = this.noise.noise2D(this.tickCounter / scale, 1);
+    const y = this.noise.noise2D(1, this.tickCounter / scale);
+    return coordMul([x, y], shake).map(Math.floor) as Coord;
   }
 
   handleGameEvent({ type, coord }: GameEvent): boolean | undefined {
