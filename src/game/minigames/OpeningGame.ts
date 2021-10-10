@@ -28,7 +28,6 @@ export class OpeningGame implements MiniGame {
   private bottleCoord: Coord;
   private openerCoord: Coord;
   private captureStatus = CaptureStatus.miss;
-  private captureThreshold = 5;
   private noise: SimplexNoise;
   private tickCounter = 0;
   private clicksAfterOpen = 0;
@@ -120,7 +119,7 @@ export class OpeningGame implements MiniGame {
 
   private checkCaptureStatus(): CaptureStatus {
     const distance = coordDistance(this.bottleCoord, this.openerCoord);
-    return distance < this.captureThreshold ? CaptureStatus.hit : CaptureStatus.miss;
+    return distance < this.opener.getCaptureDistance() ? CaptureStatus.hit : CaptureStatus.miss;
   }
 
   private drawBackground(screen: PixelScreen) {

@@ -37,4 +37,11 @@ export class BottleOpener implements GameItem {
   clone() {
     return new BottleOpener(this.type);
   }
+
+  getCaptureDistance(): number {
+    switch (this.type) {
+      case BottleOpenerType.simple: return 5;
+      case BottleOpenerType.attatched: return 2;
+    }
+  }
 }
