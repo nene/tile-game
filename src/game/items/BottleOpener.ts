@@ -28,11 +28,10 @@ export class BottleOpener implements GameItem {
     return this.sprite;
   }
 
-  combine(item: GameItem): GameItem[] | MiniGame {
+  combine(item: GameItem): MiniGame | undefined {
     if (item instanceof BeerBottle && !item.isOpen()) {
       return new OpeningGame(item, this);
     }
-    return [];
   }
 
   clone() {

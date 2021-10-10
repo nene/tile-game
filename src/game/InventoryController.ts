@@ -161,24 +161,12 @@ export class InventoryController {
       inventory.placeAt(slotIndex, this.selectedItem);
       this.selectedItem = undefined;
     }
-    else if (item && this.selectedItem && inventory.isWritable()) {
+    else if (item && this.selectedItem && inventory.isCombinable()) {
       // Combine these items if possible
-      const combinedItems = item.combine(this.selectedItem);
-      if (combinedItems instanceof Array) {
-        if (combinedItems.length > 0) {
-          inventory.takeAt(slotIndex, this.wallet);
-          inventory.placeAt(slotIndex, combinedItems[0]);
-          this.selectedItem = combinedItems[1]; // possibly nothing
-        }
-        else {
-          // Otherwise swap item at hand with item in inventory
-          inventory.takeAt(slotIndex, this.wallet);
-          inventory.placeAt(slotIndex, this.selectedItem);
-          this.selectedItem = item;
-        }
-      } else {
+      const miniGame = item.combine(this.selectedItem);
+      if (miniGame) {
         // A minigame is used for combining
-        this.miniGame = combinedItems;
+        this.miniGame = miniGame;
         // Ensure we start minigame with current mouse coordinate
         this.miniGame.handleGameEvent({ type: "mousemove", coord: this.mouseCoord });
       }

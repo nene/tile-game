@@ -25,11 +25,10 @@ export class BeerGlass implements GameItem {
     this.smallSpriteSheet = SpriteLibrary.get("beer-glass-sm");
   }
 
-  combine(item: GameItem): GameItem[] | MiniGame {
+  combine(item: GameItem): MiniGame | undefined {
     if (item instanceof BeerBottle && !item.isEmpty() && item.isOpen() && this.level === BeerLevel.empty) {
       return new PouringGame(this, item);
     }
-    return [];
   }
 
   getName() {

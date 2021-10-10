@@ -55,14 +55,13 @@ export class BeerBottle implements GameItem {
     }
   }
 
-  combine(item: GameItem): GameItem[] | MiniGame {
+  combine(item: GameItem): MiniGame | undefined {
     if (item instanceof BeerGlass) {
       return item.combine(this); // Keep main logic in beer-glass
     }
     if (item instanceof BottleOpener) {
       return item.combine(this); // Keep main logic in bottle-opener
     }
-    return [];
   }
 
   clone() {

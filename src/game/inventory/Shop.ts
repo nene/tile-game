@@ -35,6 +35,10 @@ export class Shop implements TakeableInventory {
     return true;
   }
 
+  isCombinable() {
+    return false;
+  }
+
   allItems() {
     return this.items;
   }

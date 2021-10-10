@@ -24,6 +24,10 @@ export class StaticInventory implements Inventory {
     return false;
   }
 
+  isCombinable() {
+    return true;
+  }
+
   takeAt(index: number) {
     const item = this.slots[index];
     this.slots[index] = undefined;

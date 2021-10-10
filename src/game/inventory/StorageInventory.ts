@@ -40,6 +40,10 @@ export class StorageInventory implements WritableInventory {
     return true;
   }
 
+  isCombinable() {
+    return true;
+  }
+
   takeAt(index: number) {
     const item = this.slots[index];
     this.slots[index] = undefined;

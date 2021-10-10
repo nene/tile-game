@@ -7,6 +7,7 @@ export interface Inventory {
   itemAt: (index: number) => GameItem | undefined;
   isWritable: () => this is WritableInventory;
   isTakeable: () => this is TakeableInventory;
+  isCombinable: () => boolean;
 }
 
 export interface TakeableInventory extends Inventory {
