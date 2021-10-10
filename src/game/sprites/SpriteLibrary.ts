@@ -57,7 +57,7 @@ const imageFiles = {
   'door': spriteDef({ src: door, cfg: { size: [20, 35], colsRows: [1, 1], offset: [-2, -34] } }),
   'color-shield': spriteDef({ src: colorShield, cfg: { size: [11, 12], colsRows: [1, 1], offset: [3, -40] } }),
   'bulletin-board': spriteDef({ src: bulletinBoard, cfg: { size: [13, 17], colsRows: [1, 1], offset: [4, -40] } }),
-  'fireplace': spriteDef({ src: fireplace, cfg: { size: [48, 52], colsRows: [5, 1], offset: [0, -36] } }),
+  'fireplace': spriteDef({ src: fireplace, cfg: { size: [64, 52], colsRows: [5, 1], offset: [0, -36] } }),
   'countertop': spriteDef({ src: countertop, cfg: { size: [16, 55], colsRows: [1, 1], offset: [0, -23] } }),
 
   'slot': spriteDef({ src: slot, cfg: { size: [20, 20], colsRows: [2, 1] } }),
