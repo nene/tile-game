@@ -31,7 +31,7 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
 
   const world = new GameWorld(location);
 
-  const player = new Player([36, 64]);
+  const player = new Player([286, 113]);
   world.add(player);
 
   const uiController = new UiController(player.getAttributes());
