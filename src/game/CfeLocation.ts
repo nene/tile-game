@@ -8,6 +8,7 @@ import { Table } from "./furniture/Table";
 import { Wall } from "./furniture/Wall";
 import { BeerBox } from "./furniture/BeerBox";
 import { Door } from "./furniture/Door";
+import { Sofa } from "./furniture/Sofa";
 import { Fireplace } from "./furniture/Fireplace";
 import { Countertop } from "./furniture/Countertop";
 import { Painting } from "./furniture/Painting";
@@ -38,6 +39,8 @@ export class CfeLocation implements GameLocation {
     // A table
     objects.push(new Table(tileToScreenCoord([4, 7])));
     objects.push(new Table(tileToScreenCoord([0, 11])));
+    // Sofa
+    objects.push(new Sofa(tileToScreenCoord([3, 3])));
     // Fire
     objects.push(new Fireplace(tileToScreenCoord([6, 3])));
     // A door

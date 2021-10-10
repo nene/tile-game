@@ -13,6 +13,7 @@ import colorShield from "./data/color-shield.png";
 import bulletinBoard from "./data/bulletin-board.png";
 import fireplace from "./data/fireplace.png";
 import countertop from "./data/countertop.png";
+import sofa from "./data/sofa.png";
 import slot from "./data/slot.png";
 import scrollBar from "./data/scroll-bar.png";
 import cursor from "./data/cursor.png";
@@ -59,6 +60,7 @@ const imageFiles = {
   'bulletin-board': spriteDef({ src: bulletinBoard, cfg: { size: [13, 17], colsRows: [1, 1], offset: [4, -40] } }),
   'fireplace': spriteDef({ src: fireplace, cfg: { size: [64, 52], colsRows: [5, 1], offset: [0, -36] } }),
   'countertop': spriteDef({ src: countertop, cfg: { size: [16, 55], colsRows: [1, 1], offset: [0, -23] } }),
+  'sofa': spriteDef({ src: sofa, cfg: { size: [48, 26], colsRows: [1, 1], offset: [0, -15] } }),
 
   'slot': spriteDef({ src: slot, cfg: { size: [20, 20], colsRows: [2, 1] } }),
   'scroll-bar': spriteDef({ src: scrollBar, cfg: { size: [8, 8], colsRows: [5, 1] } }),
