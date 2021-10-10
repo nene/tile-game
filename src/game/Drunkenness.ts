@@ -16,8 +16,8 @@ export class Drunkenness {
     return this.level;
   }
 
-  // Returns number between 0...3
+  // Returns number between 0...1
   getHandShakeAmount(): number {
-    return Math.abs(2 - this.level);
+    return Math.abs(2 - this.level) / 3;
   }
 }

@@ -16,10 +16,11 @@ enum CaptureStatus {
 }
 
 const NOISE_SCALE = 100;
+const HAND_NOISE_SCALE = 10;
 
 const BOTTLE_START_COORD: Coord = [100, 100];
 const BOTTLE_MAX_MOVEMENT: Coord = [100, 100]; // +/- movement in each direction
-const HAND_MAX_SHAKE: Coord = [40, 40];
+const HAND_MAX_SHAKE = 40;
 
 export class OpeningGame implements MiniGame {
   private bgSprite: Sprite;
@@ -114,9 +115,13 @@ export class OpeningGame implements MiniGame {
   }
 
   private handShake(): Coord {
-    const x = this.handNoise.noise2D(this.tickCounter / NOISE_SCALE, 1);
-    const y = this.handNoise.noise2D(1, this.tickCounter / NOISE_SCALE);
-    return coordMul([x, y], HAND_MAX_SHAKE).map(Math.floor) as Coord;
+    if (this.handShakeAmount === 0) {
+      return [0, 0];
+    }
+    const shake = HAND_MAX_SHAKE * this.handShakeAmount;
+    const scale = HAND_NOISE_SCALE / this.handShakeAmount;
+    const x = this.handNoise.noise2D(this.tickCounter / scale, 1);
+    return coordMul([x, -x], [shake, shake]).map(Math.floor) as Coord;
   }
 
   private handleMouseDown(coord: Coord) {
