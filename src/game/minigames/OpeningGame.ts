@@ -19,6 +19,7 @@ const NOISE_SCALE = 100;
 
 const BOTTLE_START_COORD: Coord = [100, 100];
 const BOTTLE_MAX_MOVEMENT: Coord = [100, 100]; // +/- movement in each direction
+const HAND_MAX_SHAKE: Coord = [40, 40];
 
 export class OpeningGame implements MiniGame {
   private bgSprite: Sprite;
@@ -26,9 +27,10 @@ export class OpeningGame implements MiniGame {
   private bottleCapSprites: SpriteSheet;
   private openerSprite: Sprite;
   private bottleCoord: Coord;
-  private openerCoord: Coord;
+  private mouseCoord: Coord = [0, 0];
   private captureStatus = CaptureStatus.miss;
-  private noise: SimplexNoise;
+  private noise = new SimplexNoise();
+  private handNoise = new SimplexNoise();
   private tickCounter = 0;
   private clicksAfterOpen = 0;
   private finishAtTick = 60 * 10; // Total amount of time for opening the bottle
@@ -38,9 +40,7 @@ export class OpeningGame implements MiniGame {
     this.bottleSprite = SpriteLibrary.get("bottle-xl").getSprite([0, 0]);
     this.bottleCapSprites = SpriteLibrary.get("bottle-cap-xl");
     this.openerSprite = SpriteLibrary.get("bottle-opener-xl").getSprite([0, 0]);
-    this.noise = new SimplexNoise();
     this.bottleCoord = this.nextBottleCoord();
-    this.openerCoord = [0, 0];
   }
 
   tick() {
@@ -69,14 +69,14 @@ export class OpeningGame implements MiniGame {
 
     if (this.bottle.isOpen()) {
       // For open bottle, keep the cap inside opener
-      screen.drawSprite(this.bottleCapSprites.getSprite([0, 0]), this.openerCoord);
+      screen.drawSprite(this.bottleCapSprites.getSprite([0, 0]), this.openerCoord());
     } else {
       // For closed bottle, keep the cap on the bottle
       screen.drawSprite(this.bottleCapSprites.getSprite([this.captureStatus, 0]), this.bottleCoord);
     }
 
     this.drawRibbon(screen);
-    screen.drawSprite(this.openerSprite, this.openerCoord);
+    screen.drawSprite(this.openerSprite, this.openerCoord());
   }
 
   handleGameEvent({ type, coord }: GameEvent): boolean | undefined {
@@ -100,12 +100,22 @@ export class OpeningGame implements MiniGame {
   }
 
   private handleMouseMove(coord: Coord) {
-    this.openerCoord = coord;
+    this.mouseCoord = coord;
     this.captureStatus = this.checkCaptureStatus();
   }
 
+  private openerCoord(): Coord {
+    return coordAdd(this.mouseCoord, this.handShake());
+  }
+
+  private handShake(): Coord {
+    const x = this.handNoise.noise2D(this.tickCounter / NOISE_SCALE, 1);
+    const y = this.handNoise.noise2D(1, this.tickCounter / NOISE_SCALE);
+    return coordMul([x, y], HAND_MAX_SHAKE).map(Math.floor) as Coord;
+  }
+
   private handleMouseDown(coord: Coord) {
-    this.openerCoord = coord;
+    this.mouseCoord = coord;
     this.captureStatus = this.checkCaptureStatus();
     if (this.captureStatus === CaptureStatus.hit && !this.bottle.isOpen()) {
       this.finishAtTick = this.tickCounter + 50; // Wait max 5 seconds before closing the minigame screen
@@ -119,7 +129,7 @@ export class OpeningGame implements MiniGame {
   }
 
   private checkCaptureStatus(): CaptureStatus {
-    const distance = coordDistance(this.bottleCoord, this.openerCoord);
+    const distance = coordDistance(this.bottleCoord, this.openerCoord());
     return distance < this.opener.getCaptureDistance() ? CaptureStatus.hit : CaptureStatus.miss;
   }
 
@@ -138,7 +148,7 @@ export class OpeningGame implements MiniGame {
       ctx.strokeStyle = "#762323";
       ctx.lineWidth = 4;
       ctx.beginPath();
-      ctx.moveTo(...coordAdd(this.openerCoord, [19, 19]));
+      ctx.moveTo(...coordAdd(this.openerCoord(), [19, 19]));
       ctx.bezierCurveTo(180, 120, 320, 180, 300, 220);
       ctx.stroke();
     }
