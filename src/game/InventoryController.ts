@@ -2,7 +2,7 @@ import { PixelScreen, TextStyle } from "./PixelScreen";
 import { Inventory } from "./inventory/Inventory";
 import { InventoryView } from "./inventory/InventoryView";
 import { GridInventoryView } from "./inventory/GridInventoryView";
-import { Coord, coordAdd, coordSub, rectGrow } from "./Coord";
+import { Coord, coordAdd, coordSub, isCoordInRect, rectGrow } from "./Coord";
 import { GameItem } from "./items/GameItem";
 import { debounce } from "lodash";
 import { Overlay } from "./Overlay";
@@ -99,12 +99,12 @@ export class InventoryController {
   private handleClick(screenCoord: Coord): boolean {
     this.hoveredItem = undefined;
 
-    if (this.playerInventoryView.isCoordInView(screenCoord)) {
+    if (isCoordInRect(screenCoord, this.playerInventoryView.getRect())) {
       this.handleInventoryClick(screenCoord, this.attributes.inventory, this.playerInventoryView);
       return true;
     }
     else if (this.objectInventory && this.objectInventoryView) {
-      if (this.objectInventoryView.isCoordInView(screenCoord)) {
+      if (isCoordInRect(screenCoord, this.objectInventoryView.getRect())) {
         this.handleInventoryClick(screenCoord, this.objectInventory, this.objectInventoryView);
       } else {
         this.hideInventory();
@@ -136,7 +136,7 @@ export class InventoryController {
   }
 
   private getInventoryItemAtCoord(coord: Coord, inventory: Inventory, inventoryView: InventoryView): GameItem | undefined {
-    if (inventoryView.isCoordInView(coord)) {
+    if (isCoordInRect(coord, inventoryView.getRect())) {
       return inventory.itemAt(inventoryView.getSlotIndexAtCoord(coord));
     }
     return undefined;

@@ -1,10 +1,10 @@
-import { Coord } from "../Coord";
+import { Coord, Rect } from "../Coord";
 import { GameEvent } from "../GameEvent";
 import { PixelScreen } from "../PixelScreen";
 
 export interface InventoryView {
   paint: (screen: PixelScreen) => void;
   handleGameEvent: (event: GameEvent) => boolean | undefined;
-  isCoordInView: (screenCoord: Coord) => boolean;
+  getRect: () => Rect;
   getSlotIndexAtCoord: (screenCoord: Coord) => number;
 }

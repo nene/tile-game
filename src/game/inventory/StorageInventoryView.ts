@@ -35,8 +35,8 @@ export class StorageInventoryView implements InventoryView {
     return undefined;
   }
 
-  isCoordInView(coord: Coord): boolean {
-    return this.window.isCoordInView(coord);
+  getRect(): Rect {
+    return this.window.getRect();
   }
 
   getSlotIndexAtCoord(coord: Coord): number {

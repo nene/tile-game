@@ -57,10 +57,6 @@ export class GridInventoryView implements InventoryView {
     return undefined;
   }
 
-  isCoordInView(screenCoord: Coord): boolean {
-    return isCoordInRect(screenCoord, this.rect);
-  }
-
   getRect() {
     return this.rect;
   }

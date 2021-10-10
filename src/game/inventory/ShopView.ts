@@ -1,4 +1,4 @@
-import { Coord } from "../Coord";
+import { Coord, Rect } from "../Coord";
 import { GameEvent } from "../GameEvent";
 import { BeerBottle } from "../items/BeerBottle";
 import { PixelScreen } from "../PixelScreen";
@@ -43,8 +43,8 @@ export class ShopView implements InventoryView {
     this.scrollView.paint(screen);
   }
 
-  isCoordInView(coord: Coord): boolean {
-    return this.window.isCoordInView(coord);
+  getRect(): Rect {
+    return this.window.getRect();
   }
 
   getSlotIndexAtCoord(coord: Coord): number {

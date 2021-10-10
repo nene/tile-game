@@ -1,4 +1,4 @@
-import { Coord, coordAdd, rectGrow } from "./Coord";
+import { coordAdd, Rect, rectGrow } from "./Coord";
 import { Character } from "./npc/Character";
 import { PixelScreen } from "./PixelScreen";
 import { fitText } from "./ui/fitText";
@@ -33,7 +33,7 @@ export class Dialog {
     });
   }
 
-  isCoordInView(coord: Coord): boolean {
-    return this.window.isCoordInView(coord);
+  getRect(): Rect {
+    return this.window.getRect();
   }
 }

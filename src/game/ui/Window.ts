@@ -1,4 +1,4 @@
-import { Coord, coordAdd, coordSub, isCoordInRect, Rect, rectCenter, rectGrow } from "../Coord";
+import { Coord, coordAdd, coordSub, Rect, rectCenter, rectGrow } from "../Coord";
 import { PixelScreen } from "../PixelScreen";
 import { drawInset, drawUpset, UI_BG_COLOR, UI_SHADOW_COLOR } from "../ui/ui-utils";
 
@@ -31,8 +31,8 @@ export class Window {
     this.drawHeadline(screen);
   }
 
-  isCoordInView(coord: Coord): boolean {
-    return isCoordInRect(coord, this.rect);
+  getRect(): Rect {
+    return this.rect;
   }
 
   private drawHeadline(screen: PixelScreen) {

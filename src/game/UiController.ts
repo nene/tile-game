@@ -11,6 +11,7 @@ import { Inventory } from "./inventory/Inventory";
 import { InventoryView } from "./inventory/InventoryView";
 import { Character } from "./npc/Character";
 import { PlayerAttributes } from "./PlayerAttributes";
+import { isCoordInRect } from "./Coord";
 
 export class UiController {
   private inventoryController: InventoryController;
@@ -90,7 +91,7 @@ export class UiController {
 
   private handleDialogClose(event: GameEvent): boolean | undefined {
     if (this.dialog && event.type === "click") {
-      if (!this.dialog.isCoordInView(event.coord)) {
+      if (!isCoordInRect(event.coord, this.dialog.getRect())) {
         this.dialog = undefined; // Close the dialog
       }
       return true;
