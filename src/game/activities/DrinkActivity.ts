@@ -21,6 +21,10 @@ export class DrinkActivity implements Activity {
     return this.animation.isFinished();
   }
 
+  isInteractable() {
+    return false;
+  }
+
   interact() { }
 
   nextActivity() {

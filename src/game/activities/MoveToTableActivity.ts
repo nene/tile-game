@@ -23,6 +23,10 @@ export class MoveToTableActivity implements Activity {
     return Boolean(this.targetCoord);
   }
 
+  isInteractable() {
+    return false;
+  }
+
   interact() { }
 
   nextActivity() {

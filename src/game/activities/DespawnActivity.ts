@@ -19,6 +19,10 @@ export class DespawnActivity implements Activity {
     return this.removed;
   }
 
+  isInteractable() {
+    return false;
+  }
+
   interact() { }
 
   nextActivity() {

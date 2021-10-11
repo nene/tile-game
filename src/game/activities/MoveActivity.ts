@@ -54,6 +54,10 @@ export class MoveActivity implements Activity {
     return current;
   }
 
+  isInteractable() {
+    return false;
+  }
+
   interact() { }
 
   nextActivity() {

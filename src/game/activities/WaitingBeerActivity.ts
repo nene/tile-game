@@ -20,6 +20,11 @@ export class WaitingBeerActivity implements Activity {
     return Boolean(this.receivedBeerGlass);
   }
 
+  isInteractable(ui: UiController) {
+    const item = ui.getSelectedItem();
+    return item instanceof BeerBottle || item instanceof BeerGlass;
+  }
+
   interact(ui: UiController) {
     const item = ui.getSelectedItem();
     if (!item || !(item instanceof BeerBottle || item instanceof BeerGlass)) {

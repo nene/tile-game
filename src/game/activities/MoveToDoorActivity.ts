@@ -22,6 +22,10 @@ export class MoveToDoorActivity implements Activity {
     return Boolean(this.targetCoord);
   }
 
+  isInteractable() {
+    return false;
+  }
+
   interact() { }
 
   nextActivity() {

@@ -14,6 +14,10 @@ export class PauseActivity implements Activity {
     return this.tickCounter === this.duration;
   }
 
+  isInteractable() {
+    return false;
+  }
+
   interact() { }
 
   nextActivity() {

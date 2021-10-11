@@ -12,6 +12,10 @@ export class IdleActivity implements Activity {
     return false;
   }
 
+  isInteractable() {
+    return false;
+  }
+
   interact() { }
 
   nextActivity() {

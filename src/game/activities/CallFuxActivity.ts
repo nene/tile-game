@@ -39,6 +39,10 @@ export class CallFuxActivity implements Activity {
     return this.finished;
   }
 
+  isInteractable() {
+    return true;
+  }
+
   interact(ui: UiController) {
     this.finished = true;
     this.expectedBeer = this.chooseBeer(this.character.favoriteBeers);
