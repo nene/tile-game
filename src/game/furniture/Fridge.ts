@@ -56,6 +56,10 @@ export class Fridge implements GameObject {
     return { coord: [0, 0], size: [16, 13] };
   }
 
+  isInteractable() {
+    return true;
+  }
+
   onInteract(ui: UiController) {
     SoundLibrary.play('opening-fridge-door');
     ui.showInventory(this.shop, new ShopView(this.shop, ui.getAttributes().wallet, {

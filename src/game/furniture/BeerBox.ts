@@ -45,6 +45,10 @@ export class BeerBox implements GameObject {
     return { coord: [3, 0], size: [11, 10] };
   }
 
+  isInteractable() {
+    return true;
+  }
+
   onInteract(ui: UiController) {
     SoundLibrary.play("glass-bottles");
     ui.showInventory(this.inventory, new StorageInventoryView({

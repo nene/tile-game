@@ -47,6 +47,10 @@ export class Countertop implements GameObject {
     return { coord: [0, 0], size: [16, 32] };
   }
 
+  isInteractable() {
+    return true;
+  }
+
   onInteract(ui: UiController) {
     ui.showInventory(this.inventory, new StorageInventoryView({
       inventory: this.inventory,

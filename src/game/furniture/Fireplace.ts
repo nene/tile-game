@@ -42,5 +42,9 @@ export class Fireplace implements GameObject {
     return { coord: [1, 0], size: [62, 12] };
   }
 
+  isInteractable() {
+    return false;
+  }
+
   onInteract() { }
 }

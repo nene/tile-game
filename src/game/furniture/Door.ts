@@ -56,5 +56,9 @@ export class Door implements GameObject {
     return { coord: [-1, -33], size: [18, 33] };
   }
 
+  isInteractable() {
+    return false;
+  }
+
   onInteract() { }
 }

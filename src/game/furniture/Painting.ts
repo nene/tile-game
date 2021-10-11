@@ -37,5 +37,9 @@ export class Painting implements GameObject {
     return { coord: [0, 0], size: [0, 0] };
   }
 
+  isInteractable() {
+    return false;
+  }
+
   onInteract() { }
 }

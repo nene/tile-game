@@ -12,4 +12,5 @@ export interface GameObject {
   hitBox: () => Rect;
   boundingBox: () => Rect;
   onInteract: (ui: UiController) => void;
+  isInteractable: (ui: UiController) => boolean;
 }

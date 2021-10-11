@@ -191,6 +191,11 @@ export class Player implements GameObject {
     return { coord: [-8, -3], size: [16, 5] };
   }
 
+  isInteractable(ui: UiController) {
+    const glass = ui.getSelectedItem();
+    return glass instanceof BeerGlass && glass.getLevel() > BeerLevel.empty;
+  }
+
   onInteract(ui: UiController) {
     const glass = ui.getSelectedItem();
     if (glass instanceof BeerGlass && glass.getLevel() > BeerLevel.empty) {

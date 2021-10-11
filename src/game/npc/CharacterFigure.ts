@@ -59,6 +59,10 @@ export class CharacterFigure implements GameObject {
     return { coord: [-8, -3], size: [16, 5] };
   }
 
+  isInteractable() {
+    return true;
+  }
+
   onInteract(uiController: UiController) {
     const activity = this.desires.currentActivity();
     activity.interact(uiController);

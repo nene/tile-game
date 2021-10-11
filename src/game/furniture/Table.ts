@@ -37,5 +37,9 @@ export class Table implements GameObject {
     return { coord: [0, 0], size: [64, 16] };
   }
 
+  isInteractable() {
+    return false;
+  }
+
   onInteract() { }
 }

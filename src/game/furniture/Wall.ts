@@ -30,5 +30,9 @@ export class Wall implements GameObject {
     return { coord: [0, 0], size: [16 * this.widthInTiles, 16] };
   }
 
+  isInteractable() {
+    return false;
+  }
+
   onInteract() { }
 }

@@ -54,6 +54,10 @@ export class BeerCabinet implements GameObject {
     return { coord: [0, 0], size: [32, 13] };
   }
 
+  isInteractable() {
+    return true;
+  }
+
   onInteract(ui: UiController) {
     SoundLibrary.play('opening-cabinet-door');
     ui.showInventory(this.inventory, new StorageInventoryView({

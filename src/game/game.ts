@@ -71,7 +71,7 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
 
   function canInteractWithWorld(worldCoord: Coord): boolean {
     const obj = world.getObjectVisibleOnCoord(worldCoord);
-    return Boolean(obj && isObjectsCloseby(player, obj));
+    return Boolean(obj && isObjectsCloseby(player, obj) && obj.isInteractable(uiController));
   }
 
   const eventFactory = new GameEventFactory(screenCfg.scale);

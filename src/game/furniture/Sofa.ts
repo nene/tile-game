@@ -37,5 +37,9 @@ export class Sofa implements GameObject {
     return { coord: [0, 0], size: [48, 11] };
   }
 
+  isInteractable() {
+    return false;
+  }
+
   onInteract() { }
 }
