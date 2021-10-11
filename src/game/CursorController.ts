@@ -34,4 +34,8 @@ export class CursorController {
     this.cursorType = highlighted ? CursorType.hand : CursorType.pointer;
     this.offset = highlighted ? [-2, 0] : [0, 0];
   }
+
+  getCoord(): Coord {
+    return this.mouseCoord;
+  }
 }

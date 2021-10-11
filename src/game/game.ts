@@ -69,7 +69,8 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
     }
   }
 
-  function canInteractWithWorld(worldCoord: Coord): boolean {
+  function canInteractWithWorld(): boolean {
+    const worldCoord = coordAdd(uiController.getMouseCoord(), screen.getOffset());
     const obj = world.getObjectVisibleOnCoord(worldCoord);
     return Boolean(obj && isObjectsCloseby(player, obj) && obj.isInteractable(uiController));
   }
@@ -79,15 +80,19 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
   return {
     onKeyDown: (key: string): boolean => {
       if (uiController.isGameWorldActive() && uiController.isGameWorldVisible()) {
+        const result = player.handleKeyDown(key);
+        uiController.highlightCursor(canInteractWithWorld());
         screenNeedsRepaint = true;
-        return player.handleKeyDown(key);
+        return result;
       }
       return false;
     },
     onKeyUp: (key: string): boolean => {
       if (uiController.isGameWorldActive() && uiController.isGameWorldVisible()) {
+        const result = player.handleKeyUp(key);
+        uiController.highlightCursor(canInteractWithWorld());
         screenNeedsRepaint = true;
-        return player.handleKeyUp(key);
+        return result;
       }
       return false;
     },
@@ -102,7 +107,11 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
       }
       else if (type === "mousemove") {
         uiController.handleGameEvent(event);
-        uiController.highlightCursor(canInteractWithWorld(coordAdd(event.coord, screen.getOffset())));
+        if (uiController.isGameWorldActive() && uiController.isGameWorldVisible()) {
+          uiController.highlightCursor(canInteractWithWorld());
+        } else {
+          uiController.highlightCursor(false);
+        }
       } else {
         uiController.handleGameEvent(event);
       }

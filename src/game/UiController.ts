@@ -11,7 +11,7 @@ import { Inventory } from "./inventory/Inventory";
 import { InventoryView } from "./inventory/InventoryView";
 import { Character } from "./npc/Character";
 import { PlayerAttributes } from "./PlayerAttributes";
-import { isCoordInRect } from "./Coord";
+import { Coord, isCoordInRect } from "./Coord";
 
 export class UiController {
   private inventoryController: InventoryController;
@@ -91,6 +91,10 @@ export class UiController {
 
   highlightCursor(highlighted: boolean) {
     this.cursorController.setHighlighted(highlighted);
+  }
+
+  getMouseCoord(): Coord {
+    return this.cursorController.getCoord();
   }
 
   private handleDialogClose(event: GameEvent): boolean | undefined {
