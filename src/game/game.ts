@@ -69,6 +69,11 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
     }
   }
 
+  function canInteractWithWorld(worldCoord: Coord): boolean {
+    const obj = world.getObjectVisibleOnCoord(worldCoord);
+    return Boolean(obj && isObjectsCloseby(player, obj));
+  }
+
   const eventFactory = new GameEventFactory(screenCfg.scale);
 
   return {
@@ -94,6 +99,10 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
           // When the click was not handled by UI
           handleWorldClick(coordAdd(event.coord, screen.getOffset()));
         }
+      }
+      else if (type === "mousemove") {
+        uiController.handleGameEvent(event);
+        uiController.highlightCursor(canInteractWithWorld(coordAdd(event.coord, screen.getOffset())));
       } else {
         uiController.handleGameEvent(event);
       }

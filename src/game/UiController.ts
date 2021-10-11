@@ -89,6 +89,10 @@ export class UiController {
     }
   }
 
+  highlightCursor(highlighted: boolean) {
+    this.cursorController.setHighlighted(highlighted);
+  }
+
   private handleDialogClose(event: GameEvent): boolean | undefined {
     if (this.dialog && event.type === "click") {
       if (!isCoordInRect(event.coord, this.dialog.getRect())) {
