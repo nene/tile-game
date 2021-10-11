@@ -64,7 +64,7 @@ const imageFiles = {
 
   'slot': spriteDef({ src: slot, cfg: { size: [20, 20], colsRows: [2, 1] } }),
   'scroll-bar': spriteDef({ src: scrollBar, cfg: { size: [8, 8], colsRows: [5, 1] } }),
-  'cursor': spriteDef({ src: cursor, cfg: { size: [7, 10], colsRows: [2, 1] } }),
+  'cursor': spriteDef({ src: cursor, cfg: { size: [8, 11], colsRows: [2, 1] } }),
   'scoreboard': spriteDef({ src: scoreboard, cfg: { size: [51, 24], colsRows: [1, 1] } }),
   'gold': spriteDef({ src: gold, cfg: { size: [8, 8], colsRows: [1, 1] } }),
 
