@@ -114,7 +114,7 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
 }
 
 function isObjectsCloseby(obj1: GameObject, obj2: GameObject) {
-  return rectDistance(objectBounds(obj1), objectBounds(obj2)) < 5;
+  return rectDistance(objectBounds(obj1), objectBounds(obj2)) < 16;
 }
 
 function objectBounds(obj: GameObject): Rect {
