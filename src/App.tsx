@@ -23,12 +23,12 @@ export function App() {
 
     let gameApi: GameApi;
     const onKeyDown = (e: KeyboardEvent) => {
-      if (gameApi.onKeyDown(e.key)) {
+      if (gameApi.onKeyEvent("keydown", e.key)) {
         e.preventDefault();
       }
     };
     const onKeyUp = (e: KeyboardEvent) => {
-      if (gameApi.onKeyUp(e.key)) {
+      if (gameApi.onKeyEvent("keyup", e.key)) {
         e.preventDefault();
       }
     };

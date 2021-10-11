@@ -13,8 +13,7 @@ import { FpsCounter } from "./FpsCounter";
 import { GameEventFactory, GameEventType } from "./GameEvent";
 
 export interface GameApi {
-  onKeyDown: (key: string) => boolean;
-  onKeyUp: (key: string) => boolean;
+  onKeyEvent: (type: "keyup" | "keydown", key: string) => boolean;
   onMouseEvent: (type: GameEventType, coord: Coord, wheelDelta?: Coord) => void;
   cleanup: () => void;
 }
@@ -78,18 +77,10 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
   const eventFactory = new GameEventFactory(screenCfg.scale);
 
   return {
-    onKeyDown: (key: string): boolean => {
+    onKeyEvent: (type: "keyup" | "keydown", key: string): boolean => {
+      const event = eventFactory.createKeyboardEvent(type, key);
       if (uiController.isGameWorldActive() && uiController.isGameWorldVisible()) {
-        const result = player.handleKeyDown(key);
-        uiController.highlightCursor(canInteractWithWorld());
-        screenNeedsRepaint = true;
-        return result;
-      }
-      return false;
-    },
-    onKeyUp: (key: string): boolean => {
-      if (uiController.isGameWorldActive() && uiController.isGameWorldVisible()) {
-        const result = player.handleKeyUp(key);
+        const result = player.handleKeyEvent(event);
         uiController.highlightCursor(canInteractWithWorld());
         screenNeedsRepaint = true;
         return result;

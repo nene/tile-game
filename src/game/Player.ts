@@ -9,6 +9,7 @@ import { BeerGlass, BeerLevel } from "./items/BeerGlass";
 import { DrinkAnimation } from "./sprites/DrinkAnimation";
 import { Animation } from "./sprites/Animation";
 import { PlayerAttributes } from "./PlayerAttributes";
+import { GameKeyEvent } from "./GameEvent";
 
 const max = Math.max;
 const min = Math.min;
@@ -48,55 +49,44 @@ export class Player implements GameObject {
     return this.attributes;
   }
 
-  handleKeyDown(key: string): boolean {
+  handleKeyEvent(event: GameKeyEvent): boolean {
     if (this.itemAtHand) {
       return false;
     }
-    switch (key) {
-      case "ArrowLeft":
-      case "a":
-        this.changeSpeed([-3, this.speed[1]]);
-        return true;
-      case "ArrowRight":
-      case "d":
-        this.changeSpeed([3, this.speed[1]]);
-        return true;
-      case "ArrowUp":
-      case "w":
-        this.changeSpeed([this.speed[0], -3]);
-        return true;
-      case "ArrowDown":
-      case "s":
-        this.changeSpeed([this.speed[0], 3]);
-        return true;
-      default:
-        return false; // Inform that we didn't handle the keypress
-    }
-  }
-
-  handleKeyUp(key: string): boolean {
-    if (this.itemAtHand) {
-      return false;
-    }
-    switch (key) {
-      case "ArrowLeft":
-      case "a":
-        this.changeSpeed([max(0, this.speed[0]), this.speed[1]]);
-        return true;
-      case "ArrowRight":
-      case "d":
-        this.changeSpeed([min(0, this.speed[0]), this.speed[1]]);
-        return true;
-      case "ArrowUp":
-      case "w":
-        this.changeSpeed([this.speed[0], max(0, this.speed[1])]);
-        return true;
-      case "ArrowDown":
-      case "s":
-        this.changeSpeed([this.speed[0], min(0, this.speed[1])]);
-        return true;
-      default:
-        return false; // Inform that we didn't handle the keypress
+    if (event.type === "keydown") {
+      switch (event.key) {
+        case "LEFT":
+          this.changeSpeed([-3, this.speed[1]]);
+          return true;
+        case "RIGHT":
+          this.changeSpeed([3, this.speed[1]]);
+          return true;
+        case "UP":
+          this.changeSpeed([this.speed[0], -3]);
+          return true;
+        case "DOWN":
+          this.changeSpeed([this.speed[0], 3]);
+          return true;
+        default:
+          return false; // Inform that we didn't handle the keypress
+      }
+    } else {
+      switch (event.key) {
+        case "LEFT":
+          this.changeSpeed([max(0, this.speed[0]), this.speed[1]]);
+          return true;
+        case "RIGHT":
+          this.changeSpeed([min(0, this.speed[0]), this.speed[1]]);
+          return true;
+        case "UP":
+          this.changeSpeed([this.speed[0], max(0, this.speed[1])]);
+          return true;
+        case "DOWN":
+          this.changeSpeed([this.speed[0], min(0, this.speed[1])]);
+          return true;
+        default:
+          return false; // Inform that we didn't handle the keypress
+      }
     }
   }
 

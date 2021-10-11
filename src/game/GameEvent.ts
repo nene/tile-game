@@ -13,6 +13,11 @@ interface GameWheelEvent {
   wheelDelta: Coord;
 }
 
+export interface GameKeyEvent {
+  type: "keyup" | "keydown";
+  key: "UP" | "DOWN" | "LEFT" | "RIGHT" | "?";
+}
+
 export type GameEvent = GameMouseEvent | GameWheelEvent;
 export type GameEventType = GameMouseEventType | "wheel";
 
@@ -27,6 +32,25 @@ export class GameEventFactory {
       return { type, coord: this.toPixelScale(rawCoord), wheelDelta: coordDiv(wheelDelta, [16, 16]) };
     } else {
       return { type, coord: this.toPixelScale(rawCoord) };
+    }
+  }
+
+  createKeyboardEvent(type: "keyup" | "keydown", key: string): GameKeyEvent {
+    switch (key) {
+      case "ArrowLeft":
+      case "a":
+        return { type, key: "LEFT" };
+      case "ArrowRight":
+      case "d":
+        return { type, key: "RIGHT" };
+      case "ArrowUp":
+      case "w":
+        return { type, key: "UP" };
+      case "ArrowDown":
+      case "s":
+        return { type, key: "DOWN" };
+      default:
+        return { type, key: "?" };
     }
   }
 
