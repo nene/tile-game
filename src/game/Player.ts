@@ -54,15 +54,19 @@ export class Player implements GameObject {
     }
     switch (key) {
       case "ArrowLeft":
+      case "a":
         this.changeSpeed([-3, this.speed[1]]);
         return true;
       case "ArrowRight":
+      case "d":
         this.changeSpeed([3, this.speed[1]]);
         return true;
       case "ArrowUp":
+      case "w":
         this.changeSpeed([this.speed[0], -3]);
         return true;
       case "ArrowDown":
+      case "s":
         this.changeSpeed([this.speed[0], 3]);
         return true;
       default:
@@ -76,15 +80,19 @@ export class Player implements GameObject {
     }
     switch (key) {
       case "ArrowLeft":
+      case "a":
         this.changeSpeed([max(0, this.speed[0]), this.speed[1]]);
         return true;
       case "ArrowRight":
+      case "d":
         this.changeSpeed([min(0, this.speed[0]), this.speed[1]]);
         return true;
       case "ArrowUp":
+      case "w":
         this.changeSpeed([this.speed[0], max(0, this.speed[1])]);
         return true;
       case "ArrowDown":
+      case "s":
         this.changeSpeed([this.speed[0], min(0, this.speed[1])]);
         return true;
       default:
