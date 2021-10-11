@@ -1,5 +1,5 @@
 import SimplexNoise from "simplex-noise";
-import { Coord, coordAdd, coordDiv, coordMul, coordSub, isCoordInRect, Rect, tileToScreenCoord } from "../Coord";
+import { Coord, coordAdd, coordDiv, coordMul, coordSub, isCoordInRect, Rect } from "../Coord";
 import { GameEvent } from "../GameEvent";
 import { BeerBottle } from "../items/BeerBottle";
 import { BeerGlass, BeerLevel } from "../items/BeerGlass";
@@ -39,7 +39,7 @@ export class PouringGame implements MiniGame {
 
   constructor(private glass: BeerGlass, private bottle: BeerBottle) {
     this.sprites = {
-      bg: SpriteLibrary.get("pouring-game-bg").getSprite([0, 0]),
+      bg: SpriteLibrary.get("cfe-bg-lg").getSprite([0, 0]),
       table: SpriteLibrary.get("opening-game-bg").getSprite([0, 0]),
       bottle: SpriteLibrary.get("bottle-xl").getSprite([0, 0]),
       beerGlass: SpriteLibrary.get("beer-glass-xl").getSprite([0, 0]),
@@ -119,8 +119,8 @@ export class PouringGame implements MiniGame {
       this.drawBeerOnTable(screen);
       screen.drawSprite(this.sprites.beerGlass, GLASS_COORD);
 
-      screen.drawText("Pudelis veel: " + Math.round(this.pouring.getLiquidInBottle() * 100) + "%", [200, 5]);
-      screen.drawText("Shoppen täis: " + Math.round(this.pouring.getFillLevel() * 100) + "%", [200 - 6, 16]);
+      screen.drawText("Pudelis veel: " + Math.round(this.pouring.getLiquidInBottle() * 100) + "%", [200, 5], { color: "#fff", shadowColor: "#000" });
+      screen.drawText("Shoppen täis: " + Math.round(this.pouring.getFillLevel() * 100) + "%", [200 - 6, 16], { color: "#fff", shadowColor: "#000" });
       if (DEBUG) {
         screen.drawText("Vaht: " + Math.round(this.pouring.getFoamInGlass() * 100) + "%", [200 - 6, 26]);
         screen.drawText("Vedelik: " + Math.round(this.pouring.getLiquidInGlass() * 100) + "%", [200 - 6, 36]);
@@ -223,10 +223,10 @@ export class PouringGame implements MiniGame {
   }
 
   private fillWithTiles(screen: PixelScreen, sprite: Sprite, rect: Rect) {
-    const [width, height] = coordDiv(rect.size, [16, 16]);
+    const [width, height] = coordDiv(rect.size, sprite.size);
     for (let x = 0; x < width; x++) {
       for (let y = 0; y < height; y++) {
-        screen.drawSprite(sprite, coordAdd(rect.coord, tileToScreenCoord([x, y])));
+        screen.drawSprite(sprite, coordAdd(rect.coord, coordMul([x, y], sprite.size)));
       }
     }
   }

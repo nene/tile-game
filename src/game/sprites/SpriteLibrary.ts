@@ -27,7 +27,7 @@ import openingGameBg from "./data/opening-game-bg.png";
 import bottleXl from "./data/bottle-xl.png";
 import bottleCapXl from "./data/bottle-cap-xl.png";
 import bottleOpenerXl from "./data/bottle-opener-xl.png";
-import pouringGameBg from "./data/pouring-game-bg.png";
+import cfeBgLg from "./data/cfe-bg-lg.png";
 import beerGlassXl from "./data/beer-glass-xl.png";
 import beerXl from "./data/beer-xl.png";
 import beerFoamXl from "./data/beer-foam-xl.png";
@@ -80,7 +80,7 @@ const imageFiles = {
   'bottle-opener-xl': spriteDef({ src: bottleOpenerXl, cfg: { size: [32, 31], colsRows: [1, 1], offset: [-10, -10] } }),
 
   // beer-pouring game
-  'pouring-game-bg': spriteDef({ src: pouringGameBg, cfg: { size: [16, 16], colsRows: [1, 1] } }),
+  'cfe-bg-lg': spriteDef({ src: cfeBgLg, cfg: { size: [32, 32], colsRows: [1, 1] } }),
   'beer-glass-xl': spriteDef({ src: beerGlassXl, cfg: { size: [76, 91], colsRows: [1, 1], offset: [-4, 0] } }),
   'beer-xl': spriteDef({ src: beerXl, cfg: { size: [47, 74], colsRows: [15, 1] } }),
   'beer-foam-xl': spriteDef({ src: beerFoamXl, cfg: { size: [47, 86], colsRows: [1, 1] } }),
