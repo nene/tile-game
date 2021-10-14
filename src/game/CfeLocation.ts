@@ -17,47 +17,41 @@ const CFE_SIZE: Coord = [21, 16]; // Size in tiles
 
 export class CfeLocation implements GameLocation {
   private background: CfeBackground;
-  private staticObjects: GameObject[];
+  private objects: GameObject[];
 
   constructor() {
     this.background = new CfeBackground(CFE_SIZE);
 
-    this.staticObjects = this.createStaticObjects();
-  }
+    this.objects = [
+      // Walls
+      new Wall(tileToScreenCoord([0, 2]), 15),
+      new Wall(tileToScreenCoord([15, 3]), 1),
+      new Wall(tileToScreenCoord([15, 4]), 1),
+      new Wall(tileToScreenCoord([15, 5]), 6),
 
-  private createStaticObjects(): GameObject[] {
-    const objects: GameObject[] = [];
+      // Color shield on wall
+      new Painting(tileToScreenCoord([3, 3]), "color-shield"),
+      // A table
+      new Table(tileToScreenCoord([4, 7])),
+      new Table(tileToScreenCoord([0, 11])),
+      // Sofa
+      new Sofa(tileToScreenCoord([3, 3])),
+      // Fire
+      new Fireplace(tileToScreenCoord([6, 3])),
+      // A door
+      new Door(tileToScreenCoord([12, 3])),
 
-    // Walls
-    objects.push(new Wall(tileToScreenCoord([0, 2]), 15));
-    objects.push(new Wall(tileToScreenCoord([15, 3]), 1));
-    objects.push(new Wall(tileToScreenCoord([15, 4]), 1));
-    objects.push(new Wall(tileToScreenCoord([15, 5]), 6));
-
-    // Color shield on wall
-    objects.push(new Painting(tileToScreenCoord([3, 3]), "color-shield"));
-    // A table
-    objects.push(new Table(tileToScreenCoord([4, 7])));
-    objects.push(new Table(tileToScreenCoord([0, 11])));
-    // Sofa
-    objects.push(new Sofa(tileToScreenCoord([3, 3])));
-    // Fire
-    objects.push(new Fireplace(tileToScreenCoord([6, 3])));
-    // A door
-    objects.push(new Door(tileToScreenCoord([12, 3])));
-
-    // Bar countertop
-    objects.push(new Countertop(tileToScreenCoord([14, 6])));
-    // Notes
-    objects.push(new Painting(tileToScreenCoord([14, 6]), "bulletin-board"));
-    // A storage of beer glasses
-    objects.push(new BeerCabinet(tileToScreenCoord([16, 6])));
-    // A fridge
-    objects.push(new Fridge(tileToScreenCoord([18, 6])));
-    // Place for empty bottles
-    objects.push(new BeerBox(tileToScreenCoord([19, 6])));
-
-    return objects;
+      // Bar countertop
+      new Countertop(tileToScreenCoord([14, 6])),
+      // Notes
+      new Painting(tileToScreenCoord([14, 6]), "bulletin-board"),
+      // A storage of beer glasses
+      new BeerCabinet(tileToScreenCoord([16, 6])),
+      // A fridge
+      new Fridge(tileToScreenCoord([18, 6])),
+      // Place for empty bottles
+      new BeerBox(tileToScreenCoord([19, 6])),
+    ];
   }
 
   getGridSize(): Coord {
@@ -68,7 +62,7 @@ export class CfeLocation implements GameLocation {
     return this.background;
   }
 
-  getStaticObjects() {
-    return this.staticObjects;
+  getObjects() {
+    return this.objects;
   }
 }

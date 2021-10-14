@@ -9,5 +9,5 @@ export interface GameLocationBackground {
 export interface GameLocation {
   getGridSize: () => Coord;
   getBackground: () => GameLocationBackground;
-  getStaticObjects: () => GameObject[];
+  getObjects: () => GameObject[];
 }
