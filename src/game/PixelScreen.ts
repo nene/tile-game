@@ -1,5 +1,5 @@
 import { Coord, coordAdd, coordConstrain, coordDiv, coordSub, Rect, rectOverlaps } from "./Coord";
-import { GameWorld } from "./GameWorld";
+import { Location } from "./locations/Location";
 import { Sprite } from "./sprites/Sprite";
 import { TextMeasurer } from "./ui/fitText";
 
@@ -110,12 +110,12 @@ export class PixelScreen implements TextMeasurer {
     this.bg = this.ctx.getImageData(0, 0, this.size[0] * this.scale, this.size[1] * this.scale);
   }
 
-  centerTo(coord: Coord, world: GameWorld) {
+  centerTo(coord: Coord, location: Location) {
     const halfScreenSize: Coord = coordDiv(this.size, [2, 2]);
 
     this.offset = coordConstrain(
       coordSub(coord, halfScreenSize),
-      { coord: [0, 0], size: coordSub(world.size(), this.size) },
+      { coord: [0, 0], size: coordSub(location.size(), this.size) },
     );
   }
 
