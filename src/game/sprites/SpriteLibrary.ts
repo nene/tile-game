@@ -51,24 +51,24 @@ const imageFiles = {
   'cfe-ksv-1': spriteDef({ src: cfeKsv1, cfg: { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET } }),
   'cfe-ksv-2': spriteDef({ src: cfeKsv2, cfg: { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET } }),
   'cfe-ksv-3': spriteDef({ src: cfeKsv3, cfg: { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET } }),
-  'callout': spriteDef({ src: callout, cfg: { size: [26, 14], colsRows: [1, 1], offset: [-10, -13] } }),
+  'callout': spriteDef({ src: callout, cfg: { size: [26, 14], offset: [-10, -13] } }),
 
-  'table': spriteDef({ src: table, cfg: { size: [64, 23], colsRows: [1, 1], offset: [0, -6] } }),
-  'fridge': spriteDef({ src: fridge, cfg: { size: [16, 46], colsRows: [1, 1], offset: [0, -32] } }),
-  'beer-cabinet': spriteDef({ src: beerCabinet, cfg: { size: [32, 46], colsRows: [1, 1], offset: [0, -32] } }),
-  'beer-box': spriteDef({ src: beerBox, cfg: { size: [11, 14], colsRows: [1, 1], offset: [3, -4] } }),
-  'door': spriteDef({ src: door, cfg: { size: [20, 35], colsRows: [1, 1], offset: [-2, -34] } }),
-  'color-shield': spriteDef({ src: colorShield, cfg: { size: [11, 12], colsRows: [1, 1], offset: [3, -40] } }),
-  'bulletin-board': spriteDef({ src: bulletinBoard, cfg: { size: [13, 17], colsRows: [1, 1], offset: [4, -40] } }),
+  'table': spriteDef({ src: table, cfg: { size: [64, 23], offset: [0, -6] } }),
+  'fridge': spriteDef({ src: fridge, cfg: { size: [16, 46], offset: [0, -32] } }),
+  'beer-cabinet': spriteDef({ src: beerCabinet, cfg: { size: [32, 46], offset: [0, -32] } }),
+  'beer-box': spriteDef({ src: beerBox, cfg: { size: [11, 14], offset: [3, -4] } }),
+  'door': spriteDef({ src: door, cfg: { size: [20, 35], offset: [-2, -34] } }),
+  'color-shield': spriteDef({ src: colorShield, cfg: { size: [11, 12], offset: [3, -40] } }),
+  'bulletin-board': spriteDef({ src: bulletinBoard, cfg: { size: [13, 17], offset: [4, -40] } }),
   'fireplace': spriteDef({ src: fireplace, cfg: { size: [64, 52], colsRows: [5, 1], offset: [0, -36] } }),
-  'countertop': spriteDef({ src: countertop, cfg: { size: [16, 55], colsRows: [1, 1], offset: [0, -23] } }),
-  'sofa': spriteDef({ src: sofa, cfg: { size: [48, 26], colsRows: [1, 1], offset: [0, -15] } }),
+  'countertop': spriteDef({ src: countertop, cfg: { size: [16, 55], offset: [0, -23] } }),
+  'sofa': spriteDef({ src: sofa, cfg: { size: [48, 26], offset: [0, -15] } }),
 
   'slot': spriteDef({ src: slot, cfg: { size: [20, 20], colsRows: [2, 1] } }),
   'scroll-bar': spriteDef({ src: scrollBar, cfg: { size: [8, 8], colsRows: [5, 1] } }),
   'cursor': spriteDef({ src: cursor, cfg: { size: [8, 11], colsRows: [2, 1] } }),
-  'scoreboard': spriteDef({ src: scoreboard, cfg: { size: [51, 24], colsRows: [1, 1] } }),
-  'gold': spriteDef({ src: gold, cfg: { size: [8, 8], colsRows: [1, 1] } }),
+  'scoreboard': spriteDef({ src: scoreboard, cfg: { size: [51, 24] } }),
+  'gold': spriteDef({ src: gold, cfg: { size: [8, 8] } }),
 
   'beer-glass-lg': spriteDef({ src: beerGlassLg, cfg: { size: [16, 16], colsRows: [5, 1] } }),
   'beer-glass-sm': spriteDef({ src: beerGlassSm, cfg: { size: [10, 10], colsRows: [5, 1], offset: [-2, -17] } }),
@@ -76,20 +76,20 @@ const imageFiles = {
   'bottle-opener': spriteDef({ src: bottleOpener, cfg: { size: [16, 16], colsRows: [2, 1] } }),
 
   // bottle-opening game
-  'opening-game-bg': spriteDef({ src: openingGameBg, cfg: { size: [16, 16], colsRows: [1, 1] } }),
-  'bottle-xl': spriteDef({ src: bottleXl, cfg: { size: [109, 107], colsRows: [1, 1], offset: [-103, -101] } }),
+  'opening-game-bg': spriteDef({ src: openingGameBg, cfg: { size: [16, 16] } }),
+  'bottle-xl': spriteDef({ src: bottleXl, cfg: { size: [109, 107], offset: [-103, -101] } }),
   'bottle-cap-xl': spriteDef({ src: bottleCapXl, cfg: { size: [14, 14], colsRows: [2, 1], offset: [-6, -6] } }),
-  'bottle-opener-xl': spriteDef({ src: bottleOpenerXl, cfg: { size: [32, 31], colsRows: [1, 1], offset: [-10, -10] } }),
+  'bottle-opener-xl': spriteDef({ src: bottleOpenerXl, cfg: { size: [32, 31], offset: [-10, -10] } }),
 
   // beer-pouring game
-  'cfe-bg-lg': spriteDef({ src: cfeBgLg, cfg: { size: [32, 32], colsRows: [1, 1] } }),
-  'beer-glass-xl': spriteDef({ src: beerGlassXl, cfg: { size: [76, 91], colsRows: [1, 1], offset: [-4, 0] } }),
+  'cfe-bg-lg': spriteDef({ src: cfeBgLg, cfg: { size: [32, 32] } }),
+  'beer-glass-xl': spriteDef({ src: beerGlassXl, cfg: { size: [76, 91], offset: [-4, 0] } }),
   'beer-xl': spriteDef({ src: beerXl, cfg: { size: [47, 74], colsRows: [15, 1] } }),
-  'beer-foam-xl': spriteDef({ src: beerFoamXl, cfg: { size: [47, 86], colsRows: [1, 1] } }),
+  'beer-foam-xl': spriteDef({ src: beerFoamXl, cfg: { size: [47, 86] } }),
 
   // Big building
-  'cfe-building': spriteDef({ src: cfeBuilding, cfg: { size: [228, 171], colsRows: [1, 1] } }),
-  'cfe-building-door': spriteDef({ src: cfeBuildingDoor, cfg: { size: [23, 34], colsRows: [1, 1], offset: [-2, -34] } }),
+  'cfe-building': spriteDef({ src: cfeBuilding, cfg: { size: [228, 171] } }),
+  'cfe-building-door': spriteDef({ src: cfeBuildingDoor, cfg: { size: [23, 34], offset: [-2, -34] } }),
 };
 
 export type SpriteName = keyof typeof imageFiles;
