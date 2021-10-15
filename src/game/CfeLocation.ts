@@ -24,10 +24,8 @@ export class CfeLocation implements GameLocation {
 
     this.objects = [
       // Walls
-      new Wall(tileToScreenCoord([0, 2]), 15),
-      new Wall(tileToScreenCoord([15, 3]), 1),
-      new Wall(tileToScreenCoord([15, 4]), 1),
-      new Wall(tileToScreenCoord([15, 5]), 6),
+      new Wall({ coord: tileToScreenCoord([0, 0]), size: tileToScreenCoord([21, 3]) }),
+      new Wall({ coord: tileToScreenCoord([14, 3]), size: tileToScreenCoord([7, 3]) }),
 
       // Color shield on wall
       new Painting(tileToScreenCoord([3, 3]), "color-shield"),
