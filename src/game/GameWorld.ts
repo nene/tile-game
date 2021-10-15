@@ -17,8 +17,8 @@ export class GameWorld {
     return this.activeLocation;
   }
 
-  size(): Coord {
-    return this.activeLocation.size();
+  getSize(): Coord {
+    return this.activeLocation.getSize();
   }
 
   add(...objects: GameObject[]) {

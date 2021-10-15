@@ -21,7 +21,7 @@ export class Location {
     this.pathFinder = new PathFinder(this.indexer.isTileEmpty.bind(this.indexer));
   }
 
-  size(): Coord {
+  getSize(): Coord {
     return this.location.getSize();
   }
 

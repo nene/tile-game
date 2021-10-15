@@ -115,7 +115,7 @@ export class PixelScreen implements TextMeasurer {
 
     this.offset = coordConstrain(
       coordSub(coord, halfScreenSize),
-      { coord: [0, 0], size: coordSub(location.size(), this.size) },
+      { coord: [0, 0], size: coordSub(location.getSize(), this.size) },
     );
   }
 

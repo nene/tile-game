@@ -160,7 +160,7 @@ export class Player implements GameObject {
 
   private constrainToWorld(coord: Coord, world: GameWorld): Coord {
     const bounds = this.boundingBox();
-    return coordConstrain(coord, { coord: coordSub([0, 0], bounds.coord), size: coordSub(world.size(), bounds.size) });
+    return coordConstrain(coord, { coord: coordSub([0, 0], bounds.coord), size: coordSub(world.getSize(), bounds.size) });
   }
 
   paint(screen: PixelScreen) {
