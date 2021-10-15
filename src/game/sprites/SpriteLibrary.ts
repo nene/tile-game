@@ -107,6 +107,10 @@ export class SpriteLibrary {
     return this.sprites[name];
   }
 
+  public static getSprite(name: SpriteName, coord?: Coord) {
+    return this.get(name).getSprite(coord);
+  }
+
   private static async loadImage(src: string): Promise<HTMLImageElement> {
     return new Promise((resolve) => {
       const img = new Image();
