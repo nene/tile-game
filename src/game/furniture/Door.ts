@@ -14,7 +14,7 @@ export class Door implements GameObject {
   private tickCount: number = 0;
 
   constructor(private coord: Coord, spriteName: SpriteName) {
-    this.sprite = SpriteLibrary.get(spriteName).getSprite([0, 0]);
+    this.sprite = SpriteLibrary.getSprite(spriteName);
   }
 
   tick(location: Location) {

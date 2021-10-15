@@ -13,7 +13,7 @@ export class BeerBox implements GameObject {
   private inventory: StorageInventory;
 
   constructor(private coord: Coord) {
-    this.sprite = SpriteLibrary.get("beer-box").getSprite([0, 0]);
+    this.sprite = SpriteLibrary.getSprite("beer-box");
     this.inventory = new StorageInventory({
       size: 12,
     });

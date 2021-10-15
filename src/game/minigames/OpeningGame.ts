@@ -38,10 +38,10 @@ export class OpeningGame implements MiniGame {
   private handShakeAmount = 0;
 
   constructor(private bottle: BeerBottle, private opener: BottleOpener) {
-    this.bgSprite = SpriteLibrary.get("opening-game-bg").getSprite([0, 0]);
-    this.bottleSprite = SpriteLibrary.get("bottle-xl").getSprite([0, 0]);
+    this.bgSprite = SpriteLibrary.getSprite("opening-game-bg");
+    this.bottleSprite = SpriteLibrary.getSprite("bottle-xl");
     this.bottleCapSprites = SpriteLibrary.get("bottle-cap-xl");
-    this.openerSprite = SpriteLibrary.get("bottle-opener-xl").getSprite([0, 0]);
+    this.openerSprite = SpriteLibrary.getSprite("bottle-opener-xl");
     this.bottleCoord = this.nextBottleCoord();
   }
 

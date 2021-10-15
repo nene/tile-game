@@ -15,7 +15,7 @@ export class Fridge implements GameObject {
   private shop: Shop;
 
   constructor(private coord: Coord) {
-    this.sprite = SpriteLibrary.get("fridge").getSprite([0, 0]);
+    this.sprite = SpriteLibrary.getSprite("fridge");
     this.shop = new Shop([
       new BeerBottle(getBeer("alexander")),
       new BeerBottle(getBeer("pilsner")),

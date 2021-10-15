@@ -16,8 +16,8 @@ export class CallFuxActivity implements Activity {
   private finished = false;
 
   constructor(private character: Character) {
-    this.sprite = SpriteLibrary.get(character.spriteSet).getSprite([0, 0]);
-    this.calloutSprite = SpriteLibrary.get("callout").getSprite([0, 0]);
+    this.sprite = SpriteLibrary.getSprite(character.spriteSet);
+    this.calloutSprite = SpriteLibrary.getSprite("callout");
     // Place above the head
     this.calloutSprite.offset = coordAdd(this.calloutSprite.offset, [0, -32]);
   }

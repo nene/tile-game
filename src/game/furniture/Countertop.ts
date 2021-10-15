@@ -18,7 +18,7 @@ export class Countertop implements GameObject {
   });
 
   constructor(private coord: Coord) {
-    this.sprite = SpriteLibrary.get("countertop").getSprite([0, 0]);
+    this.sprite = SpriteLibrary.getSprite("countertop");
   }
 
   tick() { }

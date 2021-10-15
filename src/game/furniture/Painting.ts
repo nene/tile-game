@@ -8,7 +8,7 @@ export class Painting implements GameObject {
   private sprite: Sprite;
 
   constructor(private coord: Coord, name: SpriteName) {
-    this.sprite = SpriteLibrary.get(name).getSprite([0, 0]);
+    this.sprite = SpriteLibrary.getSprite(name);
   }
 
   tick() { }

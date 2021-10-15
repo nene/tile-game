@@ -10,7 +10,7 @@ export class CfeBuilding implements Building {
   private sprite: Sprite;
 
   constructor(private coord: Coord) {
-    this.sprite = SpriteLibrary.get("cfe-building").getSprite([0, 0]);
+    this.sprite = SpriteLibrary.getSprite("cfe-building");
   }
 
   paint(screen: PixelScreen) {

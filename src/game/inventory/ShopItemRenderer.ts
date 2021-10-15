@@ -16,7 +16,7 @@ export class ShopItemRenderer {
 
   constructor(private wallet: Wallet) {
     this.beerSprites = SpriteLibrary.get("bottle");
-    this.goldSprite = SpriteLibrary.get("gold").getSprite([0, 0]);
+    this.goldSprite = SpriteLibrary.getSprite("gold");
   }
 
   render(screen: PixelScreen, rect: Rect, item: BeerBottle, highlighted: boolean) {

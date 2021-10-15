@@ -12,8 +12,8 @@ export class DrinkAnimation implements Animation {
   private handSprite: Sprite;
 
   constructor(private beerGlass: BeerGlass, spriteName: SpriteName, private onSip?: (beer: Beer) => void) {
-    this.sprite = SpriteLibrary.get(spriteName).getSprite([1, 0]);
-    this.handSprite = SpriteLibrary.get(spriteName).getSprite([2, 0]);
+    this.sprite = SpriteLibrary.getSprite(spriteName, [1, 0]);
+    this.handSprite = SpriteLibrary.getSprite(spriteName, [2, 0]);
   }
 
   tick() {

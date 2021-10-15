@@ -13,7 +13,7 @@ export class ScoreBoard {
   private beerGlass: SpriteSheet;
 
   constructor(private coord: Coord, private wallet: Wallet, private drunkenness: Drunkenness) {
-    this.bg = SpriteLibrary.get("scoreboard").getSprite([0, 0]);
+    this.bg = SpriteLibrary.getSprite("scoreboard");
     this.beerGlass = SpriteLibrary.get("beer-glass-sm");
   }
 

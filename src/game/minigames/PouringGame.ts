@@ -39,11 +39,11 @@ export class PouringGame implements MiniGame {
 
   constructor(private glass: BeerGlass, private bottle: BeerBottle) {
     this.sprites = {
-      bg: SpriteLibrary.get("cfe-bg-lg").getSprite([0, 0]),
-      table: SpriteLibrary.get("opening-game-bg").getSprite([0, 0]),
-      bottle: SpriteLibrary.get("bottle-xl").getSprite([0, 0]),
-      beerGlass: SpriteLibrary.get("beer-glass-xl").getSprite([0, 0]),
-      beerFoam: SpriteLibrary.get("beer-foam-xl").getSprite([0, 0]),
+      bg: SpriteLibrary.getSprite("cfe-bg-lg"),
+      table: SpriteLibrary.getSprite("opening-game-bg"),
+      bottle: SpriteLibrary.getSprite("bottle-xl"),
+      beerGlass: SpriteLibrary.getSprite("beer-glass-xl"),
+      beerFoam: SpriteLibrary.getSprite("beer-foam-xl"),
     };
 
     this.beerAnimation = new SpriteAnimation(SpriteLibrary.get("beer-xl"), { frames: { from: [0, 0], to: [14, 0] } });

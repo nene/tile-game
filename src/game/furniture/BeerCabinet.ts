@@ -14,7 +14,7 @@ export class BeerCabinet implements GameObject {
   private inventory: StorageInventory;
 
   constructor(private coord: Coord) {
-    this.sprite = SpriteLibrary.get("beer-cabinet").getSprite([0, 0]);
+    this.sprite = SpriteLibrary.getSprite("beer-cabinet");
     this.inventory = new StorageInventory({
       size: 12,
       items: [

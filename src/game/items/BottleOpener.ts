@@ -14,7 +14,7 @@ export class BottleOpener implements GameItem {
   private sprite: Sprite;
 
   constructor(private type: BottleOpenerType) {
-    this.sprite = SpriteLibrary.get("bottle-opener").getSprite([type, 0]);
+    this.sprite = SpriteLibrary.getSprite("bottle-opener", [type, 0]);
   }
 
   getName() {

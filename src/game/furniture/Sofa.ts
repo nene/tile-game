@@ -8,7 +8,7 @@ export class Sofa implements GameObject {
   private sprite: Sprite;
 
   constructor(private coord: Coord) {
-    this.sprite = SpriteLibrary.get("sofa").getSprite([0, 0]);
+    this.sprite = SpriteLibrary.getSprite("sofa");
   }
 
   tick() { }
