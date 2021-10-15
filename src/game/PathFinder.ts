@@ -1,10 +1,34 @@
 import { sortBy } from "lodash";
-import { Coord, coordAdd, coordDistance, coordEq } from "./Coord";
+import { Coord, coordAdd, coordDistance, coordEq, coordSub } from "./Coord";
 
 export class PathFinder {
   constructor(private isTileEmpty: (coord: Coord) => boolean) { }
 
   public findPath(coord1: Coord, coord2: Coord): Coord[] | undefined {
+    const path = this.findRawPath(coord1, coord2);
+    return path ? this.cutCorners(path) : undefined;
+  }
+
+  private cutCorners(path: Coord[]): Coord[] {
+    const cleanPath = [];
+    for (let i = 0; i < path.length; i++) {
+      cleanPath.push(path[i]);
+      if (path[i + 2] && this.isCuttableCorner(path[i], path[i + 2])) {
+        i++; // skip over the corner
+      }
+    }
+    return cleanPath;
+  }
+
+  private isCuttableCorner(a: Coord, b: Coord): boolean {
+    const [dx, dy] = coordSub(b, a);
+    const isCorner = Math.abs(dx) === 1 && Math.abs(dy) === 1;
+    return isCorner &&
+      this.isTileEmpty(coordAdd(a, [dx, 0])) &&
+      this.isTileEmpty(coordAdd(a, [0, dy]));
+  }
+
+  private findRawPath(coord1: Coord, coord2: Coord): Coord[] | undefined {
     const startCoord = coord1;
     const visited = [coord1];
     const path: Coord[] = [];
