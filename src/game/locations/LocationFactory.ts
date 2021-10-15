@@ -1,13 +1,9 @@
 import { Coord } from "../Coord";
 import { GameObject } from "../GameObject";
-import { PixelScreen } from "../PixelScreen";
-
-export interface GameLocationBackground {
-  paint: (screen: PixelScreen) => void;
-}
+import { LocationBackground } from "./LocationBackground";
 
 export interface LocationFactory {
   getSize: () => Coord;
-  getBackground: () => GameLocationBackground;
+  getBackground: () => LocationBackground;
   getObjects: () => GameObject[];
 }

@@ -1,8 +1,8 @@
-import { GameLocationBackground } from "./LocationFactory";
 import { PixelScreen } from "../PixelScreen";
 import { Building } from "./Building";
+import { LocationBackground } from "./LocationBackground";
 
-export class OutdoorsBackground implements GameLocationBackground {
+export class OutdoorsBackground implements LocationBackground {
   constructor(private buildings: Building[]) { }
 
   paint(screen: PixelScreen) {

@@ -1,9 +1,9 @@
 import { Coord, tileToScreenCoord } from "../Coord";
-import { GameLocationBackground } from "./LocationFactory";
 import { PixelScreen } from "../PixelScreen";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { SpriteSheet } from "../sprites/SpriteSheet";
+import { LocationBackground } from "./LocationBackground";
 
 // 21 x 16
 const spriteMap = [
@@ -41,7 +41,7 @@ const spriteIndex: Record<string, Coord> = {
   "3": [3, 2], // void (bottom-right)
 };
 
-export class CfeBackground implements GameLocationBackground {
+export class CfeBackground implements LocationBackground {
   private bg: SpriteSheet;
 
   constructor(private size: Coord) {

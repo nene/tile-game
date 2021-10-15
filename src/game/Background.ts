@@ -1,11 +1,11 @@
 import { Coord, coordEq } from "./Coord";
 import { PixelScreen } from "./PixelScreen";
-import { GameLocationBackground } from "./locations/LocationFactory";
+import { LocationBackground } from "./locations/LocationBackground";
 
 export class Background {
   private previousOffset: Coord = [-1, -1];
 
-  constructor(private bg: GameLocationBackground) { }
+  constructor(private bg: LocationBackground) { }
 
   paint(screen: PixelScreen) {
     if (coordEq(screen.getOffset(), this.previousOffset)) {
