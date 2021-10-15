@@ -8,13 +8,28 @@ import { SpriteLibrary, SpriteName } from "../sprites/SpriteLibrary";
 import { Location } from "../locations/Location";
 import { UiController } from "../UiController";
 import { GameWorld } from "../GameWorld";
+import { LocationName } from "../locations/LocationFactory";
+
+export interface DoorConfig {
+  coord: Coord;
+  spriteName: SpriteName;
+  target: DoorTarget;
+}
+
+export interface DoorTarget {
+  location: LocationName;
+}
 
 export class Door implements GameObject {
+  private coord: Coord;
+  private target: DoorTarget;
   private sprite: Sprite;
   private tickCount: number = 0;
 
-  constructor(private coord: Coord, spriteName: SpriteName) {
+  constructor({ coord, spriteName, target }: DoorConfig) {
+    this.coord = coord;
     this.sprite = SpriteLibrary.getSprite(spriteName);
+    this.target = target;
   }
 
   tick(location: Location) {
@@ -65,7 +80,7 @@ export class Door implements GameObject {
   }
 
   onInteract(ui: UiController, world: GameWorld) {
-    const newLocation = world.allLocations().find((loc) => loc !== world.getActiveLocation());
+    const newLocation = world.allLocations().find((loc) => loc.getName() === this.target.location);
     if (!newLocation) {
       throw new Error("No other location to go to :(");
     }

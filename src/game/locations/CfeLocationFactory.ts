@@ -37,7 +37,11 @@ export class CfeLocationFactory implements LocationFactory {
       // Fire
       new Fireplace(tileToScreenCoord([6, 3])),
       // A door
-      new Door(tileToScreenCoord([12, 3]), "door"),
+      new Door({
+        coord: tileToScreenCoord([12, 3]),
+        spriteName: "door",
+        target: { location: "outdoors" },
+      }),
 
       // Bar countertop
       new Countertop(tileToScreenCoord([14, 6])),
