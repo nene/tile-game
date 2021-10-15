@@ -1,7 +1,7 @@
 import { Coord, coordAdd } from "../Coord";
 import { Door } from "../furniture/Door";
 import { GameObject } from "../GameObject";
-import { GameWorld } from "../GameWorld";
+import { Location } from "../locations/Location";
 import { Character } from "../npc/Character";
 import { Activity, ActivityUpdates } from "./Activity";
 import { MoveActivity } from "./MoveActivity";
@@ -12,8 +12,8 @@ export class MoveToDoorActivity implements Activity {
   constructor(private character: Character) {
   }
 
-  public tick(figure: GameObject, world: GameWorld): ActivityUpdates {
-    const door = world.allObjects().find((o) => o instanceof Door) as Door;
+  public tick(figure: GameObject, location: Location): ActivityUpdates {
+    const door = location.allObjects().find((o) => o instanceof Door) as Door;
     this.targetCoord = coordAdd(door.getCoord(), [8, 8]);
     return {};
   }

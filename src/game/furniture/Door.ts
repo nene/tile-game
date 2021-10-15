@@ -1,11 +1,11 @@
 import { CharacterFigure } from "../npc/CharacterFigure";
 import { Coord, coordAdd, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
-import { GameWorld } from "../GameWorld";
 import { Character, getAllCharacters } from "../npc/Character";
 import { PixelScreen } from "../PixelScreen";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
+import { Location } from "../locations/Location";
 
 export class Door implements GameObject {
   private sprite: Sprite;
@@ -15,12 +15,12 @@ export class Door implements GameObject {
     this.sprite = SpriteLibrary.get("door").getSprite([0, 0]);
   }
 
-  tick(world: GameWorld) {
+  tick(location: Location) {
     this.tickCount++;
 
     const character = this.trySpawnCharacter();
     if (character) {
-      world.add(new CharacterFigure(this.spawnPoint(), character));
+      location.add(new CharacterFigure(this.spawnPoint(), character));
     }
   }
 

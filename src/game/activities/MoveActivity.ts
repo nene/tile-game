@@ -1,6 +1,6 @@
 import { Coord, coordEq, coordMul, coordUnit, coordSub, coordAdd } from "../Coord";
 import { GameObject } from "../GameObject";
-import { GameWorld } from "../GameWorld";
+import { Location } from "../locations/Location";
 import { Character } from "../npc/Character";
 import { SpriteAnimation } from "../sprites/SpriteAnimation";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
@@ -18,7 +18,7 @@ export class MoveActivity implements Activity {
     });
   }
 
-  public tick(figure: GameObject, world: GameWorld): ActivityUpdates {
+  public tick(figure: GameObject, location: Location): ActivityUpdates {
     const coord = figure.getCoord();
     this.animation.tick();
     const sprites = this.animation.getSprites();
@@ -28,7 +28,7 @@ export class MoveActivity implements Activity {
       return { sprites };
     }
 
-    const targetCoord = this.getActivePathStep(coord, world);
+    const targetCoord = this.getActivePathStep(coord, location);
     if (targetCoord) {
       this.speed = coordMul(coordUnit(coordSub(targetCoord, coord)), [2, 2]);
 
@@ -42,9 +42,9 @@ export class MoveActivity implements Activity {
     return this.finished;
   }
 
-  private getActivePathStep(coord: Coord, world: GameWorld): Coord | undefined {
+  private getActivePathStep(coord: Coord, location: Location): Coord | undefined {
     if (this.destination && !this.path) {
-      this.path = world.findPath(coord, this.destination);
+      this.path = location.findPath(coord, this.destination);
     }
     const current = this.path?.[0];
     if (current && coordEq(coord, current)) {

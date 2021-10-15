@@ -7,6 +7,7 @@ import { UiController } from "../UiController";
 import { Character } from "./Character";
 import { Desires } from "./Desires";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
+import { Location } from "../locations/Location";
 
 export class CharacterFigure implements GameObject {
   private desires: Desires;
@@ -18,10 +19,10 @@ export class CharacterFigure implements GameObject {
     this.defaultSprite = SpriteLibrary.get(character.spriteSet).getSprite([0, 0]);
   }
 
-  tick(world: GameWorld) {
+  tick(location: Location, world: GameWorld) {
     const activity = this.desires.currentActivity();
 
-    const updates = activity.tick(this, world);
+    const updates = activity.tick(this, location, world);
     if (updates.coord) {
       this.coord = updates.coord;
     }

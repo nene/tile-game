@@ -38,7 +38,7 @@ export class Location {
   }
 
   tick(world: GameWorld) {
-    this.allObjects().forEach((obj) => obj.tick(world));
+    this.allObjects().forEach((obj) => obj.tick(this, world));
     this.sortObjects();
   }
 

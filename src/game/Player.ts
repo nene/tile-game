@@ -2,7 +2,6 @@ import { PixelScreen } from "./PixelScreen";
 import { GameObject } from "./GameObject";
 import { Coord, coordAdd, coordConstrain, coordSub, Rect, rectTranslate } from "./Coord";
 import { SpriteAnimation } from "./sprites/SpriteAnimation";
-import { GameWorld } from "./GameWorld";
 import { SpriteLibrary } from "./sprites/SpriteLibrary";
 import { UiController } from "./UiController";
 import { BeerGlass, BeerLevel } from "./items/BeerGlass";
@@ -10,6 +9,7 @@ import { DrinkAnimation } from "./sprites/DrinkAnimation";
 import { Animation } from "./sprites/Animation";
 import { PlayerAttributes } from "./PlayerAttributes";
 import { GameKeyEvent } from "./GameEvent";
+import { Location } from "./locations/Location";
 
 const max = Math.max;
 const min = Math.min;
@@ -140,27 +140,27 @@ export class Player implements GameObject {
     return 'up';
   }
 
-  tick(world: GameWorld) {
-    this.updatePosition(world);
+  tick(location: Location) {
+    this.updatePosition(location);
     this.animation.tick();
 
     this.maybeFinishDrinking();
   }
 
-  private updatePosition(world: GameWorld) {
+  private updatePosition(location: Location) {
     const newCoord = coordAdd(this.coord, this.speed);
     const bounds = rectTranslate(this.boundingBox(), newCoord);
 
-    if (world.getObjectsInRect(bounds).some((obj) => obj.isSolid() && obj !== this)) {
+    if (location.getObjectsInRect(bounds).some((obj) => obj.isSolid() && obj !== this)) {
       return; // Don't move through walls
     }
 
-    this.coord = this.constrainToWorld(newCoord, world);
+    this.coord = this.constrainToWorld(newCoord, location);
   }
 
-  private constrainToWorld(coord: Coord, world: GameWorld): Coord {
+  private constrainToWorld(coord: Coord, location: Location): Coord {
     const bounds = this.boundingBox();
-    return coordConstrain(coord, { coord: coordSub([0, 0], bounds.coord), size: coordSub(world.getSize(), bounds.size) });
+    return coordConstrain(coord, { coord: coordSub([0, 0], bounds.coord), size: coordSub(location.getSize(), bounds.size) });
   }
 
   paint(screen: PixelScreen) {
