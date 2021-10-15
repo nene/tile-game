@@ -1,8 +1,8 @@
-import { Coord, coordEq } from "./Coord";
-import { PixelScreen } from "./PixelScreen";
-import { LocationBackground } from "./locations/LocationBackground";
+import { Coord, coordEq } from "../Coord";
+import { PixelScreen } from "../PixelScreen";
+import { LocationBackground } from "./LocationBackground";
 
-export class Background {
+export class BackgroundCache {
   private previousOffset: Coord = [-1, -1];
 
   constructor(private bg: LocationBackground) { }

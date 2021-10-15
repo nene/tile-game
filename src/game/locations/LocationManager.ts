@@ -5,17 +5,17 @@ import { ObjectIndexer } from "../ObjectIndexer";
 import { PathFinder } from "../PathFinder";
 import { PixelScreen } from "../PixelScreen";
 import { GameWorld } from "../GameWorld";
-import { Background } from "../Background";
+import { BackgroundCache } from "./BackgroundCache";
 
 export class LocationManager {
-  private background: Background;
+  private background: BackgroundCache;
   private objects: GameObject[];
   private indexer: ObjectIndexer;
   private pathFinder: PathFinder;
 
   constructor(private location: LocationFactory) {
     this.indexer = new ObjectIndexer(screenToTileCoord(location.getSize()));
-    this.background = new Background(location.getBackground());
+    this.background = new BackgroundCache(location.getBackground());
     this.objects = this.location.getObjects();
     this.sortObjects();
     this.pathFinder = new PathFinder(this.indexer.isTileEmpty.bind(this.indexer));
