@@ -4,7 +4,7 @@ import { Background } from "./Background";
 import { GameWorld } from "./GameWorld";
 import { SpriteLibrary } from "./sprites/SpriteLibrary";
 import { SoundLibrary } from "./sounds/SoundLibrary";
-import { CfeLocation } from "./CfeLocation";
+import { CfeLocation } from "./locations/CfeLocation";
 import { Coord, coordAdd, Rect, rectDistance, rectTranslate } from "./Coord";
 import { UiController } from "./UiController";
 import { Loops } from "./Loops";

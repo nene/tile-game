@@ -1,17 +1,17 @@
-import { BeerCabinet } from "./furniture/BeerCabinet";
+import { BeerCabinet } from "../furniture/BeerCabinet";
 import { CfeBackground } from "./CfeBackground";
-import { Coord, tileToScreenCoord } from "./Coord";
-import { Fridge } from "./furniture/Fridge";
+import { Coord, tileToScreenCoord } from "../Coord";
+import { Fridge } from "../furniture/Fridge";
 import { GameLocation } from "./GameLocation";
-import { GameObject } from "./GameObject";
-import { Table } from "./furniture/Table";
-import { Wall } from "./furniture/Wall";
-import { BeerBox } from "./furniture/BeerBox";
-import { Door } from "./furniture/Door";
-import { Sofa } from "./furniture/Sofa";
-import { Fireplace } from "./furniture/Fireplace";
-import { Countertop } from "./furniture/Countertop";
-import { Painting } from "./furniture/Painting";
+import { GameObject } from "../GameObject";
+import { Table } from "../furniture/Table";
+import { Wall } from "../furniture/Wall";
+import { BeerBox } from "../furniture/BeerBox";
+import { Door } from "../furniture/Door";
+import { Sofa } from "../furniture/Sofa";
+import { Fireplace } from "../furniture/Fireplace";
+import { Countertop } from "../furniture/Countertop";
+import { Painting } from "../furniture/Painting";
 
 const CFE_SIZE: Coord = [21, 16]; // Size in tiles
 

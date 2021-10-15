@@ -1,6 +1,6 @@
-import { Coord } from "./Coord";
-import { GameObject } from "./GameObject";
-import { PixelScreen } from "./PixelScreen";
+import { Coord } from "../Coord";
+import { GameObject } from "../GameObject";
+import { PixelScreen } from "../PixelScreen";
 
 export interface GameLocationBackground {
   paint: (screen: PixelScreen) => void;

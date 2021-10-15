@@ -1,5 +1,5 @@
 import { Coord, coordAdd, coordMul, isCoordInRect, Rect, screenToTileCoord, tileToScreenCoord } from "./Coord";
-import { GameLocation } from "./GameLocation";
+import { GameLocation } from "./locations/GameLocation";
 import { GameObject } from "./GameObject";
 import { ObjectIndexer } from "./ObjectIndexer";
 import { PathFinder } from "./PathFinder";

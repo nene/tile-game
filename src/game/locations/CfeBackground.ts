@@ -1,9 +1,9 @@
-import { Coord, tileToScreenCoord } from "./Coord";
+import { Coord, tileToScreenCoord } from "../Coord";
 import { GameLocationBackground } from "./GameLocation";
-import { PixelScreen } from "./PixelScreen";
-import { Sprite } from "./sprites/Sprite";
-import { SpriteLibrary } from "./sprites/SpriteLibrary";
-import { SpriteSheet } from "./sprites/SpriteSheet";
+import { PixelScreen } from "../PixelScreen";
+import { Sprite } from "../sprites/Sprite";
+import { SpriteLibrary } from "../sprites/SpriteLibrary";
+import { SpriteSheet } from "../sprites/SpriteSheet";
 
 // 21 x 16
 const spriteMap = [
