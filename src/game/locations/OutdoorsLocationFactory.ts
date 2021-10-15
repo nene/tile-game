@@ -1,11 +1,11 @@
 import { Coord, tileToScreenCoord } from "../Coord";
-import { GameLocation } from "./GameLocation";
+import { LocationFactory } from "./LocationFactory";
 import { GameObject } from "../GameObject";
 import { OutdoorsBackground } from "./OutdoorsBackground";
 import { CfeBuilding } from "./CfeBuilding";
 import { Building } from "./Building";
 
-export class OutdoorsLocation implements GameLocation {
+export class OutdoorsLocationFactory implements LocationFactory {
   private background: OutdoorsBackground;
   private objects: GameObject[];
   private buildings: Building[];

@@ -6,7 +6,7 @@ export interface GameLocationBackground {
   paint: (screen: PixelScreen) => void;
 }
 
-export interface GameLocation {
+export interface LocationFactory {
   getSize: () => Coord;
   getBackground: () => GameLocationBackground;
   getObjects: () => GameObject[];

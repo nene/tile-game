@@ -3,14 +3,14 @@ import { Player } from "./Player";
 import { GameWorld } from "./GameWorld";
 import { SpriteLibrary } from "./sprites/SpriteLibrary";
 import { SoundLibrary } from "./sounds/SoundLibrary";
-import { CfeLocation } from "./locations/CfeLocation";
+import { CfeLocationFactory } from "./locations/CfeLocationFactory";
 import { Coord, coordAdd, Rect, rectDistance, rectTranslate } from "./Coord";
 import { UiController } from "./UiController";
 import { Loops } from "./Loops";
 import { GameObject } from "./GameObject";
 import { FpsCounter } from "./FpsCounter";
 import { GameEventFactory, GameEventType } from "./GameEvent";
-import { OutdoorsLocation } from "./locations/OutdoorsLocation";
+import { OutdoorsLocationFactory } from "./locations/OutdoorsLocationFactory";
 
 export interface GameApi {
   onKeyEvent: (type: "keyup" | "keydown", key: string) => boolean;
@@ -26,8 +26,8 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
   await SoundLibrary.load();
 
   const world = new GameWorld([
-    new CfeLocation(),
-    new OutdoorsLocation(),
+    new CfeLocationFactory(),
+    new OutdoorsLocationFactory(),
   ]);
 
   const player = new Player([286, 113]);

@@ -1,5 +1,5 @@
 import { Coord, Rect } from "./Coord";
-import { GameLocation } from "./locations/GameLocation";
+import { LocationFactory } from "./locations/LocationFactory";
 import { GameObject } from "./GameObject";
 import { LocationManager } from "./locations/LocationManager";
 import { PixelScreen } from "./PixelScreen";
@@ -8,7 +8,7 @@ export class GameWorld {
   private locations: LocationManager[];
   private activeLocation: LocationManager;
 
-  constructor(locations: GameLocation[]) {
+  constructor(locations: LocationFactory[]) {
     this.locations = locations.map((loc) => new LocationManager(loc));
     this.activeLocation = this.locations[0];
   }

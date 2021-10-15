@@ -2,7 +2,7 @@ import { BeerCabinet } from "../furniture/BeerCabinet";
 import { CfeBackground } from "./CfeBackground";
 import { Coord, tileToScreenCoord } from "../Coord";
 import { Fridge } from "../furniture/Fridge";
-import { GameLocation } from "./GameLocation";
+import { LocationFactory } from "./LocationFactory";
 import { GameObject } from "../GameObject";
 import { Table } from "../furniture/Table";
 import { Wall } from "../furniture/Wall";
@@ -15,7 +15,7 @@ import { Painting } from "../furniture/Painting";
 
 const CFE_SIZE: Coord = [21, 16]; // Size in tiles
 
-export class CfeLocation implements GameLocation {
+export class CfeLocationFactory implements LocationFactory {
   private background: CfeBackground;
   private objects: GameObject[];
 

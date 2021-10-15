@@ -1,6 +1,6 @@
 import { Coord, coordEq } from "./Coord";
 import { PixelScreen } from "./PixelScreen";
-import { GameLocationBackground } from "./locations/GameLocation";
+import { GameLocationBackground } from "./locations/LocationFactory";
 
 export class Background {
   private previousOffset: Coord = [-1, -1];

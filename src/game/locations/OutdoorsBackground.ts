@@ -1,4 +1,4 @@
-import { GameLocationBackground } from "./GameLocation";
+import { GameLocationBackground } from "./LocationFactory";
 import { PixelScreen } from "../PixelScreen";
 import { Building } from "./Building";
 

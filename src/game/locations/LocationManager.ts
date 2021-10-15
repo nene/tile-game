@@ -1,5 +1,5 @@
 import { Coord, coordAdd, isCoordInRect, Rect, screenToTileCoord, tileToScreenCoord } from "../Coord";
-import { GameLocation } from "./GameLocation";
+import { LocationFactory } from "./LocationFactory";
 import { GameObject } from "../GameObject";
 import { ObjectIndexer } from "../ObjectIndexer";
 import { PathFinder } from "../PathFinder";
@@ -13,7 +13,7 @@ export class LocationManager {
   private indexer: ObjectIndexer;
   private pathFinder: PathFinder;
 
-  constructor(private location: GameLocation) {
+  constructor(private location: LocationFactory) {
     this.indexer = new ObjectIndexer(screenToTileCoord(location.getSize()));
     this.background = new Background(location.getBackground());
     this.objects = this.location.getObjects();
