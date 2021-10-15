@@ -20,7 +20,7 @@ export class OutdoorsLocationFactory implements LocationFactory {
 
     this.objects = [
       ...this.buildings.flatMap((building) => building.getWalls()),
-      new Door([228, 173]),
+      new Door([228, 173], "cfe-building-door"),
     ];
   }
 

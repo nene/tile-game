@@ -4,6 +4,7 @@ import cfeKsv1 from "./data/cfe-ksv-1.png";
 import cfeKsv2 from "./data/cfe-ksv-2.png";
 import cfeKsv3 from "./data/cfe-ksv-3.png";
 import cfeBuilding from "./data/cfe-building.png";
+import cfeBuildingDoor from "./data/cfe-building-door.png";
 import callout from "./data/callout.png";
 import table from "./data/table.png";
 import fridge from "./data/fridge.png";
@@ -88,6 +89,7 @@ const imageFiles = {
 
   // Big building
   'cfe-building': spriteDef({ src: cfeBuilding, cfg: { size: [228, 171], colsRows: [1, 1] } }),
+  'cfe-building-door': spriteDef({ src: cfeBuildingDoor, cfg: { size: [23, 34], colsRows: [1, 1], offset: [-2, -34] } }),
 };
 
 export type SpriteName = keyof typeof imageFiles;

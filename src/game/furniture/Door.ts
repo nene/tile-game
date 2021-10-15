@@ -4,7 +4,7 @@ import { GameObject } from "../GameObject";
 import { Character, getAllCharacters } from "../npc/Character";
 import { PixelScreen } from "../PixelScreen";
 import { Sprite } from "../sprites/Sprite";
-import { SpriteLibrary } from "../sprites/SpriteLibrary";
+import { SpriteLibrary, SpriteName } from "../sprites/SpriteLibrary";
 import { Location } from "../locations/Location";
 import { UiController } from "../UiController";
 import { GameWorld } from "../GameWorld";
@@ -13,8 +13,8 @@ export class Door implements GameObject {
   private sprite: Sprite;
   private tickCount: number = 0;
 
-  constructor(private coord: Coord) {
-    this.sprite = SpriteLibrary.get("door").getSprite([0, 0]);
+  constructor(private coord: Coord, spriteName: SpriteName) {
+    this.sprite = SpriteLibrary.get(spriteName).getSprite([0, 0]);
   }
 
   tick(location: Location) {
@@ -53,11 +53,11 @@ export class Door implements GameObject {
   }
 
   hitBox(): Rect {
-    return { coord: [-1, -33], size: [18, 33] };
+    return { coord: this.sprite.offset, size: this.sprite.size };
   }
 
   boundingBox(): Rect {
-    return { coord: [-1, -33], size: [18, 33] };
+    return { coord: this.sprite.offset, size: this.sprite.size };
   }
 
   isInteractable() {
