@@ -1,6 +1,5 @@
 import { PixelScreen, PixelScreenOptions } from "./PixelScreen";
 import { Player } from "./Player";
-import { Background } from "./Background";
 import { GameWorld } from "./GameWorld";
 import { SpriteLibrary } from "./sprites/SpriteLibrary";
 import { SoundLibrary } from "./sounds/SoundLibrary";
@@ -11,6 +10,7 @@ import { Loops } from "./Loops";
 import { GameObject } from "./GameObject";
 import { FpsCounter } from "./FpsCounter";
 import { GameEventFactory, GameEventType } from "./GameEvent";
+import { OutdoorsLocation } from "./locations/OutdoorsLocation";
 
 export interface GameApi {
   onKeyEvent: (type: "keyup" | "keydown", key: string) => boolean;
@@ -25,10 +25,10 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
   await SpriteLibrary.load();
   await SoundLibrary.load();
 
-  const location = new CfeLocation();
-  const background = new Background(location.getBackground());
-
-  const world = new GameWorld(location);
+  const world = new GameWorld([
+    new CfeLocation(),
+    new OutdoorsLocation(),
+  ]);
 
   const player = new Player([286, 113]);
   world.add(player);
@@ -38,8 +38,7 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
   const loops = new Loops();
   loops.runGameLoop(() => {
     if (uiController.isGameWorldActive()) {
-      world.allObjects().forEach((obj) => obj.tick(world));
-      world.sortObjects();
+      world.tick();
     }
     uiController.tick();
     screenNeedsRepaint = true;
@@ -53,8 +52,7 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
     }
     if (uiController.isGameWorldVisible()) {
       screen.centerTo(player.getCoord(), world);
-      background.paint(screen);
-      world.allObjects().forEach((obj) => obj.paint(screen));
+      world.paint(screen);
     }
     uiController.paint(screen);
     fps.paint(screen);

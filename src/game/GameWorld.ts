@@ -1,65 +1,57 @@
-import { Coord, coordAdd, isCoordInRect, Rect, screenToTileCoord, tileToScreenCoord } from "./Coord";
+import { Coord, Rect } from "./Coord";
 import { GameLocation } from "./locations/GameLocation";
 import { GameObject } from "./GameObject";
-import { ObjectIndexer } from "./ObjectIndexer";
-import { PathFinder } from "./PathFinder";
+import { LocationManager } from "./locations/LocationManager";
+import { PixelScreen } from "./PixelScreen";
 
 export class GameWorld {
-  private gameObjects: GameObject[] = [];
-  private indexer: ObjectIndexer;
-  private pathFinder: PathFinder;
+  private locations: LocationManager[];
+  private activeLocation: LocationManager;
 
-  constructor(private location: GameLocation) {
-    this.indexer = new ObjectIndexer(screenToTileCoord(location.getSize()));
-    this.gameObjects.push(...this.location.getObjects());
-    this.sortObjects();
-    this.pathFinder = new PathFinder(this.indexer.isTileEmpty.bind(this.indexer));
+  constructor(locations: GameLocation[]) {
+    this.locations = locations.map((loc) => new LocationManager(loc));
+    this.activeLocation = this.locations[0];
+  }
+
+  getActiveLocation(): LocationManager {
+    return this.activeLocation;
   }
 
   size(): Coord {
-    return this.location.getSize();
+    return this.activeLocation.size();
   }
 
   add(...objects: GameObject[]) {
-    this.gameObjects.push(...objects);
+    this.activeLocation.add(...objects);
   }
 
   remove(object: GameObject) {
-    this.gameObjects = this.gameObjects.filter((obj) => obj !== object);
+    this.activeLocation.remove(object);
   }
 
   allObjects(): GameObject[] {
-    return this.gameObjects;
+    return this.activeLocation.allObjects();
   }
 
-  sortObjects() {
-    this.gameObjects.sort((a, b) => {
-      return a.zIndex() - b.zIndex();
+  tick() {
+    this.locations.forEach((location) => {
+      location.tick(this);
     });
-    this.indexer.updateObjects(this.gameObjects);
   }
 
-  /**
-   * Looks up objects based on their hitBox,
-   * returns the first visible object (others might be behind it)
-   */
+  paint(screen: PixelScreen) {
+    this.activeLocation.paint(screen);
+  }
+
   getObjectVisibleOnCoord(screenCoord: Coord): GameObject | undefined {
-    // Loop through objects from front to back
-    return [...this.gameObjects].reverse().find((obj) => {
-      const hitBox = obj.hitBox();
-      const topLeft = coordAdd(obj.getCoord(), hitBox.coord);
-      return isCoordInRect(screenCoord, { coord: topLeft, size: hitBox.size });
-    });
+    return this.activeLocation.getObjectVisibleOnCoord(screenCoord);
   }
 
   getObjectsInRect(rect: Rect): GameObject[] {
-    return this.indexer.getObjectsInRect(rect);
+    return this.activeLocation.getObjectsInRect(rect);
   }
 
   findPath(coord1: Coord, coord2: Coord): Coord[] | undefined {
-    return this.pathFinder.findPath(
-      screenToTileCoord(coord1),
-      screenToTileCoord(coord2)
-    )?.map((coord) => coordAdd(tileToScreenCoord(coord), [8, 8]));
+    return this.activeLocation.findPath(coord1, coord2);
   }
 }
