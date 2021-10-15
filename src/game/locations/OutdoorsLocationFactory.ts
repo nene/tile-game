@@ -1,5 +1,5 @@
 import { Coord, tileToScreenCoord } from "../Coord";
-import { LocationFactory } from "./LocationFactory";
+import { LocationFactory, LocationName } from "./LocationFactory";
 import { GameObject } from "../GameObject";
 import { OutdoorsBackground } from "./OutdoorsBackground";
 import { CfeBuilding } from "./CfeBuilding";
@@ -24,7 +24,7 @@ export class OutdoorsLocationFactory implements LocationFactory {
     ];
   }
 
-  getName() {
+  getName(): LocationName {
     return "outdoors";
   }
 

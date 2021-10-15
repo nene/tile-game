@@ -2,8 +2,10 @@ import { Coord } from "../Coord";
 import { GameObject } from "../GameObject";
 import { LocationBackground } from "./LocationBackground";
 
+export type LocationName = "cfe" | "outdoors";
+
 export interface LocationFactory {
-  getName: () => string;
+  getName: () => LocationName;
   getSize: () => Coord;
   getBackground: () => LocationBackground;
   getObjects: () => GameObject[];

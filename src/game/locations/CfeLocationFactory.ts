@@ -2,7 +2,7 @@ import { BeerCabinet } from "../furniture/BeerCabinet";
 import { CfeBackground } from "./CfeBackground";
 import { Coord, tileToScreenCoord } from "../Coord";
 import { Fridge } from "../furniture/Fridge";
-import { LocationFactory } from "./LocationFactory";
+import { LocationFactory, LocationName } from "./LocationFactory";
 import { GameObject } from "../GameObject";
 import { Table } from "../furniture/Table";
 import { Wall } from "../furniture/Wall";
@@ -52,7 +52,7 @@ export class CfeLocationFactory implements LocationFactory {
     ];
   }
 
-  getName() {
+  getName(): LocationName {
     return "cfe";
   }
 

@@ -1,5 +1,5 @@
 import { Coord, coordAdd, isCoordInRect, Rect, screenToTileCoord, tileToScreenCoord } from "../Coord";
-import { LocationFactory } from "./LocationFactory";
+import { LocationFactory, LocationName } from "./LocationFactory";
 import { GameObject } from "../GameObject";
 import { ObjectIndexer } from "../ObjectIndexer";
 import { PathFinder } from "../PathFinder";
@@ -8,7 +8,7 @@ import { GameWorld } from "../GameWorld";
 import { BackgroundCache } from "./BackgroundCache";
 
 export class Location {
-  private name: string;
+  private name: LocationName;
   private background: BackgroundCache;
   private objects: GameObject[];
   private indexer: ObjectIndexer;
