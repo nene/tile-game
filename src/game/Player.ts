@@ -1,6 +1,6 @@
 import { PixelScreen } from "./PixelScreen";
 import { GameObject } from "./GameObject";
-import { Coord, coordAdd, coordConstrain, coordSub, Rect, rectTranslate } from "./Coord";
+import { Coord, coordConstrain, coordSub, Rect } from "./Coord";
 import { SpriteAnimation } from "./sprites/SpriteAnimation";
 import { SpriteLibrary } from "./sprites/SpriteLibrary";
 import { UiController } from "./UiController";
@@ -10,6 +10,7 @@ import { Animation } from "./sprites/Animation";
 import { PlayerAttributes } from "./PlayerAttributes";
 import { GameKeyEvent } from "./GameEvent";
 import { Location } from "./locations/Location";
+import { PlayerMovement } from "./PlayerMovement";
 
 const max = Math.max;
 const min = Math.min;
@@ -24,6 +25,7 @@ export class Player implements GameObject {
   private animation: Animation;
   private itemAtHand?: BeerGlass;
   private attributes = new PlayerAttributes();
+  private movement = new PlayerMovement(this);
 
   constructor(coord: Coord) {
     this.coord = coord;
@@ -148,12 +150,7 @@ export class Player implements GameObject {
   }
 
   private updatePosition(location: Location) {
-    const newCoord = coordAdd(this.coord, this.speed);
-    const bounds = rectTranslate(this.boundingBox(), newCoord);
-
-    if (location.getObjectsInRect(bounds).some((obj) => obj.isSolid() && obj !== this)) {
-      return; // Don't move through walls
-    }
+    const newCoord = this.movement.move(this.speed, location);
 
     this.coord = this.constrainToWorld(newCoord, location);
   }
