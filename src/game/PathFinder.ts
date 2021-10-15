@@ -5,6 +5,7 @@ export class PathFinder {
   constructor(private isTileEmpty: (coord: Coord) => boolean) { }
 
   public findPath(coord1: Coord, coord2: Coord): Coord[] | undefined {
+    const startCoord = coord1;
     const visited = [coord1];
     const path: Coord[] = [];
 
@@ -23,7 +24,8 @@ export class PathFinder {
           // Can't backtrack any more, so no path found
           return undefined;
         }
-        coord1 = path.pop() as Coord;
+        path.pop();
+        coord1 = path[path.length - 1] || startCoord;
       }
     }
   }
