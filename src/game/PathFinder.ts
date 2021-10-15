@@ -6,7 +6,7 @@ export class PathFinder {
 
   public findPath(coord1: Coord, coord2: Coord): Coord[] | undefined {
     const path = this.findRawPath(coord1, coord2);
-    return path ? this.cutCorners(path) : undefined;
+    return path ? this.cutCorners(path).slice(1) : undefined;
   }
 
   private cutCorners(path: Coord[]): Coord[] {
@@ -29,27 +29,24 @@ export class PathFinder {
   }
 
   private findRawPath(coord1: Coord, coord2: Coord): Coord[] | undefined {
-    const startCoord = coord1;
     const visited = [coord1];
-    const path: Coord[] = [];
+    const path: Coord[] = [coord1];
 
     while (true) {
-      const next = this.takeStep(coord1, coord2, visited);
+      const next = this.takeStep(path[path.length - 1], coord2, visited);
       if (next) {
         path.push(next);
         visited.push(next);
-        coord1 = next;
 
         if (coordEq(next, coord2)) {
           return path;
         }
       } else {
+        path.pop();
         if (path.length === 0) {
           // Can't backtrack any more, so no path found
           return undefined;
         }
-        path.pop();
-        coord1 = path[path.length - 1] || startCoord;
       }
     }
   }
