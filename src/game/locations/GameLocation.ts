@@ -7,7 +7,7 @@ export interface GameLocationBackground {
 }
 
 export interface GameLocation {
-  getGridSize: () => Coord;
+  getSize: () => Coord;
   getBackground: () => GameLocationBackground;
   getObjects: () => GameObject[];
 }

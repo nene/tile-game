@@ -52,8 +52,8 @@ export class CfeLocation implements GameLocation {
     ];
   }
 
-  getGridSize(): Coord {
-    return CFE_SIZE;
+  getSize(): Coord {
+    return tileToScreenCoord(CFE_SIZE);
   }
 
   getBackground() {

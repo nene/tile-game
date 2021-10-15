@@ -1,4 +1,4 @@
-import { Coord, coordAdd, coordMul, isCoordInRect, Rect, screenToTileCoord, tileToScreenCoord } from "./Coord";
+import { Coord, coordAdd, isCoordInRect, Rect, screenToTileCoord, tileToScreenCoord } from "./Coord";
 import { GameLocation } from "./locations/GameLocation";
 import { GameObject } from "./GameObject";
 import { ObjectIndexer } from "./ObjectIndexer";
@@ -10,14 +10,14 @@ export class GameWorld {
   private pathFinder: PathFinder;
 
   constructor(private location: GameLocation) {
-    this.indexer = new ObjectIndexer(location.getGridSize());
+    this.indexer = new ObjectIndexer(screenToTileCoord(location.getSize()));
     this.gameObjects.push(...this.location.getObjects());
     this.sortObjects();
     this.pathFinder = new PathFinder(this.indexer.isTileEmpty.bind(this.indexer));
   }
 
   size(): Coord {
-    return coordMul(this.location.getGridSize(), [16, 16]);
+    return this.location.getSize();
   }
 
   add(...objects: GameObject[]) {

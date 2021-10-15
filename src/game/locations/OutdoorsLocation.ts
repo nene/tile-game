@@ -1,11 +1,9 @@
-import { Coord } from "../Coord";
+import { Coord, tileToScreenCoord } from "../Coord";
 import { GameLocation } from "./GameLocation";
 import { GameObject } from "../GameObject";
 import { OutdoorsBackground } from "./OutdoorsBackground";
 import { CfeBuilding } from "./CfeBuilding";
 import { Building } from "./Building";
-
-const SIZE: Coord = [21, 15]; // Size in tiles
 
 export class OutdoorsLocation implements GameLocation {
   private background: OutdoorsBackground;
@@ -24,8 +22,8 @@ export class OutdoorsLocation implements GameLocation {
     ];
   }
 
-  getGridSize(): Coord {
-    return SIZE;
+  getSize(): Coord {
+    return tileToScreenCoord([21, 15]);
   }
 
   getBackground() {
