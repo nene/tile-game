@@ -18,7 +18,7 @@ export interface TextStyle {
 
 export class PixelScreen implements TextMeasurer {
   private ctx: CanvasRenderingContext2D;
-  private virtualSize: Coord;
+  private size: Coord;
   private scale: number;
   private offset: Coord;
   private bg?: ImageData;
@@ -26,7 +26,7 @@ export class PixelScreen implements TextMeasurer {
 
   constructor(ctx: CanvasRenderingContext2D, { size, scale, offset }: PixelScreenOptions) {
     this.ctx = ctx;
-    this.virtualSize = size;
+    this.size = size;
     this.scale = scale;
     this.offset = offset ?? [0, 0];
     this.ctx.scale(scale, scale);
@@ -44,7 +44,7 @@ export class PixelScreen implements TextMeasurer {
   drawSprite(sprite: Sprite, coord: Coord) {
     const screenOffset: Coord = this.fixed ? [0, 0] : this.offset;
 
-    if (rectOverlaps({ coord: coordAdd(coord, sprite.offset), size: sprite.size }, { coord: screenOffset, size: this.virtualSize })) {
+    if (rectOverlaps({ coord: coordAdd(coord, sprite.offset), size: sprite.size }, { coord: screenOffset, size: this.size })) {
       const adjustedCoord = coordSub(coordAdd(coord, sprite.offset), screenOffset);
       this.ctx.drawImage(
         sprite.image,
@@ -107,15 +107,15 @@ export class PixelScreen implements TextMeasurer {
   }
 
   saveBg() {
-    this.bg = this.ctx.getImageData(0, 0, this.virtualSize[0] * this.scale, this.virtualSize[1] * this.scale);
+    this.bg = this.ctx.getImageData(0, 0, this.size[0] * this.scale, this.size[1] * this.scale);
   }
 
   centerTo(coord: Coord, world: GameWorld) {
-    const halfScreenSize: Coord = coordDiv(this.virtualSize, [2, 2]);
+    const halfScreenSize: Coord = coordDiv(this.size, [2, 2]);
 
     this.offset = coordConstrain(
       coordSub(coord, halfScreenSize),
-      { coord: [0, 0], size: coordSub(world.size(), this.virtualSize) },
+      { coord: [0, 0], size: coordSub(world.size(), this.size) },
     );
   }
 
@@ -130,7 +130,7 @@ export class PixelScreen implements TextMeasurer {
   }
 
   getSize(): Coord {
-    return this.virtualSize;
+    return this.size;
   }
 
   getContext(): CanvasRenderingContext2D {
