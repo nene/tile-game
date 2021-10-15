@@ -12,6 +12,7 @@ import { Sofa } from "../furniture/Sofa";
 import { Fireplace } from "../furniture/Fireplace";
 import { Countertop } from "../furniture/Countertop";
 import { Painting } from "../furniture/Painting";
+import { SpawnPoint } from "../furniture/SpawnPoint";
 
 const CFE_SIZE: Coord = [21, 16]; // Size in tiles
 
@@ -42,6 +43,8 @@ export class CfeLocationFactory implements LocationFactory {
         spriteName: "door",
         target: { location: "outdoors" },
       }),
+      // A spawn location at the door
+      new SpawnPoint(tileToScreenCoord([12, 3])),
 
       // Bar countertop
       new Countertop(tileToScreenCoord([14, 6])),
