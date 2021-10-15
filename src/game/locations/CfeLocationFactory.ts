@@ -52,6 +52,10 @@ export class CfeLocationFactory implements LocationFactory {
     ];
   }
 
+  getName() {
+    return "cfe";
+  }
+
   getSize(): Coord {
     return tileToScreenCoord(CFE_SIZE);
   }

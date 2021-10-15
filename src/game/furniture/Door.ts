@@ -6,6 +6,8 @@ import { PixelScreen } from "../PixelScreen";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { Location } from "../locations/Location";
+import { UiController } from "../UiController";
+import { GameWorld } from "../GameWorld";
 
 export class Door implements GameObject {
   private sprite: Sprite;
@@ -18,14 +20,16 @@ export class Door implements GameObject {
   tick(location: Location) {
     this.tickCount++;
 
-    const character = this.trySpawnCharacter();
+    const character = this.trySpawnCharacter(location);
     if (character) {
       location.add(new CharacterFigure(this.spawnPoint(), character));
     }
   }
 
-  private trySpawnCharacter(): Character | undefined {
-    return getAllCharacters().find((char) => char.spawnTime === this.tickCount);
+  private trySpawnCharacter(location: Location): Character | undefined {
+    if (location.getName() === "cfe") {
+      return getAllCharacters().find((char) => char.spawnTime === this.tickCount);
+    }
   }
 
   private spawnPoint(): Coord {
@@ -57,8 +61,19 @@ export class Door implements GameObject {
   }
 
   isInteractable() {
-    return false;
+    return true;
   }
 
-  onInteract() { }
+  onInteract(ui: UiController, world: GameWorld) {
+    const newLocation = world.allLocations().find((loc) => loc !== world.getActiveLocation());
+    if (!newLocation) {
+      throw new Error("No other location to go to :(");
+    }
+    const door = newLocation.allObjects().find(obj => obj instanceof Door);
+    if (!door) {
+      throw new Error("No door found in the other location");
+    }
+    world.teleport(world.getPlayer(), newLocation);
+    world.getPlayer().setCoord(coordAdd(door.getCoord(), [8, 8]));
+  }
 }

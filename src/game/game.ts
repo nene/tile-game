@@ -25,13 +25,12 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
   await SpriteLibrary.load();
   await SoundLibrary.load();
 
+  const player = new Player([286, 113]);
+
   const world = new GameWorld([
     new CfeLocationFactory(),
     new OutdoorsLocationFactory(),
-  ]);
-
-  const player = new Player([286, 113]);
-  world.getActiveLocation().add(player);
+  ], player);
 
   const uiController = new UiController(player.getAttributes());
 
@@ -62,7 +61,7 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
   function handleWorldClick(worldCoord: Coord) {
     const obj = world.getActiveLocation().getObjectVisibleOnCoord(worldCoord);
     if (obj && isObjectsCloseby(player, obj)) {
-      obj.onInteract(uiController);
+      obj.onInteract(uiController, world);
     }
   }
 

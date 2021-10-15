@@ -17,4 +17,8 @@ export class BackgroundCache {
     screen.saveBg();
     this.previousOffset = screen.getOffset();
   }
+
+  invalidate() {
+    this.previousOffset = [-1, -1];
+  }
 }

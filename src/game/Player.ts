@@ -177,6 +177,10 @@ export class Player implements GameObject {
     return this.coord;
   }
 
+  setCoord(coord: Coord) {
+    this.coord = coord;
+  }
+
   isSolid() {
     return false;
   }

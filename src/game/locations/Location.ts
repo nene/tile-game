@@ -8,17 +8,23 @@ import { GameWorld } from "../GameWorld";
 import { BackgroundCache } from "./BackgroundCache";
 
 export class Location {
+  private name: string;
   private background: BackgroundCache;
   private objects: GameObject[];
   private indexer: ObjectIndexer;
   private pathFinder: PathFinder;
 
   constructor(private location: LocationFactory) {
+    this.name = location.getName();
     this.indexer = new ObjectIndexer(screenToTileCoord(location.getSize()));
     this.background = new BackgroundCache(location.getBackground());
     this.objects = this.location.getObjects();
     this.sortObjects();
     this.pathFinder = new PathFinder(this.indexer.isTileEmpty.bind(this.indexer));
+  }
+
+  getName() {
+    return this.name;
   }
 
   getSize(): Coord {
@@ -45,6 +51,10 @@ export class Location {
   paint(screen: PixelScreen) {
     this.background.paint(screen);
     this.allObjects().forEach((obj) => obj.paint(screen));
+  }
+
+  activate() {
+    this.background.invalidate();
   }
 
   private sortObjects() {

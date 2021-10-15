@@ -4,6 +4,7 @@ import { GameObject } from "../GameObject";
 import { OutdoorsBackground } from "./OutdoorsBackground";
 import { CfeBuilding } from "./CfeBuilding";
 import { Building } from "./Building";
+import { Door } from "../furniture/Door";
 
 export class OutdoorsLocationFactory implements LocationFactory {
   private background: OutdoorsBackground;
@@ -19,7 +20,12 @@ export class OutdoorsLocationFactory implements LocationFactory {
 
     this.objects = [
       ...this.buildings.flatMap((building) => building.getWalls()),
+      new Door([228, 173]),
     ];
+  }
+
+  getName() {
+    return "outdoors";
   }
 
   getSize(): Coord {
