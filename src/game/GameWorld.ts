@@ -1,16 +1,16 @@
-import { LocationFactory } from "./locations/LocationFactory";
+import { LocationFactory, LocationName } from "./locations/LocationFactory";
 import { Location } from "./locations/Location";
 import { PixelScreen } from "./PixelScreen";
 import { GameObject } from "./GameObject";
 import { Player } from "./Player";
 
 export class GameWorld {
-  private locations: Location[];
+  private locations: Map<LocationName, Location>;
   private activeLocation: Location;
 
   constructor(locations: LocationFactory[], private player: Player) {
-    this.locations = locations.map((loc) => new Location(loc));
-    this.activeLocation = this.locations[0];
+    this.locations = new Map(locations.map((loc) => [loc.getName(), new Location(loc)]));
+    this.activeLocation = this.getLocation(locations[0].getName());
     this.activeLocation.add(player);
   }
 
@@ -22,8 +22,8 @@ export class GameWorld {
     return this.player;
   }
 
-  allLocations(): Location[] {
-    return this.locations;
+  getLocation(name: LocationName): Location {
+    return this.locations.get(name) as Location;
   }
 
   tick() {
