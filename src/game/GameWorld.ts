@@ -1,19 +1,19 @@
 import { Coord, Rect } from "./Coord";
 import { LocationFactory } from "./locations/LocationFactory";
 import { GameObject } from "./GameObject";
-import { LocationManager } from "./locations/LocationManager";
+import { Location } from "./locations/Location";
 import { PixelScreen } from "./PixelScreen";
 
 export class GameWorld {
-  private locations: LocationManager[];
-  private activeLocation: LocationManager;
+  private locations: Location[];
+  private activeLocation: Location;
 
   constructor(locations: LocationFactory[]) {
-    this.locations = locations.map((loc) => new LocationManager(loc));
+    this.locations = locations.map((loc) => new Location(loc));
     this.activeLocation = this.locations[0];
   }
 
-  getActiveLocation(): LocationManager {
+  getActiveLocation(): Location {
     return this.activeLocation;
   }
 

@@ -7,7 +7,7 @@ import { PixelScreen } from "../PixelScreen";
 import { GameWorld } from "../GameWorld";
 import { BackgroundCache } from "./BackgroundCache";
 
-export class LocationManager {
+export class Location {
   private background: BackgroundCache;
   private objects: GameObject[];
   private indexer: ObjectIndexer;
