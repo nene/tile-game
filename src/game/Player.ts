@@ -12,8 +12,6 @@ import { GameKeyEvent } from "./GameEvent";
 import { Location } from "./locations/Location";
 import { PlayerMovement } from "./PlayerMovement";
 
-const max = Math.max;
-const min = Math.min;
 const PLAYER_SPEED = 3;
 
 type Facing = 'up' | 'down' | 'left' | 'right';
@@ -76,16 +74,16 @@ export class Player implements GameObject {
     } else {
       switch (event.key) {
         case "LEFT":
-          this.changeDirection([max(0, this.direction[0]), this.direction[1]]);
+          this.changeDirection([Math.max(0, this.direction[0]), this.direction[1]]);
           return true;
         case "RIGHT":
-          this.changeDirection([min(0, this.direction[0]), this.direction[1]]);
+          this.changeDirection([Math.min(0, this.direction[0]), this.direction[1]]);
           return true;
         case "UP":
-          this.changeDirection([this.direction[0], max(0, this.direction[1])]);
+          this.changeDirection([this.direction[0], Math.max(0, this.direction[1])]);
           return true;
         case "DOWN":
-          this.changeDirection([this.direction[0], min(0, this.direction[1])]);
+          this.changeDirection([this.direction[0], Math.min(0, this.direction[1])]);
           return true;
         default:
           return false; // Inform that we didn't handle the keypress
