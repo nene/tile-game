@@ -1,6 +1,6 @@
 import { PixelScreen } from "./PixelScreen";
 import { GameObject } from "./GameObject";
-import { Coord, coordConstrain, coordSub, coordUnit, Rect } from "./Coord";
+import { Coord, coordConstrain, coordSub, Rect } from "./Coord";
 import { SpriteAnimation } from "./sprites/SpriteAnimation";
 import { SpriteLibrary } from "./sprites/SpriteLibrary";
 import { UiController } from "./UiController";
@@ -14,14 +14,15 @@ import { PlayerMovement } from "./PlayerMovement";
 
 const max = Math.max;
 const min = Math.min;
+const PLAYER_SPEED = 3;
 
-type Direction = 'up' | 'down' | 'left' | 'right';
+type Facing = 'up' | 'down' | 'left' | 'right';
 
 export class Player implements GameObject {
   private coord: Coord;
-  private speed: Coord;
-  private standAnimations: Record<Direction, SpriteAnimation>;
-  private walkAnimations: Record<Direction, SpriteAnimation>;
+  private direction: Coord;
+  private standAnimations: Record<Facing, SpriteAnimation>;
+  private walkAnimations: Record<Facing, SpriteAnimation>;
   private animation: Animation;
   private itemAtHand?: BeerGlass;
   private attributes = new PlayerAttributes();
@@ -29,7 +30,7 @@ export class Player implements GameObject {
 
   constructor(coord: Coord) {
     this.coord = coord;
-    this.speed = [0, 0];
+    this.direction = [0, 0];
 
     this.standAnimations = {
       down: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: [[0, 0]] }),
@@ -58,16 +59,16 @@ export class Player implements GameObject {
     if (event.type === "keydown") {
       switch (event.key) {
         case "LEFT":
-          this.changeSpeed([-3, this.speed[1]]);
+          this.changeDirection([-1, this.direction[1]]);
           return true;
         case "RIGHT":
-          this.changeSpeed([3, this.speed[1]]);
+          this.changeDirection([1, this.direction[1]]);
           return true;
         case "UP":
-          this.changeSpeed([this.speed[0], -3]);
+          this.changeDirection([this.direction[0], -1]);
           return true;
         case "DOWN":
-          this.changeSpeed([this.speed[0], 3]);
+          this.changeDirection([this.direction[0], 1]);
           return true;
         default:
           return false; // Inform that we didn't handle the keypress
@@ -75,16 +76,16 @@ export class Player implements GameObject {
     } else {
       switch (event.key) {
         case "LEFT":
-          this.changeSpeed([max(0, this.speed[0]), this.speed[1]]);
+          this.changeDirection([max(0, this.direction[0]), this.direction[1]]);
           return true;
         case "RIGHT":
-          this.changeSpeed([min(0, this.speed[0]), this.speed[1]]);
+          this.changeDirection([min(0, this.direction[0]), this.direction[1]]);
           return true;
         case "UP":
-          this.changeSpeed([this.speed[0], max(0, this.speed[1])]);
+          this.changeDirection([this.direction[0], max(0, this.direction[1])]);
           return true;
         case "DOWN":
-          this.changeSpeed([this.speed[0], min(0, this.speed[1])]);
+          this.changeDirection([this.direction[0], min(0, this.direction[1])]);
           return true;
         default:
           return false; // Inform that we didn't handle the keypress
@@ -92,14 +93,14 @@ export class Player implements GameObject {
     }
   }
 
-  changeSpeed(newSpeed: Coord) {
-    const oldSpeed = this.speed;
-    if (this.isMoving(newSpeed)) {
+  changeDirection(newDirection: Coord) {
+    const oldDirection = this.direction;
+    if (this.isMoving(newDirection)) {
       const oldAnimation = this.animation;
-      this.animation = this.pickByDirection(newSpeed, this.walkAnimations);
+      this.animation = this.pickByDirection(newDirection, this.walkAnimations);
       // A hack for now...
       if (this.animation instanceof SpriteAnimation && oldAnimation instanceof SpriteAnimation) {
-        if (this.isStanding(oldSpeed)) {
+        if (this.isStanding(oldDirection)) {
           // started moving, begin new animation
           this.animation.setFrame(0);
         } else {
@@ -109,34 +110,34 @@ export class Player implements GameObject {
       }
     }
     else {
-      if (this.isMoving(oldSpeed)) {
+      if (this.isMoving(oldDirection)) {
         // was moving, now stopped
-        this.animation = this.pickByDirection(oldSpeed, this.standAnimations);
+        this.animation = this.pickByDirection(oldDirection, this.standAnimations);
       }
     }
-    this.speed = newSpeed;
+    this.direction = newDirection;
   }
 
-  isStanding(speed: Coord) {
-    return speed[0] === 0 && speed[1] === 0;
+  isStanding(direction: Coord) {
+    return direction[0] === 0 && direction[1] === 0;
   }
 
-  isMoving(speed: Coord) {
-    return !this.isStanding(speed);
+  isMoving(direction: Coord) {
+    return !this.isStanding(direction);
   }
 
-  pickByDirection(speed: Coord, options: Record<Direction, SpriteAnimation>): SpriteAnimation {
-    return options[this.lookingDirection(speed)];
+  pickByDirection(dir: Coord, options: Record<Facing, SpriteAnimation>): SpriteAnimation {
+    return options[this.facing(dir)];
   }
 
-  lookingDirection(speed: Coord): Direction {
-    if (speed[0] > 0) {
+  facing(dir: Coord): Facing {
+    if (dir[0] > 0) {
       return 'right';
     }
-    if (speed[0] < 0) {
+    if (dir[0] < 0) {
       return 'left';
     }
-    if (speed[1] > 0) {
+    if (dir[1] > 0) {
       return 'down';
     }
     return 'up';
@@ -150,7 +151,7 @@ export class Player implements GameObject {
   }
 
   private updatePosition(location: Location) {
-    const newCoord = this.movement.move(coordUnit(this.speed), 3, location);
+    const newCoord = this.movement.move(this.direction, PLAYER_SPEED, location);
 
     this.coord = this.constrainToWorld(newCoord, location);
   }
