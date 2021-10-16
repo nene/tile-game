@@ -64,8 +64,8 @@ export function rectOverlaps({ coord: a1, size: aSize }: Rect, { coord: b1, size
   const a2 = coordAdd(a1, aSize);
   const b2 = coordAdd(b1, bSize);
 
-  const xOverlaps = a1[0] <= b2[0] && a2[0] >= b1[0];
-  const yOverlaps = a1[1] <= b2[1] && a2[1] >= b1[1];
+  const xOverlaps = a1[0] < b2[0] && a2[0] > b1[0];
+  const yOverlaps = a1[1] < b2[1] && a2[1] > b1[1];
   return xOverlaps && yOverlaps;
 }
 

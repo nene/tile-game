@@ -1,4 +1,4 @@
-import { coordConstrain, rectCenter } from "./Coord";
+import { coordConstrain, rectCenter, rectOverlaps } from "./Coord";
 
 describe("coordConstrain()", () => {
   it("does nothing when coord inside the rectangle", () => {
@@ -21,6 +21,24 @@ describe("coordConstrain()", () => {
     expect(coordConstrain([5, 4], { coord: [10, 15], size: [10, 10] })).toEqual([10, 15]);
     expect(coordConstrain([30, 40], { coord: [10, 15], size: [10, 10] })).toEqual([20, 25]);
     expect(coordConstrain([2, 40], { coord: [10, 15], size: [10, 10] })).toEqual([10, 25]);
+  });
+});
+
+describe("rectOverlaps()", () => {
+  it("false when rects far from each other", () => {
+    expect(rectOverlaps({ coord: [0, 0], size: [5, 5] }, { coord: [20, 20], size: [10, 10] })).toBe(false);
+  });
+
+  it("true when rects clearly overlap", () => {
+    expect(rectOverlaps({ coord: [0, 0], size: [10, 10] }, { coord: [5, 5], size: [10, 10] })).toBe(true);
+  });
+
+  it("false when rects side-by-side", () => {
+    expect(rectOverlaps({ coord: [0, 0], size: [10, 10] }, { coord: [10, 10], size: [10, 10] })).toBe(false);
+  });
+
+  it("true when only edges overlap", () => {
+    expect(rectOverlaps({ coord: [0, 0], size: [10, 10] }, { coord: [9, 9], size: [10, 10] })).toBe(true);
   });
 });
 
