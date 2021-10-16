@@ -1,10 +1,11 @@
-import { Coord, tileToScreenCoord } from "../Coord";
+import { Coord, coordAdd, tileToScreenCoord } from "../Coord";
 import { LocationFactory, LocationName } from "./LocationFactory";
 import { GameObject } from "../GameObject";
 import { OutdoorsBackground } from "./OutdoorsBackground";
 import { CfeBuilding } from "./CfeBuilding";
 import { Building } from "./Building";
 import { Door } from "../furniture/Door";
+import { Fence } from "../furniture/Fence";
 
 export class OutdoorsLocationFactory implements LocationFactory {
   private background: OutdoorsBackground;
@@ -25,6 +26,10 @@ export class OutdoorsLocationFactory implements LocationFactory {
         spriteName: "cfe-building-door",
         target: { location: "cfe" },
       }),
+      new Fence(tileToScreenCoord([0, 14])),
+      new Fence(coordAdd(tileToScreenCoord([4, 14]), [8, 0])),
+      new Fence(tileToScreenCoord([9, 14])),
+      new Fence(tileToScreenCoord([16, 14])),
     ];
   }
 
