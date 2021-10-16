@@ -1,6 +1,6 @@
 import { PixelScreen } from "./PixelScreen";
 import { GameObject } from "./GameObject";
-import { Coord, coordConstrain, coordSub, Rect } from "./Coord";
+import { Coord, coordConstrain, coordSub, coordUnit, Rect } from "./Coord";
 import { SpriteAnimation } from "./sprites/SpriteAnimation";
 import { SpriteLibrary } from "./sprites/SpriteLibrary";
 import { UiController } from "./UiController";
@@ -150,7 +150,7 @@ export class Player implements GameObject {
   }
 
   private updatePosition(location: Location) {
-    const newCoord = this.movement.move(this.speed, location);
+    const newCoord = this.movement.move(coordUnit(this.speed), 3, location);
 
     this.coord = this.constrainToWorld(newCoord, location);
   }
