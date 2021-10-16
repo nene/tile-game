@@ -44,7 +44,7 @@ export class Door implements GameObject {
   }
 
   isSolid() {
-    return true;
+    return false;
   }
 
   hitBox(): Rect {
