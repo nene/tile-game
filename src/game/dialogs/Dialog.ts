@@ -1,24 +1,23 @@
-import { coordAdd, isCoordInRect, Rect, rectGrow } from "../Coord";
+import { isCoordInRect, Rect, rectGrow } from "../Coord";
 import { GameEvent } from "../GameEvent";
 import { Character } from "../npc/Character";
 import { PixelScreen } from "../PixelScreen";
-import { fitText } from "../ui/fitText";
-import { UI_SHADOW_COLOR } from "../ui/ui-utils";
 import { Window } from "../ui/Window";
+import { DialogContent } from "./DialogContent";
 
 interface DialogConfig {
   character: Character;
-  text: string;
+  content: DialogContent;
   onClose: () => void;
 }
 
 export class Dialog {
   private window: Window;
-  private text: string;
+  private content: DialogContent;
   private onClose: () => void;
 
-  constructor({ character, text, onClose }: DialogConfig) {
-    this.text = text;
+  constructor({ character, content, onClose }: DialogConfig) {
+    this.content = content;
     this.onClose = onClose;
     this.window = new Window({
       headline: {
@@ -33,16 +32,7 @@ export class Dialog {
 
   paint(screen: PixelScreen) {
     this.window.paint(screen);
-    this.drawContent(this.text, screen);
-  }
-
-  private drawContent(text: string, screen: PixelScreen) {
-    const style = { color: "#000", shadowColor: UI_SHADOW_COLOR };
-    const { coord, size } = rectGrow(this.window.contentAreaRect(), [-2, -2]);
-    const lineHeight = 12;
-    fitText(screen, size, text, style).forEach((line, i) => {
-      screen.drawText(line, coordAdd(coord, [0, lineHeight * i]),);
-    });
+    this.content.paint(screen, rectGrow(this.window.contentAreaRect(), [-2, -2]))
   }
 
   getRect(): Rect {
@@ -51,6 +41,7 @@ export class Dialog {
 
   handleGameEvent(event: GameEvent): boolean | undefined {
     this.window.handleGameEvent(event);
+    this.content.handleGameEvent(event);
 
     if (event.type === "click") {
       if (!isCoordInRect(event.coord, this.getRect())) {

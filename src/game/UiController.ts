@@ -12,6 +12,7 @@ import { InventoryView } from "./inventory/InventoryView";
 import { Character } from "./npc/Character";
 import { PlayerAttributes } from "./PlayerAttributes";
 import { Coord } from "./Coord";
+import { TextContent } from "./dialogs/TextContent";
 
 export class UiController {
   private inventoryController: InventoryController;
@@ -107,7 +108,9 @@ export class UiController {
 
   showDialog(character: Character, text: string) {
     this.dialog = new Dialog({
-      character, text, onClose: () => {
+      character,
+      content: new TextContent(text),
+      onClose: () => {
         this.dialog = undefined;
       }
     });
