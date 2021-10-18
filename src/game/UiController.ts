@@ -37,6 +37,10 @@ export class UiController {
     this.inventoryController.showInventory(inventory, view);
   }
 
+  hideInventory() {
+    this.inventoryController.hideInventory();
+  }
+
   giveMoney(amount: number) {
     this.attributes.wallet.add(amount);
   }

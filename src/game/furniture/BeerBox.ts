@@ -55,7 +55,8 @@ export class BeerBox implements GameObject {
       inventory: this.inventory,
       windowSize: [91, 87],
       gridSize: [4, 3],
-      headline: { title: "Õllekast", description: "Viska siia tühjad pudelid." }
+      headline: { title: "Õllekast", description: "Viska siia tühjad pudelid." },
+      onClose: () => ui.hideInventory(),
     }));
   }
 }

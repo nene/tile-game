@@ -56,7 +56,8 @@ export class Countertop implements GameObject {
       inventory: this.inventory,
       windowSize: [91, 87],
       gridSize: [1, 1],
-      headline: { title: "Konvendi avaja", description: "Vaid koha peal kasutamiseks." }
+      headline: { title: "Konvendi avaja", description: "Vaid koha peal kasutamiseks." },
+      onClose: () => ui.hideInventory(),
     }));
   }
 }

@@ -48,7 +48,7 @@ export class InventoryController {
     return Boolean(this.objectInventory);
   }
 
-  private hideInventory() {
+  hideInventory() {
     this.objectInventory = undefined;
     this.objectInventoryView = undefined;
   }

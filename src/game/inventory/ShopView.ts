@@ -9,15 +9,23 @@ import { InventoryView } from "./InventoryView";
 import { Wallet } from "../Wallet";
 import { Headline, Window } from "../ui/Window";
 
+interface ShopViewConfig {
+  shop: Shop;
+  wallet: Wallet;
+  headline: Headline;
+  onClose: () => void;
+}
+
 export class ShopView implements InventoryView {
   private shopItemRenderer: ShopItemRenderer;
   private scrollView: ScrollView<BeerBottle>;
   private window: Window;
 
-  constructor(shop: Shop, wallet: Wallet, headline: Headline) {
+  constructor({ shop, wallet, headline, onClose }: ShopViewConfig) {
     this.window = new Window({
       size: [192, 129],
       headline,
+      onClose,
     });
 
     const contentRect = this.window.contentAreaRect();
@@ -35,6 +43,7 @@ export class ShopView implements InventoryView {
   }
 
   handleGameEvent(event: GameEvent): boolean | undefined {
+    this.window.handleGameEvent(event);
     return this.scrollView.handleGameEvent(event);
   }
 
