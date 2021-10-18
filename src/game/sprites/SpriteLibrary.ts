@@ -19,6 +19,7 @@ import countertop from "./data/countertop.png";
 import sofa from "./data/sofa.png";
 import slot from "./data/slot.png";
 import scrollBar from "./data/scroll-bar.png";
+import closeButton from "./data/close-button.png";
 import cursor from "./data/cursor.png";
 import scoreboard from "./data/scoreboard.png";
 import gold from "./data/gold.png";
@@ -67,6 +68,7 @@ const imageFiles = {
 
   'slot': spriteDef({ src: slot, cfg: { size: [20, 20], colsRows: [2, 1] } }),
   'scroll-bar': spriteDef({ src: scrollBar, cfg: { size: [8, 8], colsRows: [5, 1] } }),
+  'close-button': spriteDef({ src: closeButton, cfg: { size: [8, 8], colsRows: [2, 1] } }),
   'cursor': spriteDef({ src: cursor, cfg: { size: [8, 11], colsRows: [2, 1] } }),
   'scoreboard': spriteDef({ src: scoreboard, cfg: { size: [51, 24] } }),
   'gold': spriteDef({ src: gold, cfg: { size: [8, 8] } }),
