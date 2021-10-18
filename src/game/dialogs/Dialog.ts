@@ -7,7 +7,7 @@ import { DialogContent } from "./DialogContent";
 
 interface DialogConfig {
   character: Character;
-  content: DialogContent;
+  createContent: (rect: Rect) => DialogContent,
   onClose: () => void;
 }
 
@@ -16,8 +16,7 @@ export class Dialog {
   private content: DialogContent;
   private onClose: () => void;
 
-  constructor({ character, content, onClose }: DialogConfig) {
-    this.content = content;
+  constructor({ character, createContent, onClose }: DialogConfig) {
     this.onClose = onClose;
     this.window = new Window({
       headline: {
@@ -28,11 +27,12 @@ export class Dialog {
       size: [200, 100],
       onClose,
     });
+    this.content = createContent(rectGrow(this.window.contentAreaRect(), [-2, -2]));
   }
 
   paint(screen: PixelScreen) {
     this.window.paint(screen);
-    this.content.paint(screen, rectGrow(this.window.contentAreaRect(), [-2, -2]))
+    this.content.paint(screen)
   }
 
   getRect(): Rect {

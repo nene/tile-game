@@ -28,7 +28,7 @@ export class UiController {
     this.scoreBoard = new ScoreBoard([269, 0], attributes.wallet, attributes.drunkenness);
     this.dialog = new Dialog({
       character: getCharacter("koppel"),
-      content: new FlagQuestionContent(getOrg("ugala")),
+      createContent: (rect) => new FlagQuestionContent(getOrg("ugala"), rect),
       onClose: () => { },
     })
   }
@@ -116,7 +116,7 @@ export class UiController {
   showDialog(character: Character, text: string) {
     this.dialog = new Dialog({
       character,
-      content: new TextContent(text),
+      createContent: (rect) => new TextContent(text, rect),
       onClose: () => {
         this.dialog = undefined;
       }
