@@ -64,7 +64,7 @@ export class BeerCabinet implements GameObject {
       inventory: this.inventory,
       windowSize: [91, 87],
       gridSize: [4, 3],
-      headline: { title: "Shoppeniriiul", description: "Haara siit paar kannu." },
+      headline: { title: "Šoppeniriiul", description: "Haara siit paar kannu." },
       onClose: () => ui.hideInventory(),
 
     }));

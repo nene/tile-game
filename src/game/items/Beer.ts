@@ -82,7 +82,7 @@ const beers = {
   }),
   "limonaad": beerDef({
     name: "Limpa limonaad",
-    description: "See magus jook kipub shoppeni põhja kleepuma.",
+    description: "See magus jook kipub šoppeni põhja kleepuma.",
     price: 1,
     spriteIndex: 7,
     alcohol: 0,
@@ -108,7 +108,7 @@ const beers = {
     capStrength: 3,
   }),
   "porter": beerDef({
-    name: "Sokolaadi porter",
+    name: "Šokolaadi porter",
     description: "Väidetavalt muudab suure mehe päkapikuks.",
     price: 4,
     spriteIndex: 10,
