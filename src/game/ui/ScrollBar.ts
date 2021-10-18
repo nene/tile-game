@@ -26,7 +26,7 @@ export class ScrollBar {
         spriteName: "scroll-bar",
         unpressed: SPRITE_UP,
         pressed: SPRITE_UP_PRESSED,
-        onPress: () => {
+        onClick: () => {
           this.sliderPos = Math.max(0, this.sliderPos - 1);
         }
       }),
@@ -35,7 +35,7 @@ export class ScrollBar {
         spriteName: "scroll-bar",
         unpressed: SPRITE_DOWN,
         pressed: SPRITE_DOWN_PRESSED,
-        onPress: () => {
+        onClick: () => {
           this.sliderPos = Math.min(this.maxSliderPos, this.sliderPos + 1);
         }
       }),

@@ -32,7 +32,7 @@ export class Window {
       spriteName: "close-button",
       unpressed: [0, 0],
       pressed: [1, 0],
-      onPress: onClose || noop,
+      onClick: onClose || noop,
     });
   }
 

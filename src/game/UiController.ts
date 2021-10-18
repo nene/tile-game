@@ -11,7 +11,7 @@ import { Inventory } from "./inventory/Inventory";
 import { InventoryView } from "./inventory/InventoryView";
 import { Character } from "./npc/Character";
 import { PlayerAttributes } from "./PlayerAttributes";
-import { Coord, isCoordInRect } from "./Coord";
+import { Coord } from "./Coord";
 
 export class UiController {
   private inventoryController: InventoryController;
@@ -82,7 +82,7 @@ export class UiController {
     let stopPropagation: boolean | undefined = undefined;
     stopPropagation = stopPropagation || this.getMiniGame()?.handleGameEvent(event);
     stopPropagation = stopPropagation || this.cursorController.handleGameEvent(event);
-    stopPropagation = stopPropagation || this.handleDialogClose(event);
+    stopPropagation = stopPropagation || this.dialog?.handleGameEvent(event);
     stopPropagation = stopPropagation || this.inventoryController.handleGameEvent(event);
     if (stopPropagation) {
       return true;
@@ -97,20 +97,15 @@ export class UiController {
     return this.cursorController.getCoord();
   }
 
-  private handleDialogClose(event: GameEvent): boolean | undefined {
-    if (this.dialog && event.type === "click") {
-      if (!isCoordInRect(event.coord, this.dialog.getRect())) {
-        this.dialog = undefined; // Close the dialog
-      }
-      return true;
-    }
-  }
-
   private getMiniGame(): MiniGame | undefined {
     return this.inventoryController.getMiniGame();
   }
 
   showDialog(character: Character, text: string) {
-    this.dialog = new Dialog(character, text);
+    this.dialog = new Dialog({
+      character, text, onClose: () => {
+        this.dialog = undefined;
+      }
+    });
   }
 }
