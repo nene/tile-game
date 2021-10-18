@@ -23,6 +23,7 @@ import closeButton from "./data/close-button.png";
 import cursor from "./data/cursor.png";
 import scoreboard from "./data/scoreboard.png";
 import gold from "./data/gold.png";
+import flagColors from "./data/flag-colors.png";
 import beerGlassLg from "./data/beer-glass-lg.png";
 import beerGlassSm from "./data/beer-glass-sm.png";
 import bottle from "./data/bottle.png";
@@ -72,6 +73,7 @@ const imageFiles = {
   'cursor': spriteDef({ src: cursor, cfg: { size: [8, 11], colsRows: [2, 1] } }),
   'scoreboard': spriteDef({ src: scoreboard, cfg: { size: [51, 24] } }),
   'gold': spriteDef({ src: gold, cfg: { size: [8, 8] } }),
+  'flag-colors': spriteDef({ src: flagColors, cfg: { size: [12, 12], colsRows: [2, 1] } }),
 
   'beer-glass-lg': spriteDef({ src: beerGlassLg, cfg: { size: [16, 16], colsRows: [5, 1] } }),
   'beer-glass-sm': spriteDef({ src: beerGlassSm, cfg: { size: [10, 10], colsRows: [5, 1], offset: [-2, -17] } }),
