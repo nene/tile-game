@@ -47,7 +47,7 @@ export class ColorButton {
         );
       }
     } else {
-      screen.drawText("?", coordAdd(this.rect.coord, coordAdd([5, 4], offset)));
+      screen.drawText("?", coordAdd(this.rect.coord, coordAdd([4, 3], offset)));
     }
   }
 
@@ -68,5 +68,9 @@ export class ColorButton {
         break;
     }
     return undefined;
+  }
+
+  setColor(color: FlagColor) {
+    this.color = color;
   }
 }

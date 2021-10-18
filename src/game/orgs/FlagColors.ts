@@ -31,3 +31,7 @@ export function getFlagColor(name: ColorName): FlagColor {
 export function makeFlag(...names: ColorName[]): FlagColor[] {
   return names.map(getFlagColor);
 }
+
+export function allFlagColors(): FlagColor[] {
+  return Object.values(colors);
+}

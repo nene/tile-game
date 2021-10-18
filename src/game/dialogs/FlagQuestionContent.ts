@@ -3,12 +3,14 @@ import { GameEvent } from "../GameEvent";
 import { Organization } from "../orgs/Organization";
 import { PixelScreen } from "../PixelScreen";
 import { ColorButton } from "../ui/ColorButton";
+import { ColorMenu } from "../ui/ColorMenu";
 import { DialogContent } from "./DialogContent";
 import { TextContent } from "./TextContent";
 
 export class FlagQuestionContent implements DialogContent {
   private question: TextContent;
   private colorButtons: ColorButton[];
+  private menu?: ColorMenu;
 
   constructor(private org: Organization, private container: Rect) {
     this.question = new TextContent(`Millised on ${org.name} värvid?`, container);
@@ -22,11 +24,12 @@ export class FlagQuestionContent implements DialogContent {
 
     return [0, 1, 2].map((i) => {
       const buttonOffset = 15 * i;
-      return new ColorButton({
-        coord: coordAdd(buttonsRect.coord, [buttonOffset, 0]),
-        color: this.org.flag[i],
-        onClick: () => { },
+      const coord = coordAdd(buttonsRect.coord, [buttonOffset, 0])
+      const btn = new ColorButton({
+        coord: coord,
+        onClick: () => { this.showMenu(btn, coord); },
       });
+      return btn;
     });
   }
 
@@ -35,12 +38,25 @@ export class FlagQuestionContent implements DialogContent {
     this.colorButtons.forEach((btn) => {
       btn.paint(screen);
     });
+    this.menu?.paint(screen);
   }
 
   handleGameEvent(event: GameEvent): boolean | undefined {
+    if (this.menu?.handleGameEvent(event)) {
+      return true;
+    }
     this.colorButtons.forEach((btn) => {
       btn.handleGameEvent(event);
     });
-    return undefined;
+  }
+
+  private showMenu(btn: ColorButton, coord: Coord) {
+    this.menu = new ColorMenu({
+      container: { coord, size: [16, 16] },
+      onSelect: (color) => {
+        btn.setColor(color);
+        this.menu = undefined;
+      }
+    });
   }
 }
