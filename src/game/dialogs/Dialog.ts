@@ -1,10 +1,10 @@
-import { coordAdd, isCoordInRect, Rect, rectGrow } from "./Coord";
-import { GameEvent } from "./GameEvent";
-import { Character } from "./npc/Character";
-import { PixelScreen } from "./PixelScreen";
-import { fitText } from "./ui/fitText";
-import { UI_SHADOW_COLOR } from "./ui/ui-utils";
-import { Window } from "./ui/Window";
+import { coordAdd, isCoordInRect, Rect, rectGrow } from "../Coord";
+import { GameEvent } from "../GameEvent";
+import { Character } from "../npc/Character";
+import { PixelScreen } from "../PixelScreen";
+import { fitText } from "../ui/fitText";
+import { UI_SHADOW_COLOR } from "../ui/ui-utils";
+import { Window } from "../ui/Window";
 
 interface DialogConfig {
   character: Character;
