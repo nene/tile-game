@@ -20,8 +20,8 @@ export class Desires {
     this.queue = [
       new PauseActivity(5, character),
       new MoveToTableActivity(character),
-      new CallFuxActivity(character, new AskQuestionInteraction(character, createYearQuestion())),
       new CallFuxActivity(character, new AskQuestionInteraction(character, createColorsQuestion())),
+      new CallFuxActivity(character, new AskQuestionInteraction(character, createYearQuestion())),
       new CallFuxActivity(character, new RequestBeerInteraction(character)),
       new MoveToDoorActivity(character),
       new DespawnActivity(character),
