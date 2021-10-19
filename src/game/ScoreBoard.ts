@@ -1,6 +1,7 @@
 import { times } from "lodash";
 import { Coord, coordAdd } from "./Coord";
 import { Drunkenness } from "./Drunkenness";
+import { BeerColor } from "./items/Beer";
 import { BeerLevel } from "./items/BeerGlass";
 import { PixelScreen } from "./PixelScreen";
 import { Sprite } from "./sprites/Sprite";
@@ -30,7 +31,7 @@ export class ScoreBoard {
   private drawAlcoholLevel(screen: PixelScreen) {
     times(5, (i: number) => {
       const level = this.getBeerLevelForStep(4 - i);
-      screen.drawSprite(this.beerGlass.getSprite([level, 0]), coordAdd(this.coord, [5 + i * 9, 29]));
+      screen.drawSprite(this.beerGlass.getSprite([level, BeerColor.light]), coordAdd(this.coord, [5 + i * 9, 29]));
     });
   }
 
