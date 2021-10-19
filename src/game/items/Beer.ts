@@ -6,6 +6,14 @@ export interface Beer {
   alcohol: number; // How much alcohol it has (ABV %)
   foam: Foaminess; // How much foam does it generate when pouring
   capStrength: number; // How hard is it to open the bottle (0 ... 1)
+  color: BeerColor;
+}
+
+export enum BeerColor {
+  water = 0,
+  light = 1,
+  dark = 2,
+  red = 3,
 }
 
 export interface Foaminess {
@@ -34,6 +42,7 @@ const beers = {
     alcohol: 5.2,
     foam: foamLevel[2],
     capStrength: 2,
+    color: BeerColor.light,
   }),
   "heineken": beerDef({
     name: "Heineken",
@@ -43,6 +52,7 @@ const beers = {
     alcohol: 5,
     foam: foamLevel[1],
     capStrength: 3,
+    color: BeerColor.light,
   }),
   "special": beerDef({
     name: "Special",
@@ -52,6 +62,7 @@ const beers = {
     alcohol: 5.2,
     foam: foamLevel[1],
     capStrength: 3,
+    color: BeerColor.light,
   }),
   "pilsner": beerDef({
     name: "Pilsner",
@@ -61,6 +72,7 @@ const beers = {
     alcohol: 4.2,
     foam: foamLevel[1],
     capStrength: 1,
+    color: BeerColor.light,
   }),
   "tommu-hiid": beerDef({
     name: "Tõmmu hiid",
@@ -70,6 +82,7 @@ const beers = {
     alcohol: 4.7,
     foam: foamLevel[4],
     capStrength: 2,
+    color: BeerColor.dark,
   }),
   "kriek": beerDef({
     name: "Kriek",
@@ -79,6 +92,7 @@ const beers = {
     alcohol: 3.5,
     foam: foamLevel[4],
     capStrength: 5,
+    color: BeerColor.red,
   }),
   "limonaad": beerDef({
     name: "Limpa limonaad",
@@ -88,6 +102,7 @@ const beers = {
     alcohol: 0,
     foam: foamLevel[0],
     capStrength: 0,
+    color: BeerColor.light,
   }),
   "paulaner": beerDef({
     name: "Hefeweisen",
@@ -97,6 +112,7 @@ const beers = {
     alcohol: 5.5,
     foam: foamLevel[4],
     capStrength: 4,
+    color: BeerColor.light,
   }),
   "bock": beerDef({
     name: "Double Bock",
@@ -106,6 +122,7 @@ const beers = {
     alcohol: 7,
     foam: foamLevel[3],
     capStrength: 3,
+    color: BeerColor.light,
   }),
   "porter": beerDef({
     name: "Šokolaadi porter",
@@ -115,6 +132,7 @@ const beers = {
     alcohol: 6.9,
     foam: foamLevel[5],
     capStrength: 2,
+    color: BeerColor.dark,
   }),
 }
 

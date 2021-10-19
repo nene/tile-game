@@ -61,11 +61,11 @@ export class BeerGlass implements GameItem {
   }
 
   getSprite(): Sprite {
-    return this.spriteSheet.getSprite([this.level, 0]);
+    return this.spriteSheet.getSprite([this.level, this.beer?.color ?? 0]);
   }
 
   getSmallSprite(): Sprite {
-    return this.smallSpriteSheet.getSprite([this.level, 0]);
+    return this.smallSpriteSheet.getSprite([this.level, this.beer?.color ?? 0]);
   }
 
   clone() {
