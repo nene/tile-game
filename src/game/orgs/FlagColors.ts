@@ -10,6 +10,7 @@ const colorDef = (color: FlagColor) => color;
 const colors = {
   kirsipruun: colorDef({ name: "kirsipruun", code: "#8c3818" }),
   punane: colorDef({ name: "punane", code: "#a83324" }),
+  helebeez: colorDef({ name: "helebeež", code: "#eae2cc" }),
   kuldne: colorDef({ name: "kuldne", code: [0, 0] as Coord }),
   kollane: colorDef({ name: "kollane", code: "#bfb44a" }),
   roheline: colorDef({ name: "roheline", code: "#156323" }),
