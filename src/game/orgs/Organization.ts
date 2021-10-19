@@ -1,3 +1,4 @@
+import { random } from "lodash";
 import { FlagColor, makeFlag } from "./FlagColors";
 
 export interface Organization {
@@ -99,4 +100,9 @@ export function getOrg(name: OrgName): Organization {
 
 export function allOrganizations(): Organization[] {
   return Object.values(orgs);
+}
+
+export function randomOrganization(): Organization {
+  const orgs = allOrganizations();
+  return orgs[random(orgs.length - 1)];
 }
