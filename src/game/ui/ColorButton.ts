@@ -13,11 +13,11 @@ interface ColorButtonConfig {
 }
 
 export class ColorButton {
-  color?: FlagColor;
-  rect: Rect;
-  pressed = false;
-  onClick: () => void;
-  tooltip = new Tooltip();
+  private color?: FlagColor;
+  private rect: Rect;
+  private pressed = false;
+  private onClick: () => void;
+  private tooltip = new Tooltip();
 
   constructor({ coord, color, onClick }: ColorButtonConfig) {
     this.rect = { coord: coord, size: [14, 14] };
@@ -78,6 +78,10 @@ export class ColorButton {
         break;
     }
     return undefined;
+  }
+
+  getColor(): FlagColor | undefined {
+    return this.color;
   }
 
   setColor(color: FlagColor) {

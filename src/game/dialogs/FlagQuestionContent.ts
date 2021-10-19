@@ -8,33 +8,48 @@ import { ColorButton } from "../ui/ColorButton";
 import { ColorMenu } from "../ui/ColorMenu";
 import { DialogContent } from "./DialogContent";
 import { TextContent } from "./TextContent";
+import { FlagColor } from "../orgs/FlagColors";
+
+interface FlagQuestionContentConfig {
+  org: Organization;
+  container: Rect;
+  onAnswer: (colors: FlagColor[]) => void;
+  onCancel: () => void;
+}
 
 export class FlagQuestionContent implements DialogContent {
   private question: TextContent;
   private colorButtons: ColorButton[];
   private menu?: ColorMenu;
-  private okButton: TextButton;
+  private answerButton: TextButton;
   private cancelButton: TextButton;
 
-  constructor(private org: Organization, private container: Rect) {
+  constructor({ org, container, onAnswer, onCancel }: FlagQuestionContentConfig) {
     this.question = new TextContent(`Millised on ${org.name} värvid?`, container);
-    this.colorButtons = this.createColorButtons();
-    this.okButton = new TextButton({
+    this.colorButtons = this.createColorButtons(container);
+    this.answerButton = new TextButton({
       rect: { coord: coordAdd(container.coord, [0, container.size[1] - 14]), size: [60, 14] },
       text: "Vasta",
-      onClick: () => { },
+      onClick: () => {
+        const colors = this.getAnswer();
+        if (colors) {
+          onAnswer(colors);
+        } else {
+          onCancel();
+        }
+      },
     });
     this.cancelButton = new TextButton({
       rect: { coord: coordAdd(container.coord, [container.size[0] - 60, container.size[1] - 14]), size: [60, 14] },
       text: "Ei tea",
-      onClick: () => { },
+      onClick: onCancel,
     });
   }
 
-  private createColorButtons(): ColorButton[] {
+  private createColorButtons(container: Rect): ColorButton[] {
     const buttonSize: Coord = [14, 14];
     const threeButtonsSize = coordAdd(coordMul(buttonSize, [3, 1]), [2, 0]);
-    const buttonsRect = rectCenter({ coord: [0, 0], size: threeButtonsSize }, this.container);
+    const buttonsRect = rectCenter({ coord: [0, 0], size: threeButtonsSize }, container);
 
     return [0, 1, 2].map((i) => {
       const buttonOffset = 15 * i;
@@ -47,10 +62,15 @@ export class FlagQuestionContent implements DialogContent {
     });
   }
 
+  private getAnswer(): FlagColor[] | undefined {
+    const colors = this.colorButtons.map((button) => button.getColor());
+    return colors.every(isDefined) ? colors : undefined;
+  }
+
   paint(screen: PixelScreen) {
     this.question.paint(screen);
 
-    this.okButton.paint(screen);
+    this.answerButton.paint(screen);
     this.cancelButton.paint(screen);
 
     // HACK: Render from right to left, so tooltips render on top of buttons
@@ -68,7 +88,7 @@ export class FlagQuestionContent implements DialogContent {
     this.colorButtons.forEach((btn) => {
       btn.handleGameEvent(event);
     });
-    this.okButton.handleGameEvent(event);
+    this.answerButton.handleGameEvent(event);
     this.cancelButton.handleGameEvent(event);
   }
 
@@ -81,4 +101,8 @@ export class FlagQuestionContent implements DialogContent {
       }
     });
   }
+}
+
+function isDefined<T>(x: T | undefined): x is T {
+  return Boolean(x);
 }

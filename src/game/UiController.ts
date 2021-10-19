@@ -11,10 +11,10 @@ import { Inventory } from "./inventory/Inventory";
 import { InventoryView } from "./inventory/InventoryView";
 import { Character, getCharacter } from "./npc/Character";
 import { PlayerAttributes } from "./PlayerAttributes";
-import { Coord } from "./Coord";
-import { TextContent } from "./dialogs/TextContent";
+import { Coord, Rect } from "./Coord";
 import { FlagQuestionContent } from "./dialogs/FlagQuestionContent";
 import { getOrg } from "./orgs/Organization";
+import { DialogContent } from "./dialogs/DialogContent";
 
 export class UiController {
   private inventoryController: InventoryController;
@@ -28,9 +28,14 @@ export class UiController {
     this.scoreBoard = new ScoreBoard([269, 0], attributes.wallet, attributes.drunkenness);
     this.dialog = new Dialog({
       character: getCharacter("koppel"),
-      createContent: (rect) => new FlagQuestionContent(getOrg("ugala"), rect),
-      onClose: () => { },
-    })
+      createContent: (rect) => new FlagQuestionContent({
+        org: getOrg("ugala"),
+        container: rect,
+        onAnswer: (colors) => { },
+        onCancel: () => this.hideDialog(),
+      }),
+      onClose: () => this.hideDialog(),
+    });
   }
 
   getSelectedItem(): GameItem | undefined {
@@ -113,13 +118,15 @@ export class UiController {
     return this.inventoryController.getMiniGame();
   }
 
-  showDialog(character: Character, text: string) {
+  showDialog(character: Character, createContent: (rect: Rect) => DialogContent) {
     this.dialog = new Dialog({
       character,
-      createContent: (rect) => new TextContent(text, rect),
-      onClose: () => {
-        this.dialog = undefined;
-      }
+      createContent,
+      onClose: () => this.hideDialog(),
     });
+  }
+
+  private hideDialog() {
+    this.dialog = undefined;
   }
 }
