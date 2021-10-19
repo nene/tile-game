@@ -9,10 +9,10 @@ export function createColorsQuestion(): ColorsQuestion {
     type: "colors",
     question: `Millised on ${org.name} värvid?`,
     validate: (colors: FlagColor[]) => {
-      if (isEqual(colors, org.flag)) {
+      if (isEqual(colors, org.colors)) {
         return "Õige!\nTubli rebane. Kiidan.";
       } else {
-        return `Vale!\n${org.name} värvid on ${colorsString(org.flag)}.\nVõta laituseks sisse.`;
+        return `Vale!\n${org.name} värvid on ${colorsString(org.colors)}.\nVõta laituseks sisse.`;
       }
     },
   }
