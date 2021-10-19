@@ -9,11 +9,9 @@ import { ScoreBoard } from "./ScoreBoard";
 import { GameEvent } from "./GameEvent";
 import { Inventory } from "./inventory/Inventory";
 import { InventoryView } from "./inventory/InventoryView";
-import { Character, getCharacter } from "./npc/Character";
+import { Character } from "./npc/Character";
 import { PlayerAttributes } from "./PlayerAttributes";
 import { Coord, Rect } from "./Coord";
-import { FlagQuestionContent } from "./dialogs/FlagQuestionContent";
-import { getOrg } from "./orgs/Organization";
 import { DialogContent } from "./dialogs/DialogContent";
 
 export class UiController {
@@ -26,16 +24,6 @@ export class UiController {
     this.inventoryController = new InventoryController(attributes);
     this.cursorController = new CursorController();
     this.scoreBoard = new ScoreBoard([269, 0], attributes.wallet, attributes.drunkenness);
-    this.dialog = new Dialog({
-      character: getCharacter("koppel"),
-      createContent: (rect) => new FlagQuestionContent({
-        org: getOrg("ugala"),
-        container: rect,
-        onAnswer: (colors) => { },
-        onCancel: () => this.hideDialog(),
-      }),
-      onClose: () => this.hideDialog(),
-    });
   }
 
   getSelectedItem(): GameItem | undefined {
@@ -126,7 +114,7 @@ export class UiController {
     });
   }
 
-  private hideDialog() {
+  hideDialog() {
     this.dialog = undefined;
   }
 }

@@ -31,3 +31,7 @@ export type OrgName = keyof typeof orgs;
 export function getOrg(name: OrgName): Organization {
   return orgs[name];
 }
+
+export function allOrganizations(): Organization[] {
+  return Object.values(orgs);
+}
