@@ -11,6 +11,8 @@ import { Inventory } from "./inventory/Inventory";
 import { InventoryView } from "./inventory/InventoryView";
 import { PlayerAttributes } from "./PlayerAttributes";
 import { Coord } from "./Coord";
+import { getCharacter } from "./npc/Character";
+import { MultiChoiceQuestionContent } from "./dialogs/MultiChoiceQuestionContent";
 
 export class UiController {
   private inventoryController: InventoryController;
@@ -22,6 +24,16 @@ export class UiController {
     this.inventoryController = new InventoryController(attributes);
     this.cursorController = new CursorController();
     this.scoreBoard = new ScoreBoard([269, 0], attributes.wallet, attributes.drunkenness);
+    this.dialog = new Dialog({
+      character: getCharacter("koppel"),
+      createContent: (rect) => new MultiChoiceQuestionContent({
+        container: rect,
+        question: "Millisel aastal on asutatud Vironia?",
+        choices: ["1981", "1900", "1907"],
+        onAnswer: () => { }
+      }),
+      onClose: () => { }
+    });
   }
 
   getSelectedItem(): GameItem | undefined {
