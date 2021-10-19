@@ -1,14 +1,14 @@
-import { PixelScreen, TextStyle } from "./PixelScreen";
+import { PixelScreen } from "./PixelScreen";
 import { Inventory } from "./inventory/Inventory";
 import { InventoryView } from "./inventory/InventoryView";
 import { GridInventoryView } from "./inventory/GridInventoryView";
-import { Coord, coordAdd, coordSub, isCoordInRect, rectGrow } from "./Coord";
+import { Coord, coordSub, isCoordInRect } from "./Coord";
 import { GameItem } from "./items/GameItem";
-import { debounce } from "lodash";
 import { Overlay } from "./Overlay";
 import { MiniGame } from "./minigames/MiniGame";
 import { GameEvent } from "./GameEvent";
 import { PlayerAttributes } from "./PlayerAttributes";
+import { Tooltip } from "./ui/Tooltip";
 
 export class InventoryController {
   private playerInventoryView: InventoryView;
@@ -16,8 +16,8 @@ export class InventoryController {
   private objectInventoryView?: InventoryView;
   private mouseCoord: Coord = [-16, -16];
   private selectedItem?: GameItem;
-  private hoveredItem?: GameItem;
   private miniGame?: MiniGame;
+  private tooltip = new Tooltip();
 
   constructor(private attributes: PlayerAttributes) {
     this.playerInventoryView = new GridInventoryView({
@@ -71,17 +71,7 @@ export class InventoryController {
     if (this.selectedItem) {
       screen.drawSprite(this.selectedItem.getSprite(), coordSub(this.mouseCoord, [8, 8]));
     }
-    if (this.hoveredItem) {
-      this.drawTooltip(this.hoveredItem, screen)
-    }
-  }
-
-  private drawTooltip(item: GameItem, screen: PixelScreen) {
-    const style: TextStyle = { color: "#3e2821" };
-    const textCoord = coordAdd(this.mouseCoord, [11, 2]);
-    const textSize = screen.measureText(item.getName(), style);
-    screen.drawRect(rectGrow({ coord: textCoord, size: textSize }, [2, 1]), "#c8b997");
-    screen.drawText(item.getName(), textCoord, style);
+    this.tooltip.paint(screen);
   }
 
   handleGameEvent(event: GameEvent): boolean | undefined {
@@ -97,7 +87,7 @@ export class InventoryController {
   }
 
   private handleClick(screenCoord: Coord): boolean {
-    this.hoveredItem = undefined;
+    this.tooltip.hide();
 
     if (isCoordInRect(screenCoord, this.playerInventoryView.getRect())) {
       this.handleInventoryClick(screenCoord, this.attributes.inventory, this.playerInventoryView);
@@ -116,13 +106,9 @@ export class InventoryController {
 
   private handleMouseMove(screenCoord: Coord) {
     this.mouseCoord = screenCoord;
-    this.hoveredItem = undefined;
-    this.showTooltipAfterDelay(screenCoord);
+    this.tooltip.hide();
+    this.tooltip.show(screenCoord, this.getHoveredInventoryItem(screenCoord)?.getName());
   }
-
-  private showTooltipAfterDelay = debounce((screenCoord: Coord) => {
-    this.hoveredItem = this.getHoveredInventoryItem(screenCoord);
-  }, 500);
 
   private getHoveredInventoryItem(coord: Coord): GameItem | undefined {
     const item = this.getInventoryItemAtCoord(coord, this.attributes.inventory, this.playerInventoryView);
