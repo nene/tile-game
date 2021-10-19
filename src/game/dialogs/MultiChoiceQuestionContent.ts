@@ -33,6 +33,7 @@ export class MultiChoiceQuestionContent implements DialogContent {
       return new TextButton({
         rect: { coord, size: buttonSize },
         text: choice,
+        align: "left",
         onClick: () => { this.onAnswer(choice) },
       });
     });
