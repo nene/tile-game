@@ -8,6 +8,8 @@ import { Character } from "./Character";
 import { PauseActivity } from "../activities/PauseActivity";
 import { AskQuestionInteraction } from "../activities/AskQuestionInteraction";
 import { RequestBeerInteraction } from "../activities/RequestBeerInteraction";
+import { createColorsQuestion } from "../questions/ColorsQuestion";
+import { createYearQuestion } from "../questions/YearQuestion";
 
 export class Desires {
   private queue: Activity[] = [];
@@ -18,7 +20,8 @@ export class Desires {
     this.queue = [
       new PauseActivity(5, character),
       new MoveToTableActivity(character),
-      new CallFuxActivity(character, new AskQuestionInteraction(character)),
+      new CallFuxActivity(character, new AskQuestionInteraction(character, createYearQuestion())),
+      new CallFuxActivity(character, new AskQuestionInteraction(character, createColorsQuestion())),
       new CallFuxActivity(character, new RequestBeerInteraction(character)),
       new MoveToDoorActivity(character),
       new DespawnActivity(character),
