@@ -27,7 +27,7 @@ const orgs = {
     name: "Sakala",
     colors: makeFlag("sinine", "violett", "valge"),
     establishedYear: 1909,
-    slogan: "Üks kõigi eest, kõik ühe eest",
+    slogan: "Üks kõige, kõik ühe eest",
   }),
   ugala: orgDef({
     name: "Ugala",
