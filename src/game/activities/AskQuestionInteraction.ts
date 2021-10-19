@@ -33,9 +33,6 @@ export class AskQuestionInteraction implements Interaction {
             this.showReply(ui, `Vale!\n${this.expectedOrg.name} värvid on ${this.colorsString(this.expectedOrg.flag)}.\nVõta laituseks sisse.`);
           }
         },
-        onCancel: () => {
-          this.showReply(ui, `Rumal rebane.\nTea siis, et ${this.expectedOrg.name} värvid on ${this.colorsString(this.expectedOrg.flag)}.\nVõta laituseks sisse.`);
-        },
       }),
       onClose: () => {
         this.showReply(ui, `Rumal rebane.\nTea siis, et ${this.expectedOrg.name} värvid on ${this.colorsString(this.expectedOrg.flag)}.\nVõta laituseks sisse.`);

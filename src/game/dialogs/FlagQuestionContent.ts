@@ -14,7 +14,6 @@ interface FlagQuestionContentConfig {
   org: Organization;
   container: Rect;
   onAnswer: (colors: FlagColor[]) => void;
-  onCancel: () => void;
 }
 
 export class FlagQuestionContent implements DialogContent {
@@ -22,27 +21,14 @@ export class FlagQuestionContent implements DialogContent {
   private colorButtons: ColorButton[];
   private menu?: ColorMenu;
   private answerButton: TextButton;
-  private cancelButton: TextButton;
 
-  constructor({ org, container, onAnswer, onCancel }: FlagQuestionContentConfig) {
+  constructor({ org, container, onAnswer }: FlagQuestionContentConfig) {
     this.question = new TextContent(`Millised on ${org.name} värvid?`, container);
     this.colorButtons = this.createColorButtons(container);
     this.answerButton = new TextButton({
-      rect: { coord: coordAdd(container.coord, [0, container.size[1] - 14]), size: [60, 14] },
-      text: "Vasta",
-      onClick: () => {
-        const colors = this.getAnswer();
-        if (colors) {
-          onAnswer(colors);
-        } else {
-          onCancel();
-        }
-      },
-    });
-    this.cancelButton = new TextButton({
       rect: { coord: coordAdd(container.coord, [container.size[0] - 60, container.size[1] - 14]), size: [60, 14] },
-      text: "Ei tea",
-      onClick: onCancel,
+      text: "Vasta",
+      onClick: () => onAnswer(this.getAnswer()),
     });
   }
 
@@ -62,16 +48,14 @@ export class FlagQuestionContent implements DialogContent {
     });
   }
 
-  private getAnswer(): FlagColor[] | undefined {
-    const colors = this.colorButtons.map((button) => button.getColor());
-    return colors.every(isDefined) ? colors : undefined;
+  private getAnswer(): FlagColor[] {
+    return this.colorButtons.map((button) => button.getColor()).filter(isDefined);
   }
 
   paint(screen: PixelScreen) {
     this.question.paint(screen);
 
     this.answerButton.paint(screen);
-    this.cancelButton.paint(screen);
 
     // HACK: Render from right to left, so tooltips render on top of buttons
     reverse([...this.colorButtons]).forEach((btn) => {
@@ -89,7 +73,6 @@ export class FlagQuestionContent implements DialogContent {
       btn.handleGameEvent(event);
     });
     this.answerButton.handleGameEvent(event);
-    this.cancelButton.handleGameEvent(event);
   }
 
   private showMenu(btn: ColorButton, coord: Coord) {
