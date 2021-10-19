@@ -2,6 +2,7 @@ import { reverse } from "lodash";
 import { Coord, coordAdd, coordMul, Rect, rectCenter } from "../Coord";
 import { GameEvent } from "../GameEvent";
 import { Organization } from "../orgs/Organization";
+import { TextButton } from "../ui/TextButton";
 import { PixelScreen } from "../PixelScreen";
 import { ColorButton } from "../ui/ColorButton";
 import { ColorMenu } from "../ui/ColorMenu";
@@ -12,10 +13,22 @@ export class FlagQuestionContent implements DialogContent {
   private question: TextContent;
   private colorButtons: ColorButton[];
   private menu?: ColorMenu;
+  private okButton: TextButton;
+  private cancelButton: TextButton;
 
   constructor(private org: Organization, private container: Rect) {
     this.question = new TextContent(`Millised on ${org.name} värvid?`, container);
     this.colorButtons = this.createColorButtons();
+    this.okButton = new TextButton({
+      rect: { coord: coordAdd(container.coord, [0, container.size[1] - 14]), size: [60, 14] },
+      text: "Vasta",
+      onClick: () => { },
+    });
+    this.cancelButton = new TextButton({
+      rect: { coord: coordAdd(container.coord, [container.size[0] - 60, container.size[1] - 14]), size: [60, 14] },
+      text: "Ei tea",
+      onClick: () => { },
+    });
   }
 
   private createColorButtons(): ColorButton[] {
@@ -37,6 +50,9 @@ export class FlagQuestionContent implements DialogContent {
   paint(screen: PixelScreen) {
     this.question.paint(screen);
 
+    this.okButton.paint(screen);
+    this.cancelButton.paint(screen);
+
     // HACK: Render from right to left, so tooltips render on top of buttons
     reverse([...this.colorButtons]).forEach((btn) => {
       btn.paint(screen);
@@ -52,6 +68,8 @@ export class FlagQuestionContent implements DialogContent {
     this.colorButtons.forEach((btn) => {
       btn.handleGameEvent(event);
     });
+    this.okButton.handleGameEvent(event);
+    this.cancelButton.handleGameEvent(event);
   }
 
   private showMenu(btn: ColorButton, coord: Coord) {
