@@ -6,7 +6,8 @@ import { MoveToDoorActivity } from "../activities/MoveToDoorActivity";
 import { DespawnActivity } from "../activities/DespawnActivity";
 import { Character } from "./Character";
 import { PauseActivity } from "../activities/PauseActivity";
-import { AskQuestionActivity } from "../activities/AskQuestionActivity";
+import { AskQuestionInteraction } from "../activities/AskQuestionInteraction";
+import { RequestBeerInteraction } from "../activities/RequestBeerInteraction";
 
 export class Desires {
   private queue: Activity[] = [];
@@ -17,8 +18,8 @@ export class Desires {
     this.queue = [
       new PauseActivity(5, character),
       new MoveToTableActivity(character),
-      new AskQuestionActivity(character),
-      new CallFuxActivity(character),
+      new CallFuxActivity(character, new AskQuestionInteraction(character)),
+      new CallFuxActivity(character, new RequestBeerInteraction(character)),
       new MoveToDoorActivity(character),
       new DespawnActivity(character),
     ];
