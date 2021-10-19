@@ -24,7 +24,7 @@ export class AskQuestionInteraction implements Interaction {
     ui.showDialog(new Dialog({
       character: this.character,
       createContent: (rect) => new FlagQuestionContent({
-        org: this.expectedOrg,
+        question: `Millised on ${this.expectedOrg.name} värvid?`,
         container: rect,
         onAnswer: (colors) => {
           if (this.validateAnswer(colors)) {

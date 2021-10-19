@@ -1,7 +1,6 @@
 import { reverse } from "lodash";
 import { Coord, coordAdd, coordMul, Rect, rectCenter } from "../Coord";
 import { GameEvent } from "../GameEvent";
-import { Organization } from "../orgs/Organization";
 import { TextButton } from "../ui/TextButton";
 import { PixelScreen } from "../PixelScreen";
 import { ColorButton } from "../ui/ColorButton";
@@ -11,7 +10,7 @@ import { TextContent } from "./TextContent";
 import { FlagColor } from "../orgs/FlagColors";
 
 interface FlagQuestionContentConfig {
-  org: Organization;
+  question: string;
   container: Rect;
   onAnswer: (colors: FlagColor[]) => void;
 }
@@ -22,8 +21,8 @@ export class FlagQuestionContent implements DialogContent {
   private menu?: ColorMenu;
   private answerButton: TextButton;
 
-  constructor({ org, container, onAnswer }: FlagQuestionContentConfig) {
-    this.question = new TextContent(`Millised on ${org.name} värvid?`, container);
+  constructor({ question, container, onAnswer }: FlagQuestionContentConfig) {
+    this.question = new TextContent(question, container);
     this.colorButtons = this.createColorButtons(container);
     this.answerButton = new TextButton({
       rect: { coord: coordAdd(container.coord, [container.size[0] - 60, container.size[1] - 14]), size: [60, 14] },
