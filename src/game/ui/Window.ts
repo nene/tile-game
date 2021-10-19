@@ -1,4 +1,3 @@
-import { noop } from "lodash";
 import { Coord, coordAdd, coordSub, Rect, rectCenter, rectGrow } from "../Coord";
 import { GameEvent } from "../GameEvent";
 import { PixelScreen } from "../PixelScreen";
@@ -23,18 +22,20 @@ const DESCRIPTION_HEIGHT = 7;
 export class Window {
   private headline: Headline;
   private rect: Rect;
-  private closeButton: Button;
+  private closeButton?: Button;
 
   constructor({ headline, coord, size, onClose }: WindowCfg) {
     this.headline = headline;
     this.rect = coord ? { coord, size } : rectCenter({ coord: [0, 0], size }, { coord: [0, 0], size: [320, 200] });
-    this.closeButton = new Button({
-      coord: coordAdd(this.rect.coord, [this.rect.size[0] - 10, 2]),
-      spriteName: "close-button",
-      unpressed: [0, 0],
-      pressed: [1, 0],
-      onClick: onClose || noop,
-    });
+    if (onClose) {
+      this.closeButton = new Button({
+        coord: coordAdd(this.rect.coord, [this.rect.size[0] - 10, 2]),
+        spriteName: "close-button",
+        unpressed: [0, 0],
+        pressed: [1, 0],
+        onClick: onClose,
+      });
+    }
   }
 
   paint(screen: PixelScreen) {
@@ -42,7 +43,7 @@ export class Window {
     drawUpset(screen, this.rect);
     drawInset(screen, rectGrow(this.contentAreaRect(), [1, 1]));
     this.drawHeadline(screen);
-    this.closeButton.paint(screen);
+    this.closeButton?.paint(screen);
   }
 
   getRect(): Rect {
@@ -66,7 +67,7 @@ export class Window {
   }
 
   handleGameEvent(event: GameEvent) {
-    this.closeButton.handleGameEvent(event);
+    this.closeButton?.handleGameEvent(event);
   }
 }
 

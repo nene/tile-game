@@ -34,9 +34,6 @@ export class AskQuestionInteraction implements Interaction {
           }
         },
       }),
-      onClose: () => {
-        this.showReply(ui, `Rumal rebane.\nTea siis, et ${this.expectedOrg.name} värvid on ${this.colorsString(this.expectedOrg.flag)}.\nVõta laituseks sisse.`);
-      }
     }));
   }
 

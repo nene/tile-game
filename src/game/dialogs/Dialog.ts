@@ -8,13 +8,13 @@ import { DialogContent } from "./DialogContent";
 interface DialogConfig {
   character: Character;
   createContent: (rect: Rect) => DialogContent,
-  onClose: () => void;
+  onClose?: () => void;
 }
 
 export class Dialog {
   private window: Window;
   private content: DialogContent;
-  private onClose: () => void;
+  private onClose?: () => void;
 
   constructor({ character, createContent, onClose }: DialogConfig) {
     this.onClose = onClose;
@@ -24,7 +24,7 @@ export class Dialog {
       },
       coord: [60, 98],
       size: [200, 102],
-      onClose,
+      onClose: onClose
     });
     this.content = createContent(rectGrow(this.window.contentAreaRect(), [-2, -2]));
   }
@@ -44,7 +44,7 @@ export class Dialog {
 
     if (event.type === "click") {
       if (!isCoordInRect(event.coord, this.getRect())) {
-        this.onClose();
+        this.onClose && this.onClose();
       }
       return true;
     }

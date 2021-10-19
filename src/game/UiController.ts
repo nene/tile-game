@@ -32,7 +32,6 @@ export class UiController {
         choices: ["1981", "1900", "1907", "1914"],
         onAnswer: () => { }
       }),
-      onClose: () => { }
     });
   }
 
