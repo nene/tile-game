@@ -5,6 +5,7 @@ import { Beer } from "../items/Beer";
 import { random } from "lodash";
 import { TextContent } from "../dialogs/TextContent";
 import { Interaction } from "./Interaction";
+import { Dialog } from "../dialogs/Dialog";
 
 export class RequestBeerInteraction implements Interaction {
   private expectedBeer?: Beer;
@@ -29,7 +30,11 @@ export class RequestBeerInteraction implements Interaction {
   }
 
   private showDialog(ui: UiController, text: string) {
-    ui.showDialog(this.character, (rect) => new TextContent(text, rect));
+    ui.showDialog(new Dialog({
+      character: this.character,
+      createContent: (rect) => new TextContent(text, rect),
+      onClose: () => ui.hideDialog(),
+    }));
   }
 
   private chooseBeer(beers: Beer[]): Beer | undefined {

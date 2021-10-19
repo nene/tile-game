@@ -1,3 +1,4 @@
+import { Dialog } from "../dialogs/Dialog";
 import { TextContent } from "../dialogs/TextContent";
 import { Beer } from "../items/Beer";
 import { BeerBottle } from "../items/BeerBottle";
@@ -66,7 +67,11 @@ export class WaitingBeerActivity implements Activity {
   }
 
   private showDialog(ui: UiController, text: string) {
-    ui.showDialog(this.character, (rect) => new TextContent(text, rect));
+    ui.showDialog(new Dialog({
+      character: this.character,
+      createContent: (rect) => new TextContent(text, rect),
+      onClose: () => ui.hideDialog(),
+    }));
   }
 
   nextActivity() {

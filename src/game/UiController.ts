@@ -9,10 +9,8 @@ import { ScoreBoard } from "./ScoreBoard";
 import { GameEvent } from "./GameEvent";
 import { Inventory } from "./inventory/Inventory";
 import { InventoryView } from "./inventory/InventoryView";
-import { Character } from "./npc/Character";
 import { PlayerAttributes } from "./PlayerAttributes";
-import { Coord, Rect } from "./Coord";
-import { DialogContent } from "./dialogs/DialogContent";
+import { Coord } from "./Coord";
 
 export class UiController {
   private inventoryController: InventoryController;
@@ -106,12 +104,8 @@ export class UiController {
     return this.inventoryController.getMiniGame();
   }
 
-  showDialog(character: Character, createContent: (rect: Rect) => DialogContent) {
-    this.dialog = new Dialog({
-      character,
-      createContent,
-      onClose: () => this.hideDialog(),
-    });
+  showDialog(dialog: Dialog) {
+    this.dialog = dialog;
   }
 
   hideDialog() {
