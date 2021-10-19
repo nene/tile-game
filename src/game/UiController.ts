@@ -29,7 +29,7 @@ export class UiController {
       createContent: (rect) => new MultiChoiceQuestionContent({
         container: rect,
         question: "Millisel aastal on asutatud Vironia?",
-        choices: ["1981", "1900", "1907"],
+        choices: ["1981", "1900", "1907", "1914"],
         onAnswer: () => { }
       }),
       onClose: () => { }

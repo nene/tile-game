@@ -21,10 +21,9 @@ export class Dialog {
     this.window = new Window({
       headline: {
         title: character.name + ":",
-        description: "",
       },
-      coord: [60, 100],
-      size: [200, 100],
+      coord: [60, 98],
+      size: [200, 102],
       onClose,
     });
     this.content = createContent(rectGrow(this.window.contentAreaRect(), [-2, -2]));

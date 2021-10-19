@@ -14,10 +14,11 @@ interface WindowCfg {
 
 export interface Headline {
   title: string;
-  description: string;
+  description?: string;
 }
 
-const TITLE_HEIGHT = 17;
+const TITLE_HEIGHT = 10;
+const DESCRIPTION_HEIGHT = 7;
 
 export class Window {
   private headline: Headline;
@@ -50,12 +51,18 @@ export class Window {
 
   private drawHeadline(screen: PixelScreen) {
     screen.drawText(this.headline.title, coordAdd(this.rect.coord, [3, 2]), { shadowColor: UI_SHADOW_COLOR });
-    screen.drawText(this.headline.description, coordAdd(this.rect.coord, [3, 12]), { size: "small" });
+    if (this.headline.description) {
+      screen.drawText(this.headline.description, coordAdd(this.rect.coord, [3, 12]), { size: "small" });
+    }
   }
 
   contentAreaRect(): Rect {
     const { coord, size } = rectGrow(this.rect, [-3, -3]);
-    return { coord: coordAdd(coord, [0, TITLE_HEIGHT]), size: coordSub(size, [0, TITLE_HEIGHT]) };
+    return { coord: coordAdd(coord, [0, this.headlineHeight()]), size: coordSub(size, [0, this.headlineHeight()]) };
+  }
+
+  headlineHeight(): number {
+    return TITLE_HEIGHT + (this.headline.description ? DESCRIPTION_HEIGHT : 0);
   }
 
   handleGameEvent(event: GameEvent) {
