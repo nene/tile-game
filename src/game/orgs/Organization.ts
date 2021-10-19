@@ -5,7 +5,7 @@ export interface Organization {
   name: string;
   colors: FlagColor[];
   establishedYear: number;
-  slogan?: string;
+  slogan: string;
 }
 
 const orgDef = (org: Organization) => org;
@@ -87,7 +87,7 @@ const orgs = {
     name: "Indla",
     colors: makeFlag("kirsipruun", "valge", "roheline"),
     establishedYear: 1924,
-    slogan: "Sõnass kindlust, teosse ausust, kodule armastust",
+    slogan: "Sõnasse kindlust, teosse ausust, kodule armastust",
   }),
   lembela: orgDef({
     name: "Lembela",

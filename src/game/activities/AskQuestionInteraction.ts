@@ -40,6 +40,7 @@ export class AskQuestionInteraction implements Interaction {
       container: rect,
       question: question.question,
       choices: question.choices,
+      fontSize: question.fontSize,
       onAnswer: (answer) => {
         this.showReply(ui, question.validate(answer));
       }

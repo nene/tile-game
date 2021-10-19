@@ -9,15 +9,18 @@ interface MultiChoiceQuestionContentConfig {
   container: Rect;
   question: string;
   choices: string[];
+  fontSize?: "medium" | "small";
   onAnswer: (answer: string) => void;
 }
 
 export class MultiChoiceQuestionContent implements DialogContent {
+  private fontSize?: "medium" | "small";
   private question: TextContent;
   private answerButtons: TextButton[];
   private onAnswer: (answer: string) => void;
 
-  constructor({ container, question, choices, onAnswer }: MultiChoiceQuestionContentConfig) {
+  constructor({ container, question, choices, fontSize, onAnswer }: MultiChoiceQuestionContentConfig) {
+    this.fontSize = fontSize;
     this.onAnswer = onAnswer;
     this.question = new TextContent(question, container);
     this.answerButtons = this.createAnswerButtons(choices, container);
@@ -34,6 +37,7 @@ export class MultiChoiceQuestionContent implements DialogContent {
         rect: { coord, size: buttonSize },
         text: choice,
         align: "left",
+        size: this.fontSize,
         onClick: () => { this.onAnswer(choice) },
       });
     });

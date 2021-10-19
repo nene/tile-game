@@ -10,6 +10,7 @@ export interface MultiChoiceQuestion {
   type: "multi-choice";
   question: string;
   choices: string[];
+  fontSize?: "medium" | "small";
   validate: (answer: string) => string;
 }
 
