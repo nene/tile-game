@@ -9,9 +9,10 @@ export class Tooltip {
   hide() {
     this.mouseCoord = undefined;
     this.text = undefined;
+    this.show();
   }
 
-  show = debounce((mouseCoord: Coord, text?: string) => {
+  show = debounce((mouseCoord?: Coord, text?: string) => {
     this.mouseCoord = mouseCoord;
     this.text = text;
   }, 500);

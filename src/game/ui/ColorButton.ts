@@ -3,6 +3,7 @@ import { GameEvent } from "../GameEvent";
 import { FlagColor } from "../orgs/FlagColors";
 import { PixelScreen } from "../PixelScreen";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
+import { Tooltip } from "./Tooltip";
 import { drawInset, drawUpset } from "./ui-utils";
 
 interface ColorButtonConfig {
@@ -16,6 +17,7 @@ export class ColorButton {
   rect: Rect;
   pressed = false;
   onClick: () => void;
+  tooltip = new Tooltip();
 
   constructor({ coord, color, onClick }: ColorButtonConfig) {
     this.rect = { coord: coord, size: [14, 14] };
@@ -31,6 +33,7 @@ export class ColorButton {
       this.drawContent(screen, [0, 0]);
       drawUpset(screen, this.rect);
     }
+    this.tooltip.paint(screen);
   }
 
   private drawContent(screen: PixelScreen, offset: Coord) {
@@ -53,6 +56,12 @@ export class ColorButton {
 
   handleGameEvent(event: GameEvent): boolean | undefined {
     switch (event.type) {
+      case "mousemove":
+        this.tooltip.hide();
+        if (isCoordInRect(event.coord, this.rect)) {
+          this.tooltip.show(event.coord, this.color?.name);
+        }
+        break;
       case "mousedown":
         if (isCoordInRect(event.coord, this.rect)) {
           this.pressed = true;
@@ -62,6 +71,7 @@ export class ColorButton {
         this.pressed = false;
         break;
       case "click":
+        this.tooltip.hide();
         if (isCoordInRect(event.coord, this.rect)) {
           this.onClick();
         }

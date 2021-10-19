@@ -3,6 +3,7 @@ import { GameEvent } from "../GameEvent";
 import { FlagColor, allFlagColors } from "../orgs/FlagColors";
 import { PixelScreen } from "../PixelScreen";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
+import { Tooltip } from "./Tooltip";
 import { drawUpset, strokeRect, UI_BG_COLOR } from "./ui-utils";
 
 interface ColorMenuConfig {
@@ -15,6 +16,7 @@ export class ColorMenu {
   private onSelect: (color: FlagColor) => void;
   private colors = allFlagColors();
   private highlightedColor?: FlagColor;
+  private tooltip = new Tooltip();
 
   constructor({ container, onSelect }: ColorMenuConfig) {
     this.rect = rectCenter({ coord: [0, 0], size: coordAdd(coordMul([13, 12], [this.colors.length, 1]), [3, 4]) }, container);
@@ -25,6 +27,7 @@ export class ColorMenu {
     screen.drawRect(this.rect, UI_BG_COLOR);
     drawUpset(screen, this.rect);
     this.colors.forEach((color, i) => this.drawColorCell(screen, color, i));
+    this.tooltip.paint(screen);
   }
 
   private drawColorCell(screen: PixelScreen, color: FlagColor, index: number) {
@@ -44,18 +47,20 @@ export class ColorMenu {
     switch (event.type) {
       case "mousemove":
         this.highlightedColor = this.getColorByCoord(event.coord);
+        this.tooltip.hide();
+        this.tooltip.show(event.coord, this.highlightedColor?.name);
         break;
       case "click":
+        this.tooltip.hide();
         if (isCoordInRect(event.coord, this.rect)) {
           const color = this.getColorByCoord(event.coord);
           if (color) {
             this.onSelect(color);
           }
-          return true;
         }
         break;
     }
-    return undefined;
+    return true;
   }
 
   private getColorByCoord(coord: Coord): FlagColor | undefined {

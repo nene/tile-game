@@ -1,3 +1,4 @@
+import { reverse } from "lodash";
 import { Coord, coordAdd, coordMul, Rect, rectCenter } from "../Coord";
 import { GameEvent } from "../GameEvent";
 import { Organization } from "../orgs/Organization";
@@ -35,9 +36,12 @@ export class FlagQuestionContent implements DialogContent {
 
   paint(screen: PixelScreen) {
     this.question.paint(screen);
-    this.colorButtons.forEach((btn) => {
+
+    // HACK: Render from right to left, so tooltips render on top of buttons
+    reverse([...this.colorButtons]).forEach((btn) => {
       btn.paint(screen);
     });
+
     this.menu?.paint(screen);
   }
 
