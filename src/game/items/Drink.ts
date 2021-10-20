@@ -11,9 +11,10 @@ export interface Drink {
 
 export enum DrinkColor {
   water = 0,
-  light = 1,
-  dark = 2,
-  red = 3,
+  lemonade = 1,
+  light = 2,
+  dark = 3,
+  red = 4,
 }
 
 export interface Foaminess {
@@ -112,7 +113,7 @@ const drinks = {
     alcohol: 0,
     foam: foamLevel[0],
     capStrength: 0,
-    color: DrinkColor.light,
+    color: DrinkColor.lemonade,
   }),
   "paulaner": drinkDef({
     name: "Hefeweisen",
