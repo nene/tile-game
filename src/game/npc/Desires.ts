@@ -11,6 +11,7 @@ import { RequestBeerInteraction } from "../activities/RequestBeerInteraction";
 import { createColorsQuestion } from "../questions/ColorsQuestion";
 import { createYearQuestion } from "../questions/YearQuestion";
 import { createSloganQuestion } from "../questions/SloganQuestion";
+import { createPlaceQuestion } from "../questions/PlaceQuestion";
 
 export class Desires {
   private queue: Activity[] = [];
@@ -21,6 +22,7 @@ export class Desires {
     this.queue = [
       new PauseActivity(5, character),
       new MoveToTableActivity(character),
+      new CallFuxActivity(character, new AskQuestionInteraction(character, createPlaceQuestion())),
       new CallFuxActivity(character, new AskQuestionInteraction(character, createSloganQuestion())),
       new CallFuxActivity(character, new AskQuestionInteraction(character, createColorsQuestion())),
       new CallFuxActivity(character, new AskQuestionInteraction(character, createYearQuestion())),
