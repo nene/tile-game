@@ -131,6 +131,41 @@ const orgs = {
     establishedPlace: "Tallinn",
     slogan: "Teadmised on ilu",
   }),
+  lettonia: orgDef({
+    name: "Lettonia",
+    colors: makeFlag("roheline", "sinine", "kuldne"),
+    establishedYear: 1870,
+    establishedPlace: "Tartu",
+    slogan: "???",
+  }),
+  polonia: orgDef({
+    name: "Polonia",
+    colors: makeFlag("punane", "sinine", "valge"),
+    establishedYear: 1828,
+    establishedPlace: "Tartu",
+    slogan: "???",
+  }),
+  savo: orgDef({
+    name: "Savolainen Osakunta",
+    colors: makeFlag("kollane", "must"),
+    establishedYear: 1905,
+    establishedPlace: "Helsingi",
+    slogan: "???",
+  }),
+  neoLithuania: orgDef({
+    name: "Neo-Lithuania",
+    colors: makeFlag("roheline", "punane", "kuldne"),
+    establishedYear: 1922,
+    establishedPlace: "???",
+    slogan: "???",
+  }),
+  varmlandsNation: orgDef({
+    name: "Värmlands Nation",
+    colors: makeFlag("kollane", "must", "kollane"),
+    establishedYear: 1660,
+    establishedPlace: "Uppsala",
+    slogan: "???",
+  }),
 };
 
 export type OrgName = keyof typeof orgs;
