@@ -26,7 +26,7 @@ export class Button {
     this.onClick = cfg.onClick;
   }
 
-  handleGameEvent(event: GameEvent) {
+  handleGameEvent(event: GameEvent): boolean | undefined {
     switch (event.type) {
       case "mousedown":
         if (isCoordInRect(event.coord, this.rect)) {
@@ -39,6 +39,7 @@ export class Button {
       case "click":
         if (isCoordInRect(event.coord, this.rect)) {
           this.onClick();
+          return true;
         }
         break;
     }
