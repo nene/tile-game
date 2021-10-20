@@ -1,9 +1,9 @@
-import { BeerBottle } from "../items/BeerBottle";
+import { GameItem } from "../items/GameItem";
 import { Wallet } from "../Wallet";
 import { TakeableInventory } from "./Inventory";
 
 export class Shop implements TakeableInventory {
-  constructor(private items: BeerBottle[]) {
+  constructor(private items: GameItem[]) {
   }
 
   size() {
@@ -20,7 +20,7 @@ export class Shop implements TakeableInventory {
     if (!item) {
       return;
     }
-    const price = item.getBeer().price;
+    const price = item.getPrice();
     if (wallet.getMoney() >= price) {
       wallet.remove(price);
       return item.clone();

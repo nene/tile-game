@@ -40,6 +40,14 @@ export class BeerGlass implements GameItem {
     }
   }
 
+  getDescription() {
+    return "Harilik klaasist šoppen";
+  }
+
+  getPrice() {
+    return 0;
+  }
+
   fill(beer: Beer, level: BeerLevel) {
     this.beer = beer;
     this.level = level;

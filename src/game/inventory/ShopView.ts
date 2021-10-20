@@ -1,6 +1,5 @@
 import { Coord, Rect } from "../Coord";
 import { GameEvent } from "../GameEvent";
-import { BeerBottle } from "../items/BeerBottle";
 import { PixelScreen } from "../PixelScreen";
 import { ScrollView } from "../ui/ScrollView";
 import { Shop } from "./Shop";
@@ -8,6 +7,7 @@ import { ShopItemRenderer } from "./ShopItemRenderer";
 import { InventoryView } from "./InventoryView";
 import { Wallet } from "../Wallet";
 import { Headline, Window } from "../ui/Window";
+import { GameItem } from "../items/GameItem";
 
 interface ShopViewConfig {
   shop: Shop;
@@ -18,7 +18,7 @@ interface ShopViewConfig {
 
 export class ShopView implements InventoryView {
   private shopItemRenderer: ShopItemRenderer;
-  private scrollView: ScrollView<BeerBottle>;
+  private scrollView: ScrollView<GameItem>;
   private window: Window;
 
   constructor({ shop, wallet, headline, onClose }: ShopViewConfig) {

@@ -24,6 +24,17 @@ export class BottleOpener implements GameItem {
     }
   }
 
+  getDescription() {
+    switch (this.type) {
+      case BottleOpenerType.simple: return "Mugav kaasas kanda ja käsitseda.";
+      case BottleOpenerType.attatched: return "Vaid koha peal kasutamiseks.";
+    }
+  }
+
+  getPrice() {
+    return 20;
+  }
+
   getSprite(): Sprite {
     return this.sprite;
   }

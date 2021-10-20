@@ -4,6 +4,7 @@ import { Shop } from "../inventory/Shop";
 import { ShopView } from "../inventory/ShopView";
 import { getBeer } from "../items/Beer";
 import { BeerBottle } from "../items/BeerBottle";
+import { BottleOpener, BottleOpenerType } from "../items/BottleOpener";
 import { PixelScreen } from "../PixelScreen";
 import { SoundLibrary } from "../sounds/SoundLibrary";
 import { Sprite } from "../sprites/Sprite";
@@ -27,7 +28,8 @@ export class Fridge implements GameObject {
       new BeerBottle(getBeer("kriek")),
       new BeerBottle(getBeer("heineken")),
       new BeerBottle(getBeer("paulaner")),
-    ])
+      new BottleOpener(BottleOpenerType.simple),
+    ]);
   }
 
   tick() { }
