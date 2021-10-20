@@ -34,6 +34,16 @@ const foamLevel: Foaminess[] = [
 const beerDef = (x: Beer) => x;
 
 const beers = {
+  "water": beerDef({
+    name: "Vesi",
+    description: "Seda tuleb kraanist lõputult.",
+    price: 0,
+    spriteIndex: 0,
+    alcohol: 0,
+    foam: foamLevel[0],
+    capStrength: 0,
+    color: BeerColor.water,
+  }),
   "alexander": beerDef({
     name: "Alexander",
     description: "Sassi läheb kui loed mitu pudelit sai joodud.",

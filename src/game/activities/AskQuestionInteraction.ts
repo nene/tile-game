@@ -59,7 +59,7 @@ export class AskQuestionInteraction implements Interaction {
 
   private punishWithWater(ui: UiController, world: GameWorld) {
     const glass = new BeerGlass();
-    glass.fill(getBeer("limonaad"), BeerLevel.full);
+    glass.fill(getBeer("water"), BeerLevel.full);
     ui.setSelectedItem(glass);
     world.getPlayer().onInteract(ui, world);
   }

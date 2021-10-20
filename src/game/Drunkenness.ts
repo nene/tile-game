@@ -9,6 +9,8 @@ export class Drunkenness {
   sip(beer: Beer) {
     if (beer.alcohol > 0) {
       this.level = Math.min(MAX_LEVEL, this.level + 0.25);
+    } else {
+      this.level = Math.max(0, this.level - 0.25);
     }
   }
 
