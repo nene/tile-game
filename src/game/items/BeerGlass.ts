@@ -18,9 +18,8 @@ export enum BeerLevel {
 export class BeerGlass implements GameItem {
   private spriteSheet: SpriteSheet;
   private smallSpriteSheet: SpriteSheet;
-  private beer?: Beer;
 
-  constructor(private level: BeerLevel = BeerLevel.empty) {
+  constructor(private beer?: Beer, private level: BeerLevel = BeerLevel.empty) {
     this.spriteSheet = SpriteLibrary.get("beer-glass-lg");
     this.smallSpriteSheet = SpriteLibrary.get("beer-glass-sm");
   }
@@ -69,6 +68,6 @@ export class BeerGlass implements GameItem {
   }
 
   clone() {
-    return new BeerGlass(this.level);
+    return new BeerGlass(this.beer, this.level);
   }
 }
