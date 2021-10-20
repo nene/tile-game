@@ -131,6 +131,48 @@ const orgs = {
     establishedPlace: "Tallinn",
     slogan: "Teadmised on ilu",
   }),
+  pohjala: orgDef({
+    name: "EÜS Põhjala",
+    colors: [],
+    establishedYear: 1884,
+    establishedPlace: "Peterburg",
+    slogan: "Töö isamaa kasuks",
+  }),
+  enys: orgDef({
+    name: "Eesti Naisüliõpilaste Selts",
+    colors: [],
+    establishedYear: 1911,
+    establishedPlace: "Tartu",
+    slogan: "Demokraatia, rahvuslikkus, individuaalsus",
+  }),
+  liivika: orgDef({
+    name: "ÜS Liivika",
+    colors: [],
+    establishedYear: 1909,
+    establishedPlace: "Tartu",
+    slogan: "Ex solo ad solem soli patriae",
+  }),
+  veljesto: orgDef({
+    name: "EYS Veljesto",
+    colors: [],
+    establishedYear: 1920,
+    establishedPlace: "Tartu",
+    slogan: "Õige vaimsuse kaudu vendlusele, nende mõlema kaudu vabadusele",
+  }),
+  raimla: orgDef({
+    name: "ÜS Raimla",
+    colors: makeFlag("sinine", "valge"), // todo: helesinine
+    establishedYear: 1922,
+    establishedPlace: "Tartu",
+    slogan: "Demokraatia, isiksus, isamaa",
+  }),
+  fennica: orgDef({
+    name: "ÜÜ Fraternitas Fennica",
+    colors: makeFlag("kuldne", "must", "valge"),
+    establishedYear: 1926,
+    establishedPlace: "Tartu",
+    slogan: "???",
+  }),
   lettonia: orgDef({
     name: "Lettonia",
     colors: makeFlag("roheline", "sinine", "kuldne"),
@@ -156,7 +198,7 @@ const orgs = {
     name: "Neo-Lithuania",
     colors: makeFlag("roheline", "punane", "kuldne"),
     establishedYear: 1922,
-    establishedPlace: "???",
+    establishedPlace: "Kaunas",
     slogan: "???",
   }),
   varmlandsNation: orgDef({

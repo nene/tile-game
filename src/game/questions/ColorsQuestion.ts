@@ -9,6 +9,14 @@ export function createColorsQuestion(): ColorsQuestion {
     type: "colors",
     question: `Millised on ${org.name} värvid?`,
     validate: (colors: FlagColor[]) => {
+      if (org.colors.length === 0) {
+        if (colors.length === 0) {
+          return { type: "praise", msg: "Õige!\nSee oli trikiga küsimus, sellel organisatsioonil polegi värve." };
+        } else {
+          return { type: "punish", msg: `See oli trikiga küsimus, ${org.name} värve ei oma.\nVõta laituseks sisse!` };
+        }
+      }
+
       if (isEqual(colors, org.colors)) {
         return { type: "praise", msg: "Õige!\nTubli rebane. Kiidan." };
       } else if (isEqual(sortColors(colors), sortColors(org.colors))) {
