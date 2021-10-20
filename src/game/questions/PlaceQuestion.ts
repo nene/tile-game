@@ -10,9 +10,9 @@ export function createPlaceQuestion(): MultiChoiceQuestion {
     choices: generateChoices(org, (org) => org.establishedPlace),
     validate: (establishedPlace: string) => {
       if (establishedPlace === org.establishedPlace) {
-        return "Õige vastus! Oled tubli.";
+        return { type: "praise", msg: "Õige vastus! Oled tubli." };
       } else {
-        return `Vale puha! ${org.name} asutamiskoht on ${org.establishedPlace}.\nVõta laituseks sisse.`;
+        return { type: "punish", msg: `Vale puha! ${org.name} asutamiskoht on ${org.establishedPlace}.\nVõta laituseks sisse.` };
       }
     },
   };

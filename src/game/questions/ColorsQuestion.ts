@@ -10,11 +10,11 @@ export function createColorsQuestion(): ColorsQuestion {
     question: `Millised on ${org.name} värvid?`,
     validate: (colors: FlagColor[]) => {
       if (isEqual(colors, org.colors)) {
-        return "Õige!\nTubli rebane. Kiidan.";
+        return { type: "praise", msg: "Õige!\nTubli rebane. Kiidan." };
       } else if (isEqual(sortColors(colors), sortColors(org.colors))) {
-        return `Õiged värvid, aga vale järjekord.\nÕige on ${colorsString(org.colors)}. Pead veel pingutama.`;
+        return { type: "neutral", msg: `Õiged värvid, aga vale järjekord.\nÕige on ${colorsString(org.colors)}. Pead veel pingutama.` };
       } else {
-        return `Vale!\n${org.name} värvid on ${colorsString(org.colors)}.\nVõta laituseks sisse.`;
+        return { type: "punish", msg: `Vale!\n${org.name} värvid on ${colorsString(org.colors)}.\nVõta laituseks sisse.` };
       }
     },
   }

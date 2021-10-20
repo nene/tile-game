@@ -30,7 +30,7 @@ export class AskQuestionInteraction implements Interaction {
       question: question.question,
       container: rect,
       onAnswer: (colors) => {
-        this.showReply(ui, question.validate(colors));
+        this.showReply(ui, question.validate(colors).msg);
       },
     });
   }
@@ -42,7 +42,7 @@ export class AskQuestionInteraction implements Interaction {
       choices: question.choices,
       fontSize: question.fontSize,
       onAnswer: (answer) => {
-        this.showReply(ui, question.validate(answer));
+        this.showReply(ui, question.validate(answer).msg);
       }
     });
   }

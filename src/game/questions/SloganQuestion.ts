@@ -11,9 +11,9 @@ export function createSloganQuestion(): MultiChoiceQuestion {
     choices: generateChoices(org, (org) => org.slogan),
     validate: (slogan: string) => {
       if (slogan === org.slogan) {
-        return "Õige! Oled hoolega tudeerinud. Tubli rebane!";
+        return { type: "praise", msg: "Õige! Oled hoolega tudeerinud. Tubli rebane!" };
       } else {
-        return `Vale! ${org.name} lipukiri on ${org.slogan}. Jäta see endale meelde.`;
+        return { type: "punish", msg: `Vale! ${org.name} lipukiri on ${org.slogan}. Jäta see endale meelde.` };
       }
     },
   };
