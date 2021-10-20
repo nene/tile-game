@@ -1,4 +1,4 @@
-import { Coord, coordAdd, coordSub, Rect, rectCenter, rectGrow } from "../Coord";
+import { Coord, coordAdd, coordSub, isCoordInRect, Rect, rectCenter, rectGrow } from "../Coord";
 import { GameEvent } from "../GameEvent";
 import { PixelScreen } from "../PixelScreen";
 import { drawInset, drawUpset, UI_BG_COLOR, UI_SHADOW_COLOR } from "../ui/ui-utils";
@@ -66,8 +66,11 @@ export class Window {
     return TITLE_HEIGHT + (this.headline.description ? DESCRIPTION_HEIGHT : 0);
   }
 
-  handleGameEvent(event: GameEvent) {
+  handleGameEvent(event: GameEvent): boolean | undefined {
     this.closeButton?.handleGameEvent(event);
+    if (event.type === "click" && isCoordInRect(event.coord, this.rect)) {
+      return true;
+    }
   }
 }
 

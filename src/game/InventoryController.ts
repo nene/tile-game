@@ -79,7 +79,9 @@ export class InventoryController {
   }
 
   handleGameEvent(event: GameEvent): boolean | undefined {
-    this.objectInventoryView?.handleGameEvent(event);
+    if (this.objectInventoryView?.handleGameEvent(event)) {
+      return true;
+    }
 
     switch (event.type) {
       case "click":

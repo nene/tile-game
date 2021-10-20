@@ -34,8 +34,7 @@ export class StorageInventoryView implements InventoryView {
   }
 
   handleGameEvent(event: GameEvent) {
-    this.window.handleGameEvent(event);
-    return undefined;
+    return this.window.handleGameEvent(event);
   }
 
   getRect(): Rect {
