@@ -54,7 +54,7 @@ const imageFiles = {
   'cfe-ksv-1': spriteDef({ src: cfeKsv1, cfg: { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET } }),
   'cfe-ksv-2': spriteDef({ src: cfeKsv2, cfg: { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET } }),
   'cfe-ksv-3': spriteDef({ src: cfeKsv3, cfg: { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET } }),
-  'callout': spriteDef({ src: callout, cfg: { size: [26, 14], offset: [-10, -48] } }),
+  'callout': spriteDef({ src: callout, cfg: { size: [16, 18], colsRows: [2, 1], offset: [-5, -52] } }),
 
   'table': spriteDef({ src: table, cfg: { size: [64, 23], offset: [0, -6] } }),
   'fridge': spriteDef({ src: fridge, cfg: { size: [16, 46], offset: [0, -32] } }),

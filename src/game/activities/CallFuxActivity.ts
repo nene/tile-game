@@ -15,7 +15,7 @@ export class CallFuxActivity implements Activity {
 
   constructor(private character: Character, private interaction: Interaction) {
     this.sprite = SpriteLibrary.getSprite(character.spriteSet);
-    this.calloutSprite = SpriteLibrary.getSprite("callout");
+    this.calloutSprite = SpriteLibrary.getSprite("callout", [interaction.getType(), 0]);
   }
 
   tick(): ActivityUpdates {

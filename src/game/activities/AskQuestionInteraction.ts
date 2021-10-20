@@ -2,7 +2,7 @@ import { Character } from "../npc/Character";
 import { UiController } from "../UiController";
 import { TextContent } from "../dialogs/TextContent";
 import { FlagQuestionContent } from "../dialogs/FlagQuestionContent";
-import { Interaction } from "./Interaction";
+import { Interaction, InteractionType } from "./Interaction";
 import { Dialog } from "../dialogs/Dialog";
 import { ColorsQuestion, MultiChoiceQuestion, Question, ValidationResult } from "../questions/Question";
 import { Rect } from "../Coord";
@@ -13,6 +13,10 @@ import { getDrink } from "../items/Drink";
 
 export class AskQuestionInteraction implements Interaction {
   constructor(private character: Character, private question: Question) {
+  }
+
+  getType() {
+    return InteractionType.question;
   }
 
   interact(ui: UiController, world: GameWorld) {

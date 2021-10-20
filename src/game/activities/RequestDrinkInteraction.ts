@@ -4,7 +4,7 @@ import { WaitingDrinkActivity } from "./WaitingDrinkActivity";
 import { Drink } from "../items/Drink";
 import { random } from "lodash";
 import { TextContent } from "../dialogs/TextContent";
-import { Interaction } from "./Interaction";
+import { Interaction, InteractionType } from "./Interaction";
 import { Dialog } from "../dialogs/Dialog";
 
 export class RequestDrinkInteraction implements Interaction {
@@ -12,6 +12,10 @@ export class RequestDrinkInteraction implements Interaction {
 
   constructor(private character: Character) {
     this.expectedDrink = this.chooseDrink(this.character.favoriteDrinks);
+  }
+
+  getType() {
+    return InteractionType.beer;
   }
 
   interact(ui: UiController) {
