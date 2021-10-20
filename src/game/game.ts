@@ -25,7 +25,7 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
   await SpriteLibrary.load();
   await SoundLibrary.load();
 
-  const player = new Player([286, 113]);
+  const player = new Player([286, 129]);
 
   const world = new GameWorld([
     new CfeLocationFactory(),

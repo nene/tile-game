@@ -14,7 +14,7 @@ import { Countertop } from "../furniture/Countertop";
 import { Painting } from "../furniture/Painting";
 import { SpawnPoint } from "../furniture/SpawnPoint";
 
-const CFE_SIZE: Coord = [21, 16]; // Size in tiles
+const CFE_SIZE: Coord = [23, 17]; // Size in tiles
 
 export class CfeLocationFactory implements LocationFactory {
   private background: CfeBackground;
@@ -25,37 +25,40 @@ export class CfeLocationFactory implements LocationFactory {
 
     this.objects = [
       // Walls
-      new Wall({ coord: tileToScreenCoord([0, 0]), size: tileToScreenCoord([21, 3]) }),
-      new Wall({ coord: tileToScreenCoord([14, 3]), size: tileToScreenCoord([7, 3]) }),
+      new Wall({ coord: tileToScreenCoord([0, 1]), size: tileToScreenCoord([22, 3]) }),
+      new Wall({ coord: tileToScreenCoord([15, 4]), size: tileToScreenCoord([8, 3]) }),
+      new Wall({ coord: tileToScreenCoord([0, 0]), size: tileToScreenCoord([1, 17]) }),
+      new Wall({ coord: tileToScreenCoord([1, 16]), size: tileToScreenCoord([22, 1]) }),
+      new Wall({ coord: tileToScreenCoord([22, 7]), size: tileToScreenCoord([1, 9]) }),
 
       // Color shield on wall
-      new Painting(tileToScreenCoord([3, 3]), "color-shield"),
+      new Painting(tileToScreenCoord([4, 4]), "color-shield"),
       // A table
-      new Table(tileToScreenCoord([4, 7])),
-      new Table(tileToScreenCoord([0, 11])),
+      new Table(tileToScreenCoord([5, 8])),
+      new Table(tileToScreenCoord([1, 12])),
       // Sofa
-      new Sofa(tileToScreenCoord([3, 3])),
+      new Sofa(tileToScreenCoord([4, 4])),
       // Fire
-      new Fireplace(tileToScreenCoord([6, 3])),
+      new Fireplace(tileToScreenCoord([7, 4])),
       // A door
       new Door({
-        coord: tileToScreenCoord([12, 3]),
+        coord: tileToScreenCoord([13, 4]),
         spriteName: "door",
         target: { location: "outdoors" },
       }),
       // A spawn location at the door
-      new SpawnPoint(tileToScreenCoord([12, 3])),
+      new SpawnPoint(tileToScreenCoord([13, 4])),
 
       // Bar countertop
-      new Countertop(tileToScreenCoord([14, 6])),
+      new Countertop(tileToScreenCoord([15, 7])),
       // Notes
-      new Painting(tileToScreenCoord([14, 6]), "bulletin-board"),
+      new Painting(tileToScreenCoord([15, 7]), "bulletin-board"),
       // A storage of beer glasses
-      new BeerCabinet(tileToScreenCoord([16, 6])),
+      new BeerCabinet(tileToScreenCoord([17, 7])),
       // A fridge
-      new Fridge(tileToScreenCoord([18, 6])),
+      new Fridge(tileToScreenCoord([19, 7])),
       // Place for empty bottles
-      new BeerBox(tileToScreenCoord([19, 6])),
+      new BeerBox(tileToScreenCoord([20, 7])),
     ];
   }
 
