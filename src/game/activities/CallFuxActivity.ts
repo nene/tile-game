@@ -1,4 +1,4 @@
-import { coordAdd } from "../Coord";
+import { Coord, coordAdd } from "../Coord";
 import { Activity, ActivityUpdates } from "./Activity";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
@@ -16,21 +16,28 @@ export class CallFuxActivity implements Activity {
   constructor(private character: Character, private interaction: Interaction) {
     this.sprite = SpriteLibrary.getSprite(character.spriteSet);
     this.calloutSprite = SpriteLibrary.getSprite("callout");
-    // Place above the head
-    this.calloutSprite.offset = coordAdd(this.calloutSprite.offset, [0, -32]);
   }
 
   tick(): ActivityUpdates {
     this.counter++;
     return {
-      sprites: this.isShouting() ? [this.sprite, this.calloutSprite] : [this.sprite],
+      sprites: [
+        this.sprite,
+        this.translateSprite(this.calloutSprite, this.spriteOffset())
+      ],
     };
   }
 
-  // shout for a second, then wait for a second
-  private isShouting(): boolean {
-    const currentSecond = Math.floor(this.counter / 10);
-    return currentSecond % 2 === 0;
+  private translateSprite(sprite: Sprite, offset: Coord): Sprite {
+    return {
+      ...sprite,
+      offset: coordAdd(sprite.offset, offset),
+    };
+  }
+
+  private spriteOffset(): Coord {
+    const sinX = Math.sin(Math.PI * ((this.counter % 11) / 10));
+    return [0, sinX * 4];
   }
 
   isFinished() {
