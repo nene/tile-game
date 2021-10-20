@@ -1,5 +1,5 @@
-import { shuffle } from "lodash";
 import { randomOrganization } from "../orgs/Organization";
+import { generateChoices } from "./generateChoices";
 import { MultiChoiceQuestion } from "./Question";
 
 export function createYearQuestion(): MultiChoiceQuestion {
@@ -7,7 +7,7 @@ export function createYearQuestion(): MultiChoiceQuestion {
   return {
     type: "multi-choice",
     question: `Millisel aastal on asutatud ${org.name}?`,
-    choices: generateChoices(org.establishedYear).map(String),
+    choices: generateChoices(org, (org) => String(org.establishedYear)),
     validate: (year: string) => {
       if (year === String(org.establishedYear)) {
         return "Õige! Võta püksid maha.";
@@ -16,15 +16,4 @@ export function createYearQuestion(): MultiChoiceQuestion {
       }
     },
   };
-}
-
-function generateChoices(year: number, count: number = 4): number[] {
-  const choices = [year];
-  while (choices.length < count) {
-    const rndYear = randomOrganization().establishedYear;
-    if (!choices.includes(rndYear)) {
-      choices.push(rndYear);
-    }
-  }
-  return shuffle(choices);
 }

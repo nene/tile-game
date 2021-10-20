@@ -1,5 +1,5 @@
-import { shuffle } from "lodash";
 import { randomOrganization } from "../orgs/Organization";
+import { generateChoices } from "./generateChoices";
 import { MultiChoiceQuestion } from "./Question";
 
 export function createSloganQuestion(): MultiChoiceQuestion {
@@ -8,7 +8,7 @@ export function createSloganQuestion(): MultiChoiceQuestion {
     type: "multi-choice",
     question: `Mis on ${org.name} lipukiri?`,
     fontSize: "small",
-    choices: generateChoices(org.slogan),
+    choices: generateChoices(org, (org) => org.slogan),
     validate: (slogan: string) => {
       if (slogan === org.slogan) {
         return "Õige! Oled hoolega tudeerinud. Tubli rebane!";
@@ -17,15 +17,4 @@ export function createSloganQuestion(): MultiChoiceQuestion {
       }
     },
   };
-}
-
-function generateChoices(slogan: string, count: number = 4): string[] {
-  const choices = [slogan];
-  while (choices.length < count) {
-    const rndSlogan = randomOrganization().slogan;
-    if (!choices.includes(rndSlogan)) {
-      choices.push(rndSlogan);
-    }
-  }
-  return shuffle(choices);
 }
