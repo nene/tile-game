@@ -2,7 +2,7 @@ import { Coord, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
 import { Shop } from "../inventory/Shop";
 import { ShopView } from "../inventory/ShopView";
-import { getBeer } from "../items/Beer";
+import { getDrink } from "../items/Drink";
 import { BeerBottle } from "../items/BeerBottle";
 import { BottleOpener, BottleOpenerType } from "../items/BottleOpener";
 import { PixelScreen } from "../PixelScreen";
@@ -18,16 +18,16 @@ export class Fridge implements GameObject {
   constructor(private coord: Coord) {
     this.sprite = SpriteLibrary.getSprite("fridge");
     this.shop = new Shop([
-      new BeerBottle(getBeer("alexander")),
-      new BeerBottle(getBeer("pilsner")),
-      new BeerBottle(getBeer("tommu-hiid")),
-      new BeerBottle(getBeer("limonaad")),
-      new BeerBottle(getBeer("bock")),
-      new BeerBottle(getBeer("porter")),
-      new BeerBottle(getBeer("special")),
-      new BeerBottle(getBeer("kriek")),
-      new BeerBottle(getBeer("heineken")),
-      new BeerBottle(getBeer("paulaner")),
+      new BeerBottle(getDrink("alexander")),
+      new BeerBottle(getDrink("pilsner")),
+      new BeerBottle(getDrink("tommu-hiid")),
+      new BeerBottle(getDrink("limonaad")),
+      new BeerBottle(getDrink("bock")),
+      new BeerBottle(getDrink("porter")),
+      new BeerBottle(getDrink("special")),
+      new BeerBottle(getDrink("kriek")),
+      new BeerBottle(getDrink("heineken")),
+      new BeerBottle(getDrink("paulaner")),
       new BottleOpener(BottleOpenerType.simple),
     ]);
   }

@@ -3,7 +3,7 @@ import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { SpriteSheet } from "../sprites/SpriteSheet";
 import { BeerGlass } from "./BeerGlass";
-import { Beer } from "./Beer";
+import { Drink } from "./Drink";
 import { BottleOpener } from "./BottleOpener";
 import { GameItem } from "./GameItem";
 
@@ -16,7 +16,7 @@ export class BeerBottle implements GameItem {
   private spriteSheet: SpriteSheet;
   private full = true;
 
-  constructor(private beer: Beer, private capState = CapState.closed) {
+  constructor(private drink: Drink, private capState = CapState.closed) {
     this.spriteSheet = SpriteLibrary.get("bottle");
   }
 
@@ -24,19 +24,19 @@ export class BeerBottle implements GameItem {
     if (!this.full) {
       return "Tühi pudel";
     }
-    return this.beer.name + (this.isOpen() ? " (avatud)" : "");
+    return this.drink.name + (this.isOpen() ? " (avatud)" : "");
   }
 
   getDescription() {
-    return this.beer.description;
+    return this.drink.description;
   }
 
   getPrice() {
-    return this.beer.price;
+    return this.drink.price;
   }
 
-  getBeer(): Beer {
-    return this.beer;
+  getDrink(): Drink {
+    return this.drink;
   }
 
   empty() {
@@ -57,7 +57,7 @@ export class BeerBottle implements GameItem {
 
   getSprite(): Sprite {
     if (this.full) {
-      return this.spriteSheet.getSprite([this.capState, this.beer.bottleSpriteIndex]);
+      return this.spriteSheet.getSprite([this.capState, this.drink.bottleSpriteIndex]);
     } else {
       return this.spriteSheet.getSprite([1, 0]);
     }
@@ -73,6 +73,6 @@ export class BeerBottle implements GameItem {
   }
 
   clone() {
-    return new BeerBottle(this.beer, this.capState);
+    return new BeerBottle(this.drink, this.capState);
   }
 }

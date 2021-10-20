@@ -2,7 +2,7 @@ import SimplexNoise from "simplex-noise";
 import { Coord, coordAdd, coordDiv, coordMul, coordSub, isCoordInRect, Rect } from "../Coord";
 import { GameEvent } from "../GameEvent";
 import { BeerBottle } from "../items/BeerBottle";
-import { BeerGlass, BeerLevel } from "../items/BeerGlass";
+import { BeerGlass, DrinkLevel } from "../items/BeerGlass";
 import { PixelScreen } from "../PixelScreen";
 import { SoundLibrary } from "../sounds/SoundLibrary";
 import { Sprite } from "../sprites/Sprite";
@@ -48,7 +48,7 @@ export class PouringGame implements MiniGame {
 
     this.beerAnimation = new SpriteAnimation(SpriteLibrary.get("beer-xl"), { frames: { from: [0, 0], to: [14, 0] } });
     this.bottleCoord = [0, 0];
-    this.pouring = new PouringLogic(bottle.getBeer().foam);
+    this.pouring = new PouringLogic(bottle.getDrink().foam);
     this.noise = new SimplexNoise();
   }
 
@@ -70,7 +70,7 @@ export class PouringGame implements MiniGame {
     }
     if (this.isFinished()) {
       this.bottle.empty();
-      this.glass.fill(this.bottle.getBeer(), this.getBeerLevel());
+      this.glass.fill(this.bottle.getDrink(), this.getBeerLevel());
     }
   }
 
@@ -83,20 +83,20 @@ export class PouringGame implements MiniGame {
     return isCoordInRect(this.adjustedBottleCoord(), POURING_AREA);
   }
 
-  private getBeerLevel(): BeerLevel {
+  private getBeerLevel(): DrinkLevel {
     if (this.pouring.getTotalInGlass() > 0.9) {
-      return BeerLevel.full;
+      return DrinkLevel.full;
     }
     if (this.pouring.getTotalInGlass() > 0.75) {
-      return BeerLevel.almostFull;
+      return DrinkLevel.almostFull;
     }
     if (this.pouring.getTotalInGlass() > 0.5) {
-      return BeerLevel.half;
+      return DrinkLevel.half;
     }
     if (this.pouring.getTotalInGlass() > 0.25) {
-      return BeerLevel.almostEmpty;
+      return DrinkLevel.almostEmpty;
     }
-    return BeerLevel.empty;
+    return DrinkLevel.empty;
   }
 
   paint(screen: PixelScreen) {

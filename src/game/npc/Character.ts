@@ -1,12 +1,12 @@
-import { Beer, getBeer } from "../items/Beer";
+import { Drink, getDrink } from "../items/Drink";
 import { SpriteName } from "../sprites/SpriteLibrary";
 
 export interface Character {
   name: string;
   spriteSet: SpriteName;
   chairIndex: number;
-  favoriteBeers: Beer[];
-  hatedBeers: Beer[];
+  favoriteDrinks: Drink[];
+  hatedDrinks: Drink[];
   spawnTime: number;
 }
 
@@ -18,24 +18,24 @@ const characterDefs = {
     spriteSet: "cfe-ksv-1",
     spawnTime: 1 * 10,
     chairIndex: 0,
-    favoriteBeers: [getBeer("bock"), getBeer("pilsner")],
-    hatedBeers: [getBeer("limonaad"), getBeer("paulaner"), getBeer("porter")],
+    favoriteDrinks: [getDrink("bock"), getDrink("pilsner")],
+    hatedDrinks: [getDrink("limonaad"), getDrink("paulaner"), getDrink("porter")],
   }),
   "sass": charDef({
     name: "vil! Aleksander Popov",
     spriteSet: "cfe-ksv-2",
     spawnTime: 5 * 10,
     chairIndex: 1,
-    favoriteBeers: [getBeer("alexander"), getBeer("tommu-hiid")],
-    hatedBeers: [getBeer("porter"), getBeer("limonaad")],
+    favoriteDrinks: [getDrink("alexander"), getDrink("tommu-hiid")],
+    hatedDrinks: [getDrink("porter"), getDrink("limonaad")],
   }),
   "pikmets": charDef({
     name: "bvil! Richard Pikmets",
     spriteSet: "cfe-ksv-3",
     spawnTime: 20 * 10,
     chairIndex: 2,
-    favoriteBeers: [getBeer("special"), getBeer("kriek")],
-    hatedBeers: [getBeer("alexander"), getBeer("pilsner")],
+    favoriteDrinks: [getDrink("special"), getDrink("kriek")],
+    hatedDrinks: [getDrink("alexander"), getDrink("pilsner")],
   }),
 };
 

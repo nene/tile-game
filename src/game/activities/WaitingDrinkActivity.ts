@@ -1,17 +1,17 @@
 import { Dialog } from "../dialogs/Dialog";
 import { TextContent } from "../dialogs/TextContent";
-import { Beer } from "../items/Beer";
+import { Drink } from "../items/Drink";
 import { BeerBottle } from "../items/BeerBottle";
-import { BeerGlass, BeerLevel } from "../items/BeerGlass";
+import { BeerGlass, DrinkLevel } from "../items/BeerGlass";
 import { Character } from "../npc/Character";
 import { UiController } from "../UiController";
 import { Activity } from "./Activity";
 import { DrinkActivity } from "./DrinkActivity";
 
-export class WaitingBeerActivity implements Activity {
+export class WaitingDrinkActivity implements Activity {
   private receivedBeerGlass?: BeerGlass;
 
-  constructor(private character: Character, private expectedBeer?: Beer) {
+  constructor(private character: Character, private expectedDrink?: Drink) {
   }
 
   tick() {
@@ -33,23 +33,23 @@ export class WaitingBeerActivity implements Activity {
       return;
     }
 
-    if (this.acceptBeer(ui, item)) {
+    if (this.acceptDrink(ui, item)) {
       ui.removeSelectedItem();
       this.receivedBeerGlass = item;
     }
   }
 
-  private acceptBeer(ui: UiController, item: BeerGlass | BeerBottle): item is BeerGlass {
-    const beer = item.getBeer();
-    if (this.expectedBeer && beer !== this.expectedBeer) {
-      this.showDialog(ui, `See pole see õlu mis ma palusin. Too mulle ${this.expectedBeer.name}.`);
+  private acceptDrink(ui: UiController, item: BeerGlass | BeerBottle): item is BeerGlass {
+    const beer = item.getDrink();
+    if (this.expectedDrink && beer !== this.expectedDrink) {
+      this.showDialog(ui, `See pole see õlu mis ma palusin. Too mulle ${this.expectedDrink.name}.`);
       return false;
     }
     else if (item instanceof BeerGlass) {
-      const isFavorite = !this.expectedBeer && beer && this.character.favoriteBeers.includes(beer);
-      const isHated = !this.expectedBeer && beer && this.character.hatedBeers.includes(beer);
+      const isFavorite = !this.expectedDrink && beer && this.character.favoriteDrinks.includes(beer);
+      const isHated = !this.expectedDrink && beer && this.character.hatedDrinks.includes(beer);
       this.showDialog(ui, this.getThanks(item, isFavorite, isHated));
-      if (item.getLevel() > BeerLevel.empty) {
+      if (item.getLevel() > DrinkLevel.empty) {
         return true;
       } else {
         return false;
@@ -80,9 +80,9 @@ export class WaitingBeerActivity implements Activity {
     }
   }
 
-  private getThanks(beer: BeerGlass, isFavorite: boolean = false, isHated: boolean = false): string {
-    switch (beer.getLevel()) {
-      case BeerLevel.full:
+  private getThanks(beerGlass: BeerGlass, isFavorite: boolean = false, isHated: boolean = false): string {
+    switch (beerGlass.getLevel()) {
+      case DrinkLevel.full:
         if (isFavorite) {
           return "Ooo! Täis šoppen minu lemmikõllega! Oled parim rebane.";
         } else if (isHated) {
@@ -90,7 +90,7 @@ export class WaitingBeerActivity implements Activity {
         } else {
           return "Ooo! See on ju suurepäraselt täidetud šoppen. Oled tõega kiitust väärt.";
         }
-      case BeerLevel.almostFull:
+      case DrinkLevel.almostFull:
         if (isFavorite) {
           return "Vau! Šoppen minu lemmikõllega! Suur aitäh!";
         } else if (isHated) {
@@ -98,7 +98,7 @@ export class WaitingBeerActivity implements Activity {
         } else {
           return "Aitäh! Oled üsna tublisti valanud.";
         }
-      case BeerLevel.half:
+      case DrinkLevel.half:
         if (isFavorite) {
           return "Oo... Minu lemmikõlu! Aga miks vaid pool šoppenit?";
         } else if (isHated) {
@@ -106,7 +106,7 @@ export class WaitingBeerActivity implements Activity {
         } else {
           return "No kuule! See on ju poolik šoppen. Mis jama sa mulle tood!";
         }
-      case BeerLevel.almostEmpty:
+      case DrinkLevel.almostEmpty:
         if (isFavorite) {
           return "Oo... Minu lemmikõlu! Aga miks vaid pool šoppenit?";
         } else if (isHated) {
@@ -114,7 +114,7 @@ export class WaitingBeerActivity implements Activity {
         } else {
           return "See ei lähe! Ma palusin sul tuua šoppeni täie õlut, aga sina tood mulle mingi tilga šoppeni põhjas.";
         }
-      case BeerLevel.empty:
+      case DrinkLevel.empty:
         return "Eee... jah, see on šoppen. Aga paluksin õlut ka siia sisse, aitäh.";
     }
   }

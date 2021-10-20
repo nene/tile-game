@@ -4,7 +4,7 @@ import { Coord, coordConstrain, coordSub, Rect } from "./Coord";
 import { SpriteAnimation } from "./sprites/SpriteAnimation";
 import { SpriteLibrary } from "./sprites/SpriteLibrary";
 import { UiController } from "./UiController";
-import { BeerGlass, BeerLevel } from "./items/BeerGlass";
+import { BeerGlass, DrinkLevel } from "./items/BeerGlass";
 import { DrinkAnimation } from "./sprites/DrinkAnimation";
 import { Animation } from "./sprites/Animation";
 import { PlayerAttributes } from "./PlayerAttributes";
@@ -192,15 +192,15 @@ export class Player implements GameObject {
 
   isInteractable(ui: UiController) {
     const glass = ui.getSelectedItem();
-    return glass instanceof BeerGlass && glass.getLevel() > BeerLevel.empty;
+    return glass instanceof BeerGlass && glass.getLevel() > DrinkLevel.empty;
   }
 
   onInteract(ui: UiController, world: GameWorld) {
     const glass = ui.getSelectedItem();
-    if (glass instanceof BeerGlass && glass.getLevel() > BeerLevel.empty) {
+    if (glass instanceof BeerGlass && glass.getLevel() > DrinkLevel.empty) {
       this.itemAtHand = glass;
-      this.animation = new DrinkAnimation(glass, "cfe-reb", (beer) => {
-        this.attributes.drunkenness.sip(beer);
+      this.animation = new DrinkAnimation(glass, "cfe-reb", (drink) => {
+        this.attributes.drunkenness.sip(drink);
       });
       ui.removeSelectedItem();
     }

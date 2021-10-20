@@ -55,7 +55,7 @@ export class OpeningGame implements MiniGame {
 
   private nextBottleCoord(): Coord {
     this.tickCounter++;
-    if (this.bottle.getBeer().capStrength === 0) {
+    if (this.bottle.getDrink().capStrength === 0) {
       return BOTTLE_START_COORD;
     }
     const x = this.noise.noise2D(this.tickCounter / this.getNoiseScale(), 1);
@@ -65,7 +65,7 @@ export class OpeningGame implements MiniGame {
   }
 
   private getNoiseScale(): number {
-    const { capStrength } = this.bottle.getBeer();
+    const { capStrength } = this.bottle.getDrink();
     return NOISE_SCALE / capStrength;
   }
 

@@ -1,9 +1,9 @@
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary, SpriteName } from "../sprites/SpriteLibrary";
-import { BeerGlass, BeerLevel } from "../items/BeerGlass";
+import { BeerGlass, DrinkLevel } from "../items/BeerGlass";
 import { coordAdd } from "../Coord";
 import { Animation } from "./Animation";
-import { Beer } from "../items/Beer";
+import { Drink } from "../items/Drink";
 
 export class DrinkAnimation implements Animation {
   private ticks = 0;
@@ -11,7 +11,7 @@ export class DrinkAnimation implements Animation {
   private sprite: Sprite;
   private handSprite: Sprite;
 
-  constructor(private beerGlass: BeerGlass, spriteName: SpriteName, private onSip?: (beer: Beer) => void) {
+  constructor(private beerGlass: BeerGlass, spriteName: SpriteName, private onSip?: (drink: Drink) => void) {
     this.sprite = SpriteLibrary.getSprite(spriteName, [1, 0]);
     this.handSprite = SpriteLibrary.getSprite(spriteName, [2, 0]);
   }
@@ -21,9 +21,9 @@ export class DrinkAnimation implements Animation {
     if (this.ticks > 10) {
       this.ticks = 0;
       this.isHandUp = !this.isHandUp;
-      if (!this.isHandUp && this.beerGlass.getLevel() !== BeerLevel.empty) {
-        this.onSip && this.onSip(this.beerGlass.getBeer() as Beer);
-        this.beerGlass.drink();
+      if (!this.isHandUp && this.beerGlass.getLevel() !== DrinkLevel.empty) {
+        this.onSip && this.onSip(this.beerGlass.getDrink() as Drink);
+        this.beerGlass.consume();
       }
     }
   }
@@ -41,7 +41,7 @@ export class DrinkAnimation implements Animation {
   }
 
   private spriteAtHandPosition(sprite: Sprite) {
-    if (this.isHandUp && this.beerGlass.getLevel() !== BeerLevel.empty) {
+    if (this.isHandUp && this.beerGlass.getLevel() !== DrinkLevel.empty) {
       return { ...sprite, offset: coordAdd(sprite.offset, [0, -2]) };
     } else {
       return sprite;
@@ -49,6 +49,6 @@ export class DrinkAnimation implements Animation {
   }
 
   isFinished() {
-    return this.beerGlass.getLevel() === BeerLevel.empty;
+    return this.beerGlass.getLevel() === DrinkLevel.empty;
   }
 }

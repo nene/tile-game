@@ -8,8 +8,8 @@ import { ColorsQuestion, MultiChoiceQuestion, Question, ValidationResult } from 
 import { Rect } from "../Coord";
 import { MultiChoiceQuestionContent } from "../dialogs/MultiChoiceQuestionContent";
 import { GameWorld } from "../GameWorld";
-import { BeerGlass, BeerLevel } from "../items/BeerGlass";
-import { getBeer } from "../items/Beer";
+import { BeerGlass, DrinkLevel } from "../items/BeerGlass";
+import { getDrink } from "../items/Drink";
 
 export class AskQuestionInteraction implements Interaction {
   constructor(private character: Character, private question: Question) {
@@ -58,7 +58,7 @@ export class AskQuestionInteraction implements Interaction {
   }
 
   private punishWithWater(ui: UiController, world: GameWorld) {
-    const glass = new BeerGlass(getBeer("water"), BeerLevel.full);
+    const glass = new BeerGlass(getDrink("water"), DrinkLevel.full);
     ui.setSelectedItem(glass);
     world.getPlayer().onInteract(ui, world);
   }

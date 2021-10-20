@@ -8,8 +8,8 @@ export class DrinkActivity implements Activity {
   private isHandUp = false;
   private animation: DrinkAnimation;
 
-  constructor(beer: BeerGlass, character: Character) {
-    this.animation = new DrinkAnimation(beer, character.spriteSet);
+  constructor(beerGlass: BeerGlass, character: Character) {
+    this.animation = new DrinkAnimation(beerGlass, character.spriteSet);
   }
 
   tick(): ActivityUpdates {

@@ -3,11 +3,11 @@ import { PouringGame } from "../minigames/PouringGame";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { SpriteSheet } from "../sprites/SpriteSheet";
-import { Beer } from "./Beer";
+import { Drink } from "./Drink";
 import { BeerBottle } from "./BeerBottle";
 import { GameItem } from "./GameItem";
 
-export enum BeerLevel {
+export enum DrinkLevel {
   empty = 0,
   almostEmpty = 1,
   half = 2,
@@ -19,24 +19,24 @@ export class BeerGlass implements GameItem {
   private spriteSheet: SpriteSheet;
   private smallSpriteSheet: SpriteSheet;
 
-  constructor(private beer?: Beer, private level: BeerLevel = BeerLevel.empty) {
+  constructor(private drink?: Drink, private level: DrinkLevel = DrinkLevel.empty) {
     this.spriteSheet = SpriteLibrary.get("beer-glass-lg");
     this.smallSpriteSheet = SpriteLibrary.get("beer-glass-sm");
   }
 
   combine(item: GameItem): MiniGame | undefined {
-    if (item instanceof BeerBottle && !item.isEmpty() && item.isOpen() && this.level === BeerLevel.empty) {
+    if (item instanceof BeerBottle && !item.isEmpty() && item.isOpen() && this.level === DrinkLevel.empty) {
       return new PouringGame(this, item);
     }
   }
 
   getName() {
     switch (this.level) {
-      case BeerLevel.empty: return "Tühi šoppen";
-      case BeerLevel.almostEmpty: return "Peaaegu tühi šoppen";
-      case BeerLevel.half: return "Poolik šoppen";
-      case BeerLevel.almostFull: return "Peaaegu täis šoppen";
-      case BeerLevel.full: return "Šoppen õllega";
+      case DrinkLevel.empty: return "Tühi šoppen";
+      case DrinkLevel.almostEmpty: return "Peaaegu tühi šoppen";
+      case DrinkLevel.half: return "Poolik šoppen";
+      case DrinkLevel.almostFull: return "Peaaegu täis šoppen";
+      case DrinkLevel.full: return "Šoppen õllega";
     }
   }
 
@@ -48,34 +48,34 @@ export class BeerGlass implements GameItem {
     return 0;
   }
 
-  fill(beer: Beer, level: BeerLevel) {
-    this.beer = beer;
+  fill(drink: Drink, level: DrinkLevel) {
+    this.drink = drink;
     this.level = level;
   }
 
-  drink() {
-    if (this.level > BeerLevel.empty) {
+  consume() {
+    if (this.level > DrinkLevel.empty) {
       this.level--;
     }
   }
 
-  getLevel(): BeerLevel {
+  getLevel(): DrinkLevel {
     return this.level;
   }
 
-  getBeer(): Beer | undefined {
-    return this.beer;
+  getDrink(): Drink | undefined {
+    return this.drink;
   }
 
   getSprite(): Sprite {
-    return this.spriteSheet.getSprite([this.level, this.beer?.color ?? 0]);
+    return this.spriteSheet.getSprite([this.level, this.drink?.color ?? 0]);
   }
 
   getSmallSprite(): Sprite {
-    return this.smallSpriteSheet.getSprite([this.level, this.beer?.color ?? 0]);
+    return this.smallSpriteSheet.getSprite([this.level, this.drink?.color ?? 0]);
   }
 
   clone() {
-    return new BeerGlass(this.beer, this.level);
+    return new BeerGlass(this.drink, this.level);
   }
 }

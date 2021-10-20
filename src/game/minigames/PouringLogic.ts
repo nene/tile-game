@@ -1,4 +1,4 @@
-import { Foaminess } from "../items/Beer";
+import { Foaminess } from "../items/Drink";
 
 export class PouringLogic {
   private foamInGlass = 0;

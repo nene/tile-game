@@ -1,8 +1,8 @@
 import { times } from "lodash";
 import { Coord, coordAdd } from "./Coord";
 import { Drunkenness } from "./Drunkenness";
-import { BeerColor } from "./items/Beer";
-import { BeerLevel } from "./items/BeerGlass";
+import { DrinkColor } from "./items/Drink";
+import { DrinkLevel } from "./items/BeerGlass";
 import { PixelScreen } from "./PixelScreen";
 import { Sprite } from "./sprites/Sprite";
 import { SpriteLibrary } from "./sprites/SpriteLibrary";
@@ -30,29 +30,29 @@ export class ScoreBoard {
 
   private drawAlcoholLevel(screen: PixelScreen) {
     times(5, (i: number) => {
-      const level = this.getBeerLevelForStep(4 - i);
-      screen.drawSprite(this.beerGlass.getSprite([level, BeerColor.light]), coordAdd(this.coord, [5 + i * 9, 29]));
+      const level = this.getDrinkLevelForStep(4 - i);
+      screen.drawSprite(this.beerGlass.getSprite([level, DrinkColor.light]), coordAdd(this.coord, [5 + i * 9, 29]));
     });
   }
 
   // alco level goes: 0...5
-  // seps go: 0..4
-  private getBeerLevelForStep(levelStep: number): BeerLevel {
+  // steps go: 0..4
+  private getDrinkLevelForStep(levelStep: number): DrinkLevel {
     const diff = this.drunkenness.getLevel() - levelStep;
     if (diff >= 1) {
-      return BeerLevel.full;
+      return DrinkLevel.full;
     }
     if (diff >= 0.75) {
-      return BeerLevel.almostFull;
+      return DrinkLevel.almostFull;
     }
     if (diff >= 0.5) {
-      return BeerLevel.half;
+      return DrinkLevel.half;
     }
     if (diff >= 0.25) {
-      return BeerLevel.almostEmpty;
+      return DrinkLevel.almostEmpty;
     }
     else {
-      return BeerLevel.empty;
+      return DrinkLevel.empty;
     }
   }
 }
