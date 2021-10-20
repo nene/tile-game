@@ -30,7 +30,7 @@ export class ShopItemRenderer {
 
     screen.drawRect(rect, UI_BG_COLOR);
     screen.drawRect(iconRect, UI_HIGHLIGHT_COLOR);
-    screen.drawSprite(this.beerSprites.getSprite([1, beer.spriteIndex]), iconRect.coord);
+    screen.drawSprite(this.beerSprites.getSprite([1, beer.bottleSpriteIndex]), iconRect.coord);
     screen.drawText(beer.name, nameCoord, textStyle);
     screen.drawText(beer.alcohol + "%", coordAdd(nameCoord, [nameLen + 3, 3.5]), { size: "small", color: "#481a12" });
     screen.drawText(beer.description, coordAdd(iconRect.coord, [18, 9]), { size: "small", color: textStyle.color });

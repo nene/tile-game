@@ -49,7 +49,7 @@ export class BeerBottle implements GameItem {
 
   getSprite(): Sprite {
     if (this.full) {
-      return this.spriteSheet.getSprite([this.capState, this.beer.spriteIndex]);
+      return this.spriteSheet.getSprite([this.capState, this.beer.bottleSpriteIndex]);
     } else {
       return this.spriteSheet.getSprite([1, 0]);
     }
