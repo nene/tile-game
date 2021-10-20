@@ -32,15 +32,11 @@ export class Desires {
     ];
   }
 
-  startActivity(activity: Activity) {
+  private startActivity(activity: Activity) {
     this.queue.unshift(activity);
   }
 
-  queueActivity(activity: Activity) {
-    this.queue.push(activity);
-  }
-
-  finishCurrentActivity() {
+  private finishCurrentActivity() {
     this.queue.shift();
   }
 
