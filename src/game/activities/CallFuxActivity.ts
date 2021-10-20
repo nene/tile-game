@@ -5,6 +5,7 @@ import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { Character } from "../npc/Character";
 import { UiController } from "../UiController";
 import { Interaction } from "./Interaction";
+import { GameWorld } from "../GameWorld";
 
 export class CallFuxActivity implements Activity {
   private counter = 0;
@@ -40,9 +41,9 @@ export class CallFuxActivity implements Activity {
     return true;
   }
 
-  interact(ui: UiController) {
+  interact(ui: UiController, world: GameWorld) {
     this.finished = true;
-    this.interaction.interact(ui);
+    this.interaction.interact(ui, world);
   }
 
   nextActivity() {

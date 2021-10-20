@@ -64,8 +64,8 @@ export class CharacterFigure implements GameObject {
     return this.desires.currentActivity().isInteractable(ui);
   }
 
-  onInteract(uiController: UiController) {
+  onInteract(uiController: UiController, world: GameWorld) {
     const activity = this.desires.currentActivity();
-    activity.interact(uiController);
+    activity.interact(uiController, world);
   }
 }

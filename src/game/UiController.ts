@@ -32,6 +32,10 @@ export class UiController {
     this.inventoryController.removeSelectedItem();
   }
 
+  setSelectedItem(item: GameItem) {
+    this.inventoryController.setSelectedItem(item);
+  }
+
   showInventory(inventory: Inventory, view: InventoryView) {
     this.inventoryController.showInventory(inventory, view);
   }

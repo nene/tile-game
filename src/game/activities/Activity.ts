@@ -14,6 +14,6 @@ export interface Activity {
   tick: (entity: GameObject, location: Location, world: GameWorld) => ActivityUpdates;
   isFinished: () => boolean;
   isInteractable: (ui: UiController) => boolean;
-  interact: (ui: UiController) => void;
+  interact: (ui: UiController, world: GameWorld) => void;
   nextActivity(): Activity | undefined;
 }

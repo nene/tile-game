@@ -4,47 +4,64 @@ import { TextContent } from "../dialogs/TextContent";
 import { FlagQuestionContent } from "../dialogs/FlagQuestionContent";
 import { Interaction } from "./Interaction";
 import { Dialog } from "../dialogs/Dialog";
-import { ColorsQuestion, MultiChoiceQuestion, Question } from "../questions/Question";
+import { ColorsQuestion, MultiChoiceQuestion, Question, ValidationResult } from "../questions/Question";
 import { Rect } from "../Coord";
 import { MultiChoiceQuestionContent } from "../dialogs/MultiChoiceQuestionContent";
+import { GameWorld } from "../GameWorld";
+import { BeerGlass, BeerLevel } from "../items/BeerGlass";
+import { getBeer } from "../items/Beer";
 
 export class AskQuestionInteraction implements Interaction {
   constructor(private character: Character, private question: Question) {
   }
 
-  interact(ui: UiController) {
+  interact(ui: UiController, world: GameWorld) {
     ui.showDialog(new Dialog({
       character: this.character,
       createContent: (rect) => {
         if (this.question.type === "colors") {
-          return this.createColorsContent(ui, rect, this.question);
+          return this.createColorsContent(ui, world, rect, this.question);
         } else {
-          return this.createMultiChoiceContent(ui, rect, this.question);
+          return this.createMultiChoiceContent(ui, world, rect, this.question);
         }
       },
     }));
   }
 
-  private createColorsContent(ui: UiController, rect: Rect, question: ColorsQuestion) {
+  private createColorsContent(ui: UiController, world: GameWorld, rect: Rect, question: ColorsQuestion) {
     return new FlagQuestionContent({
       question: question.question,
       container: rect,
       onAnswer: (colors) => {
-        this.showReply(ui, question.validate(colors).msg);
+        this.handleValidationResult(question.validate(colors), ui, world);
       },
     });
   }
 
-  private createMultiChoiceContent(ui: UiController, rect: Rect, question: MultiChoiceQuestion) {
+  private createMultiChoiceContent(ui: UiController, world: GameWorld, rect: Rect, question: MultiChoiceQuestion) {
     return new MultiChoiceQuestionContent({
       container: rect,
       question: question.question,
       choices: question.choices,
       fontSize: question.fontSize,
       onAnswer: (answer) => {
-        this.showReply(ui, question.validate(answer).msg);
+        this.handleValidationResult(question.validate(answer), ui, world);
       }
     });
+  }
+
+  private handleValidationResult(result: ValidationResult, ui: UiController, world: GameWorld) {
+    this.showReply(ui, result.msg);
+    if (result.type === "punish") {
+      this.punishWithWater(ui, world);
+    }
+  }
+
+  private punishWithWater(ui: UiController, world: GameWorld) {
+    const glass = new BeerGlass();
+    glass.fill(getBeer("limonaad"), BeerLevel.full);
+    ui.setSelectedItem(glass);
+    world.getPlayer().onInteract(ui, world);
   }
 
   nextActivity() {

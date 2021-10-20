@@ -35,6 +35,10 @@ export class InventoryController {
     this.selectedItem = undefined;
   }
 
+  setSelectedItem(item: GameItem) {
+    this.selectedItem = item;
+  }
+
   showInventory(inventory: Inventory, view: InventoryView) {
     this.objectInventory = inventory;
     this.objectInventoryView = view;
