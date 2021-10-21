@@ -5,7 +5,7 @@ export interface Organization {
   colors: FlagColor[];
   establishedYear: number;
   establishedPlace: string;
-  slogan: string;
+  slogan?: string;
 }
 
 const orgDef = (org: Organization) => org;
@@ -170,42 +170,42 @@ const orgs = {
     colors: makeFlag("kuldne", "must", "valge"),
     establishedYear: 1926,
     establishedPlace: "Tartu",
-    slogan: "???",
+    slogan: undefined,
   }),
   lettonia: orgDef({
     name: "Lettonia",
     colors: makeFlag("roheline", "sinine", "kuldne"),
     establishedYear: 1870,
     establishedPlace: "Tartu",
-    slogan: "???",
+    slogan: undefined,
   }),
   polonia: orgDef({
     name: "Polonia",
     colors: makeFlag("punane", "sinine", "valge"),
     establishedYear: 1828,
     establishedPlace: "Tartu",
-    slogan: "???",
+    slogan: undefined,
   }),
   savo: orgDef({
     name: "Savolainen Osakunta",
     colors: makeFlag("kollane", "must"),
     establishedYear: 1905,
     establishedPlace: "Helsingi",
-    slogan: "???",
+    slogan: undefined,
   }),
   neoLithuania: orgDef({
     name: "Neo-Lithuania",
     colors: makeFlag("roheline", "punane", "kuldne"),
     establishedYear: 1922,
     establishedPlace: "Kaunas",
-    slogan: "???",
+    slogan: undefined,
   }),
   varmlandsNation: orgDef({
     name: "Värmlands Nation",
     colors: makeFlag("kollane", "must", "kollane"),
     establishedYear: 1660,
     establishedPlace: "Uppsala",
-    slogan: "???",
+    slogan: undefined,
   }),
 };
 

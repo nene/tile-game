@@ -1,10 +1,10 @@
-import { allOrganizations } from "../orgs/Organization";
+import { allOrganizations, Organization } from "../orgs/Organization";
 import { pickRandom } from "../utils/pickRandom";
 import { generateChoices } from "./generateChoices";
 import { MultiChoiceQuestion } from "./Question";
 
 export function createSloganQuestion(): MultiChoiceQuestion {
-  const orgsWithSlogans = allOrganizations().filter((org) => org.slogan !== "???");
+  const orgsWithSlogans = allOrganizations().filter(isOrgWithSlogan);
   const org = pickRandom(orgsWithSlogans);
   return {
     type: "multi-choice",
@@ -20,3 +20,5 @@ export function createSloganQuestion(): MultiChoiceQuestion {
     },
   };
 }
+
+const isOrgWithSlogan = (org: Organization): org is Organization & { slogan: string } => Boolean(org.slogan);

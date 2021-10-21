@@ -1,10 +1,9 @@
 import { shuffle } from "lodash";
-import { Organization } from "../orgs/Organization";
 import { pickRandom } from "../utils/pickRandom";
 
-type GetOrgProperty = (org: Organization) => string;
+type GetProperty<T> = (org: T) => string;
 
-export function generateChoices(orgs: Organization[], org: Organization, getProperty: GetOrgProperty, count: number = 4): string[] {
+export function generateChoices<T>(orgs: T[], org: T, getProperty: GetProperty<T>, count: number = 4): string[] {
   const choices = [getProperty(org)];
   while (choices.length < count) {
     const rndSlogan = getProperty(pickRandom(orgs));
