@@ -42,10 +42,6 @@ export class UiController {
     this.inventoryController.hideInventory();
   }
 
-  giveMoney(amount: number) {
-    this.attributes.wallet.add(amount);
-  }
-
   getAttributes(): PlayerAttributes {
     return this.attributes;
   }

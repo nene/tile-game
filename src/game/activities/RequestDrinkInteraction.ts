@@ -21,11 +21,11 @@ export class RequestDrinkInteraction implements Interaction {
   interact(ui: UiController) {
     if (this.expectedDrink) {
       this.showDialog(ui, `Hea rebane, palun too mulle üks ${this.expectedDrink.name}.`);
-      ui.giveMoney(this.expectedDrink.price);
+      ui.getAttributes().wallet.add(this.expectedDrink.price);
     } else {
       const money = random(2, 6);
       this.showDialog(ui, `Hea rebane, palun too mulle üks õlu omal valikul. Siin sulle ${money} münti.`);
-      ui.giveMoney(money);
+      ui.getAttributes().wallet.add(money);
     }
   }
 
