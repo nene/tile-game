@@ -35,8 +35,8 @@ export class InventoryController {
     this.selectedItem = item;
   }
 
-  showInventory(inventory: Inventory, view: InventoryView) {
-    this.objectInventory = inventory;
+  showInventory(view: InventoryView) {
+    this.objectInventory = view.getInventory();
     this.objectInventoryView = view;
   }
 

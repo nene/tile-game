@@ -7,7 +7,6 @@ import { CursorController } from "./CursorController";
 import { MiniGame } from "./minigames/MiniGame";
 import { ScoreBoard } from "./ScoreBoard";
 import { GameEvent } from "./GameEvent";
-import { Inventory } from "./inventory/Inventory";
 import { InventoryView } from "./inventory/InventoryView";
 import { PlayerAttributes } from "./PlayerAttributes";
 import { Coord } from "./Coord";
@@ -34,8 +33,8 @@ export class UiController {
     this.inventoryController.setSelectedItem(item);
   }
 
-  showInventory(inventory: Inventory, view: InventoryView) {
-    this.inventoryController.showInventory(inventory, view);
+  showInventory(view: InventoryView) {
+    this.inventoryController.showInventory(view);
   }
 
   hideInventory() {

@@ -52,7 +52,7 @@ export class Countertop implements GameObject {
   }
 
   onInteract(ui: UiController) {
-    ui.showInventory(this.inventory, new StorageInventoryView({
+    ui.showInventory(new StorageInventoryView({
       inventory: this.inventory,
       windowSize: [97, 87],
       gridSize: [1, 1],

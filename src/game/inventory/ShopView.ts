@@ -20,8 +20,11 @@ export class ShopView implements InventoryView {
   private shopItemRenderer: ShopItemRenderer;
   private scrollView: ScrollView<GameItem>;
   private window: Window;
+  private shop: Shop;
 
   constructor({ shop, wallet, headline, onClose }: ShopViewConfig) {
+    this.shop = shop;
+
     this.window = new Window({
       size: [192, 129],
       headline,
@@ -40,6 +43,10 @@ export class ShopView implements InventoryView {
       bgColor: "#000",
       renderer: this.shopItemRenderer.render.bind(this.shopItemRenderer),
     });
+  }
+
+  getInventory() {
+    return this.shop;
   }
 
   handleGameEvent(event: GameEvent): boolean | undefined {
