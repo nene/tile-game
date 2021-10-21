@@ -31,11 +31,7 @@ export class InventoryController {
     return this.selectedItem;
   }
 
-  removeSelectedItem() {
-    this.selectedItem = undefined;
-  }
-
-  setSelectedItem(item: GameItem) {
+  setSelectedItem(item: GameItem | undefined) {
     this.selectedItem = item;
   }
 

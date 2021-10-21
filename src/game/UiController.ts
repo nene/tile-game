@@ -30,11 +30,7 @@ export class UiController {
     return this.inventoryController.getSelectedItem();
   }
 
-  removeSelectedItem() {
-    this.inventoryController.removeSelectedItem();
-  }
-
-  setSelectedItem(item: GameItem) {
+  setSelectedItem(item: GameItem | undefined) {
     this.inventoryController.setSelectedItem(item);
   }
 

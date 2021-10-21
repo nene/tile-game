@@ -34,7 +34,7 @@ export class WaitingDrinkActivity implements Activity {
     }
 
     if (this.acceptDrink(ui, item)) {
-      ui.removeSelectedItem();
+      ui.setSelectedItem(undefined);
       this.receivedBeerGlass = item;
     }
   }

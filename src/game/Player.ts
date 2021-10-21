@@ -202,7 +202,7 @@ export class Player implements GameObject {
       this.animation = new DrinkAnimation(glass, "cfe-reb", (drink) => {
         this.attributes.drunkenness.sip(drink);
       });
-      ui.removeSelectedItem();
+      ui.setSelectedItem(undefined);
     }
   }
 
