@@ -1,5 +1,4 @@
 import { PixelScreen } from "./PixelScreen";
-import { Inventory } from "./inventory/Inventory";
 import { InventoryView } from "./inventory/InventoryView";
 import { GridInventoryView } from "./inventory/GridInventoryView";
 import { Coord, coordSub, isCoordInRect } from "./Coord";
@@ -12,7 +11,6 @@ import { Tooltip } from "./ui/Tooltip";
 
 export class InventoryController {
   private playerInventoryView: InventoryView;
-  private objectInventory?: Inventory;
   private objectInventoryView?: InventoryView;
   private mouseCoord: Coord = [-16, -16];
   private selectedItem?: GameItem;
@@ -36,7 +34,6 @@ export class InventoryController {
   }
 
   showInventory(view: InventoryView) {
-    this.objectInventory = view.getInventory();
     this.objectInventoryView = view;
   }
 
@@ -45,11 +42,10 @@ export class InventoryController {
   }
 
   isObjectInventoryShown(): boolean {
-    return Boolean(this.objectInventory);
+    return Boolean(this.objectInventoryView);
   }
 
   hideInventory() {
-    this.objectInventory = undefined;
     this.objectInventoryView = undefined;
   }
 
@@ -92,12 +88,12 @@ export class InventoryController {
     this.tooltip.hide();
 
     if (isCoordInRect(screenCoord, this.playerInventoryView.getRect())) {
-      this.handleInventoryClick(screenCoord, this.attributes.inventory, this.playerInventoryView);
+      this.handleInventoryClick(screenCoord, this.playerInventoryView);
       return true;
     }
-    else if (this.objectInventory && this.objectInventoryView) {
+    else if (this.objectInventoryView) {
       if (isCoordInRect(screenCoord, this.objectInventoryView.getRect())) {
-        this.handleInventoryClick(screenCoord, this.objectInventory, this.objectInventoryView);
+        this.handleInventoryClick(screenCoord, this.objectInventoryView);
       } else {
         this.hideInventory();
       }
@@ -113,29 +109,30 @@ export class InventoryController {
   }
 
   private getHoveredInventoryItem(coord: Coord): GameItem | undefined {
-    const item = this.getInventoryItemAtCoord(coord, this.attributes.inventory, this.playerInventoryView);
+    const item = this.getInventoryItemAtCoord(coord, this.playerInventoryView);
     if (item) {
       return item;
     }
-    if (this.objectInventory && this.objectInventoryView) {
-      return this.getInventoryItemAtCoord(coord, this.objectInventory, this.objectInventoryView);
+    if (this.objectInventoryView) {
+      return this.getInventoryItemAtCoord(coord, this.objectInventoryView);
     }
     return undefined;
   }
 
-  private getInventoryItemAtCoord(coord: Coord, inventory: Inventory, inventoryView: InventoryView): GameItem | undefined {
+  private getInventoryItemAtCoord(coord: Coord, inventoryView: InventoryView): GameItem | undefined {
     if (isCoordInRect(coord, inventoryView.getRect())) {
-      return inventory.itemAt(inventoryView.getSlotIndexAtCoord(coord));
+      return inventoryView.getInventory().itemAt(inventoryView.getSlotIndexAtCoord(coord));
     }
     return undefined;
   }
 
-  private handleInventoryClick(coord: Coord, inventory: Inventory, inventoryView: InventoryView) {
+  private handleInventoryClick(coord: Coord, inventoryView: InventoryView) {
     const slotIndex = inventoryView.getSlotIndexAtCoord(coord);
     if (slotIndex === -1) {
       return; // no slot clicked
     }
 
+    const inventory = inventoryView.getInventory();
     const item = inventory.itemAt(slotIndex);
     if (item && !this.selectedItem) {
       if (inventory.isTakeable() && (inventory === this.attributes.inventory || !this.attributes.inventory.isFull())) {
