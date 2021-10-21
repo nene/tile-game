@@ -65,6 +65,7 @@ export class UiController {
     screen.withFixedCoords(() => {
       if (this.getMiniGame()) {
         this.getMiniGame()?.paint(screen);
+        this.scoreBoard.paint(screen);
         return;
       }
 
@@ -83,7 +84,9 @@ export class UiController {
   }
 
   isGameWorldActive(): boolean {
-    return !this.inventoryController.isObjectInventoryShown() && !this.dialog;
+    // Time stops when inventory or dialog is open,
+    // but regardless of that, time always runs during mini-game.
+    return Boolean(this.getMiniGame()) || (!this.inventoryController.isObjectInventoryShown() && !this.dialog);
   }
 
   isGameWorldVisible(): boolean {
