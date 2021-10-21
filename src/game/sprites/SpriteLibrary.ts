@@ -71,7 +71,7 @@ const imageFiles = {
   'scroll-bar': spriteDef({ src: scrollBar, cfg: { size: [8, 8], colsRows: [5, 1] } }),
   'close-button': spriteDef({ src: closeButton, cfg: { size: [8, 8], colsRows: [2, 1] } }),
   'cursor': spriteDef({ src: cursor, cfg: { size: [8, 11], colsRows: [2, 1] } }),
-  'scoreboard': spriteDef({ src: scoreboard, cfg: { size: [51, 24] } }),
+  'scoreboard': spriteDef({ src: scoreboard, cfg: { size: [51, 36] } }),
   'gold': spriteDef({ src: gold, cfg: { size: [8, 8] } }),
   'flag-colors': spriteDef({ src: flagColors, cfg: { size: [12, 12], colsRows: [2, 1] } }),
 

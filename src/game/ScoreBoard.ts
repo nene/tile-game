@@ -20,18 +20,23 @@ export class ScoreBoard {
 
   paint(screen: PixelScreen) {
     screen.drawSprite(this.bg, this.coord);
+    this.drawClock(screen);
     this.drawWallet(screen);
     this.drawAlcoholLevel(screen);
   }
 
+  private drawClock(screen: PixelScreen) {
+    screen.drawText("12:00", coordAdd(this.coord, [39, 2]), { align: "right", shadowColor: "#8f563b" });
+  }
+
   private drawWallet(screen: PixelScreen) {
-    screen.drawText(this.wallet.getMoney(), coordAdd(this.coord, [39, 1]), { align: "right", shadowColor: "#8f563b" });
+    screen.drawText(this.wallet.getMoney(), coordAdd(this.coord, [39, 14]), { align: "right", shadowColor: "#8f563b" });
   }
 
   private drawAlcoholLevel(screen: PixelScreen) {
     times(5, (i: number) => {
       const level = this.getDrinkLevelForStep(4 - i);
-      screen.drawSprite(this.beerGlass.getSprite([level, DrinkColor.light]), coordAdd(this.coord, [5 + i * 9, 29]));
+      screen.drawSprite(this.beerGlass.getSprite([level, DrinkColor.light]), coordAdd(this.coord, [5 + i * 9, 41]));
     });
   }
 
