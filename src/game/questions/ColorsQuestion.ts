@@ -1,10 +1,11 @@
 import { isEqual, sortBy } from "lodash";
 import { FlagColor } from "../orgs/FlagColors";
-import { randomOrganization } from "../orgs/Organization";
+import { allOrganizations } from "../orgs/Organization";
+import { pickRandom } from "../utils/pickRandom";
 import { ColorsQuestion } from "./Question";
 
 export function createColorsQuestion(): ColorsQuestion {
-  const org = randomOrganization();
+  const org = pickRandom(allOrganizations());
   return {
     type: "colors",
     question: `Millised on ${org.name} värvid?`,
