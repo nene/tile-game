@@ -8,12 +8,13 @@ import { Sprite } from "./sprites/Sprite";
 import { SpriteLibrary } from "./sprites/SpriteLibrary";
 import { SpriteSheet } from "./sprites/SpriteSheet";
 import { Wallet } from "./Wallet";
+import { Clock } from "./Clock";
 
 export class ScoreBoard {
   private bg: Sprite;
   private beerGlass: SpriteSheet;
 
-  constructor(private coord: Coord, private wallet: Wallet, private drunkenness: Drunkenness) {
+  constructor(private coord: Coord, private wallet: Wallet, private drunkenness: Drunkenness, private clock: Clock) {
     this.bg = SpriteLibrary.getSprite("scoreboard");
     this.beerGlass = SpriteLibrary.get("beer-glass-sm");
   }
@@ -26,7 +27,7 @@ export class ScoreBoard {
   }
 
   private drawClock(screen: PixelScreen) {
-    screen.drawText("12:00", coordAdd(this.coord, [39, 2]), { align: "right", shadowColor: "#8f563b" });
+    screen.drawText(this.clock.getDisplayText(), coordAdd(this.coord, [4, 2]), { align: "left", shadowColor: "#8f563b" });
   }
 
   private drawWallet(screen: PixelScreen) {

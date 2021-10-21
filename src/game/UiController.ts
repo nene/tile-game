@@ -11,17 +11,19 @@ import { Inventory } from "./inventory/Inventory";
 import { InventoryView } from "./inventory/InventoryView";
 import { PlayerAttributes } from "./PlayerAttributes";
 import { Coord } from "./Coord";
+import { Clock } from "./Clock";
 
 export class UiController {
   private inventoryController: InventoryController;
   private cursorController: CursorController;
   private dialog?: Dialog;
   private scoreBoard: ScoreBoard;
+  private clock = new Clock();
 
   constructor(private attributes: PlayerAttributes) {
     this.inventoryController = new InventoryController(attributes);
     this.cursorController = new CursorController();
-    this.scoreBoard = new ScoreBoard([269, 0], attributes.wallet, attributes.drunkenness);
+    this.scoreBoard = new ScoreBoard([269, 0], attributes.wallet, attributes.drunkenness, this.clock);
   }
 
   getSelectedItem(): GameItem | undefined {
@@ -54,6 +56,9 @@ export class UiController {
 
   tick() {
     this.inventoryController.tick();
+    if (this.isGameWorldActive()) {
+      this.clock.tick();
+    }
   }
 
   paint(screen: PixelScreen) {
