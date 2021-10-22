@@ -95,7 +95,7 @@ export class GridInventoryView implements InventoryView {
     return this.inventory;
   }
 
-  getSlotIndexAtCoord(screenCoord: Coord): number {
+  private getSlotIndexAtCoord(screenCoord: Coord): number {
     const startCoord = coordAdd(this.coord, [1, 1]);
     const [cols, rows] = this.size;
     for (let y = 0; y < rows; y++) {

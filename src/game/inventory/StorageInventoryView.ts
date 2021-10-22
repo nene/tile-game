@@ -51,8 +51,4 @@ export class StorageInventoryView implements InventoryView {
   getInventory() {
     return this.grid.getInventory();
   }
-
-  getSlotIndexAtCoord(coord: Coord): number {
-    return this.grid.getSlotIndexAtCoord(coord);
-  }
 }

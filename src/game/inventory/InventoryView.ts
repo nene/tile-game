@@ -10,7 +10,6 @@ export type ItemHoverHandler = (coord: Coord, item: GameItem) => void;
 export interface InventoryView {
   paint: (screen: PixelScreen) => void;
   handleGameEvent: (event: GameEvent) => boolean | undefined;
-  getSlotIndexAtCoord: (screenCoord: Coord) => number;
   getInventory: () => Inventory;
   onSlotClick: (callback: SlotClickHandler) => void;
   onItemHover: (callback: ItemHoverHandler) => void;

@@ -96,7 +96,7 @@ export class ShopView implements InventoryView {
     this.scrollView.paint(screen);
   }
 
-  getSlotIndexAtCoord(coord: Coord): number {
+  private getSlotIndexAtCoord(coord: Coord): number {
     return this.scrollView.getItemIndexAtCoord(coord);
   }
 }
