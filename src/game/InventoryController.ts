@@ -37,16 +37,16 @@ export class InventoryController {
     this.objectInventoryView = view;
   }
 
+  hideInventory() {
+    this.objectInventoryView = undefined;
+  }
+
   getMiniGame(): MiniGame | undefined {
     return this.miniGame;
   }
 
   isObjectInventoryShown(): boolean {
     return Boolean(this.objectInventoryView);
-  }
-
-  hideInventory() {
-    this.objectInventoryView = undefined;
   }
 
   tick() {
