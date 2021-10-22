@@ -35,6 +35,10 @@ export function App() {
     const onClick = (e: MouseEvent) => {
       gameApi.onMouseEvent("click", mouseCoordRelativeTo(e, canvas));
     };
+    const onContextMenu = (e: MouseEvent) => {
+      e.preventDefault();
+      gameApi.onMouseEvent("rightclick", mouseCoordRelativeTo(e, canvas));
+    };
     const onMouseMove = (e: MouseEvent) => {
       gameApi.onMouseEvent("mousemove", mouseCoordRelativeTo(e, canvas));
     };
@@ -61,6 +65,7 @@ export function App() {
       document.addEventListener("keyup", onKeyUp);
 
       canvas.addEventListener("click", onClick);
+      canvas.addEventListener("contextmenu", onContextMenu);
       canvas.addEventListener("mousemove", onMouseMove);
       canvas.addEventListener("mousedown", onMouseDown);
       canvas.addEventListener("mouseup", onMouseUp);
@@ -73,6 +78,7 @@ export function App() {
       document.removeEventListener("keydown", onKeyDown);
       document.removeEventListener("keyup", onKeyUp);
       canvas.removeEventListener("click", onClick);
+      canvas.removeEventListener("contextmenu", onContextMenu);
       canvas.removeEventListener("mousemove", onMouseMove);
       canvas.removeEventListener("mousedown", onMouseDown);
       canvas.removeEventListener("mouseup", onMouseUp);

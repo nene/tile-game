@@ -1,6 +1,6 @@
 import { Coord, coordDiv } from "./Coord";
 
-type GameMouseEventType = "click" | "mousemove" | "mousedown" | "mouseup";
+type GameMouseEventType = "click" | "rightclick" | "mousemove" | "mousedown" | "mouseup";
 
 interface GameMouseEvent {
   type: GameMouseEventType;
