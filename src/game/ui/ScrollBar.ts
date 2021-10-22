@@ -47,8 +47,12 @@ export class ScrollBar {
   }
 
   handleGameEvent(event: GameEvent) {
-    this.buttons.up.handleGameEvent(event);
-    this.buttons.down.handleGameEvent(event);
+    const stopPropagation =
+      this.buttons.up.handleGameEvent(event) ||
+      this.buttons.down.handleGameEvent(event);
+    if (stopPropagation) {
+      return true;
+    }
 
     switch (event.type) {
       case "mousedown":

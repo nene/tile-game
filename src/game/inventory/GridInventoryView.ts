@@ -5,6 +5,7 @@ import { PixelScreen } from "../PixelScreen";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { SpriteSheet } from "../sprites/SpriteSheet";
 import { Sprite } from "../sprites/Sprite";
+import { GameEvent } from "../GameEvent";
 
 interface GridInventoryViewCfg {
   inventory: Inventory;
@@ -53,7 +54,7 @@ export class GridInventoryView implements InventoryView {
     return this.slotSprites.getSprite(this.inventory.isTakeable() ? [0, 0] : [1, 0]);
   }
 
-  handleGameEvent() {
+  handleGameEvent(event: GameEvent) {
     return undefined;
   }
 

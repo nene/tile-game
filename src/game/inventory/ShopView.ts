@@ -50,8 +50,8 @@ export class ShopView implements InventoryView {
   }
 
   handleGameEvent(event: GameEvent): boolean | undefined {
-    this.window.handleGameEvent(event);
-    return this.scrollView.handleGameEvent(event);
+    return this.window.handleGameEvent(event) ||
+      this.scrollView.handleGameEvent(event);
   }
 
   paint(screen: PixelScreen) {

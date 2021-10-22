@@ -22,20 +22,20 @@ export class ScrollView<T> {
   }
 
   handleGameEvent(event: GameEvent): boolean | undefined {
-    this.scrollBar.handleGameEvent(event);
-    this.highlightHoveredItem(event);
-    return undefined;
+    return this.scrollBar.handleGameEvent(event) ||
+      this.highlightHoveredItem(event);
   }
 
-  highlightHoveredItem({ type, coord }: GameEvent) {
+  highlightHoveredItem({ type, coord }: GameEvent): boolean | undefined {
     switch (type) {
       case "mousemove":
         this.highlightedIndex = this.getItemIndexAtCoord(coord);
-        break;
+        return undefined;
       default:
         if (!isCoordInRect(coord, this.viewRect())) {
           this.highlightedIndex = -1;
         }
+        return undefined;
     }
   }
 
