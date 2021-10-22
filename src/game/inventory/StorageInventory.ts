@@ -5,20 +5,31 @@ import { Wallet } from "../Wallet";
 
 type Slot = GameItem | undefined;
 
+interface StorageInventoryConfig {
+  size: number;
+  items?: GameItem[];
+  isAcceptingItem?: (item: GameItem) => boolean;
+}
+
 // Inventory for storing various items, like a chest
 export class StorageInventory implements WritableInventory {
   private slots: Slot[];
   private _size: number;
+  public isAcceptingItem: (item: GameItem) => boolean;
 
-  constructor({ size, items }: { size: number, items?: GameItem[] }) {
+  constructor({ size, items, isAcceptingItem }: StorageInventoryConfig) {
     this._size = size;
     this.slots = fill(new Array(size), undefined);
     items?.forEach((item, i) => {
       this.slots[i] = item;
     });
+    this.isAcceptingItem = isAcceptingItem || (() => true);
   }
 
   placeAt(index: number, item: GameItem) {
+    if (!this.isAcceptingItem(item)) {
+      throw new Error(`This inventory doesn't accept ${item.getName()}`);
+    }
     if (!isFilledSlot(this.slots[index])) {
       this.slots[index] = item;
     }
@@ -27,7 +38,7 @@ export class StorageInventory implements WritableInventory {
   add(item: GameItem) {
     const emptyIndex = this.slots.findIndex(negate(isFilledSlot));
     if (emptyIndex > -1) {
-      this.slots[emptyIndex] = item;
+      this.placeAt(emptyIndex, item);
     } else {
       throw new Error(`Inventory full, can't add ${item.getName()}`);
     }

@@ -2,6 +2,7 @@ import { Coord, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
 import { StorageInventory } from "../inventory/StorageInventory";
 import { StorageInventoryView } from "../inventory/StorageInventoryView";
+import { BeerBottle } from "../items/BeerBottle";
 import { PixelScreen } from "../PixelScreen";
 import { SoundLibrary } from "../sounds/SoundLibrary";
 import { Sprite } from "../sprites/Sprite";
@@ -16,6 +17,7 @@ export class BeerBox implements GameObject {
     this.sprite = SpriteLibrary.getSprite("beer-box");
     this.inventory = new StorageInventory({
       size: 12,
+      isAcceptingItem: (item) => item instanceof BeerBottle && item.isEmpty(),
     });
   }
 

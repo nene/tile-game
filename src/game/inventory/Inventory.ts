@@ -15,6 +15,7 @@ export interface TakeableInventory extends Inventory {
 }
 
 export interface WritableInventory extends TakeableInventory {
+  isAcceptingItem: (item: GameItem) => boolean;
   placeAt: (index: number, item: GameItem) => void;
   add: (item: GameItem) => void;
   isFull: () => boolean;

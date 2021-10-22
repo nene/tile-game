@@ -133,7 +133,7 @@ export class InventoryController {
         this.selectedItem = inventory.takeAt(slotIndex, this.attributes.wallet);
       }
     }
-    else if (!item && this.selectedItem && inventory.isWritable()) {
+    else if (!item && this.selectedItem && inventory.isWritable() && inventory.isAcceptingItem(this.selectedItem)) {
       // Place item at hand to inventory
       inventory.placeAt(slotIndex, this.selectedItem);
       this.selectedItem = undefined;
@@ -165,14 +165,14 @@ export class InventoryController {
 
     if (inventory === this.attributes.inventory) {
       // When taking from player inventory -> move to object inventory
-      if (objInventory.isWritable() && !objInventory.isFull()) {
+      if (objInventory.isWritable() && !objInventory.isFull() && objInventory.isAcceptingItem(item)) {
         const takenItem = this.attributes.inventory.takeAt(slotIndex, this.attributes.wallet);
         takenItem && objInventory.add(takenItem);
       }
     }
     else {
       // When taking from object inventory -> move to player inventory
-      if (objInventory.isTakeable() && !this.attributes.inventory.isFull()) {
+      if (objInventory.isTakeable() && !this.attributes.inventory.isFull() && this.attributes.inventory.isAcceptingItem(item)) {
         const takenItem = objInventory.takeAt(slotIndex, this.attributes.wallet);
         takenItem && this.attributes.inventory.add(takenItem);
       }
