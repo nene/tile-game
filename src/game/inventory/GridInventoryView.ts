@@ -72,6 +72,7 @@ export class GridInventoryView implements InventoryView {
       this.handleSlotClick && this.handleSlotClick(slotIndex, this.inventory.itemAt(slotIndex));
       return true;
     }
+    return isCoordInRect(coord, this.rect);
   }
 
   getRect() {

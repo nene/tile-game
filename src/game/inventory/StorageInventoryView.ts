@@ -1,4 +1,4 @@
-import { Coord, coordAdd, coordMul, Rect, rectCenter } from "../Coord";
+import { Coord, coordAdd, coordMul, isCoordInRect, Rect, rectCenter } from "../Coord";
 import { PixelScreen } from "../PixelScreen";
 import { Inventory } from "./Inventory";
 import { InventoryView, SlotClickHandler } from "./InventoryView";
@@ -38,7 +38,10 @@ export class StorageInventoryView implements InventoryView {
   }
 
   handleGameEvent(event: GameEvent) {
-    return this.window.handleGameEvent(event) || this.grid.handleGameEvent(event);
+    if (this.window.handleGameEvent(event) || this.grid.handleGameEvent(event)) {
+      return true;
+    }
+    return event.type === "click" && isCoordInRect(event.coord, this.window.getRect());
   }
 
   getRect(): Rect {

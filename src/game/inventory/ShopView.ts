@@ -1,4 +1,4 @@
-import { Coord, Rect } from "../Coord";
+import { Coord, isCoordInRect, Rect } from "../Coord";
 import { GameEvent } from "../GameEvent";
 import { PixelScreen } from "../PixelScreen";
 import { ScrollView } from "../ui/ScrollView";
@@ -73,6 +73,7 @@ export class ShopView implements InventoryView {
       this.handleSlotClick && this.handleSlotClick(slotIndex, this.shop.itemAt(slotIndex));
       return true;
     }
+    return isCoordInRect(coord, this.window.getRect());
   }
 
   paint(screen: PixelScreen) {

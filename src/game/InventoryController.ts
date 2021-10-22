@@ -84,26 +84,21 @@ export class InventoryController {
 
     switch (event.type) {
       case "click":
-        return this.handleClick(event.coord);
+        return this.handleClickOutsideInventoryViews();
       case "mousemove":
         this.handleMouseMove(event.coord);
         break;
     }
   }
 
-  private handleClick(screenCoord: Coord): boolean {
+  private handleClickOutsideInventoryViews(): boolean | undefined {
     this.tooltip.hide();
 
-    if (isCoordInRect(screenCoord, this.playerInventoryView.getRect())) {
+    // When inventory window is open, but the click wasn't handled by it
+    if (this.objectInventoryView) {
+      this.hideInventory();
       return true;
     }
-    else if (this.objectInventoryView) {
-      if (!isCoordInRect(screenCoord, this.objectInventoryView.getRect())) {
-        this.hideInventory();
-      }
-      return true;
-    }
-    return false;
   }
 
   private handleMouseMove(screenCoord: Coord) {
@@ -131,6 +126,8 @@ export class InventoryController {
   }
 
   private handleSlotClick(inventory: Inventory, slotIndex: number, item?: GameItem) {
+    this.tooltip.hide();
+
     if (item && !this.selectedItem) {
       if (inventory.isTakeable() && (inventory === this.attributes.inventory || !this.attributes.inventory.isFull())) {
         // Take item from inventory
