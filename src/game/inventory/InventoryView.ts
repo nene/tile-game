@@ -5,6 +5,7 @@ import { PixelScreen } from "../PixelScreen";
 import { Inventory } from "./Inventory";
 
 export type SlotClickHandler = (slotIndex: number, item?: GameItem) => void;
+export type ItemHoverHandler = (coord: Coord, item: GameItem) => void;
 
 export interface InventoryView {
   paint: (screen: PixelScreen) => void;
@@ -13,4 +14,5 @@ export interface InventoryView {
   getSlotIndexAtCoord: (screenCoord: Coord) => number;
   getInventory: () => Inventory;
   onSlotClick: (callback: SlotClickHandler) => void;
+  onItemHover: (callback: ItemHoverHandler) => void;
 }

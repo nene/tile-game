@@ -4,7 +4,7 @@ import { PixelScreen } from "../PixelScreen";
 import { ScrollView } from "../ui/ScrollView";
 import { Shop } from "./Shop";
 import { ShopItemRenderer } from "./ShopItemRenderer";
-import { InventoryView, SlotClickHandler } from "./InventoryView";
+import { InventoryView, ItemHoverHandler, SlotClickHandler } from "./InventoryView";
 import { Wallet } from "../Wallet";
 import { Headline, Window } from "../ui/Window";
 import { GameItem } from "../items/GameItem";
@@ -22,6 +22,7 @@ export class ShopView implements InventoryView {
   private window: Window;
   private shop: Shop;
   private handleSlotClick?: SlotClickHandler;
+  private handleItemHover?: ItemHoverHandler;
 
   constructor({ shop, wallet, headline, onClose }: ShopViewConfig) {
     this.shop = shop;
@@ -50,6 +51,10 @@ export class ShopView implements InventoryView {
     this.handleSlotClick = cb;
   }
 
+  onItemHover(cb: ItemHoverHandler) {
+    this.handleItemHover = cb;
+  }
+
   getInventory() {
     return this.shop;
   }
@@ -64,6 +69,7 @@ export class ShopView implements InventoryView {
 
     switch (event.type) {
       case "click": return this.handleClick(event.coord);
+      case "mousemove": return this.handleMouseMove(event.coord);
     }
   }
 
@@ -74,6 +80,15 @@ export class ShopView implements InventoryView {
       return true;
     }
     return isCoordInRect(coord, this.window.getRect());
+  }
+
+  private handleMouseMove(coord: Coord): boolean | undefined {
+    const item = this.shop.itemAt(this.getSlotIndexAtCoord(coord));
+    if (item) {
+      this.handleItemHover && this.handleItemHover(coord, item);
+      return true;
+    }
+    return undefined;
   }
 
   paint(screen: PixelScreen) {

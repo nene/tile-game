@@ -1,7 +1,7 @@
 import { Coord, coordAdd, coordMul, isCoordInRect, Rect, rectCenter } from "../Coord";
 import { PixelScreen } from "../PixelScreen";
 import { Inventory } from "./Inventory";
-import { InventoryView, SlotClickHandler } from "./InventoryView";
+import { InventoryView, ItemHoverHandler, SlotClickHandler } from "./InventoryView";
 import { Headline, Window } from "../ui/Window";
 import { GridInventoryView } from "./GridInventoryView";
 import { GameEvent } from "../GameEvent";
@@ -30,6 +30,10 @@ export class StorageInventoryView implements InventoryView {
 
   onSlotClick(cb: SlotClickHandler) {
     this.grid.onSlotClick(cb);
+  }
+
+  onItemHover(cb: ItemHoverHandler) {
+    this.grid.onItemHover(cb);
   }
 
   paint(screen: PixelScreen) {

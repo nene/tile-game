@@ -1,7 +1,7 @@
 import { PixelScreen } from "./PixelScreen";
 import { InventoryView } from "./inventory/InventoryView";
 import { GridInventoryView } from "./inventory/GridInventoryView";
-import { Coord, coordSub, isCoordInRect } from "./Coord";
+import { Coord, coordSub } from "./Coord";
 import { GameItem } from "./items/GameItem";
 import { Overlay } from "./Overlay";
 import { MiniGame } from "./minigames/MiniGame";
@@ -27,6 +27,9 @@ export class InventoryController {
     this.playerInventoryView.onSlotClick((index, item) => {
       this.handleSlotClick(this.attributes.inventory, index, item);
     });
+    this.playerInventoryView.onItemHover((coord, item) => {
+      this.handleItemHover(coord, item);
+    });
   }
 
   getSelectedItem(): GameItem | undefined {
@@ -41,6 +44,9 @@ export class InventoryController {
     this.objectInventoryView = view;
     view.onSlotClick((index, item) => {
       this.handleSlotClick(view.getInventory(), index, item);
+    });
+    view.onItemHover((coord, item) => {
+      this.handleItemHover(coord, item);
     });
   }
 
@@ -104,25 +110,11 @@ export class InventoryController {
   private handleMouseMove(screenCoord: Coord) {
     this.mouseCoord = screenCoord;
     this.tooltip.hide();
-    this.tooltip.show(screenCoord, this.getHoveredInventoryItem(screenCoord)?.getName());
   }
 
-  private getHoveredInventoryItem(coord: Coord): GameItem | undefined {
-    const item = this.getInventoryItemAtCoord(coord, this.playerInventoryView);
-    if (item) {
-      return item;
-    }
-    if (this.objectInventoryView) {
-      return this.getInventoryItemAtCoord(coord, this.objectInventoryView);
-    }
-    return undefined;
-  }
-
-  private getInventoryItemAtCoord(coord: Coord, inventoryView: InventoryView): GameItem | undefined {
-    if (isCoordInRect(coord, inventoryView.getRect())) {
-      return inventoryView.getInventory().itemAt(inventoryView.getSlotIndexAtCoord(coord));
-    }
-    return undefined;
+  private handleItemHover(coord: Coord, item: GameItem) {
+    this.mouseCoord = coord;
+    this.tooltip.show(coord, item.getName());
   }
 
   private handleSlotClick(inventory: Inventory, slotIndex: number, item?: GameItem) {

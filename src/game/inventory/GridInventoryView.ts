@@ -1,6 +1,6 @@
 import { Coord, coordAdd, coordMul, isCoordInRect, Rect } from "../Coord";
 import { Inventory } from "./Inventory";
-import { InventoryView, SlotClickHandler } from "./InventoryView";
+import { InventoryView, ItemHoverHandler, SlotClickHandler } from "./InventoryView";
 import { PixelScreen } from "../PixelScreen";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { SpriteSheet } from "../sprites/SpriteSheet";
@@ -20,6 +20,7 @@ export class GridInventoryView implements InventoryView {
   private size: Coord;
   private coord: Coord;
   private handleSlotClick?: SlotClickHandler;
+  private handleItemHover?: ItemHoverHandler;
 
   constructor({ inventory, size, coord }: GridInventoryViewCfg) {
     this.inventory = inventory;
@@ -31,6 +32,10 @@ export class GridInventoryView implements InventoryView {
 
   onSlotClick(cb: SlotClickHandler) {
     this.handleSlotClick = cb;
+  }
+
+  onItemHover(cb: ItemHoverHandler) {
+    this.handleItemHover = cb;
   }
 
   paint(screen: PixelScreen) {
@@ -63,6 +68,8 @@ export class GridInventoryView implements InventoryView {
     switch (event.type) {
       case "click":
         return this.handleClick(event.coord);
+      case "mousemove":
+        return this.handleMouseMove(event.coord);
     }
   }
 
@@ -73,6 +80,15 @@ export class GridInventoryView implements InventoryView {
       return true;
     }
     return isCoordInRect(coord, this.rect);
+  }
+
+  private handleMouseMove(coord: Coord): boolean | undefined {
+    const item = this.inventory.itemAt(this.getSlotIndexAtCoord(coord));
+    if (item) {
+      this.handleItemHover && this.handleItemHover(coord, item);
+      return true;
+    }
+    return undefined;
   }
 
   getRect() {
