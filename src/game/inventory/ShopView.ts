@@ -22,6 +22,7 @@ export class ShopView implements InventoryView {
   private window: Window;
   private shop: Shop;
   private handleSlotClick?: SlotClickHandler;
+  private handleSlotRightClick?: SlotClickHandler;
   private handleItemHover?: ItemHoverHandler;
 
   constructor({ shop, wallet, headline, onClose }: ShopViewConfig) {
@@ -51,6 +52,10 @@ export class ShopView implements InventoryView {
     this.handleSlotClick = cb;
   }
 
+  onSlotRightClick(cb: SlotClickHandler) {
+    this.handleSlotRightClick = cb;
+  }
+
   onItemHover(cb: ItemHoverHandler) {
     this.handleItemHover = cb;
   }
@@ -68,15 +73,16 @@ export class ShopView implements InventoryView {
     }
 
     switch (event.type) {
-      case "click": return this.handleClick(event.coord);
+      case "click": return this.handleClick(event.coord, this.handleSlotClick);
+      case "rightclick": return this.handleClick(event.coord, this.handleSlotRightClick);
       case "mousemove": return this.handleMouseMove(event.coord);
     }
   }
 
-  private handleClick(coord: Coord): boolean | undefined {
+  private handleClick(coord: Coord, clickHandler?: SlotClickHandler): boolean | undefined {
     const slotIndex = this.getSlotIndexAtCoord(coord);
     if (slotIndex !== -1) {
-      this.handleSlotClick && this.handleSlotClick(slotIndex, this.shop.itemAt(slotIndex));
+      clickHandler && clickHandler(slotIndex, this.shop.itemAt(slotIndex));
       return true;
     }
     return isCoordInRect(coord, this.window.getRect());

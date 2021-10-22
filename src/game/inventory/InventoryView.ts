@@ -12,5 +12,6 @@ export interface InventoryView {
   handleGameEvent: (event: GameEvent) => boolean | undefined;
   getInventory: () => Inventory;
   onSlotClick: (callback: SlotClickHandler) => void;
+  onSlotRightClick: (callback: SlotClickHandler) => void;
   onItemHover: (callback: ItemHoverHandler) => void;
 }

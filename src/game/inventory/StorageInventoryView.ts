@@ -32,6 +32,10 @@ export class StorageInventoryView implements InventoryView {
     this.grid.onSlotClick(cb);
   }
 
+  onSlotRightClick(cb: SlotClickHandler) {
+    this.grid.onSlotRightClick(cb);
+  }
+
   onItemHover(cb: ItemHoverHandler) {
     this.grid.onItemHover(cb);
   }

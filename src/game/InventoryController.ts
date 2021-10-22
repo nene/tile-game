@@ -27,6 +27,9 @@ export class InventoryController {
     this.playerInventoryView.onSlotClick((index, item) => {
       this.handleSlotClick(this.attributes.inventory, index, item);
     });
+    this.playerInventoryView.onSlotRightClick((index, item) => {
+      this.handleSlotRightClick(this.attributes.inventory, index, item);
+    });
     this.playerInventoryView.onItemHover((coord, item) => {
       this.handleItemHover(coord, item);
     });
@@ -44,6 +47,9 @@ export class InventoryController {
     this.objectInventoryView = view;
     view.onSlotClick((index, item) => {
       this.handleSlotClick(view.getInventory(), index, item);
+    });
+    view.onSlotRightClick((index, item) => {
+      this.handleSlotRightClick(view.getInventory(), index, item);
     });
     view.onItemHover((coord, item) => {
       this.handleItemHover(coord, item);
@@ -141,6 +147,34 @@ export class InventoryController {
         // Ensure we start minigame with current mouse coordinate
         this.miniGame.handleGameEvent({ type: "mousemove", coord: this.mouseCoord });
         this.miniGame.setHandShakeAmount(this.attributes.drunkenness.getHandShakeAmount());
+      }
+    }
+  }
+
+  private handleSlotRightClick(inventory: Inventory, slotIndex: number, item?: GameItem) {
+    this.tooltip.hide();
+
+    // Do nothing when:
+    // - we have item selected or
+    // - when we clicked empty slot or
+    // - object inventory is not open
+    if (this.selectedItem || !item || !this.objectInventoryView) {
+      return;
+    }
+    const objInventory = this.objectInventoryView.getInventory();
+
+    if (inventory === this.attributes.inventory) {
+      // When taking from player inventory -> move to object inventory
+      if (objInventory.isWritable() && !objInventory.isFull()) {
+        const takenItem = this.attributes.inventory.takeAt(slotIndex, this.attributes.wallet);
+        takenItem && objInventory.add(takenItem);
+      }
+    }
+    else {
+      // When taking from object inventory -> move to player inventory
+      if (objInventory.isTakeable() && !this.attributes.inventory.isFull()) {
+        const takenItem = objInventory.takeAt(slotIndex, this.attributes.wallet);
+        takenItem && this.attributes.inventory.add(takenItem);
       }
     }
   }

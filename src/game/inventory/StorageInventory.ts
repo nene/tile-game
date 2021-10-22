@@ -1,6 +1,7 @@
 import { fill, negate } from "lodash";
 import { WritableInventory } from "./Inventory";
 import { GameItem } from "../items/GameItem";
+import { Wallet } from "../Wallet";
 
 type Slot = GameItem | undefined;
 
@@ -44,7 +45,7 @@ export class StorageInventory implements WritableInventory {
     return true;
   }
 
-  takeAt(index: number) {
+  takeAt(index: number, wallet: Wallet) {
     const item = this.slots[index];
     this.slots[index] = undefined;
     return item;
