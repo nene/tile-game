@@ -1,4 +1,4 @@
-import { Coord, Rect } from "../Coord";
+import { Coord } from "../Coord";
 import { GameEvent } from "../GameEvent";
 import { GameItem } from "../items/GameItem";
 import { PixelScreen } from "../PixelScreen";
@@ -10,7 +10,6 @@ export type ItemHoverHandler = (coord: Coord, item: GameItem) => void;
 export interface InventoryView {
   paint: (screen: PixelScreen) => void;
   handleGameEvent: (event: GameEvent) => boolean | undefined;
-  getRect: () => Rect;
   getSlotIndexAtCoord: (screenCoord: Coord) => number;
   getInventory: () => Inventory;
   onSlotClick: (callback: SlotClickHandler) => void;

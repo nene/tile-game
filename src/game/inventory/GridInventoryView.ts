@@ -91,10 +91,6 @@ export class GridInventoryView implements InventoryView {
     return undefined;
   }
 
-  getRect() {
-    return this.rect;
-  }
-
   getInventory() {
     return this.inventory;
   }

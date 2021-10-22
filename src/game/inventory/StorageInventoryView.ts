@@ -48,10 +48,6 @@ export class StorageInventoryView implements InventoryView {
     return event.type === "click" && isCoordInRect(event.coord, this.window.getRect());
   }
 
-  getRect(): Rect {
-    return this.window.getRect();
-  }
-
   getInventory() {
     return this.grid.getInventory();
   }
