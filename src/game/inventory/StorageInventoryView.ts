@@ -1,7 +1,7 @@
 import { Coord, coordAdd, coordMul, Rect, rectCenter } from "../Coord";
 import { PixelScreen } from "../PixelScreen";
 import { Inventory } from "./Inventory";
-import { InventoryView } from "./InventoryView";
+import { InventoryView, SlotClickHandler } from "./InventoryView";
 import { Headline, Window } from "../ui/Window";
 import { GridInventoryView } from "./GridInventoryView";
 import { GameEvent } from "../GameEvent";
@@ -26,6 +26,10 @@ export class StorageInventoryView implements InventoryView {
 
   private gridRect(gridSize: Coord, container: Rect): Rect {
     return rectCenter({ coord: [0, 0], size: coordAdd(coordMul([21, 21], gridSize), [1, 1]) }, container);
+  }
+
+  onSlotClick(cb: SlotClickHandler) {
+    this.grid.onSlotClick(cb);
   }
 
   paint(screen: PixelScreen) {

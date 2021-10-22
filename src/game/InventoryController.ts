@@ -8,6 +8,7 @@ import { MiniGame } from "./minigames/MiniGame";
 import { GameEvent } from "./GameEvent";
 import { PlayerAttributes } from "./PlayerAttributes";
 import { Tooltip } from "./ui/Tooltip";
+import { Inventory } from "./inventory/Inventory";
 
 export class InventoryController {
   private playerInventoryView: InventoryView;
@@ -23,6 +24,9 @@ export class InventoryController {
       coord: [107, 200 - 22],
       size: [5, 1],
     });
+    this.playerInventoryView.onSlotClick((index, item) => {
+      this.handleSlotClick(this.attributes.inventory, index, item);
+    });
   }
 
   getSelectedItem(): GameItem | undefined {
@@ -35,6 +39,9 @@ export class InventoryController {
 
   showInventory(view: InventoryView) {
     this.objectInventoryView = view;
+    view.onSlotClick((index, item) => {
+      this.handleSlotClick(view.getInventory(), index, item);
+    });
   }
 
   hideInventory() {
@@ -71,7 +78,7 @@ export class InventoryController {
   }
 
   handleGameEvent(event: GameEvent): boolean | undefined {
-    if (this.objectInventoryView?.handleGameEvent(event)) {
+    if (this.playerInventoryView.handleGameEvent(event) || this.objectInventoryView?.handleGameEvent(event)) {
       return true;
     }
 
@@ -88,13 +95,10 @@ export class InventoryController {
     this.tooltip.hide();
 
     if (isCoordInRect(screenCoord, this.playerInventoryView.getRect())) {
-      this.handleInventoryClick(screenCoord, this.playerInventoryView);
       return true;
     }
     else if (this.objectInventoryView) {
-      if (isCoordInRect(screenCoord, this.objectInventoryView.getRect())) {
-        this.handleInventoryClick(screenCoord, this.objectInventoryView);
-      } else {
+      if (!isCoordInRect(screenCoord, this.objectInventoryView.getRect())) {
         this.hideInventory();
       }
       return true;
@@ -126,14 +130,7 @@ export class InventoryController {
     return undefined;
   }
 
-  private handleInventoryClick(coord: Coord, inventoryView: InventoryView) {
-    const slotIndex = inventoryView.getSlotIndexAtCoord(coord);
-    if (slotIndex === -1) {
-      return; // no slot clicked
-    }
-
-    const inventory = inventoryView.getInventory();
-    const item = inventory.itemAt(slotIndex);
+  private handleSlotClick(inventory: Inventory, slotIndex: number, item?: GameItem) {
     if (item && !this.selectedItem) {
       if (inventory.isTakeable() && (inventory === this.attributes.inventory || !this.attributes.inventory.isFull())) {
         // Take item from inventory

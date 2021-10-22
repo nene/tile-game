@@ -4,7 +4,7 @@ import { PixelScreen } from "../PixelScreen";
 import { ScrollView } from "../ui/ScrollView";
 import { Shop } from "./Shop";
 import { ShopItemRenderer } from "./ShopItemRenderer";
-import { InventoryView } from "./InventoryView";
+import { InventoryView, SlotClickHandler } from "./InventoryView";
 import { Wallet } from "../Wallet";
 import { Headline, Window } from "../ui/Window";
 import { GameItem } from "../items/GameItem";
@@ -21,6 +21,7 @@ export class ShopView implements InventoryView {
   private scrollView: ScrollView<GameItem>;
   private window: Window;
   private shop: Shop;
+  private handleSlotClick?: SlotClickHandler;
 
   constructor({ shop, wallet, headline, onClose }: ShopViewConfig) {
     this.shop = shop;
@@ -45,13 +46,33 @@ export class ShopView implements InventoryView {
     });
   }
 
+  onSlotClick(cb: SlotClickHandler) {
+    this.handleSlotClick = cb;
+  }
+
   getInventory() {
     return this.shop;
   }
 
   handleGameEvent(event: GameEvent): boolean | undefined {
-    return this.window.handleGameEvent(event) ||
+    const stopPropagation =
+      this.window.handleGameEvent(event) ||
       this.scrollView.handleGameEvent(event);
+    if (stopPropagation) {
+      return true;
+    }
+
+    switch (event.type) {
+      case "click": return this.handleClick(event.coord);
+    }
+  }
+
+  private handleClick(coord: Coord): boolean | undefined {
+    const slotIndex = this.getSlotIndexAtCoord(coord);
+    if (slotIndex !== -1) {
+      this.handleSlotClick && this.handleSlotClick(slotIndex, this.shop.itemAt(slotIndex));
+      return true;
+    }
   }
 
   paint(screen: PixelScreen) {
