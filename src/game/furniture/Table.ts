@@ -1,14 +1,21 @@
 import { Coord, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
+import { StorageInventory } from "../inventory/StorageInventory";
+import { StorageInventoryView } from "../inventory/StorageInventoryView";
 import { PixelScreen } from "../PixelScreen";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
+import { UiController } from "../UiController";
 
 export class Table implements GameObject {
   private sprite: Sprite;
+  private inventory: StorageInventory;
 
   constructor(private coord: Coord) {
     this.sprite = SpriteLibrary.getSprite("table");
+    this.inventory = new StorageInventory({
+      size: 10,
+    });
   }
 
   tick() { }
@@ -38,8 +45,16 @@ export class Table implements GameObject {
   }
 
   isInteractable() {
-    return false;
+    return true;
   }
 
-  onInteract() { }
+  onInteract(ui: UiController) {
+    ui.showInventory(new StorageInventoryView({
+      inventory: this.inventory,
+      windowSize: [112, 66],
+      gridSize: [5, 2],
+      headline: { title: "Laud", description: "Siin võib vedeleda tühju šoppeneid." },
+      onClose: () => ui.hideInventory(),
+    }));
+  }
 }
