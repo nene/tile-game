@@ -34,8 +34,8 @@ export class CfeLocationFactory implements LocationFactory {
       // Color shield on wall
       new Painting(tileToScreenCoord([4, 4]), "color-shield"),
       // A table
-      new Table(tileToScreenCoord([5, 8])),
-      new Table(tileToScreenCoord([1, 12])),
+      new Table(tileToScreenCoord([8, 8])),
+      new Table(tileToScreenCoord([3, 8])),
       // Sofa
       new Sofa(tileToScreenCoord([4, 4])),
       // Fire
