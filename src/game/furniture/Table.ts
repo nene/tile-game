@@ -1,6 +1,6 @@
 import { sortBy } from "lodash";
 import SimplexNoise from "simplex-noise";
-import { Coord, coordAdd, coordFloor, coordMul, Rect } from "../Coord";
+import { Coord, coordAdd, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
 import { StorageInventory } from "../inventory/StorageInventory";
 import { StorageInventoryView } from "../inventory/StorageInventoryView";
@@ -19,7 +19,7 @@ export class Table implements GameObject {
     this.sprite = SpriteLibrary.getSprite("table");
     this.inventory = new StorageInventory({
       size: 10,
-      items: [new BeerGlass(), new BeerGlass()],
+      items: [new BeerGlass(), new BeerGlass(), new BeerGlass(), new BeerGlass(), new BeerGlass(), new BeerGlass(), new BeerGlass(), new BeerGlass()],
     });
   }
 
@@ -36,10 +36,10 @@ export class Table implements GameObject {
     const itemCoordPairs: [BeerGlass, Coord][] = this.inventory.allItems()
       .filter((item): item is BeerGlass => item instanceof BeerGlass)
       .map((item, i) => {
-        const x = (this.noise.noise2D(i, 1) + 1) / 2;
-        const y = (this.noise.noise2D(1, i) + 1) / 2;
-        const offset = coordFloor(coordAdd(coordMul([x, y], [60, 14]), [0, 5]));
-        return [item, coordAdd(this.coord, offset)];
+        const rnd = (this.noise.noise2D(i, 1) + 1) / 2;
+        const index = Math.floor(rnd * glassPositions.length);
+        const offset = glassPositions[index];
+        return [item, coordAdd(this.coord, coordAdd(offset, [2, 5]))];
       });
     return sortBy(itemCoordPairs, ([_, coord]) => coord[1]);
   }
@@ -78,3 +78,37 @@ export class Table implements GameObject {
     }));
   }
 }
+
+// Positions for maximum of 26 glasses on the table
+const glassPositions: Coord[] = [
+  // 1st row
+  [9 * 0, 0],
+  [9 * 1, 0],
+  [9 * 2, 0],
+  [9 * 3, 0],
+  [9 * 4, 0],
+  [9 * 5, 0],
+  [9 * 6, 0],
+  // 2nd row
+  [5 + 9 * 0, 4],
+  [5 + 9 * 1, 4],
+  [5 + 9 * 2, 4],
+  [5 + 9 * 3, 4],
+  [5 + 9 * 4, 4],
+  [5 + 9 * 5, 4],
+  // 3rd row
+  [9 * 0, 8],
+  [9 * 1, 8],
+  [9 * 2, 8],
+  [9 * 3, 8],
+  [9 * 4, 8],
+  [9 * 5, 8],
+  [9 * 6, 8],
+  // 4th row
+  [5 + 9 * 0, 12],
+  [5 + 9 * 1, 12],
+  [5 + 9 * 2, 12],
+  [5 + 9 * 3, 12],
+  [5 + 9 * 4, 12],
+  [5 + 9 * 5, 12],
+];
