@@ -44,6 +44,10 @@ export class Table implements GameObject {
     return sortBy(itemCoordPairs, ([_, coord]) => coord[1]);
   }
 
+  getSittingPositions(): Coord[] {
+    return [0, 1, 2, 3].map((i) => coordAdd(this.coord, coordAdd([8, -2], [i * 16, 0])));
+  }
+
   zIndex() {
     return this.coord[1];
   }
