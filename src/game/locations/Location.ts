@@ -1,4 +1,4 @@
-import { Coord, coordAdd, isCoordInRect, Rect, screenToTileCoord, tileToScreenCoord } from "../Coord";
+import { Coord, coordAdd, coordEq, isCoordInRect, Rect, screenToTileCoord, tileToScreenCoord } from "../Coord";
 import { LocationFactory, LocationName } from "./LocationFactory";
 import { GameObject } from "../GameObject";
 import { ObjectIndexer } from "../ObjectIndexer";
@@ -6,6 +6,7 @@ import { PathFinder } from "../PathFinder";
 import { PixelScreen } from "../PixelScreen";
 import { GameWorld } from "../GameWorld";
 import { BackgroundCache } from "./BackgroundCache";
+import { last } from "lodash";
 
 export class Location {
   private name: LocationName;
@@ -82,9 +83,19 @@ export class Location {
   }
 
   findPath(coord1: Coord, coord2: Coord): Coord[] | undefined {
-    return this.pathFinder.findPath(
+    const steps = this.pathFinder.findPath(
       screenToTileCoord(coord1),
       screenToTileCoord(coord2)
     )?.map((coord) => coordAdd(tileToScreenCoord(coord), [8, 8]));
+
+    // When last step isn't exactly at coord2, add that coord to the list of steps
+    const lastStep = last(steps);
+    if (lastStep && coordEq(lastStep, coord2)) {
+      return steps;
+    } else if (steps) {
+      return [...steps, coord2];
+    } else {
+      return undefined;
+    }
   }
 }
