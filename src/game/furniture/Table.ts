@@ -19,7 +19,6 @@ export class Table implements GameObject {
     this.sprite = SpriteLibrary.getSprite("table");
     this.inventory = new StorageInventory({
       size: 10,
-      items: [new BeerGlass(), new BeerGlass(), new BeerGlass(), new BeerGlass(), new BeerGlass(), new BeerGlass(), new BeerGlass(), new BeerGlass()],
     });
   }
 
@@ -46,6 +45,10 @@ export class Table implements GameObject {
 
   getSittingPositions(): Coord[] {
     return [0, 1, 2, 3].map((i) => coordAdd(this.coord, coordAdd([8, -2], [i * 16, 0])));
+  }
+
+  getInventory(): StorageInventory {
+    return this.inventory;
   }
 
   zIndex() {
