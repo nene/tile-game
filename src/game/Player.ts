@@ -187,7 +187,7 @@ export class Player implements GameObject {
   }
 
   boundingBox(): Rect {
-    return { coord: [-8, -3], size: [16, 5] };
+    return { coord: [-7, -3], size: [14, 5] };
   }
 
   isInteractable(ui: UiController) {
