@@ -51,7 +51,7 @@ const spriteDef = (x: { src: string, cfg: SpriteSheetConfig }) => x;
 const imageFiles = {
   'cfe-bg': spriteDef({ src: cfeBg, cfg: { size: [16, 16], colsRows: [4, 4] } }),
 
-  'cfe-reb': spriteDef({ src: cfeReb, cfg: { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET } }),
+  'cfe-reb': spriteDef({ src: cfeReb, cfg: { size: PLAYER_SIZE, colsRows: [6, 1], offset: PLAYER_OFFSET } }),
 
   'cfe-ksv-1': spriteDef({ src: cfeKsv1, cfg: { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET } }),
   'cfe-ksv-2': spriteDef({ src: cfeKsv2, cfg: { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET } }),

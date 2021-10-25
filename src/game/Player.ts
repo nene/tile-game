@@ -33,15 +33,15 @@ export class Player implements GameObject {
 
     this.standAnimations = {
       down: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: [[0, 0]] }),
-      up: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: [[0, 0]] }),
-      right: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: [[0, 0]] }),
-      left: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: [[0, 0]] }),
+      up: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: [[3, 0]] }),
+      right: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: [[5, 0]] }),
+      left: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: [[4, 0]] }),
     }
     this.walkAnimations = {
       down: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: { from: [0, 0], to: [0, 0] } }),
-      up: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: { from: [0, 0], to: [0, 0] } }),
-      right: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: { from: [0, 0], to: [0, 0] } }),
-      left: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: { from: [0, 0], to: [0, 0] } }),
+      up: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: { from: [3, 0], to: [3, 0] } }),
+      right: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: { from: [5, 0], to: [5, 0] } }),
+      left: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: { from: [4, 0], to: [4, 0] } }),
     };
 
     this.animation = this.standAnimations.down;
