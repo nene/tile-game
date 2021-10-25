@@ -3,6 +3,8 @@ import cfeReb from "./data/cfe-reb.png";
 import cfeKsv1 from "./data/cfe-ksv-1.png";
 import cfeKsv2 from "./data/cfe-ksv-2.png";
 import cfeKsv3 from "./data/cfe-ksv-3.png";
+import cfeKsv4 from "./data/cfe-ksv-4.png";
+import cfeKsv5 from "./data/cfe-ksv-5.png";
 import cfeBuilding from "./data/cfe-building.png";
 import cfeBuildingDoor from "./data/cfe-building-door.png";
 import cfeFence from "./data/cfe-fence.png";
@@ -54,6 +56,8 @@ const imageFiles = {
   'cfe-ksv-1': spriteDef({ src: cfeKsv1, cfg: { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET } }),
   'cfe-ksv-2': spriteDef({ src: cfeKsv2, cfg: { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET } }),
   'cfe-ksv-3': spriteDef({ src: cfeKsv3, cfg: { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET } }),
+  'cfe-ksv-4': spriteDef({ src: cfeKsv4, cfg: { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET } }),
+  'cfe-ksv-5': spriteDef({ src: cfeKsv5, cfg: { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET } }),
   'callout': spriteDef({ src: callout, cfg: { size: [16, 18], colsRows: [2, 1], offset: [-5, -52] } }),
 
   'table': spriteDef({ src: table, cfg: { size: [64, 23], offset: [0, -6] } }),
@@ -76,7 +80,7 @@ const imageFiles = {
   'flag-colors': spriteDef({ src: flagColors, cfg: { size: [12, 12], colsRows: [2, 1] } }),
 
   'beer-glass-lg': spriteDef({ src: beerGlassLg, cfg: { size: [16, 16], colsRows: [5, 5] } }),
-  'beer-glass-sm': spriteDef({ src: beerGlassSm, cfg: { size: [10, 10], colsRows: [5, 5], offset: [-2, -17] } }),
+  'beer-glass-sm': spriteDef({ src: beerGlassSm, cfg: { size: [10, 10], colsRows: [5, 5], offset: [-2, -15] } }),
   'bottle': spriteDef({ src: bottle, cfg: { size: [16, 16], colsRows: [3, 11] } }),
   'bottle-opener': spriteDef({ src: bottleOpener, cfg: { size: [16, 16], colsRows: [2, 1] } }),
 
