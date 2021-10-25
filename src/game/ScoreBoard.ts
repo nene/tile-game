@@ -37,7 +37,7 @@ export class ScoreBoard {
   private drawAlcoholLevel(screen: PixelScreen) {
     times(5, (i: number) => {
       const level = this.getDrinkLevelForStep(4 - i);
-      screen.drawSprite(this.beerGlass.getSprite([level, DrinkColor.light]), coordAdd(this.coord, [5 + i * 9, 41]));
+      screen.drawSprite(this.beerGlass.getSprite([level, DrinkColor.light]), coordAdd(this.coord, [3 + i * 9, 24]));
     });
   }
 

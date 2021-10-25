@@ -1,7 +1,7 @@
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary, SpriteName } from "../sprites/SpriteLibrary";
 import { BeerGlass, DrinkLevel } from "../items/BeerGlass";
-import { coordAdd } from "../Coord";
+import { Coord, coordAdd } from "../Coord";
 import { Animation } from "./Animation";
 import { Drink } from "../items/Drink";
 
@@ -33,19 +33,19 @@ export class DrinkAnimation implements Animation {
   }
 
   private getHandSprite(): Sprite {
-    return this.spriteAtHandPosition(this.handSprite);
+    return this.adjustSpriteOffset(this.handSprite, this.handPositionOffset());
   }
 
   private getBeerSprite(): Sprite {
-    return this.spriteAtHandPosition(this.beerGlass.getSmallSprite());
+    return this.adjustSpriteOffset(this.beerGlass.getSmallSprite(), coordAdd(this.handPositionOffset(), [-2, -15]));
   }
 
-  private spriteAtHandPosition(sprite: Sprite) {
-    if (this.isHandUp && this.beerGlass.getLevel() !== DrinkLevel.empty) {
-      return { ...sprite, offset: coordAdd(sprite.offset, [0, -2]) };
-    } else {
-      return sprite;
-    }
+  private adjustSpriteOffset(sprite: Sprite, offset: Coord): Sprite {
+    return { ...sprite, offset: coordAdd(sprite.offset, offset) };
+  }
+
+  private handPositionOffset(): Coord {
+    return (this.isHandUp && this.beerGlass.getLevel() !== DrinkLevel.empty) ? [0, -2] : [0, 0];
   }
 
   isFinished() {

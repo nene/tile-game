@@ -38,7 +38,7 @@ export class Table implements GameObject {
         const rnd = (this.noise.noise2D(i, 1) + 1) / 2;
         const index = Math.floor(rnd * glassPositions.length);
         const offset = glassPositions[index];
-        return [item, coordAdd(this.coord, coordAdd(offset, [2, 5]))];
+        return [item, coordAdd(this.coord, coordAdd(offset, [0, -12]))];
       });
     return sortBy(itemCoordPairs, ([_, coord]) => coord[1]);
   }

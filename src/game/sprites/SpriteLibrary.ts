@@ -80,7 +80,7 @@ const imageFiles = {
   'flag-colors': spriteDef({ src: flagColors, cfg: { size: [12, 12], colsRows: [2, 1] } }),
 
   'beer-glass-lg': spriteDef({ src: beerGlassLg, cfg: { size: [16, 16], colsRows: [5, 5] } }),
-  'beer-glass-sm': spriteDef({ src: beerGlassSm, cfg: { size: [10, 10], colsRows: [5, 5], offset: [-2, -15] } }),
+  'beer-glass-sm': spriteDef({ src: beerGlassSm, cfg: { size: [10, 10], colsRows: [5, 5] } }),
   'bottle': spriteDef({ src: bottle, cfg: { size: [16, 16], colsRows: [3, 11] } }),
   'bottle-opener': spriteDef({ src: bottleOpener, cfg: { size: [16, 16], colsRows: [2, 1] } }),
 
