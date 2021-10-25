@@ -1,4 +1,3 @@
-import SimplexNoise from "simplex-noise";
 import { Coord, coordAdd, coordDiv, coordMul, coordSub, isCoordInRect, Rect } from "../Coord";
 import { GameEvent } from "../GameEvent";
 import { BeerBottle } from "../items/BeerBottle";
@@ -8,6 +7,7 @@ import { SoundLibrary } from "../sounds/SoundLibrary";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteAnimation } from "../sprites/SpriteAnimation";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
+import { Noise } from "../utils/Noise";
 import { MiniGame } from "./MiniGame";
 import { PouringLogic } from "./PouringLogic";
 
@@ -33,7 +33,7 @@ export class PouringGame implements MiniGame {
   private clicksAfterFinished = 0;
   private pouring: PouringLogic;
   private tickCounter = 0;
-  private noise: SimplexNoise;
+  private noise = new Noise();
   private beerOnTable: Record<number, number> = {};
   private handShakeAmount = 0;
 
@@ -49,7 +49,6 @@ export class PouringGame implements MiniGame {
     this.beerAnimation = new SpriteAnimation(SpriteLibrary.get("beer-xl"), { frames: { from: [0, 0], to: [14, 0] } });
     this.bottleCoord = [0, 0];
     this.pouring = new PouringLogic(bottle.getDrink().foam);
-    this.noise = new SimplexNoise();
   }
 
   setHandShakeAmount(amount: number) {
@@ -161,9 +160,8 @@ export class PouringGame implements MiniGame {
   private bottleOffset(): Coord {
     const shake = coordMul(HAND_MAX_SHAKE, [this.handShakeAmount, this.handShakeAmount]);
     const scale = HAND_NOISE_SCALE / this.handShakeAmount;
-    const x = this.noise.noise2D(this.tickCounter / scale, 1);
-    const y = this.noise.noise2D(1, this.tickCounter / scale);
-    return coordMul([x, y], shake).map(Math.floor) as Coord;
+    const noiseCoord = this.noise.coord(this.tickCounter / scale);
+    return coordMul(noiseCoord, shake).map(Math.floor) as Coord;
   }
 
   handleGameEvent({ type, coord }: GameEvent): boolean | undefined {

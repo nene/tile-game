@@ -7,8 +7,8 @@ import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { SpriteSheet } from "../sprites/SpriteSheet";
 import { MiniGame } from "./MiniGame";
-import SimplexNoise from "simplex-noise";
 import { GameEvent } from "../GameEvent";
+import { Noise } from "../utils/Noise";
 
 enum CaptureStatus {
   miss = 0,
@@ -30,8 +30,8 @@ export class OpeningGame implements MiniGame {
   private bottleCoord: Coord;
   private mouseCoord: Coord = [0, 0];
   private captureStatus = CaptureStatus.miss;
-  private noise = new SimplexNoise();
-  private handNoise = new SimplexNoise();
+  private noise = new Noise();
+  private handNoise = new Noise();
   private tickCounter = 0;
   private clicksAfterOpen = 0;
   private finishAtTick = 60 * 10; // Total amount of time for opening the bottle
@@ -58,9 +58,8 @@ export class OpeningGame implements MiniGame {
     if (this.bottle.getDrink().capStrength === 0) {
       return BOTTLE_START_COORD;
     }
-    const x = this.noise.noise2D(this.tickCounter / this.getNoiseScale(), 1);
-    const y = this.noise.noise2D(1, this.tickCounter / this.getNoiseScale());
-    const offset = coordMul([x, y], BOTTLE_MAX_MOVEMENT).map(Math.floor) as Coord;
+    const noiseCoord = this.noise.coord(this.tickCounter / this.getNoiseScale());
+    const offset = coordMul(noiseCoord, BOTTLE_MAX_MOVEMENT).map(Math.floor) as Coord;
     return coordAdd(BOTTLE_START_COORD, offset);
   }
 
@@ -120,7 +119,7 @@ export class OpeningGame implements MiniGame {
     }
     const shake = HAND_MAX_SHAKE * this.handShakeAmount;
     const scale = HAND_NOISE_SCALE / this.handShakeAmount;
-    const x = this.handNoise.noise2D(this.tickCounter / scale, 1);
+    const x = this.handNoise.noise1D(this.tickCounter / scale);
     return coordMul([x, -x], [shake, shake]).map(Math.floor) as Coord;
   }
 

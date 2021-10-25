@@ -1,5 +1,5 @@
 import { sortBy } from "lodash";
-import SimplexNoise from "simplex-noise";
+import { Noise } from "../utils/Noise";
 import { Coord, coordAdd, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
 import { StorageInventory } from "../inventory/StorageInventory";
@@ -13,7 +13,7 @@ import { UiController } from "../UiController";
 export class Table implements GameObject {
   private sprite: Sprite;
   private inventory: StorageInventory;
-  private noise = new SimplexNoise();
+  private noise = new Noise();
 
   constructor(private coord: Coord) {
     this.sprite = SpriteLibrary.getSprite("table");
@@ -35,8 +35,7 @@ export class Table implements GameObject {
     const itemCoordPairs: [BeerGlass, Coord][] = this.inventory.allItems()
       .filter((item): item is BeerGlass => item instanceof BeerGlass)
       .map((item, i) => {
-        const rnd = (this.noise.noise2D(i, 1) + 1) / 2;
-        const index = Math.floor(rnd * glassPositions.length);
+        const index = Math.floor(this.noise.random(i) * glassPositions.length);
         const offset = glassPositions[index];
         return [item, coordAdd(this.coord, coordAdd(offset, [0, -12]))];
       });
