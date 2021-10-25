@@ -27,7 +27,7 @@ const characterDefs = {
     hatedDrinks: [getDrink("porter"), getDrink("limonaad")],
   }),
   "pikmets": charDef({
-    name: "bvil! Richard Pikmets",
+    name: "b!vil! Richard Pikmets",
     spriteSet: "cfe-ksv-3",
     spawnTime: 20 * 10,
     favoriteDrinks: [getDrink("special"), getDrink("kriek")],
@@ -39,6 +39,13 @@ const characterDefs = {
     spawnTime: 30 * 10,
     favoriteDrinks: [getDrink("paulaner"), getDrink("porter")],
     hatedDrinks: [getDrink("kriek"), getDrink("limonaad")],
+  }),
+  "karl": charDef({
+    name: "ksv! Karl Jõgi",
+    spriteSet: "cfe-ksv-5",
+    spawnTime: 32 * 10,
+    favoriteDrinks: [getDrink("alexander"), getDrink("pilsner"), getDrink("tommu-hiid")],
+    hatedDrinks: [getDrink("bock")],
   }),
 };
 

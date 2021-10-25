@@ -15,13 +15,24 @@ export class MoveToTableActivity implements Activity {
   }
 
   tick(figure: GameObject, location: Location): ActivityUpdates {
-    const table = location.allObjects().find((o) => o instanceof Table) as Table;
     const figureBounds = rectTranslate(figure.boundingBox(), figure.getCoord());
-    if (this.isAtTable(figure, table) && !this.isOccupied(figureBounds, figure, location)) {
-      this.finished = true;
-      return {};
+    const allTables = location.allObjects().filter(isTable);
+
+    // Are we already sitting in one of the tables. If yes, then finish.
+    for (const table of allTables) {
+      if (this.isAtTable(figure, table) && !this.isOccupied(figureBounds, figure, location)) {
+        this.finished = true;
+        return {};
+      }
     }
-    this.targetCoord = this.getFirstFreeSpot(figure, table, location);
+
+    // Otherwise try to sit in the first free spot in the first table
+    for (const table of allTables) {
+      this.targetCoord = this.getFirstFreeSpot(figure, table, location);
+      if (this.targetCoord) {
+        return {};
+      }
+    }
     return {};
   }
 
@@ -55,3 +66,5 @@ export class MoveToTableActivity implements Activity {
     }
   }
 }
+
+const isTable = (obj: GameObject): obj is Table => obj instanceof Table;
