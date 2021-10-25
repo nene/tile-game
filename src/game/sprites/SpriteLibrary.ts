@@ -42,7 +42,7 @@ import beerFoamXl from "./data/beer-foam-xl.png";
 import { Coord } from "../Coord";
 import { SpriteSheet, SpriteSheetConfig } from "./SpriteSheet";
 
-const PLAYER_SIZE: Coord = [16, 32];
+const PLAYER_SIZE: Coord = [16, 35];
 const PLAYER_OFFSET: Coord = [-8, -30];
 
 // Helper to require values of `imageFiles` to conform to specific type
