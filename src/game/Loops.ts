@@ -1,3 +1,5 @@
+const TICK_DURATION = 100; // ten ticks per second
+const MAX_DELAY = 5 * 60 * 1000; // 5 minutes (3000 ticks)
 
 export class Loops {
   private running = true;
@@ -5,16 +7,21 @@ export class Loops {
 
   // setInterval() will fire about 1x per second when in background tab
   runGameLoop(onTick: () => void) {
-    const duration = 100;
     let prevTime = Date.now();
 
     this.intervalHandle = setInterval(() => {
       const time = Date.now();
-      while (prevTime + duration < time) {
-        onTick();
-        prevTime += duration;
+
+      // Avoid huge amount of ticks being called when returning from sleep
+      if (prevTime + MAX_DELAY < time) {
+        prevTime = time;
       }
-    }, duration / 2);
+
+      while (prevTime + TICK_DURATION < time) {
+        onTick();
+        prevTime += TICK_DURATION;
+      }
+    }, TICK_DURATION / 2);
   }
 
   runPaintLoop(onPaint: (time: number) => void) {
