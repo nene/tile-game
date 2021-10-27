@@ -28,7 +28,7 @@ interface TerminologyQuestion {
 const questions: TerminologyQuestion[] = [
   {
     question: "Mis on komitaat?",
-    correctAnswer: "Ülikooli lõpetamise tähistamine.",
+    correctAnswer: "Äsja ülikooli lõpetanud fraaterite korraldatud pidu.",
     wrongAnswers: [
       "Fraateri matustele järgnev koosviibimine konvendis.",
       "Kohustuslik rebaste vehklemistund.",
@@ -51,6 +51,42 @@ const questions: TerminologyQuestion[] = [
       "Karistus liikmemaksu tasumata jätmise eest.",
       "Karistuseks määratud värvide kandmise keeld.",
       "Vilistlaskokku vastuvõtmine.",
+    ],
+  },
+  {
+    question: "Mis on juhtsimine?",
+    correctAnswer: "Karistus liikmemaksu tasumata jätmise eest.",
+    wrongAnswers: [
+      "Ühest kuni 99 aastaks konvendist välja arvamine.",
+      "Rapiiriteraga tekli läbistamine vennastuspeol.",
+      "Rebase põhjuseta lahkunuks lugemine.",
+    ],
+  },
+  {
+    question: "Mis on rebaste raseerimise õigus?",
+    correctAnswer: "Rebaste õigus vennastuse ajal veini pihta panna.",
+    wrongAnswers: [
+      "Vanamehe õigus rebasteid ebasobiliku soengu eest karistada.",
+      "Õigus peale värvide saamist akadeemilisele emale sisse anda.",
+      "Rebaste õigus õllelauas magama jäänud fraateril habe maha ajada.",
+    ],
+  },
+  {
+    question: "Mis on trisna?",
+    correctAnswer: "Fraateri matustele järgnev koosviibimine konvendis.",
+    wrongAnswers: [
+      "Pidulik rongkäik volbri ja ülikooli aastapäeva ajal.",
+      "Äsja ülikooli lõpetanud fraaterite korraldatud pidu.",
+      "Korporatsioonist määramata ajaks välja heitmine.",
+    ],
+  },
+  {
+    question: "Mis on pluserdamine?",
+    correctAnswer: "Konvendi vara tahtlik lõhkumine.",
+    wrongAnswers: [
+      "Karistus liikmemaksu tasumata jätmise eest.",
+      "Con-coetorite ühine laulmine peale vennastuspidu.",
+      "Metsikute külaliste konventi toomine.",
     ],
   },
 ];

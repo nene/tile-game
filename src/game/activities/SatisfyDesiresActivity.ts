@@ -54,7 +54,7 @@ export class SatisfyDesiresActivity implements Activity {
   }
 
   private randomQuestion(): Question {
-    switch (random(0, 3)) {
+    switch (random(0, 4)) {
       case 0: return createColorsQuestion();
       case 1: return createPlaceQuestion();
       case 2: return createSloganQuestion();
