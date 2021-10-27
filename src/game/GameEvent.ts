@@ -15,7 +15,7 @@ interface GameWheelEvent {
 
 export interface GameKeyEvent {
   type: "keyup" | "keydown";
-  key: "UP" | "DOWN" | "LEFT" | "RIGHT" | "?";
+  key: "UP" | "DOWN" | "LEFT" | "RIGHT" | "OPINIONS" | "?";
 }
 
 export type GameEvent = GameMouseEvent | GameWheelEvent;
@@ -49,6 +49,8 @@ export class GameEventFactory {
       case "ArrowDown":
       case "s":
         return { type, key: "DOWN" };
+      case "e":
+        return { type, key: "OPINIONS" };
       default:
         return { type, key: "?" };
     }

@@ -35,6 +35,10 @@ export class Character {
     return this.def.favoriteDrinks;
   }
 
+  getOpinion() {
+    return this.opinion;
+  }
+
   changeOpinion(amount: number) {
     this.opinion += amount;
   }
