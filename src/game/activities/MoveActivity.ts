@@ -1,7 +1,7 @@
 import { Coord, coordEq, coordMul, coordUnit, coordSub, coordAdd } from "../Coord";
-import { GameObject } from "../GameObject";
 import { Location } from "../locations/Location";
 import { Character } from "../npc/Character";
+import { CharacterFigure } from "../npc/CharacterFigure";
 import { SpriteAnimation } from "../sprites/SpriteAnimation";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { Activity, ActivityUpdates } from "./Activity";
@@ -18,7 +18,7 @@ export class MoveActivity implements Activity {
     });
   }
 
-  public tick(figure: GameObject, location: Location): ActivityUpdates {
+  public tick(figure: CharacterFigure, location: Location): ActivityUpdates {
     const coord = figure.getCoord();
     this.animation.tick();
     const sprites = this.animation.getSprites();

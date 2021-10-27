@@ -1,6 +1,6 @@
-import { GameObject } from "../GameObject";
 import { Location } from "../locations/Location";
 import { Character } from "../npc/Character";
+import { CharacterFigure } from "../npc/CharacterFigure";
 import { Activity, ActivityUpdates } from "./Activity";
 
 export class DespawnActivity implements Activity {
@@ -9,7 +9,7 @@ export class DespawnActivity implements Activity {
   constructor(private character: Character) {
   }
 
-  public tick(figure: GameObject, location: Location): ActivityUpdates {
+  public tick(figure: CharacterFigure, location: Location): ActivityUpdates {
     location.remove(figure);
     this.removed = true;
     return {};

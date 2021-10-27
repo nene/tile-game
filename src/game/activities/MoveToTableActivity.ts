@@ -14,7 +14,7 @@ export class MoveToTableActivity implements Activity {
   constructor(private character: Character) {
   }
 
-  tick(figure: GameObject, location: Location): ActivityUpdates {
+  tick(figure: CharacterFigure, location: Location): ActivityUpdates {
     const figureBounds = rectTranslate(figure.boundingBox(), figure.getCoord());
     const allTables = location.allObjects().filter(isTable);
 
@@ -36,15 +36,15 @@ export class MoveToTableActivity implements Activity {
     return {};
   }
 
-  private isAtTable(figure: GameObject, table: Table): boolean {
+  private isAtTable(figure: CharacterFigure, table: Table): boolean {
     return table.getSittingPositions().some((coord) => coordEq(figure.getCoord(), coord));
   }
 
-  private isOccupied(rect: Rect, figure: GameObject, location: Location): boolean {
+  private isOccupied(rect: Rect, figure: CharacterFigure, location: Location): boolean {
     return location.getObjectsInRect(rect).some((obj) => obj instanceof CharacterFigure && obj !== figure);
   }
 
-  private getFirstFreeSpot(figure: GameObject, table: Table, location: Location): Coord | undefined {
+  private getFirstFreeSpot(figure: CharacterFigure, table: Table, location: Location): Coord | undefined {
     return table.getSittingPositions().find((coord) => !this.isOccupied(rectTranslate(figure.boundingBox(), coord), figure, location));
   }
 

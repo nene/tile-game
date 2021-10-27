@@ -2,7 +2,6 @@ import { Activity, ActivityUpdates } from "./Activity";
 import { Character } from "../npc/Character";
 import { UiController } from "../UiController";
 import { GameWorld } from "../GameWorld";
-import { GameObject } from "../GameObject";
 import { Location } from "../locations/Location";
 import { CallFuxActivity } from "./CallFuxActivity";
 import { RequestDrinkInteraction } from "./RequestDrinkInteraction";
@@ -14,6 +13,7 @@ import { createPlaceQuestion } from "../questions/PlaceQuestion";
 import { createSloganQuestion } from "../questions/SloganQuestion";
 import { createYearQuestion } from "../questions/YearQuestion";
 import { createTerminologyQuestion } from "../questions/TerminologyQuestion";
+import { CharacterFigure } from "../npc/CharacterFigure";
 
 const MAX_BEERS = 2;
 const MAX_QUESTIONS = 3;
@@ -64,8 +64,8 @@ export class SatisfyDesiresActivity implements Activity {
     }
   }
 
-  tick(entity: GameObject, location: Location, world: GameWorld): ActivityUpdates {
-    const updates = this.activity.tick(entity, location, world);
+  tick(figure: CharacterFigure, location: Location, world: GameWorld): ActivityUpdates {
+    const updates = this.activity.tick(figure, location, world);
     if (this.activity.isFinished()) {
       const nextActivity = this.activity.nextActivity();
       if (nextActivity) {
