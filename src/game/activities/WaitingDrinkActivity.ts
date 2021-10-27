@@ -1,6 +1,5 @@
 import { Dialog } from "../dialogs/Dialog";
 import { TextContent } from "../dialogs/TextContent";
-import { Drink } from "../items/Drink";
 import { BeerBottle } from "../items/BeerBottle";
 import { BeerGlass, DrinkLevel } from "../items/BeerGlass";
 import { Character } from "../npc/Character";
@@ -11,7 +10,7 @@ import { DrinkActivity } from "./DrinkActivity";
 export class WaitingDrinkActivity implements Activity {
   private receivedBeerGlass?: BeerGlass;
 
-  constructor(private character: Character, private expectedDrink?: Drink) {
+  constructor(private character: Character) {
   }
 
   tick() {
@@ -41,13 +40,9 @@ export class WaitingDrinkActivity implements Activity {
 
   private acceptDrink(ui: UiController, item: BeerGlass | BeerBottle): item is BeerGlass {
     const beer = item.getDrink();
-    if (this.expectedDrink && beer !== this.expectedDrink) {
-      this.showDialog(ui, `See pole see õlu mis ma palusin. Too mulle ${this.expectedDrink.name}.`);
-      return false;
-    }
-    else if (item instanceof BeerGlass) {
-      const isFavorite = !this.expectedDrink && beer && this.character.getFavoriteDrinks().includes(beer);
-      const isHated = !this.expectedDrink && beer && this.character.getHatedDrinks().includes(beer);
+    if (item instanceof BeerGlass) {
+      const isFavorite = beer && this.character.getFavoriteDrinks().includes(beer);
+      const isHated = beer && this.character.getHatedDrinks().includes(beer);
       this.showDialog(ui, this.getThanks(item, isFavorite, isHated));
       if (item.getLevel() > DrinkLevel.empty) {
         return true;
