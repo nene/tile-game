@@ -11,7 +11,12 @@ export class DrinkActivity implements Activity {
   private animation: DrinkAnimation;
 
   constructor(private beerGlass: BeerGlass, character: Character) {
-    this.animation = new DrinkAnimation({ beerGlass, spriteName: character.spriteSet });
+    this.animation = new DrinkAnimation({
+      beerGlass,
+      spriteName: character.spriteSet,
+      idleTicks: 30,
+      drinkTicks: 10,
+    });
   }
 
   tick(figure: GameObject, location: Location): ActivityUpdates {

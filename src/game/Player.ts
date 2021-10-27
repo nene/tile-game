@@ -202,6 +202,8 @@ export class Player implements GameObject {
       this.animation = new DrinkAnimation({
         beerGlass: glass,
         spriteName: "cfe-reb",
+        drinkTicks: 10,
+        idleTicks: 10,
         onSip: (drink) => {
           this.attributes.drunkenness.sip(drink);
         },
