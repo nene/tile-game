@@ -11,7 +11,6 @@ export class CallFuxActivity implements Activity {
   private counter = 0;
   private sprite: Sprite;
   private calloutSprite: Sprite;
-  private finished = false;
 
   constructor(private character: Character, private interaction: Interaction) {
     this.sprite = SpriteLibrary.getSprite(character.getSpriteSet());
@@ -41,7 +40,7 @@ export class CallFuxActivity implements Activity {
   }
 
   isFinished() {
-    return this.finished;
+    return this.interaction.isFinished();
   }
 
   isInteractable() {
@@ -49,12 +48,11 @@ export class CallFuxActivity implements Activity {
   }
 
   interact(ui: UiController, world: GameWorld) {
-    this.finished = true;
     this.interaction.interact(ui, world);
   }
 
   nextActivity() {
-    if (this.finished) {
+    if (this.interaction.isFinished()) {
       return this.interaction.nextActivity();
     }
   }

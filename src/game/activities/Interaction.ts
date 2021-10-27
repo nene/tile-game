@@ -9,6 +9,7 @@ export enum InteractionType {
 
 export interface Interaction {
   interact: (ui: UiController, world: GameWorld) => void;
+  isFinished: () => boolean;
   nextActivity: () => Activity | undefined;
   getType: () => InteractionType;
 }

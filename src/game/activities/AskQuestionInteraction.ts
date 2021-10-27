@@ -12,11 +12,17 @@ import { BeerGlass, DrinkLevel } from "../items/BeerGlass";
 import { getDrink } from "../items/Drink";
 
 export class AskQuestionInteraction implements Interaction {
+  private finished = false;
+
   constructor(private character: Character, private question: Question) {
   }
 
   getType() {
     return InteractionType.question;
+  }
+
+  isFinished() {
+    return this.finished;
   }
 
   interact(ui: UiController, world: GameWorld) {
@@ -30,6 +36,7 @@ export class AskQuestionInteraction implements Interaction {
         }
       },
     }));
+    this.finished = true;
   }
 
   private createColorsContent(ui: UiController, world: GameWorld, rect: Rect, question: ColorsQuestion) {
