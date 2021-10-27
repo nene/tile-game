@@ -4,16 +4,27 @@ import { BeerGlass, DrinkLevel } from "../items/BeerGlass";
 import { Coord, coordAdd } from "../Coord";
 import { Animation } from "./Animation";
 import { Drink } from "../items/Drink";
+import { noop } from "lodash";
+
+interface DrinkAnimationConfig {
+  beerGlass: BeerGlass;
+  spriteName: SpriteName;
+  onSip?: (drink: Drink) => void;
+}
 
 export class DrinkAnimation implements Animation {
   private ticks = 0;
   private isHandUp = false;
   private sprite: Sprite;
   private handSprite: Sprite;
+  private beerGlass: BeerGlass;
+  private onSip: (drink: Drink) => void;
 
-  constructor(private beerGlass: BeerGlass, spriteName: SpriteName, private onSip?: (drink: Drink) => void) {
+  constructor({ beerGlass, spriteName, onSip }: DrinkAnimationConfig) {
     this.sprite = SpriteLibrary.getSprite(spriteName, [1, 0]);
     this.handSprite = SpriteLibrary.getSprite(spriteName, [2, 0]);
+    this.beerGlass = beerGlass;
+    this.onSip = onSip || noop;
   }
 
   tick() {
@@ -22,7 +33,7 @@ export class DrinkAnimation implements Animation {
       this.ticks = 0;
       this.isHandUp = !this.isHandUp;
       if (!this.isHandUp && this.beerGlass.getLevel() !== DrinkLevel.empty) {
-        this.onSip && this.onSip(this.beerGlass.getDrink() as Drink);
+        this.onSip(this.beerGlass.getDrink() as Drink);
         this.beerGlass.consume();
       }
     }

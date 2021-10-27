@@ -199,8 +199,12 @@ export class Player implements GameObject {
     const glass = ui.getSelectedItem();
     if (glass instanceof BeerGlass && glass.getLevel() > DrinkLevel.empty) {
       this.itemAtHand = glass;
-      this.animation = new DrinkAnimation(glass, "cfe-reb", (drink) => {
-        this.attributes.drunkenness.sip(drink);
+      this.animation = new DrinkAnimation({
+        beerGlass: glass,
+        spriteName: "cfe-reb",
+        onSip: (drink) => {
+          this.attributes.drunkenness.sip(drink);
+        },
       });
       ui.setSelectedItem(undefined);
     }
