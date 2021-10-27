@@ -34,6 +34,7 @@ export class WaitingDrinkActivity implements Activity {
 
     if (this.acceptDrink(ui, item)) {
       ui.setSelectedItem(undefined);
+      ui.getAttributes().wallet.add(item.getDrink()?.price || 0);
       this.receivedBeerGlass = item;
     }
   }

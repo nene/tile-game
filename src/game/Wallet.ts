@@ -9,11 +9,15 @@ export class Wallet {
 
   add(amount: number) {
     this.money += amount;
-    SoundLibrary.play("coins");
+    if (amount > 0) {
+      SoundLibrary.play("coins");
+    }
   }
 
   remove(amount: number) {
     this.money -= amount;
-    SoundLibrary.play("coins");
+    if (amount > 0) {
+      SoundLibrary.play("coins");
+    }
   }
 }

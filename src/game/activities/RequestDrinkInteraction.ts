@@ -1,7 +1,6 @@
 import { Character } from "../npc/Character";
 import { UiController } from "../UiController";
 import { WaitingDrinkActivity } from "./WaitingDrinkActivity";
-import { random } from "lodash";
 import { TextContent } from "../dialogs/TextContent";
 import { Interaction, InteractionType } from "./Interaction";
 import { Dialog } from "../dialogs/Dialog";
@@ -15,9 +14,7 @@ export class RequestDrinkInteraction implements Interaction {
   }
 
   interact(ui: UiController) {
-    const money = random(2, 6);
-    this.showDialog(ui, `Hea rebane, palun too mulle üks õlu. Siin sulle ${money} münti.`);
-    ui.getAttributes().wallet.add(money);
+    this.showDialog(ui, `Hea rebane, palun too mulle üks õlu.`);
   }
 
   nextActivity() {
