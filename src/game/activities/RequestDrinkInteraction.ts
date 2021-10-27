@@ -6,6 +6,7 @@ import { Dialog } from "../dialogs/Dialog";
 import { BeerGlass, DrinkLevel } from "../items/BeerGlass";
 import { DrinkActivity } from "./DrinkActivity";
 import { BeerBottle } from "../items/BeerBottle";
+import { ValidationResult } from "../questions/Question";
 
 export class RequestDrinkInteraction implements Interaction {
   private receivedBeerGlass?: BeerGlass;
@@ -36,11 +37,17 @@ export class RequestDrinkInteraction implements Interaction {
   }
 
   private acceptDrink(ui: UiController, item: BeerGlass | BeerBottle): item is BeerGlass {
-    const beer = item.getDrink();
     if (item instanceof BeerGlass) {
-      const isFavorite = beer && this.character.getFavoriteDrinks().includes(beer);
-      const isHated = beer && this.character.getHatedDrinks().includes(beer);
-      this.showDialog(ui, this.getThanks(item, isFavorite, isHated));
+      const result = this.validateBeerGlass(item);
+      this.showDialog(ui, result.msg);
+
+      if (result.type === "praise") {
+        this.character.changeOpinion(+1);
+      }
+      else if (result.type === "punish") {
+        this.character.changeOpinion(-1);
+      }
+
       if (item.getLevel() > DrinkLevel.empty) {
         return true;
       } else {
@@ -72,42 +79,46 @@ export class RequestDrinkInteraction implements Interaction {
     }
   }
 
-  private getThanks(beerGlass: BeerGlass, isFavorite: boolean = false, isHated: boolean = false): string {
+  private validateBeerGlass(beerGlass: BeerGlass): ValidationResult {
+    const drink = beerGlass.getDrink();
+    const isFavorite = drink && this.character.getFavoriteDrinks().includes(drink);
+    const isHated = drink && this.character.getHatedDrinks().includes(drink);
+
     switch (beerGlass.getLevel()) {
       case DrinkLevel.full:
         if (isFavorite) {
-          return "Ooo! Täis šoppen minu lemmikõllega! Oled parim rebane.";
+          return { type: "praise", msg: "Ooo! Täis šoppen minu lemmikõllega! Oled parim rebane." };
         } else if (isHated) {
-          return "Uhh! Terve šoppenitäis sellist jälkust. Kao mu silmist, sa igavene!";
+          return { type: "punish", msg: "Uhh! Terve šoppenitäis sellist jälkust. Kao mu silmist, sa igavene!" };
         } else {
-          return "Ooo! See on ju suurepäraselt täidetud šoppen. Oled tõega kiitust väärt.";
+          return { type: "praise", msg: "Ooo! See on ju suurepäraselt täidetud šoppen. Oled tõega kiitust väärt." };
         }
       case DrinkLevel.almostFull:
         if (isFavorite) {
-          return "Vau! Šoppen minu lemmikõllega! Suur aitäh!";
+          return { type: "praise", msg: "Vau! Šoppen minu lemmikõllega! Suur aitäh!" };
         } else if (isHated) {
-          return "Väkk, mis asi! Kas sa ise jood seda?";
+          return { type: "punish", msg: "Väkk, mis asi! Kas sa ise jood seda?" };
         } else {
-          return "Aitäh! Oled üsna tublisti valanud.";
+          return { type: "neutral", msg: "Aitäh! Oled üsna tublisti valanud." };
         }
       case DrinkLevel.half:
         if (isFavorite) {
-          return "Oo... Minu lemmikõlu! Aga miks vaid pool šoppenit?";
+          return { type: "neutral", msg: "Oo... Minu lemmikõlu! Aga miks vaid pool šoppenit?" };
         } else if (isHated) {
-          return "Nojah... See pole just suurem asi... Vähemalt pole seda palju.";
+          return { type: "neutral", msg: "Nojah... See pole just suurem asi... Vähemalt pole seda palju." };
         } else {
-          return "No kuule! See on ju poolik šoppen. Mis jama sa mulle tood!";
+          return { type: "punish", msg: "No kuule! See on ju poolik šoppen. Mis jama sa mulle tood!" };
         }
       case DrinkLevel.almostEmpty:
         if (isFavorite) {
-          return "Oo... Minu lemmikõlu! Aga miks vaid pool šoppenit?";
+          return { type: "punish", msg: "Kas sa õrritad mind või? Õlu tundub hea, aga miks ainult tilk šoppeni põhjas?" };
         } else if (isHated) {
-          return "Einoh... Kui seda jama juua, siis rohkem kui lonksu ma ei võtakski.";
+          return { type: "neutral", msg: "Einoh... Kui seda jama juua, siis rohkem kui lonksu ma ei võtakski." };
         } else {
-          return "See ei lähe! Ma palusin sul tuua šoppeni täie õlut, aga sina tood mulle mingi tilga šoppeni põhjas.";
+          return { type: "punish", msg: "See ei lähe! Ma palusin sul tuua šoppeni täie õlut, aga sina tood mulle mingi tilga šoppeni põhjas." };
         }
       case DrinkLevel.empty:
-        return "Eee... jah, see on šoppen. Aga paluksin õlut ka siia sisse, aitäh.";
+        return { type: "neutral", msg: "Eee... jah, see on šoppen. Aga paluksin õlut ka siia sisse, aitäh." };
     }
   }
 }
