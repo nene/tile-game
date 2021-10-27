@@ -11,7 +11,7 @@ export class RequestDrinkInteraction implements Interaction {
   private expectedDrink?: Drink;
 
   constructor(private character: Character) {
-    this.expectedDrink = this.chooseDrink(this.character.favoriteDrinks);
+    this.expectedDrink = this.chooseDrink(this.character.getFavoriteDrinks());
   }
 
   getType() {

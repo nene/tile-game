@@ -13,7 +13,7 @@ export class DrinkActivity implements Activity {
   constructor(private beerGlass: BeerGlass, character: Character) {
     this.animation = new DrinkAnimation({
       beerGlass,
-      spriteName: character.spriteSet,
+      spriteName: character.getSpriteSet(),
       idleTicks: 30,
       drinkTicks: 10,
     });

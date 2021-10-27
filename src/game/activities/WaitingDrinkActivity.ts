@@ -46,8 +46,8 @@ export class WaitingDrinkActivity implements Activity {
       return false;
     }
     else if (item instanceof BeerGlass) {
-      const isFavorite = !this.expectedDrink && beer && this.character.favoriteDrinks.includes(beer);
-      const isHated = !this.expectedDrink && beer && this.character.hatedDrinks.includes(beer);
+      const isFavorite = !this.expectedDrink && beer && this.character.getFavoriteDrinks().includes(beer);
+      const isHated = !this.expectedDrink && beer && this.character.getHatedDrinks().includes(beer);
       this.showDialog(ui, this.getThanks(item, isFavorite, isHated));
       if (item.getLevel() > DrinkLevel.empty) {
         return true;

@@ -19,7 +19,7 @@ export class SpawnPoint implements GameObject {
   }
 
   private trySpawnCharacter(): Character | undefined {
-    return getAllCharacters().find((char) => char.spawnTime === this.tickCount);
+    return getAllCharacters().find((char) => char.getSpawnTime() === this.tickCount);
   }
 
   paint() { }

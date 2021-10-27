@@ -20,7 +20,7 @@ export class Dialog {
     this.onClose = onClose;
     this.window = new Window({
       headline: {
-        title: character.name + ":",
+        title: character.getName() + ":",
       },
       coord: [60, 98],
       size: [200, 102],

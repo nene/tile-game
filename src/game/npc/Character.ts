@@ -1,7 +1,7 @@
 import { Drink, getDrink } from "../items/Drink";
 import { SpriteName } from "../sprites/SpriteLibrary";
 
-export interface Character {
+export interface CharacterDef {
   name: string;
   spriteSet: SpriteName;
   favoriteDrinks: Drink[];
@@ -9,38 +9,60 @@ export interface Character {
   spawnTime: number;
 }
 
-const charDef = (o: Character) => o;
+export class Character {
+  constructor(private def: CharacterDef) { }
 
-const characterDefs = {
-  "koppel": charDef({
+  getName() {
+    return this.def.name;
+  }
+
+  getSpriteSet() {
+    return this.def.spriteSet;
+  }
+
+  getSpawnTime() {
+    return this.def.spawnTime;
+  }
+
+  getFavoriteDrinks() {
+    return this.def.favoriteDrinks;
+  }
+
+  getHatedDrinks() {
+    return this.def.favoriteDrinks;
+  }
+}
+
+const characters = {
+  "koppel": new Character({
     name: "ksv! Jakob Koppel",
     spriteSet: "cfe-ksv-2",
     spawnTime: 1 * 10,
     favoriteDrinks: [getDrink("bock"), getDrink("pilsner")],
     hatedDrinks: [getDrink("limonaad"), getDrink("paulaner"), getDrink("porter")],
   }),
-  "sass": charDef({
+  "sass": new Character({
     name: "vil! Aleksander Popov",
     spriteSet: "cfe-ksv-1",
     spawnTime: 5 * 10,
     favoriteDrinks: [getDrink("alexander"), getDrink("tommu-hiid")],
     hatedDrinks: [getDrink("porter"), getDrink("limonaad")],
   }),
-  "pikmets": charDef({
+  "pikmets": new Character({
     name: "b!vil! Richard Pikmets",
     spriteSet: "cfe-ksv-3",
     spawnTime: 20 * 10,
     favoriteDrinks: [getDrink("special"), getDrink("kriek")],
     hatedDrinks: [getDrink("alexander"), getDrink("pilsner")],
   }),
-  "otto": charDef({
+  "otto": new Character({
     name: "vil! Otto Pukk",
     spriteSet: "cfe-ksv-4",
     spawnTime: 30 * 10,
     favoriteDrinks: [getDrink("paulaner"), getDrink("porter")],
     hatedDrinks: [getDrink("kriek"), getDrink("limonaad")],
   }),
-  "karl": charDef({
+  "karl": new Character({
     name: "ksv! Karl Jõgi",
     spriteSet: "cfe-ksv-5",
     spawnTime: 32 * 10,
@@ -49,12 +71,12 @@ const characterDefs = {
   }),
 };
 
-export type CharacterName = keyof typeof characterDefs;
+export type CharacterName = keyof typeof characters;
 
 export function getCharacter(name: CharacterName): Character {
-  return characterDefs[name];
+  return characters[name];
 }
 
 export function getAllCharacters(): Character[] {
-  return Object.values(characterDefs);
+  return Object.values(characters);
 }
