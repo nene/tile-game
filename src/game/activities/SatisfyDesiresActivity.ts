@@ -13,6 +13,7 @@ import { Question } from "../questions/Question";
 import { createPlaceQuestion } from "../questions/PlaceQuestion";
 import { createSloganQuestion } from "../questions/SloganQuestion";
 import { createYearQuestion } from "../questions/YearQuestion";
+import { createTerminologyQuestion } from "../questions/TerminologyQuestion";
 
 const MAX_BEERS = 2;
 const MAX_QUESTIONS = 3;
@@ -57,7 +58,8 @@ export class SatisfyDesiresActivity implements Activity {
       case 0: return createColorsQuestion();
       case 1: return createPlaceQuestion();
       case 2: return createSloganQuestion();
-      case 3:
+      case 3: return createTerminologyQuestion();
+      case 4:
       default: return createYearQuestion();
     }
   }
