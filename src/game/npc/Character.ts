@@ -10,6 +10,9 @@ export interface CharacterDef {
 }
 
 export class Character {
+  // How much the NPC likes or dislikes the player
+  private opinion = 0;
+
   constructor(private def: CharacterDef) { }
 
   getName() {
@@ -30,6 +33,10 @@ export class Character {
 
   getHatedDrinks() {
     return this.def.favoriteDrinks;
+  }
+
+  changeOpinion(amount: number) {
+    this.opinion += amount;
   }
 }
 

@@ -57,7 +57,11 @@ export class AskQuestionInteraction implements Interaction {
   private handleValidationResult(result: ValidationResult, ui: UiController, world: GameWorld) {
     this.showReply(ui, result.msg);
     if (result.type === "punish") {
+      this.character.changeOpinion(-1);
       this.punishWithWater(ui, world);
+    }
+    else if (result.type === "praise") {
+      this.character.changeOpinion(+1);
     }
   }
 
