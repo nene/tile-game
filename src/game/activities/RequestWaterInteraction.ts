@@ -1,0 +1,52 @@
+import { Character } from "../npc/Character";
+import { UiController } from "../UiController";
+import { TextContent } from "../dialogs/TextContent";
+import { Interaction, InteractionType } from "./Interaction";
+import { Dialog } from "../dialogs/Dialog";
+import { BeerGlass } from "../items/BeerGlass";
+import { getDrink } from "../items/Drink";
+import { GameWorld } from "../GameWorld";
+import { noop } from "lodash";
+
+export class RequestWaterInteraction implements Interaction {
+  private finished = false;
+
+  constructor(private character: Character) {
+  }
+
+  getType() {
+    return InteractionType.water;
+  }
+
+  isFinished() {
+    return this.finished;
+  }
+
+  interact(ui: UiController, world: GameWorld) {
+    const item = ui.getSelectedItem();
+    if (!(item instanceof BeerGlass) || item.getDrink() !== getDrink("water")) {
+      this.showDialog(ui, "Too šoppen vett!");
+      return;
+    }
+
+    this.showDialog(ui, "Võta laituseks sisse!", () => {
+      world.getPlayer().onInteract(ui, world);
+      this.finished = true;
+    });
+  }
+
+  private showDialog(ui: UiController, text: string, onClose: () => void = noop) {
+    ui.showDialog(new Dialog({
+      character: this.character,
+      createContent: (rect) => new TextContent(text, rect),
+      onClose: () => {
+        ui.hideDialog();
+        onClose();
+      },
+    }));
+  }
+
+  nextActivity() {
+    return undefined;
+  }
+}

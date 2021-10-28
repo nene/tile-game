@@ -4,7 +4,8 @@ import { Activity } from "./Activity";
 
 export enum InteractionType {
   beer = 0,
-  question = 1,
+  water = 1,
+  question = 2,
 }
 
 export interface Interaction {

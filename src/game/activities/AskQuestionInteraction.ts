@@ -7,12 +7,12 @@ import { Dialog } from "../dialogs/Dialog";
 import { ColorsQuestion, MultiChoiceQuestion, Question, ValidationResult } from "../questions/Question";
 import { Rect } from "../Coord";
 import { MultiChoiceQuestionContent } from "../dialogs/MultiChoiceQuestionContent";
-import { GameWorld } from "../GameWorld";
-import { BeerGlass, DrinkLevel } from "../items/BeerGlass";
-import { getDrink } from "../items/Drink";
+import { CallFuxActivity } from "./CallFuxActivity";
+import { RequestWaterInteraction } from "./RequestWaterInteraction";
 
 export class AskQuestionInteraction implements Interaction {
   private finished = false;
+  private punishWithWater = false;
 
   constructor(private character: Character, private question: Question) {
   }
@@ -25,61 +25,57 @@ export class AskQuestionInteraction implements Interaction {
     return this.finished;
   }
 
-  interact(ui: UiController, world: GameWorld) {
+  interact(ui: UiController) {
     ui.showDialog(new Dialog({
       character: this.character,
       createContent: (rect) => {
         if (this.question.type === "colors") {
-          return this.createColorsContent(ui, world, rect, this.question);
+          return this.createColorsContent(ui, rect, this.question);
         } else {
-          return this.createMultiChoiceContent(ui, world, rect, this.question);
+          return this.createMultiChoiceContent(ui, rect, this.question);
         }
       },
     }));
     this.finished = true;
   }
 
-  private createColorsContent(ui: UiController, world: GameWorld, rect: Rect, question: ColorsQuestion) {
+  private createColorsContent(ui: UiController, rect: Rect, question: ColorsQuestion) {
     return new FlagQuestionContent({
       question: question.question,
       container: rect,
       onAnswer: (colors) => {
-        this.handleValidationResult(question.validate(colors), ui, world);
+        this.handleValidationResult(question.validate(colors), ui);
       },
     });
   }
 
-  private createMultiChoiceContent(ui: UiController, world: GameWorld, rect: Rect, question: MultiChoiceQuestion) {
+  private createMultiChoiceContent(ui: UiController, rect: Rect, question: MultiChoiceQuestion) {
     return new MultiChoiceQuestionContent({
       container: rect,
       question: question.question,
       choices: question.choices,
       fontSize: question.fontSize,
       onAnswer: (answer) => {
-        this.handleValidationResult(question.validate(answer), ui, world);
+        this.handleValidationResult(question.validate(answer), ui);
       }
     });
   }
 
-  private handleValidationResult(result: ValidationResult, ui: UiController, world: GameWorld) {
+  private handleValidationResult(result: ValidationResult, ui: UiController) {
     this.showReply(ui, result.msg);
     if (result.type === "punish") {
       this.character.changeOpinion(-1);
-      this.punishWithWater(ui, world);
+      this.punishWithWater = true;
     }
     else if (result.type === "praise") {
       this.character.changeOpinion(+1);
     }
   }
 
-  private punishWithWater(ui: UiController, world: GameWorld) {
-    const glass = new BeerGlass(getDrink("water"), DrinkLevel.full);
-    ui.setSelectedItem(glass);
-    world.getPlayer().onInteract(ui, world);
-  }
-
   nextActivity() {
-    return undefined;
+    if (this.punishWithWater) {
+      return new CallFuxActivity(this.character, new RequestWaterInteraction(this.character));
+    }
   }
 
   private showReply(ui: UiController, text: string) {
