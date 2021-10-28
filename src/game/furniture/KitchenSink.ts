@@ -1,5 +1,8 @@
 import { Coord, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
+import { BeerGlass, DrinkLevel } from "../items/BeerGlass";
+import { getDrink } from "../items/Drink";
+import { GameItem } from "../items/GameItem";
 import { PixelScreen } from "../PixelScreen";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { UiController } from "../UiController";
@@ -34,10 +37,20 @@ export class KitchenSink implements GameObject {
     return { coord: [0, -16], size: [16, 32] };
   }
 
-  isInteractable() {
-    return true;
+  isInteractable(ui: UiController) {
+    return this.isEmptyGlass(ui.getSelectedItem());
   }
 
   onInteract(ui: UiController) {
+    const glass = ui.getSelectedItem();
+    if (!this.isEmptyGlass(glass)) {
+      return;
+    }
+
+    glass.fill(getDrink("water"), DrinkLevel.full);
+  }
+
+  private isEmptyGlass(item: GameItem | undefined): item is BeerGlass {
+    return item instanceof BeerGlass && item.getLevel() === DrinkLevel.empty;
   }
 }
