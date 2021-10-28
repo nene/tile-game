@@ -3,7 +3,7 @@ import { UiController } from "../UiController";
 import { TextContent } from "../dialogs/TextContent";
 import { Interaction, InteractionType } from "./Interaction";
 import { Dialog } from "../dialogs/Dialog";
-import { BeerGlass } from "../items/BeerGlass";
+import { BeerGlass, DrinkLevel } from "../items/BeerGlass";
 import { getDrink } from "../items/Drink";
 import { GameWorld } from "../GameWorld";
 import { noop } from "lodash";
@@ -24,8 +24,16 @@ export class RequestWaterInteraction implements Interaction {
 
   interact(ui: UiController, world: GameWorld) {
     const item = ui.getSelectedItem();
-    if (!(item instanceof BeerGlass) || item.getDrink() !== getDrink("water")) {
+    if (!(item instanceof BeerGlass)) {
       this.showDialog(ui, "Too šoppen vett!");
+      return;
+    }
+    if (item.getDrink() !== getDrink("water")) {
+      this.showDialog(ui, "Vesi, vesi... kus on vesi?");
+      return;
+    }
+    if (item.getLevel() !== DrinkLevel.full) {
+      this.showDialog(ui, "Meil on kraanis vett küllaga. Palun täida seal šoppen ääreni.");
       return;
     }
 
