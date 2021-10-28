@@ -1,3 +1,4 @@
+import pouringWater from "./data/pouring-water.mp3";
 import pouringBeer from "./data/pouring-beer.mp3";
 import openingBeer from "./data/opening-beer.mp3";
 import openingCabinetDoor from "./data/opening-cabinet-door.mp3";
@@ -6,6 +7,7 @@ import coins from "./data/coins.wav";
 import glassBottles from "./data/glass-bottles.mp3";
 
 const soundFiles = {
+  'pouring-water': pouringWater,
   'pouring-beer': pouringBeer,
   'opening-beer': openingBeer,
   'opening-cabinet-door': openingCabinetDoor,

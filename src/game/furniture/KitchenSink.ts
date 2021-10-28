@@ -4,6 +4,7 @@ import { BeerGlass, DrinkLevel } from "../items/BeerGlass";
 import { getDrink } from "../items/Drink";
 import { GameItem } from "../items/GameItem";
 import { PixelScreen } from "../PixelScreen";
+import { SoundLibrary } from "../sounds/SoundLibrary";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { UiController } from "../UiController";
 
@@ -47,6 +48,7 @@ export class KitchenSink implements GameObject {
       return;
     }
 
+    SoundLibrary.play("pouring-water");
     glass.fill(getDrink("water"), DrinkLevel.full);
   }
 
