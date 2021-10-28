@@ -13,6 +13,7 @@ import { Fireplace } from "../furniture/Fireplace";
 import { Countertop } from "../furniture/Countertop";
 import { Painting } from "../furniture/Painting";
 import { SpawnPoint } from "../furniture/SpawnPoint";
+import { KitchenSink } from "../furniture/KitchenSink";
 
 const CFE_SIZE: Coord = [23, 17]; // Size in tiles
 
@@ -59,6 +60,8 @@ export class CfeLocationFactory implements LocationFactory {
       new Fridge(tileToScreenCoord([19, 7])),
       // Place for empty bottles
       new BeerBox(tileToScreenCoord([20, 7])),
+      // Tap water
+      new KitchenSink(tileToScreenCoord([21, 8])),
     ];
   }
 

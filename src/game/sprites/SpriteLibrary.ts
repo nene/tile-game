@@ -13,6 +13,7 @@ import table from "./data/table.png";
 import fridge from "./data/fridge.png";
 import beerCabinet from "./data/beer-cabinet.png";
 import beerBox from "./data/beer-box.png";
+import kitchenSink from "./data/kitchen-sink.png";
 import door from "./data/door.png";
 import colorShield from "./data/color-shield.png";
 import bulletinBoard from "./data/bulletin-board.png";
@@ -64,6 +65,7 @@ const imageFiles = {
   'fridge': spriteDef({ src: fridge, cfg: { size: [16, 46], offset: [0, -32] } }),
   'beer-cabinet': spriteDef({ src: beerCabinet, cfg: { size: [32, 46], offset: [0, -32] } }),
   'beer-box': spriteDef({ src: beerBox, cfg: { size: [11, 14], offset: [3, -4] } }),
+  'kitchen-sink': spriteDef({ src: kitchenSink, cfg: { size: [16, 43], offset: [0, -27] } }),
   'door': spriteDef({ src: door, cfg: { size: [20, 35], offset: [-2, -34] } }),
   'color-shield': spriteDef({ src: colorShield, cfg: { size: [11, 12], offset: [3, -40] } }),
   'bulletin-board': spriteDef({ src: bulletinBoard, cfg: { size: [13, 17], offset: [4, -40] } }),
