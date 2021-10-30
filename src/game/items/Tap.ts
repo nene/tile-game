@@ -18,7 +18,13 @@ export class Tap implements GameItem {
   combine(item: GameItem): MiniGame | undefined {
     if (item instanceof BeerGlass && item.getLevel() === DrinkLevel.empty) {
       SoundLibrary.play("pouring-water");
-      item.fill(getDrink("water"), DrinkLevel.full);
+      const fillStep = () => {
+        item.fill(getDrink("water"), item.getLevel() + 1);
+        if (item.getLevel() < DrinkLevel.full) {
+          setTimeout(fillStep, 500);
+        }
+      };
+      setTimeout(fillStep, 500);
     }
     return undefined;
   }

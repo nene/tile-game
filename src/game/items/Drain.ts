@@ -18,7 +18,13 @@ export class Drain implements GameItem {
   combine(item: GameItem): MiniGame | undefined {
     if (item instanceof BeerGlass && item.getLevel() > DrinkLevel.empty) {
       SoundLibrary.play("pouring-water");
-      item.fill(undefined, DrinkLevel.empty);
+      const drainStep = () => {
+        item.fill(item.getDrink(), item.getLevel() - 1);
+        if (item.getLevel() > DrinkLevel.empty) {
+          setTimeout(drainStep, 500);
+        }
+      };
+      setTimeout(drainStep, 500);
     }
     if (item instanceof BeerBottle && item.isOpen() && !item.isEmpty()) {
       SoundLibrary.play("pouring-water");
