@@ -4,12 +4,12 @@ import { Shop } from "../inventory/Shop";
 import { ShopView } from "../inventory/ShopView";
 import { getDrink } from "../items/Drink";
 import { BeerBottle } from "../items/BeerBottle";
-import { BottleOpener, BottleOpenerType } from "../items/BottleOpener";
 import { PixelScreen } from "../PixelScreen";
 import { SoundLibrary } from "../sounds/SoundLibrary";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { UiController } from "../UiController";
+import { SimpleBottleOpener } from "../items/SimpleBottleOpener";
 
 export class Fridge implements GameObject {
   private sprite: Sprite;
@@ -28,7 +28,7 @@ export class Fridge implements GameObject {
       new BeerBottle(getDrink("kriek")),
       new BeerBottle(getDrink("heineken")),
       new BeerBottle(getDrink("paulaner")),
-      new BottleOpener(BottleOpenerType.simple),
+      new SimpleBottleOpener(),
     ]);
   }
 

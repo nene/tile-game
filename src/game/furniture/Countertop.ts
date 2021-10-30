@@ -2,7 +2,7 @@ import { Coord, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
 import { StaticInventory } from "../inventory/StaticInventory";
 import { StorageInventoryView } from "../inventory/StorageInventoryView";
-import { BottleOpener, BottleOpenerType } from "../items/BottleOpener";
+import { LockedBottleOpener } from "../items/LockedBottleOpener";
 import { PixelScreen } from "../PixelScreen";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
@@ -13,7 +13,7 @@ export class Countertop implements GameObject {
   private inventory = new StaticInventory({
     size: 1,
     items: [
-      new BottleOpener(BottleOpenerType.attatched),
+      new LockedBottleOpener(),
     ],
   });
 

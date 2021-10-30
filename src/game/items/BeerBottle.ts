@@ -4,8 +4,9 @@ import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { SpriteSheet } from "../sprites/SpriteSheet";
 import { BeerGlass } from "./BeerGlass";
 import { Drink } from "./Drink";
-import { BottleOpener } from "./BottleOpener";
+import { isBottleOpener } from "./BottleOpener";
 import { GameItem, SellableGameItem } from "./GameItem";
+import { OpeningGame } from "../minigames/OpeningGame";
 
 export enum CapState {
   closed = 1,
@@ -72,8 +73,8 @@ export class BeerBottle implements SellableGameItem {
     if (item instanceof BeerGlass) {
       return item.combine(this); // Keep main logic in beer-glass
     }
-    if (item instanceof BottleOpener) {
-      return item.combine(this); // Keep main logic in bottle-opener
+    if (isBottleOpener(item) && !this.isOpen()) {
+      return new OpeningGame(this, item);
     }
   }
 
