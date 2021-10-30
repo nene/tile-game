@@ -8,7 +8,7 @@ import { GameItem } from "./GameItem";
 
 export class Drain implements GameItem {
   getName() {
-    return "Tagasi Emajõkke";
+    return "Valamu";
   }
 
   getSprite(): Sprite {

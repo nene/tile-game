@@ -39,7 +39,7 @@ const drinks = {
     name: "Vesi",
     description: "Seda tuleb kraanist lõputult.",
     price: 0,
-    bottleSpriteIndex: 0,
+    bottleSpriteIndex: 11,
     alcohol: 0,
     foam: foamLevel[0],
     capStrength: 0,

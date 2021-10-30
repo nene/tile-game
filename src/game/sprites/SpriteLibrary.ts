@@ -85,7 +85,7 @@ const imageFiles = {
 
   'beer-glass-lg': spriteDef({ src: beerGlassLg, cfg: { size: [16, 16], colsRows: [5, 5] } }),
   'beer-glass-sm': spriteDef({ src: beerGlassSm, cfg: { size: [10, 10], colsRows: [5, 5] } }),
-  'bottle': spriteDef({ src: bottle, cfg: { size: [16, 16], colsRows: [3, 11] } }),
+  'bottle': spriteDef({ src: bottle, cfg: { size: [16, 16], colsRows: [3, 12] } }),
   'bottle-opener': spriteDef({ src: bottleOpener, cfg: { size: [16, 16], colsRows: [2, 1] } }),
   'tap': spriteDef({ src: tap, cfg: { size: [16, 16] } }),
   'drain': spriteDef({ src: drain, cfg: { size: [16, 16] } }),

@@ -53,9 +53,9 @@ export class KitchenSink implements GameObject {
   onInteract(ui: UiController) {
     ui.showInventory(new StorageInventoryView({
       inventory: this.inventory,
-      windowSize: [120, 87],
+      windowSize: [140, 87],
       gridSize: [2, 1],
-      headline: { title: "Kraanikauss", description: "Täida siin šoppen veega või tühjenda." },
+      headline: { title: "Kraanikauss", description: "Täida siin šoppen veega või tühjenda valamusse." },
       onClose: () => {
         ui.hideInventory();
       },

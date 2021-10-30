@@ -2,6 +2,7 @@ import { MiniGame } from "../minigames/MiniGame";
 import { SoundLibrary } from "../sounds/SoundLibrary";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
+import { BeerBottle } from "./BeerBottle";
 import { BeerGlass, DrinkLevel } from "./BeerGlass";
 import { getDrink } from "./Drink";
 import { GameItem } from "./GameItem";
@@ -25,6 +26,10 @@ export class Tap implements GameItem {
         }
       };
       setTimeout(fillStep, 500);
+    }
+    if (item instanceof BeerBottle && item.isEmpty()) {
+      SoundLibrary.play("pouring-water");
+      item.fill(getDrink("water"));
     }
     return undefined;
   }

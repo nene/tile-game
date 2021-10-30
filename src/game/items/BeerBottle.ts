@@ -43,6 +43,11 @@ export class BeerBottle implements SellableGameItem {
     this.full = false;
   }
 
+  fill(drink: Drink) {
+    this.drink = drink;
+    this.full = true;
+  }
+
   isEmpty(): boolean {
     return !this.full;
   }
