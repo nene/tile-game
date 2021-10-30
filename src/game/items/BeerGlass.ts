@@ -53,7 +53,7 @@ export class BeerGlass implements GameItem {
     return 0;
   }
 
-  fill(drink: Drink, level: DrinkLevel) {
+  fill(drink: Drink | undefined, level: DrinkLevel) {
     this.drink = drink;
     this.level = level;
   }
