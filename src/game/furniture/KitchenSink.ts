@@ -1,14 +1,20 @@
 import { Coord, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
-import { BeerGlass, DrinkLevel } from "../items/BeerGlass";
-import { getDrink } from "../items/Drink";
-import { GameItem } from "../items/GameItem";
+import { StaticInventory } from "../inventory/StaticInventory";
+import { StorageInventoryView } from "../inventory/StorageInventoryView";
+import { Tap } from "../items/Tap";
 import { PixelScreen } from "../PixelScreen";
-import { SoundLibrary } from "../sounds/SoundLibrary";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { UiController } from "../UiController";
 
 export class KitchenSink implements GameObject {
+  private inventory = new StaticInventory({
+    size: 1,
+    items: [
+      new Tap(),
+    ],
+  });
+
   constructor(private coord: Coord) {
   }
 
@@ -39,20 +45,18 @@ export class KitchenSink implements GameObject {
   }
 
   isInteractable(ui: UiController) {
-    return this.isEmptyGlass(ui.getSelectedItem());
+    return true;
   }
 
   onInteract(ui: UiController) {
-    const glass = ui.getSelectedItem();
-    if (!this.isEmptyGlass(glass)) {
-      return;
-    }
-
-    SoundLibrary.play("pouring-water");
-    glass.fill(getDrink("water"), DrinkLevel.full);
-  }
-
-  private isEmptyGlass(item: GameItem | undefined): item is BeerGlass {
-    return item instanceof BeerGlass && item.getLevel() === DrinkLevel.empty;
+    ui.showInventory(new StorageInventoryView({
+      inventory: this.inventory,
+      windowSize: [97, 87],
+      gridSize: [1, 1],
+      headline: { title: "Kraanikauss", description: "Täida siin šoppen veega." },
+      onClose: () => {
+        ui.hideInventory();
+      },
+    }));
   }
 }
