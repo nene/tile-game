@@ -7,7 +7,7 @@ import { ShopItemRenderer } from "./ShopItemRenderer";
 import { InventoryView, ItemHoverHandler, SlotClickHandler } from "./InventoryView";
 import { Wallet } from "../Wallet";
 import { Headline, Window } from "../ui/Window";
-import { GameItem } from "../items/GameItem";
+import { SellableGameItem } from "../items/GameItem";
 
 interface ShopViewConfig {
   shop: Shop;
@@ -18,7 +18,7 @@ interface ShopViewConfig {
 
 export class ShopView implements InventoryView {
   private shopItemRenderer: ShopItemRenderer;
-  private scrollView: ScrollView<GameItem>;
+  private scrollView: ScrollView<SellableGameItem>;
   private window: Window;
   private shop: Shop;
   private handleSlotClick?: SlotClickHandler;

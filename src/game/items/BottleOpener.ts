@@ -3,14 +3,14 @@ import { OpeningGame } from "../minigames/OpeningGame";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { BeerBottle } from "./BeerBottle";
-import { GameItem } from "./GameItem";
+import { GameItem, SellableGameItem } from "./GameItem";
 
 export enum BottleOpenerType {
   simple = 0,
   attatched = 1,
 }
 
-export class BottleOpener implements GameItem {
+export class BottleOpener implements SellableGameItem {
   private sprite: Sprite;
 
   constructor(private type: BottleOpenerType) {

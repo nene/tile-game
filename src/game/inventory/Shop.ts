@@ -1,9 +1,9 @@
-import { GameItem } from "../items/GameItem";
+import { SellableGameItem } from "../items/GameItem";
 import { Wallet } from "../Wallet";
 import { TakeableInventory } from "./Inventory";
 
 export class Shop implements TakeableInventory {
-  constructor(private items: GameItem[]) {
+  constructor(private items: SellableGameItem[]) {
   }
 
   size() {

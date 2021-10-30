@@ -1,6 +1,6 @@
 import { Coord, coordAdd, Rect } from "../Coord";
 import { BeerBottle } from "../items/BeerBottle";
-import { GameItem } from "../items/GameItem";
+import { SellableGameItem } from "../items/GameItem";
 import { PixelScreen } from "../PixelScreen";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
@@ -19,7 +19,7 @@ export class ShopItemRenderer {
     this.goldSprite = SpriteLibrary.getSprite("gold");
   }
 
-  render(screen: PixelScreen, rect: Rect, item: GameItem, highlighted: boolean) {
+  render(screen: PixelScreen, rect: Rect, item: SellableGameItem, highlighted: boolean) {
     const iconRect: Rect = { coord: coordAdd(rect.coord, [2, 2]), size: [16, 16] };
     const nameCoord = coordAdd(iconRect.coord, [18, -1]);
     const [nameLen] = screen.measureText(item.getName());

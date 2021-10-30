@@ -5,14 +5,14 @@ import { SpriteSheet } from "../sprites/SpriteSheet";
 import { BeerGlass } from "./BeerGlass";
 import { Drink } from "./Drink";
 import { BottleOpener } from "./BottleOpener";
-import { GameItem } from "./GameItem";
+import { GameItem, SellableGameItem } from "./GameItem";
 
 export enum CapState {
   closed = 1,
   open = 2,
 }
 
-export class BeerBottle implements GameItem {
+export class BeerBottle implements SellableGameItem {
   private spriteSheet: SpriteSheet;
   private full = true;
 

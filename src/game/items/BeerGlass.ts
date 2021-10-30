@@ -45,14 +45,6 @@ export class BeerGlass implements GameItem {
     }
   }
 
-  getDescription() {
-    return "Harilik klaasist šoppen";
-  }
-
-  getPrice() {
-    return 0;
-  }
-
   fill(drink: Drink | undefined, level: DrinkLevel) {
     this.drink = drink;
     this.level = level;
@@ -78,9 +70,5 @@ export class BeerGlass implements GameItem {
 
   getSmallSprite(): Sprite {
     return this.smallSpriteSheet.getSprite([this.level, this.drink?.color ?? 0]);
-  }
-
-  clone() {
-    return new BeerGlass(this.drink, this.level);
   }
 }

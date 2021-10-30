@@ -11,14 +11,6 @@ export class Drain implements GameItem {
     return "Tagasi Emajõkke";
   }
 
-  getDescription() {
-    return "";
-  }
-
-  getPrice() {
-    return 0;
-  }
-
   getSprite(): Sprite {
     return SpriteLibrary.getSprite("drain");
   }
@@ -33,9 +25,5 @@ export class Drain implements GameItem {
       item.empty();
     }
     return undefined;
-  }
-
-  clone() {
-    return new Drain();
   }
 }

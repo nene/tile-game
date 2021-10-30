@@ -11,14 +11,6 @@ export class Tap implements GameItem {
     return "Kraan";
   }
 
-  getDescription() {
-    return "";
-  }
-
-  getPrice() {
-    return 0;
-  }
-
   getSprite(): Sprite {
     return SpriteLibrary.getSprite("tap");
   }
@@ -29,9 +21,5 @@ export class Tap implements GameItem {
       item.fill(getDrink("water"), DrinkLevel.full);
     }
     return undefined;
-  }
-
-  clone() {
-    return new Tap();
   }
 }
