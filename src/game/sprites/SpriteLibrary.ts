@@ -14,6 +14,8 @@ import fridge from "./data/fridge.png";
 import beerCabinet from "./data/beer-cabinet.png";
 import beerBox from "./data/beer-box.png";
 import kitchenSink from "./data/kitchen-sink.png";
+import tap from "./data/tap.png";
+import drain from "./data/drain.png";
 import door from "./data/door.png";
 import colorShield from "./data/color-shield.png";
 import bulletinBoard from "./data/bulletin-board.png";
@@ -85,6 +87,8 @@ const imageFiles = {
   'beer-glass-sm': spriteDef({ src: beerGlassSm, cfg: { size: [10, 10], colsRows: [5, 5] } }),
   'bottle': spriteDef({ src: bottle, cfg: { size: [16, 16], colsRows: [3, 11] } }),
   'bottle-opener': spriteDef({ src: bottleOpener, cfg: { size: [16, 16], colsRows: [2, 1] } }),
+  'tap': spriteDef({ src: tap, cfg: { size: [16, 16] } }),
+  'drain': spriteDef({ src: drain, cfg: { size: [16, 16] } }),
 
   // bottle-opening game
   'opening-game-bg': spriteDef({ src: openingGameBg, cfg: { size: [16, 16] } }),
