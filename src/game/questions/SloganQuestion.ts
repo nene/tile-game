@@ -1,16 +1,15 @@
-import { allOrganizations, Organization } from "../orgs/Organization";
+import { Organization } from "../orgs/Organization";
 import { pickRandom } from "../utils/pickRandom";
 import { generateChoices } from "./generateChoices";
 import { MultiChoiceQuestion } from "./Question";
 
-export function createSloganQuestion(): MultiChoiceQuestion {
-  const orgsWithSlogans = allOrganizations().filter(isOrgWithSlogan);
-  const org = pickRandom(orgsWithSlogans);
+export function createSloganQuestion(targetOrgs: Organization[], allOrgs: Organization[]): MultiChoiceQuestion {
+  const org = pickRandom(targetOrgs.filter(isOrgWithSlogan));
   return {
     type: "multi-choice",
     question: `Mis on ${org.name} lipukiri?`,
     fontSize: "small",
-    choices: generateChoices(orgsWithSlogans, org, (org) => org.slogan),
+    choices: generateChoices(allOrgs.filter(isOrgWithSlogan), org, (org) => org.slogan),
     validate: (slogan: string) => {
       if (slogan === org.slogan) {
         return { type: "praise", msg: "Õige! Oled hoolega tudeerinud. Tubli rebane!" };

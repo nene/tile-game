@@ -1,14 +1,14 @@
-import { allOrganizations } from "../orgs/Organization";
+import { Organization } from "../orgs/Organization";
 import { pickRandom } from "../utils/pickRandom";
 import { generateChoices } from "./generateChoices";
 import { MultiChoiceQuestion } from "./Question";
 
-export function createPlaceQuestion(): MultiChoiceQuestion {
-  const org = pickRandom(allOrganizations());
+export function createPlaceQuestion(targetOrgs: Organization[], allOrgs: Organization[]): MultiChoiceQuestion {
+  const org = pickRandom(targetOrgs);
   return {
     type: "multi-choice",
     question: `Kus on asutatud ${org.name}?`,
-    choices: generateChoices(allOrganizations(), org, (org) => org.establishedPlace),
+    choices: generateChoices(allOrgs, org, (org) => org.establishedPlace),
     validate: (establishedPlace: string) => {
       if (establishedPlace === org.establishedPlace) {
         return { type: "praise", msg: "Õige vastus! Oled tubli." };

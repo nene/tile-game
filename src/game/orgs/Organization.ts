@@ -1,11 +1,26 @@
 import { FlagColor, makeFlag } from "./FlagColors";
 
+export enum OrgSkillLevel {
+  estica = 0, // Only Fraternitas Estica
+  fraternities1 = 1, // EÜS, Vironia, Sakala, Ugala, Rotalia
+  sororities = 2, // ENÜS, FP, Indla, Lembela, Amicitia, Sor.Estoniae
+  fraternities2 = 3, // Liviensis, Revelia, Tehnola, Leola, Tartuensis
+  unions = 4, // Seltsid: Põhjala, Liivika, Veljesto, Raimla, Fennica + Arminia
+  friends = 5, // Sõprusorgid: Lettonia, Polonia, NeoLithuania, Savo, Värmlands Nation
+  level6 = 6,
+  level7 = 7,
+  level8 = 8,
+  level9 = 9,
+  level10 = 10,
+}
+
 export interface Organization {
   name: string;
   colors: FlagColor[];
   establishedYear: number;
   establishedPlace: string;
   slogan?: string;
+  level: OrgSkillLevel;
 }
 
 const orgDef = (org: Organization) => org;
@@ -17,6 +32,7 @@ const orgs = {
     establishedYear: 1870,
     establishedPlace: "Tartu",
     slogan: "Fortiter in re, sauviter in modo",
+    level: OrgSkillLevel.fraternities1,
   }),
   vironia: orgDef({
     name: "Vironia",
@@ -24,6 +40,7 @@ const orgs = {
     establishedYear: 1900,
     establishedPlace: "Riia",
     slogan: "Ühisus, kindlus, ausus",
+    level: OrgSkillLevel.fraternities1,
   }),
   estica: orgDef({
     name: "Fraternitas Estica",
@@ -31,6 +48,7 @@ const orgs = {
     establishedYear: 1907,
     establishedPlace: "Tartu",
     slogan: "Teos õiglane ja vahvas, ustav sulle, Eesti rahvas",
+    level: OrgSkillLevel.estica,
   }),
   sakala: orgDef({
     name: "Sakala",
@@ -38,6 +56,7 @@ const orgs = {
     establishedYear: 1909,
     establishedPlace: "Tartu",
     slogan: "Üks kõige, kõik ühe eest",
+    level: OrgSkillLevel.fraternities1,
   }),
   ugala: orgDef({
     name: "Ugala",
@@ -45,6 +64,7 @@ const orgs = {
     establishedYear: 1913,
     establishedPlace: "Tartu",
     slogan: "Isamaa, sõprus, ausus",
+    level: OrgSkillLevel.fraternities1,
   }),
   rotalia: orgDef({
     name: "Rotalia",
@@ -52,6 +72,7 @@ const orgs = {
     establishedYear: 1913,
     establishedPlace: "Peterburg",
     slogan: "Eestimaa, mu isamaa",
+    level: OrgSkillLevel.fraternities1,
   }),
   liviensis: orgDef({
     name: "Fraternitas Liviensis",
@@ -59,6 +80,7 @@ const orgs = {
     establishedYear: 1918,
     establishedPlace: "Tartu",
     slogan: "Vendlus, ausus, hoolsus",
+    level: OrgSkillLevel.fraternities2,
   }),
   leola: orgDef({
     name: "Leola",
@@ -66,6 +88,7 @@ const orgs = {
     establishedYear: 1920,
     establishedPlace: "Tallinn",
     slogan: "Age quod agis",
+    level: OrgSkillLevel.fraternities2,
   }),
   revelia: orgDef({
     name: "Revelia",
@@ -73,6 +96,7 @@ const orgs = {
     establishedYear: 1920,
     establishedPlace: "Tartu",
     slogan: "Üks kõige, kõik ühe eest",
+    level: OrgSkillLevel.fraternities2,
   }),
   tehnola: orgDef({
     name: "Tehnola",
@@ -80,6 +104,7 @@ const orgs = {
     establishedYear: 1921,
     establishedPlace: "Tallinn",
     slogan: "Kindlus, ausus, vendlus",
+    level: OrgSkillLevel.fraternities2,
   }),
   tartuensis: orgDef({
     name: "Fraternitas Tartuensis",
@@ -87,6 +112,7 @@ const orgs = {
     establishedYear: 1929,
     establishedPlace: "Tartu",
     slogan: "Pidevas töös tõe valguses elurõõmsalt tulevikku",
+    level: OrgSkillLevel.fraternities2,
   }),
   arminia: orgDef({
     name: "Arminia Dorpatensis",
@@ -94,6 +120,7 @@ const orgs = {
     establishedYear: 1994,
     establishedPlace: "Tartu",
     slogan: "Jumal, vabadus, isamaa",
+    level: OrgSkillLevel.unions,
   }),
   filiaePatriae: orgDef({
     name: "Filiae Patriae",
@@ -101,6 +128,7 @@ const orgs = {
     establishedYear: 1920,
     establishedPlace: "Tartu",
     slogan: "Eesti tütar, Eesti kodu, tugevasti seotud olgu",
+    level: OrgSkillLevel.sororities,
   }),
   indla: orgDef({
     name: "Indla",
@@ -108,6 +136,7 @@ const orgs = {
     establishedYear: 1924,
     establishedPlace: "Tartu",
     slogan: "Sõnasse kindlust, teosse ausust, kodule armastust",
+    level: OrgSkillLevel.sororities,
   }),
   lembela: orgDef({
     name: "Lembela",
@@ -115,6 +144,7 @@ const orgs = {
     establishedYear: 1924,
     establishedPlace: "Tartu",
     slogan: "Constantia ad finem ducit",
+    level: OrgSkillLevel.sororities,
   }),
   amicitia: orgDef({
     name: "Amicitia",
@@ -122,6 +152,7 @@ const orgs = {
     establishedYear: 1924,
     establishedPlace: "Tartu",
     slogan: "Per aspera ad astra",
+    level: OrgSkillLevel.sororities,
   }),
   sororitasEstoniae: orgDef({
     name: "Sororitas Estoniae",
@@ -129,6 +160,7 @@ const orgs = {
     establishedYear: 2011,
     establishedPlace: "Tallinn",
     slogan: "Teadmised on ilu",
+    level: OrgSkillLevel.sororities,
   }),
   pohjala: orgDef({
     name: "EÜS Põhjala",
@@ -136,6 +168,7 @@ const orgs = {
     establishedYear: 1884,
     establishedPlace: "Peterburg",
     slogan: "Töö isamaa kasuks",
+    level: OrgSkillLevel.unions,
   }),
   enys: orgDef({
     name: "Eesti Naisüliõpilaste Selts",
@@ -143,6 +176,7 @@ const orgs = {
     establishedYear: 1911,
     establishedPlace: "Tartu",
     slogan: "Demokraatia, rahvuslikkus, individuaalsus",
+    level: OrgSkillLevel.sororities,
   }),
   liivika: orgDef({
     name: "ÜS Liivika",
@@ -150,6 +184,7 @@ const orgs = {
     establishedYear: 1909,
     establishedPlace: "Tartu",
     slogan: "Ex solo ad solem soli patriae",
+    level: OrgSkillLevel.unions,
   }),
   veljesto: orgDef({
     name: "EYS Veljesto",
@@ -157,6 +192,7 @@ const orgs = {
     establishedYear: 1920,
     establishedPlace: "Tartu",
     slogan: "Õige vaimsuse kaudu vendlusele, nende mõlema kaudu vabadusele",
+    level: OrgSkillLevel.unions,
   }),
   raimla: orgDef({
     name: "ÜS Raimla",
@@ -164,6 +200,7 @@ const orgs = {
     establishedYear: 1922,
     establishedPlace: "Tartu",
     slogan: "Demokraatia, isiksus, isamaa",
+    level: OrgSkillLevel.unions,
   }),
   fennica: orgDef({
     name: "ÜÜ Fraternitas Fennica",
@@ -171,6 +208,7 @@ const orgs = {
     establishedYear: 1926,
     establishedPlace: "Tartu",
     slogan: undefined,
+    level: OrgSkillLevel.unions,
   }),
   lettonia: orgDef({
     name: "Lettonia",
@@ -178,6 +216,7 @@ const orgs = {
     establishedYear: 1870,
     establishedPlace: "Tartu",
     slogan: undefined,
+    level: OrgSkillLevel.friends,
   }),
   polonia: orgDef({
     name: "Polonia",
@@ -185,6 +224,7 @@ const orgs = {
     establishedYear: 1828,
     establishedPlace: "Tartu",
     slogan: undefined,
+    level: OrgSkillLevel.friends,
   }),
   savo: orgDef({
     name: "Savolainen Osakunta",
@@ -192,6 +232,7 @@ const orgs = {
     establishedYear: 1905,
     establishedPlace: "Helsingi",
     slogan: undefined,
+    level: OrgSkillLevel.friends,
   }),
   neoLithuania: orgDef({
     name: "Neo-Lithuania",
@@ -199,6 +240,7 @@ const orgs = {
     establishedYear: 1922,
     establishedPlace: "Kaunas",
     slogan: undefined,
+    level: OrgSkillLevel.friends,
   }),
   varmlandsNation: orgDef({
     name: "Värmlands Nation",
@@ -206,6 +248,7 @@ const orgs = {
     establishedYear: 1660,
     establishedPlace: "Uppsala",
     slogan: undefined,
+    level: OrgSkillLevel.friends,
   }),
 };
 

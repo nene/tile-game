@@ -1,14 +1,14 @@
-import { allOrganizations } from "../orgs/Organization";
+import { Organization } from "../orgs/Organization";
 import { pickRandom } from "../utils/pickRandom";
 import { generateChoices } from "./generateChoices";
 import { MultiChoiceQuestion } from "./Question";
 
-export function createYearQuestion(): MultiChoiceQuestion {
-  const org = pickRandom(allOrganizations());
+export function createYearQuestion(targetOrgs: Organization[], allOrgs: Organization[]): MultiChoiceQuestion {
+  const org = pickRandom(targetOrgs);
   return {
     type: "multi-choice",
     question: `Millisel aastal on asutatud ${org.name}?`,
-    choices: generateChoices(allOrganizations(), org, (org) => String(org.establishedYear)),
+    choices: generateChoices(allOrgs, org, (org) => String(org.establishedYear)),
     validate: (year: string) => {
       if (year === String(org.establishedYear)) {
         return { type: "praise", msg: "Õige! Võta püksid maha." };

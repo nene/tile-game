@@ -28,7 +28,7 @@ export class AskQuestionInteraction implements Interaction {
   }
 
   interact(ui: UiController) {
-    const question = this.questionFactory.createQuestion();
+    const question = this.questionFactory.createQuestion(ui.getAttributes().orgSkill);
 
     ui.showModal(new Dialog({
       character: this.character,

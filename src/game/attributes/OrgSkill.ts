@@ -1,16 +1,5 @@
-export enum OrgSkillLevel {
-  estica = 0, // Only questions about Fraternitas Estica
-  level1 = 1,
-  level2 = 2,
-  level3 = 3,
-  level4 = 4,
-  level5 = 5,
-  level6 = 6,
-  level7 = 7,
-  level8 = 8,
-  level9 = 9,
-  level10 = 10,
-}
+import { allOrganizations, Organization, OrgSkillLevel } from "../orgs/Organization";
+import { QuestionCategory } from "../questions/QuestionFactory";
 
 // Skill of answering questions about Academic Organizations.
 // As the player levels up, questions become harder.
@@ -25,5 +14,19 @@ export class OrgSkill {
     if (this.level < OrgSkillLevel.level10) {
       this.level++;
     }
+  }
+
+  // About which orgs we ask questions
+  getTargetOrgs(): Organization[] {
+    return allOrganizations().filter((org) => org.level === this.level);
+  }
+
+  // Which additional orgs are allowed in the multi-choice answers
+  getPossibleOrgs(): Organization[] {
+    return allOrganizations();
+  }
+
+  getEnabledCategories(): QuestionCategory[] {
+    return ["colors", "place", "slogan", "year"];
   }
 }
