@@ -17,7 +17,6 @@ interface ShopViewConfig {
 }
 
 export class ShopView implements InventoryView {
-  private shopItemRenderer: ShopItemRenderer;
   private scrollView: ScrollView<SellableGameItem>;
   private window: Window;
   private shop: Shop;
@@ -36,7 +35,7 @@ export class ShopView implements InventoryView {
 
     const contentRect = this.window.contentAreaRect();
 
-    this.shopItemRenderer = new ShopItemRenderer(wallet);
+    const renderer = new ShopItemRenderer(wallet);
     this.scrollView = new ScrollView({
       items: shop.allItems(),
       rect: contentRect,
@@ -44,7 +43,7 @@ export class ShopView implements InventoryView {
       itemSeparator: 1,
       margin: [1, 1],
       bgColor: "#000",
-      renderer: this.shopItemRenderer.render.bind(this.shopItemRenderer),
+      renderer: renderer.render.bind(renderer),
     });
   }
 
