@@ -11,6 +11,7 @@ import { PlayerAttributes } from "./attributes/PlayerAttributes";
 import { Coord } from "./Coord";
 import { Clock } from "./Clock";
 import { Component } from "./ui/Component";
+import { QuestionFactory } from "./questions/QuestionFactory";
 
 export class UiController {
   private inventoryController: InventoryController;
@@ -18,11 +19,13 @@ export class UiController {
   private modalWindow?: Component;
   private scoreBoard: ScoreBoard;
   private clock = new Clock();
+  private questionFacory: QuestionFactory;
 
   constructor(private attributes: PlayerAttributes) {
     this.inventoryController = new InventoryController(attributes);
     this.cursorController = new CursorController();
     this.scoreBoard = new ScoreBoard([269, 0], attributes.wallet, attributes.drunkenness, this.clock);
+    this.questionFacory = new QuestionFactory(attributes.orgSkill);
   }
 
   getSelectedItem(): GameItem | undefined {
@@ -117,5 +120,9 @@ export class UiController {
 
   hideModal() {
     this.modalWindow = undefined;
+  }
+
+  questions(): QuestionFactory {
+    return this.questionFacory;
   }
 }

@@ -10,15 +10,25 @@ import { createYearQuestion } from "./YearQuestion";
 export type QuestionCategory = "colors" | "place" | "slogan" | "year" | "terminology";
 
 export class QuestionFactory {
-  createQuestion(orgSkill: OrgSkill): Question {
-    const categories: QuestionCategory[] = [...orgSkill.getEnabledCategories(), "terminology"];
+  constructor(private orgSkill: OrgSkill) { }
+
+  create(): Question {
+    const categories: QuestionCategory[] = [...this.orgSkill.getEnabledCategories(), "terminology"];
 
     switch (pickRandom(categories)) {
-      case "colors": return createColorsQuestion(orgSkill.getTargetOrgs());
-      case "place": return createPlaceQuestion(orgSkill.getTargetOrgs(), orgSkill.getPossibleOrgs());
-      case "slogan": return createSloganQuestion(orgSkill.getTargetOrgs(), orgSkill.getPossibleOrgs());
-      case "year": return createYearQuestion(orgSkill.getTargetOrgs(), orgSkill.getPossibleOrgs());
+      case "colors": return createColorsQuestion(this.orgSkill.getTargetOrgs());
+      case "place": return createPlaceQuestion(this.orgSkill.getTargetOrgs(), this.orgSkill.getPossibleOrgs());
+      case "slogan": return createSloganQuestion(this.orgSkill.getTargetOrgs(), this.orgSkill.getPossibleOrgs());
+      case "year": return createYearQuestion(this.orgSkill.getTargetOrgs(), this.orgSkill.getPossibleOrgs());
       case "terminology": return createTerminologyQuestion();
     }
+  }
+
+  rightAnswer() {
+    this.orgSkill.rightAnswer();
+  }
+
+  wrongAnswer() {
+    this.orgSkill.wrongAnswer();
   }
 }

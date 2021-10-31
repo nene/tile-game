@@ -9,12 +9,10 @@ import { Rect } from "../Coord";
 import { MultiChoiceQuestionContent } from "../dialogs/MultiChoiceQuestionContent";
 import { CallFuxActivity } from "./CallFuxActivity";
 import { RequestWaterInteraction } from "./RequestWaterInteraction";
-import { QuestionFactory } from "../questions/QuestionFactory";
 
 export class AskQuestionInteraction implements Interaction {
   private finished = false;
   private punishWithWater = false;
-  private questionFactory = new QuestionFactory();
 
   constructor(private character: Character) {
   }
@@ -28,7 +26,7 @@ export class AskQuestionInteraction implements Interaction {
   }
 
   interact(ui: UiController) {
-    const question = this.questionFactory.createQuestion(ui.getAttributes().orgSkill);
+    const question = ui.questions().create();
 
     ui.showModal(new Dialog({
       character: this.character,
@@ -68,10 +66,12 @@ export class AskQuestionInteraction implements Interaction {
   private handleValidationResult(result: ValidationResult, ui: UiController) {
     this.showReply(ui, result.msg);
     if (result.type === "punish") {
+      ui.questions().wrongAnswer();
       this.character.changeOpinion(-1);
       this.punishWithWater = true;
     }
     else if (result.type === "praise") {
+      ui.questions().rightAnswer();
       this.character.changeOpinion(+1);
     }
   }
