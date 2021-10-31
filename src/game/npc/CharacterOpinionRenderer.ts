@@ -3,10 +3,8 @@ import { Coord, coordAdd, coordMul, Rect } from "../Coord";
 import { PixelScreen } from "../PixelScreen";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { SpriteSheet } from "../sprites/SpriteSheet";
-import { strokeRect, UI_BG_COLOR, UI_HIGHLIGHT_COLOR, UI_SHADOW_COLOR } from "../ui/ui-utils";
+import { strokeRect, UI_BG_COLOR, UI_HIGHLIGHT_COLOR, UI_MENU_ITEM_HIGHLIGHT_COLOR, UI_SHADOW_COLOR } from "../ui/ui-utils";
 import { Character } from "./Character";
-
-const ITEM_HIGHLIGHT_COLOR = "#cab59e";
 
 enum OpinionShield {
   negative = 0,
@@ -34,7 +32,7 @@ export class CharacterOpinionRenderer {
     this.drawOpinion(screen, character.getOpinion(), opinionCoord);
 
     if (highlighted) {
-      strokeRect(screen, rect, ITEM_HIGHLIGHT_COLOR);
+      strokeRect(screen, rect, UI_MENU_ITEM_HIGHLIGHT_COLOR);
     }
   }
 

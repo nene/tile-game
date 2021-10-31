@@ -4,6 +4,7 @@ import { PixelScreen } from "../PixelScreen";
 export const UI_BG_COLOR = "#b88f61";
 export const UI_SHADOW_COLOR = "#8f563b";
 export const UI_HIGHLIGHT_COLOR = "#bda37a";
+export const UI_MENU_ITEM_HIGHLIGHT_COLOR = "#cab59e";
 
 export function drawUpset(screen: PixelScreen, rect: Rect) {
   drawUiBox(screen, rect, UI_HIGHLIGHT_COLOR, UI_SHADOW_COLOR);

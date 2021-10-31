@@ -5,10 +5,8 @@ import { PixelScreen } from "../PixelScreen";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { SpriteSheet } from "../sprites/SpriteSheet";
-import { strokeRect, UI_BG_COLOR, UI_HIGHLIGHT_COLOR, UI_SHADOW_COLOR } from "../ui/ui-utils";
+import { strokeRect, UI_BG_COLOR, UI_HIGHLIGHT_COLOR, UI_MENU_ITEM_HIGHLIGHT_COLOR, UI_SHADOW_COLOR } from "../ui/ui-utils";
 import { Wallet } from "../attributes/Wallet";
-
-const SHOP_ITEM_HIGHLIGHT_COLOR = "#cab59e";
 
 export class ShopItemRenderer {
   private beerSprites: SpriteSheet;
@@ -38,7 +36,7 @@ export class ShopItemRenderer {
     screen.drawText(item.getPrice(), coordAdd(goldCoord, [-2, -1]), { align: "right", ...textStyle });
 
     if (highlighted && this.canAfford(item.getPrice())) {
-      strokeRect(screen, rect, SHOP_ITEM_HIGHLIGHT_COLOR);
+      strokeRect(screen, rect, UI_MENU_ITEM_HIGHLIGHT_COLOR);
     }
   }
 
