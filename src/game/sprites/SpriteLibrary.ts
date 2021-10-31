@@ -41,6 +41,7 @@ import cfeBgLg from "./data/cfe-bg-lg.png";
 import beerGlassXl from "./data/beer-glass-xl.png";
 import beerXl from "./data/beer-xl.png";
 import beerFoamXl from "./data/beer-foam-xl.png";
+import opinionShield from "./data/opinion-shield.png";
 
 import { Coord } from "../Coord";
 import { SpriteSheet, SpriteSheetConfig } from "./SpriteSheet";
@@ -82,6 +83,7 @@ const imageFiles = {
   'scoreboard': spriteDef({ src: scoreboard, cfg: { size: [51, 36] } }),
   'gold': spriteDef({ src: gold, cfg: { size: [8, 8] } }),
   'flag-colors': spriteDef({ src: flagColors, cfg: { size: [12, 12], colsRows: [2, 1] } }),
+  'opinion-shield': spriteDef({ src: opinionShield, cfg: { size: [6, 7], colsRows: [3, 1] } }),
 
   'beer-glass-lg': spriteDef({ src: beerGlassLg, cfg: { size: [16, 16], colsRows: [5, 5] } }),
   'beer-glass-sm': spriteDef({ src: beerGlassSm, cfg: { size: [10, 10], colsRows: [5, 5] } }),
