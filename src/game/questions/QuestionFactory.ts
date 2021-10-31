@@ -2,12 +2,10 @@ import { OrgSkill } from "../attributes/OrgSkill";
 import { pickRandom } from "../utils/pickRandom";
 import { createColorsQuestion } from "./ColorsQuestion";
 import { createPlaceQuestion } from "./PlaceQuestion";
-import { Question } from "./Question";
+import { Question, QuestionCategory } from "./Question";
 import { createSloganQuestion } from "./SloganQuestion";
 import { createTerminologyQuestion } from "./TerminologyQuestion";
 import { createYearQuestion } from "./YearQuestion";
-
-export type QuestionCategory = "colors" | "place" | "slogan" | "year" | "terminology";
 
 export class QuestionFactory {
   constructor(private orgSkill: OrgSkill) { }
@@ -24,11 +22,19 @@ export class QuestionFactory {
     }
   }
 
-  rightAnswer() {
-    this.orgSkill.rightAnswer();
+  rightAnswer(question: Question) {
+    if (this.isOrgQuestion(question)) {
+      this.orgSkill.rightAnswer();
+    }
   }
 
-  wrongAnswer() {
-    this.orgSkill.wrongAnswer();
+  wrongAnswer(question: Question) {
+    if (this.isOrgQuestion(question)) {
+      this.orgSkill.wrongAnswer();
+    }
+  }
+
+  private isOrgQuestion(question: Question): boolean {
+    return this.orgSkill.getEnabledCategories().includes(question.category);
   }
 }

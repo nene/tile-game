@@ -7,6 +7,7 @@ export function createSloganQuestion(targetOrgs: Organization[], allOrgs: Organi
   const org = pickRandom(targetOrgs.filter(isOrgWithSlogan));
   return {
     type: "multi-choice",
+    category: "slogan",
     question: `Mis on ${org.name} lipukiri?`,
     fontSize: "small",
     choices: generateChoices(allOrgs.filter(isOrgWithSlogan), org, (org) => org.slogan),

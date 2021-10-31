@@ -1,5 +1,5 @@
 import { allOrganizations, Organization, OrgSkillLevel } from "../orgs/Organization";
-import { QuestionCategory } from "../questions/QuestionFactory";
+import { QuestionCategory } from "../questions/Question";
 
 const correctAnswersPerLevel: Record<OrgSkillLevel, number> = {
   [OrgSkillLevel.estica]: 4, // All four possible questions

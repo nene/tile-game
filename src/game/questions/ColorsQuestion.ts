@@ -8,6 +8,7 @@ export function createColorsQuestion(orgs: Organization[]): ColorsQuestion {
   const org = pickRandom(orgs);
   return {
     type: "colors",
+    category: "colors",
     question: `Millised on ${org.name} värvid?`,
     validate: (colors: FlagColor[]) => {
       if (org.colors.length === 0) {

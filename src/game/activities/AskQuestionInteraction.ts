@@ -4,7 +4,7 @@ import { TextContent } from "../dialogs/TextContent";
 import { FlagQuestionContent } from "../dialogs/FlagQuestionContent";
 import { Interaction, InteractionType } from "./Interaction";
 import { Dialog } from "../dialogs/Dialog";
-import { ColorsQuestion, MultiChoiceQuestion, ValidationResult } from "../questions/Question";
+import { ColorsQuestion, MultiChoiceQuestion, Question, ValidationResult } from "../questions/Question";
 import { Rect } from "../Coord";
 import { MultiChoiceQuestionContent } from "../dialogs/MultiChoiceQuestionContent";
 import { CallFuxActivity } from "./CallFuxActivity";
@@ -46,7 +46,7 @@ export class AskQuestionInteraction implements Interaction {
       question: question.question,
       container: rect,
       onAnswer: (colors) => {
-        this.handleValidationResult(question.validate(colors), ui);
+        this.handleValidationResult(question.validate(colors), question, ui);
       },
     });
   }
@@ -58,20 +58,20 @@ export class AskQuestionInteraction implements Interaction {
       choices: question.choices,
       fontSize: question.fontSize,
       onAnswer: (answer) => {
-        this.handleValidationResult(question.validate(answer), ui);
+        this.handleValidationResult(question.validate(answer), question, ui);
       }
     });
   }
 
-  private handleValidationResult(result: ValidationResult, ui: UiController) {
+  private handleValidationResult(result: ValidationResult, question: Question, ui: UiController) {
     this.showReply(ui, result.msg);
     if (result.type === "punish") {
-      ui.questions().wrongAnswer();
+      ui.questions().wrongAnswer(question);
       this.character.changeOpinion(-1);
       this.punishWithWater = true;
     }
     else if (result.type === "praise") {
-      ui.questions().rightAnswer();
+      ui.questions().rightAnswer(question);
       this.character.changeOpinion(+1);
     }
   }

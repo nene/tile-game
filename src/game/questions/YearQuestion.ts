@@ -7,6 +7,7 @@ export function createYearQuestion(targetOrgs: Organization[], allOrgs: Organiza
   const org = pickRandom(targetOrgs);
   return {
     type: "multi-choice",
+    category: "year",
     question: `Millisel aastal on asutatud ${org.name}?`,
     choices: generateChoices(allOrgs, org, (org) => String(org.establishedYear)),
     validate: (year: string) => {

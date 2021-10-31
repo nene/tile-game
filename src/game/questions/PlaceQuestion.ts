@@ -7,6 +7,7 @@ export function createPlaceQuestion(targetOrgs: Organization[], allOrgs: Organiz
   const org = pickRandom(targetOrgs);
   return {
     type: "multi-choice",
+    category: "place",
     question: `Kus on asutatud ${org.name}?`,
     choices: generateChoices(allOrgs, org, (org) => org.establishedPlace),
     validate: (establishedPlace: string) => {

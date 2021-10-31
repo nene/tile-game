@@ -6,6 +6,7 @@ export function createTerminologyQuestion(): MultiChoiceQuestion {
   const { question, correctAnswer, wrongAnswers } = pickRandom(questions);
   return {
     type: "multi-choice",
+    category: "terminology",
     question: question,
     fontSize: "small",
     choices: shuffle([correctAnswer, ...wrongAnswers]),
