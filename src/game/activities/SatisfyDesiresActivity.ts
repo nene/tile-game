@@ -7,13 +7,8 @@ import { CallFuxActivity } from "./CallFuxActivity";
 import { RequestDrinkInteraction } from "./RequestDrinkInteraction";
 import { random } from "lodash";
 import { AskQuestionInteraction } from "./AskQuestionInteraction";
-import { createColorsQuestion } from "../questions/ColorsQuestion";
-import { Question } from "../questions/Question";
-import { createPlaceQuestion } from "../questions/PlaceQuestion";
-import { createSloganQuestion } from "../questions/SloganQuestion";
-import { createYearQuestion } from "../questions/YearQuestion";
-import { createTerminologyQuestion } from "../questions/TerminologyQuestion";
 import { CharacterFigure } from "../npc/CharacterFigure";
+import { QuestionFactory } from "../questions/QuestionFactory";
 
 const MAX_BEERS = 2;
 const MAX_QUESTIONS = 3;
@@ -23,6 +18,7 @@ export class SatisfyDesiresActivity implements Activity {
   private beers = 0;
   private questions = 0;
   private activity: Activity;
+  private questionFactory = new QuestionFactory();
 
   constructor(private character: Character) {
     this.activity = this.chooseActivity() as Activity;
@@ -50,18 +46,7 @@ export class SatisfyDesiresActivity implements Activity {
 
   private chooseQuestionActivity() {
     this.questions++;
-    return new CallFuxActivity(this.character, new AskQuestionInteraction(this.character, this.randomQuestion()));
-  }
-
-  private randomQuestion(): Question {
-    switch (random(0, 4)) {
-      case 0: return createColorsQuestion();
-      case 1: return createPlaceQuestion();
-      case 2: return createSloganQuestion();
-      case 3: return createTerminologyQuestion();
-      case 4:
-      default: return createYearQuestion();
-    }
+    return new CallFuxActivity(this.character, new AskQuestionInteraction(this.character, this.questionFactory.createQuestion()));
   }
 
   tick(figure: CharacterFigure, location: Location, world: GameWorld): ActivityUpdates {
