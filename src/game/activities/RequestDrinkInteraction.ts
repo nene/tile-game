@@ -66,10 +66,10 @@ export class RequestDrinkInteraction implements Interaction {
   }
 
   private showDialog(ui: UiController, text: string) {
-    ui.showDialog(new Dialog({
+    ui.showModal(new Dialog({
       character: this.character,
       createContent: (rect) => new TextContent(text, rect),
-      onClose: () => ui.hideDialog(),
+      onClose: () => ui.hideModal(),
     }));
   }
 

@@ -1,7 +1,6 @@
 import { PixelScreen } from "./PixelScreen";
 import { GameItem } from "./items/GameItem";
 import { InventoryController } from "./InventoryController";
-import { Dialog } from "./dialogs/Dialog";
 import { Overlay } from "./Overlay";
 import { CursorController } from "./CursorController";
 import { MiniGame } from "./minigames/MiniGame";
@@ -11,11 +10,12 @@ import { InventoryView } from "./inventory/InventoryView";
 import { PlayerAttributes } from "./PlayerAttributes";
 import { Coord } from "./Coord";
 import { Clock } from "./Clock";
+import { Component } from "./ui/Component";
 
 export class UiController {
   private inventoryController: InventoryController;
   private cursorController: CursorController;
-  private dialog?: Dialog;
+  private modalWindow?: Component;
   private scoreBoard: ScoreBoard;
   private clock = new Clock();
 
@@ -60,9 +60,9 @@ export class UiController {
         return;
       }
 
-      if (this.dialog) {
+      if (this.modalWindow) {
         Overlay.paint(screen);
-        this.dialog.paint(screen);
+        this.modalWindow.paint(screen);
       } else {
         this.inventoryController.paint(screen);
       }
@@ -75,9 +75,9 @@ export class UiController {
   }
 
   isGameWorldActive(): boolean {
-    // Time stops when inventory or dialog is open,
+    // Time stops when inventory or modalWindow is open,
     // but regardless of that, time always runs during mini-game.
-    return Boolean(this.getMiniGame()) || (!this.inventoryController.isObjectInventoryShown() && !this.dialog);
+    return Boolean(this.getMiniGame()) || (!this.inventoryController.isObjectInventoryShown() && !this.modalWindow);
   }
 
   isGameWorldVisible(): boolean {
@@ -88,7 +88,7 @@ export class UiController {
     let stopPropagation: boolean | undefined = undefined;
     stopPropagation = stopPropagation || this.getMiniGame()?.handleGameEvent(event);
     stopPropagation = stopPropagation || this.cursorController.handleGameEvent(event);
-    stopPropagation = stopPropagation || this.dialog?.handleGameEvent(event);
+    stopPropagation = stopPropagation || this.modalWindow?.handleGameEvent(event);
     stopPropagation = stopPropagation || this.inventoryController.handleGameEvent(event);
     if (stopPropagation) {
       return true;
@@ -107,11 +107,11 @@ export class UiController {
     return this.inventoryController.getMiniGame();
   }
 
-  showDialog(dialog: Dialog) {
-    this.dialog = dialog;
+  showModal(modalWindow: Component) {
+    this.modalWindow = modalWindow;
   }
 
-  hideDialog() {
-    this.dialog = undefined;
+  hideModal() {
+    this.modalWindow = undefined;
   }
 }

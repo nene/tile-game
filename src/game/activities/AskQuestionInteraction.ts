@@ -26,7 +26,7 @@ export class AskQuestionInteraction implements Interaction {
   }
 
   interact(ui: UiController) {
-    ui.showDialog(new Dialog({
+    ui.showModal(new Dialog({
       character: this.character,
       createContent: (rect) => {
         if (this.question.type === "colors") {
@@ -79,10 +79,10 @@ export class AskQuestionInteraction implements Interaction {
   }
 
   private showReply(ui: UiController, text: string) {
-    ui.showDialog(new Dialog({
+    ui.showModal(new Dialog({
       character: this.character,
       createContent: (rect) => new TextContent(text, rect),
-      onClose: () => ui.hideDialog(),
+      onClose: () => ui.hideModal(),
     }));
   }
 }

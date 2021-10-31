@@ -44,11 +44,11 @@ export class RequestWaterInteraction implements Interaction {
   }
 
   private showDialog(ui: UiController, text: string, onClose: () => void = noop) {
-    ui.showDialog(new Dialog({
+    ui.showModal(new Dialog({
       character: this.character,
       createContent: (rect) => new TextContent(text, rect),
       onClose: () => {
-        ui.hideDialog();
+        ui.hideModal();
         onClose();
       },
     }));
