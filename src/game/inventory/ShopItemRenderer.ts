@@ -4,16 +4,13 @@ import { SellableGameItem } from "../items/GameItem";
 import { PixelScreen } from "../PixelScreen";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
-import { SpriteSheet } from "../sprites/SpriteSheet";
 import { strokeRect, UI_BG_COLOR, UI_HIGHLIGHT_COLOR, UI_MENU_ITEM_HIGHLIGHT_COLOR, UI_SHADOW_COLOR } from "../ui/ui-utils";
 import { Wallet } from "../attributes/Wallet";
 
 export class ShopItemRenderer {
-  private beerSprites: SpriteSheet;
   private goldSprite: Sprite;
 
   constructor(private wallet: Wallet) {
-    this.beerSprites = SpriteLibrary.get("bottle");
     this.goldSprite = SpriteLibrary.getSprite("gold");
   }
 
