@@ -107,6 +107,10 @@ export class UiController {
     return this.inventoryController.getMiniGame();
   }
 
+  getModal(): Component | undefined {
+    return this.modalWindow;
+  }
+
   showModal(modalWindow: Component) {
     this.modalWindow = modalWindow;
   }

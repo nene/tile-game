@@ -12,6 +12,7 @@ import { FpsCounter } from "./FpsCounter";
 import { GameEventFactory, GameEventType } from "./GameEvent";
 import { OutdoorsLocationFactory } from "./locations/OutdoorsLocationFactory";
 import { getAllCharacters } from "./npc/Character";
+import { OpinionsView } from "./npc/OpinionsView";
 
 export interface GameApi {
   onKeyEvent: (type: "keyup" | "keydown", key: string) => boolean;
@@ -78,10 +79,14 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
     onKeyEvent: (type: "keyup" | "keydown", key: string): boolean => {
       const event = eventFactory.createKeyboardEvent(type, key);
       if (event.type === "keydown" && event.key === "OPINIONS") {
-        console.log("Opinions:");
-        getAllCharacters().forEach((char) => {
-          console.log(`${char.getName()}: ${char.getOpinion()}`);
-        });
+        if (uiController.getModal() instanceof OpinionsView) {
+          uiController.hideModal();
+        } else {
+          uiController.showModal(new OpinionsView({
+            characters: getAllCharacters(),
+            onClose: () => uiController.hideModal(),
+          }));
+        }
       }
       if (uiController.isGameWorldActive() && uiController.isGameWorldVisible()) {
         const result = player.handleKeyEvent(event);

@@ -1,5 +1,6 @@
 import { Drink, getDrink } from "../items/Drink";
-import { SpriteName } from "../sprites/SpriteLibrary";
+import { Sprite } from "../sprites/Sprite";
+import { SpriteLibrary, SpriteName } from "../sprites/SpriteLibrary";
 
 export interface CharacterDef {
   name: string;
@@ -21,6 +22,16 @@ export class Character {
 
   getSpriteSet() {
     return this.def.spriteSet;
+  }
+
+  getFaceSprite(): Sprite {
+    // Extract the upper portion (face) of the first sprite
+    return {
+      ...SpriteLibrary.getSprite(this.def.spriteSet, [0, 0]),
+      coord: [0, 3],
+      size: [16, 16],
+      offset: [0, 0],
+    };
   }
 
   getSpawnTime() {
