@@ -7,6 +7,7 @@ import { BeerGlass, DrinkLevel } from "../items/BeerGlass";
 import { DrinkActivity } from "./DrinkActivity";
 import { BeerBottle } from "../items/BeerBottle";
 import { ValidationResult } from "../questions/Question";
+import { getDrink } from "../items/Drink";
 
 export class RequestDrinkInteraction implements Interaction {
   private receivedBeerGlass?: BeerGlass;
@@ -26,6 +27,11 @@ export class RequestDrinkInteraction implements Interaction {
     const item = ui.getSelectedItem();
     if (!item || !(item instanceof BeerBottle || item instanceof BeerGlass)) {
       this.showDialog(ui, "Rebane! Too mulle šoppen õlut.");
+      return;
+    }
+
+    if (item.getDrink() === getDrink("water")) {
+      this.showDialog(ui, "Vett võid sa ise juua kui tahad.");
       return;
     }
 
