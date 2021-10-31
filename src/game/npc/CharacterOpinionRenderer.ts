@@ -3,7 +3,7 @@ import { Coord, coordAdd, coordMul, Rect } from "../Coord";
 import { PixelScreen } from "../PixelScreen";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { SpriteSheet } from "../sprites/SpriteSheet";
-import { UI_BG_COLOR, UI_HIGHLIGHT_COLOR, UI_SHADOW_COLOR } from "../ui/ui-utils";
+import { strokeRect, UI_BG_COLOR, UI_HIGHLIGHT_COLOR, UI_SHADOW_COLOR } from "../ui/ui-utils";
 import { Character } from "./Character";
 
 const ITEM_HIGHLIGHT_COLOR = "#cab59e";
@@ -34,7 +34,7 @@ export class CharacterOpinionRenderer {
     this.drawOpinion(screen, character.getOpinion(), opinionCoord);
 
     if (highlighted) {
-      this.strokeRect(screen, rect, ITEM_HIGHLIGHT_COLOR);
+      strokeRect(screen, rect, ITEM_HIGHLIGHT_COLOR);
     }
   }
 
@@ -50,12 +50,5 @@ export class CharacterOpinionRenderer {
       return OpinionShield.colored;
     }
     return level < 1 ? OpinionShield.negative : OpinionShield.positive;
-  }
-
-  private strokeRect(screen: PixelScreen, { coord, size }: Rect, color: string) {
-    screen.drawRect({ coord, size: [size[0], 1] }, color);
-    screen.drawRect({ coord, size: [1, size[1]] }, color);
-    screen.drawRect({ coord: [coord[0] + size[0] - 1, coord[1]], size: [1, size[1]] }, color);
-    screen.drawRect({ coord: [coord[0], coord[1] + size[1] - 1], size: [size[0], 1] }, color);
   }
 }
