@@ -1,7 +1,7 @@
 import { Drunkenness } from "./Drunkenness";
-import { StorageInventory } from "./inventory/StorageInventory";
-import { BeerGlass, DrinkLevel } from "./items/BeerGlass";
-import { getDrink } from "./items/Drink";
+import { StorageInventory } from "../inventory/StorageInventory";
+import { BeerGlass, DrinkLevel } from "../items/BeerGlass";
+import { getDrink } from "../items/Drink";
 import { Wallet } from "./Wallet";
 
 export class PlayerAttributes {

@@ -1,13 +1,13 @@
 import { times } from "lodash";
 import { Coord, coordAdd } from "./Coord";
-import { Drunkenness } from "./Drunkenness";
+import { Drunkenness } from "./attributes/Drunkenness";
 import { DrinkColor } from "./items/Drink";
 import { DrinkLevel } from "./items/BeerGlass";
 import { PixelScreen } from "./PixelScreen";
 import { Sprite } from "./sprites/Sprite";
 import { SpriteLibrary } from "./sprites/SpriteLibrary";
 import { SpriteSheet } from "./sprites/SpriteSheet";
-import { Wallet } from "./Wallet";
+import { Wallet } from "./attributes/Wallet";
 import { Clock } from "./Clock";
 
 export class ScoreBoard {

@@ -6,7 +6,7 @@ import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { SpriteSheet } from "../sprites/SpriteSheet";
 import { UI_BG_COLOR, UI_HIGHLIGHT_COLOR, UI_SHADOW_COLOR } from "../ui/ui-utils";
-import { Wallet } from "../Wallet";
+import { Wallet } from "../attributes/Wallet";
 
 const SHOP_ITEM_HIGHLIGHT_COLOR = "#cab59e";
 

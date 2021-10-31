@@ -1,4 +1,4 @@
-import { Drink } from "./items/Drink";
+import { Drink } from "../items/Drink";
 
 const MAX_LEVEL = 5;
 

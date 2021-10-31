@@ -7,7 +7,7 @@ import { MiniGame } from "./minigames/MiniGame";
 import { ScoreBoard } from "./ScoreBoard";
 import { GameEvent } from "./GameEvent";
 import { InventoryView } from "./inventory/InventoryView";
-import { PlayerAttributes } from "./PlayerAttributes";
+import { PlayerAttributes } from "./attributes/PlayerAttributes";
 import { Coord } from "./Coord";
 import { Clock } from "./Clock";
 import { Component } from "./ui/Component";

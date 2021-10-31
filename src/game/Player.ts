@@ -7,7 +7,7 @@ import { UiController } from "./UiController";
 import { BeerGlass, DrinkLevel } from "./items/BeerGlass";
 import { DrinkAnimation } from "./sprites/DrinkAnimation";
 import { Animation } from "./sprites/Animation";
-import { PlayerAttributes } from "./PlayerAttributes";
+import { PlayerAttributes } from "./attributes/PlayerAttributes";
 import { GameKeyEvent } from "./GameEvent";
 import { Location } from "./locations/Location";
 import { PlayerMovement } from "./PlayerMovement";

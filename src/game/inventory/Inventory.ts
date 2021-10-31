@@ -1,5 +1,5 @@
 import { GameItem } from "../items/GameItem";
-import { Wallet } from "../Wallet";
+import { Wallet } from "../attributes/Wallet";
 
 export interface Inventory {
   size: () => number;

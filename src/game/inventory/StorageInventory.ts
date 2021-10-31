@@ -1,7 +1,7 @@
 import { fill, negate } from "lodash";
 import { WritableInventory } from "./Inventory";
 import { GameItem } from "../items/GameItem";
-import { Wallet } from "../Wallet";
+import { Wallet } from "../attributes/Wallet";
 
 type Slot = GameItem | undefined;
 

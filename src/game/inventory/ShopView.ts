@@ -5,7 +5,7 @@ import { ScrollView } from "../ui/ScrollView";
 import { Shop } from "./Shop";
 import { ShopItemRenderer } from "./ShopItemRenderer";
 import { InventoryView, ItemHoverHandler, SlotClickHandler } from "./InventoryView";
-import { Wallet } from "../Wallet";
+import { Wallet } from "../attributes/Wallet";
 import { Headline, Window } from "../ui/Window";
 import { SellableGameItem } from "../items/GameItem";
 

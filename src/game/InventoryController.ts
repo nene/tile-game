@@ -6,7 +6,7 @@ import { GameItem } from "./items/GameItem";
 import { Overlay } from "./Overlay";
 import { MiniGame } from "./minigames/MiniGame";
 import { GameEvent } from "./GameEvent";
-import { PlayerAttributes } from "./PlayerAttributes";
+import { PlayerAttributes } from "./attributes/PlayerAttributes";
 import { Tooltip } from "./ui/Tooltip";
 import { Inventory } from "./inventory/Inventory";
 

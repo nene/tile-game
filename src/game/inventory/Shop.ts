@@ -1,5 +1,5 @@
 import { SellableGameItem } from "../items/GameItem";
-import { Wallet } from "../Wallet";
+import { Wallet } from "../attributes/Wallet";
 import { TakeableInventory } from "./Inventory";
 
 export class Shop implements TakeableInventory {
