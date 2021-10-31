@@ -35,9 +35,7 @@ export class OrgSkill {
 
   // Notifies about incorrectly answered question
   wrongAnswer() {
-    if (this.correctAnswers > 0) {
-      this.correctAnswers--;
-    }
+    // For now, do nothing
   }
 
   private levelUp() {
