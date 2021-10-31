@@ -4,17 +4,19 @@ import { TextContent } from "../dialogs/TextContent";
 import { FlagQuestionContent } from "../dialogs/FlagQuestionContent";
 import { Interaction, InteractionType } from "./Interaction";
 import { Dialog } from "../dialogs/Dialog";
-import { ColorsQuestion, MultiChoiceQuestion, Question, ValidationResult } from "../questions/Question";
+import { ColorsQuestion, MultiChoiceQuestion, ValidationResult } from "../questions/Question";
 import { Rect } from "../Coord";
 import { MultiChoiceQuestionContent } from "../dialogs/MultiChoiceQuestionContent";
 import { CallFuxActivity } from "./CallFuxActivity";
 import { RequestWaterInteraction } from "./RequestWaterInteraction";
+import { QuestionFactory } from "../questions/QuestionFactory";
 
 export class AskQuestionInteraction implements Interaction {
   private finished = false;
   private punishWithWater = false;
+  private questionFactory = new QuestionFactory();
 
-  constructor(private character: Character, private question: Question) {
+  constructor(private character: Character) {
   }
 
   getType() {
@@ -26,13 +28,15 @@ export class AskQuestionInteraction implements Interaction {
   }
 
   interact(ui: UiController) {
+    const question = this.questionFactory.createQuestion();
+
     ui.showModal(new Dialog({
       character: this.character,
       createContent: (rect) => {
-        if (this.question.type === "colors") {
-          return this.createColorsContent(ui, rect, this.question);
+        if (question.type === "colors") {
+          return this.createColorsContent(ui, rect, question);
         } else {
-          return this.createMultiChoiceContent(ui, rect, this.question);
+          return this.createMultiChoiceContent(ui, rect, question);
         }
       },
     }));

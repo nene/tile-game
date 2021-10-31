@@ -8,7 +8,6 @@ import { RequestDrinkInteraction } from "./RequestDrinkInteraction";
 import { random } from "lodash";
 import { AskQuestionInteraction } from "./AskQuestionInteraction";
 import { CharacterFigure } from "../npc/CharacterFigure";
-import { QuestionFactory } from "../questions/QuestionFactory";
 
 const MAX_BEERS = 2;
 const MAX_QUESTIONS = 3;
@@ -18,7 +17,6 @@ export class SatisfyDesiresActivity implements Activity {
   private beers = 0;
   private questions = 0;
   private activity: Activity;
-  private questionFactory = new QuestionFactory();
 
   constructor(private character: Character) {
     this.activity = this.chooseActivity() as Activity;
@@ -46,7 +44,7 @@ export class SatisfyDesiresActivity implements Activity {
 
   private chooseQuestionActivity() {
     this.questions++;
-    return new CallFuxActivity(this.character, new AskQuestionInteraction(this.character, this.questionFactory.createQuestion()));
+    return new CallFuxActivity(this.character, new AskQuestionInteraction(this.character));
   }
 
   tick(figure: CharacterFigure, location: Location, world: GameWorld): ActivityUpdates {
