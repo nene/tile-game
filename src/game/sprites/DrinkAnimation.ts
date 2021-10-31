@@ -38,8 +38,9 @@ export class DrinkAnimation implements Animation {
     if (this.isHandUp && this.ticks > this.drinkTicks) {
       this.ticks = 0;
       this.isHandUp = false;
-      if (this.beerGlass.getLevel() !== DrinkLevel.empty) {
-        this.onSip(this.beerGlass.getDrink() as Drink);
+      const drink = this.beerGlass.getDrink()
+      if (drink) {
+        this.onSip(drink);
         this.beerGlass.consume();
       }
     }

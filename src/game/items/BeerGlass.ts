@@ -61,7 +61,7 @@ export class BeerGlass implements GameItem {
   }
 
   getDrink(): Drink | undefined {
-    return this.drink;
+    return this.level > DrinkLevel.empty ? this.drink : undefined;
   }
 
   getSprite(): Sprite {
