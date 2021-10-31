@@ -3,6 +3,7 @@ import { GameEvent } from "../GameEvent";
 import { PixelScreen } from "../PixelScreen";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary, SpriteName } from "../sprites/SpriteLibrary";
+import { Component } from "./Component";
 
 interface ButtonConfig {
   coord: Coord;
@@ -12,7 +13,7 @@ interface ButtonConfig {
   onClick: () => void;
 }
 
-export class Button {
+export class Button implements Component {
   private rect: Rect;
   private pressed = false;
   private unpressedSprite: Sprite;

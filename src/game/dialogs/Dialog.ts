@@ -2,18 +2,18 @@ import { isCoordInRect, Rect, rectGrow } from "../Coord";
 import { GameEvent } from "../GameEvent";
 import { Character } from "../npc/Character";
 import { PixelScreen } from "../PixelScreen";
+import { Component } from "../ui/Component";
 import { Window } from "../ui/Window";
-import { DialogContent } from "./DialogContent";
 
 interface DialogConfig {
   character: Character;
-  createContent: (rect: Rect) => DialogContent,
+  createContent: (rect: Rect) => Component,
   onClose?: () => void;
 }
 
-export class Dialog {
+export class Dialog implements Component {
   private window: Window;
-  private content: DialogContent;
+  private content: Component;
   private onClose?: () => void;
 
   constructor({ character, createContent, onClose }: DialogConfig) {

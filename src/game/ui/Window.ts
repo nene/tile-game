@@ -3,6 +3,7 @@ import { GameEvent } from "../GameEvent";
 import { PixelScreen } from "../PixelScreen";
 import { drawInset, drawUpset, UI_BG_COLOR, UI_SHADOW_COLOR } from "../ui/ui-utils";
 import { Button } from "./Button";
+import { Component } from "./Component";
 
 interface WindowCfg {
   headline: Headline;
@@ -19,7 +20,7 @@ export interface Headline {
 const TITLE_HEIGHT = 10;
 const DESCRIPTION_HEIGHT = 7;
 
-export class Window {
+export class Window implements Component {
   private headline: Headline;
   private rect: Rect;
   private closeButton?: Button;

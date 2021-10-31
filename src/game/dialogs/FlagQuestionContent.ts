@@ -5,9 +5,9 @@ import { TextButton } from "../ui/TextButton";
 import { PixelScreen } from "../PixelScreen";
 import { ColorButton } from "../ui/ColorButton";
 import { ColorMenu } from "../ui/ColorMenu";
-import { DialogContent } from "./DialogContent";
 import { TextContent } from "./TextContent";
 import { FlagColor } from "../orgs/FlagColors";
+import { Component } from "../ui/Component";
 
 interface FlagQuestionContentConfig {
   question: string;
@@ -15,7 +15,7 @@ interface FlagQuestionContentConfig {
   onAnswer: (colors: FlagColor[]) => void;
 }
 
-export class FlagQuestionContent implements DialogContent {
+export class FlagQuestionContent implements Component {
   private question: TextContent;
   private colorButtons: ColorButton[];
   private menu?: ColorMenu;

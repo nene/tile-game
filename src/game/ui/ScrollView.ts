@@ -1,6 +1,7 @@
 import { Coord, coordAdd, coordMul, coordSub, isCoordInRect, Rect, rectGrow, rectOverlaps, rectTranslate } from "../Coord";
 import { GameEvent } from "../GameEvent";
 import { PixelScreen } from "../PixelScreen";
+import { Component } from "./Component";
 import { ScrollBar } from "./ScrollBar";
 
 interface ScrollViewCfg<T> {
@@ -13,7 +14,7 @@ interface ScrollViewCfg<T> {
   renderer: (screen: PixelScreen, rect: Rect, item: T, highlighted: boolean) => void;
 }
 
-export class ScrollView<T> {
+export class ScrollView<T> implements Component {
   private scrollBar: ScrollBar;
   private highlightedIndex = -1;
 

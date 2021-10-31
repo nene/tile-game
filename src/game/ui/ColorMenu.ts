@@ -3,6 +3,7 @@ import { GameEvent } from "../GameEvent";
 import { FlagColor, allFlagColors } from "../orgs/FlagColors";
 import { PixelScreen } from "../PixelScreen";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
+import { Component } from "./Component";
 import { Tooltip } from "./Tooltip";
 import { drawUpset, strokeRect, UI_BG_COLOR } from "./ui-utils";
 
@@ -11,7 +12,7 @@ interface ColorMenuConfig {
   onSelect: (color: FlagColor) => void;
 }
 
-export class ColorMenu {
+export class ColorMenu implements Component {
   private rect: Rect;
   private onSelect: (color: FlagColor) => void;
   private colors = allFlagColors();

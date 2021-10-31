@@ -1,11 +1,11 @@
 import { coordAdd, Rect } from "../Coord";
 import { GameEvent } from "../GameEvent";
 import { PixelScreen } from "../PixelScreen";
+import { Component } from "../ui/Component";
 import { fitText } from "../ui/fitText";
 import { UI_SHADOW_COLOR } from "../ui/ui-utils";
-import { DialogContent } from "./DialogContent";
 
-export class TextContent implements DialogContent {
+export class TextContent implements Component {
   constructor(private text: string, private rect: Rect) { }
 
   paint(screen: PixelScreen) {

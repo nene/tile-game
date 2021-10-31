@@ -3,6 +3,7 @@ import { GameEvent } from "../GameEvent";
 import { PatternLibrary } from "../PatternLibrary";
 import { PixelScreen } from "../PixelScreen";
 import { Button } from "./Button";
+import { Component } from "./Component";
 import { drawUpset, UI_BG_COLOR } from "./ui-utils";
 
 const SPRITE_UP: Coord = [0, 0];
@@ -11,7 +12,7 @@ const SPRITE_DOWN: Coord = [2, 0];
 const SPRITE_DOWN_PRESSED: Coord = [3, 0];
 const SPRITE_BG: Coord = [4, 0];
 
-export class ScrollBar {
+export class ScrollBar implements Component {
   private bgPattern: CanvasPattern;
   private buttons: Record<"up" | "down", Button>;
   private sliderPos = 0;

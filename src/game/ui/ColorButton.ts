@@ -3,6 +3,7 @@ import { GameEvent } from "../GameEvent";
 import { FlagColor } from "../orgs/FlagColors";
 import { PixelScreen } from "../PixelScreen";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
+import { Component } from "./Component";
 import { Tooltip } from "./Tooltip";
 import { drawInset, drawUpset } from "./ui-utils";
 
@@ -12,7 +13,7 @@ interface ColorButtonConfig {
   onClick: () => void;
 }
 
-export class ColorButton {
+export class ColorButton implements Component {
   private color?: FlagColor;
   private rect: Rect;
   private pressed = false;

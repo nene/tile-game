@@ -1,6 +1,7 @@
 import { Coord, coordAdd, isCoordInRect, Rect } from "../Coord";
 import { GameEvent } from "../GameEvent";
 import { PixelScreen } from "../PixelScreen";
+import { Component } from "./Component";
 import { drawInset, drawUpset } from "./ui-utils";
 
 interface TextButtonConfig {
@@ -11,7 +12,7 @@ interface TextButtonConfig {
   onClick: () => void;
 }
 
-export class TextButton {
+export class TextButton implements Component {
   private rect: Rect;
   private text: string;
   private align: "left" | "center";

@@ -2,8 +2,8 @@ import { Coord, coordAdd, Rect } from "../Coord";
 import { GameEvent } from "../GameEvent";
 import { TextButton } from "../ui/TextButton";
 import { PixelScreen } from "../PixelScreen";
-import { DialogContent } from "./DialogContent";
 import { TextContent } from "./TextContent";
+import { Component } from "../ui/Component";
 
 interface MultiChoiceQuestionContentConfig {
   container: Rect;
@@ -13,7 +13,7 @@ interface MultiChoiceQuestionContentConfig {
   onAnswer: (answer: string) => void;
 }
 
-export class MultiChoiceQuestionContent implements DialogContent {
+export class MultiChoiceQuestionContent implements Component {
   private fontSize?: "medium" | "small";
   private question: TextContent;
   private answerButtons: TextButton[];
