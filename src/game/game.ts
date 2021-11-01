@@ -13,6 +13,7 @@ import { GameEventFactory, GameEventType } from "./GameEvent";
 import { OutdoorsLocationFactory } from "./locations/OutdoorsLocationFactory";
 import { getAllCharacters } from "./npc/Character";
 import { OpinionsView } from "./npc/OpinionsView";
+import { SkillsView } from "./attributes/SkillsView";
 
 export interface GameApi {
   onKeyEvent: (type: "keyup" | "keydown", key: string) => boolean;
@@ -84,6 +85,16 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
         } else {
           uiController.showModal(new OpinionsView({
             characters: getAllCharacters(),
+            onClose: () => uiController.hideModal(),
+          }));
+        }
+      }
+      if (event.type === "keydown" && event.key === "SKILLS") {
+        if (uiController.getModal() instanceof SkillsView) {
+          uiController.hideModal();
+        } else {
+          uiController.showModal(new SkillsView({
+            orgSkill: uiController.getAttributes().orgSkill,
             onClose: () => uiController.hideModal(),
           }));
         }
