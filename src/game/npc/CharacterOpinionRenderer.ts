@@ -39,7 +39,7 @@ export class CharacterOpinionRenderer {
   private drawOpinion(screen: PixelScreen, opinion: number, offset: Coord) {
     times(10, (i) => {
       const coord = coordAdd(offset, coordMul([7, 0], [i, i]));
-      screen.drawSprite(this.shieldSprites.getSprite([this.opinionShield(i - 4, opinion), 0]), coord);
+      screen.drawSprite(this.shieldSprites.getSprite([this.opinionShield(i + 1, opinion), 0]), coord);
     });
   }
 
@@ -47,6 +47,6 @@ export class CharacterOpinionRenderer {
     if (opinion >= level) {
       return OpinionShield.colored;
     }
-    return level < 1 ? OpinionShield.negative : OpinionShield.positive;
+    return level < 6 ? OpinionShield.negative : OpinionShield.positive;
   }
 }
