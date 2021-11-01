@@ -35,8 +35,12 @@ export class SkillsView implements Component {
 
   paint(screen: PixelScreen) {
     this.window.paint(screen);
-    const contentRect = rectGrow(this.window.contentAreaRect(), [-3, -3]);
-    this.drawSkill(screen, "Ak. Orgid", this.orgSkill.getLevel(), contentRect.coord);
+    const { coord } = rectGrow(this.window.contentAreaRect(), [-3, -3]);
+
+    this.drawSkill(screen, "Pudeliavamine", 1, coord);
+    this.drawSkill(screen, "Õllevalamine", 1, coordAdd(coord, [0, 13]));
+    this.drawSkill(screen, "Ak. Orgid", this.orgSkill.getLevel(), coordAdd(coord, [0, 13 * 2]));
+    this.drawSkill(screen, "Uusused", 0, coordAdd(coord, [0, 13 * 3]));
   }
 
   private drawSkill(screen: PixelScreen, title: string, level: number, offset: Coord) {
