@@ -1,6 +1,7 @@
 import { Drink, getDrink } from "../items/Drink";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary, SpriteName } from "../sprites/SpriteLibrary";
+import { constrain } from "../utils/constrain";
 
 export interface CharacterDef {
   name: string;
@@ -12,7 +13,7 @@ export interface CharacterDef {
 
 export class Character {
   // How much the NPC likes or dislikes the player
-  private opinion = 0;
+  private opinion = 0; // 0..10
 
   constructor(private def: CharacterDef) { }
 
@@ -51,7 +52,7 @@ export class Character {
   }
 
   changeOpinion(amount: number) {
-    this.opinion += amount;
+    this.opinion = constrain(this.opinion + amount, { min: 0, max: 10 });
   }
 }
 
