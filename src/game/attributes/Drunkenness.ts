@@ -1,6 +1,7 @@
 import { Drink } from "../items/Drink";
+import { constrain } from "../utils/constrain";
 
-const MAX_LEVEL = 5;
+const levelMinMax = { min: 0, max: 5 };
 
 export class Drunkenness {
   private level = 0; // 0 .. 5
@@ -8,9 +9,9 @@ export class Drunkenness {
   // Consumes 1/4 of a glass (one level step from beer glass)
   sip(drink: Drink) {
     if (drink.alcohol > 0) {
-      this.level = Math.min(MAX_LEVEL, this.level + 0.25);
+      this.level = constrain(this.level + 0.25, levelMinMax);
     } else {
-      this.level = Math.max(0, this.level - 0.25);
+      this.level = constrain(this.level - 0.25, levelMinMax);
     }
   }
 

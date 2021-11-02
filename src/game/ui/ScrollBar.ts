@@ -2,6 +2,7 @@ import { Coord, coordAdd, coordConstrain, coordSub, isCoordInRect, Rect } from "
 import { GameEvent } from "../GameEvent";
 import { PatternLibrary } from "../PatternLibrary";
 import { PixelScreen } from "../PixelScreen";
+import { constrain, Constraints } from "../utils/constrain";
 import { Button } from "./Button";
 import { Component } from "./Component";
 import { drawUpset, UI_BG_COLOR } from "./ui-utils";
@@ -16,11 +17,13 @@ export class ScrollBar implements Component {
   private bgPattern: CanvasPattern;
   private buttons: Record<"up" | "down", Button>;
   private sliderPos = 0;
-  private maxSliderPos: number;
+  private sliderConstraints: Constraints;
   private sliderSize = 20;
   private sliderGrabbed?: Coord;
 
   constructor(private rect: Rect, private scrollArea: Rect) {
+    this.sliderConstraints = { min: 0, max: rect.size[1] - 16 - this.sliderSize };
+
     this.buttons = {
       up: new Button({
         coord: rect.coord,
@@ -28,7 +31,7 @@ export class ScrollBar implements Component {
         unpressed: SPRITE_UP,
         pressed: SPRITE_UP_PRESSED,
         onClick: () => {
-          this.sliderPos = Math.max(0, this.sliderPos - 1);
+          this.sliderPos = constrain(this.sliderPos - 1, this.sliderConstraints);
         }
       }),
       down: new Button({
@@ -37,12 +40,10 @@ export class ScrollBar implements Component {
         unpressed: SPRITE_DOWN,
         pressed: SPRITE_DOWN_PRESSED,
         onClick: () => {
-          this.sliderPos = Math.min(this.maxSliderPos, this.sliderPos + 1);
+          this.sliderPos = constrain(this.sliderPos + 1, this.sliderConstraints);
         }
       }),
     }
-
-    this.maxSliderPos = rect.size[1] - 16 - this.sliderSize;
 
     this.bgPattern = PatternLibrary.get("scroll-bar", SPRITE_BG);
   }
@@ -66,19 +67,19 @@ export class ScrollBar implements Component {
         break;
       case "mousemove":
         if (this.sliderGrabbed) {
-          this.sliderPos = coordConstrain(coordSub(event.coord, this.sliderGrabbed), { coord: [0, 0], size: [8, this.maxSliderPos] })[1];
+          this.sliderPos = coordConstrain(coordSub(event.coord, this.sliderGrabbed), { coord: [0, 0], size: [8, this.sliderConstraints.max] })[1];
         }
         break;
       case "wheel":
         if (isCoordInRect(event.coord, this.scrollArea)) {
-          this.sliderPos = coordConstrain(coordAdd([0, this.sliderPos], event.wheelDelta), { coord: [0, 0], size: [8, this.maxSliderPos] })[1];
+          this.sliderPos = coordConstrain(coordAdd([0, this.sliderPos], event.wheelDelta), { coord: [0, 0], size: [8, this.sliderConstraints.max] })[1];
         }
         break;
     }
   }
 
   scrollPosition(): number {
-    return this.sliderPos / this.maxSliderPos;
+    return this.sliderPos / this.sliderConstraints.max;
   }
 
   paint(screen: PixelScreen) {
