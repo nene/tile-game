@@ -2,13 +2,14 @@ import { Coord, coordAdd, isCoordInRect, Rect } from "../Coord";
 import { GameEvent } from "../GameEvent";
 import { PixelScreen } from "../PixelScreen";
 import { Component } from "./Component";
-import { drawInset, drawUpset } from "./ui-utils";
+import { drawInset, drawUpset, UI_BG_COLOR } from "./ui-utils";
 
 interface TextButtonConfig {
   rect: Rect;
   text: string;
   align?: "left" | "center";
   size?: "medium" | "small";
+  opaque?: boolean;
   onClick: () => void;
 }
 
@@ -18,17 +19,22 @@ export class TextButton implements Component {
   private align: "left" | "center";
   private onClick: () => void;
   private pressed = false;
+  private opaque = false;
   private size: "medium" | "small";
 
-  constructor({ rect, text, align, size, onClick }: TextButtonConfig) {
+  constructor({ rect, text, align, size, opaque, onClick }: TextButtonConfig) {
     this.rect = rect;
     this.text = text;
     this.align = align ?? "center";
     this.size = size ?? "medium";
+    this.opaque = opaque ?? false;
     this.onClick = onClick;
   }
 
   paint(screen: PixelScreen) {
+    if (this.opaque) {
+      screen.drawRect(this.rect, UI_BG_COLOR);
+    }
     if (this.pressed) {
       this.drawText(screen, [1, 1]);
       drawInset(screen, this.rect);
@@ -53,6 +59,10 @@ export class TextButton implements Component {
 
   private textYOffset(): number {
     return this.size === "medium" ? 0 : 2;
+  }
+
+  getRect(): Rect {
+    return this.rect;
   }
 
   handleGameEvent(event: GameEvent): boolean | undefined {

@@ -1,4 +1,4 @@
-import { Coord, coordAdd, coordDistance, coordDiv, coordMul, tileToScreenCoord } from "../Coord";
+import { Coord, coordAdd, coordDistance, coordDiv, coordMul, isCoordInRect, tileToScreenCoord } from "../Coord";
 import { BeerBottle } from "../items/BeerBottle";
 import { BottleOpener } from "../items/BottleOpener";
 import { PixelScreen } from "../PixelScreen";
@@ -9,6 +9,7 @@ import { SpriteSheet } from "../sprites/SpriteSheet";
 import { MiniGame } from "./MiniGame";
 import { GameEvent } from "../GameEvent";
 import { Noise } from "../utils/Noise";
+import { TextButton } from "../ui/TextButton";
 
 enum CaptureStatus {
   miss = 0,
@@ -36,6 +37,7 @@ export class OpeningGame implements MiniGame {
   private clicksAfterOpen = 0;
   private finishAtTick?: number;
   private handShakeAmount = 0;
+  private abortButton: TextButton;
 
   constructor(private bottle: BeerBottle, private opener: BottleOpener) {
     this.bgSprite = SpriteLibrary.getSprite("opening-game-bg");
@@ -43,6 +45,14 @@ export class OpeningGame implements MiniGame {
     this.bottleCapSprites = SpriteLibrary.get("bottle-cap-xl");
     this.openerSprite = SpriteLibrary.getSprite("bottle-opener-xl");
     this.bottleCoord = this.nextBottleCoord();
+    this.abortButton = new TextButton({
+      rect: { coord: [262, 184], size: [56, 14] },
+      text: "Loobu",
+      opaque: true,
+      onClick: () => {
+        this.finishAtTick = this.tickCounter;
+      }
+    });
   }
 
   setHandShakeAmount(amount: number) {
@@ -70,6 +80,8 @@ export class OpeningGame implements MiniGame {
 
   paint(screen: PixelScreen) {
     this.drawBackground(screen);
+    this.abortButton.paint(screen);
+
     screen.drawSprite(this.bottleSprite, this.bottleCoord);
 
     if (this.bottle.isOpen()) {
@@ -80,15 +92,22 @@ export class OpeningGame implements MiniGame {
       screen.drawSprite(this.bottleCapSprites.getSprite([this.captureStatus, 0]), this.bottleCoord);
     }
 
-    this.drawRibbon(screen);
-    screen.drawSprite(this.openerSprite, this.openerCoord());
+    if (isCoordInRect(this.mouseCoord, this.abortButton.getRect())) {
+      screen.drawSprite(SpriteLibrary.getSprite("cursor", [0, 0]), this.mouseCoord);
+    } else {
+      this.drawRibbon(screen);
+      screen.drawSprite(this.openerSprite, this.openerCoord());
+    }
   }
 
-  handleGameEvent({ type, coord }: GameEvent): boolean | undefined {
-    switch (type) {
+  handleGameEvent(event: GameEvent): boolean | undefined {
+    if (this.abortButton.handleGameEvent(event)) {
+      return true;
+    }
+    switch (event.type) {
       case "click": return this.handleClick();
-      case "mousemove": this.handleMouseMove(coord); break;
-      case "mousedown": this.handleMouseDown(coord); break;
+      case "mousemove": this.handleMouseMove(event.coord); break;
+      case "mousedown": this.handleMouseDown(event.coord); break;
     }
     return undefined;
   }
