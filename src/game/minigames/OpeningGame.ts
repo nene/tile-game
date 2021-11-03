@@ -34,7 +34,7 @@ export class OpeningGame implements MiniGame {
   private handNoise = new Noise();
   private tickCounter = 0;
   private clicksAfterOpen = 0;
-  private finishAtTick = 60 * 10; // Total amount of time for opening the bottle
+  private finishAtTick?: number;
   private handShakeAmount = 0;
 
   constructor(private bottle: BeerBottle, private opener: BottleOpener) {
@@ -134,7 +134,7 @@ export class OpeningGame implements MiniGame {
   }
 
   isFinished(): boolean {
-    return this.tickCounter > this.finishAtTick;
+    return Boolean(this.finishAtTick && this.tickCounter > this.finishAtTick);
   }
 
   private checkCaptureStatus(): CaptureStatus {
