@@ -6,6 +6,7 @@ import { CfeBuilding } from "./CfeBuilding";
 import { Building } from "./Building";
 import { Door } from "../furniture/Door";
 import { Fence } from "../furniture/Fence";
+import { SpawnPoint } from "../furniture/SpawnPoint";
 
 export class OutdoorsLocationFactory implements LocationFactory {
   private background: OutdoorsBackground;
@@ -30,6 +31,8 @@ export class OutdoorsLocationFactory implements LocationFactory {
       new Fence(coordAdd(tileToScreenCoord([4, 14]), [8, 0])),
       new Fence(tileToScreenCoord([9, 14])),
       new Fence(tileToScreenCoord([16, 14])),
+      // A spawn location outside of the fence
+      new SpawnPoint(tileToScreenCoord([10, 15])),
     ];
   }
 
@@ -38,7 +41,7 @@ export class OutdoorsLocationFactory implements LocationFactory {
   }
 
   getSize(): Coord {
-    return tileToScreenCoord([21, 15]);
+    return tileToScreenCoord([21, 16]);
   }
 
   getBackground() {

@@ -68,4 +68,8 @@ export class Door implements GameObject {
     world.teleport(world.getPlayer(), newLocation);
     world.getPlayer().setCoord(coordAdd(door.getCoord(), [8, 8]));
   }
+
+  getTarget(): DoorTarget {
+    return this.target;
+  }
 }

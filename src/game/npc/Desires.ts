@@ -6,6 +6,9 @@ import { DespawnActivity } from "../activities/DespawnActivity";
 import { Character } from "./Character";
 import { PauseActivity } from "../activities/PauseActivity";
 import { SatisfyDesiresActivity } from "../activities/SatisfyDesiresActivity";
+import { EnterDoorActivity } from "../activities/EnterDoorActivity";
+import { MoveActivity } from "../activities/MoveActivity";
+import { tileToScreenCoord } from "../Coord";
 
 export class Desires {
   private queue: Activity[] = [];
@@ -14,10 +17,14 @@ export class Desires {
   constructor(character: Character) {
     this.idle = new IdleActivity(character);
     this.queue = [
+      new MoveToDoorActivity(character),
+      new EnterDoorActivity(character),
       new PauseActivity(5, character),
       new MoveToTableActivity(character),
       new SatisfyDesiresActivity(character),
       new MoveToDoorActivity(character),
+      new EnterDoorActivity(character),
+      new MoveActivity(tileToScreenCoord([10, 15]), character),
       new DespawnActivity(character),
     ];
   }

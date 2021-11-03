@@ -30,8 +30,7 @@ export class MoveActivity implements Activity {
 
     const targetCoord = this.getActivePathStep(coord, location);
     if (targetCoord) {
-      this.speed = coordMul(coordUnit(coordSub(targetCoord, coord)), [2, 2]);
-
+      this.speed = this.getSpeed(coord, targetCoord);
       return { coord: coordAdd(coord, this.speed), sprites };
     }
     this.finished = true;
@@ -40,6 +39,15 @@ export class MoveActivity implements Activity {
 
   public isFinished() {
     return this.finished;
+  }
+
+  private getSpeed(coord: Coord, targetCoord: Coord): Coord {
+    const dirVector = coordSub(targetCoord, coord);
+    if (Math.abs(dirVector[0]) <= 1 && Math.abs(dirVector[1]) <= 1) {
+      return coordUnit(dirVector);
+    } else {
+      return coordMul(coordUnit(dirVector), [2, 2]);
+    }
   }
 
   private getActivePathStep(coord: Coord, location: Location): Coord | undefined {
