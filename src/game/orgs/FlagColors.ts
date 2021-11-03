@@ -14,6 +14,7 @@ const colors = {
   kuldne: colorDef({ name: "kuldne", code: [0, 0] as Coord }),
   kollane: colorDef({ name: "kollane", code: "#bfb44a" }),
   roheline: colorDef({ name: "roheline", code: "#156323" }),
+  helesinine: colorDef({ name: "helesinine", code: "#61aadb" }),
   sinine: colorDef({ name: "sinine", code: "#444eb8" }),
   lilla: colorDef({ name: "lilla", code: "#834d9d" }),
   violett: colorDef({ name: "violett", code: "#84336f" }),

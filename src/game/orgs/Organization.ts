@@ -196,7 +196,7 @@ const orgs = {
   }),
   raimla: orgDef({
     name: "ÜS Raimla",
-    colors: makeFlag("sinine", "valge"), // todo: helesinine
+    colors: makeFlag("helesinine", "valge"), // todo: helesinine
     establishedYear: 1922,
     establishedPlace: "Tartu",
     slogan: "Demokraatia, isiksus, isamaa",
