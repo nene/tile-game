@@ -29,14 +29,6 @@ export class Desires {
     ];
   }
 
-  private startActivity(activity: Activity) {
-    this.queue.unshift(activity);
-  }
-
-  private finishCurrentActivity() {
-    this.queue.shift();
-  }
-
   currentActivity(): Activity {
     if (this.queue.length === 0) {
       return this.idle;
@@ -44,9 +36,9 @@ export class Desires {
 
     if (this.queue[0].isFinished()) {
       const nextActivity = this.queue[0].nextActivity();
-      this.finishCurrentActivity();
+      this.queue.shift();
       if (nextActivity) {
-        this.startActivity(nextActivity);
+        this.queue.unshift(nextActivity);
       }
       return this.currentActivity();
     }
