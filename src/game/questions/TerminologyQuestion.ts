@@ -137,9 +137,9 @@ const questions: TerminologyQuestion[] = [
   },
   {
     question: "Mitmendat semestrit käib noormaja?",
-    correctAnswer: "1. ja 2. semestrit.",
+    correctAnswer: "3. ja 4. semestrit.",
     wrongAnswers: [
-      "3. ja 4. semestrit.",
+      "1. ja 2. semestrit.",
       "5. ja 6. semestrit.",
       "7. ja 8. semestrit.",
     ],
