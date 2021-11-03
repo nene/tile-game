@@ -64,6 +64,15 @@ const questions: TerminologyQuestion[] = [
     ],
   },
   {
+    question: "Kes on ruktoonus?",
+    correctAnswer: "Isik kellel on korporatsiooniga läbikäimine keelatud.",
+    wrongAnswers: [
+      "Korp! Ruktonia liige.",
+      "Värske värvikandja.",
+      "Värvide saamise üle otsustava koosoleku liige.",
+    ],
+  },
+  {
     question: "Mis on rebaste raseerimise õigus?",
     correctAnswer: "Rebaste õigus vennastuse ajal veini pihta panna.",
     wrongAnswers: [
@@ -88,6 +97,96 @@ const questions: TerminologyQuestion[] = [
       "Karistus liikmemaksu tasumata jätmise eest.",
       "Con-coetorite ühine laulmine peale vennastuspidu.",
       "Metsikute külaliste konventi toomine.",
+    ],
+  },
+  {
+    question: "Mis on kaatripäev?",
+    correctAnswer: "Tervist taastav koosviibimine peale kommerssi või muud suuremat pidu.",
+    wrongAnswers: [
+      "Fraateri matustele järgnev koosviibimine konvendis.",
+      "Päev, mil konvendis on lubatud raha peale kaartide mängimine.",
+      "Iga-aastane laevasõit emajõel.",
+    ],
+  },
+  {
+    question: "Mis on comment suspendu?",
+    correctAnswer: "Ootele pandud auvahekord.",
+    wrongAnswers: [
+      "Alkoholi tarbimise keeld.",
+      "Luba õllelauast lahkuda.",
+      "Vaikimiskohustus.",
+    ],
+  },
+  {
+    question: "Mis on küüneproov?",
+    correctAnswer: "Šoppeni tühjuse kontroll.",
+    wrongAnswers: [
+      "Kaasvõitlejate maniküüri ülevaatus.",
+      "Rebasteatri proovietendus.",
+      "Laua ettevalmistus enne kvarterimängu viset.",
+    ],
+  },
+  {
+    question: "Mis on coetus-šlukk?",
+    correctAnswer: "Con-coetorite ühine laulmine peale vennastuspidu.",
+    wrongAnswers: [
+      "Eriline jook, mida valmistatakse põleva piirituse ja laulu saatel.",
+      "Tervele coetusele sisse andmine.",
+      "Coetuse liikmete ühte hoidmise põhimõte.",
+    ],
+  },
+  {
+    question: "Mitmendat semestrit käib noormaja?",
+    correctAnswer: "1. ja 2. semestrit.",
+    wrongAnswers: [
+      "3. ja 4. semestrit.",
+      "5. ja 6. semestrit.",
+      "7. ja 8. semestrit.",
+    ],
+  },
+  {
+    question: "Kuidas nimetatakse 6. semestrit liige olijat?",
+    correctAnswer: "Vanamaja.",
+    wrongAnswers: [
+      "Väga-vanamaja.",
+      "Noormaja.",
+      "Sammalpea.",
+    ],
+  },
+  {
+    question: "Kuidas nimetatakse 7. semstrit liige olijat.",
+    correctAnswer: "Väga-vanamaja.",
+    wrongAnswers: [
+      "Vanamaja.",
+      "Väga-sammalpea.",
+      "Sammalpea.",
+    ],
+  },
+  {
+    question: "Mitmendat semestrit käib sammalpea?",
+    correctAnswer: "9. ja 10. semestrit.",
+    wrongAnswers: [
+      "7. ja 8. semestrit.",
+      "5. ja 6. semestrit.",
+      "3. ja 4. semestrit.",
+    ],
+  },
+  {
+    question: "Kuidas nimetatakse 11. semstrit liige olijat.",
+    correctAnswer: "Väga-sammalpea.",
+    wrongAnswers: [
+      "Sammalpea.",
+      "Kuldrebane.",
+      "Vanamees.",
+    ],
+  },
+  {
+    question: "Kui vana on kuldrebane?",
+    correctAnswer: "13 või rohkem semestrit.",
+    wrongAnswers: [
+      "12 või rohkem semestrit.",
+      "10 või rohkem semestrit.",
+      "11 või rohkem semestrit.",
     ],
   },
 ];
