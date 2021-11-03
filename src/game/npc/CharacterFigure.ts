@@ -16,7 +16,7 @@ export class CharacterFigure implements GameObject {
 
   constructor(private coord: Coord, private character: Character) {
     this.activityManager = new ActivityManager(character);
-    this.defaultSprite = SpriteLibrary.getSprite(character.getSpriteSet());
+    this.defaultSprite = SpriteLibrary.getSprite(character.getSpriteName());
   }
 
   tick(location: Location, world: GameWorld) {

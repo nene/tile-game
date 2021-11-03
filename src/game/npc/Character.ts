@@ -5,7 +5,7 @@ import { constrain } from "../utils/constrain";
 
 export interface CharacterDef {
   name: string;
-  spriteSet: SpriteName;
+  spriteName: SpriteName;
   favoriteDrinks: Drink[];
   hatedDrinks: Drink[];
   spawnTime: number;
@@ -21,14 +21,14 @@ export class Character {
     return this.def.name;
   }
 
-  getSpriteSet() {
-    return this.def.spriteSet;
+  getSpriteName() {
+    return this.def.spriteName;
   }
 
   getFaceSprite(): Sprite {
     // Extract the upper portion (face) of the first sprite
     return {
-      ...SpriteLibrary.getSprite(this.def.spriteSet, [0, 0]),
+      ...SpriteLibrary.getSprite(this.def.spriteName, [0, 0]),
       coord: [0, 3],
       size: [16, 16],
       offset: [0, 0],
@@ -59,35 +59,35 @@ export class Character {
 const characters = {
   "koppel": new Character({
     name: "ksv! Jakob Koppel",
-    spriteSet: "cfe-ksv-2",
+    spriteName: "cfe-ksv-2",
     spawnTime: 1 * 10,
     favoriteDrinks: [getDrink("bock"), getDrink("pilsner")],
     hatedDrinks: [getDrink("limonaad"), getDrink("paulaner"), getDrink("porter")],
   }),
   "sass": new Character({
     name: "vil! Aleksander Popov",
-    spriteSet: "cfe-ksv-1",
+    spriteName: "cfe-ksv-1",
     spawnTime: 5 * 10,
     favoriteDrinks: [getDrink("alexander"), getDrink("tommu-hiid")],
     hatedDrinks: [getDrink("porter"), getDrink("limonaad")],
   }),
   "pikmets": new Character({
     name: "b!vil! Richard Pikmets",
-    spriteSet: "cfe-ksv-3",
+    spriteName: "cfe-ksv-3",
     spawnTime: 20 * 10,
     favoriteDrinks: [getDrink("special"), getDrink("kriek")],
     hatedDrinks: [getDrink("alexander"), getDrink("pilsner")],
   }),
   "otto": new Character({
     name: "vil! Otto Pukk",
-    spriteSet: "cfe-ksv-4",
+    spriteName: "cfe-ksv-4",
     spawnTime: 30 * 10,
     favoriteDrinks: [getDrink("paulaner"), getDrink("porter")],
     hatedDrinks: [getDrink("kriek"), getDrink("limonaad")],
   }),
   "karl": new Character({
     name: "ksv! Karl Jõgi",
-    spriteSet: "cfe-ksv-5",
+    spriteName: "cfe-ksv-5",
     spawnTime: 32 * 10,
     favoriteDrinks: [getDrink("alexander"), getDrink("pilsner"), getDrink("tommu-hiid")],
     hatedDrinks: [getDrink("bock")],

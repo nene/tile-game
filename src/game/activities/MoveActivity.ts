@@ -13,7 +13,7 @@ export class MoveActivity implements Activity {
   private finished = false;
 
   constructor(private destination: Coord, character: Character, private next?: Activity) {
-    this.animation = new SpriteAnimation(SpriteLibrary.get(character.getSpriteSet()), {
+    this.animation = new SpriteAnimation(SpriteLibrary.get(character.getSpriteName()), {
       frames: [[0, 0]],
     });
   }
