@@ -12,14 +12,16 @@ import { GameKeyEvent } from "./GameEvent";
 import { Location } from "./locations/Location";
 import { PlayerMovement } from "./PlayerMovement";
 import { GameWorld } from "./GameWorld";
+import { constrain } from "./utils/constrain";
 
-const PLAYER_SPEED = 3;
+const MAX_SPEED = 6;
 
 type Facing = 'up' | 'down' | 'left' | 'right';
 
 export class Player implements GameObject {
   private coord: Coord;
   private direction: Coord;
+  private speed = 0;
   private standAnimations: Record<Facing, SpriteAnimation>;
   private walkAnimations: Record<Facing, SpriteAnimation>;
   private animation: Animation;
@@ -150,7 +152,12 @@ export class Player implements GameObject {
   }
 
   private updatePosition(location: Location) {
-    const newCoord = this.movement.move(this.direction, PLAYER_SPEED, location);
+    if (this.isMoving(this.direction)) {
+      this.speed = constrain(this.speed === 0 ? 1 : this.speed * 2, { min: 0, max: MAX_SPEED });
+    } else {
+      this.speed = 0;
+    }
+    const newCoord = this.movement.move(this.direction, this.speed, location);
 
     this.coord = this.constrainToWorld(newCoord, location);
   }
