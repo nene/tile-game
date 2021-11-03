@@ -94,7 +94,7 @@ export class Player implements GameObject {
     }
   }
 
-  changeDirection(newDirection: Coord) {
+  private changeDirection(newDirection: Coord) {
     const oldDirection = this.direction;
     if (this.isMoving(newDirection)) {
       const oldAnimation = this.animation;
@@ -119,19 +119,19 @@ export class Player implements GameObject {
     this.direction = newDirection;
   }
 
-  isStanding(direction: Coord) {
+  private isStanding(direction: Coord) {
     return direction[0] === 0 && direction[1] === 0;
   }
 
-  isMoving(direction: Coord) {
+  private isMoving(direction: Coord) {
     return !this.isStanding(direction);
   }
 
-  pickByDirection(dir: Coord, options: Record<Facing, SpriteAnimation>): SpriteAnimation {
+  private pickByDirection(dir: Coord, options: Record<Facing, SpriteAnimation>): SpriteAnimation {
     return options[this.facing(dir)];
   }
 
-  facing(dir: Coord): Facing {
+  private facing(dir: Coord): Facing {
     if (dir[0] > 0) {
       return 'right';
     }
