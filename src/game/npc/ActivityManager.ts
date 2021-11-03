@@ -10,7 +10,7 @@ import { EnterDoorActivity } from "../activities/EnterDoorActivity";
 import { MoveActivity } from "../activities/MoveActivity";
 import { tileToScreenCoord } from "../Coord";
 
-export class Desires {
+export class ActivityManager {
   private queue: Activity[] = [];
   private idle: Activity;
 

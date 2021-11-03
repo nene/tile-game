@@ -5,22 +5,22 @@ import { PixelScreen } from "../PixelScreen";
 import { Sprite } from "../sprites/Sprite";
 import { UiController } from "../UiController";
 import { Character } from "./Character";
-import { Desires } from "./Desires";
+import { ActivityManager } from "./ActivityManager";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { Location } from "../locations/Location";
 
 export class CharacterFigure implements GameObject {
-  private desires: Desires;
+  private activityManager: ActivityManager;
   private sprites: Sprite[] = [];
   private defaultSprite: Sprite;
 
   constructor(private coord: Coord, private character: Character) {
-    this.desires = new Desires(character);
+    this.activityManager = new ActivityManager(character);
     this.defaultSprite = SpriteLibrary.getSprite(character.getSpriteSet());
   }
 
   tick(location: Location, world: GameWorld) {
-    const activity = this.desires.currentActivity();
+    const activity = this.activityManager.currentActivity();
 
     const updates = activity.tick(this, location, world);
     if (updates.coord) {
@@ -61,11 +61,11 @@ export class CharacterFigure implements GameObject {
   }
 
   isInteractable(ui: UiController) {
-    return this.desires.currentActivity().isInteractable(ui);
+    return this.activityManager.currentActivity().isInteractable(ui);
   }
 
   onInteract(uiController: UiController, world: GameWorld) {
-    const activity = this.desires.currentActivity();
+    const activity = this.activityManager.currentActivity();
     activity.interact(uiController, world);
   }
 }
