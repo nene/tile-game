@@ -8,11 +8,13 @@ export interface FlagColor {
 const colorDef = (color: FlagColor) => color;
 
 const colors = {
-  kirsipruun: colorDef({ name: "kirsipruun", code: "#8c3818" }),
+  pruun: colorDef({ name: "pruun", code: "#8c3818" }),
   punane: colorDef({ name: "punane", code: "#a83324" }),
+  oranz: colorDef({ name: "oranž", code: "#eb813d" }),
   helebeez: colorDef({ name: "helebeež", code: "#eae2cc" }),
   kuldne: colorDef({ name: "kuldne", code: [0, 0] as Coord }),
   kollane: colorDef({ name: "kollane", code: "#bfb44a" }),
+  heleroheline: colorDef({ name: "roheline", code: "#92a737" }),
   roheline: colorDef({ name: "roheline", code: "#156323" }),
   helesinine: colorDef({ name: "helesinine", code: "#61aadb" }),
   sinine: colorDef({ name: "sinine", code: "#444eb8" }),
@@ -21,6 +23,7 @@ const colors = {
   roosa: colorDef({ name: "roosa", code: "#eb70af" }),
   hobedane: colorDef({ name: "hõbedane", code: [1, 0] as Coord }),
   valge: colorDef({ name: "valge", code: "#c9c9c9" }),
+  hall: colorDef({ name: "hall", code: "#666" }),
   must: colorDef({ name: "must", code: "#000" }),
 };
 

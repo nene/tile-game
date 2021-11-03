@@ -8,7 +8,7 @@ const correctAnswersPerLevel: Record<OrgSkillLevel, number> = {
   [OrgSkillLevel.fraternities2]: 10, // Max 5x4 questions
   [OrgSkillLevel.unions]: 10, // Max 6x4 questions
   [OrgSkillLevel.friends]: 10, // Max 5x4 questions
-  [OrgSkillLevel.level6]: 100,
+  [OrgSkillLevel.latvia]: 100,
   [OrgSkillLevel.level7]: 100,
   [OrgSkillLevel.level8]: 100,
   [OrgSkillLevel.level9]: 100,
