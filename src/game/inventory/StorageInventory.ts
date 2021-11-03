@@ -77,6 +77,10 @@ export class StorageInventory implements WritableInventory {
   isFull() {
     return this._size === this.allItems().length;
   }
+
+  clear() {
+    this.slots = fill(new Array(this.slots.length), undefined);
+  }
 }
 
 function isFilledSlot(x: Slot): x is GameItem {
