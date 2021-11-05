@@ -12,6 +12,11 @@ export class WriteToBookActivity implements Activity {
   }
 
   tick(figure: CharacterFigure, location: Location): ActivityUpdates {
+    if (!this.character.isRememberingBookWriting()) {
+      this.finished = true;
+      return {};
+    }
+
     const book = this.findBook(location);
     if (book) {
       book.addEntry(this.character);

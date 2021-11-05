@@ -14,8 +14,11 @@ export interface CharacterDef {
 export class Character {
   // How much the NPC likes or dislikes the player
   private opinion = 0; // 0..10
+  private willWriteToBook: boolean;
 
-  constructor(private def: CharacterDef) { }
+  constructor(private def: CharacterDef) {
+    this.willWriteToBook = Math.random() > 0.5;
+  }
 
   getName() {
     return this.def.name;
@@ -53,6 +56,10 @@ export class Character {
 
   changeOpinion(amount: number) {
     this.opinion = constrain(this.opinion + amount, { min: 0, max: 10 });
+  }
+
+  isRememberingBookWriting() {
+    return this.willWriteToBook;
   }
 }
 

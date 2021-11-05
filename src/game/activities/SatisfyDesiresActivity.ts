@@ -8,6 +8,7 @@ import { RequestDrinkInteraction } from "./RequestDrinkInteraction";
 import { random } from "lodash";
 import { AskQuestionInteraction } from "./AskQuestionInteraction";
 import { CharacterFigure } from "../npc/CharacterFigure";
+import { PlainInteraction, ReceiveBookInteraction } from "./ReceiveBookInteraction";
 
 const MAX_BEERS = 2;
 const MAX_QUESTIONS = 3;
@@ -17,9 +18,13 @@ export class SatisfyDesiresActivity implements Activity {
   private beers = 0;
   private questions = 0;
   private activity: Activity;
+  private alwaysAvailableInteractions: PlainInteraction[];
 
   constructor(private character: Character) {
     this.activity = this.chooseActivity() as Activity;
+    this.alwaysAvailableInteractions = [
+      new ReceiveBookInteraction(character),
+    ];
   }
 
   private chooseActivity() {
@@ -77,6 +82,10 @@ export class SatisfyDesiresActivity implements Activity {
   }
 
   interact(ui: UiController, world: GameWorld) {
+    if (this.alwaysAvailableInteractions.some((interaction) => interaction.interact(ui, world))) {
+      return;
+    }
+
     this.activity.interact(ui, world);
   }
 
