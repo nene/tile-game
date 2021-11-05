@@ -3,7 +3,6 @@ import { GameObject } from "../GameObject";
 import { BookInventoryView } from "../inventory/BookInventoryView";
 import { StorageInventory } from "../inventory/StorageInventory";
 import { Book } from "../items/Book";
-import { Character, getCharacter } from "../npc/Character";
 import { PixelScreen } from "../PixelScreen";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { UiController } from "../UiController";
@@ -15,13 +14,9 @@ export class BookCabinet implements GameObject {
   private inventory: StorageInventory;
 
   constructor(private coord: Coord) {
-    const book = new Book();
-    book.addEntry(getCharacter("koppel"));
-    book.addEntry(getCharacter("pikmets"));
-
     this.inventory = new StorageInventory({
       size: 1,
-      items: [book],
+      items: [new Book()],
       isAcceptingItem: (item) => item instanceof Book,
     });
   }
@@ -67,12 +62,8 @@ export class BookCabinet implements GameObject {
     }));
   }
 
-  addEntry(character: Character): boolean {
+  getBook(): Book | undefined {
     const book = this.inventory.itemAt(0);
-    if (book instanceof Book) {
-      book.addEntry(character);
-      return true;
-    }
-    return false;
+    return book instanceof Book ? book : undefined;
   }
 }

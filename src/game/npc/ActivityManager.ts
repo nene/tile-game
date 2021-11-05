@@ -9,6 +9,7 @@ import { SatisfyDesiresActivity } from "../activities/SatisfyDesiresActivity";
 import { EnterDoorActivity } from "../activities/EnterDoorActivity";
 import { MoveActivity } from "../activities/MoveActivity";
 import { tileToScreenCoord } from "../Coord";
+import { WriteToBookActivity } from "../activities/WriteToBookActivity";
 
 export class ActivityManager {
   private queue: Activity[] = [];
@@ -19,6 +20,7 @@ export class ActivityManager {
     this.queue = [
       new MoveToDoorActivity(character),
       new EnterDoorActivity(character),
+      new WriteToBookActivity(character),
       new PauseActivity(5, character),
       new MoveToTableActivity(character),
       new SatisfyDesiresActivity(character),
