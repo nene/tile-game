@@ -4,7 +4,6 @@ import { StorageInventory } from "../inventory/StorageInventory";
 import { StorageInventoryView } from "../inventory/StorageInventoryView";
 import { Book } from "../items/Book";
 import { PixelScreen } from "../PixelScreen";
-import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { UiController } from "../UiController";
 
@@ -12,11 +11,9 @@ const WITH_BOOK: Coord = [0, 0];
 const WITHOUT_BOOK: Coord = [1, 0];
 
 export class BookCabinet implements GameObject {
-  private sprite: Sprite;
   private inventory: StorageInventory;
 
   constructor(private coord: Coord) {
-    this.sprite = SpriteLibrary.getSprite("book-cabinet", [0, 0]);
     this.inventory = new StorageInventory({
       size: 1,
       items: [new Book()],
