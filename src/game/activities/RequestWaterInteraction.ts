@@ -1,12 +1,10 @@
 import { Character } from "../npc/Character";
 import { UiController } from "../UiController";
-import { TextContent } from "../dialogs/TextContent";
 import { Interaction, InteractionType } from "./Interaction";
-import { Dialog } from "../dialogs/Dialog";
 import { BeerGlass, DrinkLevel } from "../items/BeerGlass";
 import { getDrink } from "../items/Drink";
 import { GameWorld } from "../GameWorld";
-import { noop } from "lodash";
+import { showPlainTextDialog } from "../dialogs/showPlainTextDialog";
 
 export class RequestWaterInteraction implements Interaction {
   private finished = false;
@@ -43,15 +41,8 @@ export class RequestWaterInteraction implements Interaction {
     });
   }
 
-  private showDialog(ui: UiController, text: string, onClose: () => void = noop) {
-    ui.showModal(new Dialog({
-      character: this.character,
-      createContent: (rect) => new TextContent(text, rect),
-      onClose: () => {
-        ui.hideModal();
-        onClose();
-      },
-    }));
+  private showDialog(ui: UiController, text: string, onClose?: () => void) {
+    showPlainTextDialog({ ui, character: this.character, text, onClose });
   }
 
   nextActivity() {
