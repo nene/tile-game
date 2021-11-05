@@ -34,7 +34,7 @@ export class SatisfyDesiresActivity implements Activity {
     else if (this.beers < MAX_BEERS) {
       return this.chooseDrinkActivity();
     }
-    else if (this.beers < MAX_BEERS) {
+    else if (this.questions < MAX_QUESTIONS) {
       return this.chooseQuestionActivity();
     }
     else {
