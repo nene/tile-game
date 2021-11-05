@@ -1,7 +1,7 @@
 import { Coord, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
+import { BookInventoryView } from "../inventory/BookInventoryView";
 import { StorageInventory } from "../inventory/StorageInventory";
-import { StorageInventoryView } from "../inventory/StorageInventoryView";
 import { Book } from "../items/Book";
 import { Character, getCharacter } from "../npc/Character";
 import { PixelScreen } from "../PixelScreen";
@@ -58,9 +58,9 @@ export class BookCabinet implements GameObject {
   }
 
   onInteract(ui: UiController) {
-    ui.showInventory(new StorageInventoryView({
+    ui.showInventory(new BookInventoryView({
       inventory: this.inventory,
-      windowSize: [120, 87],
+      windowSize: [200, 120],
       gridSize: [1, 1],
       headline: { title: "Majaraamatu laud", description: "Kirjuta sisse kui konventi tuled." },
       onClose: () => ui.hideInventory(),
