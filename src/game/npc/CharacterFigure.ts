@@ -8,6 +8,7 @@ import { Character } from "./Character";
 import { ActivityManager } from "./ActivityManager";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { Location } from "../locations/Location";
+import { createCharacterActivities } from "./createCharacterActivities";
 
 export class CharacterFigure implements GameObject {
   private activityManager: ActivityManager;
@@ -15,7 +16,7 @@ export class CharacterFigure implements GameObject {
   private defaultSprite: Sprite;
 
   constructor(private coord: Coord, private character: Character) {
-    this.activityManager = new ActivityManager(character);
+    this.activityManager = new ActivityManager(createCharacterActivities(character));
     this.defaultSprite = SpriteLibrary.getSprite(character.getSpriteName());
   }
 
