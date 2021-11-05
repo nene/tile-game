@@ -154,7 +154,7 @@ const questions: TerminologyQuestion[] = [
     ],
   },
   {
-    question: "Kuidas nimetatakse 7. semstrit liige olijat.",
+    question: "Kuidas nimetatakse 7. semestrit liige olijat.",
     correctAnswer: "Väga-vanamaja.",
     wrongAnswers: [
       "Vanamaja.",
@@ -172,7 +172,7 @@ const questions: TerminologyQuestion[] = [
     ],
   },
   {
-    question: "Kuidas nimetatakse 11. semstrit liige olijat.",
+    question: "Kuidas nimetatakse 11. semestrit liige olijat.",
     correctAnswer: "Väga-sammalpea.",
     wrongAnswers: [
       "Sammalpea.",
