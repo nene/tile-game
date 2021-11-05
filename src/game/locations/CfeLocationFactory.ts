@@ -13,6 +13,7 @@ import { Fireplace } from "../furniture/Fireplace";
 import { Countertop } from "../furniture/Countertop";
 import { Painting } from "../furniture/Painting";
 import { KitchenSink } from "../furniture/KitchenSink";
+import { BookCabinet } from "../furniture/BookCabinet";
 
 const CFE_SIZE: Coord = [23, 17]; // Size in tiles
 
@@ -37,9 +38,11 @@ export class CfeLocationFactory implements LocationFactory {
       new Table(tileToScreenCoord([8, 8])),
       new Table(tileToScreenCoord([3, 8])),
       // Sofa
-      new Sofa(tileToScreenCoord([4, 4])),
+      new Sofa(tileToScreenCoord([3, 4])),
       // Fire
-      new Fireplace(tileToScreenCoord([7, 4])),
+      new Fireplace(tileToScreenCoord([6, 4])),
+      // Where to write in
+      new BookCabinet(tileToScreenCoord([11, 4])),
       // A door
       new Door({
         coord: tileToScreenCoord([13, 4]),
