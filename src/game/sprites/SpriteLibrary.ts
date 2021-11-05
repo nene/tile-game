@@ -17,6 +17,7 @@ import bookCabinet from "./data/book-cabinet.png";
 import kitchenSink from "./data/kitchen-sink.png";
 import tap from "./data/tap.png";
 import drain from "./data/drain.png";
+import book from "./data/book.png";
 import door from "./data/door.png";
 import colorShield from "./data/color-shield.png";
 import bulletinBoard from "./data/bulletin-board.png";
@@ -69,7 +70,7 @@ const imageFiles = {
   'fridge': spriteDef({ src: fridge, cfg: { size: [16, 46], offset: [0, -32] } }),
   'beer-cabinet': spriteDef({ src: beerCabinet, cfg: { size: [32, 46], offset: [0, -32] } }),
   'beer-box': spriteDef({ src: beerBox, cfg: { size: [11, 14], offset: [3, -4] } }),
-  'book-cabinet': spriteDef({ src: bookCabinet, cfg: { size: [16, 24], offset: [0, -15] } }),
+  'book-cabinet': spriteDef({ src: bookCabinet, cfg: { size: [16, 24], colsRows: [2, 1], offset: [0, -15] } }),
   'kitchen-sink': spriteDef({ src: kitchenSink, cfg: { size: [16, 43], offset: [0, -27] } }),
   'door': spriteDef({ src: door, cfg: { size: [20, 35], offset: [-2, -34] } }),
   'color-shield': spriteDef({ src: colorShield, cfg: { size: [11, 12], offset: [3, -40] } }),
@@ -93,6 +94,7 @@ const imageFiles = {
   'bottle-opener': spriteDef({ src: bottleOpener, cfg: { size: [16, 16], colsRows: [2, 1] } }),
   'tap': spriteDef({ src: tap, cfg: { size: [16, 16] } }),
   'drain': spriteDef({ src: drain, cfg: { size: [16, 16] } }),
+  'book': spriteDef({ src: book, cfg: { size: [16, 16] } }),
 
   // bottle-opening game
   'opening-game-bg': spriteDef({ src: openingGameBg, cfg: { size: [16, 16] } }),
