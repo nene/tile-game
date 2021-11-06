@@ -12,7 +12,7 @@ export class MoveActivity implements Activity {
   private animation: SpriteAnimation;
   private finished = false;
 
-  constructor(private destination: Coord, character: Character, private next?: Activity) {
+  constructor(private destination: Coord, character: Character) {
     this.animation = new SpriteAnimation(SpriteLibrary.get(character.getSpriteName()), {
       frames: [[0, 0]],
     });
@@ -69,6 +69,6 @@ export class MoveActivity implements Activity {
   interact() { }
 
   nextActivity() {
-    return this.finished ? this.next : undefined;
+    return undefined;
   }
 }

@@ -5,6 +5,7 @@ import { Location } from "../locations/Location";
 import { Character } from "../npc/Character";
 import { CharacterFigure } from "../npc/CharacterFigure";
 import { Activity, ActivityUpdates } from "./Activity";
+import { ContinuationActivity } from "./ContinuationActivity";
 import { MoveActivity } from "./MoveActivity";
 
 export class MoveToTableActivity implements Activity {
@@ -62,7 +63,10 @@ export class MoveToTableActivity implements Activity {
     if (this.targetCoord) {
       // After reaching the destination, check if we reached a proper spot at the table
       // When not, we'll move again.
-      return new MoveActivity(this.targetCoord, this.character, new MoveToTableActivity(this.character));
+      return new ContinuationActivity(
+        new MoveActivity(this.targetCoord, this.character),
+        new MoveToTableActivity(this.character),
+      );
     }
   }
 }
