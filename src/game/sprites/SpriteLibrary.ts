@@ -1,10 +1,10 @@
 import cfeBg from "./data/cfe-bg.png";
 import cfeReb from "./data/cfe-reb.png";
-import cfeKsv1 from "./data/cfe-ksv-1.png";
-import cfeKsv2 from "./data/cfe-ksv-2.png";
-import cfeKsv3 from "./data/cfe-ksv-3.png";
-import cfeKsv4 from "./data/cfe-ksv-4.png";
-import cfeKsv5 from "./data/cfe-ksv-5.png";
+import cfeKsvSass from "./data/cfe-ksv-sass.png";
+import cfeKsvKoppel from "./data/cfe-ksv-koppel.png";
+import cfeKsvPikmets from "./data/cfe-ksv-pikmets.png";
+import cfeKsvOtto from "./data/cfe-ksv-otto.png";
+import cfeKsvKarl from "./data/cfe-ksv-karl.png";
 import cfeBuilding from "./data/cfe-building.png";
 import cfeBuildingDoor from "./data/cfe-building-door.png";
 import cfeFence from "./data/cfe-fence.png";
@@ -59,11 +59,11 @@ const imageFiles = {
 
   'cfe-reb': spriteDef({ src: cfeReb, cfg: { size: PLAYER_SIZE, colsRows: [6, 1], offset: PLAYER_OFFSET } }),
 
-  'cfe-ksv-1': spriteDef({ src: cfeKsv1, cfg: { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET } }),
-  'cfe-ksv-2': spriteDef({ src: cfeKsv2, cfg: { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET } }),
-  'cfe-ksv-3': spriteDef({ src: cfeKsv3, cfg: { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET } }),
-  'cfe-ksv-4': spriteDef({ src: cfeKsv4, cfg: { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET } }),
-  'cfe-ksv-5': spriteDef({ src: cfeKsv5, cfg: { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET } }),
+  'cfe-ksv-sass': spriteDef({ src: cfeKsvSass, cfg: { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET } }),
+  'cfe-ksv-koppel': spriteDef({ src: cfeKsvKoppel, cfg: { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET } }),
+  'cfe-ksv-pikmets': spriteDef({ src: cfeKsvPikmets, cfg: { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET } }),
+  'cfe-ksv-otto': spriteDef({ src: cfeKsvOtto, cfg: { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET } }),
+  'cfe-ksv-karl': spriteDef({ src: cfeKsvKarl, cfg: { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET } }),
   'callout': spriteDef({ src: callout, cfg: { size: [16, 18], colsRows: [3, 1], offset: [-5, -52] } }),
 
   'table': spriteDef({ src: table, cfg: { size: [64, 23], offset: [0, -6] } }),
