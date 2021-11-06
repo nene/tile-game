@@ -9,6 +9,7 @@ import { random } from "lodash";
 import { AskQuestionInteraction } from "./AskQuestionInteraction";
 import { CharacterFigure } from "../npc/CharacterFigure";
 import { PlainInteraction, ReceiveBookInteraction } from "./ReceiveBookInteraction";
+import { ContinuationActivity } from "./ContinuationActivity";
 
 const MAX_BEERS = 2;
 const MAX_QUESTIONS = 3;
@@ -82,8 +83,14 @@ export class SatisfyDesiresActivity implements Activity {
   }
 
   interact(ui: UiController, world: GameWorld) {
-    if (this.alwaysAvailableInteractions.some((interaction) => interaction.interact(ui, world))) {
-      return;
+    for (const interaction of this.alwaysAvailableInteractions) {
+      const result = interaction.interact(ui, world);
+      if (result) {
+        if (result.type === "activity") {
+          this.activity = new ContinuationActivity(result.activity, this.activity);
+        }
+        return;
+      }
     }
 
     this.activity.interact(ui, world);
