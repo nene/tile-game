@@ -118,8 +118,8 @@ const characters = {
     favoriteDrinks: [getDrink("paulaner"), getDrink("porter")],
     hatedDrinks: [getDrink("kriek"), getDrink("limonaad")],
   }),
-  "karl": new Character({
-    name: "ksv! Karl Jõgi",
+  "vanamees": new Character({
+    name: "Vanamees",
     spriteName: "cfe-ksv-karl",
     spawnTime: 32 * 10,
     favoriteDrinks: [getDrink("alexander"), getDrink("pilsner"), getDrink("tommu-hiid")],
