@@ -1,7 +1,10 @@
+import { compact } from "lodash";
 import { Drink, getDrink } from "../items/Drink";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary, SpriteName } from "../sprites/SpriteLibrary";
 import { constrain } from "../utils/constrain";
+
+export type Desire = "beer" | "question";
 
 export interface CharacterDef {
   name: string;
@@ -11,10 +14,15 @@ export interface CharacterDef {
   spawnTime: number;
 }
 
+const MAX_BEERS = 2;
+const MAX_QUESTIONS = 3;
+
 export class Character {
   // How much the NPC likes or dislikes the player
   private opinion = 0; // 0..10
   private willWriteToBook: boolean;
+  private beersConsumed = 0;
+  private questionsAsked = 0;
 
   constructor(private def: CharacterDef) {
     this.willWriteToBook = Math.random() > 0.5;
@@ -60,6 +68,24 @@ export class Character {
 
   isRememberingBookWriting() {
     return this.willWriteToBook;
+  }
+
+  getDesires(): Desire[] {
+    return compact([
+      this.beersConsumed < MAX_BEERS ? "beer" : undefined,
+      this.questionsAsked < MAX_QUESTIONS ? "question" : undefined,
+    ]);
+  }
+
+  satisfyDesire(desire: Desire) {
+    switch (desire) {
+      case "beer":
+        this.beersConsumed++;
+        break;
+      case "question":
+        this.questionsAsked++;
+        break;
+    }
   }
 }
 

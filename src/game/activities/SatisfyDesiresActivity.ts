@@ -1,23 +1,18 @@
 import { Activity, ActivityUpdates } from "./Activity";
-import { Character } from "../npc/Character";
+import { Character, Desire } from "../npc/Character";
 import { UiController } from "../UiController";
 import { GameWorld } from "../GameWorld";
 import { Location } from "../locations/Location";
 import { CallFuxActivity } from "./CallFuxActivity";
 import { RequestDrinkInteraction } from "./RequestDrinkInteraction";
-import { random } from "lodash";
 import { AskQuestionInteraction } from "./AskQuestionInteraction";
 import { CharacterFigure } from "../npc/CharacterFigure";
 import { PlainInteraction, ReceiveBookInteraction } from "./ReceiveBookInteraction";
 import { ContinuationActivity } from "./ContinuationActivity";
-
-const MAX_BEERS = 2;
-const MAX_QUESTIONS = 3;
+import { pickRandom } from "../utils/pickRandom";
 
 export class SatisfyDesiresActivity implements Activity {
   private finished = false;
-  private beers = 0;
-  private questions = 0;
   private activity: Activity;
   private alwaysAvailableInteractions: PlainInteraction[];
 
@@ -29,27 +24,18 @@ export class SatisfyDesiresActivity implements Activity {
   }
 
   private chooseActivity() {
-    if (this.beers < MAX_BEERS && this.questions < MAX_QUESTIONS) {
-      return random(0, 1) === 1 ? this.chooseDrinkActivity() : this.chooseQuestionActivity();
-    }
-    else if (this.beers < MAX_BEERS) {
-      return this.chooseDrinkActivity();
-    }
-    else if (this.questions < MAX_QUESTIONS) {
-      return this.chooseQuestionActivity();
-    }
-    else {
-      return undefined;
+    switch (pickRandom(this.character.getDesires()) as Desire | undefined) {
+      case "beer": return this.chooseDrinkActivity();
+      case "question": return this.chooseQuestionActivity();
+      default: return undefined;
     }
   }
 
   private chooseDrinkActivity() {
-    this.beers++;
     return new CallFuxActivity(this.character, new RequestDrinkInteraction(this.character));
   }
 
   private chooseQuestionActivity() {
-    this.questions++;
     return new CallFuxActivity(this.character, new AskQuestionInteraction(this.character));
   }
 

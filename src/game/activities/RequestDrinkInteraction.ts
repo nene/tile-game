@@ -37,6 +37,7 @@ export class RequestDrinkInteraction implements Interaction {
     if (this.acceptDrink(ui, item)) {
       ui.setSelectedItem(undefined);
       ui.getAttributes().wallet.add(item.getDrink()?.price || 0);
+      this.character.satisfyDesire("beer");
       this.receivedBeerGlass = item;
     }
   }

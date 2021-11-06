@@ -65,6 +65,7 @@ export class AskQuestionInteraction implements Interaction {
 
   private handleValidationResult(result: ValidationResult, question: Question, ui: UiController) {
     this.showReply(ui, result.msg);
+    this.character.satisfyDesire("question");
     if (result.type === "punish") {
       ui.questions().wrongAnswer(question);
       this.character.changeOpinion(-1);
