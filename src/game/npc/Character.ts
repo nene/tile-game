@@ -20,12 +20,12 @@ const MAX_QUESTIONS = 3;
 export class Character {
   // How much the NPC likes or dislikes the player
   private opinion = 0; // 0..10
-  private willWriteToBook: boolean;
+  // 3 times out of 4 the fraater will remember to write himself into the book
+  private willWriteToBook = Math.random() < 3 / 4;
   private beersConsumed = 0;
   private questionsAsked = 0;
 
   constructor(private def: CharacterDef) {
-    this.willWriteToBook = Math.random() > 0.5;
   }
 
   getName() {
