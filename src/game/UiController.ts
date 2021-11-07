@@ -19,6 +19,7 @@ export class UiController {
   private inventoryController: InventoryController;
   private cursorController: CursorController;
   private modalWindow?: Component;
+  private infoModalWindow?: Component;
   private scoreBoard: ScoreBoard;
   private clock = new Clock();
   private questionFacory: QuestionFactory;
@@ -66,7 +67,10 @@ export class UiController {
         return;
       }
 
-      if (this.modalWindow) {
+      if (this.infoModalWindow) {
+        Overlay.paint(screen);
+        this.infoModalWindow.paint(screen);
+      } else if (this.modalWindow) {
         Overlay.paint(screen);
         this.modalWindow.paint(screen);
       } else {
@@ -83,7 +87,7 @@ export class UiController {
   isGameWorldActive(): boolean {
     // Time stops when inventory or modalWindow is open,
     // but regardless of that, time always runs during mini-game.
-    return Boolean(this.getMiniGame()) || (!this.inventoryController.isObjectInventoryShown() && !this.modalWindow);
+    return Boolean(this.getMiniGame()) || (!this.inventoryController.isObjectInventoryShown() && !this.infoModalWindow && !this.modalWindow);
   }
 
   isGameWorldVisible(): boolean {
@@ -94,6 +98,7 @@ export class UiController {
     let stopPropagation: boolean | undefined = undefined;
     stopPropagation = stopPropagation || this.getMiniGame()?.handleGameEvent(event);
     stopPropagation = stopPropagation || this.cursorController.handleGameEvent(event);
+    stopPropagation = stopPropagation || this.infoModalWindow?.handleGameEvent(event);
     stopPropagation = stopPropagation || this.modalWindow?.handleGameEvent(event);
     stopPropagation = stopPropagation || this.inventoryController.handleGameEvent(event);
     if (stopPropagation) {
@@ -113,16 +118,26 @@ export class UiController {
     return this.inventoryController.getMiniGame();
   }
 
-  getModal(): Component | undefined {
-    return this.modalWindow;
-  }
-
+  // Normal modal
   showModal(modalWindow: Component) {
     this.modalWindow = modalWindow;
   }
 
   hideModal() {
     this.modalWindow = undefined;
+  }
+
+  // Info-modal
+  getInfoModal(): Component | undefined {
+    return this.infoModalWindow;
+  }
+
+  showInfoModal(infoModalWindow: Component) {
+    this.infoModalWindow = infoModalWindow;
+  }
+
+  hideInfoModal() {
+    this.infoModalWindow = undefined;
   }
 
   questions(): QuestionFactory {

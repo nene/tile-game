@@ -80,22 +80,22 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
     onKeyEvent: (type: "keyup" | "keydown", key: string): boolean => {
       const event = eventFactory.createKeyboardEvent(type, key);
       if (event.type === "keydown" && event.key === "OPINIONS") {
-        if (uiController.getModal() instanceof OpinionsView) {
-          uiController.hideModal();
+        if (uiController.getInfoModal() instanceof OpinionsView) {
+          uiController.hideInfoModal();
         } else {
-          uiController.showModal(new OpinionsView({
+          uiController.showInfoModal(new OpinionsView({
             characters: getAllCharacters(),
-            onClose: () => uiController.hideModal(),
+            onClose: () => uiController.hideInfoModal(),
           }));
         }
       }
       if (event.type === "keydown" && event.key === "SKILLS") {
-        if (uiController.getModal() instanceof SkillsView) {
-          uiController.hideModal();
+        if (uiController.getInfoModal() instanceof SkillsView) {
+          uiController.hideInfoModal();
         } else {
-          uiController.showModal(new SkillsView({
+          uiController.showInfoModal(new SkillsView({
             orgSkill: uiController.getAttributes().orgSkill,
-            onClose: () => uiController.hideModal(),
+            onClose: () => uiController.hideInfoModal(),
           }));
         }
       }
