@@ -7,6 +7,7 @@ import { CharacterFigure } from "../npc/CharacterFigure";
 import { Activity, ActivityUpdates } from "./Activity";
 import { ContinuationActivity } from "./ContinuationActivity";
 import { MoveActivity } from "./MoveActivity";
+import { PauseActivity } from "./PauseActivity";
 
 export class MoveToTableActivity implements Activity {
   private finished = false;
@@ -64,8 +65,11 @@ export class MoveToTableActivity implements Activity {
       // After reaching the destination, check if we reached a proper spot at the table
       // When not, we'll move again.
       return new ContinuationActivity(
-        new MoveActivity(this.targetCoord, this.character),
-        new MoveToTableActivity(this.character),
+        new PauseActivity(Math.floor(Math.random() * 10), this.character),
+        new ContinuationActivity(
+          new MoveActivity(this.targetCoord, this.character),
+          new MoveToTableActivity(this.character),
+        )
       );
     }
   }
