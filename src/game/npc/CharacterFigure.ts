@@ -74,3 +74,5 @@ export class CharacterFigure implements GameObject {
     activity.interact(uiController);
   }
 }
+
+export const isCharacterFigure = (obj: GameObject): obj is CharacterFigure => obj instanceof CharacterFigure;

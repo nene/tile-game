@@ -85,6 +85,8 @@ export class Table implements GameObject {
   }
 }
 
+export const isTable = (obj: GameObject): obj is Table => obj instanceof Table;
+
 // Positions for maximum of 26 glasses on the table
 const glassPositions: Coord[] = [
   // 1st row

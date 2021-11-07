@@ -67,3 +67,5 @@ export class BookCabinet implements GameObject {
     return book && isBook(book) ? book : undefined;
   }
 }
+
+export const isBookCabinet = (obj: GameObject): obj is BookCabinet => obj instanceof BookCabinet;

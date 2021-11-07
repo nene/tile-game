@@ -7,7 +7,7 @@ import { PixelScreen } from "../PixelScreen";
 import { GameWorld } from "../GameWorld";
 import { BackgroundCache } from "./BackgroundCache";
 import { last } from "lodash";
-import { CharacterFigure } from "../npc/CharacterFigure";
+import { CharacterFigure, isCharacterFigure } from "../npc/CharacterFigure";
 import { Character } from "../npc/Character";
 
 export class Location {
@@ -106,8 +106,4 @@ export class Location {
       .filter(isCharacterFigure)
       .find((fig) => fig.getCharacter() === character);
   }
-}
-
-function isCharacterFigure(obj: GameObject): obj is CharacterFigure {
-  return obj instanceof CharacterFigure;
 }

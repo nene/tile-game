@@ -4,7 +4,7 @@ import { Character } from "../npc/Character";
 import { DrinkAnimation } from "../sprites/DrinkAnimation";
 import { Location } from "../locations/Location";
 import { coordAdd, rectTranslate } from "../Coord";
-import { Table } from "../furniture/Table";
+import { isTable, Table } from "../furniture/Table";
 import { CharacterFigure } from "../npc/CharacterFigure";
 
 export class DrinkActivity implements Activity {
@@ -31,7 +31,7 @@ export class DrinkActivity implements Activity {
   }
 
   private nearbyTable(figure: CharacterFigure, location: Location): Table | undefined {
-    return location.getObjectsInRect(rectTranslate(figure.boundingBox(), coordAdd(figure.getCoord(), [0, 2]))).find((obj): obj is Table => obj instanceof Table);
+    return location.getObjectsInRect(rectTranslate(figure.boundingBox(), coordAdd(figure.getCoord(), [0, 2]))).find(isTable);
   }
 
   isFinished() {

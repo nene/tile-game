@@ -1,5 +1,5 @@
 import { Coord, coordAdd } from "../Coord";
-import { Door } from "../furniture/Door";
+import { Door, isDoor } from "../furniture/Door";
 import { Location } from "../locations/Location";
 import { Character } from "../npc/Character";
 import { CharacterFigure } from "../npc/CharacterFigure";
@@ -13,7 +13,7 @@ export class MoveToDoorActivity implements Activity {
   }
 
   public tick(figure: CharacterFigure, location: Location): ActivityUpdates {
-    const door = location.allObjects().find((o) => o instanceof Door) as Door;
+    const door = location.allObjects().find(isDoor) as Door;
     this.targetCoord = coordAdd(door.getCoord(), [8, 8]);
     return {};
   }

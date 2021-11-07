@@ -61,7 +61,7 @@ export class Door implements GameObject {
   onInteract(ui: UiController) {
     const world = ui.getWorld();
     const newLocation = world.getLocation(this.target.location);
-    const door = newLocation.allObjects().find(obj => obj instanceof Door);
+    const door = newLocation.allObjects().find(isDoor);
     if (!door) {
       throw new Error("No door found in the other location");
     }
@@ -73,3 +73,5 @@ export class Door implements GameObject {
     return this.target;
   }
 }
+
+export const isDoor = (obj: GameObject): obj is Door => obj instanceof Door;

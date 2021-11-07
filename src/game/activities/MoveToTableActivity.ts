@@ -1,9 +1,8 @@
 import { Coord, coordEq, Rect, rectTranslate } from "../Coord";
-import { Table } from "../furniture/Table";
-import { GameObject } from "../GameObject";
+import { isTable, Table } from "../furniture/Table";
 import { Location } from "../locations/Location";
 import { Character } from "../npc/Character";
-import { CharacterFigure } from "../npc/CharacterFigure";
+import { CharacterFigure, isCharacterFigure } from "../npc/CharacterFigure";
 import { Activity, ActivityUpdates } from "./Activity";
 import { ContinuationActivity } from "./ContinuationActivity";
 import { MoveActivity } from "./MoveActivity";
@@ -43,7 +42,7 @@ export class MoveToTableActivity implements Activity {
   }
 
   private isOccupied(rect: Rect, figure: CharacterFigure, location: Location): boolean {
-    return location.getObjectsInRect(rect).some((obj) => obj instanceof CharacterFigure && obj !== figure);
+    return location.getObjectsInRect(rect).some((obj) => isCharacterFigure(obj) && obj !== figure);
   }
 
   private getFirstFreeSpot(figure: CharacterFigure, table: Table, location: Location): Coord | undefined {
@@ -74,5 +73,3 @@ export class MoveToTableActivity implements Activity {
     }
   }
 }
-
-const isTable = (obj: GameObject): obj is Table => obj instanceof Table;

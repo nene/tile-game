@@ -1,4 +1,4 @@
-import { Door } from "../furniture/Door";
+import { Door, isDoor } from "../furniture/Door";
 import { GameWorld } from "../GameWorld";
 import { Location } from "../locations/Location";
 import { Character } from "../npc/Character";
@@ -21,7 +21,7 @@ export class EnterDoorActivity implements Activity {
   }
 
   private findDoor(location: Location): Door {
-    return location.allObjects().find((o) => o instanceof Door) as Door;
+    return location.allObjects().find(isDoor) as Door;
   }
 
   isFinished() {

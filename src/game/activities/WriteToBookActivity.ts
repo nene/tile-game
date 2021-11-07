@@ -1,4 +1,4 @@
-import { BookCabinet } from "../furniture/BookCabinet";
+import { isBookCabinet } from "../furniture/BookCabinet";
 import { Book } from "../items/Book";
 import { Location } from "../locations/Location";
 import { Character } from "../npc/Character";
@@ -26,7 +26,7 @@ export class WriteToBookActivity implements Activity {
   }
 
   private findBook(location: Location): Book | undefined {
-    const cabinet = location.allObjects().find((o) => o instanceof BookCabinet) as BookCabinet | undefined;
+    const cabinet = location.allObjects().find(isBookCabinet);
     return cabinet?.getBook();
   }
 
