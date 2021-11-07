@@ -32,7 +32,7 @@ export class OutdoorsLocationFactory implements LocationFactory {
       new Fence(tileToScreenCoord([9, 14])),
       new Fence(tileToScreenCoord([16, 14])),
       // A spawn location outside of the fence
-      new SpawnPoint(tileToScreenCoord([10, 15])),
+      new SpawnPoint(tileToScreenCoord([14, 13])),
     ];
   }
 
