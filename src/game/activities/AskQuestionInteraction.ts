@@ -29,7 +29,7 @@ export class AskQuestionInteraction implements Interaction {
     const question = ui.questions().create();
 
     ui.showModal(new Dialog({
-      world: ui.getWorld(),
+      ui,
       character: this.character,
       createContent: (rect) => {
         if (question.type === "colors") {
@@ -39,7 +39,6 @@ export class AskQuestionInteraction implements Interaction {
         }
       },
     }));
-    this.finished = true;
   }
 
   private createColorsContent(ui: UiController, rect: Rect, question: ColorsQuestion) {
@@ -76,6 +75,7 @@ export class AskQuestionInteraction implements Interaction {
       ui.questions().rightAnswer(question);
       this.character.changeOpinion(+1);
     }
+    this.finished = true;
   }
 
   nextActivity() {
@@ -86,7 +86,7 @@ export class AskQuestionInteraction implements Interaction {
 
   private showReply(ui: UiController, text: string) {
     ui.showModal(new Dialog({
-      world: ui.getWorld(),
+      ui,
       character: this.character,
       createContent: (rect) => new TextContent(text, rect),
       onClose: () => ui.hideModal(),

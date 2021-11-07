@@ -7,6 +7,8 @@ import { PixelScreen } from "../PixelScreen";
 import { GameWorld } from "../GameWorld";
 import { BackgroundCache } from "./BackgroundCache";
 import { last } from "lodash";
+import { CharacterFigure } from "../npc/CharacterFigure";
+import { Character } from "../npc/Character";
 
 export class Location {
   private name: LocationName;
@@ -98,4 +100,14 @@ export class Location {
       return undefined;
     }
   }
+
+  findCharacterFigure(character: Character): CharacterFigure | undefined {
+    return this.allObjects()
+      .filter(isCharacterFigure)
+      .find((fig) => fig.getCharacter() === character);
+  }
+}
+
+function isCharacterFigure(obj: GameObject): obj is CharacterFigure {
+  return obj instanceof CharacterFigure;
 }

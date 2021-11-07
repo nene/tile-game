@@ -1,22 +1,22 @@
 import { coordAdd, isCoordInRect, Rect, rectGrow } from "../Coord";
 import { GameEvent } from "../GameEvent";
-import { GameWorld } from "../GameWorld";
 import { Character } from "../npc/Character";
 import { PixelScreen } from "../PixelScreen";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { Component } from "../ui/Component";
 import { UI_HIGHLIGHT_COLOR } from "../ui/ui-utils";
 import { Window } from "../ui/Window";
+import { UiController } from "../UiController";
 
 interface DialogConfig {
-  world: GameWorld;
+  ui: UiController;
   character: Character;
   createContent: (rect: Rect) => Component,
   onClose?: () => void;
 }
 
 export class Dialog implements Component {
-  private world: GameWorld;
+  private ui: UiController;
   private window: Window;
   private content: Component;
   private onClose?: () => void;
@@ -24,8 +24,8 @@ export class Dialog implements Component {
   private iconRect: Rect;
   private iconHovered = false;
 
-  constructor({ world, character, createContent, onClose }: DialogConfig) {
-    this.world = world;
+  constructor({ ui, character, createContent, onClose }: DialogConfig) {
+    this.ui = ui;
     this.onClose = onClose;
     this.character = character;
     this.window = new Window({
@@ -80,6 +80,9 @@ export class Dialog implements Component {
     }
 
     if (event.type === "click") {
+      if (isCoordInRect(event.coord, this.iconRect)) {
+        this.ui.touchColorBand(this.character);
+      }
       if (!isCoordInRect(event.coord, this.getRect())) {
         this.onClose && this.onClose();
       }

@@ -13,6 +13,7 @@ import { Clock } from "./Clock";
 import { Component } from "./ui/Component";
 import { QuestionFactory } from "./questions/QuestionFactory";
 import { GameWorld } from "./GameWorld";
+import { Character } from "./npc/Character";
 
 export class UiController {
   private inventoryController: InventoryController;
@@ -21,6 +22,7 @@ export class UiController {
   private scoreBoard: ScoreBoard;
   private clock = new Clock();
   private questionFacory: QuestionFactory;
+  private touchingColorBand = false;
 
   constructor(private world: GameWorld, private attributes: PlayerAttributes) {
     this.inventoryController = new InventoryController(attributes);
@@ -129,5 +131,15 @@ export class UiController {
 
   getWorld() {
     return this.world;
+  }
+
+  touchColorBand(character: Character) {
+    this.touchingColorBand = true;
+    this.world.getActiveLocation().findCharacterFigure(character)?.onInteract(this, this.world);
+    this.touchingColorBand = false;
+  }
+
+  isTouchingColorBand() {
+    return this.touchingColorBand;
   }
 }

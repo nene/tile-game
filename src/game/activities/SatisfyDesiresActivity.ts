@@ -7,9 +7,11 @@ import { CallFuxActivity } from "./CallFuxActivity";
 import { RequestDrinkInteraction } from "./RequestDrinkInteraction";
 import { AskQuestionInteraction } from "./AskQuestionInteraction";
 import { CharacterFigure } from "../npc/CharacterFigure";
-import { PlainInteraction, ReceiveBookInteraction } from "./ReceiveBookInteraction";
+import { ReceiveBookInteraction } from "./ReceiveBookInteraction";
+import { PlainInteraction } from "./PlainInteraction";
 import { ContinuationActivity } from "./ContinuationActivity";
 import { pickRandom } from "../utils/pickRandom";
+import { ColorBandInteraction } from "./ColorBandInteraction";
 
 export class SatisfyDesiresActivity implements Activity {
   private finished = false;
@@ -19,6 +21,7 @@ export class SatisfyDesiresActivity implements Activity {
   constructor(private character: Character) {
     this.activity = this.chooseActivity() as Activity;
     this.alwaysAvailableInteractions = [
+      new ColorBandInteraction(character),
       new ReceiveBookInteraction(character),
     ];
   }

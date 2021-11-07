@@ -4,19 +4,11 @@ import { Book } from "../items/Book";
 import { getDrink } from "../items/Drink";
 import { Character } from "../npc/Character";
 import { UiController } from "../UiController";
-import { Activity } from "./Activity";
 import { CallFuxActivity } from "./CallFuxActivity";
+import { InteractionResult, PlainInteraction } from "./PlainInteraction";
 import { RequestWaterInteraction } from "./RequestWaterInteraction";
 
-type InteractionResult = { type: "activity"; activity: Activity } | { type: "done" };
-
-export interface PlainInteraction {
-  interact: (ui: UiController, world: GameWorld) => InteractionResult | undefined;
-}
-
 export class ReceiveBookInteraction implements PlainInteraction {
-  private next?: Activity;
-
   constructor(private character: Character) { }
 
   interact(ui: UiController, world: GameWorld): InteractionResult | undefined {

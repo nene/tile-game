@@ -20,6 +20,10 @@ export class CharacterFigure implements GameObject {
     this.defaultSprite = SpriteLibrary.getSprite(character.getSpriteName());
   }
 
+  getCharacter(): Character {
+    return this.character;
+  }
+
   tick(location: Location, world: GameWorld) {
     const activity = this.activityManager.currentActivity();
 
