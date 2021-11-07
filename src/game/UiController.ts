@@ -12,6 +12,7 @@ import { Coord } from "./Coord";
 import { Clock } from "./Clock";
 import { Component } from "./ui/Component";
 import { QuestionFactory } from "./questions/QuestionFactory";
+import { GameWorld } from "./GameWorld";
 
 export class UiController {
   private inventoryController: InventoryController;
@@ -21,7 +22,7 @@ export class UiController {
   private clock = new Clock();
   private questionFacory: QuestionFactory;
 
-  constructor(private attributes: PlayerAttributes) {
+  constructor(private world: GameWorld, private attributes: PlayerAttributes) {
     this.inventoryController = new InventoryController(attributes);
     this.cursorController = new CursorController();
     this.scoreBoard = new ScoreBoard([269, 0], attributes.wallet, attributes.drunkenness, this.clock);
@@ -124,5 +125,9 @@ export class UiController {
 
   questions(): QuestionFactory {
     return this.questionFacory;
+  }
+
+  getWorld() {
+    return this.world;
   }
 }

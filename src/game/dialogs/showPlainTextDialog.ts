@@ -12,6 +12,7 @@ interface PlainTextDialogConfig {
 
 export function showPlainTextDialog({ ui, character, text, onClose }: PlainTextDialogConfig) {
   ui.showModal(new Dialog({
+    world: ui.getWorld(),
     character: character,
     createContent: (rect) => new TextContent(text, rect),
     onClose: () => {

@@ -1,5 +1,6 @@
 import { coordAdd, isCoordInRect, Rect, rectGrow } from "../Coord";
 import { GameEvent } from "../GameEvent";
+import { GameWorld } from "../GameWorld";
 import { Character } from "../npc/Character";
 import { PixelScreen } from "../PixelScreen";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
@@ -8,12 +9,14 @@ import { UI_HIGHLIGHT_COLOR } from "../ui/ui-utils";
 import { Window } from "../ui/Window";
 
 interface DialogConfig {
+  world: GameWorld;
   character: Character;
   createContent: (rect: Rect) => Component,
   onClose?: () => void;
 }
 
 export class Dialog implements Component {
+  private world: GameWorld;
   private window: Window;
   private content: Component;
   private onClose?: () => void;
@@ -21,7 +24,8 @@ export class Dialog implements Component {
   private iconRect: Rect;
   private iconHovered = false;
 
-  constructor({ character, createContent, onClose }: DialogConfig) {
+  constructor({ world, character, createContent, onClose }: DialogConfig) {
+    this.world = world;
     this.onClose = onClose;
     this.character = character;
     this.window = new Window({
@@ -41,7 +45,7 @@ export class Dialog implements Component {
   paint(screen: PixelScreen) {
     this.window.paint(screen);
     this.drawIcon(screen);
-    this.content.paint(screen)
+    this.content.paint(screen);
   }
 
   private drawIcon(screen: PixelScreen) {

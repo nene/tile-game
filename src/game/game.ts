@@ -35,7 +35,7 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
     new OutdoorsLocationFactory(),
   ], player);
 
-  const uiController = new UiController(player.getAttributes());
+  const uiController = new UiController(world, player.getAttributes());
 
   const loops = new Loops();
   loops.runGameLoop(() => {
