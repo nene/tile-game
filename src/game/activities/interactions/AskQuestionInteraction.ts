@@ -1,13 +1,13 @@
-import { Character } from "../npc/Character";
-import { UiController } from "../UiController";
-import { TextContent } from "../dialogs/TextContent";
-import { FlagQuestionContent } from "../dialogs/FlagQuestionContent";
+import { Character } from "../../npc/Character";
+import { UiController } from "../../UiController";
+import { TextContent } from "../../dialogs/TextContent";
+import { FlagQuestionContent } from "../../dialogs/FlagQuestionContent";
 import { Interaction, InteractionType } from "./Interaction";
-import { Dialog } from "../dialogs/Dialog";
-import { ColorsQuestion, MultiChoiceQuestion, Question, ValidationResult } from "../questions/Question";
-import { Rect } from "../Coord";
-import { MultiChoiceQuestionContent } from "../dialogs/MultiChoiceQuestionContent";
-import { CallFuxActivity } from "./CallFuxActivity";
+import { Dialog } from "../../dialogs/Dialog";
+import { ColorsQuestion, MultiChoiceQuestion, Question, ValidationResult } from "../../questions/Question";
+import { Rect } from "../../Coord";
+import { MultiChoiceQuestionContent } from "../../dialogs/MultiChoiceQuestionContent";
+import { CallFuxActivity } from "../CallFuxActivity";
 import { RequestWaterInteraction } from "./RequestWaterInteraction";
 
 export class AskQuestionInteraction implements Interaction {

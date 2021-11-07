@@ -1,12 +1,12 @@
-import { Character } from "../npc/Character";
-import { UiController } from "../UiController";
+import { Character } from "../../npc/Character";
+import { UiController } from "../../UiController";
 import { Interaction, InteractionType } from "./Interaction";
-import { BeerGlass, DrinkLevel } from "../items/BeerGlass";
-import { DrinkActivity } from "./DrinkActivity";
-import { BeerBottle } from "../items/BeerBottle";
-import { ValidationResult } from "../questions/Question";
-import { getDrink } from "../items/Drink";
-import { showPlainTextDialog } from "../dialogs/showPlainTextDialog";
+import { BeerGlass, DrinkLevel } from "../../items/BeerGlass";
+import { DrinkActivity } from "./../DrinkActivity";
+import { BeerBottle } from "../../items/BeerBottle";
+import { ValidationResult } from "../../questions/Question";
+import { getDrink } from "../../items/Drink";
+import { showPlainTextDialog } from "../../dialogs/showPlainTextDialog";
 
 export class RequestDrinkInteraction implements Interaction {
   private receivedBeerGlass?: BeerGlass;

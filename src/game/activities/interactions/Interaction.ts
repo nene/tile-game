@@ -1,5 +1,5 @@
-import { UiController } from "../UiController";
-import { Activity } from "./Activity";
+import { UiController } from "../../UiController";
+import { Activity } from "../Activity";
 
 export enum InteractionType {
   beer = 0,

@@ -1,9 +1,9 @@
-import { Character } from "../npc/Character";
-import { UiController } from "../UiController";
+import { Character } from "../../npc/Character";
+import { UiController } from "../../UiController";
 import { Interaction, InteractionType } from "./Interaction";
-import { BeerGlass, DrinkLevel } from "../items/BeerGlass";
-import { getDrink } from "../items/Drink";
-import { showPlainTextDialog } from "../dialogs/showPlainTextDialog";
+import { BeerGlass, DrinkLevel } from "../../items/BeerGlass";
+import { getDrink } from "../../items/Drink";
+import { showPlainTextDialog } from "../../dialogs/showPlainTextDialog";
 
 export class RequestWaterInteraction implements Interaction {
   private finished = false;

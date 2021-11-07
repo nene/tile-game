@@ -4,14 +4,14 @@ import { UiController } from "../UiController";
 import { GameWorld } from "../GameWorld";
 import { Location } from "../locations/Location";
 import { CallFuxActivity } from "./CallFuxActivity";
-import { RequestDrinkInteraction } from "./RequestDrinkInteraction";
-import { AskQuestionInteraction } from "./AskQuestionInteraction";
+import { RequestDrinkInteraction } from "./interactions/RequestDrinkInteraction";
+import { AskQuestionInteraction } from "./interactions/AskQuestionInteraction";
 import { CharacterFigure } from "../npc/CharacterFigure";
-import { ReceiveBookInteraction } from "./ReceiveBookInteraction";
-import { PlainInteraction } from "./PlainInteraction";
+import { ReceiveBookInteraction } from "./plain-interactions/ReceiveBookInteraction";
+import { PlainInteraction } from "./plain-interactions/PlainInteraction";
 import { ContinuationActivity } from "./ContinuationActivity";
 import { pickRandom } from "../utils/pickRandom";
-import { ColorBandInteraction } from "./ColorBandInteraction";
+import { ColorBandInteraction } from "./plain-interactions/ColorBandInteraction";
 
 export class SatisfyDesiresActivity implements Activity {
   private finished = false;

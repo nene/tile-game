@@ -4,7 +4,7 @@ import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { Character } from "../npc/Character";
 import { UiController } from "../UiController";
-import { Interaction } from "./Interaction";
+import { Interaction } from "./interactions/Interaction";
 
 export class CallFuxActivity implements Activity {
   private counter = 0;

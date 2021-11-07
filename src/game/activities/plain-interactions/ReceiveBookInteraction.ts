@@ -1,11 +1,11 @@
-import { showPlainTextDialog } from "../dialogs/showPlainTextDialog";
-import { Book } from "../items/Book";
-import { getDrink } from "../items/Drink";
-import { Character } from "../npc/Character";
-import { UiController } from "../UiController";
-import { CallFuxActivity } from "./CallFuxActivity";
+import { showPlainTextDialog } from "../../dialogs/showPlainTextDialog";
+import { Book } from "../../items/Book";
+import { getDrink } from "../../items/Drink";
+import { Character } from "../../npc/Character";
+import { UiController } from "../../UiController";
+import { CallFuxActivity } from "../CallFuxActivity";
 import { InteractionResult, PlainInteraction } from "./PlainInteraction";
-import { RequestWaterInteraction } from "./RequestWaterInteraction";
+import { RequestWaterInteraction } from "../interactions/RequestWaterInteraction";
 
 export class ReceiveBookInteraction implements PlainInteraction {
   constructor(private character: Character) { }
