@@ -1,9 +1,9 @@
 import { Character } from "../../npc/Character";
 import { UiController } from "../../UiController";
 import { Interaction, InteractionType } from "./Interaction";
-import { BeerGlass, DrinkLevel } from "../../items/BeerGlass";
+import { BeerGlass, DrinkLevel, isBeerGlass } from "../../items/BeerGlass";
 import { DrinkActivity } from "./../DrinkActivity";
-import { BeerBottle } from "../../items/BeerBottle";
+import { BeerBottle, isBeerBottle } from "../../items/BeerBottle";
 import { ValidationResult } from "../../questions/Question";
 import { getDrink } from "../../items/Drink";
 import { showPlainTextDialog } from "../../dialogs/showPlainTextDialog";
@@ -24,7 +24,7 @@ export class RequestDrinkInteraction implements Interaction {
 
   interact(ui: UiController) {
     const item = ui.getSelectedItem();
-    if (!item || !(item instanceof BeerBottle || item instanceof BeerGlass)) {
+    if (!item || !(isBeerBottle(item) || isBeerGlass(item))) {
       this.showDialog(ui, "Rebane! Too mulle šoppen õlut.");
       return;
     }
@@ -43,7 +43,7 @@ export class RequestDrinkInteraction implements Interaction {
   }
 
   private acceptDrink(ui: UiController, item: BeerGlass | BeerBottle): item is BeerGlass {
-    if (item instanceof BeerGlass) {
+    if (isBeerGlass(item)) {
       const result = this.validateBeerGlass(item);
       this.showDialog(ui, result.msg);
 
@@ -60,11 +60,11 @@ export class RequestDrinkInteraction implements Interaction {
         return false;
       }
     }
-    else if (item instanceof BeerBottle && !item.isOpen()) {
+    else if (isBeerBottle(item) && !item.isOpen()) {
       this.showDialog(ui, "Aitäh.\nTee palun pudel lahti ja vala šoppenisse ka.");
       return false;
     }
-    else if (item instanceof BeerBottle && item.isOpen()) {
+    else if (isBeerBottle(item) && item.isOpen()) {
       this.showDialog(ui, "Aitäh.\nVala õlu šoppenisse ka.");
       return false;
     }

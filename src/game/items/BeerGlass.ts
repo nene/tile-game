@@ -4,7 +4,7 @@ import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { SpriteSheet } from "../sprites/SpriteSheet";
 import { Drink, DrinkColor } from "./Drink";
-import { BeerBottle } from "./BeerBottle";
+import { isBeerBottle } from "./BeerBottle";
 import { GameItem } from "./GameItem";
 
 export enum DrinkLevel {
@@ -25,7 +25,7 @@ export class BeerGlass implements GameItem {
   }
 
   combine(item: GameItem): MiniGame | undefined {
-    if (item instanceof BeerBottle && !item.isEmpty() && item.isOpen() && this.level === DrinkLevel.empty) {
+    if (isBeerBottle(item) && !item.isEmpty() && item.isOpen() && this.level === DrinkLevel.empty) {
       return new PouringGame(this, item);
     }
   }
@@ -72,3 +72,5 @@ export class BeerGlass implements GameItem {
     return this.smallSpriteSheet.getSprite([this.level, this.drink?.color ?? 0]);
   }
 }
+
+export const isBeerGlass = (item: GameItem): item is BeerGlass => item instanceof BeerGlass;

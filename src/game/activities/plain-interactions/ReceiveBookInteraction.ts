@@ -1,5 +1,5 @@
 import { showPlainTextDialog } from "../../dialogs/showPlainTextDialog";
-import { Book } from "../../items/Book";
+import { isBook } from "../../items/Book";
 import { getDrink } from "../../items/Drink";
 import { Character } from "../../npc/Character";
 import { UiController } from "../../UiController";
@@ -12,7 +12,7 @@ export class ReceiveBookInteraction implements PlainInteraction {
 
   interact(ui: UiController): InteractionResult | undefined {
     const item = ui.getSelectedItem();
-    if (!(item instanceof Book)) {
+    if (!item || !isBook(item)) {
       return undefined;
     }
 

@@ -26,3 +26,5 @@ export class Book implements GameItem {
     return undefined;
   }
 }
+
+export const isBook = (item: GameItem): item is Book => item instanceof Book;

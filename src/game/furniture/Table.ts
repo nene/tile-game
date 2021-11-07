@@ -4,7 +4,7 @@ import { Coord, coordAdd, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
 import { StorageInventory } from "../inventory/StorageInventory";
 import { StorageInventoryView } from "../inventory/StorageInventoryView";
-import { BeerGlass } from "../items/BeerGlass";
+import { BeerGlass, isBeerGlass } from "../items/BeerGlass";
 import { PixelScreen } from "../PixelScreen";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
@@ -33,7 +33,7 @@ export class Table implements GameObject {
 
   private itemCoords(): [BeerGlass, Coord][] {
     const itemCoordPairs: [BeerGlass, Coord][] = this.inventory.allItems()
-      .filter((item): item is BeerGlass => item instanceof BeerGlass)
+      .filter((item): item is BeerGlass => isBeerGlass(item))
       .map((item, i) => {
         const index = Math.floor(this.noise.random(i) * glassPositions.length);
         const offset = glassPositions[index];

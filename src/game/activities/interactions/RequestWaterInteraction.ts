@@ -1,7 +1,7 @@
 import { Character } from "../../npc/Character";
 import { UiController } from "../../UiController";
 import { Interaction, InteractionType } from "./Interaction";
-import { BeerGlass, DrinkLevel } from "../../items/BeerGlass";
+import { DrinkLevel, isBeerGlass } from "../../items/BeerGlass";
 import { getDrink } from "../../items/Drink";
 import { showPlainTextDialog } from "../../dialogs/showPlainTextDialog";
 
@@ -21,7 +21,7 @@ export class RequestWaterInteraction implements Interaction {
 
   interact(ui: UiController) {
     const item = ui.getSelectedItem();
-    if (!(item instanceof BeerGlass)) {
+    if (!item || !(isBeerGlass(item))) {
       this.showDialog(ui, "Too šoppen vett!");
       return;
     }

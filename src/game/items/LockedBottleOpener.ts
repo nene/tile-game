@@ -1,7 +1,7 @@
 import { MiniGame } from "../minigames/MiniGame";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
-import { BeerBottle } from "./BeerBottle";
+import { isBeerBottle } from "./BeerBottle";
 import { BottleOpener } from "./BottleOpener";
 import { GameItem } from "./GameItem";
 
@@ -25,7 +25,7 @@ export class LockedBottleOpener implements BottleOpener {
   }
 
   combine(item: GameItem): MiniGame | undefined {
-    if (item instanceof BeerBottle) {
+    if (isBeerBottle(item)) {
       return item.combine(this); // Keep main logic in BeerBottle
     }
   }

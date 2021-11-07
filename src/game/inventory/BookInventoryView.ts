@@ -5,7 +5,7 @@ import { InventoryView, ItemHoverHandler, SlotClickHandler } from "./InventoryVi
 import { Headline, Window } from "../ui/Window";
 import { GridInventoryView } from "./GridInventoryView";
 import { GameEvent } from "../GameEvent";
-import { Book } from "../items/Book";
+import { Book, isBook } from "../items/Book";
 import { TextContent } from "../dialogs/TextContent";
 
 interface BookInventoryViewCfg {
@@ -59,7 +59,7 @@ export class BookInventoryView implements InventoryView {
 
   private getBook(): Book | undefined {
     const item = this.inventory.itemAt(0);
-    return item instanceof Book ? item : undefined;
+    return item && isBook(item) ? item : undefined;
   }
 
   private getNames(): string {

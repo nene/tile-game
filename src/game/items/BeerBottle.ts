@@ -2,7 +2,7 @@ import { MiniGame } from "../minigames/MiniGame";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { SpriteSheet } from "../sprites/SpriteSheet";
-import { BeerGlass } from "./BeerGlass";
+import { isBeerGlass } from "./BeerGlass";
 import { Drink } from "./Drink";
 import { isBottleOpener } from "./BottleOpener";
 import { GameItem, SellableGameItem } from "./GameItem";
@@ -70,7 +70,7 @@ export class BeerBottle implements SellableGameItem {
   }
 
   combine(item: GameItem): MiniGame | undefined {
-    if (item instanceof BeerGlass) {
+    if (isBeerGlass(item)) {
       return item.combine(this); // Keep main logic in beer-glass
     }
     if (isBottleOpener(item) && !this.isOpen()) {
@@ -82,3 +82,5 @@ export class BeerBottle implements SellableGameItem {
     return new BeerBottle(this.drink, this.capState);
   }
 }
+
+export const isBeerBottle = (item: GameItem): item is BeerBottle => item instanceof BeerBottle;

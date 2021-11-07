@@ -1,5 +1,5 @@
 import { Coord, coordAdd, Rect } from "../Coord";
-import { BeerBottle } from "../items/BeerBottle";
+import { isBeerBottle } from "../items/BeerBottle";
 import { SellableGameItem } from "../items/GameItem";
 import { PixelScreen } from "../PixelScreen";
 import { Sprite } from "../sprites/Sprite";
@@ -25,7 +25,7 @@ export class ShopItemRenderer {
     screen.drawRect(iconRect, UI_HIGHLIGHT_COLOR);
     screen.drawSprite(item.getSprite(), iconRect.coord);
     screen.drawText(item.getName(), nameCoord, textStyle);
-    if (item instanceof BeerBottle) {
+    if (isBeerBottle(item)) {
       screen.drawText(item.getDrink().alcohol + "%", coordAdd(nameCoord, [nameLen + 3, 3.5]), { size: "small", color: "#481a12" });
     }
     screen.drawText(item.getDescription(), coordAdd(iconRect.coord, [18, 9]), { size: "small", color: textStyle.color });

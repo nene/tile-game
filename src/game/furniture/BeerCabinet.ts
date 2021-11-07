@@ -4,7 +4,7 @@ import { StorageInventory } from "../inventory/StorageInventory";
 import { PixelScreen } from "../PixelScreen";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
-import { BeerGlass } from "../items/BeerGlass";
+import { BeerGlass, isBeerGlass } from "../items/BeerGlass";
 import { UiController } from "../UiController";
 import { SoundLibrary } from "../sounds/SoundLibrary";
 import { StorageInventoryView } from "../inventory/StorageInventoryView";
@@ -25,7 +25,7 @@ export class BeerCabinet implements GameObject {
         new BeerGlass(),
         new BeerGlass(),
       ],
-      isAcceptingItem: (item) => item instanceof BeerGlass,
+      isAcceptingItem: isBeerGlass,
     });
   }
 

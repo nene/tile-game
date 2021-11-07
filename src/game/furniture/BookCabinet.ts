@@ -2,7 +2,7 @@ import { Coord, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
 import { BookInventoryView } from "../inventory/BookInventoryView";
 import { StorageInventory } from "../inventory/StorageInventory";
-import { Book } from "../items/Book";
+import { Book, isBook } from "../items/Book";
 import { PixelScreen } from "../PixelScreen";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { UiController } from "../UiController";
@@ -17,7 +17,7 @@ export class BookCabinet implements GameObject {
     this.inventory = new StorageInventory({
       size: 1,
       items: [new Book()],
-      isAcceptingItem: (item) => item instanceof Book,
+      isAcceptingItem: isBook,
     });
   }
 
@@ -64,6 +64,6 @@ export class BookCabinet implements GameObject {
 
   getBook(): Book | undefined {
     const book = this.inventory.itemAt(0);
-    return book instanceof Book ? book : undefined;
+    return book && isBook(book) ? book : undefined;
   }
 }

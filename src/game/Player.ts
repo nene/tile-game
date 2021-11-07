@@ -4,7 +4,7 @@ import { Coord, coordConstrain, coordSub, Rect } from "./Coord";
 import { SpriteAnimation } from "./sprites/SpriteAnimation";
 import { SpriteLibrary } from "./sprites/SpriteLibrary";
 import { UiController } from "./UiController";
-import { BeerGlass, DrinkLevel } from "./items/BeerGlass";
+import { BeerGlass, DrinkLevel, isBeerGlass } from "./items/BeerGlass";
 import { DrinkAnimation } from "./sprites/DrinkAnimation";
 import { Animation } from "./sprites/Animation";
 import { PlayerAttributes } from "./attributes/PlayerAttributes";
@@ -198,12 +198,12 @@ export class Player implements GameObject {
 
   isInteractable(ui: UiController) {
     const glass = ui.getSelectedItem();
-    return glass instanceof BeerGlass && glass.getLevel() > DrinkLevel.empty;
+    return !!glass && isBeerGlass(glass) && glass.getLevel() > DrinkLevel.empty;
   }
 
   onInteract(ui: UiController) {
     const glass = ui.getSelectedItem();
-    if (glass instanceof BeerGlass && glass.getLevel() > DrinkLevel.empty) {
+    if (glass && isBeerGlass(glass) && glass.getLevel() > DrinkLevel.empty) {
       this.itemAtHand = glass;
       this.animation = new DrinkAnimation({
         beerGlass: glass,

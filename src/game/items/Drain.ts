@@ -2,8 +2,8 @@ import { MiniGame } from "../minigames/MiniGame";
 import { SoundLibrary } from "../sounds/SoundLibrary";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
-import { BeerBottle } from "./BeerBottle";
-import { BeerGlass, DrinkLevel } from "./BeerGlass";
+import { isBeerBottle } from "./BeerBottle";
+import { DrinkLevel, isBeerGlass } from "./BeerGlass";
 import { GameItem } from "./GameItem";
 
 export class Drain implements GameItem {
@@ -16,7 +16,7 @@ export class Drain implements GameItem {
   }
 
   combine(item: GameItem): MiniGame | undefined {
-    if (item instanceof BeerGlass && item.getLevel() > DrinkLevel.empty) {
+    if (isBeerGlass(item) && item.getLevel() > DrinkLevel.empty) {
       SoundLibrary.play("pouring-water");
       const drainStep = () => {
         item.fill(item.getDrink(), item.getLevel() - 1);
@@ -26,10 +26,12 @@ export class Drain implements GameItem {
       };
       setTimeout(drainStep, 500);
     }
-    if (item instanceof BeerBottle && item.isOpen() && !item.isEmpty()) {
+    if (isBeerBottle(item) && item.isOpen() && !item.isEmpty()) {
       SoundLibrary.play("pouring-water");
       item.empty();
     }
     return undefined;
   }
 }
+
+export const isDrain = (item: GameItem): item is Drain => item instanceof Drain;
