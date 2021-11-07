@@ -99,6 +99,10 @@ export class Character {
   getColorBandState(): ColorBandState {
     return this.colorBandState;
   }
+
+  correctColorBand() {
+    this.colorBandState = ColorBandState.correct;
+  }
 }
 
 const characters = {
