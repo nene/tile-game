@@ -2,6 +2,7 @@ import { coordAdd, isCoordInRect, Rect, rectGrow } from "../Coord";
 import { GameEvent } from "../GameEvent";
 import { Character } from "../npc/Character";
 import { PixelScreen } from "../PixelScreen";
+import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { Component } from "../ui/Component";
 import { UI_HIGHLIGHT_COLOR } from "../ui/ui-utils";
 import { Window } from "../ui/Window";
@@ -17,6 +18,8 @@ export class Dialog implements Component {
   private content: Component;
   private onClose?: () => void;
   private character: Character;
+  private iconRect: Rect;
+  private iconHovered = false;
 
   constructor({ character, createContent, onClose }: DialogConfig) {
     this.onClose = onClose;
@@ -32,17 +35,30 @@ export class Dialog implements Component {
       onClose: onClose
     });
     this.content = createContent(rectGrow(this.window.contentAreaRect(), [-2, -2]));
+    this.iconRect = { coord: coordAdd(this.window.getRect().coord, [2, 2]), size: [16, 16] };
   }
 
   paint(screen: PixelScreen) {
     this.window.paint(screen);
-    this.drawAvatar(screen, { coord: coordAdd(this.window.getRect().coord, [2, 2]), size: [16, 16] });
+    this.drawIcon(screen);
     this.content.paint(screen)
   }
 
-  private drawAvatar(screen: PixelScreen, rect: Rect) {
-    screen.drawRect(rect, UI_HIGHLIGHT_COLOR);
-    screen.drawSprite(this.character.getFaceSprite(), rect.coord);
+  private drawIcon(screen: PixelScreen) {
+    if (this.iconHovered) {
+      this.drawColorBand(screen);
+    } else {
+      this.drawAvatar(screen);
+    }
+  }
+
+  private drawColorBand(screen: PixelScreen) {
+    screen.drawSprite(SpriteLibrary.getSprite("color-band", [this.character.getColorBandState(), 0]), this.iconRect.coord);
+  }
+
+  private drawAvatar(screen: PixelScreen) {
+    screen.drawRect(this.iconRect, UI_HIGHLIGHT_COLOR);
+    screen.drawSprite(this.character.getFaceSprite(), this.iconRect.coord);
   }
 
   getRect(): Rect {
@@ -50,8 +66,14 @@ export class Dialog implements Component {
   }
 
   handleGameEvent(event: GameEvent): boolean | undefined {
-    this.window.handleGameEvent(event);
-    this.content.handleGameEvent(event);
+    if (this.window.handleGameEvent(event) || this.content.handleGameEvent(event)) {
+      return true;
+    }
+
+    if (event.type === "mousemove") {
+      this.iconHovered = isCoordInRect(event.coord, this.iconRect);
+      return undefined;
+    }
 
     if (event.type === "click") {
       if (!isCoordInRect(event.coord, this.getRect())) {

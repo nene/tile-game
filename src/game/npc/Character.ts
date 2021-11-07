@@ -3,8 +3,15 @@ import { Drink, getDrink } from "../items/Drink";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary, SpriteName } from "../sprites/SpriteLibrary";
 import { constrain } from "../utils/constrain";
+import { pickRandom } from "../utils/pickRandom";
 
 export type Desire = "beer" | "question";
+
+export enum ColorBandState {
+  correct = 0,
+  twisted = 1,
+  inverted = 2,
+}
 
 export interface CharacterDef {
   name: string;
@@ -24,6 +31,7 @@ export class Character {
   private willWriteToBook = Math.random() < 3 / 4;
   private beersConsumed = 0;
   private questionsAsked = 0;
+  private colorBandState = pickRandom([ColorBandState.correct, ColorBandState.twisted, ColorBandState.inverted]);
 
   constructor(private def: CharacterDef) {
   }
@@ -86,6 +94,10 @@ export class Character {
         this.questionsAsked++;
         break;
     }
+  }
+
+  getColorBandState(): ColorBandState {
+    return this.colorBandState;
   }
 }
 
