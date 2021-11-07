@@ -4,7 +4,6 @@ import { PixelScreen } from "../PixelScreen";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary, SpriteName } from "../sprites/SpriteLibrary";
 import { UiController } from "../UiController";
-import { GameWorld } from "../GameWorld";
 import { LocationName } from "../locations/LocationFactory";
 
 export interface DoorConfig {
@@ -59,7 +58,8 @@ export class Door implements GameObject {
     return true;
   }
 
-  onInteract(ui: UiController, world: GameWorld) {
+  onInteract(ui: UiController) {
+    const world = ui.getWorld();
     const newLocation = world.getLocation(this.target.location);
     const door = newLocation.allObjects().find(obj => obj instanceof Door);
     if (!door) {

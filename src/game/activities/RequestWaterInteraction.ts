@@ -3,7 +3,6 @@ import { UiController } from "../UiController";
 import { Interaction, InteractionType } from "./Interaction";
 import { BeerGlass, DrinkLevel } from "../items/BeerGlass";
 import { getDrink } from "../items/Drink";
-import { GameWorld } from "../GameWorld";
 import { showPlainTextDialog } from "../dialogs/showPlainTextDialog";
 
 export class RequestWaterInteraction implements Interaction {
@@ -20,7 +19,7 @@ export class RequestWaterInteraction implements Interaction {
     return this.finished;
   }
 
-  interact(ui: UiController, world: GameWorld) {
+  interact(ui: UiController) {
     const item = ui.getSelectedItem();
     if (!(item instanceof BeerGlass)) {
       this.showDialog(ui, "Too šoppen vett!");
@@ -36,7 +35,7 @@ export class RequestWaterInteraction implements Interaction {
     }
 
     this.showDialog(ui, "Võta laituseks sisse!", () => {
-      world.getPlayer().onInteract(ui, world);
+      ui.getWorld().getPlayer().onInteract(ui);
       this.finished = true;
     });
   }

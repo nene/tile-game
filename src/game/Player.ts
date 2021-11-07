@@ -11,7 +11,6 @@ import { PlayerAttributes } from "./attributes/PlayerAttributes";
 import { GameKeyEvent } from "./GameEvent";
 import { Location } from "./locations/Location";
 import { PlayerMovement } from "./PlayerMovement";
-import { GameWorld } from "./GameWorld";
 import { constrain } from "./utils/constrain";
 
 const MAX_SPEED = 6;
@@ -202,7 +201,7 @@ export class Player implements GameObject {
     return glass instanceof BeerGlass && glass.getLevel() > DrinkLevel.empty;
   }
 
-  onInteract(ui: UiController, world: GameWorld) {
+  onInteract(ui: UiController) {
     const glass = ui.getSelectedItem();
     if (glass instanceof BeerGlass && glass.getLevel() > DrinkLevel.empty) {
       this.itemAtHand = glass;

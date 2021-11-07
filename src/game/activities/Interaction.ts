@@ -1,4 +1,3 @@
-import { GameWorld } from "../GameWorld";
 import { UiController } from "../UiController";
 import { Activity } from "./Activity";
 
@@ -9,7 +8,7 @@ export enum InteractionType {
 }
 
 export interface Interaction {
-  interact: (ui: UiController, world: GameWorld) => void;
+  interact: (ui: UiController) => void;
   isFinished: () => boolean;
   nextActivity: () => Activity | undefined;
   getType: () => InteractionType;

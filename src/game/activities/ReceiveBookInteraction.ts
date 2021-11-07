@@ -1,5 +1,4 @@
 import { showPlainTextDialog } from "../dialogs/showPlainTextDialog";
-import { GameWorld } from "../GameWorld";
 import { Book } from "../items/Book";
 import { getDrink } from "../items/Drink";
 import { Character } from "../npc/Character";
@@ -11,7 +10,7 @@ import { RequestWaterInteraction } from "./RequestWaterInteraction";
 export class ReceiveBookInteraction implements PlainInteraction {
   constructor(private character: Character) { }
 
-  interact(ui: UiController, world: GameWorld): InteractionResult | undefined {
+  interact(ui: UiController): InteractionResult | undefined {
     const item = ui.getSelectedItem();
     if (!(item instanceof Book)) {
       return undefined;

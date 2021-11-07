@@ -71,9 +71,9 @@ export class SatisfyDesiresActivity implements Activity {
     return true;
   }
 
-  interact(ui: UiController, world: GameWorld) {
+  interact(ui: UiController) {
     for (const interaction of this.alwaysAvailableInteractions) {
-      const result = interaction.interact(ui, world);
+      const result = interaction.interact(ui);
       if (result) {
         if (result.type === "activity") {
           this.activity = new ContinuationActivity(result.activity, this.activity);
@@ -82,7 +82,7 @@ export class SatisfyDesiresActivity implements Activity {
       }
     }
 
-    this.activity.interact(ui, world);
+    this.activity.interact(ui);
   }
 
   nextActivity() {

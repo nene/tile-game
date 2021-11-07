@@ -20,8 +20,8 @@ export class ContinuationActivity implements Activity {
     return this.current.isInteractable(ui);
   }
 
-  interact(ui: UiController, world: GameWorld) {
-    return this.current.interact(ui, world);
+  interact(ui: UiController) {
+    return this.current.interact(ui);
   }
 
   nextActivity() {

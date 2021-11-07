@@ -135,7 +135,7 @@ export class UiController {
 
   touchColorBand(character: Character) {
     this.touchingColorBand = true;
-    this.world.getActiveLocation().findCharacterFigure(character)?.onInteract(this, this.world);
+    this.world.getActiveLocation().findCharacterFigure(character)?.onInteract(this);
     this.touchingColorBand = false;
   }
 

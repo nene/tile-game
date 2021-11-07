@@ -64,7 +64,7 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
   function handleWorldClick(worldCoord: Coord) {
     const obj = world.getActiveLocation().getObjectVisibleOnCoord(worldCoord);
     if (obj && isObjectsCloseby(player, obj)) {
-      obj.onInteract(uiController, world);
+      obj.onInteract(uiController);
     }
   }
 
