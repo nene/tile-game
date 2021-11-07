@@ -8,6 +8,7 @@ import { ColorMenu } from "../ui/ColorMenu";
 import { TextContent } from "./TextContent";
 import { FlagColor } from "../orgs/FlagColors";
 import { Component } from "../ui/Component";
+import { isDefined } from "../utils/isDefined";
 
 interface FlagQuestionContentConfig {
   question: string;
@@ -83,8 +84,4 @@ export class FlagQuestionContent implements Component {
       }
     });
   }
-}
-
-function isDefined<T>(x: T | undefined): x is T {
-  return Boolean(x);
 }

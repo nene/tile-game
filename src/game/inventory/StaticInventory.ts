@@ -1,6 +1,7 @@
 import { fill } from "lodash";
 import { Inventory } from "./Inventory";
 import { GameItem } from "../items/GameItem";
+import { isDefined } from "../utils/isDefined";
 
 type Slot = GameItem | undefined;
 
@@ -43,10 +44,6 @@ export class StaticInventory implements Inventory {
   }
 
   allItems() {
-    return this.slots.filter(isFilledSlot);
+    return this.slots.filter(isDefined);
   }
-}
-
-function isFilledSlot(x: Slot): x is GameItem {
-  return x !== undefined;
 }

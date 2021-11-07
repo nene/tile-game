@@ -2,6 +2,7 @@ import { fill, negate } from "lodash";
 import { WritableInventory } from "./Inventory";
 import { GameItem } from "../items/GameItem";
 import { Wallet } from "../attributes/Wallet";
+import { isDefined } from "../utils/isDefined";
 
 type Slot = GameItem | undefined;
 
@@ -30,13 +31,13 @@ export class StorageInventory implements WritableInventory {
     if (!this.isAcceptingItem(item)) {
       throw new Error(`This inventory doesn't accept ${item.getName()}`);
     }
-    if (!isFilledSlot(this.slots[index])) {
+    if (!isDefined(this.slots[index])) {
       this.slots[index] = item;
     }
   }
 
   add(item: GameItem) {
-    const emptyIndex = this.slots.findIndex(negate(isFilledSlot));
+    const emptyIndex = this.slots.findIndex(negate(isDefined));
     if (emptyIndex > -1) {
       this.placeAt(emptyIndex, item);
     } else {
@@ -71,7 +72,7 @@ export class StorageInventory implements WritableInventory {
   }
 
   allItems() {
-    return this.slots.filter(isFilledSlot);
+    return this.slots.filter(isDefined);
   }
 
   isFull() {
@@ -81,8 +82,4 @@ export class StorageInventory implements WritableInventory {
   clear() {
     this.slots = fill(new Array(this.slots.length), undefined);
   }
-}
-
-function isFilledSlot(x: Slot): x is GameItem {
-  return x !== undefined;
 }
