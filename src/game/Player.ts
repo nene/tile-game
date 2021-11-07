@@ -196,6 +196,11 @@ export class Player implements GameObject {
     return { coord: [-7, -3], size: [14, 5] };
   }
 
+  // True when the player isn't busy doing something (e.g. drinking)
+  isFree(): boolean {
+    return !this.itemAtHand;
+  }
+
   isInteractable(ui: UiController) {
     const glass = ui.getSelectedItem();
     return !!glass && isBeerGlass(glass) && glass.getLevel() > DrinkLevel.empty;
