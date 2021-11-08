@@ -7,11 +7,13 @@ import { Player } from "./Player";
 export class GameWorld {
   private locations: Map<LocationName, Location>;
   private activeLocation: Location;
+  private player: Player;
 
-  constructor(locations: LocationFactory[], private player: Player) {
+  constructor(locations: LocationFactory[]) {
     this.locations = new Map(locations.map((loc) => [loc.getName(), new Location(loc)]));
     this.activeLocation = this.getLocation(locations[0].getName());
-    this.activeLocation.add(player);
+    this.player = new Player([286, 129]);
+    this.activeLocation.add(this.player);
   }
 
   getActiveLocation(): Location {

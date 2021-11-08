@@ -1,5 +1,4 @@
 import { PixelScreen, PixelScreenOptions } from "./PixelScreen";
-import { Player } from "./Player";
 import { GameWorld } from "./GameWorld";
 import { SpriteLibrary } from "./sprites/SpriteLibrary";
 import { SoundLibrary } from "./sounds/SoundLibrary";
@@ -28,12 +27,10 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
   await SpriteLibrary.load();
   await SoundLibrary.load();
 
-  const player = new Player([286, 129]);
-
   const world = new GameWorld([
     new CfeLocationFactory(),
     new OutdoorsLocationFactory(),
-  ], player);
+  ]);
 
   const ui = new UiController(world);
 
@@ -56,6 +53,7 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
 
   function handleWorldClick(worldCoord: Coord) {
     const obj = ui.getWorld().getActiveLocation().getObjectVisibleOnCoord(worldCoord);
+    const player = ui.getWorld().getPlayer();
     if (obj && isObjectsCloseby(player, obj) && player.isFree()) {
       obj.onInteract(ui);
     }
@@ -64,6 +62,7 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
   function canInteractWithWorld(): boolean {
     const worldCoord = coordAdd(ui.getMouseCoord(), screen.getOffset());
     const obj = ui.getWorld().getActiveLocation().getObjectVisibleOnCoord(worldCoord);
+    const player = ui.getWorld().getPlayer();
     return Boolean(obj && isObjectsCloseby(player, obj) && obj.isInteractable(ui) && player.isFree());
   }
 
@@ -93,7 +92,7 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
         }
       }
       if (ui.isGameWorldActive() && ui.isGameWorldVisible()) {
-        const result = player.handleKeyEvent(event);
+        const result = ui.getWorld().getPlayer().handleKeyEvent(event);
         ui.highlightCursor(canInteractWithWorld());
         screenNeedsRepaint = true;
         return result;
