@@ -24,12 +24,14 @@ export class UiController {
   private calendar = new Calendar();
   private questionFacory: QuestionFactory;
   private touchingColorBand = false;
+  private attributes: PlayerAttributes;
 
-  constructor(private world: GameWorld, private attributes: PlayerAttributes) {
-    this.inventoryController = new InventoryController(attributes);
+  constructor(private world: GameWorld) {
+    this.attributes = world.getPlayer().getAttributes();
+    this.inventoryController = new InventoryController(this.attributes);
     this.cursorController = new CursorController();
-    this.scoreBoard = new ScoreBoard([269, 0], attributes.wallet, attributes.drunkenness, this.calendar);
-    this.questionFacory = new QuestionFactory(attributes.orgSkill);
+    this.scoreBoard = new ScoreBoard([269, 0], this.attributes.wallet, this.attributes.drunkenness, this.calendar);
+    this.questionFacory = new QuestionFactory(this.attributes.orgSkill);
   }
 
   getSelectedItem(): GameItem | undefined {
