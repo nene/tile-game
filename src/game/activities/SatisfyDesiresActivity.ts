@@ -15,11 +15,11 @@ import { ColorBandInteraction } from "./plain-interactions/ColorBandInteraction"
 
 export class SatisfyDesiresActivity implements Activity {
   private finished = false;
-  private activity: Activity;
+  private activity?: Activity;
   private alwaysAvailableInteractions: PlainInteraction[];
 
   constructor(private character: Character) {
-    this.activity = this.chooseActivity() as Activity;
+    this.activity = this.chooseActivity();
     this.alwaysAvailableInteractions = [
       new ColorBandInteraction(character),
       new ReceiveBookInteraction(character),
@@ -43,6 +43,11 @@ export class SatisfyDesiresActivity implements Activity {
   }
 
   tick(figure: CharacterFigure, location: Location, world: GameWorld): ActivityUpdates {
+    if (!this.activity) {
+      this.finished = true;
+      return {};
+    }
+
     const updates = this.activity.tick(figure, location, world);
     if (this.activity.isFinished()) {
       const nextActivity = this.activity.nextActivity();
@@ -72,6 +77,10 @@ export class SatisfyDesiresActivity implements Activity {
   }
 
   interact(ui: UiController) {
+    if (!this.activity) {
+      return;
+    }
+
     for (const interaction of this.alwaysAvailableInteractions) {
       const result = interaction.interact(ui);
       if (result) {
