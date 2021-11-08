@@ -1,15 +1,12 @@
 import { PixelScreen, PixelScreenOptions } from "./PixelScreen";
-import { GameWorld } from "./GameWorld";
 import { SpriteLibrary } from "./sprites/SpriteLibrary";
 import { SoundLibrary } from "./sounds/SoundLibrary";
-import { CfeLocationFactory } from "./locations/CfeLocationFactory";
 import { Coord, coordAdd, Rect, rectDistance, rectTranslate } from "./Coord";
 import { UiController } from "./UiController";
 import { Loops } from "./Loops";
 import { GameObject } from "./GameObject";
 import { FpsCounter } from "./FpsCounter";
 import { GameEventFactory, GameEventType } from "./GameEvent";
-import { OutdoorsLocationFactory } from "./locations/OutdoorsLocationFactory";
 import { getAllCharacters } from "./npc/Character";
 import { OpinionsView } from "./npc/OpinionsView";
 import { SkillsView } from "./attributes/SkillsView";
@@ -27,12 +24,7 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
   await SpriteLibrary.load();
   await SoundLibrary.load();
 
-  const world = new GameWorld([
-    new CfeLocationFactory(),
-    new OutdoorsLocationFactory(),
-  ]);
-
-  const ui = new UiController(world);
+  const ui = new UiController();
 
   const loops = new Loops();
   loops.runGameLoop(() => {

@@ -14,19 +14,28 @@ import { Component } from "./ui/Component";
 import { QuestionFactory } from "./questions/QuestionFactory";
 import { GameWorld } from "./GameWorld";
 import { Character } from "./npc/Character";
+import { createWorld } from "./locations/createWorld";
 
 export class UiController {
+  private world: GameWorld;
   private inventoryController: InventoryController;
   private cursorController: CursorController;
   private modalWindow?: Component;
   private infoModalWindow?: Component;
   private scoreBoard: ScoreBoard;
-  private calendar = new Calendar();
+  private calendar: Calendar;
   private questionFacory: QuestionFactory;
   private touchingColorBand = false;
   private attributes = new PlayerAttributes();
 
-  constructor(private world: GameWorld) {
+  constructor() {
+    this.world = createWorld(1);
+    this.calendar = new Calendar({
+      onNextDay: (day) => {
+        this.world = createWorld(day);
+      },
+    });
+
     this.inventoryController = new InventoryController(this.attributes);
     this.cursorController = new CursorController();
     this.scoreBoard = new ScoreBoard([269, 0], this.attributes.wallet, this.attributes.drunkenness, this.calendar);

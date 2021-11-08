@@ -1,17 +1,32 @@
-const GAME_HOUR_LENGTH = 60;
+const GAME_HOUR_LENGTH = 60 * 10;
 
-const START_TIME = 6 * GAME_HOUR_LENGTH; // 6:00 pm
+const DAY_START_TIME = 6 * GAME_HOUR_LENGTH; // 6:00 pm
+const DAY_END_TIME = (12 + 2) * GAME_HOUR_LENGTH; // 2:00 am
+
+interface CalendarConfig {
+  onNextDay: (day: number) => void;
+}
 
 export class Calendar {
-  private ticks = START_TIME;
+  private ticks = DAY_START_TIME;
   private day = 1;
+  private onNextDay: (day: number) => void;
+
+  constructor({ onNextDay }: CalendarConfig) {
+    this.onNextDay = onNextDay;
+  }
 
   tick() {
     this.ticks++;
+    if (this.ticks > DAY_END_TIME) {
+      this.nextDay();
+    }
   }
 
-  nextDay() {
+  private nextDay() {
     this.day++;
+    this.ticks = DAY_START_TIME;
+    this.onNextDay(this.day);
   }
 
   getDayText(): string {
