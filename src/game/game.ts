@@ -55,7 +55,7 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
   });
 
   function handleWorldClick(worldCoord: Coord) {
-    const obj = world.getActiveLocation().getObjectVisibleOnCoord(worldCoord);
+    const obj = ui.getWorld().getActiveLocation().getObjectVisibleOnCoord(worldCoord);
     if (obj && isObjectsCloseby(player, obj) && player.isFree()) {
       obj.onInteract(ui);
     }
@@ -63,7 +63,7 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
 
   function canInteractWithWorld(): boolean {
     const worldCoord = coordAdd(ui.getMouseCoord(), screen.getOffset());
-    const obj = world.getActiveLocation().getObjectVisibleOnCoord(worldCoord);
+    const obj = ui.getWorld().getActiveLocation().getObjectVisibleOnCoord(worldCoord);
     return Boolean(obj && isObjectsCloseby(player, obj) && obj.isInteractable(ui) && player.isFree());
   }
 
