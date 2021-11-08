@@ -117,7 +117,9 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
         }
       }
       else if (type === "mousemove") {
-        uiController.handleGameEvent(event);
+        if (uiController.handleGameEvent(event)) {
+          return;
+        }
         if (uiController.isGameWorldActive() && uiController.isGameWorldVisible()) {
           uiController.highlightCursor(canInteractWithWorld());
         } else {

@@ -76,7 +76,8 @@ export class Dialog implements Component {
 
     if (event.type === "mousemove") {
       this.iconHovered = isCoordInRect(event.coord, this.iconRect);
-      return undefined;
+      this.ui.highlightCursor(this.iconHovered);
+      return true;
     }
 
     if (event.type === "click") {
