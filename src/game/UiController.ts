@@ -9,7 +9,7 @@ import { GameEvent } from "./GameEvent";
 import { InventoryView } from "./inventory/InventoryView";
 import { PlayerAttributes } from "./attributes/PlayerAttributes";
 import { Coord } from "./Coord";
-import { Clock } from "./Clock";
+import { Calendar } from "./Calendar";
 import { Component } from "./ui/Component";
 import { QuestionFactory } from "./questions/QuestionFactory";
 import { GameWorld } from "./GameWorld";
@@ -21,14 +21,14 @@ export class UiController {
   private modalWindow?: Component;
   private infoModalWindow?: Component;
   private scoreBoard: ScoreBoard;
-  private clock = new Clock();
+  private calendar = new Calendar();
   private questionFacory: QuestionFactory;
   private touchingColorBand = false;
 
   constructor(private world: GameWorld, private attributes: PlayerAttributes) {
     this.inventoryController = new InventoryController(attributes);
     this.cursorController = new CursorController();
-    this.scoreBoard = new ScoreBoard([269, 0], attributes.wallet, attributes.drunkenness, this.clock);
+    this.scoreBoard = new ScoreBoard([269, 0], attributes.wallet, attributes.drunkenness, this.calendar);
     this.questionFacory = new QuestionFactory(attributes.orgSkill);
   }
 
@@ -55,7 +55,7 @@ export class UiController {
   tick() {
     this.inventoryController.tick();
     if (this.isGameWorldActive()) {
-      this.clock.tick();
+      this.calendar.tick();
     }
   }
 

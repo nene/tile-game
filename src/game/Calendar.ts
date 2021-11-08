@@ -2,7 +2,7 @@ const GAME_MINUTE_LENGTH = 10;
 
 const START_TIME = 18 * 60 * GAME_MINUTE_LENGTH; // 18:00
 
-export class Clock {
+export class Calendar {
   private ticks = START_TIME;
 
   tick() {

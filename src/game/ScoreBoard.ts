@@ -8,26 +8,26 @@ import { Sprite } from "./sprites/Sprite";
 import { SpriteLibrary } from "./sprites/SpriteLibrary";
 import { SpriteSheet } from "./sprites/SpriteSheet";
 import { Wallet } from "./attributes/Wallet";
-import { Clock } from "./Clock";
+import { Calendar } from "./Calendar";
 
 export class ScoreBoard {
   private bg: Sprite;
   private beerGlass: SpriteSheet;
 
-  constructor(private coord: Coord, private wallet: Wallet, private drunkenness: Drunkenness, private clock: Clock) {
+  constructor(private coord: Coord, private wallet: Wallet, private drunkenness: Drunkenness, private calendar: Calendar) {
     this.bg = SpriteLibrary.getSprite("scoreboard");
     this.beerGlass = SpriteLibrary.get("beer-glass-sm");
   }
 
   paint(screen: PixelScreen) {
     screen.drawSprite(this.bg, this.coord);
-    this.drawClock(screen);
+    this.drawCalendar(screen);
     this.drawWallet(screen);
     this.drawAlcoholLevel(screen);
   }
 
-  private drawClock(screen: PixelScreen) {
-    screen.drawText(this.clock.getDisplayText(), coordAdd(this.coord, [4, 2]), { align: "left", shadowColor: "#8f563b" });
+  private drawCalendar(screen: PixelScreen) {
+    screen.drawText(this.calendar.getDisplayText(), coordAdd(this.coord, [4, 2]), { align: "left", shadowColor: "#8f563b" });
   }
 
   private drawWallet(screen: PixelScreen) {
