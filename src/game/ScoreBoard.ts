@@ -27,7 +27,8 @@ export class ScoreBoard {
   }
 
   private drawCalendar(screen: PixelScreen) {
-    screen.drawText(this.calendar.getDisplayText(), coordAdd(this.coord, [4, 2]), { align: "left", shadowColor: "#8f563b" });
+    screen.drawText(this.calendar.getDayText(), coordAdd(this.coord, [6, 0]), { size: "small" });
+    screen.drawText(this.calendar.getTimeText(), coordAdd(this.coord, [6, 6]), { size: "small" });
   }
 
   private drawWallet(screen: PixelScreen) {

@@ -1,19 +1,26 @@
-const GAME_MINUTE_LENGTH = 10;
+const GAME_HOUR_LENGTH = 60;
 
-const START_TIME = 18 * 60 * GAME_MINUTE_LENGTH; // 18:00
+const START_TIME = 6 * GAME_HOUR_LENGTH; // 6:00 pm
 
 export class Calendar {
   private ticks = START_TIME;
+  private day = 1;
 
   tick() {
     this.ticks++;
   }
 
-  getDisplayText(): string {
-    const totalMinutes = Math.floor(this.ticks / GAME_MINUTE_LENGTH)
-    const hours = Math.floor(totalMinutes / 60);
-    const minutes = totalMinutes - hours * 60;
-    const cappedHours = hours % 24;
-    return `${cappedHours}:${String(minutes).padStart(2, "0")}`;
+  nextDay() {
+    this.day++;
+  }
+
+  getDayText(): string {
+    return `${this.day}. päev`;
+  }
+
+  getTimeText(): string {
+    const hours = Math.floor(this.ticks / GAME_HOUR_LENGTH);
+    const hours12h = hours % 12 === 0 ? 12 : hours % 12;
+    return `kell ${hours12h}`;
   }
 }
