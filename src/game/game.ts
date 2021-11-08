@@ -35,14 +35,14 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
     new OutdoorsLocationFactory(),
   ], player);
 
-  const uiController = new UiController(world);
+  const ui = new UiController(world);
 
   const loops = new Loops();
   loops.runGameLoop(() => {
-    if (uiController.isGameWorldActive()) {
+    if (ui.isGameWorldActive()) {
       world.tick();
     }
-    uiController.tick();
+    ui.tick();
     screenNeedsRepaint = true;
   });
 
@@ -52,11 +52,11 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
     if (!screenNeedsRepaint) {
       return; // Don't paint when app state hasn't changed
     }
-    if (uiController.isGameWorldVisible()) {
+    if (ui.isGameWorldVisible()) {
       screen.centerTo(player.getCoord(), world.getActiveLocation());
       world.paint(screen);
     }
-    uiController.paint(screen);
+    ui.paint(screen);
     fps.paint(screen);
     screenNeedsRepaint = false;
   });
@@ -64,14 +64,14 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
   function handleWorldClick(worldCoord: Coord) {
     const obj = world.getActiveLocation().getObjectVisibleOnCoord(worldCoord);
     if (obj && isObjectsCloseby(player, obj) && player.isFree()) {
-      obj.onInteract(uiController);
+      obj.onInteract(ui);
     }
   }
 
   function canInteractWithWorld(): boolean {
-    const worldCoord = coordAdd(uiController.getMouseCoord(), screen.getOffset());
+    const worldCoord = coordAdd(ui.getMouseCoord(), screen.getOffset());
     const obj = world.getActiveLocation().getObjectVisibleOnCoord(worldCoord);
-    return Boolean(obj && isObjectsCloseby(player, obj) && obj.isInteractable(uiController) && player.isFree());
+    return Boolean(obj && isObjectsCloseby(player, obj) && obj.isInteractable(ui) && player.isFree());
   }
 
   const eventFactory = new GameEventFactory(screenCfg.scale);
@@ -80,28 +80,28 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
     onKeyEvent: (type: "keyup" | "keydown", key: string): boolean => {
       const event = eventFactory.createKeyboardEvent(type, key);
       if (event.type === "keydown" && event.key === "OPINIONS") {
-        if (uiController.getInfoModal() instanceof OpinionsView) {
-          uiController.hideInfoModal();
+        if (ui.getInfoModal() instanceof OpinionsView) {
+          ui.hideInfoModal();
         } else {
-          uiController.showInfoModal(new OpinionsView({
+          ui.showInfoModal(new OpinionsView({
             characters: getAllCharacters(),
-            onClose: () => uiController.hideInfoModal(),
+            onClose: () => ui.hideInfoModal(),
           }));
         }
       }
       if (event.type === "keydown" && event.key === "SKILLS") {
-        if (uiController.getInfoModal() instanceof SkillsView) {
-          uiController.hideInfoModal();
+        if (ui.getInfoModal() instanceof SkillsView) {
+          ui.hideInfoModal();
         } else {
-          uiController.showInfoModal(new SkillsView({
-            orgSkill: uiController.getAttributes().orgSkill,
-            onClose: () => uiController.hideInfoModal(),
+          ui.showInfoModal(new SkillsView({
+            orgSkill: ui.getAttributes().orgSkill,
+            onClose: () => ui.hideInfoModal(),
           }));
         }
       }
-      if (uiController.isGameWorldActive() && uiController.isGameWorldVisible()) {
+      if (ui.isGameWorldActive() && ui.isGameWorldVisible()) {
         const result = player.handleKeyEvent(event);
-        uiController.highlightCursor(canInteractWithWorld());
+        ui.highlightCursor(canInteractWithWorld());
         screenNeedsRepaint = true;
         return result;
       }
@@ -111,22 +111,22 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
       screenNeedsRepaint = true;
       const event = eventFactory.createEvent(type, coord, wheelDelta);
       if (type === "click") {
-        if (!uiController.handleGameEvent(event)) {
+        if (!ui.handleGameEvent(event)) {
           // When the click was not handled by UI
           handleWorldClick(coordAdd(event.coord, screen.getOffset()));
         }
       }
       else if (type === "mousemove") {
-        if (uiController.handleGameEvent(event)) {
+        if (ui.handleGameEvent(event)) {
           return;
         }
-        if (uiController.isGameWorldActive() && uiController.isGameWorldVisible()) {
-          uiController.highlightCursor(canInteractWithWorld());
+        if (ui.isGameWorldActive() && ui.isGameWorldVisible()) {
+          ui.highlightCursor(canInteractWithWorld());
         } else {
-          uiController.highlightCursor(false);
+          ui.highlightCursor(false);
         }
       } else {
-        uiController.handleGameEvent(event);
+        ui.handleGameEvent(event);
       }
     },
     cleanup: () => {
