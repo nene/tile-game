@@ -146,8 +146,6 @@ export class Player implements GameObject {
   tick(location: Location) {
     this.updatePosition(location);
     this.animation.tick();
-
-    this.maybeFinishDrinking();
   }
 
   private updatePosition(location: Location) {
@@ -216,18 +214,15 @@ export class Player implements GameObject {
         drinkTicks: 10,
         idleTicks: 10,
         onSip: (drink) => {
-          this.attributes.drunkenness.sip(drink);
+          ui.getAttributes().drunkenness.sip(drink);
         },
+        onFinish: () => {
+          this.animation = this.standAnimations.down;
+          ui.getAttributes().inventory.add(glass);
+          this.itemAtHand = undefined;
+        }
       });
       ui.setSelectedItem(undefined);
-    }
-  }
-
-  private maybeFinishDrinking() {
-    if (this.itemAtHand && this.animation.isFinished()) {
-      this.animation = this.standAnimations.down;
-      this.attributes.inventory.add(this.itemAtHand);
-      this.itemAtHand = undefined;
     }
   }
 }

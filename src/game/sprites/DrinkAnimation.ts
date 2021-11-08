@@ -12,6 +12,7 @@ interface DrinkAnimationConfig {
   idleTicks: number;
   drinkTicks: number;
   onSip?: (drink: Drink) => void;
+  onFinish?: () => void;
 }
 
 export class DrinkAnimation implements Animation {
@@ -23,14 +24,16 @@ export class DrinkAnimation implements Animation {
   private drinkTicks: number;
   private idleTicks: number;
   private onSip: (drink: Drink) => void;
+  private onFinish: () => void;
 
-  constructor({ beerGlass, spriteName, drinkTicks, idleTicks, onSip }: DrinkAnimationConfig) {
+  constructor({ beerGlass, spriteName, drinkTicks, idleTicks, onSip, onFinish }: DrinkAnimationConfig) {
     this.sprite = SpriteLibrary.getSprite(spriteName, [1, 0]);
     this.handSprite = SpriteLibrary.getSprite(spriteName, [2, 0]);
     this.beerGlass = beerGlass;
     this.drinkTicks = drinkTicks;
     this.idleTicks = idleTicks;
     this.onSip = onSip || noop;
+    this.onFinish = onFinish || noop;
   }
 
   tick() {
@@ -42,6 +45,9 @@ export class DrinkAnimation implements Animation {
       if (drink) {
         this.onSip(drink);
         this.beerGlass.consume();
+        if (this.isFinished()) {
+          this.onFinish();
+        }
       }
     }
     else if (!this.isHandUp && this.ticks > this.idleTicks) {
