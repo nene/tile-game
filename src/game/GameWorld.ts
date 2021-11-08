@@ -33,6 +33,7 @@ export class GameWorld {
   }
 
   paint(screen: PixelScreen) {
+    screen.centerTo(this.player.getCoord(), this.activeLocation);
     this.activeLocation.paint(screen);
   }
 

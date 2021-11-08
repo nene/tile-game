@@ -62,6 +62,10 @@ export class UiController {
   }
 
   paint(screen: PixelScreen) {
+    if (this.isGameWorldVisible()) {
+      this.world.paint(screen);
+    }
+
     screen.withFixedCoords(() => {
       if (this.getMiniGame()) {
         this.getMiniGame()?.paint(screen);
