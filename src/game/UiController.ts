@@ -32,6 +32,7 @@ export class UiController {
     this.world = createWorld(1);
     this.calendar = new Calendar({
       onNextDay: (day) => {
+        this.attributes.drunkenness.reset();
         this.world = createWorld(day);
       },
     });

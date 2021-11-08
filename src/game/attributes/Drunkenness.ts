@@ -23,4 +23,8 @@ export class Drunkenness {
   getHandShakeAmount(): number {
     return Math.abs(2 - this.level) / 3;
   }
+
+  reset() {
+    this.level = 0;
+  }
 }
