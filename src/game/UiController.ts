@@ -56,6 +56,7 @@ export class UiController {
   tick() {
     this.inventoryController.tick();
     if (this.isGameWorldActive()) {
+      this.world.tick();
       this.calendar.tick();
     }
   }

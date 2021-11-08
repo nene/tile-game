@@ -39,9 +39,6 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
 
   const loops = new Loops();
   loops.runGameLoop(() => {
-    if (ui.isGameWorldActive()) {
-      world.tick();
-    }
     ui.tick();
     screenNeedsRepaint = true;
   });
