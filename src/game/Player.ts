@@ -7,7 +7,6 @@ import { UiController } from "./UiController";
 import { BeerGlass, DrinkLevel, isBeerGlass } from "./items/BeerGlass";
 import { DrinkAnimation } from "./sprites/DrinkAnimation";
 import { Animation } from "./sprites/Animation";
-import { PlayerAttributes } from "./attributes/PlayerAttributes";
 import { GameKeyEvent } from "./GameEvent";
 import { Location } from "./locations/Location";
 import { PlayerMovement } from "./PlayerMovement";
@@ -25,7 +24,6 @@ export class Player implements GameObject {
   private walkAnimations: Record<Facing, SpriteAnimation>;
   private animation: Animation;
   private itemAtHand?: BeerGlass;
-  private attributes = new PlayerAttributes();
   private movement = new PlayerMovement(this);
 
   constructor(coord: Coord) {
@@ -46,10 +44,6 @@ export class Player implements GameObject {
     };
 
     this.animation = this.standAnimations.down;
-  }
-
-  getAttributes(): PlayerAttributes {
-    return this.attributes;
   }
 
   handleKeyEvent(event: GameKeyEvent): boolean {

@@ -24,10 +24,9 @@ export class UiController {
   private calendar = new Calendar();
   private questionFacory: QuestionFactory;
   private touchingColorBand = false;
-  private attributes: PlayerAttributes;
+  private attributes = new PlayerAttributes();
 
   constructor(private world: GameWorld) {
-    this.attributes = world.getPlayer().getAttributes();
     this.inventoryController = new InventoryController(this.attributes);
     this.cursorController = new CursorController();
     this.scoreBoard = new ScoreBoard([269, 0], this.attributes.wallet, this.attributes.drunkenness, this.calendar);
