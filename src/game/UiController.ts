@@ -1,7 +1,7 @@
 import { PixelScreen } from "./PixelScreen";
 import { GameItem } from "./items/GameItem";
 import { InventoryController } from "./InventoryController";
-import { Overlay } from "./Overlay";
+import { Overlay } from "./ui/Overlay";
 import { CursorController } from "./CursorController";
 import { MiniGame } from "./minigames/MiniGame";
 import { ScoreBoard } from "./ScoreBoard";

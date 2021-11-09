@@ -1,4 +1,4 @@
-import { PixelScreen } from "./PixelScreen";
+import { PixelScreen } from "../PixelScreen";
 
 export class Overlay {
   public static paint(screen: PixelScreen) {

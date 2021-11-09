@@ -3,7 +3,7 @@ import { InventoryView } from "./inventory/InventoryView";
 import { GridInventoryView } from "./inventory/GridInventoryView";
 import { Coord, coordSub } from "./Coord";
 import { GameItem } from "./items/GameItem";
-import { Overlay } from "./Overlay";
+import { Overlay } from "./ui/Overlay";
 import { MiniGame } from "./minigames/MiniGame";
 import { GameEvent } from "./GameEvent";
 import { PlayerAttributes } from "./attributes/PlayerAttributes";
