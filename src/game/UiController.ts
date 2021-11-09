@@ -135,12 +135,12 @@ export class UiController {
 
   handleGameEvent(event: GameEvent): boolean | undefined {
     let stopPropagation: boolean | undefined = undefined;
+    stopPropagation = stopPropagation || this.dayTransition?.handleGameEvent(event);
+    stopPropagation = stopPropagation || this.infoModalWindow?.handleGameEvent(event);
     stopPropagation = stopPropagation || this.getMiniGame()?.handleGameEvent(event);
     stopPropagation = stopPropagation || this.cursorController.handleGameEvent(event);
-    stopPropagation = stopPropagation || this.infoModalWindow?.handleGameEvent(event);
     stopPropagation = stopPropagation || this.modalWindow?.handleGameEvent(event);
     stopPropagation = stopPropagation || this.inventoryController.handleGameEvent(event);
-    stopPropagation = stopPropagation || this.dayTransition?.handleGameEvent(event);
     if (stopPropagation) {
       return true;
     }
