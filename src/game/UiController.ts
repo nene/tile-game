@@ -35,6 +35,7 @@ export class UiController {
     this.calendar = new Calendar({
       onDayEnd: (day) => {
         this.dayTransition = new DayTransition({
+          calendar: this.calendar,
           onHalfWay: () => {
             this.inventoryController.resetForNewDay();
             this.modalWindow = undefined;
@@ -143,6 +144,7 @@ export class UiController {
     stopPropagation = stopPropagation || this.infoModalWindow?.handleGameEvent(event);
     stopPropagation = stopPropagation || this.modalWindow?.handleGameEvent(event);
     stopPropagation = stopPropagation || this.inventoryController.handleGameEvent(event);
+    stopPropagation = stopPropagation || this.dayTransition?.handleGameEvent(event);
     if (stopPropagation) {
       return true;
     }

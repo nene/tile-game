@@ -1,4 +1,4 @@
-const GAME_HOUR_LENGTH = 2 * 10;
+const GAME_HOUR_LENGTH = 60 * 10;
 
 const DAY_START_TIME = 6 * GAME_HOUR_LENGTH; // 6:00 pm
 const DAY_END_TIME = (12 + 2) * GAME_HOUR_LENGTH; // 2:00 am
