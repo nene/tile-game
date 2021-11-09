@@ -99,12 +99,7 @@ export class UiController {
           this.infoModalWindow.paint(screen);
           this.cursorController.paint(screen);
         }
-        this.scoreBoard.paint(screen);
-        this.dayTransition?.paint(screen);
-        return;
-      }
-
-      if (this.infoModalWindow) {
+      } else if (this.infoModalWindow) {
         Overlay.paint(screen);
         this.infoModalWindow.paint(screen);
       } else if (this.modalWindow) {
@@ -118,8 +113,9 @@ export class UiController {
 
       this.dayTransition?.paint(screen);
 
-      // Cursor is always painted on top
-      this.cursorController.paint(screen);
+      if (!this.getMiniGame()) {
+        this.cursorController.paint(screen);
+      }
     });
   }
 
