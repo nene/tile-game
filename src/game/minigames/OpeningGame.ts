@@ -10,6 +10,7 @@ import { MiniGame } from "./MiniGame";
 import { GameEvent } from "../GameEvent";
 import { Noise } from "../utils/Noise";
 import { TextButton } from "../ui/TextButton";
+import { SCREEN_SIZE } from "../ui/screen-size";
 
 enum CaptureStatus {
   miss = 0,
@@ -162,7 +163,7 @@ export class OpeningGame implements MiniGame {
   }
 
   private drawBackground(screen: PixelScreen) {
-    const [width, height] = coordDiv(screen.getSize(), [16, 16]);
+    const [width, height] = coordDiv(SCREEN_SIZE, [16, 16]);
     for (let x = 0; x < width; x++) {
       for (let y = 0; y < height; y++) {
         screen.drawSprite(this.bgSprite, tileToScreenCoord([x, y]));

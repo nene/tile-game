@@ -7,6 +7,7 @@ import { SoundLibrary } from "../sounds/SoundLibrary";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteAnimation } from "../sprites/SpriteAnimation";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
+import { SCREEN_SIZE } from "../ui/screen-size";
 import { Noise } from "../utils/Noise";
 import { MiniGame } from "./MiniGame";
 import { PouringLogic } from "./PouringLogic";
@@ -213,11 +214,11 @@ export class PouringGame implements MiniGame {
   }
 
   private drawBackground(screen: PixelScreen) {
-    this.fillWithTiles(screen, this.sprites.bg, { coord: [0, 0], size: [screen.getSize()[0], 176] });
+    this.fillWithTiles(screen, this.sprites.bg, { coord: [0, 0], size: [SCREEN_SIZE[0], 176] });
   }
 
   private drawTable(screen: PixelScreen) {
-    this.fillWithTiles(screen, this.sprites.table, { coord: [0, 176], size: [screen.getSize()[0], 24] });
+    this.fillWithTiles(screen, this.sprites.table, { coord: [0, 176], size: [SCREEN_SIZE[0], 24] });
   }
 
   private fillWithTiles(screen: PixelScreen, sprite: Sprite, rect: Rect) {
@@ -230,7 +231,7 @@ export class PouringGame implements MiniGame {
   }
 
   private drawBeerOnTable(screen: PixelScreen) {
-    const len = screen.getSize()[0]
+    const len = SCREEN_SIZE[0];
     for (let i = 0; i < len; i += 8) {
       const amount = this.beerOnTable[i];
       if (amount) {

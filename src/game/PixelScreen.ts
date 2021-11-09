@@ -120,10 +120,6 @@ export class PixelScreen implements TextMeasurer {
     return this.offset;
   }
 
-  getSize(): Coord {
-    return this.size;
-  }
-
   getContext(): CanvasRenderingContext2D {
     return this.ctx;
   }
