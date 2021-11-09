@@ -1,4 +1,5 @@
 import { Coord, coordDiv } from "./Coord";
+import { SCREEN_SCALE } from "./ui/screen-size";
 
 type GameMouseEventType = "click" | "rightclick" | "mousemove" | "mousedown" | "mouseup";
 
@@ -22,8 +23,6 @@ export type GameEvent = GameMouseEvent | GameWheelEvent;
 export type GameEventType = GameMouseEventType | "wheel";
 
 export class GameEventFactory {
-  constructor(private scale: number) { }
-
   createEvent(type: GameEventType, rawCoord: Coord, wheelDelta?: Coord): GameEvent {
     if (type === "wheel") {
       if (!wheelDelta) {
@@ -59,6 +58,6 @@ export class GameEventFactory {
   }
 
   private toPixelScale([x, y]: Coord): Coord {
-    return [Math.floor(x / this.scale), Math.floor(y / this.scale)];
+    return [Math.floor(x / SCREEN_SCALE), Math.floor(y / SCREEN_SCALE)];
   }
 }

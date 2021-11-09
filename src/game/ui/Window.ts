@@ -4,6 +4,7 @@ import { PixelScreen } from "../PixelScreen";
 import { drawInset, drawUpset, UI_BG_COLOR, UI_SHADOW_COLOR } from "../ui/ui-utils";
 import { Button } from "./Button";
 import { Component } from "./Component";
+import { SCREEN_SIZE } from "./screen-size";
 
 interface WindowCfg {
   headline: Headline;
@@ -30,7 +31,7 @@ export class Window implements Component {
   constructor({ headline, headlinePadding, coord, size, onClose }: WindowCfg) {
     this.headline = headline;
     this.headlinePadding = headlinePadding ?? 3;
-    this.rect = coord ? { coord, size } : rectCenter({ coord: [0, 0], size }, { coord: [0, 0], size: [320, 200] });
+    this.rect = coord ? { coord, size } : rectCenter({ coord: [0, 0], size }, { coord: [0, 0], size: SCREEN_SIZE });
     if (onClose) {
       this.closeButton = new Button({
         coord: coordAdd(this.rect.coord, [this.rect.size[0] - 10, 2]),

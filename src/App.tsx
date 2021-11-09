@@ -1,11 +1,8 @@
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { GameApi, runGame } from "./game/game";
+import { SCREEN_SCALE, SCREEN_SIZE } from "./game/ui/screen-size";
 import { mouseCoordRelativeTo } from "./mouseCoord";
-
-const WIDTH = 320;
-const HEIGHT = 200;
-const PIXEL_SCALE = 4;
 
 export function App() {
   const canvasEl = useRef<HTMLCanvasElement>(null);
@@ -56,10 +53,7 @@ export function App() {
     };
 
     const game = async () => {
-      gameApi = await runGame(ctx, {
-        size: [WIDTH, HEIGHT],
-        scale: PIXEL_SCALE,
-      });
+      gameApi = await runGame(ctx);
 
       document.addEventListener("keydown", onKeyDown);
       document.addEventListener("keyup", onKeyUp);
@@ -90,8 +84,8 @@ export function App() {
     <AppWrapper>
       <GameCanvas
         id="canvas"
-        width={WIDTH * PIXEL_SCALE}
-        height={HEIGHT * PIXEL_SCALE}
+        width={SCREEN_SIZE[0] * SCREEN_SCALE}
+        height={SCREEN_SIZE[1] * SCREEN_SCALE}
         ref={canvasEl}
       ></GameCanvas>
     </AppWrapper>

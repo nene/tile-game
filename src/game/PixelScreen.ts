@@ -2,12 +2,7 @@ import { Coord, coordAdd, coordConstrain, coordDiv, coordSub, Rect, rectOverlaps
 import { Location } from "./locations/Location";
 import { Sprite } from "./sprites/Sprite";
 import { TextMeasurer } from "./ui/fitText";
-
-export interface PixelScreenOptions {
-  size: Coord;
-  scale: number;
-  offset?: Coord;
-}
+import { SCREEN_SCALE, SCREEN_SIZE } from "./ui/screen-size";
 
 export interface TextStyle {
   color?: string;
@@ -18,18 +13,14 @@ export interface TextStyle {
 
 export class PixelScreen implements TextMeasurer {
   private ctx: CanvasRenderingContext2D;
-  private size: Coord;
-  private scale: number;
-  private offset: Coord;
+  private size: Coord = SCREEN_SIZE;
+  private offset: Coord = [0, 0];
   private bg?: ImageData;
   private fixed = false;
 
-  constructor(ctx: CanvasRenderingContext2D, { size, scale, offset }: PixelScreenOptions) {
+  constructor(ctx: CanvasRenderingContext2D) {
     this.ctx = ctx;
-    this.size = size;
-    this.scale = scale;
-    this.offset = offset ?? [0, 0];
-    this.ctx.scale(scale, scale);
+    this.ctx.scale(SCREEN_SCALE, SCREEN_SCALE);
     this.ctx.imageSmoothingEnabled = false;
     this.ctx.textBaseline = "top";
   }
@@ -107,7 +98,7 @@ export class PixelScreen implements TextMeasurer {
   }
 
   saveBg() {
-    this.bg = this.ctx.getImageData(0, 0, this.size[0] * this.scale, this.size[1] * this.scale);
+    this.bg = this.ctx.getImageData(0, 0, this.size[0] * SCREEN_SCALE, this.size[1] * SCREEN_SCALE);
   }
 
   centerTo(coord: Coord, location: Location) {

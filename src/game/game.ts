@@ -1,4 +1,4 @@
-import { PixelScreen, PixelScreenOptions } from "./PixelScreen";
+import { PixelScreen } from "./PixelScreen";
 import { SpriteLibrary } from "./sprites/SpriteLibrary";
 import { SoundLibrary } from "./sounds/SoundLibrary";
 import { Coord, coordAdd, Rect, rectDistance, rectTranslate } from "./Coord";
@@ -17,8 +17,8 @@ export interface GameApi {
   cleanup: () => void;
 }
 
-export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScreenOptions): Promise<GameApi> {
-  const screen = new PixelScreen(ctx, screenCfg);
+export async function runGame(ctx: CanvasRenderingContext2D): Promise<GameApi> {
+  const screen = new PixelScreen(ctx);
   let screenNeedsRepaint = true;
 
   await SpriteLibrary.load();
@@ -58,7 +58,7 @@ export async function runGame(ctx: CanvasRenderingContext2D, screenCfg: PixelScr
     return Boolean(obj && isObjectsCloseby(player, obj) && obj.isInteractable(ui) && player.isFree());
   }
 
-  const eventFactory = new GameEventFactory(screenCfg.scale);
+  const eventFactory = new GameEventFactory();
 
   return {
     onKeyEvent: (type: "keyup" | "keydown", key: string): boolean => {
