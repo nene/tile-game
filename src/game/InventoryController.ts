@@ -64,6 +64,15 @@ export class InventoryController {
     return this.miniGame;
   }
 
+  resetForNewDay() {
+    this.miniGame = undefined;
+    if (this.selectedItem) {
+      this.attributes.inventory.add(this.selectedItem);
+      this.selectedItem = undefined;
+    }
+    this.hideInventory();
+  }
+
   isObjectInventoryShown(): boolean {
     return Boolean(this.objectInventoryView);
   }

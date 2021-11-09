@@ -33,11 +33,14 @@ export class UiController {
   constructor() {
     this.world = createWorld(1);
     this.calendar = new Calendar({
-      onNextDay: (day) => {
+      onDayEnd: (day) => {
         this.dayTransition = new DayTransition({
           onHalfWay: () => {
+            this.inventoryController.resetForNewDay();
+            this.modalWindow = undefined;
             this.attributes.drunkenness.reset();
-            this.world = createWorld(day);
+            this.world = createWorld(day + 1);
+            this.calendar.setDay(day + 1);
           },
           onFinished: () => {
             this.dayTransition = undefined;
@@ -73,9 +76,9 @@ export class UiController {
   }
 
   tick() {
-    this.inventoryController.tick();
     if (this.isGameWorldActive()) {
       this.world.tick();
+      this.inventoryController.tick();
       this.calendar.tick();
     } else {
       this.dayTransition?.tick();
@@ -90,7 +93,13 @@ export class UiController {
     screen.withFixedCoords(() => {
       if (this.getMiniGame()) {
         this.getMiniGame()?.paint(screen);
+        if (this.infoModalWindow) {
+          Overlay.paint(screen);
+          this.infoModalWindow.paint(screen);
+          this.cursorController.paint(screen);
+        }
         this.scoreBoard.paint(screen);
+        this.dayTransition?.paint(screen);
         return;
       }
 
@@ -114,9 +123,13 @@ export class UiController {
   }
 
   isGameWorldActive(): boolean {
-    // Time stops when inventory or modalWindow is open,
+    // Time always stops when game is excplicitly paused or during day transitions
+    if (this.infoModalWindow || this.dayTransition) {
+      return false;
+    }
+    // Time also stops when inventory or modalWindow is open,
     // but regardless of that, time always runs during mini-game.
-    return Boolean(this.getMiniGame()) || (!this.inventoryController.isObjectInventoryShown() && !this.infoModalWindow && !this.modalWindow && !this.dayTransition);
+    return Boolean(this.getMiniGame()) || (!this.inventoryController.isObjectInventoryShown() && !this.modalWindow);
   }
 
   isGameWorldVisible(): boolean {
