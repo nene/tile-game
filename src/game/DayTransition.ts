@@ -1,10 +1,10 @@
 import { Calendar } from "./Calendar";
-import { Rect, rectCenter } from "./Coord";
+import { rectCenter } from "./Coord";
 import { GameEvent } from "./GameEvent";
 import { PixelScreen } from "./PixelScreen";
 import { Component } from "./ui/Component";
 import { Overlay } from "./ui/Overlay";
-import { SCREEN_SIZE } from "./ui/screen-size";
+import { SCREEN_RECT } from "./ui/screen-size";
 import { drawUpset, UI_BG_COLOR, UI_SHADOW_COLOR } from "./ui/ui-utils";
 
 interface DayTransitionConfig {
@@ -55,9 +55,8 @@ export class DayTransition implements Component {
   }
 
   private drawNewDayMessage(screen: PixelScreen) {
-    const screenRect: Rect = { coord: [0, 0], size: SCREEN_SIZE };
-    const rect = rectCenter({ coord: [0, 0], size: [80, 15] }, screenRect);
-    const textRect = rectCenter({ coord: [0, 0], size: [1, 9] }, screenRect);
+    const rect = rectCenter({ coord: [0, 0], size: [80, 15] }, SCREEN_RECT);
+    const textRect = rectCenter({ coord: [0, 0], size: [1, 9] }, SCREEN_RECT);
     screen.drawRect(rect, UI_BG_COLOR);
     drawUpset(screen, rect);
     screen.drawText(this.calendar.getDayText(), textRect.coord, { shadowColor: UI_SHADOW_COLOR, align: "center" });
