@@ -15,6 +15,7 @@ import { QuestionFactory } from "./questions/QuestionFactory";
 import { GameWorld } from "./GameWorld";
 import { Character } from "./npc/Character";
 import { createWorld } from "./locations/createWorld";
+import { DayTransition } from "./DayTransition";
 
 export class UiController {
   private world: GameWorld;
@@ -27,13 +28,21 @@ export class UiController {
   private questionFacory: QuestionFactory;
   private touchingColorBand = false;
   private attributes = new PlayerAttributes();
+  private dayTransition?: DayTransition;
 
   constructor() {
     this.world = createWorld(1);
     this.calendar = new Calendar({
       onNextDay: (day) => {
-        this.attributes.drunkenness.reset();
-        this.world = createWorld(day);
+        this.dayTransition = new DayTransition({
+          onHalfWay: () => {
+            this.attributes.drunkenness.reset();
+            this.world = createWorld(day);
+          },
+          onFinished: () => {
+            this.dayTransition = undefined;
+          }
+        });
       },
     });
 
@@ -68,6 +77,8 @@ export class UiController {
     if (this.isGameWorldActive()) {
       this.world.tick();
       this.calendar.tick();
+    } else {
+      this.dayTransition?.tick();
     }
   }
 
@@ -95,6 +106,8 @@ export class UiController {
 
       this.scoreBoard.paint(screen);
 
+      this.dayTransition?.paint(screen);
+
       // Cursor is always painted on top
       this.cursorController.paint(screen);
     });
@@ -103,7 +116,7 @@ export class UiController {
   isGameWorldActive(): boolean {
     // Time stops when inventory or modalWindow is open,
     // but regardless of that, time always runs during mini-game.
-    return Boolean(this.getMiniGame()) || (!this.inventoryController.isObjectInventoryShown() && !this.infoModalWindow && !this.modalWindow);
+    return Boolean(this.getMiniGame()) || (!this.inventoryController.isObjectInventoryShown() && !this.infoModalWindow && !this.modalWindow && !this.dayTransition);
   }
 
   isGameWorldVisible(): boolean {
