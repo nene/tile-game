@@ -50,13 +50,18 @@ export class GameWorld {
 
   isInteractable(ui: UiController, worldCoord: Coord): boolean {
     const obj = this.activeLocation.getObjectVisibleOnCoord(worldCoord);
-    return Boolean(obj && isObjectsCloseby(this.player, obj) && obj.isInteractable(ui) && this.player.isFree());
+    return Boolean(
+      obj &&
+      isObjectsCloseby(this.player, obj) &&
+      this.player.isFree() &&
+      obj.isInteractable(ui, ui.getSelectedItem())
+    );
   }
 
   interact(ui: UiController, worldCoord: Coord) {
     const obj = this.activeLocation.getObjectVisibleOnCoord(worldCoord);
     if (obj && isObjectsCloseby(this.player, obj) && this.player.isFree()) {
-      obj.interact(ui);
+      obj.interact(ui, ui.getSelectedItem());
     }
   }
 }

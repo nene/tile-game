@@ -11,6 +11,7 @@ import { GameKeyEvent } from "./GameEvent";
 import { Location } from "./locations/Location";
 import { PlayerMovement } from "./PlayerMovement";
 import { constrain } from "./utils/constrain";
+import { GameItem } from "./items/GameItem";
 
 const MAX_SPEED = 6;
 
@@ -193,13 +194,11 @@ export class Player implements GameObject {
     return !this.itemAtHand;
   }
 
-  isInteractable(ui: UiController) {
-    const glass = ui.getSelectedItem();
+  isInteractable(ui: UiController, glass?: GameItem) {
     return !!glass && isBeerGlass(glass) && glass.getLevel() > DrinkLevel.empty;
   }
 
-  interact(ui: UiController) {
-    const glass = ui.getSelectedItem();
+  interact(ui: UiController, glass?: GameItem) {
     if (glass && isBeerGlass(glass) && glass.getLevel() > DrinkLevel.empty) {
       this.itemAtHand = glass;
       this.animation = new DrinkAnimation({
