@@ -45,10 +45,10 @@ export class ScoreBoard {
     });
   }
 
-  // alco level goes: 0...5
+  // drunkenness level goes: 0...5
   // steps go: 0..4
   private getDrinkLevelForStep(levelStep: number): DrinkLevel {
-    const diff = this.alcoSkill.getLevel() - levelStep;
+    const diff = this.alcoSkill.getDrunkenness() - levelStep;
     if (diff >= 1) {
       return DrinkLevel.full;
     }
