@@ -26,7 +26,7 @@ export class ShopItemRenderer {
     screen.drawSprite(item.getSprite(), iconRect.coord);
     screen.drawText(item.getName(), nameCoord, textStyle);
     if (isBeerBottle(item)) {
-      screen.drawText(item.getDrink().alcohol + "%", coordAdd(nameCoord, [nameLen + 3, 3.5]), { size: "small", color: "#481a12" });
+      screen.drawText((item.getDrink().alcohol * 2.5) + "%", coordAdd(nameCoord, [nameLen + 3, 3.5]), { size: "small", color: "#481a12" });
     }
     screen.drawText(item.getDescription(), coordAdd(iconRect.coord, [18, 9]), { size: "small", color: textStyle.color });
     screen.drawSprite(this.goldSprite, goldCoord);
