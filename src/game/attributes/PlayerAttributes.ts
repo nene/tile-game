@@ -6,12 +6,14 @@ import { Wallet } from "./Wallet";
 import { OrgSkill } from "./OrgSkill";
 import { isBottleOpener } from "../items/BottleOpener";
 import { GameItem } from "../items/GameItem";
+import { OpeningSkill } from "./OpeningSkill";
 
 export class PlayerAttributes {
   public readonly inventory = new StorageInventory({ size: 5, items: [new BeerGlass(getDrink("pilsner"), DrinkLevel.full)] });
   public readonly wallet = new Wallet(25);
   public readonly drunkenness = new Drunkenness();
   public readonly orgSkill = new OrgSkill();
+  public readonly openingSkill = new OpeningSkill();
   private selectedItem?: GameItem;
 
   getSelectedItem(): GameItem | undefined {

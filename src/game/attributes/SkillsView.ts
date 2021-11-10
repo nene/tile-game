@@ -5,10 +5,12 @@ import { Component } from "../ui/Component";
 import { ScoreChart } from "../ui/ScoreChart";
 import { UI_SHADOW_COLOR } from "../ui/ui-utils";
 import { Window } from "../ui/Window";
+import { OpeningSkill } from "./OpeningSkill";
 import { OrgSkill } from "./OrgSkill";
 
 interface SkillsViewConfig {
   orgSkill: OrgSkill,
+  openingSkill: OpeningSkill,
   onClose: () => void;
 }
 
@@ -16,11 +18,13 @@ export class SkillsView implements Component {
   private window: Window;
   private onClose: () => void;
   private orgSkill: OrgSkill;
+  private openingSkill: OpeningSkill;
   private scoreChart: ScoreChart;
 
-  constructor({ orgSkill, onClose }: SkillsViewConfig) {
+  constructor({ orgSkill, openingSkill, onClose }: SkillsViewConfig) {
     this.scoreChart = new ScoreChart();
     this.orgSkill = orgSkill;
+    this.openingSkill = openingSkill;
     this.onClose = onClose;
 
     this.window = new Window({
@@ -37,7 +41,7 @@ export class SkillsView implements Component {
     this.window.paint(screen);
     const { coord } = rectGrow(this.window.contentAreaRect(), [-3, -3]);
 
-    this.drawSkill(screen, "Pudeliavamine", 1, coord);
+    this.drawSkill(screen, "Pudeliavamine", this.openingSkill.getLevel(), coord);
     this.drawSkill(screen, "Õllevalamine", 1, coordAdd(coord, [0, 13]));
     this.drawSkill(screen, "Ak. Orgid", this.orgSkill.getLevel(), coordAdd(coord, [0, 13 * 2]));
     this.drawSkill(screen, "Uusused", 0, coordAdd(coord, [0, 13 * 3]));

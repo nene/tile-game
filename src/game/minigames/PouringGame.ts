@@ -1,3 +1,4 @@
+import { PlayerAttributes } from "../attributes/PlayerAttributes";
 import { Coord, coordAdd, coordDiv, coordMul, coordSub, isCoordInRect, Rect } from "../Coord";
 import { GameEvent } from "../GameEvent";
 import { BeerBottle } from "../items/BeerBottle";
@@ -37,6 +38,7 @@ export class PouringGame implements MiniGame {
   private noise = new Noise();
   private beerOnTable: Record<number, number> = {};
   private handShakeAmount = 0;
+  private attributes?: PlayerAttributes;
 
   constructor(private glass: BeerGlass, private bottle: BeerBottle) {
     this.sprites = {
@@ -52,8 +54,9 @@ export class PouringGame implements MiniGame {
     this.pouring = new PouringLogic(bottle.getDrink().foam);
   }
 
-  setHandShakeAmount(amount: number) {
-    this.handShakeAmount = amount;
+  init(attributes: PlayerAttributes) {
+    this.handShakeAmount = attributes.drunkenness.getHandShakeAmount();
+    this.attributes = attributes;
   }
 
   tick() {

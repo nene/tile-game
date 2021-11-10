@@ -11,6 +11,7 @@ import { GameEvent } from "../GameEvent";
 import { Noise } from "../utils/Noise";
 import { TextButton } from "../ui/TextButton";
 import { SCREEN_SIZE } from "../ui/screen-size";
+import { PlayerAttributes } from "../attributes/PlayerAttributes";
 
 enum CaptureStatus {
   miss = 0,
@@ -39,6 +40,7 @@ export class OpeningGame implements MiniGame {
   private finishAtTick?: number;
   private handShakeAmount = 0;
   private abortButton: TextButton;
+  private attributes?: PlayerAttributes;
 
   constructor(private bottle: BeerBottle, private opener: BottleOpener) {
     this.bgSprite = SpriteLibrary.getSprite("opening-game-bg");
@@ -56,8 +58,9 @@ export class OpeningGame implements MiniGame {
     });
   }
 
-  setHandShakeAmount(amount: number) {
-    this.handShakeAmount = amount;
+  init(attributes: PlayerAttributes) {
+    this.handShakeAmount = attributes.drunkenness.getHandShakeAmount();
+    this.attributes = attributes;
   }
 
   tick() {
@@ -149,6 +152,7 @@ export class OpeningGame implements MiniGame {
     if (this.captureStatus === CaptureStatus.hit && !this.bottle.isOpen()) {
       this.finishAtTick = this.tickCounter + 50; // Wait max 5 seconds before closing the minigame screen
       this.bottle.open();
+      this.attributes?.openingSkill.openBottle();
       SoundLibrary.play("opening-beer");
     }
   }

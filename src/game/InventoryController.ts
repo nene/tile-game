@@ -146,7 +146,7 @@ export class InventoryController {
         this.miniGame = miniGame;
         // Ensure we start minigame with current mouse coordinate
         this.miniGame.handleGameEvent({ type: "mousemove", coord: this.mouseCoord });
-        this.miniGame.setHandShakeAmount(this.attributes.drunkenness.getHandShakeAmount());
+        this.miniGame.init(this.attributes);
       }
     }
   }

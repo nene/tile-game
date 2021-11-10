@@ -67,6 +67,7 @@ export async function runGame(ctx: CanvasRenderingContext2D): Promise<GameApi> {
         } else {
           ui.showInfoModal(new SkillsView({
             orgSkill: ui.getAttributes().orgSkill,
+            openingSkill: ui.getAttributes().openingSkill,
             onClose: () => ui.hideInfoModal(),
           }));
         }
