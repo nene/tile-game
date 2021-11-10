@@ -38,8 +38,8 @@ export class UiController {
           calendar: this.calendar,
           onHalfWay: () => {
             this.inventoryController.resetForNewDay();
+            this.attributes.resetForNewDay();
             this.modalWindow = undefined;
-            this.attributes.drunkenness.reset();
             this.world = createWorld(day + 1);
             this.calendar.setDay(day + 1);
           },
