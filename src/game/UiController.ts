@@ -14,6 +14,7 @@ import { QuestionFactory } from "./questions/QuestionFactory";
 import { GameWorld } from "./GameWorld";
 import { createWorld } from "./locations/createWorld";
 import { DayTransition } from "./DayTransition";
+import { resetCharactersForDay } from "./npc/Character";
 
 export class UiController {
   private world: GameWorld;
@@ -37,6 +38,7 @@ export class UiController {
             this.inventoryController.resetForNewDay();
             this.attributes.resetForNewDay();
             this.modalWindow = undefined;
+            resetCharactersForDay(day + 1);
             this.world = createWorld(day + 1);
             this.calendar.setDay(day + 1);
           },

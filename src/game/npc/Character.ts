@@ -28,12 +28,27 @@ export class Character {
   // How much the NPC likes or dislikes the player
   private opinion = 0; // 0..10
   // 3 times out of 4 the fraater will remember to write himself into the book
-  private willWriteToBook = Math.random() < 3 / 4;
+  private willWriteToBook = this.randomWillWriteToBook();
   private beersConsumed = 0;
   private questionsAsked = 0;
-  private colorBandState = pickRandom([ColorBandState.correct, ColorBandState.twisted, ColorBandState.inverted]);
+  private colorBandState = this.randomColorBandState();
 
   constructor(private def: CharacterDef) {
+  }
+
+  resetForDay(day: number) {
+    this.willWriteToBook = this.randomWillWriteToBook();
+    this.beersConsumed = 0;
+    this.questionsAsked = 0;
+    this.colorBandState = this.randomColorBandState();
+  }
+
+  private randomWillWriteToBook(): boolean {
+    return Math.random() < 3 / 4;
+  }
+
+  private randomColorBandState(): ColorBandState {
+    return pickRandom([ColorBandState.correct, ColorBandState.twisted, ColorBandState.inverted])
   }
 
   getName() {
@@ -151,4 +166,8 @@ export function getCharacter(name: CharacterName): Character {
 
 export function getAllCharacters(): Character[] {
   return Object.values(characters);
+}
+
+export function resetCharactersForDay(n: number) {
+  getAllCharacters().forEach((char) => char.resetForDay(n));
 }
