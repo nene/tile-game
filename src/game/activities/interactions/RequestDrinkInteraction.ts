@@ -7,6 +7,7 @@ import { BeerBottle, isBeerBottle } from "../../items/BeerBottle";
 import { ValidationResult } from "../../questions/Question";
 import { getDrink } from "../../items/Drink";
 import { showPlainTextDialog } from "../../dialogs/showPlainTextDialog";
+import { GameItem } from "../../items/GameItem";
 
 export class RequestDrinkInteraction implements Interaction {
   private receivedBeerGlass?: BeerGlass;
@@ -22,8 +23,7 @@ export class RequestDrinkInteraction implements Interaction {
     return Boolean(this.receivedBeerGlass);
   }
 
-  interact(ui: UiController) {
-    const item = ui.getSelectedItem();
+  interact(ui: UiController, item?: GameItem) {
     if (!item || !(isBeerBottle(item) || isBeerGlass(item))) {
       this.showDialog(ui, "Rebane! Too mulle šoppen õlut.");
       return;

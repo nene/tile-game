@@ -6,12 +6,12 @@ import { UiController } from "../../UiController";
 import { CallFuxActivity } from "../CallFuxActivity";
 import { InteractionResult, PlainInteraction } from "./PlainInteraction";
 import { RequestWaterInteraction } from "../interactions/RequestWaterInteraction";
+import { GameItem } from "../../items/GameItem";
 
 export class ReceiveBookInteraction implements PlainInteraction {
   constructor(private character: Character) { }
 
-  interact(ui: UiController): InteractionResult | undefined {
-    const item = ui.getSelectedItem();
+  interact(ui: UiController, item?: GameItem): InteractionResult | undefined {
     if (!item || !isBook(item)) {
       return undefined;
     }

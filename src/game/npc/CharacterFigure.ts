@@ -9,6 +9,7 @@ import { ActivityManager } from "./ActivityManager";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { Location } from "../locations/Location";
 import { createCharacterActivities } from "./createCharacterActivities";
+import { GameItem } from "../items/GameItem";
 
 export class CharacterFigure implements GameObject {
   private activityManager: ActivityManager;
@@ -65,13 +66,12 @@ export class CharacterFigure implements GameObject {
     return { coord: [-8, -3], size: [16, 5] };
   }
 
-  isInteractable(ui: UiController) {
-    return this.activityManager.currentActivity().isInteractable(ui);
+  isInteractable(ui: UiController, item?: GameItem) {
+    return this.activityManager.currentActivity().isInteractable(ui, item);
   }
 
-  interact(uiController: UiController) {
-    const activity = this.activityManager.currentActivity();
-    activity.interact(uiController);
+  interact(ui: UiController, item?: GameItem) {
+    this.activityManager.currentActivity().interact(ui, item);
   }
 }
 

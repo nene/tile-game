@@ -12,6 +12,7 @@ import { PlainInteraction } from "./plain-interactions/PlainInteraction";
 import { ContinuationActivity } from "./ContinuationActivity";
 import { pickRandom } from "../utils/pickRandom";
 import { ColorBandInteraction } from "./plain-interactions/ColorBandInteraction";
+import { GameItem } from "../items/GameItem";
 
 export class SatisfyDesiresActivity implements Activity {
   private finished = false;
@@ -76,13 +77,13 @@ export class SatisfyDesiresActivity implements Activity {
     return true;
   }
 
-  interact(ui: UiController) {
+  interact(ui: UiController, item?: GameItem) {
     if (!this.activity) {
       return;
     }
 
     for (const interaction of this.alwaysAvailableInteractions) {
-      const result = interaction.interact(ui);
+      const result = interaction.interact(ui, item);
       if (result) {
         if (result.type === "activity") {
           this.activity = new ContinuationActivity(result.activity, this.activity);
@@ -91,7 +92,7 @@ export class SatisfyDesiresActivity implements Activity {
       }
     }
 
-    this.activity.interact(ui);
+    this.activity.interact(ui, item);
   }
 
   nextActivity() {

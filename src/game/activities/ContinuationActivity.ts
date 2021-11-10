@@ -1,4 +1,5 @@
 import { GameWorld } from "../GameWorld";
+import { GameItem } from "../items/GameItem";
 import { Location } from "../locations/Location";
 import { CharacterFigure } from "../npc/CharacterFigure";
 import { UiController } from "../UiController";
@@ -16,12 +17,12 @@ export class ContinuationActivity implements Activity {
     return this.current.isFinished();
   }
 
-  isInteractable(ui: UiController) {
-    return this.current.isInteractable(ui);
+  isInteractable(ui: UiController, item?: GameItem) {
+    return this.current.isInteractable(ui, item);
   }
 
-  interact(ui: UiController) {
-    return this.current.interact(ui);
+  interact(ui: UiController, item?: GameItem) {
+    return this.current.interact(ui, item);
   }
 
   nextActivity() {
