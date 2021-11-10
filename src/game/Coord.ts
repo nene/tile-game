@@ -88,7 +88,35 @@ export function rectDistance({ coord: a1, size: aSize }: Rect, { coord: b1, size
 }
 
 export function rectCenter(rect: Rect, container: Rect): Rect {
-  const offset = coordFloor(coordDiv(coordSub(container.size, rect.size), [2, 2]));
+  return rectAlign(rect, container, "center");
+}
+
+export type Alignment = "top" | "right" | "bottom" | "left" | "top-left" | "top-right" | "bottom-left" | "bottom-right" | "center";
+
+export function rectAlign(rect: Rect, container: Rect, align: Alignment): Rect {
+  switch (align) {
+    case "top": return doRectAlign(rect, container, center, start);
+    case "left": return doRectAlign(rect, container, start, center);
+    case "bottom": return doRectAlign(rect, container, center, end);
+    case "right": return doRectAlign(rect, container, end, center);
+    case "top-left": return doRectAlign(rect, container, start, start);
+    case "top-right": return doRectAlign(rect, container, end, start);
+    case "bottom-left": return doRectAlign(rect, container, start, end);
+    case "bottom-right": return doRectAlign(rect, container, end, end);
+    case "center": return doRectAlign(rect, container, center, center);
+  }
+}
+
+type AlignFn = (len: number, containerLen: number) => number;
+const center: AlignFn = (len, containerLen) => Math.floor((containerLen - len) / 2);
+const start: AlignFn = () => 0;
+const end: AlignFn = (len, containerLen) => containerLen - len;
+
+function doRectAlign(rect: Rect, container: Rect, xAlign: AlignFn, yAlign: AlignFn): Rect {
+  const [rWidth, rHeight] = rect.size;
+  const [cWidth, cHeight] = container.size;
+
+  const offset: Coord = [xAlign(rWidth, cWidth), yAlign(rHeight, cHeight)];
   return { coord: coordAdd(container.coord, offset), size: rect.size };
 }
 

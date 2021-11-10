@@ -1,4 +1,4 @@
-import { coordConstrain, rectCenter, rectOverlaps } from "./Coord";
+import { coordConstrain, Rect, rectAlign, rectCenter, rectOverlaps } from "./Coord";
 
 describe("coordConstrain()", () => {
   it("does nothing when coord inside the rectangle", () => {
@@ -69,5 +69,46 @@ describe("rectCenter()", () => {
       coord: [20, 25],
       size: [64, 64]
     });
+  });
+});
+
+describe("rectAlign()", () => {
+  const container: Rect = { coord: [20, 30], size: [100, 120] };
+  const rect: Rect = { coord: [0, 0], size: [10, 16] };
+
+  it("top - aligns rectangle to top-center", () => {
+    expect(rectAlign(rect, container, "top")).toEqual({ coord: [65, 30], size: [10, 16] });
+  });
+
+  it("left - aligns rectangle to left-center", () => {
+    expect(rectAlign(rect, container, "left")).toEqual({ coord: [20, 82], size: [10, 16] });
+  });
+
+  it("bottom - aligns rectangle to bottom-center", () => {
+    expect(rectAlign(rect, container, "bottom")).toEqual({ coord: [65, 134], size: [10, 16] });
+  });
+
+  it("right - aligns rectangle to right-center", () => {
+    expect(rectAlign(rect, container, "right")).toEqual({ coord: [110, 82], size: [10, 16] });
+  });
+
+  it("top-left - simply places the rect at container coordinate", () => {
+    expect(rectAlign(rect, container, "top-left")).toEqual({ coord: [20, 30], size: [10, 16] });
+  });
+
+  it("top-right - aligns top top-right corner", () => {
+    expect(rectAlign(rect, container, "top-right")).toEqual({ coord: [110, 30], size: [10, 16] });
+  });
+
+  it("bottom-left - aligns top bottom-left corner", () => {
+    expect(rectAlign(rect, container, "bottom-left")).toEqual({ coord: [20, 134], size: [10, 16] });
+  });
+
+  it("bottom-right - aligns top bottom-right corner", () => {
+    expect(rectAlign(rect, container, "bottom-right")).toEqual({ coord: [110, 134], size: [10, 16] });
+  });
+
+  it("center - behaves just like rectCenter()", () => {
+    expect(rectAlign(rect, container, "center")).toEqual({ coord: [65, 82], size: [10, 16] });
   });
 });
