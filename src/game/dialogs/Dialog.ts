@@ -1,5 +1,6 @@
 import { coordAdd, isCoordInRect, Rect, rectGrow } from "../Coord";
 import { GameEvent } from "../GameEvent";
+import { ColorBandTouch } from "../items/ColorBandTouch";
 import { Character } from "../npc/Character";
 import { PixelScreen } from "../PixelScreen";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
@@ -82,7 +83,7 @@ export class Dialog implements Component {
 
     if (event.type === "click") {
       if (isCoordInRect(event.coord, this.iconRect)) {
-        this.ui.touchColorBand(this.character);
+        this.touchColorBand();
       }
       if (!isCoordInRect(event.coord, this.getRect())) {
         this.onClose && this.onClose();
@@ -91,5 +92,9 @@ export class Dialog implements Component {
     }
 
     return undefined;
+  }
+
+  private touchColorBand() {
+    this.ui.getWorld().getActiveLocation().findCharacterFigure(this.character)?.interact(this.ui, new ColorBandTouch());
   }
 }

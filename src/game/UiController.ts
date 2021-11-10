@@ -12,10 +12,8 @@ import { Calendar } from "./Calendar";
 import { Component } from "./ui/Component";
 import { QuestionFactory } from "./questions/QuestionFactory";
 import { GameWorld } from "./GameWorld";
-import { Character } from "./npc/Character";
 import { createWorld } from "./locations/createWorld";
 import { DayTransition } from "./DayTransition";
-import { ColorBandTouch } from "./items/ColorBandTouch";
 
 export class UiController {
   private world: GameWorld;
@@ -177,9 +175,5 @@ export class UiController {
 
   getWorld() {
     return this.world;
-  }
-
-  touchColorBand(character: Character) {
-    this.world.getActiveLocation().findCharacterFigure(character)?.interact(this, new ColorBandTouch());
   }
 }
