@@ -5,16 +5,34 @@ import { getDrink } from "../items/Drink";
 import { Wallet } from "./Wallet";
 import { OrgSkill } from "./OrgSkill";
 import { isBottleOpener } from "../items/BottleOpener";
+import { GameItem } from "../items/GameItem";
 
 export class PlayerAttributes {
   public readonly inventory = new StorageInventory({ size: 5, items: [new BeerGlass(getDrink("pilsner"), DrinkLevel.full)] });
   public readonly wallet = new Wallet(25);
   public readonly drunkenness = new Drunkenness();
   public readonly orgSkill = new OrgSkill();
+  private selectedItem?: GameItem;
+
+  getSelectedItem(): GameItem | undefined {
+    return this.selectedItem;
+  }
+
+  setSelectedItem(item: GameItem | undefined) {
+    this.selectedItem = item;
+  }
 
   resetForNewDay() {
+    this.resetSelectedItem();
     this.resetInventory();
     this.drunkenness.reset();
+  }
+
+  private resetSelectedItem() {
+    if (this.selectedItem) {
+      this.inventory.add(this.selectedItem);
+      this.selectedItem = undefined;
+    }
   }
 
   private resetInventory() {

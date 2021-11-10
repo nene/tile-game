@@ -57,11 +57,11 @@ export class UiController {
   }
 
   getSelectedItem(): GameItem | undefined {
-    return this.inventoryController.getSelectedItem();
+    return this.attributes.getSelectedItem();
   }
 
   setSelectedItem(item: GameItem | undefined) {
-    this.inventoryController.setSelectedItem(item);
+    this.attributes.setSelectedItem(item);
   }
 
   showInventory(view: InventoryView) {

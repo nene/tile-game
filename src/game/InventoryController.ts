@@ -15,7 +15,6 @@ export class InventoryController {
   private playerInventoryView: InventoryView;
   private objectInventoryView?: InventoryView;
   private mouseCoord: Coord = [-16, -16];
-  private selectedItem?: GameItem;
   private miniGame?: MiniGame;
   private tooltip = new Tooltip();
 
@@ -35,14 +34,6 @@ export class InventoryController {
     this.playerInventoryView.onItemHover((coord, item) => {
       this.handleItemHover(coord, item);
     });
-  }
-
-  getSelectedItem(): GameItem | undefined {
-    return this.selectedItem;
-  }
-
-  setSelectedItem(item: GameItem | undefined) {
-    this.selectedItem = item;
   }
 
   showInventory(view: InventoryView) {
@@ -68,10 +59,6 @@ export class InventoryController {
 
   resetForNewDay() {
     this.miniGame = undefined;
-    if (this.selectedItem) {
-      this.attributes.inventory.add(this.selectedItem);
-      this.selectedItem = undefined;
-    }
     this.hideInventory();
   }
 
@@ -94,8 +81,9 @@ export class InventoryController {
 
     this.playerInventoryView.paint(screen);
 
-    if (this.selectedItem) {
-      screen.drawSprite(this.selectedItem.getSprite(), coordSub(this.mouseCoord, [8, 8]));
+    const selectedItem = this.attributes.getSelectedItem();
+    if (selectedItem) {
+      screen.drawSprite(selectedItem.getSprite(), coordSub(this.mouseCoord, [8, 8]));
     }
     this.tooltip.paint(screen);
   }
@@ -136,22 +124,23 @@ export class InventoryController {
 
   private handleSlotClick(inventory: Inventory, slotIndex: number, item?: GameItem) {
     this.tooltip.hide();
+    const selectedItem = this.attributes.getSelectedItem();
 
-    if (item && !this.selectedItem) {
+    if (item && !selectedItem) {
       if (inventory.isTakeable() && (inventory === this.attributes.inventory || !this.attributes.inventory.isFull())) {
         // Take item from inventory
         // (only take from non-player-inventory when player-inventory has some room)
-        this.selectedItem = inventory.takeAt(slotIndex, this.attributes.wallet);
+        this.attributes.setSelectedItem(inventory.takeAt(slotIndex, this.attributes.wallet));
       }
     }
-    else if (!item && this.selectedItem && inventory.isWritable() && inventory.isAcceptingItem(this.selectedItem)) {
+    else if (!item && selectedItem && inventory.isWritable() && inventory.isAcceptingItem(selectedItem)) {
       // Place item at hand to inventory
-      inventory.placeAt(slotIndex, this.selectedItem);
-      this.selectedItem = undefined;
+      inventory.placeAt(slotIndex, selectedItem);
+      this.attributes.setSelectedItem(undefined);
     }
-    else if (item && this.selectedItem && inventory.isCombinable()) {
+    else if (item && selectedItem && inventory.isCombinable()) {
       // Combine these items if possible
-      const miniGame = item.combine(this.selectedItem);
+      const miniGame = item.combine(selectedItem);
       if (miniGame) {
         // A minigame is used for combining
         this.miniGame = miniGame;
@@ -169,7 +158,7 @@ export class InventoryController {
     // - we have item selected or
     // - when we clicked empty slot or
     // - object inventory is not open
-    if (this.selectedItem || !item || !this.objectInventoryView) {
+    if (this.attributes.getSelectedItem() || !item || !this.objectInventoryView) {
       return;
     }
     const objInventory = this.objectInventoryView.getInventory();
