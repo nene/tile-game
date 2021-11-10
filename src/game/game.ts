@@ -43,6 +43,10 @@ export async function runGame(ctx: CanvasRenderingContext2D): Promise<GameApi> {
     screenNeedsRepaint = false;
   });
 
+  function toWorldCoord(screenCoord: Coord): Coord {
+    return coordAdd(screenCoord, screen.getOffset());
+  }
+
   function handleWorldClick(worldCoord: Coord) {
     const obj = ui.getWorld().getActiveLocation().getObjectVisibleOnCoord(worldCoord);
     const player = ui.getWorld().getPlayer();
@@ -51,8 +55,7 @@ export async function runGame(ctx: CanvasRenderingContext2D): Promise<GameApi> {
     }
   }
 
-  function canInteractWithWorld(): boolean {
-    const worldCoord = coordAdd(ui.getMouseCoord(), screen.getOffset());
+  function canInteractWithWorld(worldCoord: Coord): boolean {
     const obj = ui.getWorld().getActiveLocation().getObjectVisibleOnCoord(worldCoord);
     const player = ui.getWorld().getPlayer();
     return Boolean(obj && isObjectsCloseby(player, obj) && obj.isInteractable(ui) && player.isFree());
@@ -85,7 +88,7 @@ export async function runGame(ctx: CanvasRenderingContext2D): Promise<GameApi> {
       }
       if (ui.isGameWorldActive() && ui.isGameWorldVisible()) {
         const result = ui.getWorld().getPlayer().handleKeyEvent(event);
-        ui.highlightCursor(canInteractWithWorld());
+        ui.highlightCursor(canInteractWithWorld(toWorldCoord(ui.getMouseCoord())));
         screenNeedsRepaint = true;
         return result;
       }
@@ -97,7 +100,7 @@ export async function runGame(ctx: CanvasRenderingContext2D): Promise<GameApi> {
       if (type === "click") {
         if (!ui.handleGameEvent(event)) {
           // When the click was not handled by UI
-          handleWorldClick(coordAdd(event.coord, screen.getOffset()));
+          handleWorldClick(toWorldCoord(event.coord));
         }
       }
       else if (type === "mousemove") {
@@ -105,7 +108,7 @@ export async function runGame(ctx: CanvasRenderingContext2D): Promise<GameApi> {
           return;
         }
         if (ui.isGameWorldActive() && ui.isGameWorldVisible()) {
-          ui.highlightCursor(canInteractWithWorld());
+          ui.highlightCursor(canInteractWithWorld(toWorldCoord(event.coord)));
         } else {
           ui.highlightCursor(false);
         }
