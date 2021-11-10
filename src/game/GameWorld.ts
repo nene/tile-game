@@ -54,14 +54,14 @@ export class GameWorld {
       obj &&
       isObjectsCloseby(this.player, obj) &&
       this.player.isFree() &&
-      obj.isInteractable(ui, ui.getSelectedItem())
+      obj.isInteractable(ui, ui.getAttributes().getSelectedItem())
     );
   }
 
   interact(ui: UiController, worldCoord: Coord) {
     const obj = this.activeLocation.getObjectVisibleOnCoord(worldCoord);
     if (obj && isObjectsCloseby(this.player, obj) && this.player.isFree()) {
-      obj.interact(ui, ui.getSelectedItem());
+      obj.interact(ui, ui.getAttributes().getSelectedItem());
     }
   }
 }

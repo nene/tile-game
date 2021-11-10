@@ -215,7 +215,7 @@ export class Player implements GameObject {
           this.itemAtHand = undefined;
         }
       });
-      ui.setSelectedItem(undefined);
+      ui.getAttributes().setSelectedItem(undefined);
     }
   }
 }

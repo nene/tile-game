@@ -1,5 +1,4 @@
 import { PixelScreen } from "./PixelScreen";
-import { GameItem } from "./items/GameItem";
 import { InventoryController } from "./InventoryController";
 import { Overlay } from "./ui/Overlay";
 import { CursorController } from "./CursorController";
@@ -54,14 +53,6 @@ export class UiController {
     this.cursorController = new CursorController();
     this.scoreBoard = new ScoreBoard(this.attributes.wallet, this.attributes.drunkenness, this.calendar);
     this.questionFacory = new QuestionFactory(this.attributes.orgSkill);
-  }
-
-  getSelectedItem(): GameItem | undefined {
-    return this.attributes.getSelectedItem();
-  }
-
-  setSelectedItem(item: GameItem | undefined) {
-    this.attributes.setSelectedItem(item);
   }
 
   showInventory(view: InventoryView) {
