@@ -41,6 +41,7 @@ export class SkillsView implements Component {
     this.drawSkill(screen, "Õllevalamine", this.attributes.pouringSkill.getLevel(), coordAdd(coord, [0, 13]));
     this.drawSkill(screen, "Ak. Orgid", this.attributes.orgSkill.getLevel(), coordAdd(coord, [0, 13 * 2]));
     this.drawSkill(screen, "Uusused", 0, coordAdd(coord, [0, 13 * 3]));
+    this.drawSkill(screen, "Õlletaluvus", this.attributes.alcoSkill.getLevel(), coordAdd(coord, [0, 13 * 4]));
   }
 
   private drawSkill(screen: PixelScreen, title: string, level: number, offset: Coord) {
