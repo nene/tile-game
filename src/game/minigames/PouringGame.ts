@@ -55,7 +55,7 @@ export class PouringGame implements MiniGame {
   }
 
   init(attributes: PlayerAttributes) {
-    this.handShakeAmount = attributes.drunkenness.getHandShakeAmount();
+    this.handShakeAmount = attributes.alcoSkill.getHandShakeAmount();
     this.attributes = attributes;
   }
 

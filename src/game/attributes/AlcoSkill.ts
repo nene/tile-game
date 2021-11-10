@@ -3,7 +3,7 @@ import { constrain } from "../utils/constrain";
 
 const levelMinMax = { min: 0, max: 5 };
 
-export class Drunkenness {
+export class AlcoSkill {
   private level = 0; // 0 .. 5
 
   // Consumes 1/4 of a glass (one level step from beer glass)

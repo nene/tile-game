@@ -1,4 +1,4 @@
-import { Drunkenness } from "./Drunkenness";
+import { AlcoSkill } from "./AlcoSkill";
 import { StorageInventory } from "../inventory/StorageInventory";
 import { BeerGlass, DrinkLevel } from "../items/BeerGlass";
 import { getDrink } from "../items/Drink";
@@ -12,7 +12,7 @@ import { PouringSkill } from "./PouringSkill";
 export class PlayerAttributes {
   public readonly inventory = new StorageInventory({ size: 5, items: [new BeerGlass(getDrink("pilsner"), DrinkLevel.full)] });
   public readonly wallet = new Wallet(25);
-  public readonly drunkenness = new Drunkenness();
+  public readonly alcoSkill = new AlcoSkill();
   public readonly orgSkill = new OrgSkill();
   public readonly openingSkill = new OpeningSkill();
   public readonly pouringSkill = new PouringSkill();
@@ -29,7 +29,7 @@ export class PlayerAttributes {
   resetForNewDay() {
     this.resetSelectedItem();
     this.resetInventory();
-    this.drunkenness.reset();
+    this.alcoSkill.reset();
   }
 
   private resetSelectedItem() {

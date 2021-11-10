@@ -207,7 +207,7 @@ export class Player implements GameObject {
         drinkTicks: 10,
         idleTicks: 10,
         onSip: (drink) => {
-          ui.getAttributes().drunkenness.sip(drink);
+          ui.getAttributes().alcoSkill.sip(drink);
         },
         onFinish: () => {
           this.animation = this.standAnimations.down;
