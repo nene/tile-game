@@ -74,6 +74,7 @@ export class PouringGame implements MiniGame {
     if (this.isFinished()) {
       this.bottle.empty();
       this.glass.fill(this.bottle.getDrink(), this.getBeerLevel());
+      this.attributes?.pouringSkill.pourDrink();
     }
   }
 

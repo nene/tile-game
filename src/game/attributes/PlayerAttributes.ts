@@ -7,6 +7,7 @@ import { OrgSkill } from "./OrgSkill";
 import { isBottleOpener } from "../items/BottleOpener";
 import { GameItem } from "../items/GameItem";
 import { OpeningSkill } from "./OpeningSkill";
+import { PouringSkill } from "./PouringSkill";
 
 export class PlayerAttributes {
   public readonly inventory = new StorageInventory({ size: 5, items: [new BeerGlass(getDrink("pilsner"), DrinkLevel.full)] });
@@ -14,6 +15,7 @@ export class PlayerAttributes {
   public readonly drunkenness = new Drunkenness();
   public readonly orgSkill = new OrgSkill();
   public readonly openingSkill = new OpeningSkill();
+  public readonly pouringSkill = new PouringSkill();
   private selectedItem?: GameItem;
 
   getSelectedItem(): GameItem | undefined {
