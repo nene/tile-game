@@ -34,8 +34,8 @@ export class Dialog implements Component {
         description: " ",
       },
       headlinePadding: 20,
-      coord: [60, 91],
       size: [200, 109],
+      align: "bottom",
       onClose: onClose
     });
     this.content = createContent(rectGrow(this.window.contentAreaRect(), [-2, -2]));

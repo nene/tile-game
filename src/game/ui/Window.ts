@@ -1,4 +1,4 @@
-import { Coord, coordAdd, coordSub, Rect, rectCenter, rectGrow } from "../Coord";
+import { Alignment, Coord, coordAdd, coordSub, Rect, rectAlign, rectGrow } from "../Coord";
 import { GameEvent } from "../GameEvent";
 import { PixelScreen } from "../PixelScreen";
 import { drawInset, drawUpset, UI_BG_COLOR, UI_SHADOW_COLOR } from "../ui/ui-utils";
@@ -9,7 +9,7 @@ import { SCREEN_RECT } from "./screen-size";
 interface WindowCfg {
   headline: Headline;
   headlinePadding?: number;
-  coord?: Coord;
+  align?: Alignment;
   size: Coord;
   onClose?: () => void;
 }
@@ -28,10 +28,10 @@ export class Window implements Component {
   private rect: Rect;
   private closeButton?: Button;
 
-  constructor({ headline, headlinePadding, coord, size, onClose }: WindowCfg) {
+  constructor({ headline, headlinePadding, align, size, onClose }: WindowCfg) {
     this.headline = headline;
     this.headlinePadding = headlinePadding ?? 3;
-    this.rect = coord ? { coord, size } : rectCenter({ coord: [0, 0], size }, SCREEN_RECT);
+    this.rect = rectAlign({ coord: [0, 0], size }, SCREEN_RECT, align || "center");
     if (onClose) {
       this.closeButton = new Button({
         coord: coordAdd(this.rect.coord, [this.rect.size[0] - 10, 2]),
