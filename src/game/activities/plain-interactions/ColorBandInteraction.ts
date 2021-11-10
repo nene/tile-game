@@ -5,12 +5,14 @@ import { UiController } from "../../UiController";
 import { CallFuxActivity } from "../CallFuxActivity";
 import { InteractionResult, PlainInteraction } from "./PlainInteraction";
 import { RequestWaterInteraction } from "../interactions/RequestWaterInteraction";
+import { GameItem } from "../../items/GameItem";
+import { isColorBandTouch } from "../../items/ColorBandTouch";
 
 export class ColorBandInteraction implements PlainInteraction {
   constructor(private character: Character) { }
 
-  interact(ui: UiController): InteractionResult | undefined {
-    if (!ui.isTouchingColorBand()) {
+  interact(ui: UiController, item?: GameItem): InteractionResult | undefined {
+    if (!item || !isColorBandTouch(item)) {
       return undefined;
     }
 

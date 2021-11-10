@@ -16,6 +16,7 @@ import { GameWorld } from "./GameWorld";
 import { Character } from "./npc/Character";
 import { createWorld } from "./locations/createWorld";
 import { DayTransition } from "./DayTransition";
+import { ColorBandTouch } from "./items/ColorBandTouch";
 
 export class UiController {
   private world: GameWorld;
@@ -26,7 +27,6 @@ export class UiController {
   private scoreBoard: ScoreBoard;
   private calendar: Calendar;
   private questionFacory: QuestionFactory;
-  private touchingColorBand = false;
   private attributes = new PlayerAttributes();
   private dayTransition?: DayTransition;
 
@@ -189,12 +189,6 @@ export class UiController {
   }
 
   touchColorBand(character: Character) {
-    this.touchingColorBand = true;
-    this.world.getActiveLocation().findCharacterFigure(character)?.interact(this);
-    this.touchingColorBand = false;
-  }
-
-  isTouchingColorBand() {
-    return this.touchingColorBand;
+    this.world.getActiveLocation().findCharacterFigure(character)?.interact(this, new ColorBandTouch());
   }
 }
