@@ -62,7 +62,7 @@ export class Fridge implements GameObject {
     return true;
   }
 
-  onInteract(ui: UiController) {
+  interact(ui: UiController) {
     SoundLibrary.play('opening-fridge-door');
     ui.showInventory(new ShopView({
       shop: this.shop,

@@ -56,7 +56,7 @@ export class GameWorld {
   interact(ui: UiController, worldCoord: Coord) {
     const obj = this.activeLocation.getObjectVisibleOnCoord(worldCoord);
     if (obj && isObjectsCloseby(this.player, obj) && this.player.isFree()) {
-      obj.onInteract(ui);
+      obj.interact(ui);
     }
   }
 }

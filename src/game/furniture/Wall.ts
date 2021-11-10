@@ -40,5 +40,5 @@ export class Wall implements GameObject {
     return false;
   }
 
-  onInteract() { }
+  interact() { }
 }

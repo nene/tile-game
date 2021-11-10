@@ -59,7 +59,7 @@ export class BeerCabinet implements GameObject {
     return true;
   }
 
-  onInteract(ui: UiController) {
+  interact(ui: UiController) {
     SoundLibrary.play('opening-cabinet-door');
     ui.showInventory(new StorageInventoryView({
       inventory: this.inventory,

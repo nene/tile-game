@@ -51,7 +51,7 @@ export class BeerBox implements GameObject {
     return true;
   }
 
-  onInteract(ui: UiController) {
+  interact(ui: UiController) {
     SoundLibrary.play("glass-bottles");
     this.inventory.clear();
     ui.showInventory(new StorageInventoryView({

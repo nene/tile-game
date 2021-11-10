@@ -42,5 +42,5 @@ export class Fence implements GameObject {
     return false;
   }
 
-  onInteract() { }
+  interact() { }
 }

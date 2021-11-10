@@ -58,7 +58,7 @@ export class Door implements GameObject {
     return true;
   }
 
-  onInteract(ui: UiController) {
+  interact(ui: UiController) {
     const world = ui.getWorld();
     const newLocation = world.getLocation(this.target.location);
     const door = newLocation.allObjects().find(isDoor);

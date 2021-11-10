@@ -41,5 +41,5 @@ export class Sofa implements GameObject {
     return false;
   }
 
-  onInteract() { }
+  interact() { }
 }

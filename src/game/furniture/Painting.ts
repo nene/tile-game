@@ -41,5 +41,5 @@ export class Painting implements GameObject {
     return false;
   }
 
-  onInteract() { }
+  interact() { }
 }

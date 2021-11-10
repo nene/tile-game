@@ -48,5 +48,5 @@ export class SpawnPoint implements GameObject {
     return false;
   }
 
-  onInteract() { }
+  interact() { }
 }

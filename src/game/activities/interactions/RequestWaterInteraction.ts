@@ -35,7 +35,7 @@ export class RequestWaterInteraction implements Interaction {
     }
 
     this.showDialog(ui, "Võta laituseks sisse!", () => {
-      ui.getWorld().getPlayer().onInteract(ui);
+      ui.getWorld().getPlayer().interact(ui);
       this.finished = true;
     });
   }

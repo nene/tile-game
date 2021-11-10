@@ -46,5 +46,5 @@ export class Fireplace implements GameObject {
     return false;
   }
 
-  onInteract() { }
+  interact() { }
 }

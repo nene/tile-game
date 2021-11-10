@@ -75,7 +75,7 @@ export class Table implements GameObject {
     return true;
   }
 
-  onInteract(ui: UiController) {
+  interact(ui: UiController) {
     ui.showInventory(new StorageInventoryView({
       inventory: this.inventory,
       windowSize: [112, 66],

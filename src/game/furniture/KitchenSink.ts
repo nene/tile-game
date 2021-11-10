@@ -50,7 +50,7 @@ export class KitchenSink implements GameObject {
     return true;
   }
 
-  onInteract(ui: UiController) {
+  interact(ui: UiController) {
     ui.showInventory(new StorageInventoryView({
       inventory: this.inventory,
       windowSize: [140, 87],

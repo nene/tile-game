@@ -198,7 +198,7 @@ export class Player implements GameObject {
     return !!glass && isBeerGlass(glass) && glass.getLevel() > DrinkLevel.empty;
   }
 
-  onInteract(ui: UiController) {
+  interact(ui: UiController) {
     const glass = ui.getSelectedItem();
     if (glass && isBeerGlass(glass) && glass.getLevel() > DrinkLevel.empty) {
       this.itemAtHand = glass;

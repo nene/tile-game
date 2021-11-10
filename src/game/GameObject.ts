@@ -12,6 +12,6 @@ export interface GameObject {
   isSolid: () => boolean;
   hitBox: () => Rect;
   boundingBox: () => Rect;
-  onInteract: (ui: UiController) => void;
+  interact: (ui: UiController) => void;
   isInteractable: (ui: UiController) => boolean;
 }
