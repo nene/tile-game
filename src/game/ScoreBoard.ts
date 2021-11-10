@@ -1,5 +1,5 @@
 import { times } from "lodash";
-import { Coord, coordAdd } from "./Coord";
+import { Coord, coordAdd, rectAlign } from "./Coord";
 import { Drunkenness } from "./attributes/Drunkenness";
 import { DrinkColor } from "./items/Drink";
 import { DrinkLevel } from "./items/BeerGlass";
@@ -9,14 +9,17 @@ import { SpriteLibrary } from "./sprites/SpriteLibrary";
 import { SpriteSheet } from "./sprites/SpriteSheet";
 import { Wallet } from "./attributes/Wallet";
 import { Calendar } from "./Calendar";
+import { SCREEN_RECT } from "./ui/screen-size";
 
 export class ScoreBoard {
   private bg: Sprite;
   private beerGlass: SpriteSheet;
+  private coord: Coord;
 
-  constructor(private coord: Coord, private wallet: Wallet, private drunkenness: Drunkenness, private calendar: Calendar) {
+  constructor(private wallet: Wallet, private drunkenness: Drunkenness, private calendar: Calendar) {
     this.bg = SpriteLibrary.getSprite("scoreboard");
     this.beerGlass = SpriteLibrary.get("beer-glass-sm");
+    this.coord = rectAlign({ coord: [0, 0], size: this.bg.size }, SCREEN_RECT, "top-right").coord;
   }
 
   paint(screen: PixelScreen) {

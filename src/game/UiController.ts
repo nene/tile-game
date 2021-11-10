@@ -52,7 +52,7 @@ export class UiController {
 
     this.inventoryController = new InventoryController(this.attributes);
     this.cursorController = new CursorController();
-    this.scoreBoard = new ScoreBoard([269, 0], this.attributes.wallet, this.attributes.drunkenness, this.calendar);
+    this.scoreBoard = new ScoreBoard(this.attributes.wallet, this.attributes.drunkenness, this.calendar);
     this.questionFacory = new QuestionFactory(this.attributes.orgSkill);
   }
 
