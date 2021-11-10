@@ -1,4 +1,4 @@
-import { Coord, coordAdd, coordMul, isCoordInRect, Rect, rectCenter } from "../Coord";
+import { Coord, isCoordInRect } from "../Coord";
 import { PixelScreen } from "../PixelScreen";
 import { Inventory } from "./Inventory";
 import { InventoryView, ItemHoverHandler, SlotClickHandler } from "./InventoryView";
@@ -21,11 +21,12 @@ export class StorageInventoryView implements InventoryView {
 
   constructor({ inventory, windowSize, gridSize, headline, onClose }: StorageInventoryViewCfg) {
     this.window = new Window({ headline, size: windowSize, onClose });
-    this.grid = new GridInventoryView({ inventory, coord: this.gridRect(gridSize, this.window.contentAreaRect()).coord, size: gridSize });
-  }
-
-  private gridRect(gridSize: Coord, container: Rect): Rect {
-    return rectCenter({ coord: [0, 0], size: coordAdd(coordMul([21, 21], gridSize), [1, 1]) }, container);
+    this.grid = new GridInventoryView({
+      inventory,
+      size: gridSize,
+      container: this.window.contentAreaRect(),
+      align: "center",
+    });
   }
 
   onSlotClick(cb: SlotClickHandler) {

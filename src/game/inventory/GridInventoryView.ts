@@ -1,4 +1,4 @@
-import { Coord, coordAdd, coordMul, isCoordInRect, Rect } from "../Coord";
+import { Alignment, Coord, coordAdd, coordMul, isCoordInRect, Rect, rectAlign } from "../Coord";
 import { Inventory } from "./Inventory";
 import { InventoryView, ItemHoverHandler, SlotClickHandler } from "./InventoryView";
 import { PixelScreen } from "../PixelScreen";
@@ -10,7 +10,8 @@ import { GameEvent } from "../GameEvent";
 interface GridInventoryViewCfg {
   inventory: Inventory;
   size: Coord;
-  coord: Coord;
+  container: Rect;
+  align: Alignment;
 }
 
 export class GridInventoryView implements InventoryView {
@@ -18,17 +19,15 @@ export class GridInventoryView implements InventoryView {
   private rect: Rect;
   private inventory: Inventory;
   private size: Coord;
-  private coord: Coord;
   private handleSlotClick?: SlotClickHandler;
   private handleSlotRightClick?: SlotClickHandler;
   private handleItemHover?: ItemHoverHandler;
 
-  constructor({ inventory, size, coord }: GridInventoryViewCfg) {
+  constructor({ inventory, size, container, align }: GridInventoryViewCfg) {
     this.inventory = inventory;
     this.size = size;
-    this.coord = coord;
     this.slotSprites = SpriteLibrary.get("slot");
-    this.rect = { coord, size: coordAdd(coordMul([21, 21], size), [1, 1]) };
+    this.rect = rectAlign({ coord: [0, 0], size: coordAdd(coordMul([21, 21], size), [1, 1]) }, container, align);
   }
 
   onSlotClick(cb: SlotClickHandler) {
@@ -50,7 +49,7 @@ export class GridInventoryView implements InventoryView {
         "#c8b997",
       );
 
-      const startCoord = coordAdd(this.coord, [1, 1]);
+      const startCoord = coordAdd(this.rect.coord, [1, 1]);
       const [cols, rows] = this.size;
       for (let y = 0; y < rows; y++) {
         for (let x = 0; x < cols; x++) {
@@ -107,7 +106,7 @@ export class GridInventoryView implements InventoryView {
       return -1;
     }
 
-    const startCoord = coordAdd(this.coord, [1, 1]);
+    const startCoord = coordAdd(this.rect.coord, [1, 1]);
     const [cols, rows] = this.size;
     for (let y = 0; y < rows; y++) {
       for (let x = 0; x < cols; x++) {

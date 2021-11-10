@@ -9,6 +9,7 @@ import { GameEvent } from "./GameEvent";
 import { PlayerAttributes } from "./attributes/PlayerAttributes";
 import { Tooltip } from "./ui/Tooltip";
 import { Inventory } from "./inventory/Inventory";
+import { SCREEN_RECT } from "./ui/screen-size";
 
 export class InventoryController {
   private playerInventoryView: InventoryView;
@@ -21,8 +22,9 @@ export class InventoryController {
   constructor(private attributes: PlayerAttributes) {
     this.playerInventoryView = new GridInventoryView({
       inventory: this.attributes.inventory,
-      coord: [107, 200 - 22],
       size: [5, 1],
+      container: SCREEN_RECT,
+      align: "bottom"
     });
     this.playerInventoryView.onSlotClick((index, item) => {
       this.handleSlotClick(this.attributes.inventory, index, item);

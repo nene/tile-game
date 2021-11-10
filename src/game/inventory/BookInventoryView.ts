@@ -25,7 +25,12 @@ export class BookInventoryView implements InventoryView {
     this.inventory = inventory;
     this.window = new Window({ headline, size: windowSize, onClose });
 
-    this.grid = new GridInventoryView({ inventory, coord: this.window.contentAreaRect().coord, size: gridSize });
+    this.grid = new GridInventoryView({
+      inventory,
+      size: gridSize,
+      container: this.window.contentAreaRect(),
+      align: "top-left",
+    });
   }
 
   onSlotClick(cb: SlotClickHandler) {
