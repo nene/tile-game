@@ -1,10 +1,9 @@
 import { PixelScreen } from "./PixelScreen";
 import { SpriteLibrary } from "./sprites/SpriteLibrary";
 import { SoundLibrary } from "./sounds/SoundLibrary";
-import { Coord, coordAdd, Rect, rectDistance, rectTranslate } from "./Coord";
+import { Coord, coordAdd } from "./Coord";
 import { UiController } from "./UiController";
 import { Loops } from "./Loops";
-import { GameObject } from "./GameObject";
 import { FpsCounter } from "./FpsCounter";
 import { GameEventFactory, GameEventType } from "./GameEvent";
 import { getAllCharacters } from "./npc/Character";
@@ -47,20 +46,6 @@ export async function runGame(ctx: CanvasRenderingContext2D): Promise<GameApi> {
     return coordAdd(screenCoord, screen.getOffset());
   }
 
-  function handleWorldClick(worldCoord: Coord) {
-    const obj = ui.getWorld().getActiveLocation().getObjectVisibleOnCoord(worldCoord);
-    const player = ui.getWorld().getPlayer();
-    if (obj && isObjectsCloseby(player, obj) && player.isFree()) {
-      obj.onInteract(ui);
-    }
-  }
-
-  function canInteractWithWorld(worldCoord: Coord): boolean {
-    const obj = ui.getWorld().getActiveLocation().getObjectVisibleOnCoord(worldCoord);
-    const player = ui.getWorld().getPlayer();
-    return Boolean(obj && isObjectsCloseby(player, obj) && obj.isInteractable(ui) && player.isFree());
-  }
-
   const eventFactory = new GameEventFactory();
 
   return {
@@ -88,7 +73,7 @@ export async function runGame(ctx: CanvasRenderingContext2D): Promise<GameApi> {
       }
       if (ui.isGameWorldActive() && ui.isGameWorldVisible()) {
         const result = ui.getWorld().getPlayer().handleKeyEvent(event);
-        ui.highlightCursor(canInteractWithWorld(toWorldCoord(ui.getMouseCoord())));
+        ui.highlightCursor(ui.getWorld().isInteractable(ui, toWorldCoord(ui.getMouseCoord())));
         screenNeedsRepaint = true;
         return result;
       }
@@ -100,7 +85,7 @@ export async function runGame(ctx: CanvasRenderingContext2D): Promise<GameApi> {
       if (type === "click") {
         if (!ui.handleGameEvent(event)) {
           // When the click was not handled by UI
-          handleWorldClick(toWorldCoord(event.coord));
+          ui.getWorld().interact(ui, toWorldCoord(event.coord));
         }
       }
       else if (type === "mousemove") {
@@ -108,7 +93,7 @@ export async function runGame(ctx: CanvasRenderingContext2D): Promise<GameApi> {
           return;
         }
         if (ui.isGameWorldActive() && ui.isGameWorldVisible()) {
-          ui.highlightCursor(canInteractWithWorld(toWorldCoord(event.coord)));
+          ui.highlightCursor(ui.getWorld().isInteractable(ui, toWorldCoord(event.coord)));
         } else {
           ui.highlightCursor(false);
         }
@@ -120,12 +105,4 @@ export async function runGame(ctx: CanvasRenderingContext2D): Promise<GameApi> {
       loops.cleanup();
     },
   };
-}
-
-function isObjectsCloseby(obj1: GameObject, obj2: GameObject) {
-  return rectDistance(objectBounds(obj1), objectBounds(obj2)) < 16;
-}
-
-function objectBounds(obj: GameObject): Rect {
-  return rectTranslate(obj.boundingBox(), obj.getCoord());
 }
