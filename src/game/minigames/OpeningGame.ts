@@ -40,7 +40,6 @@ export class OpeningGame implements MiniGame {
   private finishAtTick?: number;
   private handShakeAmount = 0;
   private abortButton: TextButton;
-  private attributes?: PlayerAttributes;
 
   constructor(private bottle: BeerBottle, private opener: BottleOpener) {
     this.bgSprite = SpriteLibrary.getSprite("opening-game-bg");
@@ -60,7 +59,6 @@ export class OpeningGame implements MiniGame {
 
   init(attributes: PlayerAttributes) {
     this.handShakeAmount = attributes.alcoSkill.getHandShakeAmount();
-    this.attributes = attributes;
   }
 
   tick() {
@@ -152,7 +150,6 @@ export class OpeningGame implements MiniGame {
     if (this.captureStatus === CaptureStatus.hit && !this.bottle.isOpen()) {
       this.finishAtTick = this.tickCounter + 50; // Wait max 5 seconds before closing the minigame screen
       this.bottle.open();
-      this.attributes?.openingSkill.openBottle();
       SoundLibrary.play("opening-beer");
     }
   }

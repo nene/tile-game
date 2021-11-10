@@ -6,7 +6,6 @@ import { Wallet } from "./Wallet";
 import { OrgSkill } from "./OrgSkill";
 import { isBottleOpener } from "../items/BottleOpener";
 import { GameItem } from "../items/GameItem";
-import { OpeningSkill } from "./OpeningSkill";
 import { PouringSkill } from "./PouringSkill";
 
 export class PlayerAttributes {
@@ -14,7 +13,6 @@ export class PlayerAttributes {
   public readonly wallet = new Wallet(25);
   public readonly alcoSkill = new AlcoSkill();
   public readonly orgSkill = new OrgSkill();
-  public readonly openingSkill = new OpeningSkill();
   public readonly pouringSkill = new PouringSkill();
   private selectedItem?: GameItem;
 
