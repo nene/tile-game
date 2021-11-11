@@ -1,5 +1,6 @@
 import cfeBg from "./data/cfe-bg.png";
 import cfeReb from "./data/cfe-reb.png";
+import cfeRebDrunk from "./data/cfe-reb-drunk.png";
 import cfeKsvSass from "./data/cfe-ksv-sass.png";
 import cfeKsvKoppel from "./data/cfe-ksv-koppel.png";
 import cfeKsvPikmets from "./data/cfe-ksv-pikmets.png";
@@ -59,6 +60,7 @@ const imageFiles = {
   'cfe-bg': spriteDef({ src: cfeBg, cfg: { size: [16, 16], colsRows: [4, 4] } }),
 
   'cfe-reb': spriteDef({ src: cfeReb, cfg: { size: PLAYER_SIZE, colsRows: [6, 1], offset: PLAYER_OFFSET } }),
+  'cfe-reb-drunk': spriteDef({ src: cfeRebDrunk, cfg: { size: [32, 32], colsRows: [6, 1], offset: [-16, -30] } }),
 
   'cfe-ksv-sass': spriteDef({ src: cfeKsvSass, cfg: { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET } }),
   'cfe-ksv-koppel': spriteDef({ src: cfeKsvKoppel, cfg: { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET } }),

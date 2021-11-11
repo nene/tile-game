@@ -49,6 +49,10 @@ export class UiController {
       },
     });
 
+    this.attributes.alcoSkill.onDrunkennessChange((drunkenness) => {
+      this.world.getPlayer().setDrunk(drunkenness >= 4);
+    });
+
     this.inventoryController = new InventoryController(this.attributes);
     this.cursorController = new CursorController();
     this.scoreBoard = new ScoreBoard(this.attributes.wallet, this.attributes.alcoSkill, this.calendar);

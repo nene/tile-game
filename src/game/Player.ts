@@ -23,8 +23,10 @@ export class Player implements GameObject {
   private speed = 0;
   private standAnimations: Record<Facing, SpriteAnimation>;
   private walkAnimations: Record<Facing, SpriteAnimation>;
+  private drunkAnimation: Animation;
   private animation: Animation;
   private itemAtHand?: BeerGlass;
+  private isDrunk = false;
   private movement = new PlayerMovement(this);
 
   constructor(coord: Coord) {
@@ -43,8 +45,28 @@ export class Player implements GameObject {
       right: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: { from: [5, 0], to: [5, 0] } }),
       left: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: { from: [4, 0], to: [4, 0] } }),
     };
+    this.drunkAnimation = new SpriteAnimation(SpriteLibrary.get("cfe-reb-drunk"), {
+      frames: [
+        [2, 0],
+        [3, 0],
+        [4, 0],
+        [3, 0],
+        [2, 0],
+        [1, 0],
+        [0, 0],
+        [1, 0],
+      ],
+      ticksPerFrame: 2,
+    });
 
     this.animation = this.standAnimations.down;
+  }
+
+  setDrunk(drunk: boolean) {
+    this.isDrunk = drunk;
+    if (!(this.animation instanceof DrinkAnimation)) {
+      this.changeDirection(this.direction);
+    }
   }
 
   handleKeyEvent(event: GameKeyEvent): boolean {
@@ -105,7 +127,10 @@ export class Player implements GameObject {
       }
     }
     else {
-      if (this.isMoving(oldDirection)) {
+      if (this.isDrunk) {
+        this.animation = this.drunkAnimation;
+      }
+      else if (this.isMoving(oldDirection)) {
         // was moving, now stopped
         this.animation = this.pickByDirection(oldDirection, this.standAnimations);
       }
@@ -210,7 +235,9 @@ export class Player implements GameObject {
           ui.getAttributes().alcoSkill.sip(drink);
         },
         onFinish: () => {
-          this.animation = this.standAnimations.down;
+          this.changeDirection([0, 1]); // moving down
+          this.changeDirection([0, 0]); // stopped
+
           ui.getAttributes().inventory.add(glass);
           this.itemAtHand = undefined;
         }

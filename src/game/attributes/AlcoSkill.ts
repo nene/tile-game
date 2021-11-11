@@ -20,6 +20,7 @@ const levelMultiplier: Record<number, number> = {
 export class AlcoSkill {
   private level = 0; // 0 .. 10
   private drunkenness = 0; // 0 .. 5
+  private drunkennessChangeCallback?: (drunkenness: number) => void;
 
   // Consumes 1/4 of a glass (one step from beer glass)
   sip(drink: Drink) {
@@ -28,6 +29,7 @@ export class AlcoSkill {
     } else {
       this.drunkenness = constrain(this.drunkenness - 0.25, drunkennessMinMax);
     }
+    this.drunkennessChangeCallback?.(this.drunkenness);
   }
 
   private drunkennessPerSip(drink: Drink) {
@@ -58,5 +60,9 @@ export class AlcoSkill {
       this.levelUp();
     }
     this.drunkenness = 0;
+  }
+
+  onDrunkennessChange(callback: (drunkenness: number) => void) {
+    this.drunkennessChangeCallback = callback;
   }
 }
