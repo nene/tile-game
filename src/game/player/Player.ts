@@ -2,7 +2,6 @@ import { PixelScreen } from "../PixelScreen";
 import { GameObject } from "../GameObject";
 import { Coord, coordConstrain, coordSub, Rect } from "../Coord";
 import { SpriteAnimation } from "../sprites/SpriteAnimation";
-import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { UiController } from "../UiController";
 import { BeerGlass, DrinkLevel, isBeerGlass } from "../items/BeerGlass";
 import { DrinkAnimation } from "../sprites/DrinkAnimation";
@@ -12,54 +11,25 @@ import { Location } from "../locations/Location";
 import { PlayerMovement } from "./PlayerMovement";
 import { constrain } from "../utils/constrain";
 import { GameItem } from "../items/GameItem";
+import { Facing, PlayerAnimationLibrary } from "./PlayerAnimationLibrary";
 
 const MAX_SPEED = 6;
-
-type Facing = 'up' | 'down' | 'left' | 'right';
 
 export class Player implements GameObject {
   private coord: Coord;
   private direction: Coord;
   private speed = 0;
-  private standAnimations: Record<Facing, SpriteAnimation>;
-  private walkAnimations: Record<Facing, SpriteAnimation>;
-  private drunkAnimation: Animation;
   private animation: Animation;
   private itemAtHand?: BeerGlass;
   private isDrunk = false;
   private movement = new PlayerMovement(this);
+  private animationLib = new PlayerAnimationLibrary();
 
   constructor(coord: Coord) {
     this.coord = coord;
     this.direction = [0, 0];
 
-    this.standAnimations = {
-      down: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: [[0, 0]] }),
-      up: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: [[3, 0]] }),
-      right: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: [[5, 0]] }),
-      left: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: [[4, 0]] }),
-    }
-    this.walkAnimations = {
-      down: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: { from: [0, 0], to: [0, 0] } }),
-      up: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: { from: [3, 0], to: [3, 0] } }),
-      right: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: { from: [5, 0], to: [5, 0] } }),
-      left: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: { from: [4, 0], to: [4, 0] } }),
-    };
-    this.drunkAnimation = new SpriteAnimation(SpriteLibrary.get("cfe-reb-drunk"), {
-      frames: [
-        [2, 0],
-        [3, 0],
-        [4, 0],
-        [3, 0],
-        [2, 0],
-        [1, 0],
-        [0, 0],
-        [1, 0],
-      ],
-      ticksPerFrame: 2,
-    });
-
-    this.animation = this.standAnimations.down;
+    this.animation = this.animationLib.get("stand", "down");
   }
 
   setDrunk(drunk: boolean) {
@@ -114,7 +84,7 @@ export class Player implements GameObject {
     const oldDirection = this.direction;
     if (this.isMoving(newDirection)) {
       const oldAnimation = this.animation;
-      this.animation = this.pickByDirection(newDirection, this.walkAnimations);
+      this.animation = this.animationLib.get("walk", this.facing(newDirection));
       // A hack for now...
       if (this.animation instanceof SpriteAnimation && oldAnimation instanceof SpriteAnimation) {
         if (this.isStanding(oldDirection)) {
@@ -128,11 +98,11 @@ export class Player implements GameObject {
     }
     else {
       if (this.isDrunk) {
-        this.animation = this.drunkAnimation;
+        this.animation = this.animationLib.get("drunk", this.facing(oldDirection));
       }
       else if (this.isMoving(oldDirection)) {
         // was moving, now stopped
-        this.animation = this.pickByDirection(oldDirection, this.standAnimations);
+        this.animation = this.animationLib.get("stand", this.facing(oldDirection));
       }
     }
     this.direction = newDirection;
@@ -144,10 +114,6 @@ export class Player implements GameObject {
 
   private isMoving(direction: Coord) {
     return !this.isStanding(direction);
-  }
-
-  private pickByDirection(dir: Coord, options: Record<Facing, SpriteAnimation>): SpriteAnimation {
-    return options[this.facing(dir)];
   }
 
   private facing(dir: Coord): Facing {

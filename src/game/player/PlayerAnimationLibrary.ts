@@ -1,0 +1,50 @@
+import { Animation } from "../sprites/Animation";
+import { SpriteAnimation } from "../sprites/SpriteAnimation";
+import { SpriteLibrary } from "../sprites/SpriteLibrary";
+
+export type Facing = 'up' | 'down' | 'left' | 'right';
+export type PlayerAnimationType = 'stand' | 'walk' | 'drunk';
+
+export class PlayerAnimationLibrary {
+  private standAnimations: Record<Facing, SpriteAnimation>;
+  private walkAnimations: Record<Facing, SpriteAnimation>;
+  private drunkAnimation: Animation;
+
+  constructor() {
+    this.standAnimations = {
+      down: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: [[0, 0]] }),
+      up: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: [[3, 0]] }),
+      right: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: [[5, 0]] }),
+      left: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: [[4, 0]] }),
+    }
+
+    this.walkAnimations = {
+      down: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: { from: [0, 0], to: [0, 0] } }),
+      up: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: { from: [3, 0], to: [3, 0] } }),
+      right: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: { from: [5, 0], to: [5, 0] } }),
+      left: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: { from: [4, 0], to: [4, 0] } }),
+    };
+
+    this.drunkAnimation = new SpriteAnimation(SpriteLibrary.get("cfe-reb-drunk"), {
+      frames: [
+        [2, 0],
+        [3, 0],
+        [4, 0],
+        [3, 0],
+        [2, 0],
+        [1, 0],
+        [0, 0],
+        [1, 0],
+      ],
+      ticksPerFrame: 2,
+    });
+  }
+
+  get(type: PlayerAnimationType, facing: Facing): Animation {
+    switch (type) {
+      case "stand": return this.standAnimations[facing];
+      case "walk": return this.walkAnimations[facing];
+      case "drunk": return this.drunkAnimation;
+    }
+  }
+}
