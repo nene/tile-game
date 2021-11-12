@@ -2,7 +2,7 @@ import { LocationFactory, LocationName } from "./locations/LocationFactory";
 import { Location } from "./locations/Location";
 import { PixelScreen } from "./PixelScreen";
 import { GameObject } from "./GameObject";
-import { Player } from "./Player";
+import { Player } from "./player/Player";
 import { Coord, Rect, rectDistance, rectTranslate } from "./Coord";
 import { UiController } from "./UiController";
 

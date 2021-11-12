@@ -1,6 +1,6 @@
 import { times } from "lodash";
-import { Coord, coordAdd, Rect, rectTranslate } from "./Coord";
-import { GameObject } from "./GameObject";
+import { Coord, coordAdd, Rect, rectTranslate } from "../Coord";
+import { GameObject } from "../GameObject";
 
 interface ObstacleLookup {
   getObjectsInRect: (bounds: Rect) => GameObject[];

@@ -1,17 +1,17 @@
-import { PixelScreen } from "./PixelScreen";
-import { GameObject } from "./GameObject";
-import { Coord, coordConstrain, coordSub, Rect } from "./Coord";
-import { SpriteAnimation } from "./sprites/SpriteAnimation";
-import { SpriteLibrary } from "./sprites/SpriteLibrary";
-import { UiController } from "./UiController";
-import { BeerGlass, DrinkLevel, isBeerGlass } from "./items/BeerGlass";
-import { DrinkAnimation } from "./sprites/DrinkAnimation";
-import { Animation } from "./sprites/Animation";
-import { GameKeyEvent } from "./GameEvent";
-import { Location } from "./locations/Location";
+import { PixelScreen } from "../PixelScreen";
+import { GameObject } from "../GameObject";
+import { Coord, coordConstrain, coordSub, Rect } from "../Coord";
+import { SpriteAnimation } from "../sprites/SpriteAnimation";
+import { SpriteLibrary } from "../sprites/SpriteLibrary";
+import { UiController } from "../UiController";
+import { BeerGlass, DrinkLevel, isBeerGlass } from "../items/BeerGlass";
+import { DrinkAnimation } from "../sprites/DrinkAnimation";
+import { Animation } from "../sprites/Animation";
+import { GameKeyEvent } from "../GameEvent";
+import { Location } from "../locations/Location";
 import { PlayerMovement } from "./PlayerMovement";
-import { constrain } from "./utils/constrain";
-import { GameItem } from "./items/GameItem";
+import { constrain } from "../utils/constrain";
+import { GameItem } from "../items/GameItem";
 
 const MAX_SPEED = 6;
 

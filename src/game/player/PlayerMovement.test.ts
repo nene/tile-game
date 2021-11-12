@@ -1,5 +1,5 @@
-import { Rect, rectOverlaps, rectTranslate } from "./Coord";
-import { Wall } from "./furniture/Wall";
+import { Rect, rectOverlaps, rectTranslate } from "../Coord";
+import { Wall } from "../furniture/Wall";
 import { PlayerMovement } from "./PlayerMovement";
 
 const walls = [
