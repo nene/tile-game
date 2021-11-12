@@ -1,14 +1,14 @@
 import { Animation } from "../sprites/Animation";
 import { SpriteAnimation } from "../sprites/SpriteAnimation";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
+import { Facing } from "./PlayerDirection";
 
-export type Facing = 'up' | 'down' | 'left' | 'right';
 export type PlayerAnimationType = 'stand' | 'walk' | 'drunk';
 
 export class PlayerAnimationLibrary {
   private standAnimations: Record<Facing, SpriteAnimation>;
   private walkAnimations: Record<Facing, SpriteAnimation>;
-  private drunkAnimation: Animation;
+  private drunkAnimation: SpriteAnimation;
 
   constructor() {
     this.standAnimations = {
@@ -40,11 +40,15 @@ export class PlayerAnimationLibrary {
     });
   }
 
-  get(type: PlayerAnimationType, facing: Facing): Animation {
-    switch (type) {
-      case "stand": return this.standAnimations[facing];
-      case "walk": return this.walkAnimations[facing];
-      case "drunk": return this.drunkAnimation;
-    }
+  getStanding(facing: Facing, frame: number = 0): Animation {
+    return this.standAnimations[facing];
+  }
+
+  getWalking(facing: Facing, frame: number = 0): Animation {
+    return this.walkAnimations[facing];
+  }
+
+  getDrunk(): Animation {
+    return this.drunkAnimation;
   }
 }

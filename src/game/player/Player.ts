@@ -11,31 +11,36 @@ import { Location } from "../locations/Location";
 import { PlayerMovement } from "./PlayerMovement";
 import { constrain } from "../utils/constrain";
 import { GameItem } from "../items/GameItem";
-import { Facing, PlayerAnimationLibrary } from "./PlayerAnimationLibrary";
+import { PlayerAnimationLibrary } from "./PlayerAnimationLibrary";
+import { Facing, PlayerDirection } from "./PlayerDirection";
 
 const MAX_SPEED = 6;
 
 export class Player implements GameObject {
   private coord: Coord;
-  private direction: Coord;
   private speed = 0;
   private animation: Animation;
   private itemAtHand?: BeerGlass;
   private isDrunk = false;
   private movement = new PlayerMovement(this);
   private animationLib = new PlayerAnimationLibrary();
+  private direction: PlayerDirection;
 
   constructor(coord: Coord) {
     this.coord = coord;
-    this.direction = [0, 0];
+    this.direction = new PlayerDirection({
+      onStartMoving: this.startMoving.bind(this),
+      onStartStanding: this.startStanding.bind(this),
+      onChangeMovingDirection: this.changeMovingDirection.bind(this),
+    });
 
-    this.animation = this.animationLib.get("stand", "down");
+    this.animation = this.animationLib.getStanding(this.direction.getFacing());
   }
 
   setDrunk(drunk: boolean) {
     this.isDrunk = drunk;
-    if (!(this.animation instanceof DrinkAnimation)) {
-      this.changeDirection(this.direction);
+    if (this.direction.isStanding() && !this.itemAtHand) {
+      this.startStanding("down");
     }
   }
 
@@ -46,16 +51,16 @@ export class Player implements GameObject {
     if (event.type === "keydown") {
       switch (event.key) {
         case "LEFT":
-          this.changeDirection([-1, this.direction[1]]);
+          this.direction.moveInDir("left");
           return true;
         case "RIGHT":
-          this.changeDirection([1, this.direction[1]]);
+          this.direction.moveInDir("right");
           return true;
         case "UP":
-          this.changeDirection([this.direction[0], -1]);
+          this.direction.moveInDir("up");
           return true;
         case "DOWN":
-          this.changeDirection([this.direction[0], 1]);
+          this.direction.moveInDir("down");
           return true;
         default:
           return false; // Inform that we didn't handle the keypress
@@ -63,16 +68,16 @@ export class Player implements GameObject {
     } else {
       switch (event.key) {
         case "LEFT":
-          this.changeDirection([Math.max(0, this.direction[0]), this.direction[1]]);
+          this.direction.stopInDir("left");
           return true;
         case "RIGHT":
-          this.changeDirection([Math.min(0, this.direction[0]), this.direction[1]]);
+          this.direction.stopInDir("right");
           return true;
         case "UP":
-          this.changeDirection([this.direction[0], Math.max(0, this.direction[1])]);
+          this.direction.stopInDir("up");
           return true;
         case "DOWN":
-          this.changeDirection([this.direction[0], Math.min(0, this.direction[1])]);
+          this.direction.stopInDir("down");
           return true;
         default:
           return false; // Inform that we didn't handle the keypress
@@ -80,53 +85,21 @@ export class Player implements GameObject {
     }
   }
 
-  private changeDirection(newDirection: Coord) {
-    const oldDirection = this.direction;
-    if (this.isMoving(newDirection)) {
-      const oldAnimation = this.animation;
-      this.animation = this.animationLib.get("walk", this.facing(newDirection));
-      // A hack for now...
-      if (this.animation instanceof SpriteAnimation && oldAnimation instanceof SpriteAnimation) {
-        if (this.isStanding(oldDirection)) {
-          // started moving, begin new animation
-          this.animation.setFrame(0);
-        } else {
-          // was already moving, preserve current animation frame
-          this.animation.setFrame(oldAnimation.getFrame());
-        }
-      }
-    }
-    else {
-      if (this.isDrunk) {
-        this.animation = this.animationLib.get("drunk", this.facing(oldDirection));
-      }
-      else if (this.isMoving(oldDirection)) {
-        // was moving, now stopped
-        this.animation = this.animationLib.get("stand", this.facing(oldDirection));
-      }
-    }
-    this.direction = newDirection;
+  private startMoving(facing: Facing) {
+    this.animation = this.animationLib.getWalking(facing);
   }
 
-  private isStanding(direction: Coord) {
-    return direction[0] === 0 && direction[1] === 0;
+  private startStanding(facing: Facing) {
+    if (this.isDrunk) {
+      this.animation = this.animationLib.getDrunk();
+    } else {
+      this.animation = this.animationLib.getStanding(facing);
+    }
   }
 
-  private isMoving(direction: Coord) {
-    return !this.isStanding(direction);
-  }
-
-  private facing(dir: Coord): Facing {
-    if (dir[0] > 0) {
-      return 'right';
-    }
-    if (dir[0] < 0) {
-      return 'left';
-    }
-    if (dir[1] > 0) {
-      return 'down';
-    }
-    return 'up';
+  private changeMovingDirection(facing: Facing) {
+    const frameNr = this.animation instanceof SpriteAnimation ? this.animation.getFrame() : 0;
+    this.animation = this.animationLib.getWalking(facing, frameNr);
   }
 
   tick(location: Location) {
@@ -135,12 +108,12 @@ export class Player implements GameObject {
   }
 
   private updatePosition(location: Location) {
-    if (this.isMoving(this.direction)) {
+    if (this.direction.isMoving()) {
       this.speed = constrain(this.speed === 0 ? 1 : this.speed * 2, { min: 0, max: MAX_SPEED });
     } else {
       this.speed = 0;
     }
-    const newCoord = this.movement.move(this.direction, this.speed, location);
+    const newCoord = this.movement.move(this.direction.getHeading(), this.speed, location);
 
     this.coord = this.constrainToWorld(newCoord, location);
   }
@@ -201,8 +174,7 @@ export class Player implements GameObject {
           ui.getAttributes().alcoSkill.sip(drink);
         },
         onFinish: () => {
-          this.changeDirection([0, 1]); // moving down
-          this.changeDirection([0, 0]); // stopped
+          this.startStanding("down");
 
           ui.getAttributes().inventory.add(glass);
           this.itemAtHand = undefined;
