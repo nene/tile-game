@@ -9,6 +9,7 @@ export class PlayerAnimationLibrary {
   private standAnimations: Record<Facing, SpriteAnimation>;
   private walkAnimations: Record<Facing, SpriteAnimation>;
   private drunkAnimation: SpriteAnimation;
+  private sleepAnimation: SpriteAnimation;
 
   constructor() {
     this.standAnimations = {
@@ -38,6 +39,16 @@ export class PlayerAnimationLibrary {
       ],
       ticksPerFrame: 2,
     });
+
+    this.sleepAnimation = new SpriteAnimation(SpriteLibrary.get("cfe-reb-drunk"), {
+      frames: [
+        [0, 1],
+        [1, 1],
+        [2, 1],
+        [3, 1],
+      ],
+      ticksPerFrame: 2,
+    });
   }
 
   getStanding(facing: Facing, frame: number = 0): Animation {
@@ -50,5 +61,9 @@ export class PlayerAnimationLibrary {
 
   getDrunk(): Animation {
     return this.drunkAnimation;
+  }
+
+  getSleep(): Animation {
+    return this.sleepAnimation;
   }
 }
