@@ -167,11 +167,11 @@ export class Player implements GameObject {
   }
 
   isInteractable(ui: UiController, glass?: GameItem) {
-    return !!glass && isBeerGlass(glass) && glass.getLevel() > DrinkLevel.empty && this.mentalState !== "sleep";
+    return this.isNonEmptyGlass(glass) && this.isFree();
   }
 
   interact(ui: UiController, glass?: GameItem) {
-    if (glass && isBeerGlass(glass) && glass.getLevel() > DrinkLevel.empty && this.mentalState !== "sleep") {
+    if (this.isNonEmptyGlass(glass) && this.isFree()) {
       this.itemAtHand = glass;
       this.animation = new DrinkAnimation({
         beerGlass: glass,
@@ -190,5 +190,9 @@ export class Player implements GameObject {
       });
       ui.getAttributes().setSelectedItem(undefined);
     }
+  }
+
+  private isNonEmptyGlass(glass?: GameItem): glass is BeerGlass {
+    return !!glass && isBeerGlass(glass) && glass.getLevel() > DrinkLevel.empty;
   }
 }
