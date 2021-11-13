@@ -50,7 +50,7 @@ export class UiController {
     });
 
     this.attributes.alcoSkill.onDrunkennessChange((drunkenness) => {
-      this.world.getPlayer().setDrunk(drunkenness >= 4);
+      this.world.getPlayer().setMentalState(drunkenness >= 4 ? 'drunk' : 'sober');
     });
 
     this.inventoryController = new InventoryController(this.attributes);

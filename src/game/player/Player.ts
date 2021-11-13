@@ -16,12 +16,14 @@ import { Facing, PlayerDirection } from "./PlayerDirection";
 
 const MAX_SPEED = 6;
 
+type MentalState = 'sober' | 'drunk' | 'sleep';
+
 export class Player implements GameObject {
   private coord: Coord;
   private speed = 0;
   private animation: Animation;
   private itemAtHand?: BeerGlass;
-  private isDrunk = false;
+  private mentalState: MentalState = 'sober';
   private movement = new PlayerMovement(this);
   private animationLib = new PlayerAnimationLibrary();
   private direction: PlayerDirection;
@@ -37,8 +39,8 @@ export class Player implements GameObject {
     this.animation = this.animationLib.getStanding(this.direction.getFacing());
   }
 
-  setDrunk(drunk: boolean) {
-    this.isDrunk = drunk;
+  setMentalState(state: MentalState) {
+    this.mentalState = state;
     if (this.direction.isStanding() && !this.itemAtHand) {
       this.startStanding("down");
     }
@@ -90,7 +92,7 @@ export class Player implements GameObject {
   }
 
   private startStanding(facing: Facing) {
-    if (this.isDrunk) {
+    if (this.mentalState === 'drunk') {
       this.animation = this.animationLib.getDrunk();
     } else {
       this.animation = this.animationLib.getStanding(facing);
