@@ -16,6 +16,10 @@ export class Calendar {
     this.onDayEnd = onDayEnd;
   }
 
+  endDay() {
+    this.onDayEnd(this.day);
+  }
+
   tick() {
     this.ticks++;
     if (this.ticks > DAY_END_TIME) {

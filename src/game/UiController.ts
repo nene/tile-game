@@ -15,6 +15,7 @@ import { GameWorld } from "./GameWorld";
 import { createWorld } from "./locations/createWorld";
 import { DayTransition } from "./DayTransition";
 import { resetCharactersForDay } from "./npc/Character";
+import { delay } from "lodash";
 
 export class UiController {
   private world: GameWorld;
@@ -50,10 +51,14 @@ export class UiController {
     });
 
     this.attributes.alcoSkill.onDrunkennessChange((drunkenness) => {
+      const player = this.world.getPlayer();
       if (drunkenness === 5) {
-        this.world.getPlayer().setMentalState('sleep');
+        player.setMentalState('sleep');
+        player.onSleepStarted(() => {
+          delay(this.calendar.endDay.bind(this.calendar), 3000);
+        });
       } else {
-        this.world.getPlayer().setMentalState(drunkenness >= 4 ? 'drunk' : 'sober');
+        player.setMentalState(drunkenness >= 4 ? 'drunk' : 'sober');
       }
     });
 
