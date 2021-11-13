@@ -47,7 +47,7 @@ export class Player implements GameObject {
   }
 
   handleKeyEvent(event: GameKeyEvent): boolean {
-    if (this.itemAtHand) {
+    if (this.itemAtHand || this.mentalState === "sleep") {
       return false;
     }
     if (event.type === "keydown") {
@@ -92,10 +92,16 @@ export class Player implements GameObject {
   }
 
   private startStanding(facing: Facing) {
-    if (this.mentalState === 'drunk') {
-      this.animation = this.animationLib.getDrunk();
-    } else {
-      this.animation = this.animationLib.getStanding(facing);
+    switch (this.mentalState) {
+      case "sober":
+        this.animation = this.animationLib.getStanding(facing);
+        break;
+      case "drunk":
+        this.animation = this.animationLib.getDrunk();
+        break;
+      case "sleep":
+        this.animation = this.animationLib.getSleep();
+        break;
     }
   }
 
@@ -157,15 +163,15 @@ export class Player implements GameObject {
 
   // True when the player isn't busy doing something (e.g. drinking)
   isFree(): boolean {
-    return !this.itemAtHand;
+    return !this.itemAtHand && this.mentalState !== "sleep";
   }
 
   isInteractable(ui: UiController, glass?: GameItem) {
-    return !!glass && isBeerGlass(glass) && glass.getLevel() > DrinkLevel.empty;
+    return !!glass && isBeerGlass(glass) && glass.getLevel() > DrinkLevel.empty && this.mentalState !== "sleep";
   }
 
   interact(ui: UiController, glass?: GameItem) {
-    if (glass && isBeerGlass(glass) && glass.getLevel() > DrinkLevel.empty) {
+    if (glass && isBeerGlass(glass) && glass.getLevel() > DrinkLevel.empty && this.mentalState !== "sleep") {
       this.itemAtHand = glass;
       this.animation = new DrinkAnimation({
         beerGlass: glass,

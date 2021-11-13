@@ -47,7 +47,7 @@ export class PlayerAnimationLibrary {
         [2, 1],
         [3, 1],
       ],
-      ticksPerFrame: 2,
+      ticksPerFrame: 3,
     });
   }
 
