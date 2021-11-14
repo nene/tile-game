@@ -7,6 +7,7 @@ interface AnimationConfig {
   frames: Coord[] | FrameRange;
   ticksPerFrame?: number;
   currentFrame?: number;
+  repeat?: number;
 }
 
 interface FrameRange {
@@ -20,10 +21,12 @@ export class SpriteAnimation implements Animation {
   private ticks = 0;
   private ticksPerFrame = 1;
   private currentFrame = 0;
-  private finished = false;
+  private repeat: number;
+  private cycles = 0;
 
   constructor(private spriteSheet: SpriteSheet, cfg: AnimationConfig) {
     this.frames = cfg.frames instanceof Array ? cfg.frames : expandFrameRange(cfg.frames);
+    this.repeat = cfg.repeat ?? Infinity;
     this.ticksPerFrame = cfg.ticksPerFrame ?? 1;
     this.currentFrame = cfg.currentFrame ?? 0;
   }
@@ -45,9 +48,10 @@ export class SpriteAnimation implements Animation {
   }
 
   private nextFrame() {
+    const previousFrame = this.currentFrame;
     this.setFrame(this.currentFrame + 1);
-    if (!this.finished && this.currentFrame === 0) {
-      this.finished = true;
+    if (this.currentFrame <= previousFrame) {
+      this.cycles++;
     }
   }
 
@@ -56,7 +60,7 @@ export class SpriteAnimation implements Animation {
   }
 
   public isFinished(): boolean {
-    return this.finished;
+    return this.cycles >= this.repeat;
   }
 }
 
