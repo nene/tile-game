@@ -55,7 +55,7 @@ export class UiController {
       if (drunkenness === 5) {
         player.setMentalState('sleep');
         player.onSleepStarted(() => {
-          delay(this.calendar.endDay.bind(this.calendar), 3000);
+          delay(this.calendar.endDay.bind(this.calendar), 6000);
         });
       } else {
         player.setMentalState(drunkenness >= 4 ? 'drunk' : 'sober');

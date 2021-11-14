@@ -1,4 +1,5 @@
 import { Animation } from "../sprites/Animation";
+import { CompositeAnimation } from "../sprites/CompositeAnimation";
 import { SpriteAnimation } from "../sprites/SpriteAnimation";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { Facing } from "./PlayerDirection";
@@ -8,8 +9,8 @@ export type PlayerAnimationType = 'stand' | 'walk' | 'drunk';
 export class PlayerAnimationLibrary {
   private standAnimations: Record<Facing, SpriteAnimation>;
   private walkAnimations: Record<Facing, SpriteAnimation>;
-  private drunkAnimation: SpriteAnimation;
-  private sleepAnimation: SpriteAnimation;
+  private drunkAnimation: Animation;
+  private sleepAnimation: Animation;
 
   constructor() {
     this.standAnimations = {
@@ -26,7 +27,24 @@ export class PlayerAnimationLibrary {
       left: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: { from: [4, 0], to: [4, 0] } }),
     };
 
-    this.drunkAnimation = new SpriteAnimation(SpriteLibrary.get("cfe-reb-drunk"), {
+    this.drunkAnimation = this.createDrunkAnimation();
+
+    this.sleepAnimation = new CompositeAnimation([
+      this.createDrunkAnimation(1),
+      new SpriteAnimation(SpriteLibrary.get("cfe-reb-drunk"), {
+        frames: [
+          [0, 1],
+          [1, 1],
+          [2, 1],
+          [3, 1],
+        ],
+        ticksPerFrame: 3,
+      }),
+    ]);
+  }
+
+  private createDrunkAnimation(repeat?: number): Animation {
+    return new SpriteAnimation(SpriteLibrary.get("cfe-reb-drunk"), {
       frames: [
         [2, 0],
         [3, 0],
@@ -38,16 +56,7 @@ export class PlayerAnimationLibrary {
         [1, 0],
       ],
       ticksPerFrame: 2,
-    });
-
-    this.sleepAnimation = new SpriteAnimation(SpriteLibrary.get("cfe-reb-drunk"), {
-      frames: [
-        [0, 1],
-        [1, 1],
-        [2, 1],
-        [3, 1],
-      ],
-      ticksPerFrame: 3,
+      repeat,
     });
   }
 
