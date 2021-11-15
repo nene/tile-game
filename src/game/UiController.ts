@@ -58,7 +58,7 @@ export class UiController {
           delay(this.calendar.endDay.bind(this.calendar), 6000);
         });
       } else {
-        player.setMentalState(drunkenness >= 4 ? 'drunk' : 'sober');
+        player.setMentalState(drunkenness >= 3 ? 'drunk' : 'sober');
       }
     });
 
