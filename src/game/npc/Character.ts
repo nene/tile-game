@@ -13,12 +13,16 @@ export enum ColorBandState {
   inverted = 2,
 }
 
+interface DayConfig {
+  spawnTime: number;
+}
+
 export interface CharacterDef {
   name: string;
   spriteName: SpriteName;
   favoriteDrinks: Drink[];
   hatedDrinks: Drink[];
-  spawnTime: number;
+  days: Record<number, DayConfig>;
 }
 
 const MAX_BEERS = 2;
@@ -69,8 +73,8 @@ export class Character {
     };
   }
 
-  getSpawnTime() {
-    return this.def.spawnTime;
+  getSpawnTime(day: number): number {
+    return this.def.days[day]?.spawnTime ?? Infinity;
   }
 
   getFavoriteDrinks() {
@@ -124,42 +128,55 @@ const characters = {
   "koppel": new Character({
     name: "ksv! Jakob Koppel",
     spriteName: "cfe-ksv-koppel",
-    spawnTime: 1 * 10,
+    days: {
+      2: { spawnTime: 1 * 10 },
+    },
     favoriteDrinks: [getDrink("bock"), getDrink("pilsner")],
     hatedDrinks: [getDrink("limonaad"), getDrink("paulaner"), getDrink("porter")],
   }),
   "sass": new Character({
     name: "vil! Aleksander Popov",
     spriteName: "cfe-ksv-sass",
-    spawnTime: 5 * 10,
+    days: {
+      2: { spawnTime: 5 * 10 },
+    },
     favoriteDrinks: [getDrink("alexander"), getDrink("tommu-hiid")],
     hatedDrinks: [getDrink("porter"), getDrink("limonaad")],
   }),
   "pikmets": new Character({
     name: "b!vil! Richard Pikmets",
     spriteName: "cfe-ksv-pikmets",
-    spawnTime: 20 * 10,
+    days: {
+      2: { spawnTime: 20 * 10 },
+    },
     favoriteDrinks: [getDrink("special"), getDrink("kriek")],
     hatedDrinks: [getDrink("alexander"), getDrink("pilsner")],
   }),
   "otto": new Character({
     name: "vil! Otto Pukk",
     spriteName: "cfe-ksv-otto",
-    spawnTime: 30 * 10,
+    days: {
+      2: { spawnTime: 30 * 10 },
+    },
     favoriteDrinks: [getDrink("paulaner"), getDrink("porter")],
     hatedDrinks: [getDrink("kriek"), getDrink("limonaad")],
   }),
   "vanamees": new Character({
     name: "Vanamees",
     spriteName: "cfe-ksv-karl",
-    spawnTime: 32 * 10,
+    days: {
+      1: { spawnTime: 1 * 10 },
+      2: { spawnTime: 32 * 10 },
+    },
     favoriteDrinks: [getDrink("alexander"), getDrink("pilsner"), getDrink("tommu-hiid")],
     hatedDrinks: [getDrink("bock")],
   }),
   "kark": new Character({
     name: "vil! Raul Tõniste",
     spriteName: "cfe-ksv-kark",
-    spawnTime: 40 * 10,
+    days: {
+      2: { spawnTime: 40 * 10 },
+    },
     favoriteDrinks: [getDrink("paulaner")],
     hatedDrinks: [getDrink("porter")],
   }),
