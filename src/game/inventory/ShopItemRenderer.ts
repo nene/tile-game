@@ -6,6 +6,7 @@ import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { strokeRect, UI_BG_COLOR, UI_HIGHLIGHT_COLOR, UI_MENU_ITEM_HIGHLIGHT_COLOR, UI_SHADOW_COLOR } from "../ui/ui-utils";
 import { Wallet } from "../attributes/Wallet";
+import { round } from "lodash";
 
 export class ShopItemRenderer {
   private goldSprite: Sprite;
@@ -26,7 +27,7 @@ export class ShopItemRenderer {
     screen.drawSprite(item.getSprite(), iconRect.coord);
     screen.drawText(item.getName(), nameCoord, textStyle);
     if (isBeerBottle(item)) {
-      screen.drawText((item.getDrink().alcohol * 2.5) + "%", coordAdd(nameCoord, [nameLen + 3, 3.5]), { size: "small", color: "#481a12" });
+      screen.drawText(round(item.getDrink().alcohol * 2.5, 1) + "%", coordAdd(nameCoord, [nameLen + 3, 3.5]), { size: "small", color: "#481a12" });
     }
     screen.drawText(item.getDescription(), coordAdd(iconRect.coord, [18, 9]), { size: "small", color: textStyle.color });
     screen.drawSprite(this.goldSprite, goldCoord);

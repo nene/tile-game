@@ -4,7 +4,7 @@ import { constrain } from "../utils/constrain";
 const drunkennessMinMax = { min: 0, max: 5 };
 
 const levelMultiplier: Record<number, number> = {
-  0: 5, // max: 1 pilku
+  0: 4, // max: 1 pilku
   1: 3, // max: 2 pilkut või sass
   2: 2,
   3: 1.5,
