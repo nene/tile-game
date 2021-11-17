@@ -156,6 +156,13 @@ const characters = {
     favoriteDrinks: [getDrink("alexander"), getDrink("pilsner"), getDrink("tommu-hiid")],
     hatedDrinks: [getDrink("bock")],
   }),
+  "kark": new Character({
+    name: "vil! Raul Tõniste",
+    spriteName: "cfe-ksv-kark",
+    spawnTime: 40 * 10,
+    favoriteDrinks: [getDrink("paulaner")],
+    hatedDrinks: [getDrink("porter")],
+  }),
 };
 
 export type CharacterName = keyof typeof characters;

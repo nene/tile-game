@@ -6,6 +6,7 @@ import cfeKsvKoppel from "./data/cfe-ksv-koppel.png";
 import cfeKsvPikmets from "./data/cfe-ksv-pikmets.png";
 import cfeKsvOtto from "./data/cfe-ksv-otto.png";
 import cfeKsvKarl from "./data/cfe-ksv-karl.png";
+import cfeKsvKark from "./data/cfe-ksv-kark.png";
 import cfeBuilding from "./data/cfe-building.png";
 import cfeBuildingDoor from "./data/cfe-building-door.png";
 import cfeFence from "./data/cfe-fence.png";
@@ -67,6 +68,7 @@ const imageFiles = {
   'cfe-ksv-pikmets': spriteDef({ src: cfeKsvPikmets, cfg: { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET } }),
   'cfe-ksv-otto': spriteDef({ src: cfeKsvOtto, cfg: { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET } }),
   'cfe-ksv-karl': spriteDef({ src: cfeKsvKarl, cfg: { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET } }),
+  'cfe-ksv-kark': spriteDef({ src: cfeKsvKark, cfg: { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET } }),
   'callout': spriteDef({ src: callout, cfg: { size: [16, 18], colsRows: [3, 1], offset: [-5, -52] } }),
 
   'table': spriteDef({ src: table, cfg: { size: [64, 23], offset: [0, -6] } }),
