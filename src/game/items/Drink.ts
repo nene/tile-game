@@ -1,5 +1,6 @@
 export interface Drink {
   name: string;
+  withName: string;
   description: string;
   price: number;
   bottleSpriteIndex: number;
@@ -37,6 +38,7 @@ const drinkDef = (x: Drink) => x;
 const drinks = {
   "water": drinkDef({
     name: "Vesi",
+    withName: "veega",
     description: "Seda tuleb kraanist lõputult.",
     price: 0,
     bottleSpriteIndex: 11,
@@ -47,6 +49,7 @@ const drinks = {
   }),
   "limonaad": drinkDef({
     name: "Limpa limonaad",
+    withName: "limonaadiga",
     description: "See magus jook kipub šoppeni põhja kleepuma.",
     price: 1,
     bottleSpriteIndex: 7,
@@ -57,6 +60,7 @@ const drinks = {
   }),
   "kriek": drinkDef({
     name: "Kriek",
+    withName: "kriekiga",
     description: "Seda hõrku nestet libistavad ka naiskorporandid.",
     price: 6,
     bottleSpriteIndex: 6,
@@ -67,6 +71,7 @@ const drinks = {
   }),
   "pilsner": drinkDef({
     name: "Pilsner",
+    withName: "pilkuga",
     description: "EÜSnikute lemmiknaps.",
     price: 1,
     bottleSpriteIndex: 4,
@@ -77,6 +82,7 @@ const drinks = {
   }),
   "heineken": drinkDef({
     name: "Heineken",
+    withName: "heinekeniga",
     description: "Väljamaine rüübe rohelises pudelis.",
     price: 3,
     bottleSpriteIndex: 2,
@@ -87,6 +93,7 @@ const drinks = {
   }),
   "tommu-hiid": drinkDef({
     name: "Tõmmu hiid",
+    withName: "tõmmu hiiuga",
     description: "Vana vilistlase rammujook.",
     price: 4,
     bottleSpriteIndex: 5,
@@ -97,6 +104,7 @@ const drinks = {
   }),
   "alexander": drinkDef({
     name: "Alexander",
+    withName: "sassiga",
     description: "Sassi läheb kui loed mitu pudelit sai joodud.",
     price: 2,
     bottleSpriteIndex: 1,
@@ -107,6 +115,7 @@ const drinks = {
   }),
   "special": drinkDef({
     name: "Special",
+    withName: "specialiga",
     description: "Eriline jook puhuks kui paremat pole võtta.",
     price: 3,
     bottleSpriteIndex: 3,
@@ -117,6 +126,7 @@ const drinks = {
   }),
   "paulaner": drinkDef({
     name: "Hefeweisen",
+    withName: "nisukaga",
     description: "Saksamaine nisumärjuke (bratwursti kõrvale).",
     price: 5,
     bottleSpriteIndex: 8,
@@ -127,6 +137,7 @@ const drinks = {
   }),
   "porter": drinkDef({
     name: "Šokolaadi porter",
+    withName: "porteriga",
     description: "Väidetavalt muudab suure mehe päkapikuks.",
     price: 4,
     bottleSpriteIndex: 10,
@@ -137,6 +148,7 @@ const drinks = {
   }),
   "bock": drinkDef({
     name: "Double Bock",
+    withName: "bockiga",
     description: "Revelia kvarteriturniiri erikülaline.",
     price: 3,
     bottleSpriteIndex: 9,
@@ -147,8 +159,8 @@ const drinks = {
   }),
 }
 
-export type DirnkType = keyof typeof drinks;
+export type DrinkType = keyof typeof drinks;
 
-export function getDrink(type: DirnkType): Drink {
+export function getDrink(type: DrinkType): Drink {
   return drinks[type];
 }

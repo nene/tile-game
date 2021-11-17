@@ -9,7 +9,13 @@ import { GameItem } from "../items/GameItem";
 import { PouringSkill } from "./PouringSkill";
 
 export class PlayerAttributes {
-  public readonly inventory = new StorageInventory({ size: 5, items: [new BeerGlass(getDrink("pilsner"), DrinkLevel.full)] });
+  public readonly inventory = new StorageInventory({
+    size: 5,
+    items: [
+      new BeerGlass(getDrink("pilsner"), DrinkLevel.full),
+      new BeerGlass(getDrink("pilsner"), DrinkLevel.almostFull)
+    ],
+  });
   public readonly wallet = new Wallet(25);
   public readonly alcoSkill = new AlcoSkill();
   public readonly orgSkill = new OrgSkill();

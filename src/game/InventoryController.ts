@@ -10,6 +10,8 @@ import { PlayerAttributes } from "./attributes/PlayerAttributes";
 import { Tooltip } from "./ui/Tooltip";
 import { Inventory } from "./inventory/Inventory";
 import { SCREEN_RECT } from "./ui/screen-size";
+import { BeerGlass } from "./items/BeerGlass";
+import { beerGlassName } from "./items/beerGlassName";
 
 export class InventoryController {
   private playerInventoryView: InventoryView;
@@ -119,7 +121,7 @@ export class InventoryController {
 
   private handleItemHover(coord: Coord, item: GameItem) {
     this.mouseCoord = coord;
-    this.tooltip.show(coord, item.getName());
+    this.tooltip.show(coord, item instanceof BeerGlass ? beerGlassName(item, this.attributes.alcoSkill) : item.getName());
   }
 
   private handleSlotClick(inventory: Inventory, slotIndex: number, item?: GameItem) {

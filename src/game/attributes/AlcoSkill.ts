@@ -21,6 +21,8 @@ export class AlcoSkill {
   private level = 0; // 0 .. 10
   private drunkenness = 0; // 0 .. 5
   private drunkennessChangeCallback?: (drunkenness: number) => void;
+  // Records the number of sips one has had of each drink
+  private sippedDrinks = new Map<Drink, number>();
 
   // Consumes 1/4 of a glass (one step from beer glass)
   sip(drink: Drink) {
@@ -29,6 +31,7 @@ export class AlcoSkill {
     } else {
       this.drunkenness = constrain(this.drunkenness - 0.25, drunkennessMinMax);
     }
+    this.sippedDrinks.set(drink, (this.sippedDrinks.get(drink) ?? 0) + 1);
     this.drunkennessChangeCallback?.(this.drunkenness);
   }
 
@@ -64,5 +67,10 @@ export class AlcoSkill {
 
   onDrunkennessChange(callback: (drunkenness: number) => void) {
     this.drunkennessChangeCallback = callback;
+  }
+
+  // True when one has consumed at least a glass of the given drink
+  knowsDrink(drink: Drink): boolean {
+    return (this.sippedDrinks.get(drink) ?? 0) >= 4;
   }
 }

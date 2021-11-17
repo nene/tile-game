@@ -3,7 +3,7 @@ import { PouringGame } from "../minigames/PouringGame";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { SpriteSheet } from "../sprites/SpriteSheet";
-import { Drink, DrinkColor } from "./Drink";
+import { Drink } from "./Drink";
 import { isBeerBottle } from "./BeerBottle";
 import { GameItem } from "./GameItem";
 
@@ -31,18 +31,7 @@ export class BeerGlass implements GameItem {
   }
 
   getName() {
-    switch (this.level) {
-      case DrinkLevel.empty: return "Tühi šoppen";
-      case DrinkLevel.almostEmpty: return "Peaaegu tühi šoppen";
-      case DrinkLevel.half: return "Poolik šoppen";
-      case DrinkLevel.almostFull: return "Peaaegu täis šoppen";
-      case DrinkLevel.full:
-        switch (this.drink?.color) {
-          case DrinkColor.water: return "Šoppen veega";
-          case DrinkColor.lemonade: return "Šoppen limonaadiga";
-          default: return "Šoppen õllega";
-        }
-    }
+    return "Šoppen";
   }
 
   fill(drink: Drink | undefined, level: DrinkLevel) {
