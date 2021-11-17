@@ -5,6 +5,6 @@ import { OutdoorsLocationFactory } from "./OutdoorsLocationFactory";
 export function createWorld(day: number): GameWorld {
   return new GameWorld([
     new CfeLocationFactory(),
-    new OutdoorsLocationFactory(day),
+    new OutdoorsLocationFactory(),
   ]);
 }

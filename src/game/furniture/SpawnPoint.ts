@@ -7,7 +7,7 @@ import { Location } from "../locations/Location";
 export class SpawnPoint implements GameObject {
   private tickCount: number = 0;
 
-  constructor(private coord: Coord, private day: number) { }
+  constructor(private coord: Coord) { }
 
   tick(location: Location) {
     this.tickCount++;
@@ -19,7 +19,7 @@ export class SpawnPoint implements GameObject {
   }
 
   private trySpawnCharacter(): Character | undefined {
-    return getAllCharacters().find((char) => char.getSpawnTime(this.day) === this.tickCount);
+    return getAllCharacters().find((char) => char.getSpawnTime() === this.tickCount);
   }
 
   paint() { }

@@ -13,7 +13,7 @@ export class OutdoorsLocationFactory implements LocationFactory {
   private objects: GameObject[];
   private buildings: Building[];
 
-  constructor(day: number) {
+  constructor() {
     this.buildings = [
       new CfeBuilding([28, 32]),
     ];
@@ -32,7 +32,7 @@ export class OutdoorsLocationFactory implements LocationFactory {
       new Fence(tileToScreenCoord([9, 14])),
       new Fence(tileToScreenCoord([16, 14])),
       // A spawn location outside of the fence
-      new SpawnPoint(tileToScreenCoord([14, 13]), day),
+      new SpawnPoint(tileToScreenCoord([14, 13])),
     ];
   }
 

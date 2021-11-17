@@ -36,11 +36,14 @@ export class Character {
   private beersConsumed = 0;
   private questionsAsked = 0;
   private colorBandState = this.randomColorBandState();
+  private today?: DayConfig;
 
   constructor(private def: CharacterDef) {
+    this.resetForDay(1);
   }
 
   resetForDay(day: number) {
+    this.today = this.def.days[day];
     this.willWriteToBook = this.randomWillWriteToBook();
     this.beersConsumed = 0;
     this.questionsAsked = 0;
@@ -73,8 +76,8 @@ export class Character {
     };
   }
 
-  getSpawnTime(day: number): number {
-    return this.def.days[day]?.spawnTime ?? Infinity;
+  getSpawnTime(): number {
+    return this.today?.spawnTime ?? Infinity;
   }
 
   getFavoriteDrinks() {
