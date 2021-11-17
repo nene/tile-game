@@ -27,6 +27,10 @@ export class Calendar {
     }
   }
 
+  getDay() {
+    return this.day;
+  }
+
   setDay(day: number) {
     this.day = day;
     this.ticks = DAY_START_TIME;

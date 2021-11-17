@@ -39,7 +39,6 @@ export class Character {
   private today?: DayConfig;
 
   constructor(private def: CharacterDef) {
-    this.resetForDay(1);
   }
 
   resetForDay(day: number) {

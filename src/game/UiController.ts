@@ -30,7 +30,6 @@ export class UiController {
   private dayTransition?: DayTransition;
 
   constructor() {
-    this.world = createWorld(1);
     this.calendar = new Calendar({
       onDayEnd: (day) => {
         this.dayTransition = new DayTransition({
@@ -49,6 +48,9 @@ export class UiController {
         });
       },
     });
+
+    resetCharactersForDay(this.calendar.getDay());
+    this.world = createWorld(this.calendar.getDay());
 
     this.attributes.alcoSkill.onDrunkennessChange((drunkenness) => {
       const player = this.world.getPlayer();
