@@ -21,7 +21,7 @@ export class PlayerAnimationLibrary {
     }
 
     this.walkAnimations = {
-      down: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: { from: [0, 0], to: [0, 0] } }),
+      down: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: { from: [0, 3], to: [7, 3] } }),
       up: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: { from: [3, 0], to: [3, 0] } }),
       right: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: { from: [0, 1], to: [7, 1] } }),
       left: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: { from: [0, 2], to: [7, 2] } }),
