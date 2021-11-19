@@ -60,7 +60,7 @@ const spriteDef = (x: { src: string, cfg: SpriteSheetConfig }) => x;
 const imageFiles = {
   'cfe-bg': spriteDef({ src: cfeBg, cfg: { size: [16, 16], colsRows: [4, 4] } }),
 
-  'cfe-reb': spriteDef({ src: cfeReb, cfg: { size: [16, 34], colsRows: [8, 4], offset: [-8, -31] } }),
+  'cfe-reb': spriteDef({ src: cfeReb, cfg: { size: [16, 34], colsRows: [8, 5], offset: [-8, -31] } }),
   'cfe-reb-drunk': spriteDef({ src: cfeRebDrunk, cfg: { size: [32, 35], colsRows: [5, 2], offset: [-16, -30] } }),
 
   'cfe-ksv-sass': spriteDef({ src: cfeKsvSass, cfg: { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET } }),
