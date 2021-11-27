@@ -1,4 +1,4 @@
-import { Door, isDoor } from "../furniture/Door";
+import { findDoor } from "../furniture/Door";
 import { GameWorld } from "../GameWorld";
 import { Location } from "../locations/Location";
 import { LocationName } from "../locations/LocationFactory";
@@ -13,20 +13,12 @@ export class EnterDoorActivity implements Activity {
   }
 
   tick(figure: CharacterFigure, oldLocation: Location, world: GameWorld): ActivityUpdates {
-    const door = this.findDoor(oldLocation, this.doorTarget);
+    const door = findDoor(oldLocation, this.doorTarget);
     const newLocation = world.getLocation(door.getToLocation());
     oldLocation.remove(figure);
     newLocation.add(figure);
     this.entered = true;
-    return { coord: this.findDoor(newLocation, oldLocation.getName()).getCoord() };
-  }
-
-  private findDoor(location: Location, target: LocationName): Door {
-    const door = location.allObjects().filter(isDoor).find((door) => door.getToLocation() === target);
-    if (!door) {
-      throw new Error("No suitable door found");
-    }
-    return door;
+    return { coord: findDoor(newLocation, oldLocation.getName()).getCoord() };
   }
 
   isFinished() {

@@ -5,6 +5,7 @@ import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary, SpriteName } from "../sprites/SpriteLibrary";
 import { UiController } from "../UiController";
 import { LocationName } from "../locations/LocationFactory";
+import { Location } from "../locations/Location";
 
 export interface DoorConfig {
   coord: Coord;
@@ -61,11 +62,7 @@ export class Door implements GameObject {
     const world = ui.getWorld();
     world.getActiveLocation();
     const newLocation = world.getLocation(this.toLocation);
-    // Find door that opens to this location
-    const door = newLocation.allObjects().filter(isDoor).find(door => door.getToLocation() === this.fromLocation);
-    if (!door) {
-      throw new Error("No suitable door found in the other location");
-    }
+    const door = findDoor(newLocation, this.fromLocation);
     world.teleport(world.getPlayer(), newLocation);
     world.getPlayer().setCoord(coordAdd(door.getCoord(), [8, 8]));
   }
@@ -80,3 +77,11 @@ export class Door implements GameObject {
 }
 
 export const isDoor = (obj: GameObject): obj is Door => obj instanceof Door;
+
+export const findDoor = (location: Location, target: LocationName): Door => {
+  const door = location.allObjects().filter(isDoor).find((door) => door.getToLocation() === target);
+  if (!door) {
+    throw new Error(`No door to ${target} found in ${location.getName()}`);
+  }
+  return door;
+};
