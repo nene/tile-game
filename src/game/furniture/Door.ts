@@ -67,10 +67,6 @@ export class Door implements GameObject {
     world.getPlayer().setCoord(coordAdd(door.getCoord(), [8, 8]));
   }
 
-  getFromLocation(): LocationName {
-    return this.fromLocation;
-  }
-
   getToLocation(): LocationName {
     return this.toLocation;
   }
