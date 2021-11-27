@@ -40,7 +40,8 @@ export class CfeLocationFactory implements LocationFactory {
       new Door({
         coord: tileToScreenCoord([13, 4]),
         spriteName: "door",
-        target: { location: "outdoors" },
+        from: "cfe-cellar",
+        to: "cfe-hall",
       }),
 
       new Countertop(tileToScreenCoord([15, 7])),
@@ -53,7 +54,7 @@ export class CfeLocationFactory implements LocationFactory {
   }
 
   getName(): LocationName {
-    return "cfe";
+    return "cfe-cellar";
   }
 
   getSize(): Coord {

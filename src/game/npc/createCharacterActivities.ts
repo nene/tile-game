@@ -13,14 +13,18 @@ import { compact } from "lodash";
 
 export function createCharacterActivities(character: Character): Activity[] {
   return compact([
-    new MoveToDoorActivity(character),
-    new EnterDoorActivity(character),
+    new MoveToDoorActivity("cfe-hall", character),
+    new EnterDoorActivity("cfe-hall", character),
+    new MoveToDoorActivity("cfe-cellar", character),
+    new EnterDoorActivity("cfe-cellar", character),
     character.isRememberingBookWriting() ? new WriteToBookActivity(character) : undefined,
     new PauseActivity(5, character),
     new MoveToTableActivity(character),
     new SatisfyDesiresActivity(character),
-    new MoveToDoorActivity(character),
-    new EnterDoorActivity(character),
+    new MoveToDoorActivity("cfe-hall", character),
+    new EnterDoorActivity("cfe-hall", character),
+    new MoveToDoorActivity("outdoors", character),
+    new EnterDoorActivity("outdoors", character),
     new MoveActivity(tileToScreenCoord([10, 15]), character),
     new DespawnActivity(character),
   ]);

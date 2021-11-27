@@ -9,22 +9,21 @@ import { LocationName } from "../locations/LocationFactory";
 export interface DoorConfig {
   coord: Coord;
   spriteName: SpriteName;
-  target: DoorTarget;
-}
-
-export interface DoorTarget {
-  location: LocationName;
+  from: LocationName;
+  to: LocationName;
 }
 
 export class Door implements GameObject {
   private coord: Coord;
-  private target: DoorTarget;
+  private fromLocation: LocationName;
+  private toLocation: LocationName;
   private sprite: Sprite;
 
-  constructor({ coord, spriteName, target }: DoorConfig) {
+  constructor({ coord, spriteName, from, to }: DoorConfig) {
     this.coord = coord;
     this.sprite = SpriteLibrary.getSprite(spriteName);
-    this.target = target;
+    this.fromLocation = from;
+    this.toLocation = to;
   }
 
   tick() {
@@ -60,17 +59,23 @@ export class Door implements GameObject {
 
   interact(ui: UiController) {
     const world = ui.getWorld();
-    const newLocation = world.getLocation(this.target.location);
-    const door = newLocation.allObjects().find(isDoor);
+    world.getActiveLocation();
+    const newLocation = world.getLocation(this.toLocation);
+    // Find door that opens to this location
+    const door = newLocation.allObjects().filter(isDoor).find(door => door.getToLocation() === this.fromLocation);
     if (!door) {
-      throw new Error("No door found in the other location");
+      throw new Error("No suitable door found in the other location");
     }
     world.teleport(world.getPlayer(), newLocation);
     world.getPlayer().setCoord(coordAdd(door.getCoord(), [8, 8]));
   }
 
-  getTarget(): DoorTarget {
-    return this.target;
+  getFromLocation(): LocationName {
+    return this.fromLocation;
+  }
+
+  getToLocation(): LocationName {
+    return this.toLocation;
   }
 }
 

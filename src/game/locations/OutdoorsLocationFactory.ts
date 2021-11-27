@@ -25,7 +25,8 @@ export class OutdoorsLocationFactory implements LocationFactory {
       new Door({
         coord: [228, 173],
         spriteName: "cfe-building-door",
-        target: { location: "cfe" },
+        from: "outdoors",
+        to: "cfe-hall",
       }),
       new Fence(tileToScreenCoord([0, 14])),
       new Fence(coordAdd(tileToScreenCoord([4, 14]), [8, 0])),
