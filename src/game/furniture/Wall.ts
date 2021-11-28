@@ -1,5 +1,6 @@
 import { Coord, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
+import { PixelScreen } from "../PixelScreen";
 
 // Just a box which can't be walked through
 // Invisible in itself, relies on the background map to render the wall itself
@@ -7,14 +8,18 @@ export class Wall implements GameObject {
   private coord: Coord;
   private size: Coord;
 
-  constructor({ coord, size }: Rect) {
+  constructor({ coord, size }: Rect, private debug = false) {
     this.coord = coord;
     this.size = size;
   }
 
   tick() { }
 
-  paint() { }
+  paint(s: PixelScreen) {
+    if (this.debug) {
+      s.drawRect({ coord: this.coord, size: this.size }, "red");
+    }
+  }
 
   getCoord() {
     return this.coord;

@@ -7,35 +7,34 @@ import { Lamp } from "../furniture/Lamp";
 import { Painting } from "../furniture/Painting";
 import { Pianino } from "../furniture/Pianino";
 
-const CFE_HALL_SIZE: Coord = [23, 17]; // Size in tiles
+const CFE_HALL_SIZE: Coord = [22, 15]; // Size in tiles
 
 export class CfeHallLocationFactory implements LocationFactory {
   private background = new TiledBackground([
-    "#22222222222222########",
-    "6tttttttttttttt4#######",
-    "6mmmmmmmmmmmmmm4#######",
-    "6bbbbbbbbbbbbbb1222222#",
-    "6______________ttttttt4",
-    "6______________mmmmmmm4",
-    "6______________bbbbbbb4",
-    "6_____________________4",
-    "6_____________________4",
-    "6_____________________4",
-    "6_____________________4",
-    "6_____________________4",
-    "6_____________________4",
-    "6_____________________4",
-    "6_____________________4",
-    "6_____________________4",
-    "#888888888888888888888#",
+    "#22222222222222#######",
+    "6tttttttttttttt4######",
+    "6mmmmmmmmmmmmmm4######",
+    "6bbbbbbbbbbbbbb122222#",
+    "6______________tttttt4",
+    "6______________mmmmmm4",
+    "6______________bbbbbb4",
+    "6____________________4",
+    "6____________________4",
+    "6____________________4",
+    "6______________788888#",
+    "6______________4######",
+    "6______________4######",
+    "6______________4######",
+    "#88888888888888#######",
   ]);
 
   private objects = [
     new Wall({ coord: tileToScreenCoord([0, 1]), size: tileToScreenCoord([22, 3]) }),
-    new Wall({ coord: tileToScreenCoord([15, 4]), size: tileToScreenCoord([8, 3]) }),
-    new Wall({ coord: tileToScreenCoord([0, 0]), size: tileToScreenCoord([1, 17]) }),
-    new Wall({ coord: tileToScreenCoord([1, 16]), size: tileToScreenCoord([22, 1]) }),
-    new Wall({ coord: tileToScreenCoord([22, 7]), size: tileToScreenCoord([1, 9]) }),
+    new Wall({ coord: tileToScreenCoord([15, 4]), size: tileToScreenCoord([7, 3]) }),
+    new Wall({ coord: tileToScreenCoord([0, 0]), size: tileToScreenCoord([1, 15]) }),
+    new Wall({ coord: tileToScreenCoord([1, 14]), size: tileToScreenCoord([22, 1]) }),
+    new Wall({ coord: tileToScreenCoord([21, 7]), size: tileToScreenCoord([1, 7]) }),
+    new Wall({ coord: tileToScreenCoord([15, 10]), size: tileToScreenCoord([6, 4]) }),
 
     new Lamp(tileToScreenCoord([3, 4]), true),
     new Painting(tileToScreenCoord([4, 4]), "coat-of-arms"),
