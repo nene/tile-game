@@ -35,17 +35,17 @@ export class CfeHallLocationFactory implements LocationFactory {
     new Wall({ coord: tileToScreenCoord([22, 7]), size: tileToScreenCoord([1, 9]) }),
 
     new Door({
-      coord: tileToScreenCoord([13, 4]),
-      spriteName: "door",
+      coord: tileToScreenCoord([10, 4]),
+      spriteName: "door-large",
       from: "cfe-hall",
-      to: "cfe-cellar",
+      to: "outdoors",
     }),
 
     new Door({
       coord: tileToScreenCoord([16, 7]),
       spriteName: "door",
       from: "cfe-hall",
-      to: "outdoors",
+      to: "cfe-cellar",
     }),
   ];
 

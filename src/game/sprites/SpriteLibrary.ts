@@ -21,6 +21,7 @@ import tap from "./data/tap.png";
 import drain from "./data/drain.png";
 import book from "./data/book.png";
 import door from "./data/door.png";
+import doorLarge from "./data/door-large.png";
 import colorShield from "./data/color-shield.png";
 import colorBand from "./data/color-band.png";
 import bulletinBoard from "./data/bulletin-board.png";
@@ -78,6 +79,7 @@ const imageFiles = {
   'book-cabinet': spriteDef({ src: bookCabinet, cfg: { size: [16, 24], colsRows: [2, 1], offset: [0, -15] } }),
   'kitchen-sink': spriteDef({ src: kitchenSink, cfg: { size: [16, 43], offset: [0, -27] } }),
   'door': spriteDef({ src: door, cfg: { size: [20, 35], offset: [-2, -34] } }),
+  'door-large': spriteDef({ src: doorLarge, cfg: { size: [33, 38], offset: [-2, -37] } }),
   'color-shield': spriteDef({ src: colorShield, cfg: { size: [11, 12], offset: [3, -40] } }),
   'color-band': spriteDef({ src: colorBand, cfg: { size: [16, 16], colsRows: [3, 1] } }),
   'bulletin-board': spriteDef({ src: bulletinBoard, cfg: { size: [13, 17], offset: [4, -40] } }),
