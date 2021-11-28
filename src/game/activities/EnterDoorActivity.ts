@@ -18,7 +18,7 @@ export class EnterDoorActivity implements Activity {
     oldLocation.remove(figure);
     newLocation.add(figure);
     this.entered = true;
-    return { coord: findDoor(newLocation, oldLocation.getName()).getCoord() };
+    return { coord: findDoor(newLocation, oldLocation.getName()).getTeleportCoord() };
   }
 
   isFinished() {

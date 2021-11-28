@@ -27,9 +27,19 @@ const spriteIndex: Record<string, Coord> = {
   "m": [4, 1], // Wall middle (hall)
   "b": [4, 2], // Wall bottom (hall)
   "_": [4, 3], // Floor (hall)
+
+  "u": [5, 0], // stairs up top-left
+  "U": [6, 0], // stairs up top-right
+  "y": [5, 1], // stairs up bottom-left
+  "Y": [6, 1], // stairs up bottom-right
+
+  "d": [5, 2], // stairs down top-left
+  "D": [6, 2], // stairs down top-right
+  "z": [5, 3], // stairs down bottom-left
+  "Z": [6, 3], // stairs down bottom-right
 };
 
-const isWallSymbol = (char: string): boolean => /[1234#6789TMBtmb]/.test(char);
+const isWallSymbol = (char: string): boolean => /[1234#6789TMBtmbuUzZ]/.test(char);
 
 export class TiledBackground implements LocationBackground {
   private bg: SpriteSheet;

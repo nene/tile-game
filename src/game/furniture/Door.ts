@@ -10,8 +10,10 @@ import { Location } from "../locations/Location";
 export interface DoorConfig {
   coord: Coord;
   spriteName: SpriteName;
+  spriteCoord?: Coord;
   from: LocationName;
   to: LocationName;
+  teleportOffset?: Coord;
 }
 
 export class Door implements GameObject {
@@ -19,12 +21,14 @@ export class Door implements GameObject {
   private fromLocation: LocationName;
   private toLocation: LocationName;
   private sprite: Sprite;
+  private teleportOffset: Coord;
 
-  constructor({ coord, spriteName, from, to }: DoorConfig) {
+  constructor({ coord, spriteName, spriteCoord, from, to, teleportOffset }: DoorConfig) {
     this.coord = coord;
-    this.sprite = SpriteLibrary.getSprite(spriteName);
+    this.sprite = SpriteLibrary.getSprite(spriteName, spriteCoord);
     this.fromLocation = from;
     this.toLocation = to;
+    this.teleportOffset = teleportOffset ?? [8, 8];
   }
 
   tick() {
@@ -64,11 +68,15 @@ export class Door implements GameObject {
     const newLocation = world.getLocation(this.toLocation);
     const door = findDoor(newLocation, this.fromLocation);
     world.teleport(world.getPlayer(), newLocation);
-    world.getPlayer().setCoord(coordAdd(door.getCoord(), [8, 8]));
+    world.getPlayer().setCoord(door.getTeleportCoord());
   }
 
   getToLocation(): LocationName {
     return this.toLocation;
+  }
+
+  getTeleportCoord(): Coord {
+    return coordAdd(this.getCoord(), this.teleportOffset);
   }
 }
 

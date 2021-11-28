@@ -1,4 +1,4 @@
-import { Coord, coordAdd } from "../Coord";
+import { Coord } from "../Coord";
 import { findDoor } from "../furniture/Door";
 import { Location } from "../locations/Location";
 import { LocationName } from "../locations/LocationFactory";
@@ -14,7 +14,7 @@ export class MoveToDoorActivity implements Activity {
   }
 
   public tick(figure: CharacterFigure, location: Location): ActivityUpdates {
-    this.targetCoord = coordAdd(findDoor(location, this.doorTarget).getCoord(), [8, 8]);
+    this.targetCoord = findDoor(location, this.doorTarget).getTeleportCoord();
     return {};
   }
 

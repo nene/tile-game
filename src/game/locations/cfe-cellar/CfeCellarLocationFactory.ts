@@ -17,9 +17,9 @@ import { TiledBackground } from "../TiledBackground";
 export class CfeCellarLocationFactory implements LocationFactory {
   private background = new TiledBackground([
     "#22222222222222########",
-    "6TTTTTTTTTTTTTT4#######",
-    "6MMMMMMMMMMMMMM4#######",
-    "6BBBBBBBBBBBBBB1222222#",
+    "6TTTTTTTTTTT##T4#######",
+    "6MMMMMMMMMMMuUM4#######",
+    "6BBBBBBBBBBByYB1222222#",
     "6..............TTTTTTT4",
     "6..............MMMMMMM4",
     "6..............BBBBBBB4",
@@ -43,12 +43,14 @@ export class CfeCellarLocationFactory implements LocationFactory {
     new Table(tileToScreenCoord([3, 8]), "rtl"),
     new Sofa(tileToScreenCoord([3, 4])),
     new Fireplace(tileToScreenCoord([6, 4])),
-    new BookCabinet(tileToScreenCoord([11, 4])),
+    new BookCabinet(tileToScreenCoord([10, 4])),
     new Door({
-      coord: tileToScreenCoord([13, 4]),
-      spriteName: "door",
+      coord: tileToScreenCoord([12, 4]),
+      spriteName: "staircase-door",
+      spriteCoord: [1, 0],
       from: "cfe-cellar",
       to: "cfe-hall",
+      teleportOffset: [16, -8],
     }),
 
     new Countertop(tileToScreenCoord([15, 7])),

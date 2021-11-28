@@ -25,6 +25,7 @@ import drain from "./data/drain.png";
 import book from "./data/book.png";
 import door from "./data/door.png";
 import doorLarge from "./data/door-large.png";
+import staircaseDoor from "./data/staircase-door.png";
 import colorShield from "./data/color-shield.png";
 import colorBand from "./data/color-band.png";
 import bulletinBoard from "./data/bulletin-board.png";
@@ -65,7 +66,7 @@ const PLAYER_OFFSET: Coord = [-8, -30];
 const spriteDef = (x: { src: string, cfg: SpriteSheetConfig }) => x;
 
 const imageFiles = {
-  'cfe-bg': spriteDef({ src: cfeBg, cfg: { size: [16, 16], colsRows: [5, 4] } }),
+  'cfe-bg': spriteDef({ src: cfeBg, cfg: { size: [16, 16], colsRows: [7, 4] } }),
 
   'cfe-reb': spriteDef({ src: cfeReb, cfg: { size: [16, 34], colsRows: [8, 5], offset: [-8, -31] } }),
   'cfe-reb-drunk': spriteDef({ src: cfeRebDrunk, cfg: { size: [32, 35], colsRows: [5, 2], offset: [-16, -30] } }),
@@ -87,6 +88,7 @@ const imageFiles = {
   'kitchen-sink': spriteDef({ src: kitchenSink, cfg: { size: [16, 43], offset: [0, -27] } }),
   'door': spriteDef({ src: door, cfg: { size: [20, 35], offset: [-2, -34] } }),
   'door-large': spriteDef({ src: doorLarge, cfg: { size: [33, 38], offset: [-1, -38] } }),
+  'staircase-door': spriteDef({ src: staircaseDoor, cfg: { size: [32, 48], colsRows: [3, 1], offset: [0, -48] } }),
   'fireplace': spriteDef({ src: fireplace, cfg: { size: [64, 52], colsRows: [5, 1], offset: [0, -36] } }),
   'countertop': spriteDef({ src: countertop, cfg: { size: [16, 55], offset: [0, -23] } }),
   'sofa': spriteDef({ src: sofa, cfg: { size: [48, 26], offset: [0, -15] } }),
