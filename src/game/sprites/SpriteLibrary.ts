@@ -18,6 +18,7 @@ import beerBox from "./data/beer-box.png";
 import bookCabinet from "./data/book-cabinet.png";
 import kitchenSink from "./data/kitchen-sink.png";
 import pianino from "./data/pianino.png";
+import boardTable from "./data/board-table.png";
 import lightSwitch from "./data/light-switch.png";
 import tap from "./data/tap.png";
 import drain from "./data/drain.png";
@@ -91,6 +92,7 @@ const imageFiles = {
   'sofa': spriteDef({ src: sofa, cfg: { size: [48, 26], offset: [0, -15] } }),
   'lamp': spriteDef({ src: lamp, cfg: { size: [21, 24], colsRows: [2, 1], offset: [-3, -44] } }),
   'pianino': spriteDef({ src: pianino, cfg: { size: [32, 27], offset: [0, -17] } }),
+  'board-table': spriteDef({ src: boardTable, cfg: { size: [43, 31], offset: [-5, -14] } }),
   'light-switch': spriteDef({ src: lightSwitch, cfg: { size: [9, 6], colsRows: [2, 1], offset: [4, -19] } }),
   // paintings
   'bulletin-board': spriteDef({ src: bulletinBoard, cfg: { size: [13, 17], offset: [4, -40] } }),

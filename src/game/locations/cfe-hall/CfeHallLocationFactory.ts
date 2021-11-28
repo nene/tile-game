@@ -1,4 +1,4 @@
-import { Coord, tileToScreenCoord } from "../../Coord";
+import { Coord, coordAdd, tileToScreenCoord } from "../../Coord";
 import { LocationFactory, LocationName } from "../LocationFactory";
 import { Door } from "../../furniture/Door";
 import { TiledBackground } from "../TiledBackground";
@@ -7,6 +7,7 @@ import { Painting } from "../../furniture/Painting";
 import { Pianino } from "../../furniture/Pianino";
 import { GameObject } from "../../GameObject";
 import { LightSwitch } from "../../furniture/LightSwitch";
+import { BoardTable } from "../../furniture/BoardTable";
 
 export class CfeHallLocationFactory implements LocationFactory {
   private background = new TiledBackground([
@@ -39,14 +40,9 @@ export class CfeHallLocationFactory implements LocationFactory {
 
     this.objects = [
       ...this.background.getWalls(),
-      // new Wall({ coord: tileToScreenCoord([0, 1]), size: tileToScreenCoord([22, 3]) }),
-      // new Wall({ coord: tileToScreenCoord([15, 4]), size: tileToScreenCoord([7, 3]) }),
-      // new Wall({ coord: tileToScreenCoord([0, 0]), size: tileToScreenCoord([1, 15]) }),
-      // new Wall({ coord: tileToScreenCoord([1, 14]), size: tileToScreenCoord([22, 1]) }),
-      // new Wall({ coord: tileToScreenCoord([21, 7]), size: tileToScreenCoord([1, 7]) }),
-      // new Wall({ coord: tileToScreenCoord([15, 10]), size: tileToScreenCoord([6, 4]) }),
 
       new Painting(tileToScreenCoord([4, 4]), "coat-of-arms"),
+      new BoardTable(coordAdd(tileToScreenCoord([5, 4]), [0, 5])),
 
       new Door({
         coord: tileToScreenCoord([9, 4]),
