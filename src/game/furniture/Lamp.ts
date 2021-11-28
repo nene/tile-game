@@ -4,7 +4,7 @@ import { PixelScreen } from "../PixelScreen";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 
 export class Lamp implements GameObject {
-  constructor(private coord: Coord, private turnedOn: boolean) {
+  constructor(private coord: Coord, private turnedOn: boolean = false) {
   }
 
   tick() { }
@@ -38,4 +38,8 @@ export class Lamp implements GameObject {
   }
 
   interact() { }
+
+  toggle(turnedOn: boolean) {
+    this.turnedOn = turnedOn;
+  }
 }
