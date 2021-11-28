@@ -42,14 +42,14 @@ export class CfeHallLocationFactory implements LocationFactory {
     new Lamp(tileToScreenCoord([8, 4]), true),
 
     new Door({
-      coord: tileToScreenCoord([10, 4]),
+      coord: tileToScreenCoord([9, 4]),
       spriteName: "door-large",
       from: "cfe-hall",
       to: "outdoors",
     }),
-    new Lamp(tileToScreenCoord([12, 4]), true),
-    new Painting(tileToScreenCoord([13, 4]), "polonia-cartel"),
-    new Pianino(tileToScreenCoord([13, 4])),
+    new Lamp(tileToScreenCoord([11, 4]), true),
+    new Painting(tileToScreenCoord([12, 4]), "polonia-cartel"),
+    new Pianino(tileToScreenCoord([12, 4])),
 
     new Door({
       coord: tileToScreenCoord([16, 7]),
