@@ -38,6 +38,7 @@ export class CfeHallLocationFactory implements LocationFactory {
     new Wall({ coord: tileToScreenCoord([22, 7]), size: tileToScreenCoord([1, 9]) }),
 
     new Lamp(tileToScreenCoord([3, 4]), true),
+    new Painting(tileToScreenCoord([4, 4]), "coat-of-arms"),
     new Lamp(tileToScreenCoord([8, 4]), true),
 
     new Door({

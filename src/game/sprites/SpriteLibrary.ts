@@ -27,6 +27,7 @@ import colorShield from "./data/color-shield.png";
 import colorBand from "./data/color-band.png";
 import bulletinBoard from "./data/bulletin-board.png";
 import poloniaCartel from "./data/polonia-cartel.png";
+import coatOfArms from "./data/coat-of-arms.png";
 import fireplace from "./data/fireplace.png";
 import countertop from "./data/countertop.png";
 import sofa from "./data/sofa.png";
@@ -93,6 +94,7 @@ const imageFiles = {
   'bulletin-board': spriteDef({ src: bulletinBoard, cfg: { size: [13, 17], offset: [4, -40] } }),
   'color-shield': spriteDef({ src: colorShield, cfg: { size: [11, 12], offset: [3, -40] } }),
   'polonia-cartel': spriteDef({ src: poloniaCartel, cfg: { size: [24, 29], offset: [1, -46] } }),
+  'coat-of-arms': spriteDef({ src: coatOfArms, cfg: { size: [53, 48], offset: [6, -48] } }),
 
   // UI
   'slot': spriteDef({ src: slot, cfg: { size: [20, 20], colsRows: [2, 1] } }),
