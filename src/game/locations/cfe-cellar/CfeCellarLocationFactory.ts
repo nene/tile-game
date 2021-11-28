@@ -4,7 +4,6 @@ import { Fridge } from "../../furniture/Fridge";
 import { LocationFactory, LocationName } from "../LocationFactory";
 import { GameObject } from "../../GameObject";
 import { Table } from "../../furniture/Table";
-import { Wall } from "../../furniture/Wall";
 import { BeerBox } from "../../furniture/BeerBox";
 import { Door } from "../../furniture/Door";
 import { Sofa } from "../../furniture/Sofa";
@@ -37,11 +36,7 @@ export class CfeCellarLocationFactory implements LocationFactory {
   ]);
 
   private objects: GameObject[] = [
-    new Wall({ coord: tileToScreenCoord([0, 1]), size: tileToScreenCoord([22, 3]) }),
-    new Wall({ coord: tileToScreenCoord([15, 4]), size: tileToScreenCoord([8, 3]) }),
-    new Wall({ coord: tileToScreenCoord([0, 0]), size: tileToScreenCoord([1, 17]) }),
-    new Wall({ coord: tileToScreenCoord([1, 16]), size: tileToScreenCoord([22, 1]) }),
-    new Wall({ coord: tileToScreenCoord([22, 7]), size: tileToScreenCoord([1, 9]) }),
+    ...this.background.getWalls(),
 
     new Painting(tileToScreenCoord([4, 4]), "color-shield"),
     new Table(tileToScreenCoord([8, 8])),

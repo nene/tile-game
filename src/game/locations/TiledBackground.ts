@@ -1,8 +1,10 @@
-import { Coord, tileToScreenCoord } from "../Coord";
+import { Coord, tileToScreenCoord, tileToScreenRect } from "../Coord";
+import { Wall } from "../furniture/Wall";
 import { PixelScreen } from "../PixelScreen";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { SpriteSheet } from "../sprites/SpriteSheet";
+import { detectWallSections } from "./detectWallSections";
 import { LocationBackground } from "./LocationBackground";
 
 const spriteIndex: Record<string, Coord> = {
@@ -27,6 +29,8 @@ const spriteIndex: Record<string, Coord> = {
   "_": [4, 3], // Floor (hall)
 };
 
+const isWallSymbol = (char: string): boolean => /[1234#6789TMBtmb]/.test(char);
+
 export class TiledBackground implements LocationBackground {
   private bg: SpriteSheet;
   private width: number;
@@ -46,12 +50,33 @@ export class TiledBackground implements LocationBackground {
     }
   }
 
-  private lookupSprite([x, y]: Coord): Sprite {
-    const char = this.spriteMap[y].charAt(x);
-    return this.bg.getSprite(spriteIndex[char]);
+  private lookupSprite(coord: Coord): Sprite {
+    return this.bg.getSprite(spriteIndex[this.lookupSymbol(coord)]);
+  }
+
+  private lookupSymbol([x, y]: Coord): string {
+    return this.spriteMap[y].charAt(x);
   }
 
   getGridSize(): Coord {
     return [this.width, this.height];
+  }
+
+  private getWallMap(): boolean[][] {
+    const map: boolean[][] = [];
+    for (let y = 0; y < this.height; y++) {
+      const row: boolean[] = [];
+      for (let x = 0; x < this.width; x++) {
+        row.push(isWallSymbol(this.lookupSymbol([x, y])));
+      }
+      map.push(row);
+    }
+    return map;
+  }
+
+  getWalls(): Wall[] {
+    return detectWallSections(this.getWallMap())
+      .map(tileToScreenRect)
+      .map((rect) => new Wall(rect));
   }
 }

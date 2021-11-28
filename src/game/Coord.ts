@@ -133,3 +133,8 @@ export function screenToTileCoord(screenCoord: Coord): Coord {
 export function screenToFractionalTileCoord(screenCoord: Coord): Coord {
   return coordDiv(screenCoord, TILE_SIZE);
 }
+
+export const tileToScreenRect = ({ coord, size }: Rect): Rect => ({
+  coord: tileToScreenCoord(coord),
+  size: tileToScreenCoord(size),
+});
