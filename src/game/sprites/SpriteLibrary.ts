@@ -25,6 +25,7 @@ import doorLarge from "./data/door-large.png";
 import colorShield from "./data/color-shield.png";
 import colorBand from "./data/color-band.png";
 import bulletinBoard from "./data/bulletin-board.png";
+import poloniaCartel from "./data/polonia-cartel.png";
 import fireplace from "./data/fireplace.png";
 import countertop from "./data/countertop.png";
 import sofa from "./data/sofa.png";
@@ -81,14 +82,15 @@ const imageFiles = {
   'book-cabinet': spriteDef({ src: bookCabinet, cfg: { size: [16, 24], colsRows: [2, 1], offset: [0, -15] } }),
   'kitchen-sink': spriteDef({ src: kitchenSink, cfg: { size: [16, 43], offset: [0, -27] } }),
   'door': spriteDef({ src: door, cfg: { size: [20, 35], offset: [-2, -34] } }),
-  'door-large': spriteDef({ src: doorLarge, cfg: { size: [33, 38], offset: [-2, -37] } }),
-  'color-shield': spriteDef({ src: colorShield, cfg: { size: [11, 12], offset: [3, -40] } }),
-  'color-band': spriteDef({ src: colorBand, cfg: { size: [16, 16], colsRows: [3, 1] } }),
-  'bulletin-board': spriteDef({ src: bulletinBoard, cfg: { size: [13, 17], offset: [4, -40] } }),
+  'door-large': spriteDef({ src: doorLarge, cfg: { size: [33, 38], offset: [-1, -38] } }),
   'fireplace': spriteDef({ src: fireplace, cfg: { size: [64, 52], colsRows: [5, 1], offset: [0, -36] } }),
   'countertop': spriteDef({ src: countertop, cfg: { size: [16, 55], offset: [0, -23] } }),
   'sofa': spriteDef({ src: sofa, cfg: { size: [48, 26], offset: [0, -15] } }),
-  'lamp': spriteDef({ src: lamp, cfg: { size: [21, 24], colsRows: [2, 1], offset: [3, -44] } }),
+  'lamp': spriteDef({ src: lamp, cfg: { size: [21, 24], colsRows: [2, 1], offset: [-3, -44] } }),
+  // paintings
+  'bulletin-board': spriteDef({ src: bulletinBoard, cfg: { size: [13, 17], offset: [4, -40] } }),
+  'color-shield': spriteDef({ src: colorShield, cfg: { size: [11, 12], offset: [3, -40] } }),
+  'polonia-cartel': spriteDef({ src: poloniaCartel, cfg: { size: [24, 29], offset: [1, -46] } }),
 
   // UI
   'slot': spriteDef({ src: slot, cfg: { size: [20, 20], colsRows: [2, 1] } }),
@@ -99,6 +101,7 @@ const imageFiles = {
   'gold': spriteDef({ src: gold, cfg: { size: [8, 8] } }),
   'flag-colors': spriteDef({ src: flagColors, cfg: { size: [12, 12], colsRows: [2, 1] } }),
   'opinion-shield': spriteDef({ src: opinionShield, cfg: { size: [6, 7], colsRows: [3, 1] } }),
+  'color-band': spriteDef({ src: colorBand, cfg: { size: [16, 16], colsRows: [3, 1] } }),
 
   // Items
   'beer-glass-lg': spriteDef({ src: beerGlassLg, cfg: { size: [16, 16], colsRows: [5, 5] } }),

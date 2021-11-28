@@ -4,6 +4,7 @@ import { Wall } from "../furniture/Wall";
 import { Door } from "../furniture/Door";
 import { TiledBackground } from "./TiledBackground";
 import { Lamp } from "../furniture/Lamp";
+import { Painting } from "../furniture/Painting";
 
 const CFE_HALL_SIZE: Coord = [23, 17]; // Size in tiles
 
@@ -37,8 +38,6 @@ export class CfeHallLocationFactory implements LocationFactory {
 
     new Lamp(tileToScreenCoord([3, 4]), true),
     new Lamp(tileToScreenCoord([8, 4]), true),
-    new Lamp(tileToScreenCoord([12, 4]), true),
-    new Lamp(tileToScreenCoord([18, 7]), true),
 
     new Door({
       coord: tileToScreenCoord([10, 4]),
@@ -46,6 +45,8 @@ export class CfeHallLocationFactory implements LocationFactory {
       from: "cfe-hall",
       to: "outdoors",
     }),
+    new Lamp(tileToScreenCoord([12, 4]), true),
+    new Painting(tileToScreenCoord([13, 4]), "polonia-cartel"),
 
     new Door({
       coord: tileToScreenCoord([16, 7]),
@@ -53,6 +54,7 @@ export class CfeHallLocationFactory implements LocationFactory {
       from: "cfe-hall",
       to: "cfe-cellar",
     }),
+    new Lamp(tileToScreenCoord([18, 7]), true),
   ];
 
   getName(): LocationName {
