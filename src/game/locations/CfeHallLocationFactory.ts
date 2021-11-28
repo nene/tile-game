@@ -3,6 +3,7 @@ import { LocationFactory, LocationName } from "./LocationFactory";
 import { Wall } from "../furniture/Wall";
 import { Door } from "../furniture/Door";
 import { TiledBackground } from "./TiledBackground";
+import { Lamp } from "../furniture/Lamp";
 
 const CFE_HALL_SIZE: Coord = [23, 17]; // Size in tiles
 
@@ -33,6 +34,11 @@ export class CfeHallLocationFactory implements LocationFactory {
     new Wall({ coord: tileToScreenCoord([0, 0]), size: tileToScreenCoord([1, 17]) }),
     new Wall({ coord: tileToScreenCoord([1, 16]), size: tileToScreenCoord([22, 1]) }),
     new Wall({ coord: tileToScreenCoord([22, 7]), size: tileToScreenCoord([1, 9]) }),
+
+    new Lamp(tileToScreenCoord([3, 4]), true),
+    new Lamp(tileToScreenCoord([8, 4]), true),
+    new Lamp(tileToScreenCoord([12, 4]), true),
+    new Lamp(tileToScreenCoord([18, 7]), true),
 
     new Door({
       coord: tileToScreenCoord([10, 4]),

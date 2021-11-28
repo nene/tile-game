@@ -28,6 +28,7 @@ import bulletinBoard from "./data/bulletin-board.png";
 import fireplace from "./data/fireplace.png";
 import countertop from "./data/countertop.png";
 import sofa from "./data/sofa.png";
+import lamp from "./data/lamp.png";
 import slot from "./data/slot.png";
 import scrollBar from "./data/scroll-bar.png";
 import closeButton from "./data/close-button.png";
@@ -72,6 +73,7 @@ const imageFiles = {
   'cfe-ksv-kark': spriteDef({ src: cfeKsvKark, cfg: { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET } }),
   'callout': spriteDef({ src: callout, cfg: { size: [16, 18], colsRows: [3, 1], offset: [-5, -52] } }),
 
+  // Furniture
   'table': spriteDef({ src: table, cfg: { size: [64, 23], offset: [0, -6] } }),
   'fridge': spriteDef({ src: fridge, cfg: { size: [16, 46], offset: [0, -32] } }),
   'beer-cabinet': spriteDef({ src: beerCabinet, cfg: { size: [32, 46], offset: [0, -32] } }),
@@ -86,7 +88,9 @@ const imageFiles = {
   'fireplace': spriteDef({ src: fireplace, cfg: { size: [64, 52], colsRows: [5, 1], offset: [0, -36] } }),
   'countertop': spriteDef({ src: countertop, cfg: { size: [16, 55], offset: [0, -23] } }),
   'sofa': spriteDef({ src: sofa, cfg: { size: [48, 26], offset: [0, -15] } }),
+  'lamp': spriteDef({ src: lamp, cfg: { size: [21, 24], colsRows: [2, 1], offset: [3, -44] } }),
 
+  // UI
   'slot': spriteDef({ src: slot, cfg: { size: [20, 20], colsRows: [2, 1] } }),
   'scroll-bar': spriteDef({ src: scrollBar, cfg: { size: [8, 8], colsRows: [5, 1] } }),
   'close-button': spriteDef({ src: closeButton, cfg: { size: [8, 8], colsRows: [2, 1] } }),
@@ -96,6 +100,7 @@ const imageFiles = {
   'flag-colors': spriteDef({ src: flagColors, cfg: { size: [12, 12], colsRows: [2, 1] } }),
   'opinion-shield': spriteDef({ src: opinionShield, cfg: { size: [6, 7], colsRows: [3, 1] } }),
 
+  // Items
   'beer-glass-lg': spriteDef({ src: beerGlassLg, cfg: { size: [16, 16], colsRows: [5, 5] } }),
   'beer-glass-sm': spriteDef({ src: beerGlassSm, cfg: { size: [10, 10], colsRows: [5, 5] } }),
   'bottle': spriteDef({ src: bottle, cfg: { size: [16, 16], colsRows: [3, 12] } }),
