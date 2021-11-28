@@ -15,8 +15,6 @@ import { KitchenSink } from "../furniture/KitchenSink";
 import { BookCabinet } from "../furniture/BookCabinet";
 import { TiledBackground } from "./TiledBackground";
 
-const CFE_SIZE: Coord = [23, 17]; // Size in tiles
-
 export class CfeCellarLocationFactory implements LocationFactory {
   private background = new TiledBackground([
     "#22222222222222########",
@@ -71,7 +69,7 @@ export class CfeCellarLocationFactory implements LocationFactory {
   }
 
   getSize(): Coord {
-    return tileToScreenCoord(CFE_SIZE);
+    return tileToScreenCoord(this.background.getGridSize());
   }
 
   getBackground() {

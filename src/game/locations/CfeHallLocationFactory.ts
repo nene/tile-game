@@ -7,8 +7,6 @@ import { Lamp } from "../furniture/Lamp";
 import { Painting } from "../furniture/Painting";
 import { Pianino } from "../furniture/Pianino";
 
-const CFE_HALL_SIZE: Coord = [22, 15]; // Size in tiles
-
 export class CfeHallLocationFactory implements LocationFactory {
   private background = new TiledBackground([
     "#22222222222222#######",
@@ -64,7 +62,7 @@ export class CfeHallLocationFactory implements LocationFactory {
   }
 
   getSize(): Coord {
-    return tileToScreenCoord(CFE_HALL_SIZE);
+    return tileToScreenCoord(this.background.getGridSize());
   }
 
   getBackground() {

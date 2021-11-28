@@ -50,4 +50,8 @@ export class TiledBackground implements LocationBackground {
     const char = this.spriteMap[y].charAt(x);
     return this.bg.getSprite(spriteIndex[char]);
   }
+
+  getGridSize(): Coord {
+    return [this.width, this.height];
+  }
 }
