@@ -1,13 +1,32 @@
-import { CfeBackground } from "./CfeBackground";
 import { Coord, tileToScreenCoord } from "../Coord";
 import { LocationFactory, LocationName } from "./LocationFactory";
 import { Wall } from "../furniture/Wall";
 import { Door } from "../furniture/Door";
+import { TiledBackground } from "./TiledBackground";
 
 const CFE_HALL_SIZE: Coord = [23, 17]; // Size in tiles
 
 export class CfeHallLocationFactory implements LocationFactory {
-  private background = new CfeBackground(CFE_HALL_SIZE);
+  private background = new TiledBackground([
+    "#22222222222222########",
+    "6TTTTTTTTTTTTTT4#######",
+    "6MMMMMMMMMMMMMM4#######",
+    "6BBBBBBBBBBBBBB1222222#",
+    "6..............TTTTTTT4",
+    "6..............MMMMMMM4",
+    "6..............BBBBBBB4",
+    "6.....................4",
+    "6.....................4",
+    "6.....................4",
+    "6.....................4",
+    "6.....................4",
+    "6.....................4",
+    "6.....................4",
+    "6.....................4",
+    "6.....................4",
+    "#888888888888888888888#",
+  ]);
+
 
   private objects = [
     new Wall({ coord: tileToScreenCoord([0, 1]), size: tileToScreenCoord([22, 3]) }),

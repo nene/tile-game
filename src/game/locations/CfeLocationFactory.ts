@@ -1,5 +1,4 @@
 import { BeerCabinet } from "../furniture/BeerCabinet";
-import { CfeBackground } from "./CfeBackground";
 import { Coord, tileToScreenCoord } from "../Coord";
 import { Fridge } from "../furniture/Fridge";
 import { LocationFactory, LocationName } from "./LocationFactory";
@@ -14,16 +13,34 @@ import { Countertop } from "../furniture/Countertop";
 import { Painting } from "../furniture/Painting";
 import { KitchenSink } from "../furniture/KitchenSink";
 import { BookCabinet } from "../furniture/BookCabinet";
+import { TiledBackground } from "./TiledBackground";
 
 const CFE_SIZE: Coord = [23, 17]; // Size in tiles
 
 export class CfeLocationFactory implements LocationFactory {
-  private background: CfeBackground;
+  private background = new TiledBackground([
+    "#22222222222222########",
+    "6TTTTTTTTTTTTTT4#######",
+    "6MMMMMMMMMMMMMM4#######",
+    "6BBBBBBBBBBBBBB1222222#",
+    "6..............TTTTTTT4",
+    "6..............MMMMMMM4",
+    "6..............BBBBBBB4",
+    "6.....................4",
+    "6.....................4",
+    "6.....................4",
+    "6.....................4",
+    "6.....................4",
+    "6.....................4",
+    "6.....................4",
+    "6.....................4",
+    "6.....................4",
+    "#888888888888888888888#",
+  ]);
+
   private objects: GameObject[];
 
   constructor() {
-    this.background = new CfeBackground(CFE_SIZE);
-
     this.objects = [
       new Wall({ coord: tileToScreenCoord([0, 1]), size: tileToScreenCoord([22, 3]) }),
       new Wall({ coord: tileToScreenCoord([15, 4]), size: tileToScreenCoord([8, 3]) }),
