@@ -15,10 +15,16 @@ const spriteIndex: Record<string, Coord> = {
   "9": [2, 0], // void (top-right)
   "6": [2, 1], // void (right)
   "3": [2, 2], // void (bottom-right)
-  "T": [3, 0], // Wall top
-  "M": [3, 1], // Wall middle
-  "B": [3, 2], // Wall bottom
-  ".": [3, 3], // Floor
+
+  "T": [3, 0], // Wall top (cellar)
+  "M": [3, 1], // Wall middle (cellar)
+  "B": [3, 2], // Wall bottom (cellar)
+  ".": [3, 3], // Floor (cellar)
+
+  "t": [4, 0], // Wall top (hall)
+  "m": [4, 1], // Wall middle (hall)
+  "b": [4, 2], // Wall bottom (hall)
+  "_": [4, 3], // Floor (hall)
 };
 
 export class TiledBackground implements LocationBackground {
