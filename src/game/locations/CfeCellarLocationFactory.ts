@@ -17,7 +17,7 @@ import { TiledBackground } from "./TiledBackground";
 
 const CFE_SIZE: Coord = [23, 17]; // Size in tiles
 
-export class CfeLocationFactory implements LocationFactory {
+export class CfeCellarLocationFactory implements LocationFactory {
   private background = new TiledBackground([
     "#22222222222222########",
     "6TTTTTTTTTTTTTT4#######",

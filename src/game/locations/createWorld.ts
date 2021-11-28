@@ -1,11 +1,11 @@
 import { GameWorld } from "../GameWorld";
 import { CfeHallLocationFactory } from "./CfeHallLocationFactory";
-import { CfeLocationFactory } from "./CfeLocationFactory";
+import { CfeCellarLocationFactory } from "./CfeCellarLocationFactory";
 import { OutdoorsLocationFactory } from "./OutdoorsLocationFactory";
 
 export function createWorld(day: number): GameWorld {
   return new GameWorld([
-    new CfeLocationFactory(),
+    new CfeCellarLocationFactory(),
     new CfeHallLocationFactory(),
     new OutdoorsLocationFactory(),
   ]);
