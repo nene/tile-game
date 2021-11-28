@@ -27,19 +27,19 @@ const spriteMap = [
 ];
 
 const spriteIndex: Record<string, Coord> = {
-  "T": [0, 0], // Wall top
-  "M": [0, 1], // Wall middle
-  "B": [0, 2], // Wall bottom
-  ".": [0, 3], // Floor
-  "7": [1, 0], // void (top-left)
-  "4": [1, 1], // void (left)
-  "1": [1, 2], // void (bottom-left)
-  "8": [2, 0], // void (top)
-  "#": [2, 1], // void (middle)
-  "2": [2, 2], // void (bottom)
-  "9": [3, 0], // void (top-right)
-  "6": [3, 1], // void (right)
-  "3": [3, 2], // void (bottom-right)
+  "7": [0, 0], // void (top-left)
+  "4": [0, 1], // void (left)
+  "1": [0, 2], // void (bottom-left)
+  "8": [1, 0], // void (top)
+  "#": [1, 1], // void (middle)
+  "2": [1, 2], // void (bottom)
+  "9": [2, 0], // void (top-right)
+  "6": [2, 1], // void (right)
+  "3": [2, 2], // void (bottom-right)
+  "T": [3, 0], // Wall top
+  "M": [3, 1], // Wall middle
+  "B": [3, 2], // Wall bottom
+  ".": [3, 3], // Floor
 };
 
 export class CfeBackground implements LocationBackground {
