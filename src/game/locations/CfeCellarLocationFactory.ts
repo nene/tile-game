@@ -38,37 +38,33 @@ export class CfeCellarLocationFactory implements LocationFactory {
     "#888888888888888888888#",
   ]);
 
-  private objects: GameObject[];
+  private objects: GameObject[] = [
+    new Wall({ coord: tileToScreenCoord([0, 1]), size: tileToScreenCoord([22, 3]) }),
+    new Wall({ coord: tileToScreenCoord([15, 4]), size: tileToScreenCoord([8, 3]) }),
+    new Wall({ coord: tileToScreenCoord([0, 0]), size: tileToScreenCoord([1, 17]) }),
+    new Wall({ coord: tileToScreenCoord([1, 16]), size: tileToScreenCoord([22, 1]) }),
+    new Wall({ coord: tileToScreenCoord([22, 7]), size: tileToScreenCoord([1, 9]) }),
 
-  constructor() {
-    this.objects = [
-      new Wall({ coord: tileToScreenCoord([0, 1]), size: tileToScreenCoord([22, 3]) }),
-      new Wall({ coord: tileToScreenCoord([15, 4]), size: tileToScreenCoord([8, 3]) }),
-      new Wall({ coord: tileToScreenCoord([0, 0]), size: tileToScreenCoord([1, 17]) }),
-      new Wall({ coord: tileToScreenCoord([1, 16]), size: tileToScreenCoord([22, 1]) }),
-      new Wall({ coord: tileToScreenCoord([22, 7]), size: tileToScreenCoord([1, 9]) }),
+    new Painting(tileToScreenCoord([4, 4]), "color-shield"),
+    new Table(tileToScreenCoord([8, 8])),
+    new Table(tileToScreenCoord([3, 8]), "rtl"),
+    new Sofa(tileToScreenCoord([3, 4])),
+    new Fireplace(tileToScreenCoord([6, 4])),
+    new BookCabinet(tileToScreenCoord([11, 4])),
+    new Door({
+      coord: tileToScreenCoord([13, 4]),
+      spriteName: "door",
+      from: "cfe-cellar",
+      to: "cfe-hall",
+    }),
 
-      new Painting(tileToScreenCoord([4, 4]), "color-shield"),
-      new Table(tileToScreenCoord([8, 8])),
-      new Table(tileToScreenCoord([3, 8]), "rtl"),
-      new Sofa(tileToScreenCoord([3, 4])),
-      new Fireplace(tileToScreenCoord([6, 4])),
-      new BookCabinet(tileToScreenCoord([11, 4])),
-      new Door({
-        coord: tileToScreenCoord([13, 4]),
-        spriteName: "door",
-        from: "cfe-cellar",
-        to: "cfe-hall",
-      }),
-
-      new Countertop(tileToScreenCoord([15, 7])),
-      new Painting(tileToScreenCoord([15, 7]), "bulletin-board"),
-      new BeerCabinet(tileToScreenCoord([17, 7])),
-      new Fridge(tileToScreenCoord([19, 7])),
-      new BeerBox(tileToScreenCoord([20, 7])),
-      new KitchenSink(tileToScreenCoord([21, 8])),
-    ];
-  }
+    new Countertop(tileToScreenCoord([15, 7])),
+    new Painting(tileToScreenCoord([15, 7]), "bulletin-board"),
+    new BeerCabinet(tileToScreenCoord([17, 7])),
+    new Fridge(tileToScreenCoord([19, 7])),
+    new BeerBox(tileToScreenCoord([20, 7])),
+    new KitchenSink(tileToScreenCoord([21, 8])),
+  ];
 
   getName(): LocationName {
     return "cfe-cellar";

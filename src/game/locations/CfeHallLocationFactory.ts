@@ -27,7 +27,6 @@ export class CfeHallLocationFactory implements LocationFactory {
     "#888888888888888888888#",
   ]);
 
-
   private objects = [
     new Wall({ coord: tileToScreenCoord([0, 1]), size: tileToScreenCoord([22, 3]) }),
     new Wall({ coord: tileToScreenCoord([15, 4]), size: tileToScreenCoord([8, 3]) }),
