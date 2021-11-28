@@ -1,11 +1,11 @@
-import { Coord, tileToScreenCoord } from "../Coord";
-import { LocationFactory, LocationName } from "./LocationFactory";
-import { Wall } from "../furniture/Wall";
-import { Door } from "../furniture/Door";
-import { TiledBackground } from "./TiledBackground";
-import { Lamp } from "../furniture/Lamp";
-import { Painting } from "../furniture/Painting";
-import { Pianino } from "../furniture/Pianino";
+import { Coord, tileToScreenCoord } from "../../Coord";
+import { LocationFactory, LocationName } from "../LocationFactory";
+import { Wall } from "../../furniture/Wall";
+import { Door } from "../../furniture/Door";
+import { TiledBackground } from "../TiledBackground";
+import { Lamp } from "../../furniture/Lamp";
+import { Painting } from "../../furniture/Painting";
+import { Pianino } from "../../furniture/Pianino";
 
 export class CfeHallLocationFactory implements LocationFactory {
   private background = new TiledBackground([

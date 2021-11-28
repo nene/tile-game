@@ -1,7 +1,7 @@
 import { GameWorld } from "../GameWorld";
-import { CfeHallLocationFactory } from "./CfeHallLocationFactory";
-import { CfeCellarLocationFactory } from "./CfeCellarLocationFactory";
-import { OutdoorsLocationFactory } from "./OutdoorsLocationFactory";
+import { CfeHallLocationFactory } from "./cfe-hall/CfeHallLocationFactory";
+import { CfeCellarLocationFactory } from "./cfe-cellar/CfeCellarLocationFactory";
+import { OutdoorsLocationFactory } from "./outdoors/OutdoorsLocationFactory";
 
 export function createWorld(day: number): GameWorld {
   return new GameWorld([

@@ -1,12 +1,12 @@
-import { Coord, coordAdd, tileToScreenCoord } from "../Coord";
-import { LocationFactory, LocationName } from "./LocationFactory";
-import { GameObject } from "../GameObject";
+import { Coord, coordAdd, tileToScreenCoord } from "../../Coord";
+import { LocationFactory, LocationName } from "../LocationFactory";
+import { GameObject } from "../../GameObject";
 import { OutdoorsBackground } from "./OutdoorsBackground";
 import { CfeBuilding } from "./CfeBuilding";
 import { Building } from "./Building";
-import { Door } from "../furniture/Door";
-import { Fence } from "../furniture/Fence";
-import { SpawnPoint } from "../furniture/SpawnPoint";
+import { Door } from "../../furniture/Door";
+import { Fence } from "../../furniture/Fence";
+import { SpawnPoint } from "../../furniture/SpawnPoint";
 
 export class OutdoorsLocationFactory implements LocationFactory {
   private background: OutdoorsBackground;

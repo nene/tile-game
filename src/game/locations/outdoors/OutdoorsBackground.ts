@@ -1,6 +1,6 @@
-import { PixelScreen } from "../PixelScreen";
+import { PixelScreen } from "../../PixelScreen";
 import { Building } from "./Building";
-import { LocationBackground } from "./LocationBackground";
+import { LocationBackground } from "../LocationBackground";
 
 export class OutdoorsBackground implements LocationBackground {
   constructor(private buildings: Building[]) { }

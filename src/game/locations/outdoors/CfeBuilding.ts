@@ -1,9 +1,9 @@
-import { Coord, Rect, rectTranslate } from "../Coord";
-import { Wall } from "../furniture/Wall";
-import { GameObject } from "../GameObject";
-import { PixelScreen } from "../PixelScreen";
-import { Sprite } from "../sprites/Sprite";
-import { SpriteLibrary } from "../sprites/SpriteLibrary";
+import { Coord, Rect, rectTranslate } from "../../Coord";
+import { Wall } from "../../furniture/Wall";
+import { GameObject } from "../../GameObject";
+import { PixelScreen } from "../../PixelScreen";
+import { Sprite } from "../../sprites/Sprite";
+import { SpriteLibrary } from "../../sprites/SpriteLibrary";
 import { Building } from "./Building";
 
 export class CfeBuilding implements Building {

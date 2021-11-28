@@ -1,19 +1,19 @@
-import { BeerCabinet } from "../furniture/BeerCabinet";
-import { Coord, tileToScreenCoord } from "../Coord";
-import { Fridge } from "../furniture/Fridge";
-import { LocationFactory, LocationName } from "./LocationFactory";
-import { GameObject } from "../GameObject";
-import { Table } from "../furniture/Table";
-import { Wall } from "../furniture/Wall";
-import { BeerBox } from "../furniture/BeerBox";
-import { Door } from "../furniture/Door";
-import { Sofa } from "../furniture/Sofa";
-import { Fireplace } from "../furniture/Fireplace";
-import { Countertop } from "../furniture/Countertop";
-import { Painting } from "../furniture/Painting";
-import { KitchenSink } from "../furniture/KitchenSink";
-import { BookCabinet } from "../furniture/BookCabinet";
-import { TiledBackground } from "./TiledBackground";
+import { BeerCabinet } from "../../furniture/BeerCabinet";
+import { Coord, tileToScreenCoord } from "../../Coord";
+import { Fridge } from "../../furniture/Fridge";
+import { LocationFactory, LocationName } from "../LocationFactory";
+import { GameObject } from "../../GameObject";
+import { Table } from "../../furniture/Table";
+import { Wall } from "../../furniture/Wall";
+import { BeerBox } from "../../furniture/BeerBox";
+import { Door } from "../../furniture/Door";
+import { Sofa } from "../../furniture/Sofa";
+import { Fireplace } from "../../furniture/Fireplace";
+import { Countertop } from "../../furniture/Countertop";
+import { Painting } from "../../furniture/Painting";
+import { KitchenSink } from "../../furniture/KitchenSink";
+import { BookCabinet } from "../../furniture/BookCabinet";
+import { TiledBackground } from "../TiledBackground";
 
 export class CfeCellarLocationFactory implements LocationFactory {
   private background = new TiledBackground([
