@@ -5,6 +5,7 @@ import { Door } from "../furniture/Door";
 import { TiledBackground } from "./TiledBackground";
 import { Lamp } from "../furniture/Lamp";
 import { Painting } from "../furniture/Painting";
+import { Pianino } from "../furniture/Pianino";
 
 const CFE_HALL_SIZE: Coord = [23, 17]; // Size in tiles
 
@@ -47,6 +48,7 @@ export class CfeHallLocationFactory implements LocationFactory {
     }),
     new Lamp(tileToScreenCoord([12, 4]), true),
     new Painting(tileToScreenCoord([13, 4]), "polonia-cartel"),
+    new Pianino(tileToScreenCoord([13, 4])),
 
     new Door({
       coord: tileToScreenCoord([16, 7]),
