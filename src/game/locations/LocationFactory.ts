@@ -8,5 +8,6 @@ export interface LocationFactory {
   getName: () => LocationName;
   getSize: () => Coord;
   getBackground: () => LocationBackground;
+  getForeground: () => LocationBackground | undefined;
   getObjects: () => GameObject[];
 }

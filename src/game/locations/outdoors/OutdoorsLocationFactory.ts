@@ -49,6 +49,10 @@ export class OutdoorsLocationFactory implements LocationFactory {
     return this.background;
   }
 
+  getForeground() {
+    return undefined;
+  }
+
   getObjects() {
     return this.objects;
   }

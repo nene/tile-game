@@ -12,14 +12,14 @@ import { Countertop } from "../../furniture/Countertop";
 import { Painting } from "../../furniture/Painting";
 import { KitchenSink } from "../../furniture/KitchenSink";
 import { BookCabinet } from "../../furniture/BookCabinet";
-import { TiledBackground } from "../TiledBackground";
 import { getLevel } from "../Level";
+import { TiledLevelFactory } from "../TiledLevelFactory";
 
 export class CfeCellarLocationFactory implements LocationFactory {
-  private background = new TiledBackground(getLevel("CFE_cellar"));
+  private levelFactory = new TiledLevelFactory(getLevel("CFE_cellar"));
 
   private objects: GameObject[] = [
-    ...this.background.getWalls(),
+    ...this.levelFactory.getWalls(),
 
     new Painting(tileToScreenCoord([4, 4]), "color-shield"),
     new Table(tileToScreenCoord([8, 8])),
@@ -49,11 +49,15 @@ export class CfeCellarLocationFactory implements LocationFactory {
   }
 
   getSize(): Coord {
-    return tileToScreenCoord(this.background.getGridSize());
+    return tileToScreenCoord(this.levelFactory.getGridSize());
   }
 
   getBackground() {
-    return this.background;
+    return this.levelFactory.getBackground();
+  }
+
+  getForeground() {
+    return this.levelFactory.getForeground();
   }
 
   getObjects() {

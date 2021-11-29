@@ -7,11 +7,11 @@ import { Pianino } from "../../furniture/Pianino";
 import { GameObject } from "../../GameObject";
 import { LightSwitch } from "../../furniture/LightSwitch";
 import { BoardTable } from "../../furniture/BoardTable";
-import { TiledBackground } from "../TiledBackground";
 import { getLevel } from "../Level";
+import { TiledLevelFactory } from "../TiledLevelFactory";
 
 export class CfeHallLocationFactory implements LocationFactory {
-  private background = new TiledBackground(getLevel("CFE_hall"));
+  private levelFactory = new TiledLevelFactory(getLevel("CFE_hall"));
 
   private objects: GameObject[];
 
@@ -24,7 +24,7 @@ export class CfeHallLocationFactory implements LocationFactory {
     ];
 
     this.objects = [
-      ...this.background.getWalls(),
+      ...this.levelFactory.getWalls(),
 
       new Painting(tileToScreenCoord([4, 4]), "coat-of-arms"),
       new BoardTable(coordAdd(tileToScreenCoord([5, 4]), [0, 5])),
@@ -56,11 +56,15 @@ export class CfeHallLocationFactory implements LocationFactory {
   }
 
   getSize(): Coord {
-    return tileToScreenCoord(this.background.getGridSize());
+    return tileToScreenCoord(this.levelFactory.getGridSize());
   }
 
   getBackground() {
-    return this.background;
+    return this.levelFactory.getBackground();
+  }
+
+  getForeground() {
+    return this.levelFactory.getForeground();
   }
 
   getObjects() {

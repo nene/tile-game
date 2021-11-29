@@ -1,0 +1,48 @@
+import { Coord, screenToTileCoord, tileToScreenRect } from "../Coord";
+import { isBackgroundLayer, isForegroundLayer, isWallLayer, Level } from "./Level";
+import { Wall } from "../furniture/Wall";
+import { detectWallSections } from "./detectWallSections";
+import { TiledBackground } from "./TiledBackground";
+
+export class TiledLevelFactory {
+  private width: number;
+  private height: number;
+
+  constructor(private level: Level) {
+    [this.width, this.height] = screenToTileCoord([level.pxWid, level.pxHei]);
+  }
+
+  getBackground(): TiledBackground {
+    const tiles = this.level.layerInstances.find(isBackgroundLayer)?.gridTiles ?? [];
+    return new TiledBackground(tiles);
+  }
+
+  getForeground(): TiledBackground {
+    const tiles = this.level.layerInstances.find(isForegroundLayer)?.gridTiles ?? [];
+    return new TiledBackground(tiles);
+  }
+
+  getGridSize(): Coord {
+    return [this.width, this.height];
+  }
+
+  private getWallMap(): boolean[][] {
+    const walls = this.level.layerInstances.find(isWallLayer)?.intGridCsv ?? [];
+
+    const map: boolean[][] = [];
+    for (let y = 0; y < this.height; y++) {
+      const row: boolean[] = [];
+      for (let x = 0; x < this.width; x++) {
+        row.push(Boolean(walls[y * this.width + x]));
+      }
+      map.push(row);
+    }
+    return map;
+  }
+
+  getWalls(): Wall[] {
+    return detectWallSections(this.getWallMap())
+      .map(tileToScreenRect)
+      .map((rect) => new Wall(rect));
+  }
+}

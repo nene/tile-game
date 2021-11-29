@@ -9,10 +9,12 @@ import { BackgroundCache } from "./BackgroundCache";
 import { last } from "lodash";
 import { CharacterFigure, isCharacterFigure } from "../npc/CharacterFigure";
 import { Character } from "../npc/Character";
+import { LocationBackground } from "./LocationBackground";
 
 export class Location {
   private name: LocationName;
   private background: BackgroundCache;
+  private foreground?: LocationBackground;
   private objects: GameObject[];
   private indexer: ObjectIndexer;
   private pathFinder: PathFinder;
@@ -21,6 +23,7 @@ export class Location {
     this.name = location.getName();
     this.indexer = new ObjectIndexer(screenToTileCoord(location.getSize()));
     this.background = new BackgroundCache(location.getBackground());
+    this.foreground = location.getForeground();
     this.objects = this.location.getObjects();
     this.sortObjects();
     this.pathFinder = new PathFinder(this.indexer.isTileEmpty.bind(this.indexer));
@@ -54,6 +57,7 @@ export class Location {
   paint(screen: PixelScreen) {
     this.background.paint(screen);
     this.allObjects().forEach((obj) => obj.paint(screen));
+    this.foreground?.paint(screen);
   }
 
   activate() {
