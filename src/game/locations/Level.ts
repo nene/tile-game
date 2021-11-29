@@ -7,7 +7,7 @@ export interface Level {
   layerInstances: Layer[];
 }
 
-export type Layer = IntLayer | TileLayer;
+export type Layer = IntLayer | TileLayer | EntityLayer;
 
 interface BaseLayer {
   __identifier: string;
@@ -25,6 +25,11 @@ export interface TileLayer extends BaseLayer {
   gridTiles: Tile[];
 }
 
+export interface EntityLayer extends BaseLayer {
+  __type: "Entities";
+  entityInstances: Tile[];
+}
+
 type Coord = [number, number];
 
 export interface Tile {
@@ -33,6 +38,18 @@ export interface Tile {
   f: number;
   t: number;
   d: number[];
+}
+
+export interface Entity {
+  __identifier: string;
+  px: Coord;
+  fieldInstances: EntityField[];
+}
+
+export interface EntityField {
+  __identifier: string;
+  __type: string;
+  __value: string;
 }
 
 export function getLevel(name: string): Level {
@@ -61,4 +78,8 @@ export function isIntLayer(layer: Layer): layer is IntLayer {
 
 export function isWallLayer(layer: Layer): layer is IntLayer {
   return isIntLayer(layer) && layer.__identifier === "Walls";
+}
+
+export function isEntityLayer(layer: Layer): layer is EntityLayer {
+  return layer.__type === "Entities";
 }

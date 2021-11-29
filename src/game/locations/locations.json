@@ -9,7 +9,7 @@
 		"url": "https://ldtk.io"
 	},
 	"jsonVersion": "0.9.3",
-	"nextUid": 6,
+	"nextUid": 19,
 	"worldLayout": "Free",
 	"worldGridWidth": 256,
 	"worldGridHeight": 256,
@@ -46,6 +46,25 @@
 			"autoRuleGroups": [],
 			"autoSourceLayerDefUid": null,
 			"tilesetDefUid": 1,
+			"tilePivotX": 0,
+			"tilePivotY": 0
+		},
+		{
+			"__type": "Entities",
+			"identifier": "Entities",
+			"type": "Entities",
+			"uid": 10,
+			"gridSize": 16,
+			"displayOpacity": 1,
+			"pxOffsetX": 0,
+			"pxOffsetY": 0,
+			"requiredTags": [],
+			"excludedTags": [],
+			"intGridValues": [{ "value": 1, "identifier": null, "color": "#000000" }],
+			"autoTilesetDefUid": null,
+			"autoRuleGroups": [],
+			"autoSourceLayerDefUid": null,
+			"tilesetDefUid": null,
 			"tilePivotX": 0,
 			"tilePivotY": 0
 		},
@@ -87,7 +106,104 @@
 			"tilePivotX": 0,
 			"tilePivotY": 0
 		}
-	], "entities": [], "tilesets": [
+	], "entities": [
+		{
+			"identifier": "Pianino",
+			"uid": 6,
+			"tags": [],
+			"width": 32,
+			"height": 16,
+			"resizableX": false,
+			"resizableY": false,
+			"keepAspectRatio": false,
+			"fillOpacity": 1,
+			"lineOpacity": 1,
+			"hollow": false,
+			"color": "#94D9B3",
+			"renderMode": "Tile",
+			"showName": true,
+			"tilesetId": 17,
+			"tileId": 0,
+			"tileRenderMode": "FitInside",
+			"maxCount": 0,
+			"limitScope": "PerLevel",
+			"limitBehavior": "MoveLastOne",
+			"pivotX": 0,
+			"pivotY": 0,
+			"fieldDefs": []
+		},
+		{
+			"identifier": "Painting",
+			"uid": 7,
+			"tags": [],
+			"width": 16,
+			"height": 16,
+			"resizableX": false,
+			"resizableY": false,
+			"keepAspectRatio": false,
+			"fillOpacity": 1,
+			"lineOpacity": 1,
+			"hollow": false,
+			"color": "#D3A019",
+			"renderMode": "Rectangle",
+			"showName": true,
+			"tilesetId": null,
+			"tileId": null,
+			"tileRenderMode": "Stretch",
+			"maxCount": 0,
+			"limitScope": "PerLevel",
+			"limitBehavior": "MoveLastOne",
+			"pivotX": 0,
+			"pivotY": 0,
+			"fieldDefs": [
+				{
+					"identifier": "Painting",
+					"__type": "LocalEnum.Painting",
+					"uid": 16,
+					"type": { "id": "F_Enum", "params": [15] },
+					"isArray": false,
+					"canBeNull": false,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "EntityTile",
+					"editorDisplayPos": "Above",
+					"editorAlwaysShow": false,
+					"editorCutLongValues": true,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null
+				}
+			]
+		},
+		{
+			"identifier": "BoardTable",
+			"uid": 9,
+			"tags": [],
+			"width": 32,
+			"height": 16,
+			"resizableX": false,
+			"resizableY": false,
+			"keepAspectRatio": false,
+			"fillOpacity": 1,
+			"lineOpacity": 1,
+			"hollow": false,
+			"color": "#36251F",
+			"renderMode": "Tile",
+			"showName": true,
+			"tilesetId": 17,
+			"tileId": 1,
+			"tileRenderMode": "FitInside",
+			"maxCount": 0,
+			"limitScope": "PerLevel",
+			"limitBehavior": "MoveLastOne",
+			"pivotX": 0,
+			"pivotY": 0,
+			"fieldDefs": []
+		}
+	], "tilesets": [
 		{
 			"__cWid": 7,
 			"__cHei": 5,
@@ -107,8 +223,47 @@
 				"opaqueTiles": "11111111111111111111111011111100000",
 				"averageColors": "f444f333f444f676f898f222f444f333f000f333f565f898f554f665f444f333f444f322f898f655f665f100f1000000f887f875f322f444f100f10000000000000000000000"
 			}
+		},
+		{
+			"__cWid": 4,
+			"__cHei": 1,
+			"identifier": "Paintings",
+			"uid": 14,
+			"relPath": "../../../art/all-paintings.aseprite",
+			"pxWid": 128,
+			"pxHei": 32,
+			"tileGridSize": 32,
+			"spacing": 0,
+			"padding": 0,
+			"tagsSourceEnumUid": null,
+			"enumTags": [],
+			"customData": [],
+			"savedSelections": [],
+			"cachedPixelData": { "opaqueTiles": "0000", "averageColors": "8667687717763776" }
+		},
+		{
+			"__cWid": 6,
+			"__cHei": 2,
+			"identifier": "Furniture",
+			"uid": 17,
+			"relPath": "../../../art/all-furniture.aseprite",
+			"pxWid": 192,
+			"pxHei": 64,
+			"tileGridSize": 32,
+			"spacing": 0,
+			"padding": 0,
+			"tagsSourceEnumUid": null,
+			"enumTags": [],
+			"customData": [],
+			"savedSelections": [],
+			"cachedPixelData": { "opaqueTiles": "000000000000", "averageColors": "c33483336433433256667887c6546666b555599aa3644432" }
 		}
-	], "enums": [], "externalEnums": [], "levelFields": [] },
+	], "enums": [{ "identifier": "Painting", "uid": 15, "values": [
+		{ "id": "Coat_of_arms", "tileId": 0, "color": 6319480, "__tileSrcRect": [0,0,32,32] },
+		{ "id": "Polonia_cartel", "tileId": 1, "color": 9075827, "__tileSrcRect": [32,0,32,32] },
+		{ "id": "Color_shield", "tileId": 2, "color": 7894882, "__tileSrcRect": [64,0,32,32] },
+		{ "id": "Bulletin_board", "tileId": 3, "color": 7958631, "__tileSrcRect": [96,0,32,32] }
+	], "iconTilesetUid": 14, "externalRelPath": null, "externalFileChecksum": null }], "externalEnums": [], "levelFields": [] },
 	"levels": [
 		{
 			"identifier": "CFE_cellar",
@@ -173,6 +328,31 @@
 						{ "px": [320,256], "src": [16,0], "f": 0, "t": 1, "d": [388] },
 						{ "px": [336,256], "src": [16,0], "f": 0, "t": 1, "d": [389] }
 					],
+					"entityInstances": []
+				},
+				{
+					"__identifier": "Entities",
+					"__type": "Entities",
+					"__cWid": 23,
+					"__cHei": 18,
+					"__gridSize": 16,
+					"__opacity": 1,
+					"__pxTotalOffsetX": 0,
+					"__pxTotalOffsetY": 0,
+					"__tilesetDefUid": null,
+					"__tilesetRelPath": null,
+					"levelId": 0,
+					"layerDefUid": 10,
+					"pxOffsetX": 0,
+					"pxOffsetY": 0,
+					"visible": true,
+					"optionalRules": [],
+					"intGrid": [],
+					"intGridCsv": [],
+					"autoLayerTiles": [],
+					"seed": 6256160,
+					"overrideTilesetUid": null,
+					"gridTiles": [],
 					"entityInstances": []
 				},
 				{
@@ -857,6 +1037,94 @@
 						{ "px": [224,224], "src": [16,0], "f": 0, "t": 1, "d": [322] }
 					],
 					"entityInstances": []
+				},
+				{
+					"__identifier": "Entities",
+					"__type": "Entities",
+					"__cWid": 22,
+					"__cHei": 16,
+					"__gridSize": 16,
+					"__opacity": 1,
+					"__pxTotalOffsetX": 0,
+					"__pxTotalOffsetY": 0,
+					"__tilesetDefUid": null,
+					"__tilesetRelPath": null,
+					"levelId": 4,
+					"layerDefUid": 10,
+					"pxOffsetX": 0,
+					"pxOffsetY": 0,
+					"visible": true,
+					"optionalRules": [],
+					"intGrid": [],
+					"intGridCsv": [],
+					"autoLayerTiles": [],
+					"seed": 1911703,
+					"overrideTilesetUid": null,
+					"gridTiles": [],
+					"entityInstances": [
+						{
+							"__identifier": "Pianino",
+							"__grid": [12,4],
+							"__pivot": [0,0],
+							"__tile": { "tilesetUid": 17, "srcRect": [0,0,32,32] },
+							"width": 32,
+							"height": 16,
+							"defUid": 6,
+							"px": [192,64],
+							"fieldInstances": []
+						},
+						{
+							"__identifier": "Painting",
+							"__grid": [12,4],
+							"__pivot": [0,0],
+							"__tile": { "tilesetUid": 14, "srcRect": [32,0,32,32] },
+							"width": 16,
+							"height": 16,
+							"defUid": 7,
+							"px": [192,64],
+							"fieldInstances": [{
+								"__identifier": "Painting",
+								"__value": "Polonia_cartel",
+								"__type": "LocalEnum.Painting",
+								"defUid": 16,
+								"realEditorValues": [{
+									"id": "V_String",
+									"params": ["Polonia_cartel"]
+								}]
+							}]
+						},
+						{
+							"__identifier": "BoardTable",
+							"__grid": [6,4],
+							"__pivot": [0,0],
+							"__tile": { "tilesetUid": 17, "srcRect": [32,0,32,32] },
+							"width": 32,
+							"height": 16,
+							"defUid": 9,
+							"px": [96,64],
+							"fieldInstances": []
+						},
+						{
+							"__identifier": "Painting",
+							"__grid": [5,4],
+							"__pivot": [0,0],
+							"__tile": { "tilesetUid": 14, "srcRect": [0,0,32,32] },
+							"width": 16,
+							"height": 16,
+							"defUid": 7,
+							"px": [80,64],
+							"fieldInstances": [{
+								"__identifier": "Painting",
+								"__value": "Coat_of_arms",
+								"__type": "LocalEnum.Painting",
+								"defUid": 16,
+								"realEditorValues": [{
+									"id": "V_String",
+									"params": ["Coat_of_arms"]
+								}]
+							}]
+						}
+					]
 				},
 				{
 					"__identifier": "Walls",
