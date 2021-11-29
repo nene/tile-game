@@ -1,12 +1,10 @@
-import { Coord, coordAdd, tileToScreenCoord } from "../../Coord";
+import { Coord, tileToScreenCoord } from "../../Coord";
 import { LocationFactory, LocationName } from "../LocationFactory";
 import { Door } from "../../furniture/Door";
 import { Lamp } from "../../furniture/Lamp";
 import { Painting } from "../../furniture/Painting";
-import { Pianino } from "../../furniture/Pianino";
 import { GameObject } from "../../GameObject";
 import { LightSwitch } from "../../furniture/LightSwitch";
-import { BoardTable } from "../../furniture/BoardTable";
 import { getLevel } from "../Level";
 import { TiledLevelFactory } from "../TiledLevelFactory";
 
@@ -25,9 +23,9 @@ export class CfeHallLocationFactory implements LocationFactory {
 
     this.objects = [
       ...this.levelFactory.getWalls(),
+      ...this.levelFactory.getFurniture(),
 
       new Painting(tileToScreenCoord([4, 4]), "coat-of-arms"),
-      new BoardTable(coordAdd(tileToScreenCoord([5, 4]), [0, 5])),
 
       new Door({
         coord: tileToScreenCoord([9, 4]),
@@ -37,7 +35,6 @@ export class CfeHallLocationFactory implements LocationFactory {
         teleportOffset: [16, 8],
       }),
       new Painting(tileToScreenCoord([12, 4]), "polonia-cartel"),
-      new Pianino(tileToScreenCoord([12, 4])),
 
       new Door({
         coord: tileToScreenCoord([17, 13]),

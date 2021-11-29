@@ -27,7 +27,7 @@ export interface TileLayer extends BaseLayer {
 
 export interface EntityLayer extends BaseLayer {
   __type: "Entities";
-  entityInstances: Tile[];
+  entityInstances: Entity[];
 }
 
 type Coord = [number, number];

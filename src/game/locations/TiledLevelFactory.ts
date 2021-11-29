@@ -1,8 +1,10 @@
 import { Coord, screenToTileCoord, tileToScreenRect } from "../Coord";
-import { isBackgroundLayer, isForegroundLayer, isWallLayer, Level } from "./Level";
+import { isBackgroundLayer, isEntityLayer, isForegroundLayer, isWallLayer, Level } from "./Level";
 import { Wall } from "../furniture/Wall";
 import { detectWallSections } from "./detectWallSections";
 import { TiledBackground } from "./TiledBackground";
+import { createFurniture } from "../furniture/createFurniture";
+import { GameObject } from "../GameObject";
 
 export class TiledLevelFactory {
   private width: number;
@@ -20,6 +22,13 @@ export class TiledLevelFactory {
   getForeground(): TiledBackground {
     const tiles = this.level.layerInstances.find(isForegroundLayer)?.gridTiles ?? [];
     return new TiledBackground(tiles);
+  }
+
+  getFurniture(): GameObject[] {
+    const entities = this.level.layerInstances.find(isEntityLayer)?.entityInstances ?? [];
+    return entities
+      .filter(entity => entity.__identifier !== "Painting")
+      .map((entity) => createFurniture(entity.__identifier, entity.px));
   }
 
   getGridSize(): Coord {
