@@ -1,32 +1,17 @@
 import { Coord, coordAdd, tileToScreenCoord } from "../../Coord";
 import { LocationFactory, LocationName } from "../LocationFactory";
 import { Door } from "../../furniture/Door";
-import { TiledBackground } from "../TiledBackground";
 import { Lamp } from "../../furniture/Lamp";
 import { Painting } from "../../furniture/Painting";
 import { Pianino } from "../../furniture/Pianino";
 import { GameObject } from "../../GameObject";
 import { LightSwitch } from "../../furniture/LightSwitch";
 import { BoardTable } from "../../furniture/BoardTable";
+import { TiledBackground } from "../TiledBackground";
+import { getLevel } from "../Level";
 
 export class CfeHallLocationFactory implements LocationFactory {
-  private background = new TiledBackground([
-    "#22222222222222#######",
-    "6tttttttttttttt4######",
-    "6mmmmmmmmmmmmmm4######",
-    "6bbbbbbbbbbbbbb122222#",
-    "6______________tttttt4",
-    "6______________mmmmmm4",
-    "6______________bbbbbb4",
-    "6____________________4",
-    "6____________________4",
-    "6____________________4",
-    "6______________79__78#",
-    "6______________46dD4##",
-    "6______________46zZ4##",
-    "6______________4#88###",
-    "#88888888888888#######",
-  ]);
+  private background = new TiledBackground(getLevel("CFE_hall"));
 
   private objects: GameObject[];
 

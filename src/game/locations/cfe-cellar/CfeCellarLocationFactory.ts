@@ -13,27 +13,10 @@ import { Painting } from "../../furniture/Painting";
 import { KitchenSink } from "../../furniture/KitchenSink";
 import { BookCabinet } from "../../furniture/BookCabinet";
 import { TiledBackground } from "../TiledBackground";
+import { getLevel } from "../Level";
 
 export class CfeCellarLocationFactory implements LocationFactory {
-  private background = new TiledBackground([
-    "#22222222222222########",
-    "6TTTTTTTTTTT##T4#######",
-    "6MMMMMMMMMMMuUM4#######",
-    "6BBBBBBBBBBByYB1222222#",
-    "6..............TTTTTTT4",
-    "6..............MMMMMMM4",
-    "6..............BBBBBBB4",
-    "6.....................4",
-    "6.....................4",
-    "6.....................4",
-    "6.....................4",
-    "6.....................4",
-    "6.....................4",
-    "6.....................4",
-    "6.....................4",
-    "6.....................4",
-    "#888888888888888888888#",
-  ]);
+  private background = new TiledBackground(getLevel("CFE_cellar"));
 
   private objects: GameObject[] = [
     ...this.background.getWalls(),
