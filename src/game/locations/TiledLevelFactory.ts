@@ -27,8 +27,9 @@ export class TiledLevelFactory {
   getFurniture(): GameObject[] {
     const entities = this.level.layerInstances.find(isEntityLayer)?.entityInstances ?? [];
     return entities
-      .filter(entity => entity.__identifier !== "Painting")
-      .map((entity) => createFurniture(entity.__identifier, entity.px));
+      .map((entity) => {
+        return createFurniture(entity.__identifier, entity.px, entity.fieldInstances)
+      });
   }
 
   getGridSize(): Coord {

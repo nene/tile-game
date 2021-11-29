@@ -2,7 +2,6 @@ import { Coord, tileToScreenCoord } from "../../Coord";
 import { LocationFactory, LocationName } from "../LocationFactory";
 import { Door } from "../../furniture/Door";
 import { Lamp } from "../../furniture/Lamp";
-import { Painting } from "../../furniture/Painting";
 import { GameObject } from "../../GameObject";
 import { LightSwitch } from "../../furniture/LightSwitch";
 import { getLevel } from "../Level";
@@ -25,8 +24,6 @@ export class CfeHallLocationFactory implements LocationFactory {
       ...this.levelFactory.getWalls(),
       ...this.levelFactory.getFurniture(),
 
-      new Painting(tileToScreenCoord([4, 4]), "coat-of-arms"),
-
       new Door({
         coord: tileToScreenCoord([9, 4]),
         spriteName: "door-large",
@@ -34,7 +31,6 @@ export class CfeHallLocationFactory implements LocationFactory {
         to: "outdoors",
         teleportOffset: [16, 8],
       }),
-      new Painting(tileToScreenCoord([12, 4]), "polonia-cartel"),
 
       new Door({
         coord: tileToScreenCoord([17, 13]),

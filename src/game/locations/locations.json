@@ -1106,13 +1106,13 @@
 						},
 						{
 							"__identifier": "Painting",
-							"__grid": [5,4],
+							"__grid": [4,4],
 							"__pivot": [0,0],
 							"__tile": { "tilesetUid": 14, "srcRect": [0,0,32,32] },
 							"width": 16,
 							"height": 16,
 							"defUid": 7,
-							"px": [80,64],
+							"px": [64,64],
 							"fieldInstances": [{
 								"__identifier": "Painting",
 								"__value": "Coat_of_arms",
