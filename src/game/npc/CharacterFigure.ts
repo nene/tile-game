@@ -63,7 +63,7 @@ export class CharacterFigure implements GameObject {
   }
 
   boundingBox(): Rect {
-    return { coord: [-8, -3], size: [16, 5] };
+    return { coord: [-8, -2], size: [16, 5] };
   }
 
   isInteractable(ui: UiController, item?: GameItem) {

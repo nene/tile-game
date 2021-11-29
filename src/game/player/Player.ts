@@ -168,7 +168,7 @@ export class Player implements GameObject {
   }
 
   boundingBox(): Rect {
-    return { coord: [-7, -4], size: [14, 5] };
+    return { coord: [-7, -2], size: [14, 5] };
   }
 
   // True when the player isn't busy doing something (e.g. drinking)
