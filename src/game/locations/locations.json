@@ -705,17 +705,6 @@
 							"fieldInstances": []
 						},
 						{
-							"__identifier": "BookCabinet",
-							"__grid": [10,4],
-							"__pivot": [0,0],
-							"__tile": { "tilesetUid": 17, "srcRect": [128,0,32,32] },
-							"width": 16,
-							"height": 8,
-							"defUid": 22,
-							"px": [160,64],
-							"fieldInstances": []
-						},
-						{
 							"__identifier": "Countertop",
 							"__grid": [15,7],
 							"__pivot": [0,0],
@@ -1610,6 +1599,17 @@
 									"params": ["Coat_of_arms"]
 								}]
 							}]
+						},
+						{
+							"__identifier": "BookCabinet",
+							"__grid": [16,7],
+							"__pivot": [0,0],
+							"__tile": { "tilesetUid": 17, "srcRect": [128,0,32,32] },
+							"width": 16,
+							"height": 8,
+							"defUid": 22,
+							"px": [256,112],
+							"fieldInstances": []
 						}
 					]
 				},

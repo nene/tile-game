@@ -14,8 +14,9 @@ import { LocationName } from "../locations/LocationFactory";
 
 export function createCharacterActivities(character: Character): Activity[] {
   return compact([
-    ...travel(["cfe-hall", "cfe-cellar"], character),
+    ...travel(["cfe-hall"], character),
     character.isRememberingBookWriting() ? new WriteToBookActivity(character) : undefined,
+    ...travel(["cfe-cellar"], character),
     new PauseActivity(5, character),
     new MoveToTableActivity(character),
     new SatisfyDesiresActivity(character),
