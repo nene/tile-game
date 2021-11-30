@@ -39,11 +39,11 @@ export class KitchenSink implements GameObject {
   }
 
   hitBox(): Rect {
-    return { coord: [0, -27], size: [16, 43] };
+    return { coord: [0, -11], size: [16, 43] };
   }
 
   boundingBox(): Rect {
-    return { coord: [0, -16], size: [16, 32] };
+    return { coord: [0, 0], size: [16, 32] };
   }
 
   isInteractable(ui: UiController) {
