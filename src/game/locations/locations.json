@@ -353,7 +353,48 @@
 					"seed": 6256160,
 					"overrideTilesetUid": null,
 					"gridTiles": [],
-					"entityInstances": []
+					"entityInstances": [
+						{
+							"__identifier": "Painting",
+							"__grid": [15,7],
+							"__pivot": [0,0],
+							"__tile": { "tilesetUid": 14, "srcRect": [96,0,32,32] },
+							"width": 16,
+							"height": 16,
+							"defUid": 7,
+							"px": [240,112],
+							"fieldInstances": [{
+								"__identifier": "Painting",
+								"__value": "Bulletin_board",
+								"__type": "LocalEnum.Painting",
+								"defUid": 16,
+								"realEditorValues": [{
+									"id": "V_String",
+									"params": ["Bulletin_board"]
+								}]
+							}]
+						},
+						{
+							"__identifier": "Painting",
+							"__grid": [4,4],
+							"__pivot": [0,0],
+							"__tile": { "tilesetUid": 14, "srcRect": [64,0,32,32] },
+							"width": 16,
+							"height": 16,
+							"defUid": 7,
+							"px": [64,64],
+							"fieldInstances": [{
+								"__identifier": "Painting",
+								"__value": "Color_shield",
+								"__type": "LocalEnum.Painting",
+								"defUid": 16,
+								"realEditorValues": [{
+									"id": "V_String",
+									"params": ["Color_shield"]
+								}]
+							}]
+						}
+					]
 				},
 				{
 					"__identifier": "Walls",

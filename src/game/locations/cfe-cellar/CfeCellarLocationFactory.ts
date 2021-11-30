@@ -9,7 +9,6 @@ import { Door } from "../../furniture/Door";
 import { Sofa } from "../../furniture/Sofa";
 import { Fireplace } from "../../furniture/Fireplace";
 import { Countertop } from "../../furniture/Countertop";
-import { Painting } from "../../furniture/Painting";
 import { KitchenSink } from "../../furniture/KitchenSink";
 import { BookCabinet } from "../../furniture/BookCabinet";
 import { getLevel } from "../Level";
@@ -20,8 +19,8 @@ export class CfeCellarLocationFactory implements LocationFactory {
 
   private objects: GameObject[] = [
     ...this.levelFactory.getWalls(),
+    ...this.levelFactory.getFurniture(),
 
-    new Painting(tileToScreenCoord([4, 4]), "color-shield"),
     new Table(tileToScreenCoord([8, 8])),
     new Table(tileToScreenCoord([3, 8]), "rtl"),
     new Sofa(tileToScreenCoord([3, 4])),
@@ -37,7 +36,6 @@ export class CfeCellarLocationFactory implements LocationFactory {
     }),
 
     new Countertop(tileToScreenCoord([15, 7])),
-    new Painting(tileToScreenCoord([15, 7]), "bulletin-board"),
     new BeerCabinet(tileToScreenCoord([17, 7])),
     new Fridge(tileToScreenCoord([19, 7])),
     new BeerBox(tileToScreenCoord([20, 7])),
