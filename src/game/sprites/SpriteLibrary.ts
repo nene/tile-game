@@ -66,7 +66,7 @@ const PLAYER_OFFSET: Coord = [-8, -30];
 const spriteDef = (x: { src: string, cfg: SpriteSheetConfig }) => x;
 
 const imageFiles = {
-  'cfe-bg': spriteDef({ src: cfeBg, cfg: { size: [16, 16], colsRows: [7, 4] } }),
+  'cfe-bg': spriteDef({ src: cfeBg, cfg: { size: [16, 16], colsRows: [8, 6] } }),
 
   'cfe-reb': spriteDef({ src: cfeReb, cfg: { size: [16, 34], colsRows: [8, 5], offset: [-8, -31] } }),
   'cfe-reb-drunk': spriteDef({ src: cfeRebDrunk, cfg: { size: [32, 35], colsRows: [5, 2], offset: [-16, -30] } }),
