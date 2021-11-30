@@ -14,10 +14,11 @@ export class CfeHallLocationFactory implements LocationFactory {
 
   constructor() {
     const lamps = [
-      new Lamp(tileToScreenCoord([3, 4])),
-      new Lamp(tileToScreenCoord([8, 4])),
-      new Lamp(tileToScreenCoord([11, 4])),
-      new Lamp(tileToScreenCoord([18, 7])),
+      new Lamp(tileToScreenCoord([3, 6])),
+      new Lamp(tileToScreenCoord([8, 6])),
+      new Lamp(tileToScreenCoord([11, 6])),
+      new Lamp(tileToScreenCoord([16, 7])),
+      new Lamp(tileToScreenCoord([19, 7])),
     ];
 
     this.objects = [
@@ -25,7 +26,7 @@ export class CfeHallLocationFactory implements LocationFactory {
       ...this.levelFactory.getFurniture(),
 
       new Door({
-        coord: tileToScreenCoord([9, 4]),
+        coord: tileToScreenCoord([9, 6]),
         spriteName: "door-large",
         from: "cfe-hall",
         to: "outdoors",
@@ -40,7 +41,7 @@ export class CfeHallLocationFactory implements LocationFactory {
         teleportOffset: [16, -24],
       }),
       ...lamps,
-      new LightSwitch(tileToScreenCoord([19, 7]), lamps, false),
+      new LightSwitch(tileToScreenCoord([15, 7]), lamps, false),
     ];
   }
 
