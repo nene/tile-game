@@ -356,13 +356,13 @@
 					"entityInstances": [
 						{
 							"__identifier": "Painting",
-							"__grid": [15,7],
+							"__grid": [15,4],
 							"__pivot": [0,0],
 							"__tile": { "tilesetUid": 14, "srcRect": [96,0,32,32] },
 							"width": 16,
 							"height": 16,
 							"defUid": 7,
-							"px": [240,112],
+							"px": [240,64],
 							"fieldInstances": [{
 								"__identifier": "Painting",
 								"__value": "Bulletin_board",
@@ -376,13 +376,13 @@
 						},
 						{
 							"__identifier": "Painting",
-							"__grid": [4,4],
+							"__grid": [4,1],
 							"__pivot": [0,0],
 							"__tile": { "tilesetUid": 14, "srcRect": [64,0,32,32] },
 							"width": 16,
 							"height": 16,
 							"defUid": 7,
-							"px": [64,64],
+							"px": [64,16],
 							"fieldInstances": [{
 								"__identifier": "Painting",
 								"__value": "Color_shield",
@@ -1116,13 +1116,13 @@
 						},
 						{
 							"__identifier": "Painting",
-							"__grid": [12,4],
+							"__grid": [12,1],
 							"__pivot": [0,0],
 							"__tile": { "tilesetUid": 14, "srcRect": [32,0,32,32] },
 							"width": 16,
 							"height": 16,
 							"defUid": 7,
-							"px": [192,64],
+							"px": [192,16],
 							"fieldInstances": [{
 								"__identifier": "Painting",
 								"__value": "Polonia_cartel",
@@ -1147,13 +1147,13 @@
 						},
 						{
 							"__identifier": "Painting",
-							"__grid": [4,4],
+							"__grid": [4,1],
 							"__pivot": [0,0],
 							"__tile": { "tilesetUid": 14, "srcRect": [0,0,32,32] },
 							"width": 16,
 							"height": 16,
 							"defUid": 7,
-							"px": [64,64],
+							"px": [64,16],
 							"fieldInstances": [{
 								"__identifier": "Painting",
 								"__value": "Coat_of_arms",

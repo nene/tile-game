@@ -97,10 +97,10 @@ const imageFiles = {
   'board-table': spriteDef({ src: boardTable, cfg: { size: [43, 31], offset: [-5, -14] } }),
   'light-switch': spriteDef({ src: lightSwitch, cfg: { size: [9, 6], colsRows: [2, 1], offset: [4, -19] } }),
   // paintings
-  'bulletin-board': spriteDef({ src: bulletinBoard, cfg: { size: [13, 17], offset: [4, -40] } }),
-  'color-shield': spriteDef({ src: colorShield, cfg: { size: [11, 12], offset: [3, -40] } }),
-  'polonia-cartel': spriteDef({ src: poloniaCartel, cfg: { size: [24, 29], offset: [1, -46] } }),
-  'coat-of-arms': spriteDef({ src: coatOfArms, cfg: { size: [53, 48], offset: [6, -48] } }),
+  'bulletin-board': spriteDef({ src: bulletinBoard, cfg: { size: [13, 17], offset: [4, 8] } }),
+  'color-shield': spriteDef({ src: colorShield, cfg: { size: [11, 12], offset: [3, 8] } }),
+  'polonia-cartel': spriteDef({ src: poloniaCartel, cfg: { size: [24, 29], offset: [1, 2] } }),
+  'coat-of-arms': spriteDef({ src: coatOfArms, cfg: { size: [53, 48], offset: [6, 0] } }),
 
   // UI
   'slot': spriteDef({ src: slot, cfg: { size: [20, 20], colsRows: [2, 1] } }),
