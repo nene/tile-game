@@ -41,7 +41,7 @@ export class BookCabinet implements GameObject {
   }
 
   hitBox(): Rect {
-    return { coord: [0, -15], size: [16, 24] };
+    return { coord: [0, -37], size: [16, 46] };
   }
 
   boundingBox(): Rect {

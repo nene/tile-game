@@ -84,7 +84,7 @@ const imageFiles = {
   'fridge': spriteDef({ src: fridge, cfg: { size: [16, 46], offset: [0, -32] } }),
   'beer-cabinet': spriteDef({ src: beerCabinet, cfg: { size: [32, 46], offset: [0, -32] } }),
   'beer-box': spriteDef({ src: beerBox, cfg: { size: [11, 14], offset: [3, -4] } }),
-  'book-cabinet': spriteDef({ src: bookCabinet, cfg: { size: [16, 24], colsRows: [2, 1], offset: [0, -15] } }),
+  'book-cabinet': spriteDef({ src: bookCabinet, cfg: { size: [20, 57], colsRows: [2, 1], offset: [-2, -48] } }),
   'kitchen-sink': spriteDef({ src: kitchenSink, cfg: { size: [16, 43], offset: [0, -11] } }),
   'door': spriteDef({ src: door, cfg: { size: [20, 35], offset: [-2, -34] } }),
   'door-large': spriteDef({ src: doorLarge, cfg: { size: [33, 38], offset: [-1, -38] } }),
