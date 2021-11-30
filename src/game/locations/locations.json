@@ -9,7 +9,7 @@
 		"url": "https://ldtk.io"
 	},
 	"jsonVersion": "0.9.3",
-	"nextUid": 29,
+	"nextUid": 32,
 	"worldLayout": "Free",
 	"worldGridWidth": 256,
 	"worldGridHeight": 256,
@@ -426,7 +426,28 @@
 			"limitBehavior": "MoveLastOne",
 			"pivotX": 0,
 			"pivotY": 0,
-			"fieldDefs": []
+			"fieldDefs": [
+				{
+					"identifier": "sittingDir",
+					"__type": "LocalEnum.SittingDir",
+					"uid": 31,
+					"type": { "id": "F_Enum", "params": [30] },
+					"isArray": false,
+					"canBeNull": false,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "Hidden",
+					"editorDisplayPos": "Above",
+					"editorAlwaysShow": false,
+					"editorCutLongValues": true,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null
+				}
+			]
 		}
 	], "tilesets": [
 		{
@@ -483,12 +504,15 @@
 			"savedSelections": [],
 			"cachedPixelData": { "opaqueTiles": "000000000000", "averageColors": "c33483336433433256667887c6546666b555599aa3644432" }
 		}
-	], "enums": [{ "identifier": "Painting", "uid": 15, "values": [
-		{ "id": "Coat_of_arms", "tileId": 0, "color": 6319480, "__tileSrcRect": [0,0,32,32] },
-		{ "id": "Polonia_cartel", "tileId": 1, "color": 9075827, "__tileSrcRect": [32,0,32,32] },
-		{ "id": "Color_shield", "tileId": 2, "color": 7894882, "__tileSrcRect": [64,0,32,32] },
-		{ "id": "Bulletin_board", "tileId": 3, "color": 7958631, "__tileSrcRect": [96,0,32,32] }
-	], "iconTilesetUid": 14, "externalRelPath": null, "externalFileChecksum": null }], "externalEnums": [], "levelFields": [] },
+	], "enums": [
+		{ "identifier": "Painting", "uid": 15, "values": [
+			{ "id": "Coat_of_arms", "tileId": 0, "color": 6319480, "__tileSrcRect": [0,0,32,32] },
+			{ "id": "Polonia_cartel", "tileId": 1, "color": 9075827, "__tileSrcRect": [32,0,32,32] },
+			{ "id": "Color_shield", "tileId": 2, "color": 7894882, "__tileSrcRect": [64,0,32,32] },
+			{ "id": "Bulletin_board", "tileId": 3, "color": 7958631, "__tileSrcRect": [96,0,32,32] }
+		], "iconTilesetUid": 14, "externalRelPath": null, "externalFileChecksum": null },
+		{ "identifier": "SittingDir", "uid": 30, "values": [ { "id": "LTR", "tileId": null, "color": 0, "__tileSrcRect": null }, { "id": "RTL", "tileId": null, "color": 0, "__tileSrcRect": null } ], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null }
+	], "externalEnums": [], "levelFields": [] },
 	"levels": [
 		{
 			"identifier": "CFE_cellar",
@@ -705,7 +729,16 @@
 							"height": 16,
 							"defUid": 19,
 							"px": [48,128],
-							"fieldInstances": []
+							"fieldInstances": [{
+								"__identifier": "sittingDir",
+								"__value": "RTL",
+								"__type": "LocalEnum.SittingDir",
+								"defUid": 31,
+								"realEditorValues": [{
+									"id": "V_String",
+									"params": ["RTL"]
+								}]
+							}]
 						},
 						{
 							"__identifier": "Table",
@@ -716,7 +749,16 @@
 							"height": 16,
 							"defUid": 19,
 							"px": [128,128],
-							"fieldInstances": []
+							"fieldInstances": [{
+								"__identifier": "sittingDir",
+								"__value": "LTR",
+								"__type": "LocalEnum.SittingDir",
+								"defUid": 31,
+								"realEditorValues": [{
+									"id": "V_String",
+									"params": ["LTR"]
+								}]
+							}]
 						},
 						{
 							"__identifier": "BeerBox",

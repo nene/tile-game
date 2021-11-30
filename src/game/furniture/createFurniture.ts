@@ -26,7 +26,6 @@ const classMap: Record<string, { new(coord: Coord): GameObject }> = {
   "KitchenSink": KitchenSink,
   "Pianino": Pianino,
   "Sofa": Sofa,
-  "Table": Table,
 }
 
 const paintingMap: Record<string, SpriteName> = {
@@ -39,6 +38,9 @@ const paintingMap: Record<string, SpriteName> = {
 export function createFurniture(type: string, coord: Coord, fields: EntityField[]): GameObject {
   if (type === "Painting") {
     return new Painting(coord, paintingMap[fields[0].__value]);
+  }
+  if (type === "Table") {
+    return new Table(coord, fields[0].__value === "RTL" ? "RTL" : "LTR");
   }
   return new classMap[type](coord);
 }

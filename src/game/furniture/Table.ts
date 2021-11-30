@@ -15,7 +15,7 @@ export class Table implements GameObject {
   private inventory: StorageInventory;
   private noise = new Noise();
 
-  constructor(private coord: Coord, private sittingDir: "ltr" | "rtl" = "ltr") {
+  constructor(private coord: Coord, private sittingDir: "LTR" | "RTL" = "LTR") {
     this.sprite = SpriteLibrary.getSprite("table");
     this.inventory = new StorageInventory({
       size: 10,
@@ -43,7 +43,7 @@ export class Table implements GameObject {
   }
 
   getSittingPositions(): Coord[] {
-    const chairIndexes = this.sittingDir === "ltr" ? [0, 1, 2, 3] : [3, 2, 1, 0];
+    const chairIndexes = this.sittingDir === "LTR" ? [0, 1, 2, 3] : [3, 2, 1, 0];
     return chairIndexes.map((i) => coordAdd(this.coord, coordAdd([8, -2], [i * 16, 0])));
   }
 
