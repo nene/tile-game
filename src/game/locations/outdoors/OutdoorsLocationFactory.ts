@@ -46,7 +46,7 @@ export class OutdoorsLocationFactory implements LocationFactory {
   }
 
   getSize(): Coord {
-    return tileToScreenCoord([45, 20]);
+    return tileToScreenCoord(this.levelFactory.getGridSize());
   }
 
   getBackgrounds() {
