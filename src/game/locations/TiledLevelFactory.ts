@@ -1,5 +1,5 @@
 import { Coord, screenToTileCoord, tileToScreenRect } from "../Coord";
-import { isBackgroundLayer, isBuildingsLayer, isEntityLayer, isForegroundLayer, isWallLayer, Level } from "./Level";
+import { isEntityLayer, isTileLayerWithName, isWallLayer, Level } from "./Level";
 import { Wall } from "../furniture/Wall";
 import { detectWallSections } from "./detectWallSections";
 import { TiledBackground } from "./TiledBackground";
@@ -15,17 +15,17 @@ export class TiledLevelFactory {
   }
 
   getBackground(): TiledBackground {
-    const tiles = this.level.layerInstances.find(isBackgroundLayer)?.gridTiles ?? [];
+    const tiles = this.level.layerInstances.find(isTileLayerWithName("Background"))?.gridTiles ?? [];
     return new TiledBackground(tiles, 'cfe-bg');
   }
 
   getBuildings(): TiledBackground {
-    const tiles = this.level.layerInstances.find(isBuildingsLayer)?.gridTiles ?? [];
+    const tiles = this.level.layerInstances.find(isTileLayerWithName("Buildings"))?.gridTiles ?? [];
     return new TiledBackground(tiles, 'buildings');
   }
 
   getForeground(): TiledBackground {
-    const tiles = this.level.layerInstances.find(isForegroundLayer)?.gridTiles ?? [];
+    const tiles = this.level.layerInstances.find(isTileLayerWithName("Foreground"))?.gridTiles ?? [];
     return new TiledBackground(tiles, 'cfe-bg');
   }
 

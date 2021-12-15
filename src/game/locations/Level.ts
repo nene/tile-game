@@ -64,16 +64,10 @@ export function isTileLayer(layer: Layer): layer is TileLayer {
   return layer.__type === "Tiles";
 }
 
-export function isBackgroundLayer(layer: Layer): layer is TileLayer {
-  return isTileLayer(layer) && layer.__identifier === "Background";
-}
-
-export function isForegroundLayer(layer: Layer): layer is TileLayer {
-  return isTileLayer(layer) && layer.__identifier === "Foreground";
-}
-
-export function isBuildingsLayer(layer: Layer): layer is TileLayer {
-  return isTileLayer(layer) && layer.__identifier === "Buildings";
+export function isTileLayerWithName(name: string) {
+  return (layer: Layer): layer is TileLayer => {
+    return isTileLayer(layer) && layer.__identifier === name;
+  };
 }
 
 export function isIntLayer(layer: Layer): layer is IntLayer {
