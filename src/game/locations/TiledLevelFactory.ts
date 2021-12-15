@@ -5,6 +5,7 @@ import { detectWallSections } from "./detectWallSections";
 import { TiledBackground } from "./TiledBackground";
 import { createFurniture } from "../furniture/createFurniture";
 import { GameObject } from "../GameObject";
+import { SpriteName } from "../sprites/SpriteLibrary";
 
 export class TiledLevelFactory {
   private width: number;
@@ -15,18 +16,20 @@ export class TiledLevelFactory {
   }
 
   getBackground(): TiledBackground {
-    const tiles = this.level.layerInstances.find(isTileLayerWithName("Background"))?.gridTiles ?? [];
-    return new TiledBackground(tiles, 'cfe-bg');
+    return this.createTiledBackground("Background", "cfe-bg");
   }
 
   getBuildings(): TiledBackground {
-    const tiles = this.level.layerInstances.find(isTileLayerWithName("Buildings"))?.gridTiles ?? [];
-    return new TiledBackground(tiles, 'buildings');
+    return this.createTiledBackground("Buildings", "buildings");
   }
 
   getForeground(): TiledBackground {
-    const tiles = this.level.layerInstances.find(isTileLayerWithName("Foreground"))?.gridTiles ?? [];
-    return new TiledBackground(tiles, 'cfe-bg');
+    return this.createTiledBackground("Foreground", "cfe-bg");
+  }
+
+  private createTiledBackground(layerName: string, spriteName: SpriteName) {
+    const tiles = this.level.layerInstances.find(isTileLayerWithName(layerName))?.gridTiles ?? [];
+    return new TiledBackground(tiles, spriteName);
   }
 
   getFurniture(): GameObject[] {
