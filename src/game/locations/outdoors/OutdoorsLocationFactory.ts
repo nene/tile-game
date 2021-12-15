@@ -7,8 +7,11 @@ import { Building } from "./Building";
 import { Door } from "../../furniture/Door";
 import { Fence } from "../../furniture/Fence";
 import { SpawnPoint } from "../../furniture/SpawnPoint";
+import { TiledLevelFactory } from "../TiledLevelFactory";
+import { getLevel } from "../Level";
 
 export class OutdoorsLocationFactory implements LocationFactory {
+  private levelFactory = new TiledLevelFactory(getLevel("Outdoors"));
   private background: OutdoorsBackground;
   private objects: GameObject[];
   private buildings: Building[];
@@ -18,22 +21,23 @@ export class OutdoorsLocationFactory implements LocationFactory {
       new CfeBuilding([28, 32]),
     ];
 
-    this.background = new OutdoorsBackground(this.buildings);
+    this.background = new OutdoorsBackground();
 
     this.objects = [
+      ...this.levelFactory.getWalls(),
       ...this.buildings.flatMap((building) => building.getWalls()),
       new Door({
-        coord: [228, 173],
+        coord: [229, 173 + 32],
         spriteName: "cfe-building-door",
         from: "outdoors",
         to: "cfe-hall",
       }),
-      new Fence(tileToScreenCoord([0, 14])),
-      new Fence(coordAdd(tileToScreenCoord([4, 14]), [8, 0])),
-      new Fence(tileToScreenCoord([9, 14])),
-      new Fence(tileToScreenCoord([16, 14])),
+      new Fence(tileToScreenCoord([0, 16])),
+      new Fence(coordAdd(tileToScreenCoord([4, 16]), [8, 0])),
+      new Fence(tileToScreenCoord([9, 16])),
+      new Fence(tileToScreenCoord([16, 16])),
       // A spawn location outside of the fence
-      new SpawnPoint(tileToScreenCoord([14, 13])),
+      new SpawnPoint(tileToScreenCoord([14, 15])),
     ];
   }
 
@@ -42,11 +46,15 @@ export class OutdoorsLocationFactory implements LocationFactory {
   }
 
   getSize(): Coord {
-    return tileToScreenCoord([21, 16]);
+    return tileToScreenCoord([45, 20]);
   }
 
   getBackground() {
     return this.background;
+  }
+
+  getBuildings() {
+    return this.levelFactory.getBuildings();
   }
 
   getForeground() {

@@ -1,6 +1,6 @@
 import { screenToTileCoord } from "../Coord";
 import { PixelScreen } from "../PixelScreen";
-import { SpriteLibrary } from "../sprites/SpriteLibrary";
+import { SpriteLibrary, SpriteName } from "../sprites/SpriteLibrary";
 import { SpriteSheet } from "../sprites/SpriteSheet";
 import { LocationBackground } from "./LocationBackground";
 import { Tile } from "./Level";
@@ -8,8 +8,8 @@ import { Tile } from "./Level";
 export class TiledBackground implements LocationBackground {
   private bg: SpriteSheet;
 
-  constructor(private tiles: Tile[]) {
-    this.bg = SpriteLibrary.get('cfe-bg');
+  constructor(private tiles: Tile[], spriteName: SpriteName) {
+    this.bg = SpriteLibrary.get(spriteName);
   }
 
   paint(screen: PixelScreen) {

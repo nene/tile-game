@@ -34,6 +34,10 @@ export class CfeCellarLocationFactory implements LocationFactory {
     return this.levelFactory.getBackground();
   }
 
+  getBuildings() {
+    return undefined;
+  }
+
   getForeground() {
     return this.levelFactory.getForeground();
   }

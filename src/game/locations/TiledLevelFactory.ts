@@ -1,5 +1,5 @@
 import { Coord, screenToTileCoord, tileToScreenRect } from "../Coord";
-import { isBackgroundLayer, isEntityLayer, isForegroundLayer, isWallLayer, Level } from "./Level";
+import { isBackgroundLayer, isBuildingsLayer, isEntityLayer, isForegroundLayer, isWallLayer, Level } from "./Level";
 import { Wall } from "../furniture/Wall";
 import { detectWallSections } from "./detectWallSections";
 import { TiledBackground } from "./TiledBackground";
@@ -16,12 +16,17 @@ export class TiledLevelFactory {
 
   getBackground(): TiledBackground {
     const tiles = this.level.layerInstances.find(isBackgroundLayer)?.gridTiles ?? [];
-    return new TiledBackground(tiles);
+    return new TiledBackground(tiles, 'cfe-bg');
+  }
+
+  getBuildings(): TiledBackground {
+    const tiles = this.level.layerInstances.find(isBuildingsLayer)?.gridTiles ?? [];
+    return new TiledBackground(tiles, 'buildings');
   }
 
   getForeground(): TiledBackground {
     const tiles = this.level.layerInstances.find(isForegroundLayer)?.gridTiles ?? [];
-    return new TiledBackground(tiles);
+    return new TiledBackground(tiles, 'cfe-bg');
   }
 
   getFurniture(): GameObject[] {

@@ -72,6 +72,10 @@ export function isForegroundLayer(layer: Layer): layer is TileLayer {
   return isTileLayer(layer) && layer.__identifier === "Foreground";
 }
 
+export function isBuildingsLayer(layer: Layer): layer is TileLayer {
+  return isTileLayer(layer) && layer.__identifier === "Buildings";
+}
+
 export function isIntLayer(layer: Layer): layer is IntLayer {
   return layer.__type === "IntGrid";
 }
