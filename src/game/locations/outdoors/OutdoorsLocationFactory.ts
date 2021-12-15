@@ -18,7 +18,7 @@ export class OutdoorsLocationFactory implements LocationFactory {
 
   constructor() {
     this.buildings = [
-      new CfeBuilding([28, 32]),
+      new CfeBuilding([29, 64]),
     ];
 
     this.background = new OutdoorsBackground();

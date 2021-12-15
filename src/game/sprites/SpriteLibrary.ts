@@ -7,7 +7,6 @@ import cfeKsvPikmets from "./data/cfe-ksv-pikmets.png";
 import cfeKsvOtto from "./data/cfe-ksv-otto.png";
 import cfeKsvKarl from "./data/cfe-ksv-karl.png";
 import cfeKsvKark from "./data/cfe-ksv-kark.png";
-import cfeBuilding from "./data/cfe-building.png";
 import cfeBuildingDoor from "./data/cfe-building-door.png";
 import cfeFence from "./data/cfe-fence.png";
 import buildings from "./data/buildings.png";
@@ -137,7 +136,6 @@ const imageFiles = {
   'beer-foam-xl': spriteDef({ src: beerFoamXl, cfg: { size: [47, 86] } }),
 
   // Big building
-  'cfe-building': spriteDef({ src: cfeBuilding, cfg: { size: [228, 171] } }),
   'cfe-building-door': spriteDef({ src: cfeBuildingDoor, cfg: { size: [23, 34], offset: [-2, -34] } }),
   'cfe-fence': spriteDef({ src: cfeFence, cfg: { size: [83, 37], offset: [-1, -31] } }),
 };
