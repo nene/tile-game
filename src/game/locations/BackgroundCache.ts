@@ -5,7 +5,7 @@ import { LocationBackground } from "./LocationBackground";
 export class BackgroundCache {
   private previousOffset: Coord = [-1, -1];
 
-  constructor(private bg: LocationBackground) { }
+  constructor(private backgrounds: LocationBackground[]) { }
 
   paint(screen: PixelScreen) {
     if (coordEq(screen.getOffset(), this.previousOffset)) {
@@ -13,7 +13,7 @@ export class BackgroundCache {
       return;
     }
 
-    this.bg.paint(screen);
+    this.backgrounds.forEach((bg) => bg.paint(screen));
     screen.saveBg();
     this.previousOffset = screen.getOffset();
   }

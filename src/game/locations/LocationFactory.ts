@@ -7,8 +7,7 @@ export type LocationName = "cfe-cellar" | "cfe-hall" | "outdoors";
 export interface LocationFactory {
   getName: () => LocationName;
   getSize: () => Coord;
-  getBackground: () => LocationBackground;
-  getBuildings: () => LocationBackground | undefined;
+  getBackgrounds: () => LocationBackground[];
   getForeground: () => LocationBackground | undefined;
   getObjects: () => GameObject[];
 }

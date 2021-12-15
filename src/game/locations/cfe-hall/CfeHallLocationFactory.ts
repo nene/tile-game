@@ -56,12 +56,8 @@ export class CfeHallLocationFactory implements LocationFactory {
     return tileToScreenCoord(this.levelFactory.getGridSize());
   }
 
-  getBackground() {
-    return this.levelFactory.getBackground();
-  }
-
-  getBuildings() {
-    return undefined;
+  getBackgrounds() {
+    return [this.levelFactory.getBackground()];
   }
 
   getForeground() {

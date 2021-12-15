@@ -49,12 +49,11 @@ export class OutdoorsLocationFactory implements LocationFactory {
     return tileToScreenCoord([45, 20]);
   }
 
-  getBackground() {
-    return this.background;
-  }
-
-  getBuildings() {
-    return this.levelFactory.getBuildings();
+  getBackgrounds() {
+    return [
+      this.background,
+      this.levelFactory.getBuildings(),
+    ];
   }
 
   getForeground() {

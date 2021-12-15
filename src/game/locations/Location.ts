@@ -14,7 +14,6 @@ import { LocationBackground } from "./LocationBackground";
 export class Location {
   private name: LocationName;
   private background: BackgroundCache;
-  private buildings?: LocationBackground;
   private foreground?: LocationBackground;
   private objects: GameObject[];
   private indexer: ObjectIndexer;
@@ -23,8 +22,7 @@ export class Location {
   constructor(private location: LocationFactory) {
     this.name = location.getName();
     this.indexer = new ObjectIndexer(screenToTileCoord(location.getSize()));
-    this.background = new BackgroundCache(location.getBackground());
-    this.buildings = location.getBuildings();
+    this.background = new BackgroundCache(location.getBackgrounds());
     this.foreground = location.getForeground();
     this.objects = this.location.getObjects();
     this.sortObjects();
@@ -58,7 +56,6 @@ export class Location {
 
   paint(screen: PixelScreen) {
     this.background.paint(screen);
-    this.buildings?.paint(screen);
     this.allObjects().forEach((obj) => obj.paint(screen));
     this.foreground?.paint(screen);
   }
