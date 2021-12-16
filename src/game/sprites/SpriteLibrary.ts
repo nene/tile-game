@@ -9,6 +9,7 @@ import cfeKsvKarl from "./data/cfe-ksv-karl.png";
 import cfeKsvKark from "./data/cfe-ksv-kark.png";
 import cfeBuildingDoor from "./data/cfe-building-door.png";
 import buildings from "./data/buildings.png";
+import grass from "./data/grass.png";
 import fence from "./data/fence.png";
 import callout from "./data/callout.png";
 import table from "./data/table.png";
@@ -67,6 +68,7 @@ const spriteDef = (x: { src: string, cfg: SpriteSheetConfig }) => x;
 
 const imageFiles = {
   'cfe-bg': spriteDef({ src: cfeBg, cfg: { size: [16, 16], colsRows: [8, 6] } }),
+  'grass': spriteDef({ src: grass, cfg: { size: [16, 16], colsRows: [5, 3] } }),
   'buildings': spriteDef({ src: buildings, cfg: { size: [16, 16], colsRows: [16, 26] } }),
 
   'cfe-reb': spriteDef({ src: cfeReb, cfg: { size: [16, 34], colsRows: [8, 5], offset: [-8, -31] } }),

@@ -20,6 +20,12 @@ export interface IntLayer extends BaseLayer {
   intGridCsv: number[];
 }
 
+export interface AutoTileLayer extends IntLayer {
+  __type: "IntGrid";
+  intGridCsv: number[];
+  autoLayerTiles: Tile[];
+}
+
 export interface TileLayer extends BaseLayer {
   __type: "Tiles";
   gridTiles: Tile[];
@@ -78,6 +84,10 @@ export function isIntLayer(layer: Layer): layer is IntLayer {
 
 export function isWallLayer(layer: Layer): layer is IntLayer {
   return isIntLayer(layer) && layer.__identifier === "Walls";
+}
+
+export function isGrassLayer(layer: Layer): layer is AutoTileLayer {
+  return isIntLayer(layer) && layer.__identifier === "Grass";
 }
 
 export function isEntityLayer(layer: Layer): layer is EntityLayer {

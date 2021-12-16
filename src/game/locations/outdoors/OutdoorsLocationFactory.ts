@@ -41,6 +41,7 @@ export class OutdoorsLocationFactory implements LocationFactory {
     return [
       this.background,
       this.levelFactory.getBackground(),
+      this.levelFactory.getGrass(),
       this.levelFactory.getBuildings(),
     ];
   }

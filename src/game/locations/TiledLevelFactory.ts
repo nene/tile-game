@@ -1,5 +1,5 @@
 import { Coord, screenToTileCoord, tileToScreenRect } from "../Coord";
-import { isEntityLayer, isTileLayerWithName, isWallLayer, Level } from "./Level";
+import { isEntityLayer, isGrassLayer, isTileLayerWithName, isWallLayer, Level } from "./Level";
 import { Wall } from "../furniture/Wall";
 import { detectWallSections } from "./detectWallSections";
 import { TiledBackground } from "./TiledBackground";
@@ -30,6 +30,11 @@ export class TiledLevelFactory {
   private createTiledBackground(layerName: string, spriteName: SpriteName) {
     const tiles = this.level.layerInstances.find(isTileLayerWithName(layerName))?.gridTiles ?? [];
     return new TiledBackground(tiles, spriteName);
+  }
+
+  getGrass(): TiledBackground {
+    const tiles = this.level.layerInstances.find(isGrassLayer)?.autoLayerTiles ?? [];
+    return new TiledBackground(tiles, "grass");
   }
 
   getFurniture(): GameObject[] {
