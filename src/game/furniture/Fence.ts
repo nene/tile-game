@@ -4,11 +4,23 @@ import { PixelScreen } from "../PixelScreen";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 
+export enum FenceType {
+  cfe = 0,
+  sakala = 1,
+}
+
+const boundsMap: Record<FenceType, Rect> = {
+  [FenceType.cfe]: { coord: [3, 0], size: [73, 7] },
+  [FenceType.sakala]: { coord: [2, 0], size: [76, 7] },
+};
+
 export class Fence implements GameObject {
   private sprite: Sprite;
+  private bounds: Rect;
 
-  constructor(private coord: Coord) {
-    this.sprite = SpriteLibrary.getSprite("cfe-fence");
+  constructor(private coord: Coord, fenceType: FenceType) {
+    this.sprite = SpriteLibrary.getSprite("fence", [fenceType, 0]);
+    this.bounds = boundsMap[fenceType];
   }
 
   tick() {
@@ -31,11 +43,11 @@ export class Fence implements GameObject {
   }
 
   hitBox(): Rect {
-    return { coord: [0, 0], size: [81, 7] };
+    return this.bounds;
   }
 
   boundingBox(): Rect {
-    return { coord: [0, 0], size: [81, 7] };
+    return this.bounds;
   }
 
   isInteractable() {

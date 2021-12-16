@@ -1,11 +1,11 @@
-import { Coord, coordAdd, tileToScreenCoord } from "../../Coord";
+import { Coord, tileToScreenCoord } from "../../Coord";
 import { LocationFactory, LocationName } from "../LocationFactory";
 import { GameObject } from "../../GameObject";
 import { OutdoorsBackground } from "./OutdoorsBackground";
 import { CfeBuilding } from "./CfeBuilding";
 import { Building } from "./Building";
 import { Door } from "../../furniture/Door";
-import { Fence } from "../../furniture/Fence";
+import { Fence, FenceType } from "../../furniture/Fence";
 import { SpawnPoint } from "../../furniture/SpawnPoint";
 import { TiledLevelFactory } from "../TiledLevelFactory";
 import { getLevel } from "../Level";
@@ -32,10 +32,14 @@ export class OutdoorsLocationFactory implements LocationFactory {
         from: "outdoors",
         to: "cfe-hall",
       }),
-      new Fence(tileToScreenCoord([0, 16])),
-      new Fence(coordAdd(tileToScreenCoord([4, 16]), [8, 0])),
-      new Fence(tileToScreenCoord([9, 16])),
-      new Fence(tileToScreenCoord([16, 16])),
+      new Fence(tileToScreenCoord([1, 16]), FenceType.cfe),
+      new Fence(tileToScreenCoord([5, 16]), FenceType.cfe),
+      new Fence(tileToScreenCoord([9, 16]), FenceType.cfe),
+      new Fence(tileToScreenCoord([16, 16]), FenceType.cfe),
+      new Fence(tileToScreenCoord([23, 16]), FenceType.sakala),
+      new Fence(tileToScreenCoord([27, 16]), FenceType.sakala),
+      new Fence(tileToScreenCoord([31, 16]), FenceType.sakala),
+
       // A spawn location outside of the fence
       new SpawnPoint(tileToScreenCoord([14, 15])),
     ];
