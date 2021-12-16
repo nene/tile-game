@@ -36,7 +36,7 @@ export class TiledLevelFactory {
     const entities = this.level.layerInstances.find(isEntityLayer)?.entityInstances ?? [];
     return entities
       .map((entity) => {
-        return createFurniture(entity.__identifier, entity.px, entity.fieldInstances)
+        return createFurniture(entity.__identifier, { coord: entity.px, size: [entity.width, entity.height] }, entity.fieldInstances)
       });
   }
 

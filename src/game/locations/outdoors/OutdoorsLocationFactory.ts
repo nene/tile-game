@@ -2,8 +2,6 @@ import { Coord, tileToScreenCoord } from "../../Coord";
 import { LocationFactory, LocationName } from "../LocationFactory";
 import { GameObject } from "../../GameObject";
 import { OutdoorsBackground } from "./OutdoorsBackground";
-import { CfeBuilding } from "./CfeBuilding";
-import { Building } from "./Building";
 import { Door } from "../../furniture/Door";
 import { SpawnPoint } from "../../furniture/SpawnPoint";
 import { TiledLevelFactory } from "../TiledLevelFactory";
@@ -13,19 +11,13 @@ export class OutdoorsLocationFactory implements LocationFactory {
   private levelFactory = new TiledLevelFactory(getLevel("Outdoors"));
   private background: OutdoorsBackground;
   private objects: GameObject[];
-  private buildings: Building[];
 
   constructor() {
-    this.buildings = [
-      new CfeBuilding([29, 64]),
-    ];
-
     this.background = new OutdoorsBackground();
 
     this.objects = [
       ...this.levelFactory.getWalls(),
       ...this.levelFactory.getFurniture(),
-      ...this.buildings.flatMap((building) => building.getWalls()),
       new Door({
         coord: [229, 173 + 33],
         spriteName: "cfe-building-door",

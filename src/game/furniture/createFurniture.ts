@@ -1,4 +1,4 @@
-import { Coord } from "../Coord";
+import { Coord, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
 import { EntityField } from "../locations/Level";
 import { SpriteName } from "../sprites/SpriteLibrary";
@@ -15,6 +15,7 @@ import { Painting } from "./Painting";
 import { Pianino } from "./Pianino";
 import { Sofa } from "./Sofa";
 import { Table } from "./Table";
+import { Wall } from "./Wall";
 
 const classMap: Record<string, { new(coord: Coord): GameObject }> = {
   "BeerBox": BeerBox,
@@ -36,7 +37,7 @@ const paintingMap: Record<string, SpriteName> = {
   "Color_shield": "color-shield",
 };
 
-export function createFurniture(type: string, coord: Coord, fields: EntityField[]): GameObject {
+export function createFurniture(type: string, { coord, size }: Rect, fields: EntityField[]): GameObject {
   if (type === "Painting") {
     return new Painting(coord, paintingMap[fields[0].__value]);
   }
@@ -45,6 +46,9 @@ export function createFurniture(type: string, coord: Coord, fields: EntityField[
   }
   if (type === "Fence") {
     return new Fence(coord, fields[0].__value === "Cfe" ? FenceType.cfe : FenceType.sakala);
+  }
+  if (type === "Wall") {
+    return new Wall({ coord, size });
   }
   return new classMap[type](coord);
 }

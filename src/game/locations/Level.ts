@@ -43,6 +43,8 @@ export interface Tile {
 export interface Entity {
   __identifier: string;
   px: Coord;
+  width: number;
+  height: number;
   fieldInstances: EntityField[];
 }
 

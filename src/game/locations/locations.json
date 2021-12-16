@@ -9,7 +9,7 @@
 		"url": "https://ldtk.io"
 	},
 	"jsonVersion": "0.9.3",
-	"nextUid": 42,
+	"nextUid": 43,
 	"worldLayout": "Free",
 	"worldGridWidth": 256,
 	"worldGridHeight": 256,
@@ -532,6 +532,31 @@
 					"textLanguageMode": null
 				}
 			]
+		},
+		{
+			"identifier": "Wall",
+			"uid": 42,
+			"tags": [],
+			"width": 5,
+			"height": 5,
+			"resizableX": true,
+			"resizableY": true,
+			"keepAspectRatio": false,
+			"fillOpacity": 0.4,
+			"lineOpacity": 0,
+			"hollow": false,
+			"color": "#FF0909",
+			"renderMode": "Rectangle",
+			"showName": true,
+			"tilesetId": null,
+			"tileId": null,
+			"tileRenderMode": "FitInside",
+			"maxCount": 0,
+			"limitScope": "PerLevel",
+			"limitBehavior": "MoveLastOne",
+			"pivotX": 0,
+			"pivotY": 0,
+			"fieldDefs": []
 		}
 	], "tilesets": [
 		{
@@ -3495,6 +3520,116 @@
 									"params": ["Sakala"]
 								}]
 							}]
+						},
+						{
+							"__identifier": "Wall",
+							"__grid": [23,7],
+							"__pivot": [0,0],
+							"__tile": null,
+							"width": 12,
+							"height": 100,
+							"defUid": 42,
+							"px": [372,124],
+							"fieldInstances": []
+						},
+						{
+							"__identifier": "Wall",
+							"__grid": [21,11],
+							"__pivot": [0,0],
+							"__tile": null,
+							"width": 6,
+							"height": 27,
+							"defUid": 42,
+							"px": [336,185],
+							"fieldInstances": []
+						},
+						{
+							"__identifier": "Wall",
+							"__grid": [21,11],
+							"__pivot": [0,0],
+							"__tile": null,
+							"width": 36,
+							"height": 9,
+							"defUid": 42,
+							"px": [336,176],
+							"fieldInstances": []
+						},
+						{
+							"__identifier": "Wall",
+							"__grid": [13,12],
+							"__pivot": [0,0],
+							"__tile": null,
+							"width": 14,
+							"height": 36,
+							"defUid": 42,
+							"px": [208,192],
+							"fieldInstances": []
+						},
+						{
+							"__identifier": "Wall",
+							"__grid": [13,12],
+							"__pivot": [0,0],
+							"__tile": null,
+							"width": 34,
+							"height": 14,
+							"defUid": 42,
+							"px": [222,192],
+							"fieldInstances": []
+						},
+						{
+							"__identifier": "Wall",
+							"__grid": [9,13],
+							"__pivot": [0,0],
+							"__tile": null,
+							"width": 62,
+							"height": 6,
+							"defUid": 42,
+							"px": [146,222],
+							"fieldInstances": []
+						},
+						{
+							"__identifier": "Wall",
+							"__grid": [10,14],
+							"__pivot": [0,0],
+							"__tile": null,
+							"width": 31,
+							"height": 7,
+							"defUid": 42,
+							"px": [168,228],
+							"fieldInstances": []
+						},
+						{
+							"__identifier": "Wall",
+							"__grid": [3,14],
+							"__pivot": [0,0],
+							"__tile": null,
+							"width": 28,
+							"height": 9,
+							"defUid": 42,
+							"px": [54,224],
+							"fieldInstances": []
+						},
+						{
+							"__identifier": "Wall",
+							"__grid": [3,13],
+							"__pivot": [0,0],
+							"__tile": null,
+							"width": 97,
+							"height": 10,
+							"defUid": 42,
+							"px": [49,218],
+							"fieldInstances": []
+						},
+						{
+							"__identifier": "Wall",
+							"__grid": [1,10],
+							"__pivot": [0,0],
+							"__tile": null,
+							"width": 18,
+							"height": 43,
+							"defUid": 42,
+							"px": [30,160],
+							"fieldInstances": []
 						}
 					]
 				},
