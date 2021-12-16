@@ -9,7 +9,7 @@
 		"url": "https://ldtk.io"
 	},
 	"jsonVersion": "0.9.3",
-	"nextUid": 38,
+	"nextUid": 42,
 	"worldLayout": "Free",
 	"worldGridWidth": 256,
 	"worldGridHeight": 256,
@@ -486,6 +486,52 @@
 					"textLanguageMode": null
 				}
 			]
+		},
+		{
+			"identifier": "Fence",
+			"uid": 40,
+			"tags": [],
+			"width": 80,
+			"height": 7,
+			"resizableX": false,
+			"resizableY": false,
+			"keepAspectRatio": false,
+			"fillOpacity": 1,
+			"lineOpacity": 1,
+			"hollow": false,
+			"color": "#BFD994",
+			"renderMode": "Tile",
+			"showName": true,
+			"tilesetId": 39,
+			"tileId": 0,
+			"tileRenderMode": "FitInside",
+			"maxCount": 0,
+			"limitScope": "PerLevel",
+			"limitBehavior": "MoveLastOne",
+			"pivotX": 0,
+			"pivotY": 0,
+			"fieldDefs": [
+				{
+					"identifier": "FenceType",
+					"__type": "LocalEnum.FenceType",
+					"uid": 41,
+					"type": { "id": "F_Enum", "params": [38] },
+					"isArray": false,
+					"canBeNull": false,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "EntityTile",
+					"editorDisplayPos": "Above",
+					"editorAlwaysShow": false,
+					"editorCutLongValues": true,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null
+				}
+			]
 		}
 	], "tilesets": [
 		{
@@ -581,6 +627,23 @@
 				"opaqueTiles": "00000000000000000000000011111000000111111111100000011111111110000111111111111000011111111111111001111111111111100111111111111110001111111111111000111111111100000000000000000000000000000000000000111111111111100011111111111110111111111111111011111111111111101111111111111110111111111111111011111111111111101111111111111110111111111111111011111111111111101111111111111110111111111111111000011111111111100000000000000000",
 				"averageColors": "000000000000000000000000000002326342e232e234e2346121011100000000000000001999e332e221e221e221e221f332f232f444f665f221712100000000000000002aaaf333f232f232f232f232f332f232f555f232f4437655000000001a9956667332f232f232f232f332f232f665fa99faaafa99f6657766000000003887f998f332f232f221f443f766f232f998fa96f887fa97f998e544e12111113887f998f998f887f987f887f997f987fa98fa97f987fa97fa98f444f12111112988f988f998f988f986f876f986f886f998f987f888f987f998f555f66601212999f999fa99f998f987f988f998f998f998f988f998f887f999f544f76600001988a999faaaf999f998f777f998f888fa99fa99f999f999fa99f544f776000000000000faa9f888f988f777f887f877fa99faaaf888fa99f998a65588770000000000008998b999555552325232423239889a99a99998884877021100000000000003338444833482238223822382238434833482238223822382238223322200001333f455f555f555f444f444f323f444f656f444f333f223f223f223622379888888f445f555f555f666f888f555f555f555f777f666f223f223f2236223f988f988f455f555f555f555f555f555f556f555f455f333f323f323f2236223f988f988f455f555f555f556f555f555f556f555f556f555f434f323f2236223f988f988f455f555f556f555f555f555f556f445f556f445f556f445f3336223f988f988f445f445f444f555f555f444f555f545f555f555f444f444f3346223f988f888f666f445f555f666f666f666f666f666f666f666f656f445f6564444faa9f988f999f777f989f989f777fa9af666fa9af888f888f988f777f9990000f887f554f989f998f999fa99f888fa9af887fa9af989f999f999f998fa990000f776f322f888fa99faa9fa99f998f988f988f998f998f999faa9fa99f9980000f666f433f988f887faa9f999f777f666f666f777f777f888faa9f887f9990000f766f766f988f887faa9f999f776f666f666f777f777f888faa9f887f999000047664655d988fa9afa9af989f988f878f878f989f989f989fa9afa9af98900000000000037663877387737764655455445554655465546663877387738770000"
 			}
+		},
+		{
+			"__cWid": 3,
+			"__cHei": 1,
+			"identifier": "Fence",
+			"uid": 39,
+			"relPath": "../sprites/data/fence.png",
+			"pxWid": 160,
+			"pxHei": 38,
+			"tileGridSize": 38,
+			"spacing": 38,
+			"padding": 0,
+			"tagsSourceEnumUid": null,
+			"enumTags": [],
+			"customData": [],
+			"savedSelections": [],
+			"cachedPixelData": { "opaqueTiles": "001", "averageColors": "877687760000" }
 		}
 	], "enums": [
 		{ "identifier": "Painting", "uid": 15, "values": [
@@ -589,7 +652,8 @@
 			{ "id": "Color_shield", "tileId": 2, "color": 7894882, "__tileSrcRect": [64,0,32,32] },
 			{ "id": "Bulletin_board", "tileId": 3, "color": 7958631, "__tileSrcRect": [96,0,32,32] }
 		], "iconTilesetUid": 14, "externalRelPath": null, "externalFileChecksum": null },
-		{ "identifier": "SittingDir", "uid": 30, "values": [ { "id": "LTR", "tileId": null, "color": 0, "__tileSrcRect": null }, { "id": "RTL", "tileId": null, "color": 0, "__tileSrcRect": null } ], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null }
+		{ "identifier": "SittingDir", "uid": 30, "values": [ { "id": "LTR", "tileId": null, "color": 0, "__tileSrcRect": null }, { "id": "RTL", "tileId": null, "color": 0, "__tileSrcRect": null } ], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null },
+		{ "identifier": "FenceType", "uid": 38, "values": [ { "id": "Cfe", "tileId": 0, "color": 8024420, "__tileSrcRect": [0,0,38,38] }, { "id": "Sakala", "tileId": 1, "color": 7959150, "__tileSrcRect": [76,0,38,38] } ], "iconTilesetUid": 39, "externalRelPath": null, "externalFileChecksum": null }
 	], "externalEnums": [], "levelFields": [] },
 	"levels": [
 		{
@@ -3291,7 +3355,148 @@
 					"seed": 6973488,
 					"overrideTilesetUid": null,
 					"gridTiles": [],
-					"entityInstances": []
+					"entityInstances": [
+						{
+							"__identifier": "Fence",
+							"__grid": [1,16],
+							"__pivot": [0,0],
+							"__tile": { "tilesetUid": 39, "srcRect": [0,0,38,38] },
+							"width": 80,
+							"height": 7,
+							"defUid": 40,
+							"px": [16,256],
+							"fieldInstances": [{
+								"__identifier": "FenceType",
+								"__value": "Cfe",
+								"__type": "LocalEnum.FenceType",
+								"defUid": 41,
+								"realEditorValues": [{
+									"id": "V_String",
+									"params": ["Cfe"]
+								}]
+							}]
+						},
+						{
+							"__identifier": "Fence",
+							"__grid": [16,16],
+							"__pivot": [0,0],
+							"__tile": { "tilesetUid": 39, "srcRect": [0,0,38,38] },
+							"width": 80,
+							"height": 7,
+							"defUid": 40,
+							"px": [256,256],
+							"fieldInstances": [{
+								"__identifier": "FenceType",
+								"__value": "Cfe",
+								"__type": "LocalEnum.FenceType",
+								"defUid": 41,
+								"realEditorValues": [{
+									"id": "V_String",
+									"params": ["Cfe"]
+								}]
+							}]
+						},
+						{
+							"__identifier": "Fence",
+							"__grid": [5,16],
+							"__pivot": [0,0],
+							"__tile": { "tilesetUid": 39, "srcRect": [0,0,38,38] },
+							"width": 80,
+							"height": 7,
+							"defUid": 40,
+							"px": [80,256],
+							"fieldInstances": [{
+								"__identifier": "FenceType",
+								"__value": "Cfe",
+								"__type": "LocalEnum.FenceType",
+								"defUid": 41,
+								"realEditorValues": [{
+									"id": "V_String",
+									"params": ["Cfe"]
+								}]
+							}]
+						},
+						{
+							"__identifier": "Fence",
+							"__grid": [9,16],
+							"__pivot": [0,0],
+							"__tile": { "tilesetUid": 39, "srcRect": [0,0,38,38] },
+							"width": 80,
+							"height": 7,
+							"defUid": 40,
+							"px": [144,256],
+							"fieldInstances": [{
+								"__identifier": "FenceType",
+								"__value": "Cfe",
+								"__type": "LocalEnum.FenceType",
+								"defUid": 41,
+								"realEditorValues": [{
+									"id": "V_String",
+									"params": ["Cfe"]
+								}]
+							}]
+						},
+						{
+							"__identifier": "Fence",
+							"__grid": [23,16],
+							"__pivot": [0,0],
+							"__tile": { "tilesetUid": 39, "srcRect": [76,0,38,38] },
+							"width": 80,
+							"height": 7,
+							"defUid": 40,
+							"px": [368,256],
+							"fieldInstances": [{
+								"__identifier": "FenceType",
+								"__value": "Sakala",
+								"__type": "LocalEnum.FenceType",
+								"defUid": 41,
+								"realEditorValues": [{
+									"id": "V_String",
+									"params": ["Sakala"]
+								}]
+							}]
+						},
+						{
+							"__identifier": "Fence",
+							"__grid": [27,16],
+							"__pivot": [0,0],
+							"__tile": { "tilesetUid": 39, "srcRect": [76,0,38,38] },
+							"width": 80,
+							"height": 7,
+							"defUid": 40,
+							"px": [432,256],
+							"fieldInstances": [{
+								"__identifier": "FenceType",
+								"__value": "Sakala",
+								"__type": "LocalEnum.FenceType",
+								"defUid": 41,
+								"realEditorValues": [{
+									"id": "V_String",
+									"params": ["Sakala"]
+								}]
+							}]
+						},
+						{
+							"__identifier": "Fence",
+							"__grid": [31,16],
+							"__pivot": [0,0],
+							"__tile": { "tilesetUid": 39, "srcRect": [76,0,38,38] },
+							"width": 80,
+							"height": 7,
+							"defUid": 40,
+							"px": [496,256],
+							"fieldInstances": [{
+								"__identifier": "FenceType",
+								"__value": "Sakala",
+								"__type": "LocalEnum.FenceType",
+								"defUid": 41,
+								"realEditorValues": [{
+									"id": "V_String",
+									"params": ["Sakala"]
+								}]
+							}]
+						}
+					]
 				},
 				{
 					"__identifier": "Paintings",

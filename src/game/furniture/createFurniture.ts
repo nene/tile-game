@@ -7,6 +7,7 @@ import { BeerCabinet } from "./BeerCabinet";
 import { BoardTable } from "./BoardTable";
 import { BookCabinet } from "./BookCabinet";
 import { Countertop } from "./Countertop";
+import { Fence, FenceType } from "./Fence";
 import { Fireplace } from "./Fireplace";
 import { Fridge } from "./Fridge";
 import { KitchenSink } from "./KitchenSink";
@@ -41,6 +42,9 @@ export function createFurniture(type: string, coord: Coord, fields: EntityField[
   }
   if (type === "Table") {
     return new Table(coord, fields[0].__value === "RTL" ? "RTL" : "LTR");
+  }
+  if (type === "Fence") {
+    return new Fence(coord, fields[0].__value === "Cfe" ? FenceType.cfe : FenceType.sakala);
   }
   return new classMap[type](coord);
 }
