@@ -17,7 +17,7 @@ export class Wall implements GameObject {
 
   paint(s: PixelScreen) {
     if (this.debug) {
-      s.drawRect({ coord: this.coord, size: this.size }, "red");
+      s.drawRect({ coord: this.coord, size: this.size }, "rgba(255,0,0,0.5)");
     }
   }
 

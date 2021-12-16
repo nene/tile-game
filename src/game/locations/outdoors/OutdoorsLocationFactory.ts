@@ -27,7 +27,7 @@ export class OutdoorsLocationFactory implements LocationFactory {
       ...this.levelFactory.getFurniture(),
       ...this.buildings.flatMap((building) => building.getWalls()),
       new Door({
-        coord: [229, 173 + 32],
+        coord: [229, 173 + 33],
         spriteName: "cfe-building-door",
         from: "outdoors",
         to: "cfe-hall",

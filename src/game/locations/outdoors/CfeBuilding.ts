@@ -9,13 +9,13 @@ export class CfeBuilding implements Building {
 
   getWalls(): GameObject[] {
     const relativeWallLocations: Rect[] = [
-      { coord: [1, 62], size: [18, 76] }, // left wing
+      { coord: [1, 62], size: [18, 77] }, // left wing
       { coord: [19, 62], size: [40, 101] }, // tower
       { coord: [24, 163], size: [30, 5] }, // tower bottom
-      { coord: [59, 62], size: [58, 97] }, // middle section
-      { coord: [117, 62], size: [76, 101] }, // large main section
-      { coord: [136, 163], size: [36, 6] }, // main section bottom
-      { coord: [193, 62], size: [34, 79] }, // entrance hall
+      { coord: [59, 62], size: [58, 102] }, // middle section
+      { coord: [117, 62], size: [76, 102] }, // large main section
+      { coord: [136, 164], size: [36, 5] }, // main section bottom
+      { coord: [193, 62], size: [34, 80] }, // entrance hall
     ];
 
     return relativeWallLocations
