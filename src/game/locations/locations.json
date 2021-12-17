@@ -1085,12 +1085,12 @@
 		},
 		{
 			"__cWid": 4,
-			"__cHei": 1,
+			"__cHei": 2,
 			"identifier": "Paintings",
 			"uid": 14,
 			"relPath": "../../../art/all-paintings.aseprite",
 			"pxWid": 128,
-			"pxHei": 32,
+			"pxHei": 64,
 			"tileGridSize": 32,
 			"spacing": 0,
 			"padding": 0,
@@ -1098,7 +1098,7 @@
 			"enumTags": [],
 			"customData": [],
 			"savedSelections": [],
-			"cachedPixelData": { "opaqueTiles": "0000", "averageColors": "8667687717763776" }
+			"cachedPixelData": { "opaqueTiles": "00000000", "averageColors": "86676877177637760000000000000000" }
 		},
 		{
 			"__cWid": 6,
