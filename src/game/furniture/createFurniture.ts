@@ -32,6 +32,7 @@ const classMap: Record<string, { new(coord: Coord): GameObject }> = {
 
 const paintingMap: Record<string, SpriteName> = {
   "Coat_of_arms": "coat-of-arms",
+  "Sakala_coat_of_arms": "sakala-coat-of-arms",
   "Polonia_cartel": "polonia-cartel",
   "Bulletin_board": "bulletin-board",
   "Color_shield": "color-shield",

@@ -32,6 +32,7 @@ import colorBand from "./data/color-band.png";
 import bulletinBoard from "./data/bulletin-board.png";
 import poloniaCartel from "./data/polonia-cartel.png";
 import coatOfArms from "./data/coat-of-arms.png";
+import sakalaCoatOfArms from "./data/sakala-coat-of-arms.png";
 import fireplace from "./data/fireplace.png";
 import countertop from "./data/countertop.png";
 import sofa from "./data/sofa.png";
@@ -104,6 +105,7 @@ const imageFiles = {
   'color-shield': spriteDef({ src: colorShield, cfg: { size: [11, 12], offset: [3, 8] } }),
   'polonia-cartel': spriteDef({ src: poloniaCartel, cfg: { size: [24, 29], offset: [1, 2] } }),
   'coat-of-arms': spriteDef({ src: coatOfArms, cfg: { size: [53, 48], offset: [6, 0] } }),
+  'sakala-coat-of-arms': spriteDef({ src: sakalaCoatOfArms, cfg: { size: [59, 36], offset: [12, 5] } }),
 
   // UI
   'slot': spriteDef({ src: slot, cfg: { size: [20, 20], colsRows: [2, 1] } }),
