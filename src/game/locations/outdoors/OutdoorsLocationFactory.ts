@@ -24,6 +24,12 @@ export class OutdoorsLocationFactory implements LocationFactory {
         from: "outdoors",
         to: "cfe-hall",
       }),
+      new Door({
+        coord: [344, 185],
+        spriteName: "staircase-door",
+        from: "outdoors",
+        to: "sakala-hall",
+      }),
       // A spawn location outside of the fence
       new SpawnPoint(tileToScreenCoord([14, 15])),
     ];

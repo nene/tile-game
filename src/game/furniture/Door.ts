@@ -14,6 +14,7 @@ export interface DoorConfig {
   from: LocationName;
   to: LocationName;
   teleportOffset?: Coord;
+  debug?: boolean;
 }
 
 export class Door implements GameObject {
@@ -22,13 +23,15 @@ export class Door implements GameObject {
   private toLocation: LocationName;
   private sprite: Sprite;
   private teleportOffset: Coord;
+  private debug?: boolean;
 
-  constructor({ coord, spriteName, spriteCoord, from, to, teleportOffset }: DoorConfig) {
+  constructor({ coord, spriteName, spriteCoord, from, to, teleportOffset, debug }: DoorConfig) {
     this.coord = coord;
     this.sprite = SpriteLibrary.getSprite(spriteName, spriteCoord);
     this.fromLocation = from;
     this.toLocation = to;
     this.teleportOffset = teleportOffset ?? [8, 8];
+    this.debug = debug;
   }
 
   tick() {
@@ -36,6 +39,9 @@ export class Door implements GameObject {
 
   paint(screen: PixelScreen) {
     screen.drawSprite(this.sprite, this.coord);
+    if (this.debug) {
+      screen.drawRect({ coord: coordAdd(this.coord, this.sprite.offset), size: this.sprite.size }, "rgba(0,255,0,0.5)");
+    }
   }
 
   zIndex() {
