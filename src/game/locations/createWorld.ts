@@ -1,6 +1,6 @@
 import { GameWorld } from "../GameWorld";
-import { CfeHallLocationFactory } from "./cfe-hall/CfeHallLocationFactory";
-import { CfeCellarLocationFactory } from "./cfe-cellar/CfeCellarLocationFactory";
+import { CfeHallLocationFactory } from "./cfe/CfeHallLocationFactory";
+import { CfeCellarLocationFactory } from "./cfe/CfeCellarLocationFactory";
 import { OutdoorsLocationFactory } from "./outdoors/OutdoorsLocationFactory";
 import { SakalaHallLocationFactory } from "./sakala/SakalaHallLocationFactory";
 
