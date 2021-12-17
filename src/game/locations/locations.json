@@ -1196,10 +1196,10 @@
 		}
 	], "enums": [
 		{ "identifier": "Painting", "uid": 15, "values": [
-			{ "id": "Coat_of_arms", "tileId": 0, "color": 6319480, "__tileSrcRect": [0,0,32,32] },
 			{ "id": "Polonia_cartel", "tileId": 1, "color": 9075827, "__tileSrcRect": [32,0,32,32] },
 			{ "id": "Color_shield", "tileId": 2, "color": 7894882, "__tileSrcRect": [64,0,32,32] },
 			{ "id": "Bulletin_board", "tileId": 3, "color": 7958631, "__tileSrcRect": [96,0,32,32] },
+			{ "id": "CFE_coat_of_arms", "tileId": 0, "color": 6319480, "__tileSrcRect": [0,0,32,32] },
 			{ "id": "Sakala_coat_of_arms", "tileId": 4, "color": 7171724, "__tileSrcRect": [0,32,32,32] }
 		], "iconTilesetUid": 14, "externalRelPath": null, "externalFileChecksum": null },
 		{ "identifier": "SittingDir", "uid": 30, "values": [ { "id": "LTR", "tileId": null, "color": 0, "__tileSrcRect": null }, { "id": "RTL", "tileId": null, "color": 0, "__tileSrcRect": null } ], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null },
@@ -2645,12 +2645,12 @@
 							"px": [64,48],
 							"fieldInstances": [{
 								"__identifier": "Painting",
-								"__value": "Coat_of_arms",
+								"__value": "CFE_coat_of_arms",
 								"__type": "LocalEnum.Painting",
 								"defUid": 16,
 								"realEditorValues": [{
 									"id": "V_String",
-									"params": ["Coat_of_arms"]
+									"params": ["CFE_coat_of_arms"]
 								}]
 							}]
 						},
