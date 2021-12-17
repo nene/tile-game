@@ -1098,7 +1098,7 @@
 			"enumTags": [],
 			"customData": [],
 			"savedSelections": [],
-			"cachedPixelData": { "opaqueTiles": "00000000", "averageColors": "86676877177637760000000000000000" }
+			"cachedPixelData": { "opaqueTiles": "00000000", "averageColors": "86676877177637765668000000000000" }
 		},
 		{
 			"__cWid": 6,
@@ -1199,7 +1199,8 @@
 			{ "id": "Coat_of_arms", "tileId": 0, "color": 6319480, "__tileSrcRect": [0,0,32,32] },
 			{ "id": "Polonia_cartel", "tileId": 1, "color": 9075827, "__tileSrcRect": [32,0,32,32] },
 			{ "id": "Color_shield", "tileId": 2, "color": 7894882, "__tileSrcRect": [64,0,32,32] },
-			{ "id": "Bulletin_board", "tileId": 3, "color": 7958631, "__tileSrcRect": [96,0,32,32] }
+			{ "id": "Bulletin_board", "tileId": 3, "color": 7958631, "__tileSrcRect": [96,0,32,32] },
+			{ "id": "Sakala_coat_of_arms", "tileId": 4, "color": 7171724, "__tileSrcRect": [0,32,32,32] }
 		], "iconTilesetUid": 14, "externalRelPath": null, "externalFileChecksum": null },
 		{ "identifier": "SittingDir", "uid": 30, "values": [ { "id": "LTR", "tileId": null, "color": 0, "__tileSrcRect": null }, { "id": "RTL", "tileId": null, "color": 0, "__tileSrcRect": null } ], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null },
 		{ "identifier": "FenceType", "uid": 38, "values": [ { "id": "Cfe", "tileId": 0, "color": 8024420, "__tileSrcRect": [0,0,38,38] }, { "id": "Sakala", "tileId": 1, "color": 7959150, "__tileSrcRect": [76,0,38,38] } ], "iconTilesetUid": 39, "externalRelPath": null, "externalFileChecksum": null }
@@ -6291,7 +6292,28 @@
 					"seed": 1232544,
 					"overrideTilesetUid": null,
 					"gridTiles": [],
-					"entityInstances": []
+					"entityInstances": [
+						{
+							"__identifier": "Painting",
+							"__grid": [6,1],
+							"__pivot": [0,0],
+							"__tile": { "tilesetUid": 14, "srcRect": [0,32,32,32] },
+							"width": 16,
+							"height": 16,
+							"defUid": 7,
+							"px": [96,16],
+							"fieldInstances": [{
+								"__identifier": "Painting",
+								"__value": "Sakala_coat_of_arms",
+								"__type": "LocalEnum.Painting",
+								"defUid": 16,
+								"realEditorValues": [{
+									"id": "V_String",
+									"params": ["Sakala_coat_of_arms"]
+								}]
+							}]
+						}
+					]
 				},
 				{
 					"__identifier": "Paintings",
