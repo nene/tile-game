@@ -37,6 +37,7 @@ import fireplace from "./data/fireplace.png";
 import countertop from "./data/countertop.png";
 import sofa from "./data/sofa.png";
 import lamp from "./data/lamp.png";
+import sakalaLamp from "./data/sakala-lamp.png";
 import slot from "./data/slot.png";
 import scrollBar from "./data/scroll-bar.png";
 import closeButton from "./data/close-button.png";
@@ -97,6 +98,7 @@ const imageFiles = {
   'countertop': spriteDef({ src: countertop, cfg: { size: [16, 55], offset: [0, -23] } }),
   'sofa': spriteDef({ src: sofa, cfg: { size: [48, 26], offset: [0, -15] } }),
   'lamp': spriteDef({ src: lamp, cfg: { size: [21, 24], colsRows: [2, 1], offset: [-3, -44] } }),
+  'sakala-lamp': spriteDef({ src: sakalaLamp, cfg: { size: [15, 19], colsRows: [2, 1], offset: [0, -41] } }),
   'pianino': spriteDef({ src: pianino, cfg: { size: [32, 27], offset: [0, -17] } }),
   'board-table': spriteDef({ src: boardTable, cfg: { size: [43, 31], offset: [-5, -14] } }),
   'light-switch': spriteDef({ src: lightSwitch, cfg: { size: [9, 6], colsRows: [2, 1], offset: [4, -19] } }),

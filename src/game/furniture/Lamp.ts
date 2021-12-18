@@ -1,16 +1,16 @@
 import { Coord, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
 import { PixelScreen } from "../PixelScreen";
-import { SpriteLibrary } from "../sprites/SpriteLibrary";
+import { SpriteLibrary, SpriteName } from "../sprites/SpriteLibrary";
 
 export class Lamp implements GameObject {
-  constructor(private coord: Coord, private turnedOn: boolean = false) {
+  constructor(private coord: Coord, private spriteName: SpriteName, private turnedOn: boolean = false) {
   }
 
   tick() { }
 
   paint(screen: PixelScreen) {
-    screen.drawSprite(SpriteLibrary.getSprite("lamp", [this.turnedOn ? 1 : 0, 0]), this.coord);
+    screen.drawSprite(SpriteLibrary.getSprite(this.spriteName, [this.turnedOn ? 1 : 0, 0]), this.coord);
   }
 
   getCoord() {
