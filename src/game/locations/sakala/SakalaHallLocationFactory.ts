@@ -14,8 +14,8 @@ export class SakalaHallLocationFactory implements LocationFactory {
 
   constructor() {
     const lamps = [
-      new Lamp(tileToScreenCoord([1, 4]), "sakala-lamp"),
-      new Lamp(tileToScreenCoord([4, 4]), "sakala-lamp"),
+      new Lamp(tileToScreenCoord([1.5, 4]), "sakala-lamp"),
+      new Lamp(tileToScreenCoord([3.5, 4]), "sakala-lamp"),
       new Lamp(tileToScreenCoord([7, 4]), "sakala-lamp"),
       new Lamp(tileToScreenCoord([10, 4]), "sakala-lamp"),
       new Lamp(tileToScreenCoord([16, 4]), "sakala-lamp"),
