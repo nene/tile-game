@@ -1,4 +1,4 @@
-import { Coord, coordAdd, Rect } from "../Coord";
+import { Coord, coordAdd, Rect, rectTranslate } from "../Coord";
 import { GameObject } from "../GameObject";
 import { PixelScreen } from "../PixelScreen";
 import { Sprite } from "../sprites/Sprite";
@@ -8,7 +8,7 @@ import { Location } from "../locations/Location";
 
 export interface DoorConfig {
   coord: Coord;
-  sprite: Sprite;
+  area: Sprite | Rect;
   from: LocationName;
   to: LocationName;
   teleportOffset?: Coord;
@@ -19,13 +19,19 @@ export class Door implements GameObject {
   private coord: Coord;
   private fromLocation: LocationName;
   private toLocation: LocationName;
-  private sprite: Sprite;
+  private sprite?: Sprite;
+  private rect: Rect;
   private teleportOffset: Coord;
   private debug?: boolean;
 
-  constructor({ coord, sprite, from, to, teleportOffset, debug }: DoorConfig) {
+  constructor({ coord, area, from, to, teleportOffset, debug }: DoorConfig) {
     this.coord = coord;
-    this.sprite = sprite;
+    if (isSprite(area)) {
+      this.sprite = area;
+      this.rect = { coord: this.sprite.offset, size: this.sprite.size };
+    } else {
+      this.rect = area;
+    }
     this.fromLocation = from;
     this.toLocation = to;
     this.teleportOffset = teleportOffset ?? [8, 8];
@@ -36,9 +42,11 @@ export class Door implements GameObject {
   }
 
   paint(screen: PixelScreen) {
-    screen.drawSprite(this.sprite, this.coord);
+    if (this.sprite) {
+      screen.drawSprite(this.sprite, this.coord);
+    }
     if (this.debug) {
-      screen.drawRect({ coord: coordAdd(this.coord, this.sprite.offset), size: this.sprite.size }, "rgba(0,255,0,0.5)");
+      screen.drawRect(rectTranslate(this.rect, this.coord), "rgba(0,255,0,0.5)");
     }
   }
 
@@ -55,11 +63,11 @@ export class Door implements GameObject {
   }
 
   hitBox(): Rect {
-    return { coord: this.sprite.offset, size: this.sprite.size };
+    return this.rect;
   }
 
   boundingBox(): Rect {
-    return { coord: this.sprite.offset, size: this.sprite.size };
+    return this.rect;
   }
 
   isInteractable() {
@@ -93,3 +101,5 @@ export const findDoor = (location: Location, target: LocationName): Door => {
   }
   return door;
 };
+
+const isSprite = (area: Sprite | Rect): area is Sprite => area.hasOwnProperty("image");

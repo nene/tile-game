@@ -18,7 +18,7 @@ export class SakalaHallLocationFactory implements LocationFactory {
 
       new Door({
         coord: tileToScreenCoord([2, 4]),
-        sprite: SpriteLibrary.getSprite("door-large"),
+        area: SpriteLibrary.getSprite("door-large"),
         from: "sakala-hall",
         to: "outdoors",
         teleportOffset: [16, 8],

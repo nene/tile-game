@@ -21,13 +21,13 @@ export class OutdoorsLocationFactory implements LocationFactory {
       ...this.levelFactory.getFurniture(),
       new Door({
         coord: [229, 173 + 33],
-        sprite: SpriteLibrary.getSprite("cfe-building-door"),
+        area: SpriteLibrary.getSprite("cfe-building-door"),
         from: "outdoors",
         to: "cfe-hall",
       }),
       new Door({
         coord: [344, 185],
-        sprite: SpriteLibrary.getSprite("staircase-door"),
+        area: SpriteLibrary.getSprite("staircase-door"),
         from: "outdoors",
         to: "sakala-hall",
       }),
