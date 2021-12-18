@@ -16,7 +16,7 @@ export class SakalaHallLocationFactory implements LocationFactory {
       ...this.levelFactory.getFurniture(),
 
       new Door({
-        coord: tileToScreenCoord([3, 4]),
+        coord: tileToScreenCoord([2, 4]),
         spriteName: "door-large",
         from: "sakala-hall",
         to: "outdoors",
