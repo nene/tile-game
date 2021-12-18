@@ -27,7 +27,7 @@ export class OutdoorsLocationFactory implements LocationFactory {
       }),
       new Door({
         coord: [344, 185],
-        area: SpriteLibrary.getSprite("staircase-door"),
+        area: { coord: [0, -38], size: [27, 38] },
         from: "outdoors",
         to: "sakala-hall",
       }),

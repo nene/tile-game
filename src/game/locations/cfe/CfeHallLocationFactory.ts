@@ -37,7 +37,7 @@ export class CfeHallLocationFactory implements LocationFactory {
 
       new Door({
         coord: tileToScreenCoord([17, 13]),
-        area: SpriteLibrary.getSprite("staircase-door"),
+        area: { coord: [0, -48], size: [32, 48] },
         from: "cfe-hall",
         to: "cfe-cellar",
         teleportOffset: [16, -24],
