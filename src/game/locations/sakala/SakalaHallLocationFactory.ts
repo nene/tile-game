@@ -5,6 +5,7 @@ import { GameObject } from "../../GameObject";
 import { getLevel } from "../Level";
 import { TiledLevelFactory } from "../TiledLevelFactory";
 import { Lamp } from "../../furniture/Lamp";
+import { LightSwitch } from "../../furniture/LightSwitch";
 
 export class SakalaHallLocationFactory implements LocationFactory {
   private levelFactory = new TiledLevelFactory(getLevel("Sakala_hall"));
@@ -12,11 +13,20 @@ export class SakalaHallLocationFactory implements LocationFactory {
   private objects: GameObject[];
 
   constructor() {
+    const lamps = [
+      new Lamp(tileToScreenCoord([1, 4]), "sakala-lamp"),
+      new Lamp(tileToScreenCoord([4, 4]), "sakala-lamp"),
+      new Lamp(tileToScreenCoord([7, 4]), "sakala-lamp"),
+      new Lamp(tileToScreenCoord([10, 4]), "sakala-lamp"),
+      new Lamp(tileToScreenCoord([16, 4]), "sakala-lamp"),
+      new Lamp(tileToScreenCoord([19, 4]), "sakala-lamp"),
+    ];
+
     this.objects = [
       ...this.levelFactory.getWalls(),
       ...this.levelFactory.getFurniture(),
-      new Lamp(tileToScreenCoord([1, 4]), "sakala-lamp"),
-      new Lamp(tileToScreenCoord([4, 4]), "sakala-lamp"),
+      ...lamps,
+      new LightSwitch(tileToScreenCoord([5, 5]), lamps, false),
 
       new Door({
         coord: tileToScreenCoord([2, 10]),
