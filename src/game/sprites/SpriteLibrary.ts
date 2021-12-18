@@ -92,7 +92,7 @@ const imageFiles = {
   'kitchen-sink': spriteDef({ src: kitchenSink, cfg: { size: [16, 43], offset: [0, -11] } }),
   'door': spriteDef({ src: door, cfg: { size: [20, 35], offset: [-2, -34] } }),
   'door-large': spriteDef({ src: doorLarge, cfg: { size: [33, 38], offset: [-1, -38] } }),
-  'staircase-door': spriteDef({ src: staircaseDoor, cfg: { size: [32, 48], colsRows: [3, 1], offset: [0, -48] } }),
+  'staircase-door': spriteDef({ src: staircaseDoor, cfg: { size: [32, 48], colsRows: [2, 1], offset: [0, -48] } }),
   'fireplace': spriteDef({ src: fireplace, cfg: { size: [64, 52], colsRows: [5, 1], offset: [0, -36] } }),
   'countertop': spriteDef({ src: countertop, cfg: { size: [16, 55], offset: [0, -23] } }),
   'sofa': spriteDef({ src: sofa, cfg: { size: [48, 26], offset: [0, -15] } }),
