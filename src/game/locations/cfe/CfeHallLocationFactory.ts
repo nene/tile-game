@@ -7,7 +7,7 @@ import { LightSwitch } from "../../furniture/LightSwitch";
 import { getLevel } from "../Level";
 import { TiledLevelFactory } from "../TiledLevelFactory";
 import { WallSection } from "../../furniture/WallSection";
-import { SpriteLibrary } from "../../sprites/SpriteLibrary";
+import { Painting } from "../../furniture/Painting";
 
 export class CfeHallLocationFactory implements LocationFactory {
   private levelFactory = new TiledLevelFactory(getLevel("CFE_hall"));
@@ -27,12 +27,15 @@ export class CfeHallLocationFactory implements LocationFactory {
       ...this.levelFactory.getWalls(),
       ...this.levelFactory.getFurniture(),
 
+      // non-functional door
+      new Painting(tileToScreenCoord([9, 6]), "door-large"),
+
       new Door({
-        coord: tileToScreenCoord([9, 6]),
-        area: SpriteLibrary.getSprite("door-large"),
+        coord: tileToScreenCoord([23, 13]),
+        area: { coord: [0, 0], size: [48, 32] },
         from: "cfe-hall",
         to: "outdoors",
-        teleportOffset: [16, 8],
+        teleportOffset: [24, 24],
       }),
 
       new Door({
