@@ -4,6 +4,7 @@ import { GameObject } from "../../GameObject";
 import { Door } from "../../furniture/Door";
 import { getLevel } from "../Level";
 import { TiledLevelFactory } from "../TiledLevelFactory";
+import { SpriteLibrary } from "../../sprites/SpriteLibrary";
 
 export class CfeCellarLocationFactory implements LocationFactory {
   private levelFactory = new TiledLevelFactory(getLevel("CFE_cellar"));
@@ -14,8 +15,7 @@ export class CfeCellarLocationFactory implements LocationFactory {
 
     new Door({
       coord: tileToScreenCoord([12, 4]),
-      spriteName: "staircase-door",
-      spriteCoord: [1, 0],
+      sprite: SpriteLibrary.getSprite("staircase-door", [1, 0]),
       from: "cfe-cellar",
       to: "cfe-hall",
       teleportOffset: [16, -8],

@@ -2,15 +2,13 @@ import { Coord, coordAdd, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
 import { PixelScreen } from "../PixelScreen";
 import { Sprite } from "../sprites/Sprite";
-import { SpriteLibrary, SpriteName } from "../sprites/SpriteLibrary";
 import { UiController } from "../UiController";
 import { LocationName } from "../locations/LocationFactory";
 import { Location } from "../locations/Location";
 
 export interface DoorConfig {
   coord: Coord;
-  spriteName: SpriteName;
-  spriteCoord?: Coord;
+  sprite: Sprite;
   from: LocationName;
   to: LocationName;
   teleportOffset?: Coord;
@@ -25,9 +23,9 @@ export class Door implements GameObject {
   private teleportOffset: Coord;
   private debug?: boolean;
 
-  constructor({ coord, spriteName, spriteCoord, from, to, teleportOffset, debug }: DoorConfig) {
+  constructor({ coord, sprite, from, to, teleportOffset, debug }: DoorConfig) {
     this.coord = coord;
-    this.sprite = SpriteLibrary.getSprite(spriteName, spriteCoord);
+    this.sprite = sprite;
     this.fromLocation = from;
     this.toLocation = to;
     this.teleportOffset = teleportOffset ?? [8, 8];

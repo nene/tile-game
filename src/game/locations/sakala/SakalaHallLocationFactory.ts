@@ -4,6 +4,7 @@ import { Door } from "../../furniture/Door";
 import { GameObject } from "../../GameObject";
 import { getLevel } from "../Level";
 import { TiledLevelFactory } from "../TiledLevelFactory";
+import { SpriteLibrary } from "../../sprites/SpriteLibrary";
 
 export class SakalaHallLocationFactory implements LocationFactory {
   private levelFactory = new TiledLevelFactory(getLevel("Sakala_hall"));
@@ -17,7 +18,7 @@ export class SakalaHallLocationFactory implements LocationFactory {
 
       new Door({
         coord: tileToScreenCoord([2, 4]),
-        spriteName: "door-large",
+        sprite: SpriteLibrary.getSprite("door-large"),
         from: "sakala-hall",
         to: "outdoors",
         teleportOffset: [16, 8],

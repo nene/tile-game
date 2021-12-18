@@ -6,6 +6,7 @@ import { Door } from "../../furniture/Door";
 import { SpawnPoint } from "../../furniture/SpawnPoint";
 import { TiledLevelFactory } from "../TiledLevelFactory";
 import { getLevel } from "../Level";
+import { SpriteLibrary } from "../../sprites/SpriteLibrary";
 
 export class OutdoorsLocationFactory implements LocationFactory {
   private levelFactory = new TiledLevelFactory(getLevel("Outdoors"));
@@ -20,13 +21,13 @@ export class OutdoorsLocationFactory implements LocationFactory {
       ...this.levelFactory.getFurniture(),
       new Door({
         coord: [229, 173 + 33],
-        spriteName: "cfe-building-door",
+        sprite: SpriteLibrary.getSprite("cfe-building-door"),
         from: "outdoors",
         to: "cfe-hall",
       }),
       new Door({
         coord: [344, 185],
-        spriteName: "staircase-door",
+        sprite: SpriteLibrary.getSprite("staircase-door"),
         from: "outdoors",
         to: "sakala-hall",
       }),
