@@ -69,6 +69,10 @@ export function rectOverlaps({ coord: a1, size: aSize }: Rect, { coord: b1, size
   return xOverlaps && yOverlaps;
 }
 
+export function rectContains(container: Rect, rect: Rect): boolean {
+  return isCoordInRect(rect.coord, container) && isCoordInRect(coordAdd(rect.coord, coordSub(rect.size, [1, 1])), container);
+}
+
 export function rectGrow({ coord, size }: Rect, padding: Coord): Rect {
   return { coord: coordSub(coord, padding), size: coordAdd(size, coordMul(padding, [2, 2])) };
 }

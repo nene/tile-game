@@ -1,4 +1,4 @@
-import { coordConstrain, Rect, rectAlign, rectCenter, rectOverlaps } from "./Coord";
+import { coordConstrain, Rect, rectAlign, rectCenter, rectContains, rectOverlaps } from "./Coord";
 
 describe("coordConstrain()", () => {
   it("does nothing when coord inside the rectangle", () => {
@@ -39,6 +39,24 @@ describe("rectOverlaps()", () => {
 
   it("true when only edges overlap", () => {
     expect(rectOverlaps({ coord: [0, 0], size: [10, 10] }, { coord: [9, 9], size: [10, 10] })).toBe(true);
+  });
+});
+
+describe("rectContains()", () => {
+  it("false when rects far from each other", () => {
+    expect(rectContains({ coord: [0, 0], size: [5, 5] }, { coord: [20, 20], size: [10, 10] })).toBe(false);
+  });
+
+  it("true when rect clearly inside the container", () => {
+    expect(rectContains({ coord: [5, 5], size: [20, 20] }, { coord: [10, 10], size: [5, 5] })).toBe(true);
+  });
+
+  it("true for two equal rects", () => {
+    expect(rectContains({ coord: [5, 5], size: [20, 20] }, { coord: [5, 5], size: [20, 20] })).toBe(true);
+  });
+
+  it("false when container inside the rect", () => {
+    expect(rectContains({ coord: [10, 10], size: [5, 5] }, { coord: [5, 5], size: [20, 20] })).toBe(false);
   });
 });
 
