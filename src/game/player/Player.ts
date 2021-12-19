@@ -206,3 +206,5 @@ export class Player implements GameObject {
     return !!glass && isBeerGlass(glass) && glass.getLevel() > DrinkLevel.empty;
   }
 }
+
+export const isPlayer = (obj: GameObject): obj is Player => obj instanceof Player;

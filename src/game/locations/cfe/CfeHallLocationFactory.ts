@@ -36,6 +36,7 @@ export class CfeHallLocationFactory implements LocationFactory {
         from: "cfe-hall",
         to: "outdoors",
         teleportOffset: [24, 24],
+        autoTeleportSide: "bottom",
       }),
 
       new Door({
@@ -44,6 +45,7 @@ export class CfeHallLocationFactory implements LocationFactory {
         from: "cfe-hall",
         to: "cfe-cellar",
         teleportOffset: [16, -24],
+        autoTeleportSide: "bottom",
       }),
       ...lamps,
       new LightSwitch(tileToScreenCoord([15, 7]), lamps, false),

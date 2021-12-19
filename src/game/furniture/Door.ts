@@ -1,10 +1,12 @@
-import { Coord, coordAdd, Rect, rectTranslate } from "../Coord";
+import { Coord, coordAdd, Rect, rectAlign, rectContains, rectTranslate } from "../Coord";
 import { GameObject } from "../GameObject";
 import { PixelScreen } from "../PixelScreen";
 import { Sprite } from "../sprites/Sprite";
 import { UiController } from "../UiController";
 import { LocationName } from "../locations/LocationFactory";
 import { Location } from "../locations/Location";
+import { GameWorld } from "../GameWorld";
+import { isPlayer, Player } from "../player/Player";
 
 export interface DoorConfig {
   coord: Coord;
@@ -12,6 +14,7 @@ export interface DoorConfig {
   from: LocationName;
   to: LocationName;
   teleportOffset?: Coord;
+  autoTeleportSide?: "top" | "bottom";
   debug?: boolean;
 }
 
@@ -23,8 +26,9 @@ export class Door implements GameObject {
   private rect: Rect;
   private teleportOffset: Coord;
   private debug?: boolean;
+  private autoTeleportArea?: Rect;
 
-  constructor({ coord, area, from, to, teleportOffset, debug }: DoorConfig) {
+  constructor({ coord, area, from, to, teleportOffset, autoTeleportSide, debug }: DoorConfig) {
     this.coord = coord;
     if (isSprite(area)) {
       this.sprite = area;
@@ -35,10 +39,26 @@ export class Door implements GameObject {
     this.fromLocation = from;
     this.toLocation = to;
     this.teleportOffset = teleportOffset ?? [8, 8];
+    if (autoTeleportSide) {
+      const height = autoTeleportSide === "bottom" ? 8 : 22;
+      this.autoTeleportArea = rectAlign({ coord: [0, 0], size: [this.rect.size[0], height] }, this.rect, autoTeleportSide);
+    }
     this.debug = debug;
   }
 
-  tick() {
+  tick(location: Location, world: GameWorld) {
+    if (!this.autoTeleportArea || world.getActiveLocation() !== location) {
+      return;
+    }
+
+    const player = location.allObjects().find(isPlayer);
+    if (player && this.isInAutoTeleportArea(player, this.autoTeleportArea)) {
+      this.teleport(world);
+    }
+  }
+
+  private isInAutoTeleportArea(player: Player, autoTeleportArea: Rect): boolean {
+    return rectContains(rectTranslate(autoTeleportArea, this.coord), rectTranslate(player.boundingBox(), player.getCoord()));
   }
 
   paint(screen: PixelScreen) {
@@ -75,7 +95,10 @@ export class Door implements GameObject {
   }
 
   interact(ui: UiController) {
-    const world = ui.getWorld();
+    this.teleport(ui.getWorld());
+  }
+
+  private teleport(world: GameWorld) {
     world.getActiveLocation();
     const newLocation = world.getLocation(this.toLocation);
     const door = findDoor(newLocation, this.fromLocation);

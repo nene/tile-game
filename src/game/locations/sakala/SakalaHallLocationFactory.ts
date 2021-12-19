@@ -34,6 +34,7 @@ export class SakalaHallLocationFactory implements LocationFactory {
         from: "sakala-hall",
         to: "outdoors",
         teleportOffset: [16, 24],
+        autoTeleportSide: "bottom",
       }),
     ];
   }

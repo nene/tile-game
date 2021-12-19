@@ -19,6 +19,7 @@ export class CfeCellarLocationFactory implements LocationFactory {
       from: "cfe-cellar",
       to: "cfe-hall",
       teleportOffset: [16, -8],
+      autoTeleportSide: "top",
     }),
   ];
 
