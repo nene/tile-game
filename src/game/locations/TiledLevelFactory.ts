@@ -16,7 +16,7 @@ export class TiledLevelFactory {
   }
 
   getBackground(): TiledBackground {
-    return this.createTiledBackground("Background", "cfe-bg");
+    return this.createTiledBackground("Background", "bg");
   }
 
   getBuildings(): TiledBackground {
@@ -24,7 +24,7 @@ export class TiledLevelFactory {
   }
 
   getForeground(): TiledBackground {
-    return this.createTiledBackground("Foreground", "cfe-bg");
+    return this.createTiledBackground("Foreground", "bg");
   }
 
   private createTiledBackground(layerName: string, spriteName: SpriteName) {

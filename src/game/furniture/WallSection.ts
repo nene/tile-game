@@ -20,7 +20,7 @@ export class WallSection implements GameObject {
   constructor({ coord, size }: Rect, private type: WallType) {
     this.coord = coord;
     this.size = size;
-    this.sprites = spriteCoords[type].map((coord) => SpriteLibrary.getSprite("cfe-bg", coord));
+    this.sprites = spriteCoords[type].map((coord) => SpriteLibrary.getSprite("bg", coord));
   }
 
   tick() { }
