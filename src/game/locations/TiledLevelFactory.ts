@@ -34,7 +34,7 @@ export class TiledLevelFactory {
 
   getGrass(): TiledBackground {
     const tiles = this.level.layerInstances.find(isGrassLayer)?.autoLayerTiles ?? [];
-    return new TiledBackground(tiles, "grass");
+    return new TiledBackground(tiles, "grass", [8, 8]);
   }
 
   getFurniture(): GameObject[] {
