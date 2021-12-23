@@ -16,15 +16,15 @@ export class PlayerAnimationLibrary {
     this.standAnimations = {
       down: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), {
         frames: [
-          [0, 6], [0, 6], [0, 6], [0, 6], [0, 6], [0, 6], [0, 6], [0, 6], // 8
-          [1, 6], [1, 6], [1, 6], [1, 6], [1, 6], [1, 6], [1, 6], [1, 6], // 8
-          [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], // 8
-          [3, 6],
-          [4, 6], [4, 6], [4, 6], [4, 6], [4, 6], [4, 6], [4, 6], [4, 6], // 8
-          [5, 6],
-          [6, 6],
-          [7, 6],
-          [8, 6], [8, 6], [8, 6], [8, 6], [8, 6], [8, 6], [8, 6], [8, 6], // 8
+          { coord: [0, 6], ticks: 8 },
+          { coord: [1, 6], ticks: 8 },
+          { coord: [2, 6], ticks: 8 },
+          { coord: [3, 6], ticks: 1 },
+          { coord: [4, 6], ticks: 8 },
+          { coord: [5, 6], ticks: 1 },
+          { coord: [6, 6], ticks: 1 },
+          { coord: [7, 6], ticks: 1 },
+          { coord: [8, 6], ticks: 8 },
         ]
       }),
       up: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: [[3, 0]] }),

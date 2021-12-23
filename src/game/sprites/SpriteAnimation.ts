@@ -1,10 +1,11 @@
+import { fill } from "lodash";
 import { Coord } from "../Coord";
 import { Animation } from "./Animation";
 import { Sprite } from "./Sprite";
 import { SpriteSheet } from "./SpriteSheet";
 
 interface AnimationConfig {
-  frames: Coord[] | FrameRange;
+  frames: Coord[] | FrameWithTicks[] | FrameRange;
   ticksPerFrame?: number;
   currentFrame?: number;
   repeat?: number;
@@ -13,6 +14,11 @@ interface AnimationConfig {
 interface FrameRange {
   from: Coord;
   to: Coord;
+}
+
+interface FrameWithTicks {
+  coord: Coord;
+  ticks: number;
 }
 
 // An animated sprite
@@ -25,10 +31,23 @@ export class SpriteAnimation implements Animation {
   private cycles = 0;
 
   constructor(private spriteSheet: SpriteSheet, cfg: AnimationConfig) {
-    this.frames = cfg.frames instanceof Array ? cfg.frames : expandFrameRange(cfg.frames);
+    this.frames = this.toPlainFrames(cfg.frames);
     this.repeat = cfg.repeat ?? Infinity;
     this.ticksPerFrame = cfg.ticksPerFrame ?? 1;
     this.currentFrame = cfg.currentFrame ?? 0;
+  }
+
+  private toPlainFrames(frames: Coord[] | FrameWithTicks[] | FrameRange): Coord[] {
+    if (frames instanceof Array) {
+      if (isCoordArray(frames)) {
+        return frames;
+      } else {
+        return expandFramesWithTicks(frames);
+      }
+    }
+    else {
+      return expandFrameRange(frames);
+    }
   }
 
   public getSprites(): Sprite[] {
@@ -72,4 +91,12 @@ function expandFrameRange({ from, to }: FrameRange): Coord[] {
     }
   }
   return frames;
+}
+
+function isCoordArray(x: Coord[] | FrameWithTicks[]): x is Coord[] {
+  return x[0] instanceof Array;
+}
+
+function expandFramesWithTicks(frames: FrameWithTicks[]): Coord[] {
+  return frames.flatMap(({ coord, ticks }) => fill(new Array(ticks), coord));
 }
