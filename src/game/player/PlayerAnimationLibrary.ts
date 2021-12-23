@@ -14,7 +14,19 @@ export class PlayerAnimationLibrary {
 
   constructor() {
     this.standAnimations = {
-      down: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: [[0, 5], [1, 5], [2, 5]], ticksPerFrame: 2 }),
+      down: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), {
+        frames: [
+          [0, 6], [0, 6], [0, 6], [0, 6], [0, 6], [0, 6], [0, 6], [0, 6], // 8
+          [1, 6], [1, 6], [1, 6], [1, 6], [1, 6], [1, 6], [1, 6], [1, 6], // 8
+          [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], // 8
+          [3, 6],
+          [4, 6], [4, 6], [4, 6], [4, 6], [4, 6], [4, 6], [4, 6], [4, 6], // 8
+          [5, 6],
+          [6, 6],
+          [7, 6],
+          [8, 6], [8, 6], [8, 6], [8, 6], [8, 6], [8, 6], [8, 6], [8, 6], // 8
+        ]
+      }),
       up: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: [[3, 0]] }),
       right: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: [[5, 0]] }),
       left: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: [[4, 0]] }),
