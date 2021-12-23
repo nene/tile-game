@@ -19,9 +19,15 @@ export class PlayerAnimationLibrary {
       down: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), {
         frames: readAsepriteAnimation("idle2", cfeRebJson),
       }),
-      up: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: [[3, 0]] }),
-      right: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: [[5, 0]] }),
-      left: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: [[4, 0]] }),
+      up: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), {
+        frames: [readAsepriteAnimation("base", cfeRebJson)[3]],
+      }),
+      right: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), {
+        frames: [readAsepriteAnimation("base", cfeRebJson)[5]],
+      }),
+      left: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), {
+        frames: [readAsepriteAnimation("base", cfeRebJson)[4]],
+      }),
     }
 
     this.walkAnimations = {
