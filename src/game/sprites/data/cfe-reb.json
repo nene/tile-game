@@ -348,7 +348,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 34 },
     "sourceSize": { "w": 16, "h": 34 },
-    "duration": 200
+    "duration": 800
    },
    {
     "filename": "#idle 1",
@@ -357,7 +357,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 34 },
     "sourceSize": { "w": 16, "h": 34 },
-    "duration": 200
+    "duration": 800
    },
    {
     "filename": "#idle 2",
@@ -366,38 +366,11 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 34 },
     "sourceSize": { "w": 16, "h": 34 },
-    "duration": 200
-   },
-   {
-    "filename": "#idle2 0",
-    "frame": { "x": 0, "y": 204, "w": 16, "h": 34 },
-    "rotated": false,
-    "trimmed": false,
-    "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 34 },
-    "sourceSize": { "w": 16, "h": 34 },
     "duration": 800
    },
    {
-    "filename": "#idle2 1",
-    "frame": { "x": 16, "y": 204, "w": 16, "h": 34 },
-    "rotated": false,
-    "trimmed": false,
-    "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 34 },
-    "sourceSize": { "w": 16, "h": 34 },
-    "duration": 800
-   },
-   {
-    "filename": "#idle2 2",
-    "frame": { "x": 32, "y": 204, "w": 16, "h": 34 },
-    "rotated": false,
-    "trimmed": false,
-    "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 34 },
-    "sourceSize": { "w": 16, "h": 34 },
-    "duration": 800
-   },
-   {
-    "filename": "#idle2 3",
-    "frame": { "x": 48, "y": 204, "w": 16, "h": 34 },
+    "filename": "#idle 3",
+    "frame": { "x": 48, "y": 170, "w": 16, "h": 34 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 34 },
@@ -405,8 +378,8 @@
     "duration": 100
    },
    {
-    "filename": "#idle2 4",
-    "frame": { "x": 64, "y": 204, "w": 16, "h": 34 },
+    "filename": "#idle 4",
+    "frame": { "x": 64, "y": 170, "w": 16, "h": 34 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 34 },
@@ -414,8 +387,8 @@
     "duration": 800
    },
    {
-    "filename": "#idle2 5",
-    "frame": { "x": 80, "y": 204, "w": 16, "h": 34 },
+    "filename": "#idle 5",
+    "frame": { "x": 80, "y": 170, "w": 16, "h": 34 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 34 },
@@ -423,8 +396,8 @@
     "duration": 100
    },
    {
-    "filename": "#idle2 6",
-    "frame": { "x": 96, "y": 204, "w": 16, "h": 34 },
+    "filename": "#idle 6",
+    "frame": { "x": 96, "y": 170, "w": 16, "h": 34 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 34 },
@@ -432,8 +405,8 @@
     "duration": 100
    },
    {
-    "filename": "#idle2 7",
-    "frame": { "x": 112, "y": 204, "w": 16, "h": 34 },
+    "filename": "#idle 7",
+    "frame": { "x": 112, "y": 170, "w": 16, "h": 34 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 34 },
@@ -441,8 +414,8 @@
     "duration": 100
    },
    {
-    "filename": "#idle2 8",
-    "frame": { "x": 128, "y": 204, "w": 16, "h": 34 },
+    "filename": "#idle 8",
+    "frame": { "x": 128, "y": 170, "w": 16, "h": 34 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 34 },
@@ -455,7 +428,7 @@
   "version": "1.2.30",
   "image": "cfe-reb.png",
   "format": "RGBA8888",
-  "size": { "w": 144, "h": 238 },
+  "size": { "w": 144, "h": 204 },
   "scale": "1",
   "frameTags": [
    { "name": "base", "from": 0, "to": 5, "direction": "forward" },
@@ -463,8 +436,7 @@
    { "name": "w-left", "from": 14, "to": 21, "direction": "forward" },
    { "name": "w-forward", "from": 22, "to": 29, "direction": "forward" },
    { "name": "w-back", "from": 30, "to": 37, "direction": "forward" },
-   { "name": "idle", "from": 38, "to": 40, "direction": "forward" },
-   { "name": "idle2", "from": 41, "to": 49, "direction": "forward" }
+   { "name": "idle", "from": 38, "to": 46, "direction": "forward" }
   ]
  }
 }

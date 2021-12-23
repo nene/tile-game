@@ -17,7 +17,7 @@ export class PlayerAnimationLibrary {
   constructor() {
     this.standAnimations = {
       down: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), {
-        frames: readAsepriteAnimation("idle2", cfeRebJson),
+        frames: readAsepriteAnimation("idle", cfeRebJson),
       }),
       up: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), {
         frames: [readAsepriteAnimation("base", cfeRebJson)[3]],
