@@ -25,10 +25,18 @@ export class PlayerAnimationLibrary {
     }
 
     this.walkAnimations = {
-      down: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: { from: [0, 3], to: [7, 3] } }),
-      up: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: { from: [0, 4], to: [7, 4] } }),
-      right: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: { from: [0, 1], to: [7, 1] } }),
-      left: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: { from: [0, 2], to: [7, 2] } }),
+      down: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), {
+        frames: readAsepriteAnimation("w-forward", cfeRebJson),
+      }),
+      up: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), {
+        frames: readAsepriteAnimation("w-back", cfeRebJson),
+      }),
+      right: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), {
+        frames: readAsepriteAnimation("w-right", cfeRebJson),
+      }),
+      left: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), {
+        frames: readAsepriteAnimation("w-left", cfeRebJson),
+      }),
     };
 
     this.drunkAnimation = this.createDrunkAnimation();
