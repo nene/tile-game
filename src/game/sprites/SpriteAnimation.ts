@@ -16,7 +16,7 @@ interface FrameRange {
   to: Coord;
 }
 
-interface FrameWithTicks {
+export interface FrameWithTicks {
   coord: Coord;
   ticks: number;
 }
