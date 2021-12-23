@@ -73,7 +73,7 @@ export class PlayerAnimationLibrary {
   }
 
   getStanding(facing: Facing, frame: number = 0): Animation {
-    return this.standAnimations[facing];
+    return resetFrame(this.standAnimations[facing]);
   }
 
   getWalking(facing: Facing, frame: number = 0): Animation {
@@ -87,4 +87,9 @@ export class PlayerAnimationLibrary {
   getSleep(): Animation {
     return this.sleepAnimation;
   }
+}
+
+function resetFrame(animation: SpriteAnimation): SpriteAnimation {
+  animation.setFrame(0);
+  return animation;
 }
