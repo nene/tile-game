@@ -3,6 +3,8 @@ import { CompositeAnimation } from "../sprites/CompositeAnimation";
 import { SpriteAnimation } from "../sprites/SpriteAnimation";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { Facing } from "./PlayerDirection";
+import cfeRebJson from "../sprites/data/cfe-reb.json";
+import { readAsepriteAnimation } from "../sprites/readAsepriteAnimation";
 
 export type PlayerAnimationType = 'stand' | 'walk' | 'drunk';
 
@@ -15,17 +17,7 @@ export class PlayerAnimationLibrary {
   constructor() {
     this.standAnimations = {
       down: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), {
-        frames: [
-          { coord: [0, 6], ticks: 8 },
-          { coord: [1, 6], ticks: 8 },
-          { coord: [2, 6], ticks: 8 },
-          { coord: [3, 6], ticks: 1 },
-          { coord: [4, 6], ticks: 8 },
-          { coord: [5, 6], ticks: 1 },
-          { coord: [6, 6], ticks: 1 },
-          { coord: [7, 6], ticks: 1 },
-          { coord: [8, 6], ticks: 8 },
-        ]
+        frames: readAsepriteAnimation("idle2", cfeRebJson),
       }),
       up: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: [[3, 0]] }),
       right: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), { frames: [[5, 0]] }),
