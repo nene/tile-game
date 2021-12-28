@@ -3386,7 +3386,7 @@
 					"layerDefUid": 3,
 					"pxOffsetX": 0,
 					"pxOffsetY": 0,
-					"visible": true,
+					"visible": false,
 					"optionalRules": [],
 					"intGrid": [
 						{ "coordId": 0, "v": 0 },
@@ -4256,7 +4256,7 @@
 					"layerDefUid": 10,
 					"pxOffsetX": 0,
 					"pxOffsetY": 0,
-					"visible": true,
+					"visible": false,
 					"optionalRules": [],
 					"intGrid": [],
 					"intGridCsv": [],
@@ -4601,6 +4601,17 @@
 							"height": 13,
 							"defUid": 42,
 							"px": [850,208],
+							"fieldInstances": []
+						},
+						{
+							"__identifier": "Wall",
+							"__grid": [45,13],
+							"__pivot": [0,0],
+							"__tile": null,
+							"width": 20,
+							"height": 14,
+							"defUid": 42,
+							"px": [726,208],
 							"fieldInstances": []
 						}
 					]
