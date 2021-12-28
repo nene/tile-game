@@ -9,7 +9,7 @@ interface CalendarConfig {
 
 export class Calendar {
   private ticks = DAY_START_TIME;
-  private day = 1;
+  private day = 2;
   private onDayEnd: (day: number) => void;
 
   constructor({ onDayEnd }: CalendarConfig) {
