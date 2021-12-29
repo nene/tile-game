@@ -1,7 +1,6 @@
 import { Coord, tileToScreenCoord } from "../../Coord";
 import { LocationFactory, LocationName } from "../LocationFactory";
 import { GameObject } from "../../GameObject";
-import { OutdoorsBackground } from "./OutdoorsBackground";
 import { Door } from "../../furniture/Door";
 import { SpawnPoint } from "../../furniture/SpawnPoint";
 import { TiledLevelFactory } from "../TiledLevelFactory";
@@ -10,12 +9,9 @@ import { SpriteLibrary } from "../../sprites/SpriteLibrary";
 
 export class OutdoorsLocationFactory implements LocationFactory {
   private levelFactory = new TiledLevelFactory(getLevel("Outdoors"));
-  private background: OutdoorsBackground;
   private objects: GameObject[];
 
   constructor() {
-    this.background = new OutdoorsBackground();
-
     this.objects = [
       ...this.levelFactory.getWalls(),
       ...this.levelFactory.getFurniture(),
@@ -46,7 +42,6 @@ export class OutdoorsLocationFactory implements LocationFactory {
 
   getBackgrounds() {
     return [
-      this.background,
       this.levelFactory.getBackground(),
       this.levelFactory.getGrass(),
       this.levelFactory.getBuildings(),
