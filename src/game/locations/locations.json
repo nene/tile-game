@@ -9,7 +9,7 @@
 		"url": "https://ldtk.io"
 	},
 	"jsonVersion": "0.9.3",
-	"nextUid": 67,
+	"nextUid": 68,
 	"worldLayout": "Free",
 	"worldGridWidth": 256,
 	"worldGridHeight": 256,
@@ -1064,6 +1064,31 @@
 			"pivotX": 0,
 			"pivotY": 0,
 			"fieldDefs": []
+		},
+		{
+			"identifier": "FeenoksShelf",
+			"uid": 67,
+			"tags": [],
+			"width": 32,
+			"height": 5,
+			"resizableX": false,
+			"resizableY": false,
+			"keepAspectRatio": false,
+			"fillOpacity": 1,
+			"lineOpacity": 1,
+			"hollow": false,
+			"color": "#94D9B3",
+			"renderMode": "Tile",
+			"showName": true,
+			"tilesetId": 17,
+			"tileId": 12,
+			"tileRenderMode": "FitInside",
+			"maxCount": 0,
+			"limitScope": "PerLevel",
+			"limitBehavior": "MoveLastOne",
+			"pivotX": 0,
+			"pivotY": 0,
+			"fieldDefs": []
 		}
 	], "tilesets": [
 		{
@@ -1120,7 +1145,7 @@
 			"savedSelections": [],
 			"cachedPixelData": {
 				"opaqueTiles": "000000000000000000000000",
-				"averageColors": "c33483336433433256667887c6546666b555599aa3644432000000000000000000000000000000000000000000000000"
+				"averageColors": "c33483336433433256667887c6546666b555599aa36444328754a99a1764000000000000000000000000000000000000"
 			}
 		},
 		{
@@ -8732,7 +8757,41 @@
 					"seed": 2692728,
 					"overrideTilesetUid": null,
 					"gridTiles": [],
-					"entityInstances": []
+					"entityInstances": [
+						{
+							"__identifier": "FeenoksShelf",
+							"__grid": [7,4],
+							"__pivot": [0,0],
+							"__tile": { "tilesetUid": 17, "srcRect": [0,64,32,32] },
+							"width": 32,
+							"height": 5,
+							"defUid": 67,
+							"px": [112,64],
+							"fieldInstances": []
+						},
+						{
+							"__identifier": "FeenoksShelf",
+							"__grid": [11,4],
+							"__pivot": [0,0],
+							"__tile": { "tilesetUid": 17, "srcRect": [0,64,32,32] },
+							"width": 32,
+							"height": 5,
+							"defUid": 67,
+							"px": [180,64],
+							"fieldInstances": []
+						},
+						{
+							"__identifier": "FeenoksShelf",
+							"__grid": [13,4],
+							"__pivot": [0,0],
+							"__tile": { "tilesetUid": 17, "srcRect": [0,64,32,32] },
+							"width": 32,
+							"height": 5,
+							"defUid": 67,
+							"px": [214,64],
+							"fieldInstances": []
+						}
+					]
 				},
 				{
 					"__identifier": "Paintings",
