@@ -9,7 +9,7 @@
 		"url": "https://ldtk.io"
 	},
 	"jsonVersion": "0.9.3",
-	"nextUid": 71,
+	"nextUid": 74,
 	"worldLayout": "Free",
 	"worldGridWidth": 256,
 	"worldGridHeight": 256,
@@ -1088,7 +1088,28 @@
 			"limitBehavior": "MoveLastOne",
 			"pivotX": 0,
 			"pivotY": 0,
-			"fieldDefs": []
+			"fieldDefs": [
+				{
+					"identifier": "variant",
+					"__type": "Int",
+					"uid": 73,
+					"type": "F_Int",
+					"isArray": false,
+					"canBeNull": false,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "ValueOnly",
+					"editorDisplayPos": "Above",
+					"editorAlwaysShow": true,
+					"editorCutLongValues": true,
+					"min": 0,
+					"max": 2,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": { "id": "V_Int", "params": [0] },
+					"textLanguageMode": null
+				}
+			]
 		},
 		{
 			"identifier": "FeenoksFridge",
@@ -1163,7 +1184,28 @@
 			"limitBehavior": "MoveLastOne",
 			"pivotX": 0,
 			"pivotY": 0,
-			"fieldDefs": []
+			"fieldDefs": [
+				{
+					"identifier": "variant",
+					"__type": "Int",
+					"uid": 71,
+					"type": "F_Int",
+					"isArray": false,
+					"canBeNull": false,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "ValueOnly",
+					"editorDisplayPos": "Above",
+					"editorAlwaysShow": false,
+					"editorCutLongValues": true,
+					"min": 0,
+					"max": 2,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": { "id": "V_Int", "params": [0] },
+					"textLanguageMode": null
+				}
+			]
 		}
 	], "tilesets": [
 		{
@@ -8842,7 +8884,13 @@
 							"height": 5,
 							"defUid": 67,
 							"px": [112,64],
-							"fieldInstances": []
+							"fieldInstances": [{
+								"__identifier": "variant",
+								"__value": 0,
+								"__type": "Int",
+								"defUid": 73,
+								"realEditorValues": [{ "id": "V_Int", "params": [0] }]
+							}]
 						},
 						{
 							"__identifier": "FeenoksShelf",
@@ -8853,7 +8901,13 @@
 							"height": 5,
 							"defUid": 67,
 							"px": [180,64],
-							"fieldInstances": []
+							"fieldInstances": [{
+								"__identifier": "variant",
+								"__value": 1,
+								"__type": "Int",
+								"defUid": 73,
+								"realEditorValues": [{ "id": "V_Int", "params": [1] }]
+							}]
 						},
 						{
 							"__identifier": "FeenoksShelf",
@@ -8864,7 +8918,13 @@
 							"height": 5,
 							"defUid": 67,
 							"px": [214,64],
-							"fieldInstances": []
+							"fieldInstances": [{
+								"__identifier": "variant",
+								"__value": 2,
+								"__type": "Int",
+								"defUid": 73,
+								"realEditorValues": [{ "id": "V_Int", "params": [2] }]
+							}]
 						},
 						{
 							"__identifier": "FeenoksFridge",
@@ -8919,7 +8979,13 @@
 							"height": 12,
 							"defUid": 70,
 							"px": [112,84],
-							"fieldInstances": []
+							"fieldInstances": [{
+								"__identifier": "variant",
+								"__value": 0,
+								"__type": "Int",
+								"defUid": 71,
+								"realEditorValues": [{ "id": "V_Int", "params": [0] }]
+							}]
 						},
 						{
 							"__identifier": "FeenoksCounter",
@@ -8930,7 +8996,13 @@
 							"height": 12,
 							"defUid": 70,
 							"px": [144,84],
-							"fieldInstances": []
+							"fieldInstances": [{
+								"__identifier": "variant",
+								"__value": 1,
+								"__type": "Int",
+								"defUid": 71,
+								"realEditorValues": [{ "id": "V_Int", "params": [1] }]
+							}]
 						},
 						{
 							"__identifier": "FeenoksCounter",
@@ -8941,7 +9013,13 @@
 							"height": 12,
 							"defUid": 70,
 							"px": [176,84],
-							"fieldInstances": []
+							"fieldInstances": [{
+								"__identifier": "variant",
+								"__value": 2,
+								"__type": "Int",
+								"defUid": 71,
+								"realEditorValues": [{ "id": "V_Int", "params": [2] }]
+							}]
 						}
 					]
 				},

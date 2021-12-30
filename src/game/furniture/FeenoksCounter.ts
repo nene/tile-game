@@ -4,13 +4,13 @@ import { PixelScreen } from "../PixelScreen";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 
 export class FeenoksCounter implements GameObject {
-  constructor(private coord: Coord) {
+  constructor(private coord: Coord, private type: number) {
   }
 
   tick() { }
 
   paint(screen: PixelScreen) {
-    screen.drawSprite(SpriteLibrary.getSprite("feenoks-counter"), this.coord);
+    screen.drawSprite(SpriteLibrary.getSprite("feenoks-counter", [this.type, 0]), this.coord);
   }
 
   zIndex() {

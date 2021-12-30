@@ -32,10 +32,8 @@ const classMap: Record<string, { new(coord: Coord): GameObject }> = {
   "KitchenSink": KitchenSink,
   "Pianino": Pianino,
   "Sofa": Sofa,
-  "FeenoksShelf": FeenoksShelf,
   "FeenoksShelfSideways": FeenoksShelfSideways,
   "FeenoksFridge": FeenoksFridge,
-  "FeenoksCounter": FeenoksCounter,
 }
 
 const paintingMap: Record<string, SpriteName> = {
@@ -58,6 +56,12 @@ export function createFurniture(type: string, { coord, size }: Rect, fields: Ent
   }
   if (type === "Wall") {
     return new Wall({ coord, size });
+  }
+  if (type === "FeenoksShelf") {
+    return new FeenoksShelf(coord, Number(fields[0].__value));
+  }
+  if (type === "FeenoksCounter") {
+    return new FeenoksCounter(coord, Number(fields[0].__value));
   }
   return new classMap[type](coord);
 }
