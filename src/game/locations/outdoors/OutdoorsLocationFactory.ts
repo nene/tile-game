@@ -6,6 +6,7 @@ import { SpawnPoint } from "../../furniture/SpawnPoint";
 import { TiledLevelFactory } from "../TiledLevelFactory";
 import { getLevel } from "../Level";
 import { SpriteLibrary } from "../../sprites/SpriteLibrary";
+import { SolidBackground } from "../SolidBackground";
 
 export class OutdoorsLocationFactory implements LocationFactory {
   private levelFactory = new TiledLevelFactory(getLevel("Outdoors"));
@@ -48,6 +49,7 @@ export class OutdoorsLocationFactory implements LocationFactory {
 
   getBackgrounds() {
     return [
+      new SolidBackground(),
       this.levelFactory.getBackground(),
       this.levelFactory.getGrass(),
       this.levelFactory.getBuildings(),
