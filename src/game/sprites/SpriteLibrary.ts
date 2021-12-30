@@ -58,6 +58,7 @@ import beerGlassXl from "./data/beer-glass-xl.png";
 import beerXl from "./data/beer-xl.png";
 import beerFoamXl from "./data/beer-foam-xl.png";
 import opinionShield from "./data/opinion-shield.png";
+import feenoksShelf from "./data/feenoks-shelf.png";
 
 import { Coord } from "../Coord";
 import { SpriteSheet, SpriteSheetConfig } from "./SpriteSheet";
@@ -144,6 +145,9 @@ const imageFiles = {
   // Big building
   'cfe-building-door': spriteDef({ src: cfeBuildingDoor, cfg: { size: [23, 34], offset: [-2, -34] } }),
   'fence': spriteDef({ src: fence, cfg: { size: [80, 38], offset: [0, -31], colsRows: [2, 1] } }),
+
+  // Feenoks
+  'feenoks-shelf': spriteDef({ src: feenoksShelf, cfg: { size: [34, 54], offset: [0, -48], colsRows: [3, 1] } }),
 };
 
 export type SpriteName = keyof typeof imageFiles;
