@@ -1105,12 +1105,12 @@
 		},
 		{
 			"__cWid": 6,
-			"__cHei": 2,
+			"__cHei": 4,
 			"identifier": "Furniture",
 			"uid": 17,
 			"relPath": "../../../art/all-furniture.aseprite",
 			"pxWid": 192,
-			"pxHei": 64,
+			"pxHei": 128,
 			"tileGridSize": 32,
 			"spacing": 0,
 			"padding": 0,
@@ -1118,7 +1118,10 @@
 			"enumTags": [],
 			"customData": [],
 			"savedSelections": [],
-			"cachedPixelData": { "opaqueTiles": "000000000000", "averageColors": "c33483336433433256667887c6546666b555599aa3644432" }
+			"cachedPixelData": {
+				"opaqueTiles": "000000000000000000000000",
+				"averageColors": "c33483336433433256667887c6546666b555599aa3644432000000000000000000000000000000000000000000000000"
+			}
 		},
 		{
 			"__cWid": 6,
