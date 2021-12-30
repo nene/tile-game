@@ -9117,6 +9117,57 @@
 								"defUid": 75,
 								"realEditorValues": [{ "id": "V_Int", "params": [2] }]
 							}]
+						},
+						{
+							"__identifier": "FeenoksCounter",
+							"__grid": [1,5],
+							"__pivot": [0,0],
+							"__tile": { "tilesetUid": 17, "srcRect": [96,64,32,32] },
+							"width": 32,
+							"height": 12,
+							"defUid": 70,
+							"px": [16,89],
+							"fieldInstances": [{
+								"__identifier": "variant",
+								"__value": 0,
+								"__type": "Int",
+								"defUid": 71,
+								"realEditorValues": [{ "id": "V_Int", "params": [0] }]
+							}]
+						},
+						{
+							"__identifier": "FeenoksShelf",
+							"__grid": [1,4],
+							"__pivot": [0,0],
+							"__tile": { "tilesetUid": 17, "srcRect": [0,64,32,32] },
+							"width": 32,
+							"height": 5,
+							"defUid": 67,
+							"px": [16,64],
+							"fieldInstances": [{
+								"__identifier": "variant",
+								"__value": 2,
+								"__type": "Int",
+								"defUid": 73,
+								"realEditorValues": [{ "id": "V_Int", "params": [2] }]
+							}]
+						},
+						{
+							"__identifier": "FeenoksCounter",
+							"__grid": [3,5],
+							"__pivot": [0,0],
+							"__tile": { "tilesetUid": 17, "srcRect": [96,64,32,32] },
+							"width": 32,
+							"height": 12,
+							"defUid": 70,
+							"px": [48,89],
+							"fieldInstances": [{
+								"__identifier": "variant",
+								"__value": 1,
+								"__type": "Int",
+								"defUid": 71,
+								"realEditorValues": [{ "id": "V_Int", "params": [1] }]
+							}]
 						}
 					]
 				},
