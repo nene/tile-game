@@ -9,7 +9,7 @@
 		"url": "https://ldtk.io"
 	},
 	"jsonVersion": "0.9.3",
-	"nextUid": 68,
+	"nextUid": 69,
 	"worldLayout": "Free",
 	"worldGridWidth": 256,
 	"worldGridHeight": 256,
@@ -1082,6 +1082,31 @@
 			"showName": true,
 			"tilesetId": 17,
 			"tileId": 12,
+			"tileRenderMode": "FitInside",
+			"maxCount": 0,
+			"limitScope": "PerLevel",
+			"limitBehavior": "MoveLastOne",
+			"pivotX": 0,
+			"pivotY": 0,
+			"fieldDefs": []
+		},
+		{
+			"identifier": "FeenoksFridge",
+			"uid": 68,
+			"tags": [],
+			"width": 32,
+			"height": 11,
+			"resizableX": false,
+			"resizableY": false,
+			"keepAspectRatio": false,
+			"fillOpacity": 1,
+			"lineOpacity": 1,
+			"hollow": false,
+			"color": "#94D9B3",
+			"renderMode": "Tile",
+			"showName": true,
+			"tilesetId": 17,
+			"tileId": 13,
 			"tileRenderMode": "FitInside",
 			"maxCount": 0,
 			"limitScope": "PerLevel",
@@ -8789,6 +8814,17 @@
 							"height": 5,
 							"defUid": 67,
 							"px": [214,64],
+							"fieldInstances": []
+						},
+						{
+							"__identifier": "FeenoksFridge",
+							"__grid": [9,4],
+							"__pivot": [0,0],
+							"__tile": { "tilesetUid": 17, "srcRect": [32,64,32,32] },
+							"width": 32,
+							"height": 11,
+							"defUid": 68,
+							"px": [146,64],
 							"fieldInstances": []
 						}
 					]

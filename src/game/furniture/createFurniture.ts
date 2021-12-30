@@ -7,6 +7,7 @@ import { BeerCabinet } from "./BeerCabinet";
 import { BoardTable } from "./BoardTable";
 import { BookCabinet } from "./BookCabinet";
 import { Countertop } from "./Countertop";
+import { FeenoksFridge } from "./FeenoksFridge";
 import { FeenoksShelf } from "./FeenoksShelf";
 import { Fence, FenceType } from "./Fence";
 import { Fireplace } from "./Fireplace";
@@ -30,6 +31,7 @@ const classMap: Record<string, { new(coord: Coord): GameObject }> = {
   "Pianino": Pianino,
   "Sofa": Sofa,
   "FeenoksShelf": FeenoksShelf,
+  "FeenoksFridge": FeenoksFridge,
 }
 
 const paintingMap: Record<string, SpriteName> = {
