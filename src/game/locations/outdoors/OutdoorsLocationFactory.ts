@@ -27,6 +27,12 @@ export class OutdoorsLocationFactory implements LocationFactory {
         from: "outdoors",
         to: "sakala-hall",
       }),
+      new Door({
+        coord: [726, 223],
+        area: { coord: [0, -33], size: [21, 32] },
+        from: "outdoors",
+        to: "feenoks",
+      }),
       // A spawn location outside of the fence
       new SpawnPoint(tileToScreenCoord([14, 15])),
     ];

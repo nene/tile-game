@@ -2,7 +2,7 @@ import { Coord } from "../Coord";
 import { GameObject } from "../GameObject";
 import { LocationBackground } from "./LocationBackground";
 
-export type LocationName = "cfe-cellar" | "cfe-hall" | "outdoors" | "sakala-hall";
+export type LocationName = "cfe-cellar" | "cfe-hall" | "outdoors" | "sakala-hall" | "feenoks";
 
 export interface LocationFactory {
   getName: () => LocationName;
