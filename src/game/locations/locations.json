@@ -9,7 +9,7 @@
 		"url": "https://ldtk.io"
 	},
 	"jsonVersion": "0.9.3",
-	"nextUid": 74,
+	"nextUid": 76,
 	"worldLayout": "Free",
 	"worldGridWidth": 256,
 	"worldGridHeight": 256,
@@ -1206,6 +1206,52 @@
 					"textLanguageMode": null
 				}
 			]
+		},
+		{
+			"identifier": "FeenoksCounterSideways",
+			"uid": 74,
+			"tags": [],
+			"width": 16,
+			"height": 29,
+			"resizableX": false,
+			"resizableY": false,
+			"keepAspectRatio": false,
+			"fillOpacity": 1,
+			"lineOpacity": 1,
+			"hollow": false,
+			"color": "#94D9B3",
+			"renderMode": "Tile",
+			"showName": true,
+			"tilesetId": 17,
+			"tileId": 16,
+			"tileRenderMode": "FitInside",
+			"maxCount": 0,
+			"limitScope": "PerLevel",
+			"limitBehavior": "MoveLastOne",
+			"pivotX": 0,
+			"pivotY": 0,
+			"fieldDefs": [
+				{
+					"identifier": "variant",
+					"__type": "Int",
+					"uid": 75,
+					"type": "F_Int",
+					"isArray": false,
+					"canBeNull": false,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "ValueOnly",
+					"editorDisplayPos": "Above",
+					"editorAlwaysShow": true,
+					"editorCutLongValues": true,
+					"min": 0,
+					"max": 2,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": { "id": "V_Int", "params": [0] },
+					"textLanguageMode": null
+				}
+			]
 		}
 	], "tilesets": [
 		{
@@ -1262,7 +1308,7 @@
 			"savedSelections": [],
 			"cachedPixelData": {
 				"opaqueTiles": "000000000000000000000000",
-				"averageColors": "c33483336433433256667887c6546666b555599aa36444328754a99a1764b65500000000000000000000000000000000"
+				"averageColors": "c33483336433433256667887c6546666b555599aa36444328754a99a1764b65567540000000000000000000000000000"
 			}
 		},
 		{
@@ -9018,6 +9064,57 @@
 								"__value": 2,
 								"__type": "Int",
 								"defUid": 71,
+								"realEditorValues": [{ "id": "V_Int", "params": [2] }]
+							}]
+						},
+						{
+							"__identifier": "FeenoksCounterSideways",
+							"__grid": [13,5],
+							"__pivot": [0,0],
+							"__tile": { "tilesetUid": 17, "srcRect": [128,64,32,32] },
+							"width": 16,
+							"height": 29,
+							"defUid": 74,
+							"px": [208,84],
+							"fieldInstances": [{
+								"__identifier": "variant",
+								"__value": 0,
+								"__type": "Int",
+								"defUid": 75,
+								"realEditorValues": [{ "id": "V_Int", "params": [0] }]
+							}]
+						},
+						{
+							"__identifier": "FeenoksCounterSideways",
+							"__grid": [13,7],
+							"__pivot": [0,0],
+							"__tile": { "tilesetUid": 17, "srcRect": [128,64,32,32] },
+							"width": 16,
+							"height": 29,
+							"defUid": 74,
+							"px": [208,113],
+							"fieldInstances": [{
+								"__identifier": "variant",
+								"__value": 1,
+								"__type": "Int",
+								"defUid": 75,
+								"realEditorValues": [{ "id": "V_Int", "params": [1] }]
+							}]
+						},
+						{
+							"__identifier": "FeenoksCounterSideways",
+							"__grid": [13,8],
+							"__pivot": [0,0],
+							"__tile": { "tilesetUid": 17, "srcRect": [128,64,32,32] },
+							"width": 16,
+							"height": 29,
+							"defUid": 74,
+							"px": [208,142],
+							"fieldInstances": [{
+								"__identifier": "variant",
+								"__value": 2,
+								"__type": "Int",
+								"defUid": 75,
 								"realEditorValues": [{ "id": "V_Int", "params": [2] }]
 							}]
 						}

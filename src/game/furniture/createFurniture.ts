@@ -8,6 +8,7 @@ import { BoardTable } from "./BoardTable";
 import { BookCabinet } from "./BookCabinet";
 import { Countertop } from "./Countertop";
 import { FeenoksCounter } from "./FeenoksCounter";
+import { FeenoksCounterSideways } from "./FeenoksCounterSideways";
 import { FeenoksFridge } from "./FeenoksFridge";
 import { FeenoksShelf } from "./FeenoksShelf";
 import { FeenoksShelfSideways } from "./FeenoksShelfSideways";
@@ -62,6 +63,9 @@ export function createFurniture(type: string, { coord, size }: Rect, fields: Ent
   }
   if (type === "FeenoksCounter") {
     return new FeenoksCounter(coord, Number(fields[0].__value));
+  }
+  if (type === "FeenoksCounterSideways") {
+    return new FeenoksCounterSideways(coord, Number(fields[0].__value));
   }
   return new classMap[type](coord);
 }
