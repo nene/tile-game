@@ -59,6 +59,7 @@ import beerXl from "./data/beer-xl.png";
 import beerFoamXl from "./data/beer-foam-xl.png";
 import opinionShield from "./data/opinion-shield.png";
 import feenoksShelf from "./data/feenoks-shelf.png";
+import feenoksShelfSideways from "./data/feenoks-shelf-sideways.png";
 import feenoksFridge from "./data/feenoks-fridge.png";
 
 import { Coord } from "../Coord";
@@ -149,7 +150,8 @@ const imageFiles = {
 
   // Feenoks
   'feenoks-shelf': spriteDef({ src: feenoksShelf, cfg: { size: [34, 54], offset: [0, -48], colsRows: [3, 1] } }),
-  'feenoks-fridge': spriteDef({ src: feenoksFridge, cfg: { size: [34, 48], offset: [0, -38] } }),
+  'feenoks-shelf-sideways': spriteDef({ src: feenoksShelfSideways, cfg: { size: [8, 78], offset: [0, -46] } }),
+  'feenoks-fridge': spriteDef({ src: feenoksFridge, cfg: { size: [34, 48], offset: [0, -37] } }),
 };
 
 export type SpriteName = keyof typeof imageFiles;

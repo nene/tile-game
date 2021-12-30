@@ -9,6 +9,7 @@ import { BookCabinet } from "./BookCabinet";
 import { Countertop } from "./Countertop";
 import { FeenoksFridge } from "./FeenoksFridge";
 import { FeenoksShelf } from "./FeenoksShelf";
+import { FeenoksShelfSideways } from "./FeenoksShelfSideways";
 import { Fence, FenceType } from "./Fence";
 import { Fireplace } from "./Fireplace";
 import { Fridge } from "./Fridge";
@@ -31,6 +32,7 @@ const classMap: Record<string, { new(coord: Coord): GameObject }> = {
   "Pianino": Pianino,
   "Sofa": Sofa,
   "FeenoksShelf": FeenoksShelf,
+  "FeenoksShelfSideways": FeenoksShelfSideways,
   "FeenoksFridge": FeenoksFridge,
 }
 
