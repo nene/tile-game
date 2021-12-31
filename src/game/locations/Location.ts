@@ -1,6 +1,6 @@
 import { Coord, coordAdd, coordEq, isCoordInRect, Rect, screenToTileCoord, tileToScreenCoord } from "../Coord";
 import { LocationFactory, LocationName } from "./LocationFactory";
-import { GameObject } from "../GameObject";
+import { CANCEL_TICK, GameObject } from "../GameObject";
 import { ObjectIndexer } from "../ObjectIndexer";
 import { PathFinder } from "../PathFinder";
 import { PixelScreen } from "../PixelScreen";
@@ -50,7 +50,11 @@ export class Location {
   }
 
   tick(world: GameWorld) {
-    this.allObjects().forEach((obj) => obj.tick(this, world));
+    for (const obj of this.objects) {
+      if (obj.tick(this, world) === CANCEL_TICK) {
+        break;
+      }
+    }
     this.sortObjects();
   }
 

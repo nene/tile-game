@@ -5,11 +5,14 @@ import { Location } from "./locations/Location";
 import { PixelScreen } from "./PixelScreen";
 import { UiController } from "./UiController";
 
+export type CancelTick = "cancel tick";
+export const CANCEL_TICK: CancelTick = "cancel tick";
+
 export interface GameObject {
   zIndex: () => number;
   getCoord: () => Coord;
   paint: (screen: PixelScreen) => void;
-  tick: (location: Location, world: GameWorld) => void;
+  tick: (location: Location, world: GameWorld) => void | CancelTick;
   isSolid: () => boolean;
   hitBox: () => Rect;
   boundingBox: () => Rect;

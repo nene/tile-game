@@ -1,5 +1,5 @@
 import { Coord, coordAdd, Rect, rectAlign, rectContains, rectTranslate } from "../Coord";
-import { GameObject } from "../GameObject";
+import { CANCEL_TICK, GameObject } from "../GameObject";
 import { PixelScreen } from "../PixelScreen";
 import { Sprite } from "../sprites/Sprite";
 import { UiController } from "../UiController";
@@ -54,6 +54,7 @@ export class Door implements GameObject {
     const player = location.allObjects().find(isPlayer);
     if (player && this.isInAutoTeleportArea(player, this.autoTeleportArea)) {
       this.teleport(world);
+      return CANCEL_TICK;
     }
   }
 
