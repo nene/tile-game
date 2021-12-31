@@ -1,6 +1,6 @@
 import { Coord, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
-import { EntityField } from "../locations/Level";
+import { EntityField, isIntEntityField } from "../locations/Level";
 import { SpriteName } from "../sprites/SpriteLibrary";
 import { BeerBox } from "./BeerBox";
 import { BeerCabinet } from "./BeerCabinet";
@@ -72,14 +72,19 @@ export function createFurniture(type: string, { coord, size }: Rect, fields: Ent
   if (type === "Wall") {
     return new Wall({ coord, size });
   }
-  if (type === "FeenoksShelf") {
-    return new FeenoksShelf(coord, Number(fields[0].__value));
+
+  const field = fields[0];
+  if (field && isIntEntityField(field) && field.__identifier === "variant") {
+    if (type === "FeenoksShelf") {
+      return new FeenoksShelf(coord, field.__value);
+    }
+    if (type === "FeenoksCounter") {
+      return new FeenoksCounter(coord, field.__value);
+    }
+    if (type === "FeenoksCounterSideways") {
+      return new FeenoksCounterSideways(coord, field.__value);
+    }
   }
-  if (type === "FeenoksCounter") {
-    return new FeenoksCounter(coord, Number(fields[0].__value));
-  }
-  if (type === "FeenoksCounterSideways") {
-    return new FeenoksCounterSideways(coord, Number(fields[0].__value));
-  }
+
   return new classMap[type](coord);
 }

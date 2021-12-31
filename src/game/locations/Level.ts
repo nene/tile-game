@@ -54,11 +54,23 @@ export interface Entity {
   fieldInstances: EntityField[];
 }
 
-export interface EntityField {
+export interface EnumEntityField {
   __identifier: string;
-  __type: string;
+  __type: "LocalEnum.Painting" | "LocalEnum.SittingDir" | "LocalEnum.FenceType";
   __value: string;
 }
+
+export interface IntEntityField {
+  __identifier: string;
+  __type: "Int";
+  __value: number;
+}
+
+export type EntityField = EnumEntityField | IntEntityField;
+
+export const isIntEntityField = (field: EntityField): field is IntEntityField => field.__type === "Int";
+
+export const isEnumEntityField = (field: EntityField): field is IntEntityField => !isIntEntityField(field);
 
 export function getLevel(name: string): Level {
   const level = locationsJson.levels.find((level) => level.identifier === name) as Level | undefined;
