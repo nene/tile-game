@@ -4,7 +4,6 @@ import { EntityField } from "../locations/Level";
 import { SpriteName } from "../sprites/SpriteLibrary";
 import { BeerBox } from "./BeerBox";
 import { BeerCabinet } from "./BeerCabinet";
-import { BoardTable } from "./BoardTable";
 import { BookCabinet } from "./BookCabinet";
 import { Countertop } from "./Countertop";
 import { createFurnitureClass } from "./createFurnitureClass";
@@ -16,22 +15,32 @@ import { Fireplace } from "./Fireplace";
 import { Fridge } from "./Fridge";
 import { KitchenSink } from "./KitchenSink";
 import { Painting } from "./Painting";
-import { Pianino } from "./Pianino";
-import { Sofa } from "./Sofa";
 import { Table } from "./Table";
 import { Wall } from "./Wall";
 
 const classMap: Record<string, { new(coord: Coord): GameObject }> = {
   "BeerBox": BeerBox,
   "BeerCabinet": BeerCabinet,
-  "BoardTable": BoardTable,
   "BookCabinet": BookCabinet,
   "Countertop": Countertop,
   "Fireplace": Fireplace,
   "Fridge": Fridge,
   "KitchenSink": KitchenSink,
-  "Pianino": Pianino,
-  "Sofa": Sofa,
+  "BoardTable": createFurnitureClass({
+    spriteName: "board-table",
+    boundingBox: { coord: [-5, 4], size: [42, 13] },
+    hitBox: { coord: [-5, -5], size: [42, 22] },
+  }),
+  "Pianino": createFurnitureClass({
+    spriteName: "pianino",
+    boundingBox: { coord: [0, 0], size: [32, 9] },
+    hitBox: { coord: [0, -17], size: [32, 26] },
+  }),
+  "Sofa": createFurnitureClass({
+    spriteName: "sofa",
+    boundingBox: { coord: [0, 0], size: [48, 11] },
+    hitBox: { coord: [0, -15], size: [48, 26] },
+  }),
   "FeenoksShelfSideways": createFurnitureClass({
     spriteName: "feenoks-shelf-sideways",
     boundingBox: { coord: [0, 0], size: [8, 32] },

@@ -6,6 +6,7 @@ import { SpriteLibrary, SpriteName } from "../sprites/SpriteLibrary";
 export interface FurnitureClassConfig {
   spriteName: SpriteName;
   boundingBox: Rect;
+  hitBox?: Rect;
 }
 
 export function createFurnitureClass(cfg: FurnitureClassConfig) {
@@ -32,7 +33,7 @@ export function createFurnitureClass(cfg: FurnitureClassConfig) {
     }
 
     hitBox(): Rect {
-      return { coord: [0, 0], size: [0, 0] };
+      return cfg.hitBox ?? { coord: [0, 0], size: [0, 0] };
     }
 
     boundingBox(): Rect {
