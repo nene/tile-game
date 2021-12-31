@@ -1,5 +1,5 @@
 import { LocationFactory, LocationName } from "./locations/LocationFactory";
-import { Location } from "./locations/Location";
+import { Location, TeleportCommand } from "./locations/Location";
 import { PixelScreen } from "./PixelScreen";
 import { GameObject } from "./GameObject";
 import { Player } from "./player/Player";
@@ -31,14 +31,23 @@ export class GameWorld {
   }
 
   tick() {
+    const commands: TeleportCommand[] = [];
     this.locations.forEach((location) => {
-      location.tick(this);
+      commands.push(...location.tick(this));
     });
+
+    commands.forEach((cmd) => this.runTeleportCommand(cmd));
   }
 
   paint(screen: PixelScreen) {
     screen.centerTo(this.player.getCoord(), this.activeLocation);
     this.activeLocation.paint(screen);
+  }
+
+  private runTeleportCommand(cmd: TeleportCommand) {
+    const newLocation = this.getLocation(cmd.toLocation);
+    this.teleport(cmd.entity, newLocation);
+    cmd.entity.setCoord(cmd.coord);
   }
 
   teleport(object: GameObject, location: Location) {

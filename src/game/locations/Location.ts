@@ -1,6 +1,6 @@
 import { Coord, coordAdd, coordEq, isCoordInRect, Rect, screenToTileCoord, tileToScreenCoord } from "../Coord";
 import { LocationFactory, LocationName } from "./LocationFactory";
-import { CANCEL_TICK, GameObject } from "../GameObject";
+import { GameObject } from "../GameObject";
 import { ObjectIndexer } from "../ObjectIndexer";
 import { PathFinder } from "../PathFinder";
 import { PixelScreen } from "../PixelScreen";
@@ -10,6 +10,13 @@ import { last } from "lodash";
 import { CharacterFigure, isCharacterFigure } from "../npc/CharacterFigure";
 import { Character } from "../npc/Character";
 import { LocationBackground } from "./LocationBackground";
+
+export interface TeleportCommand {
+  entity: GameObject & { setCoord: (coord: Coord) => void };
+  fromLocation: LocationName;
+  toLocation: LocationName;
+  coord: Coord;
+}
 
 export class Location {
   private name: LocationName;
@@ -49,13 +56,16 @@ export class Location {
     return this.objects;
   }
 
-  tick(world: GameWorld) {
+  tick(world: GameWorld): TeleportCommand[] {
+    const commands = [];
     for (const obj of this.objects) {
-      if (obj.tick(this, world) === CANCEL_TICK) {
-        break;
+      const command = obj.tick(this, world);
+      if (command) {
+        commands.push(command);
       }
     }
     this.sortObjects();
+    return commands;
   }
 
   paint(screen: PixelScreen) {

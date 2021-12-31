@@ -1,10 +1,10 @@
 import { Coord, coordAdd, Rect, rectAlign, rectContains, rectTranslate } from "../Coord";
-import { CANCEL_TICK, GameObject } from "../GameObject";
+import { GameObject } from "../GameObject";
 import { PixelScreen } from "../PixelScreen";
 import { Sprite } from "../sprites/Sprite";
 import { UiController } from "../UiController";
 import { LocationName } from "../locations/LocationFactory";
-import { Location } from "../locations/Location";
+import { Location, TeleportCommand } from "../locations/Location";
 import { GameWorld } from "../GameWorld";
 import { isPlayer, Player } from "../player/Player";
 
@@ -46,15 +46,19 @@ export class Door implements GameObject {
     this.debug = debug;
   }
 
-  tick(location: Location, world: GameWorld) {
+  tick(location: Location, world: GameWorld): void | TeleportCommand {
     if (!this.autoTeleportArea || world.getActiveLocation() !== location) {
       return;
     }
 
     const player = location.allObjects().find(isPlayer);
     if (player && this.isInAutoTeleportArea(player, this.autoTeleportArea)) {
-      this.teleport(world);
-      return CANCEL_TICK;
+      return {
+        entity: world.getPlayer(),
+        fromLocation: this.fromLocation,
+        toLocation: this.toLocation,
+        coord: findDoor(world.getLocation(this.toLocation), this.fromLocation).getTeleportCoord(),
+      };
     }
   }
 
@@ -100,7 +104,6 @@ export class Door implements GameObject {
   }
 
   private teleport(world: GameWorld) {
-    world.getActiveLocation();
     const newLocation = world.getLocation(this.toLocation);
     const door = findDoor(newLocation, this.fromLocation);
     world.teleport(world.getPlayer(), newLocation);
