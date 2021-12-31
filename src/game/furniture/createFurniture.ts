@@ -1,6 +1,5 @@
 import { Coord, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
-import { EntityField, isIntEntityField } from "../locations/Level";
 import { SpriteName } from "../sprites/SpriteLibrary";
 import { BeerBox } from "./BeerBox";
 import { BeerCabinet } from "./BeerCabinet";
@@ -59,31 +58,38 @@ const paintingMap: Record<string, SpriteName> = {
   "Color_shield": "color-shield",
 };
 
-export function createFurniture(type: string, { coord, size }: Rect, fields: EntityField[]): GameObject {
-  if (type === "Painting") {
-    return new Painting(coord, paintingMap[fields[0].__value]);
+export interface EntityOptions {
+  variant?: number;
+  fenceType?: FenceType;
+  sittingDir?: "RTL" | "LTR";
+  paintingName?: string;
+}
+
+export function createFurniture(type: string, { coord, size }: Rect, opts: EntityOptions): GameObject {
+  if (type === "Painting" && opts.paintingName) {
+    return new Painting(coord, paintingMap[opts.paintingName]);
   }
   if (type === "Table") {
-    return new Table(coord, fields[0].__value === "RTL" ? "RTL" : "LTR");
+    return new Table(coord, opts.sittingDir);
   }
   if (type === "Fence") {
-    return new Fence(coord, fields[0].__value === "Cfe" ? FenceType.cfe : FenceType.sakala);
+    return new Fence(coord, opts.fenceType ?? FenceType.cfe);
   }
   if (type === "Wall") {
     return new Wall({ coord, size });
   }
+  if (type === "FeenoksShelf") {
+    return new FeenoksShelf(coord, opts.variant ?? 0);
+  }
+  if (type === "FeenoksCounter") {
+    return new FeenoksCounter(coord, opts.variant ?? 0);
+  }
+  if (type === "FeenoksCounterSideways") {
+    return new FeenoksCounterSideways(coord, opts.variant ?? 0);
+  }
 
-  const field = fields[0];
-  if (field && isIntEntityField(field) && field.__identifier === "variant") {
-    if (type === "FeenoksShelf") {
-      return new FeenoksShelf(coord, field.__value);
-    }
-    if (type === "FeenoksCounter") {
-      return new FeenoksCounter(coord, field.__value);
-    }
-    if (type === "FeenoksCounterSideways") {
-      return new FeenoksCounterSideways(coord, field.__value);
-    }
+  if (!classMap[type]) {
+    throw new Error(`No class with name "${type}"`);
   }
 
   return new classMap[type](coord);

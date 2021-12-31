@@ -70,7 +70,7 @@ export type EntityField = EnumEntityField | IntEntityField;
 
 export const isIntEntityField = (field: EntityField): field is IntEntityField => field.__type === "Int";
 
-export const isEnumEntityField = (field: EntityField): field is IntEntityField => !isIntEntityField(field);
+export const isEnumEntityField = (field: EntityField): field is EnumEntityField => !isIntEntityField(field);
 
 export function getLevel(name: string): Level {
   const level = locationsJson.levels.find((level) => level.identifier === name) as Level | undefined;
