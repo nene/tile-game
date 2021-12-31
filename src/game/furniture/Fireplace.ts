@@ -6,7 +6,6 @@ import { SpriteAnimation } from "../sprites/SpriteAnimation";
 
 export class Fireplace implements GameObject {
   private animation: SpriteAnimation;
-  private tickCount: number = 0;
 
   constructor(private coord: Coord) {
     this.animation = new SpriteAnimation(SpriteLibrary.get("fireplace"), { frames: { from: [0, 0], to: [4, 0] } });
