@@ -85,7 +85,7 @@ export function createFurniture(type: string, { coord, size }: Rect, opts: Entit
     return new Table(coord, opts.sittingDir);
   }
   if (type === "Fence") {
-    return new Fence(coord, opts.fenceType ?? FenceType.cfe);
+    return new Fence(coord, opts.fenceType);
   }
   if (type === "Wall") {
     return new Wall({ coord, size });

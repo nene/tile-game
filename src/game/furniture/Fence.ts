@@ -18,7 +18,7 @@ export class Fence implements GameObject {
   private sprite: Sprite;
   private bounds: Rect;
 
-  constructor(private coord: Coord, fenceType: FenceType) {
+  constructor(private coord: Coord, fenceType: FenceType = FenceType.cfe) {
     this.sprite = SpriteLibrary.getSprite("fence", [fenceType, 0]);
     this.bounds = boundsMap[fenceType];
   }
