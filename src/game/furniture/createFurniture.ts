@@ -7,11 +7,10 @@ import { BeerCabinet } from "./BeerCabinet";
 import { BoardTable } from "./BoardTable";
 import { BookCabinet } from "./BookCabinet";
 import { Countertop } from "./Countertop";
+import { createFurnitureClass } from "./createFurnitureClass";
 import { FeenoksCounter } from "./FeenoksCounter";
 import { FeenoksCounterSideways } from "./FeenoksCounterSideways";
-import { FeenoksFridge } from "./FeenoksFridge";
 import { FeenoksShelf } from "./FeenoksShelf";
-import { FeenoksShelfSideways } from "./FeenoksShelfSideways";
 import { Fence, FenceType } from "./Fence";
 import { Fireplace } from "./Fireplace";
 import { Fridge } from "./Fridge";
@@ -33,8 +32,14 @@ const classMap: Record<string, { new(coord: Coord): GameObject }> = {
   "KitchenSink": KitchenSink,
   "Pianino": Pianino,
   "Sofa": Sofa,
-  "FeenoksShelfSideways": FeenoksShelfSideways,
-  "FeenoksFridge": FeenoksFridge,
+  "FeenoksShelfSideways": createFurnitureClass({
+    spriteName: "feenoks-shelf-sideways",
+    boundingBox: { coord: [0, 0], size: [8, 32] },
+  }),
+  "FeenoksFridge": createFurnitureClass({
+    spriteName: "feenoks-fridge",
+    boundingBox: { coord: [0, 0], size: [32, 11] },
+  }),
 }
 
 const paintingMap: Record<string, SpriteName> = {
