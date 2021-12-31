@@ -11,13 +11,13 @@ export interface FurnitureClassConfig {
 
 export function createFurnitureClass(cfg: FurnitureClassConfig) {
   return class Furniture implements GameObject {
-    constructor(private coord: Coord) {
+    constructor(private coord: Coord, private variant = 0) {
     }
 
     tick() { }
 
     paint(screen: PixelScreen) {
-      screen.drawSprite(SpriteLibrary.getSprite(cfg.spriteName), this.coord);
+      screen.drawSprite(SpriteLibrary.getSprite(cfg.spriteName, [this.variant, 0]), this.coord);
     }
 
     zIndex() {

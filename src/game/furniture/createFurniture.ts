@@ -6,9 +6,6 @@ import { BeerCabinet } from "./BeerCabinet";
 import { BookCabinet } from "./BookCabinet";
 import { Countertop } from "./Countertop";
 import { createFurnitureClass } from "./createFurnitureClass";
-import { FeenoksCounter } from "./FeenoksCounter";
-import { FeenoksCounterSideways } from "./FeenoksCounterSideways";
-import { FeenoksShelf } from "./FeenoksShelf";
 import { Fence, FenceType } from "./Fence";
 import { Fireplace } from "./Fireplace";
 import { Fridge } from "./Fridge";
@@ -48,7 +45,22 @@ const classMap: Record<string, { new(coord: Coord): GameObject }> = {
     spriteName: "feenoks-fridge",
     boundingBox: { coord: [0, 0], size: [32, 11] },
   }),
-}
+};
+
+const variantClassMap: Record<string, { new(coord: Coord, variant?: number): GameObject }> = {
+  "FeenoksShelf": createFurnitureClass({
+    spriteName: "feenoks-shelf",
+    boundingBox: { coord: [0, 0], size: [32, 5] },
+  }),
+  "FeenoksCounter": createFurnitureClass({
+    spriteName: "feenoks-counter",
+    boundingBox: { coord: [0, 0], size: [32, 12] },
+  }),
+  "FeenoksCounterSideways": createFurnitureClass({
+    spriteName: "feenoks-counter-sideways",
+    boundingBox: { coord: [0, 0], size: [16, 29] },
+  }),
+};
 
 const paintingMap: Record<string, SpriteName> = {
   "CFE_coat_of_arms": "cfe-coat-of-arms",
@@ -78,19 +90,13 @@ export function createFurniture(type: string, { coord, size }: Rect, opts: Entit
   if (type === "Wall") {
     return new Wall({ coord, size });
   }
-  if (type === "FeenoksShelf") {
-    return new FeenoksShelf(coord, opts.variant ?? 0);
+
+  if (variantClassMap[type]) {
+    return new variantClassMap[type](coord, opts.variant);
   }
-  if (type === "FeenoksCounter") {
-    return new FeenoksCounter(coord, opts.variant ?? 0);
-  }
-  if (type === "FeenoksCounterSideways") {
-    return new FeenoksCounterSideways(coord, opts.variant ?? 0);
+  if (classMap[type]) {
+    return new classMap[type](coord);
   }
 
-  if (!classMap[type]) {
-    throw new Error(`No class with name "${type}"`);
-  }
-
-  return new classMap[type](coord);
+  throw new Error(`No class with name "${type}"`);
 }
