@@ -4,6 +4,7 @@ import { Door } from "../../furniture/Door";
 import { GameObject } from "../../GameObject";
 import { getLevel } from "../Level";
 import { TiledLevelFactory } from "../TiledLevelFactory";
+import { SolidBackground } from "../SolidBackground";
 
 export class FeenoksLocationFactory implements LocationFactory {
   private levelFactory = new TiledLevelFactory(getLevel("Feenoks"));
@@ -36,7 +37,10 @@ export class FeenoksLocationFactory implements LocationFactory {
   }
 
   getBackgrounds() {
-    return [this.levelFactory.getBackground()];
+    return [
+      new SolidBackground(),
+      this.levelFactory.getBackground(),
+    ];
   }
 
   getForeground() {
