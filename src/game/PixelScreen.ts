@@ -1,4 +1,4 @@
-import { Coord, coordAdd, coordConstrain, coordDiv, coordSub, Rect, rectOverlaps } from "./Coord";
+import { Coord, coordAdd, coordSub, Rect, rectOverlaps } from "./Coord";
 import { Location } from "./locations/Location";
 import { Sprite } from "./sprites/Sprite";
 import { TextMeasurer } from "./ui/fitText";
@@ -102,12 +102,10 @@ export class PixelScreen implements TextMeasurer {
   }
 
   centerTo(coord: Coord, location: Location) {
-    const halfScreenSize: Coord = coordDiv(this.size, [2, 2]);
-
-    this.offset = coordConstrain(
-      coordSub(coord, halfScreenSize),
-      { coord: [0, 0], size: coordSub(location.getSize(), this.size) },
-    );
+    this.offset = worldOffset(coord, {
+      screenSize: this.size,
+      worldSize: location.getSize(),
+    });
   }
 
   restoreBg() {
@@ -123,4 +121,31 @@ export class PixelScreen implements TextMeasurer {
   getContext(): CanvasRenderingContext2D {
     return this.ctx;
   }
+}
+
+export interface WorldOffsetOpts {
+  screenSize: Coord;
+  worldSize: Coord;
+}
+
+export function worldOffset([x, y]: Coord, { screenSize, worldSize }: WorldOffsetOpts): Coord {
+  return [
+    axisOffset(x, screenSize[0], worldSize[0]),
+    axisOffset(y, screenSize[1], worldSize[1]),
+  ];
+}
+
+function axisOffset(x: number, screenSize: number, worldSize: number): number {
+  if (worldSize - screenSize < 0) {
+    return Math.floor((worldSize - screenSize) / 2);
+  }
+
+  const halfScreen = Math.floor(screenSize / 2);
+  if (x <= halfScreen) {
+    return 0;
+  }
+  if (x >= worldSize - halfScreen) {
+    return worldSize - screenSize;
+  }
+  return x - halfScreen;
 }
