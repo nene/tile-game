@@ -1,3 +1,5 @@
+import { constrain } from "./utils/constrain";
+
 export type Coord = [number, number];
 export type Rect = { coord: Coord, size: Coord };
 
@@ -23,20 +25,10 @@ export function coordEq(a: Coord, b: Coord): boolean {
 
 export function coordConstrain([x, y]: Coord, { coord: [minX, minY], size }: Rect): Coord {
   const [maxX, maxY] = coordAdd([minX, minY], size);
-
-  if (x < minX) {
-    x = minX;
-  }
-  if (x > maxX) {
-    x = maxX;
-  }
-  if (y < minY) {
-    y = minY;
-  }
-  if (y > maxY) {
-    y = maxY;
-  }
-  return [x, y];
+  return [
+    constrain(x, { min: minX, max: maxX }),
+    constrain(y, { min: minY, max: maxY }),
+  ];
 }
 
 // Takes any coord of any numbers and converts it to a coord that can only contain numbers -1, 0, 1
