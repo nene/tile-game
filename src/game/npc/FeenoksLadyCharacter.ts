@@ -1,6 +1,7 @@
 import { SpriteLibrary, SpriteName } from "../sprites/SpriteLibrary";
 import { Character } from "./Character";
 import { Sprite } from "../sprites/Sprite";
+import { SellAlcoholActivity } from "../activities/SellAlcoholActivity";
 
 export class FeenoksLadyCharacter implements Character {
   getName() {
@@ -24,6 +25,8 @@ export class FeenoksLadyCharacter implements Character {
   }
 
   getActivities() {
-    return [];
+    return [
+      new SellAlcoholActivity(this),
+    ];
   }
 }
