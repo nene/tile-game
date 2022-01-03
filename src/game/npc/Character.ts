@@ -182,6 +182,13 @@ const characters = {
     favoriteDrinks: [getDrink("paulaner")],
     hatedDrinks: [getDrink("porter")],
   }),
+  "feenoks-lady": new Character({
+    name: "Proua Fenoksia",
+    spriteName: "feenoks-lady",
+    days: {},
+    favoriteDrinks: [],
+    hatedDrinks: [],
+  }),
 };
 
 export type CharacterName = keyof typeof characters;
