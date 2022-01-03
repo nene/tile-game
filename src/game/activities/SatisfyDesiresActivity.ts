@@ -1,5 +1,5 @@
 import { Activity, ActivityUpdates } from "./Activity";
-import { Character, Desire } from "../npc/Character";
+import { AkademicCharacter, Desire } from "../npc/Character";
 import { UiController } from "../UiController";
 import { GameWorld } from "../GameWorld";
 import { Location } from "../locations/Location";
@@ -19,7 +19,7 @@ export class SatisfyDesiresActivity implements Activity {
   private activity?: Activity;
   private alwaysAvailableInteractions: PlainInteraction[];
 
-  constructor(private character: Character) {
+  constructor(private character: AkademicCharacter) {
     this.activity = this.chooseActivity();
     this.alwaysAvailableInteractions = [
       new ColorBandInteraction(character),

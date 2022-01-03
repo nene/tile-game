@@ -1,6 +1,6 @@
 import { Activity, ActivityUpdates } from "./Activity";
 import { BeerGlass } from "../items/BeerGlass";
-import { Character } from "../npc/Character";
+import { AkademicCharacter } from "../npc/Character";
 import { DrinkAnimation } from "../sprites/DrinkAnimation";
 import { Location } from "../locations/Location";
 import { coordAdd, rectTranslate } from "../Coord";
@@ -10,7 +10,7 @@ import { CharacterFigure } from "../npc/CharacterFigure";
 export class DrinkActivity implements Activity {
   private animation: DrinkAnimation;
 
-  constructor(private beerGlass: BeerGlass, character: Character) {
+  constructor(private beerGlass: BeerGlass, character: AkademicCharacter) {
     this.animation = new DrinkAnimation({
       beerGlass,
       spriteName: character.getSpriteName(),

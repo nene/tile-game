@@ -2,7 +2,7 @@ import { coordAdd, Rect } from "../Coord";
 import { PixelScreen } from "../PixelScreen";
 import { ScoreChart } from "../ui/ScoreChart";
 import { strokeRect, UI_BG_COLOR, UI_HIGHLIGHT_COLOR, UI_MENU_ITEM_HIGHLIGHT_COLOR, UI_SHADOW_COLOR } from "../ui/ui-utils";
-import { Character } from "./Character";
+import { AkademicCharacter } from "./Character";
 
 export class CharacterOpinionRenderer {
   private scoreChart: ScoreChart;
@@ -11,7 +11,7 @@ export class CharacterOpinionRenderer {
     this.scoreChart = new ScoreChart();
   }
 
-  render(screen: PixelScreen, rect: Rect, character: Character, highlighted: boolean) {
+  render(screen: PixelScreen, rect: Rect, character: AkademicCharacter, highlighted: boolean) {
     const iconRect: Rect = { coord: coordAdd(rect.coord, [2, 2]), size: [16, 16] };
     const nameCoord = coordAdd(iconRect.coord, [18, -1]);
     const opinionCoord = coordAdd(nameCoord, [0, 10]);

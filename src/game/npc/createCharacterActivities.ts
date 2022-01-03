@@ -8,11 +8,11 @@ import { EnterDoorActivity } from "../activities/EnterDoorActivity";
 import { MoveActivity } from "../activities/MoveActivity";
 import { tileToScreenCoord } from "../Coord";
 import { WriteToBookActivity } from "../activities/WriteToBookActivity";
-import { Character } from "./Character";
+import { AkademicCharacter } from "./Character";
 import { compact } from "lodash";
 import { LocationName } from "../locations/LocationFactory";
 
-export function createCharacterActivities(character: Character): Activity[] {
+export function createCharacterActivities(character: AkademicCharacter): Activity[] {
   return compact([
     ...travel(["cfe-hall"], character),
     character.isRememberingBookWriting() ? new WriteToBookActivity(character) : undefined,
@@ -26,7 +26,7 @@ export function createCharacterActivities(character: Character): Activity[] {
   ]);
 }
 
-function travel(locations: LocationName[], character: Character): Activity[] {
+function travel(locations: LocationName[], character: AkademicCharacter): Activity[] {
   return locations.flatMap((loc) => [
     new MoveToDoorActivity(loc, character),
     new EnterDoorActivity(loc, character),

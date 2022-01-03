@@ -1,7 +1,7 @@
 import { coordAdd, isCoordInRect, Rect, rectGrow } from "../Coord";
 import { GameEvent } from "../GameEvent";
 import { ColorBandTouch } from "../items/ColorBandTouch";
-import { Character } from "../npc/Character";
+import { AkademicCharacter } from "../npc/Character";
 import { PixelScreen } from "../PixelScreen";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { Component } from "../ui/Component";
@@ -11,7 +11,7 @@ import { UiController } from "../UiController";
 
 interface DialogConfig {
   ui: UiController;
-  character: Character;
+  character: AkademicCharacter;
   createContent: (rect: Rect) => Component,
   onClose?: () => void;
 }
@@ -21,7 +21,7 @@ export class Dialog implements Component {
   private window: Window;
   private content: Component;
   private onClose?: () => void;
-  private character: Character;
+  private character: AkademicCharacter;
   private iconRect: Rect;
   private iconHovered = false;
 

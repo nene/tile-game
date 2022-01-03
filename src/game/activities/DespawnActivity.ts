@@ -1,12 +1,12 @@
 import { Location } from "../locations/Location";
-import { Character } from "../npc/Character";
+import { AkademicCharacter } from "../npc/Character";
 import { CharacterFigure } from "../npc/CharacterFigure";
 import { Activity, ActivityUpdates } from "./Activity";
 
 export class DespawnActivity implements Activity {
   private removed = false;
 
-  constructor(private character: Character) {
+  constructor(private character: AkademicCharacter) {
   }
 
   public tick(figure: CharacterFigure, location: Location): ActivityUpdates {

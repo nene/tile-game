@@ -17,7 +17,7 @@ interface DayConfig {
   spawnTime: number;
 }
 
-export interface CharacterDef {
+export interface AkademicCharacterDef {
   name: string;
   spriteName: SpriteName;
   favoriteDrinks: Drink[];
@@ -28,7 +28,7 @@ export interface CharacterDef {
 const MAX_BEERS = 2;
 const MAX_QUESTIONS = 3;
 
-export class Character {
+export class AkademicCharacter {
   // How much the NPC likes or dislikes the player
   private opinion = 0; // 0..10
   // 3 times out of 4 the fraater will remember to write himself into the book
@@ -38,7 +38,7 @@ export class Character {
   private colorBandState = this.randomColorBandState();
   private today?: DayConfig;
 
-  constructor(private def: CharacterDef) {
+  constructor(private def: AkademicCharacterDef) {
   }
 
   resetForDay(day: number) {
@@ -127,7 +127,7 @@ export class Character {
 }
 
 const characters = {
-  "koppel": new Character({
+  "koppel": new AkademicCharacter({
     name: "ksv! Jakob Koppel",
     spriteName: "cfe-ksv-koppel",
     days: {
@@ -136,7 +136,7 @@ const characters = {
     favoriteDrinks: [getDrink("bock"), getDrink("pilsner")],
     hatedDrinks: [getDrink("limonaad"), getDrink("paulaner"), getDrink("porter")],
   }),
-  "sass": new Character({
+  "sass": new AkademicCharacter({
     name: "vil! Aleksander Popov",
     spriteName: "cfe-ksv-sass",
     days: {
@@ -145,7 +145,7 @@ const characters = {
     favoriteDrinks: [getDrink("alexander"), getDrink("tommu-hiid")],
     hatedDrinks: [getDrink("porter"), getDrink("limonaad")],
   }),
-  "pikmets": new Character({
+  "pikmets": new AkademicCharacter({
     name: "b!vil! Richard Pikmets",
     spriteName: "cfe-ksv-pikmets",
     days: {
@@ -154,7 +154,7 @@ const characters = {
     favoriteDrinks: [getDrink("special"), getDrink("kriek")],
     hatedDrinks: [getDrink("alexander"), getDrink("pilsner")],
   }),
-  "otto": new Character({
+  "otto": new AkademicCharacter({
     name: "vil! Otto Pukk",
     spriteName: "cfe-ksv-otto",
     days: {
@@ -163,7 +163,7 @@ const characters = {
     favoriteDrinks: [getDrink("paulaner"), getDrink("porter")],
     hatedDrinks: [getDrink("kriek"), getDrink("limonaad")],
   }),
-  "vanamees": new Character({
+  "vanamees": new AkademicCharacter({
     name: "Vanamees",
     spriteName: "cfe-ksv-karl",
     days: {
@@ -173,7 +173,7 @@ const characters = {
     favoriteDrinks: [getDrink("alexander"), getDrink("pilsner"), getDrink("tommu-hiid")],
     hatedDrinks: [getDrink("bock")],
   }),
-  "kark": new Character({
+  "kark": new AkademicCharacter({
     name: "vil! Raul Tõniste",
     spriteName: "cfe-ksv-kark",
     days: {
@@ -182,7 +182,7 @@ const characters = {
     favoriteDrinks: [getDrink("paulaner")],
     hatedDrinks: [getDrink("porter")],
   }),
-  "feenoks-lady": new Character({
+  "feenoks-lady": new AkademicCharacter({
     name: "Proua Fenoksia",
     spriteName: "feenoks-lady",
     days: {},
@@ -193,11 +193,11 @@ const characters = {
 
 export type CharacterName = keyof typeof characters;
 
-export function getCharacter(name: CharacterName): Character {
+export function getCharacter(name: CharacterName): AkademicCharacter {
   return characters[name];
 }
 
-export function getAllCharacters(): Character[] {
+export function getAllCharacters(): AkademicCharacter[] {
   return Object.values(characters);
 }
 

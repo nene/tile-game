@@ -1,14 +1,14 @@
 import { isBookCabinet } from "../furniture/BookCabinet";
 import { Book } from "../items/Book";
 import { Location } from "../locations/Location";
-import { Character } from "../npc/Character";
+import { AkademicCharacter } from "../npc/Character";
 import { CharacterFigure } from "../npc/CharacterFigure";
 import { Activity, ActivityUpdates } from "./Activity";
 
 export class WriteToBookActivity implements Activity {
   private finished = false;
 
-  constructor(private character: Character) {
+  constructor(private character: AkademicCharacter) {
   }
 
   tick(figure: CharacterFigure, location: Location): ActivityUpdates {

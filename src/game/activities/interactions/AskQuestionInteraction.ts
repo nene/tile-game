@@ -1,4 +1,4 @@
-import { Character } from "../../npc/Character";
+import { AkademicCharacter } from "../../npc/Character";
 import { UiController } from "../../UiController";
 import { TextContent } from "../../dialogs/TextContent";
 import { FlagQuestionContent } from "../../dialogs/FlagQuestionContent";
@@ -14,7 +14,7 @@ export class AskQuestionInteraction implements Interaction {
   private finished = false;
   private punishWithWater = false;
 
-  constructor(private character: Character) {
+  constructor(private character: AkademicCharacter) {
   }
 
   getType() {

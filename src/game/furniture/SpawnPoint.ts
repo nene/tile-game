@@ -1,7 +1,7 @@
 import { CharacterFigure } from "../npc/CharacterFigure";
 import { Coord, coordAdd, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
-import { Character, getAllCharacters } from "../npc/Character";
+import { AkademicCharacter, getAllCharacters } from "../npc/Character";
 import { Location } from "../locations/Location";
 
 export class SpawnPoint implements GameObject {
@@ -18,7 +18,7 @@ export class SpawnPoint implements GameObject {
     }
   }
 
-  private trySpawnCharacter(): Character | undefined {
+  private trySpawnCharacter(): AkademicCharacter | undefined {
     return getAllCharacters().find((char) => char.getSpawnTime() === this.tickCount);
   }
 
