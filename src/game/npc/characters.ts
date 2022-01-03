@@ -1,5 +1,7 @@
 import { getDrink } from "../items/Drink";
 import { AcademicCharacter } from "./AcademicCharacter";
+import { Character } from "./Character";
+import { FeenoksLadyCharacter } from "./FeenoksLadyCharacter";
 
 const characters = {
   "koppel": new AcademicCharacter({
@@ -57,22 +59,16 @@ const characters = {
     favoriteDrinks: [getDrink("paulaner")],
     hatedDrinks: [getDrink("porter")],
   }),
-  "feenoks-lady": new AcademicCharacter({
-    name: "Proua Fenoksia",
-    spriteName: "feenoks-lady",
-    days: {},
-    favoriteDrinks: [],
-    hatedDrinks: [],
-  }),
+  "feenoks-lady": new FeenoksLadyCharacter(),
 };
 
 export type CharacterName = keyof typeof characters;
 
-export function getCharacter(name: CharacterName): AcademicCharacter {
+export function getCharacter(name: CharacterName): Character {
   return characters[name];
 }
 
-export function getAllCharacters(): AcademicCharacter[] {
+export function getAllCharacters(): Character[] {
   return Object.values(characters);
 }
 

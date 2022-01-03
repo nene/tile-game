@@ -45,6 +45,6 @@ export class FeenoksLady implements GameObject {
   }
 
   interact(ui: UiController, item?: GameItem) {
-    showPlainTextDialog({ ui, character: getCharacter("feenoks-lady"), text: "terekest" });
+    showPlainTextDialog({ ui, character: getCharacter("feenoks-lady"), text: "Teretulemast Feenoksi alkoparadiisi!" });
   }
 }

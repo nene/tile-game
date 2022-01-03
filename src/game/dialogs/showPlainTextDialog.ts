@@ -1,11 +1,11 @@
-import { AcademicCharacter } from "../npc/AcademicCharacter";
+import { Character } from "../npc/Character";
 import { UiController } from "../UiController";
 import { Dialog } from "./Dialog";
 import { TextContent } from "./TextContent";
 
 interface PlainTextDialogConfig {
   ui: UiController;
-  character: AcademicCharacter;
+  character: Character;
   text: string;
   onClose?: () => void;
 }

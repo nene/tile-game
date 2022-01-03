@@ -9,6 +9,7 @@ import { GameEventFactory, GameEventType } from "./GameEvent";
 import { getAllCharacters } from "./npc/characters";
 import { OpinionsView } from "./npc/OpinionsView";
 import { SkillsView } from "./attributes/SkillsView";
+import { isAcademicCharacter } from "./npc/AcademicCharacter";
 
 export interface GameApi {
   onKeyEvent: (type: "keyup" | "keydown", key: string) => boolean;
@@ -56,7 +57,7 @@ export async function runGame(ctx: CanvasRenderingContext2D): Promise<GameApi> {
           ui.hideInfoModal();
         } else {
           ui.showInfoModal(new OpinionsView({
-            characters: getAllCharacters(),
+            characters: getAllCharacters().filter(isAcademicCharacter),
             onClose: () => ui.hideInfoModal(),
           }));
         }

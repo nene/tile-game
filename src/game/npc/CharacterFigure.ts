@@ -10,6 +10,7 @@ import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { Location } from "../locations/Location";
 import { createCharacterActivities } from "./createCharacterActivities";
 import { GameItem } from "../items/GameItem";
+import { Character } from "./Character";
 
 export class CharacterFigure implements GameObject {
   private activityManager: ActivityManager;
@@ -21,7 +22,7 @@ export class CharacterFigure implements GameObject {
     this.defaultSprite = SpriteLibrary.getSprite(character.getSpriteName());
   }
 
-  getCharacter(): AcademicCharacter {
+  getCharacter(): Character {
     return this.character;
   }
 

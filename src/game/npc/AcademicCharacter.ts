@@ -4,6 +4,7 @@ import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary, SpriteName } from "../sprites/SpriteLibrary";
 import { constrain } from "../utils/constrain";
 import { pickRandom } from "../utils/pickRandom";
+import { Character } from "./Character";
 
 export type Desire = "beer" | "question";
 
@@ -28,7 +29,7 @@ export interface AcademicCharacterDef {
 const MAX_BEERS = 2;
 const MAX_QUESTIONS = 3;
 
-export class AcademicCharacter {
+export class AcademicCharacter implements Character {
   // How much the NPC likes or dislikes the player
   private opinion = 0; // 0..10
   // 3 times out of 4 the fraater will remember to write himself into the book
@@ -125,3 +126,5 @@ export class AcademicCharacter {
     this.colorBandState = ColorBandState.correct;
   }
 }
+
+export const isAcademicCharacter = (char: Character): char is AcademicCharacter => char instanceof AcademicCharacter;

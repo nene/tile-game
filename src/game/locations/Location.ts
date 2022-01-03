@@ -8,8 +8,8 @@ import { GameWorld } from "../GameWorld";
 import { BackgroundCache } from "./BackgroundCache";
 import { last } from "lodash";
 import { CharacterFigure, isCharacterFigure } from "../npc/CharacterFigure";
-import { AcademicCharacter } from "../npc/AcademicCharacter";
 import { LocationBackground } from "./LocationBackground";
+import { Character } from "../npc/Character";
 
 export interface TeleportCommand {
   entity: GameObject & { setCoord: (coord: Coord) => void };
@@ -119,7 +119,7 @@ export class Location {
     }
   }
 
-  findCharacterFigure(character: AcademicCharacter): CharacterFigure | undefined {
+  findCharacterFigure(character: Character): CharacterFigure | undefined {
     return this.allObjects()
       .filter(isCharacterFigure)
       .find((fig) => fig.getCharacter() === character);

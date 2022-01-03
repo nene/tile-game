@@ -1,7 +1,8 @@
 import { coordAdd, isCoordInRect, Rect, rectGrow } from "../Coord";
 import { GameEvent } from "../GameEvent";
 import { ColorBandTouch } from "../items/ColorBandTouch";
-import { AcademicCharacter } from "../npc/AcademicCharacter";
+import { AcademicCharacter, isAcademicCharacter } from "../npc/AcademicCharacter";
+import { Character } from "../npc/Character";
 import { PixelScreen } from "../PixelScreen";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { Component } from "../ui/Component";
@@ -11,7 +12,7 @@ import { UiController } from "../UiController";
 
 interface DialogConfig {
   ui: UiController;
-  character: AcademicCharacter;
+  character: Character;
   createContent: (rect: Rect) => Component,
   onClose?: () => void;
 }
@@ -21,7 +22,7 @@ export class Dialog implements Component {
   private window: Window;
   private content: Component;
   private onClose?: () => void;
-  private character: AcademicCharacter;
+  private character: Character;
   private iconRect: Rect;
   private iconHovered = false;
 
@@ -50,15 +51,15 @@ export class Dialog implements Component {
   }
 
   private drawIcon(screen: PixelScreen) {
-    if (this.iconHovered) {
-      this.drawColorBand(screen);
+    if (this.iconHovered && isAcademicCharacter(this.character)) {
+      this.drawColorBand(screen, this.character);
     } else {
       this.drawAvatar(screen);
     }
   }
 
-  private drawColorBand(screen: PixelScreen) {
-    screen.drawSprite(SpriteLibrary.getSprite("color-band", [this.character.getColorBandState(), 0]), this.iconRect.coord);
+  private drawColorBand(screen: PixelScreen, character: AcademicCharacter) {
+    screen.drawSprite(SpriteLibrary.getSprite("color-band", [character.getColorBandState(), 0]), this.iconRect.coord);
   }
 
   private drawAvatar(screen: PixelScreen) {
@@ -75,7 +76,7 @@ export class Dialog implements Component {
       return true;
     }
 
-    if (event.type === "mousemove") {
+    if (event.type === "mousemove" && isAcademicCharacter(this.character)) {
       this.iconHovered = isCoordInRect(event.coord, this.iconRect);
       this.ui.highlightCursor(this.iconHovered);
       return true;
