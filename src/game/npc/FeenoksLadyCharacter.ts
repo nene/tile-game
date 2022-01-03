@@ -22,4 +22,8 @@ export class FeenoksLadyCharacter implements Character {
 
   resetForDay() {
   }
+
+  getActivities() {
+    return [];
+  }
 }

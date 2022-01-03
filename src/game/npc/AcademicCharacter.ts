@@ -5,6 +5,7 @@ import { SpriteLibrary, SpriteName } from "../sprites/SpriteLibrary";
 import { constrain } from "../utils/constrain";
 import { pickRandom } from "../utils/pickRandom";
 import { Character } from "./Character";
+import { createCharacterActivities } from "./createCharacterActivities";
 
 export type Desire = "beer" | "question";
 
@@ -74,6 +75,10 @@ export class AcademicCharacter implements Character {
       size: [16, 16],
       offset: [0, 0],
     };
+  }
+
+  getActivities() {
+    return createCharacterActivities(this);
   }
 
   getSpawnTime(): number {

@@ -5,7 +5,8 @@ import { GameObject } from "../../GameObject";
 import { getLevel } from "../Level";
 import { TiledLevelFactory } from "../TiledLevelFactory";
 import { SolidBackground } from "../SolidBackground";
-import { FeenoksLady } from "../../npc/FeenoksLady";
+import { CharacterFigure } from "../../npc/CharacterFigure";
+import { getCharacter } from "../../npc/characters";
 
 export class FeenoksLocationFactory implements LocationFactory {
   private levelFactory = new TiledLevelFactory(getLevel("Feenoks"));
@@ -27,7 +28,7 @@ export class FeenoksLocationFactory implements LocationFactory {
         autoTeleportSide: "bottom",
       }),
 
-      new FeenoksLady(tileToScreenCoord([12, 5])),
+      new CharacterFigure(tileToScreenCoord([12, 5]), getCharacter("feenoks-lady")),
     ];
   }
 

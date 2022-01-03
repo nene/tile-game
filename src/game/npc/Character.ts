@@ -1,3 +1,4 @@
+import { Activity } from "../activities/Activity";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteName } from "../sprites/SpriteLibrary";
 
@@ -6,4 +7,5 @@ export interface Character {
   getSpriteName: () => SpriteName;
   getFaceSprite: () => Sprite;
   resetForDay: (n: number) => void;
+  getActivities: () => Activity[];
 }
