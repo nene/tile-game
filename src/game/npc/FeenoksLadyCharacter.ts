@@ -4,6 +4,8 @@ import { Sprite } from "../sprites/Sprite";
 import { SellAlcoholActivity } from "../activities/SellAlcoholActivity";
 
 export class FeenoksLadyCharacter implements Character {
+  private dialogShown = false;
+
   getName() {
     return "Proua Fenoksia";
   }
@@ -28,5 +30,13 @@ export class FeenoksLadyCharacter implements Character {
     return [
       new SellAlcoholActivity(this),
     ];
+  }
+
+  isDialogShown(): boolean {
+    return this.dialogShown;
+  }
+
+  markDialogShown() {
+    this.dialogShown = true;
   }
 }

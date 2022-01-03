@@ -39,11 +39,18 @@ export class SellAlcoholActivity implements Activity {
   }
 
   interact(ui: UiController) {
+    if (this.character.isDialogShown()) {
+      return this.showShop(ui);
+    }
+
     showPlainTextDialog({
       ui,
       character: this.character,
       text: "Teretulemast Feenoksi alkoparadiisi!",
-      onClose: () => this.showShop(ui),
+      onClose: () => {
+        this.character.markDialogShown();
+        this.showShop(ui);
+      },
     });
   }
 
