@@ -1,7 +1,7 @@
 import { showPlainTextDialog } from "../../dialogs/showPlainTextDialog";
 import { isBook } from "../../items/Book";
 import { getDrink } from "../../items/Drink";
-import { AkademicCharacter } from "../../npc/Character";
+import { AcademicCharacter } from "../../npc/AcademicCharacter";
 import { UiController } from "../../UiController";
 import { CallFuxActivity } from "../CallFuxActivity";
 import { InteractionResult, PlainInteraction } from "./PlainInteraction";
@@ -9,7 +9,7 @@ import { RequestWaterInteraction } from "../interactions/RequestWaterInteraction
 import { GameItem } from "../../items/GameItem";
 
 export class ReceiveBookInteraction implements PlainInteraction {
-  constructor(private character: AkademicCharacter) { }
+  constructor(private character: AcademicCharacter) { }
 
   interact(ui: UiController, item?: GameItem): InteractionResult | undefined {
     if (!item || !isBook(item)) {

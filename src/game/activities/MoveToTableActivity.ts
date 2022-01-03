@@ -1,7 +1,7 @@
 import { Coord, coordEq, Rect, rectTranslate } from "../Coord";
 import { isTable, Table } from "../furniture/Table";
 import { Location } from "../locations/Location";
-import { AkademicCharacter } from "../npc/Character";
+import { AcademicCharacter } from "../npc/AcademicCharacter";
 import { CharacterFigure, isCharacterFigure } from "../npc/CharacterFigure";
 import { Activity, ActivityUpdates } from "./Activity";
 import { ContinuationActivity } from "./ContinuationActivity";
@@ -12,7 +12,7 @@ export class MoveToTableActivity implements Activity {
   private finished = false;
   private targetCoord?: Coord;
 
-  constructor(private character: AkademicCharacter) {
+  constructor(private character: AcademicCharacter) {
   }
 
   tick(figure: CharacterFigure, location: Location): ActivityUpdates {

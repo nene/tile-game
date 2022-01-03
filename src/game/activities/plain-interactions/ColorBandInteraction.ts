@@ -1,6 +1,6 @@
 import { showPlainTextDialog } from "../../dialogs/showPlainTextDialog";
 import { getDrink } from "../../items/Drink";
-import { AkademicCharacter, ColorBandState } from "../../npc/Character";
+import { AcademicCharacter, ColorBandState } from "../../npc/AcademicCharacter";
 import { UiController } from "../../UiController";
 import { CallFuxActivity } from "../CallFuxActivity";
 import { InteractionResult, PlainInteraction } from "./PlainInteraction";
@@ -9,7 +9,7 @@ import { GameItem } from "../../items/GameItem";
 import { isColorBandTouch } from "../../items/ColorBandTouch";
 
 export class ColorBandInteraction implements PlainInteraction {
-  constructor(private character: AkademicCharacter) { }
+  constructor(private character: AcademicCharacter) { }
 
   interact(ui: UiController, item?: GameItem): InteractionResult | undefined {
     if (!item || !isColorBandTouch(item)) {

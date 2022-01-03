@@ -1,10 +1,10 @@
-import { AkademicCharacter } from "../npc/Character";
+import { AcademicCharacter } from "../npc/AcademicCharacter";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { GameItem } from "./GameItem";
 
 export class Book implements GameItem {
-  private entries: AkademicCharacter[] = [];
+  private entries: AcademicCharacter[] = [];
 
   getName() {
     return "Majaraamat";
@@ -14,11 +14,11 @@ export class Book implements GameItem {
     return SpriteLibrary.getSprite("book");
   }
 
-  addEntry(char: AkademicCharacter) {
+  addEntry(char: AcademicCharacter) {
     this.entries.push(char);
   }
 
-  getEntries(): AkademicCharacter[] {
+  getEntries(): AcademicCharacter[] {
     return this.entries;
   }
 

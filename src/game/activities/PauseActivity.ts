@@ -1,9 +1,9 @@
-import { AkademicCharacter } from "../npc/Character";
+import { AcademicCharacter } from "../npc/AcademicCharacter";
 import { Activity } from "./Activity";
 
 export class PauseActivity implements Activity {
   private tickCounter = 0;
-  constructor(private duration: number, private character: AkademicCharacter) { }
+  constructor(private duration: number, private character: AcademicCharacter) { }
 
   tick() {
     this.tickCounter++;

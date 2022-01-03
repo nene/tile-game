@@ -2,14 +2,14 @@ import { findDoor } from "../furniture/Door";
 import { GameWorld } from "../GameWorld";
 import { Location } from "../locations/Location";
 import { LocationName } from "../locations/LocationFactory";
-import { AkademicCharacter } from "../npc/Character";
+import { AcademicCharacter } from "../npc/AcademicCharacter";
 import { CharacterFigure } from "../npc/CharacterFigure";
 import { Activity, ActivityUpdates } from "./Activity";
 
 export class EnterDoorActivity implements Activity {
   private entered = false;
 
-  constructor(private doorTarget: LocationName, private character: AkademicCharacter) {
+  constructor(private doorTarget: LocationName, private character: AcademicCharacter) {
   }
 
   tick(figure: CharacterFigure, oldLocation: Location, world: GameWorld): ActivityUpdates {

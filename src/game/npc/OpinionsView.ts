@@ -4,17 +4,17 @@ import { PixelScreen } from "../PixelScreen";
 import { Component } from "../ui/Component";
 import { ScrollView } from "../ui/ScrollView";
 import { Window } from "../ui/Window";
-import { AkademicCharacter } from "./Character";
+import { AcademicCharacter } from "./AcademicCharacter";
 import { CharacterOpinionRenderer } from "./CharacterOpinionRenderer";
 
 interface OpinionsViewConfig {
-  characters: AkademicCharacter[],
+  characters: AcademicCharacter[],
   onClose: () => void;
 }
 
 export class OpinionsView implements Component {
   private window: Window;
-  private scrollView: ScrollView<AkademicCharacter>;
+  private scrollView: ScrollView<AcademicCharacter>;
   private onClose: () => void;
 
   constructor({ characters, onClose }: OpinionsViewConfig) {

@@ -1,6 +1,6 @@
 import { Coord, coordEq, coordMul, coordUnit, coordSub, coordAdd } from "../Coord";
 import { Location } from "../locations/Location";
-import { AkademicCharacter } from "../npc/Character";
+import { AcademicCharacter } from "../npc/AcademicCharacter";
 import { CharacterFigure } from "../npc/CharacterFigure";
 import { SpriteAnimation } from "../sprites/SpriteAnimation";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
@@ -12,7 +12,7 @@ export class MoveActivity implements Activity {
   private animation: SpriteAnimation;
   private finished = false;
 
-  constructor(private destination: Coord, character: AkademicCharacter) {
+  constructor(private destination: Coord, character: AcademicCharacter) {
     this.animation = new SpriteAnimation(SpriteLibrary.get(character.getSpriteName()), {
       frames: [[0, 0]],
     });

@@ -1,4 +1,4 @@
-import { AkademicCharacter } from "../../npc/Character";
+import { AcademicCharacter } from "../../npc/AcademicCharacter";
 import { UiController } from "../../UiController";
 import { Interaction, InteractionType } from "./Interaction";
 import { BeerGlass, DrinkLevel, isBeerGlass } from "../../items/BeerGlass";
@@ -12,7 +12,7 @@ import { GameItem } from "../../items/GameItem";
 export class RequestDrinkInteraction implements Interaction {
   private receivedBeerGlass?: BeerGlass;
 
-  constructor(private character: AkademicCharacter) {
+  constructor(private character: AcademicCharacter) {
   }
 
   getType() {

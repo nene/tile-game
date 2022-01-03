@@ -8,7 +8,7 @@ import { GameWorld } from "../GameWorld";
 import { BackgroundCache } from "./BackgroundCache";
 import { last } from "lodash";
 import { CharacterFigure, isCharacterFigure } from "../npc/CharacterFigure";
-import { AkademicCharacter } from "../npc/Character";
+import { AcademicCharacter } from "../npc/AcademicCharacter";
 import { LocationBackground } from "./LocationBackground";
 
 export interface TeleportCommand {
@@ -119,7 +119,7 @@ export class Location {
     }
   }
 
-  findCharacterFigure(character: AkademicCharacter): CharacterFigure | undefined {
+  findCharacterFigure(character: AcademicCharacter): CharacterFigure | undefined {
     return this.allObjects()
       .filter(isCharacterFigure)
       .find((fig) => fig.getCharacter() === character);
