@@ -6,7 +6,7 @@ import { UiController } from "./UiController";
 import { Loops } from "./Loops";
 import { FpsCounter } from "./FpsCounter";
 import { GameEventFactory, GameEventType } from "./GameEvent";
-import { getAllCharacters } from "./npc/Character";
+import { getAllCharacters } from "./npc/characters";
 import { OpinionsView } from "./npc/OpinionsView";
 import { SkillsView } from "./attributes/SkillsView";
 

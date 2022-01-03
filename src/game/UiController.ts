@@ -14,7 +14,7 @@ import { QuestionFactory } from "./questions/QuestionFactory";
 import { GameWorld } from "./GameWorld";
 import { createWorld } from "./locations/createWorld";
 import { DayTransition } from "./DayTransition";
-import { resetCharactersForDay } from "./npc/Character";
+import { resetCharactersForDay } from "./npc/characters";
 import { delay } from "lodash";
 
 export class UiController {

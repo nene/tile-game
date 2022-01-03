@@ -2,7 +2,7 @@ import { CharacterFigure } from "../npc/CharacterFigure";
 import { Coord, coordAdd, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
 import { AcademicCharacter } from "../npc/AcademicCharacter";
-import { getAllCharacters } from "../npc/Character";
+import { getAllCharacters } from "../npc/characters";
 import { Location } from "../locations/Location";
 
 export class SpawnPoint implements GameObject {

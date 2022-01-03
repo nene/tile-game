@@ -3,7 +3,7 @@ import { GameObject } from "../GameObject";
 import { GameWorld } from "../GameWorld";
 import { PixelScreen } from "../PixelScreen";
 import { UiController } from "../UiController";
-import { getCharacter } from "./Character";
+import { getCharacter } from "./characters";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { Location } from "../locations/Location";
 import { GameItem } from "../items/GameItem";
