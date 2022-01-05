@@ -7,7 +7,6 @@ import cfeKsvPikmets from "./data/cfe-ksv-pikmets.png";
 import cfeKsvOtto from "./data/cfe-ksv-otto.png";
 import cfeKsvKarl from "./data/cfe-ksv-karl.png";
 import cfeKsvKark from "./data/cfe-ksv-kark.png";
-import cfeBuildingDoor from "./data/cfe-building-door.png";
 import buildings from "./data/buildings.png";
 import grass from "./data/grass.png";
 import fence from "./data/fence.png";
@@ -148,7 +147,6 @@ const imageFiles = {
   'beer-foam-xl': spriteDef({ src: beerFoamXl, cfg: { size: [47, 86] } }),
 
   // Big building
-  'cfe-building-door': spriteDef({ src: cfeBuildingDoor, cfg: { size: [23, 34], offset: [-2, -34] } }),
   'fence': spriteDef({ src: fence, cfg: { size: [80, 38], offset: [0, -31], colsRows: [2, 1] } }),
 
   // Feenoks

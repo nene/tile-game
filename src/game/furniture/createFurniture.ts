@@ -1,13 +1,15 @@
-import { Coord, Rect } from "../Coord";
+import { Coord, coordAdd, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
-import { readIntField, readMappedField } from "../locations/entityFields";
+import { fieldExists, readCoordField, readIntField, readMappedField, readStringField } from "../locations/entityFields";
 import { EntityField } from "../locations/Level";
+import { LocationName } from "../locations/LocationFactory";
 import { SpriteName } from "../sprites/SpriteLibrary";
 import { BeerBox } from "./BeerBox";
 import { BeerCabinet } from "./BeerCabinet";
 import { BookCabinet } from "./BookCabinet";
 import { Countertop } from "./Countertop";
 import { createFurnitureClass } from "./createFurnitureClass";
+import { Door } from "./Door";
 import { Fence, FenceType } from "./Fence";
 import { Fireplace } from "./Fireplace";
 import { Fridge } from "./Fridge";
@@ -84,6 +86,16 @@ export function createFurniture(type: string, { coord, size }: Rect, fields: Ent
   }
   if (type === "Wall") {
     return new Wall({ coord, size });
+  }
+  if (type === "Door") {
+    return new Door({
+      coord: coordAdd(coord, [0, size[1]]),
+      area: { coord: [0, -size[1]], size },
+      from: readStringField("from", fields) as LocationName,
+      to: readStringField("to", fields) as LocationName,
+      autoTeleportSide: readMappedField("autoTeleportSide", { Top: "top", Bottom: "bottom" }, fields),
+      teleportOffset: fieldExists("teleportOffset", fields) ? readCoordField("teleportOffset", fields) : undefined,
+    });
   }
 
   if (variantClassMap[type]) {

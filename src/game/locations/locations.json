@@ -9,7 +9,7 @@
 		"url": "https://ldtk.io"
 	},
 	"jsonVersion": "0.9.3",
-	"nextUid": 76,
+	"nextUid": 82,
 	"worldLayout": "Free",
 	"worldGridWidth": 256,
 	"worldGridHeight": 256,
@@ -1252,6 +1252,112 @@
 					"textLanguageMode": null
 				}
 			]
+		},
+		{
+			"identifier": "Door",
+			"uid": 76,
+			"tags": [],
+			"width": 8,
+			"height": 8,
+			"resizableX": true,
+			"resizableY": true,
+			"keepAspectRatio": false,
+			"fillOpacity": 0.5,
+			"lineOpacity": 0,
+			"hollow": false,
+			"color": "#98B11F",
+			"renderMode": "Rectangle",
+			"showName": true,
+			"tilesetId": null,
+			"tileId": null,
+			"tileRenderMode": "FitInside",
+			"maxCount": 0,
+			"limitScope": "PerLevel",
+			"limitBehavior": "MoveLastOne",
+			"pivotX": 0,
+			"pivotY": 0,
+			"fieldDefs": [
+				{
+					"identifier": "from",
+					"__type": "String",
+					"uid": 77,
+					"type": "F_String",
+					"isArray": false,
+					"canBeNull": false,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "Hidden",
+					"editorDisplayPos": "Above",
+					"editorAlwaysShow": false,
+					"editorCutLongValues": true,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null
+				},
+				{
+					"identifier": "to",
+					"__type": "String",
+					"uid": 78,
+					"type": "F_String",
+					"isArray": false,
+					"canBeNull": false,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "Hidden",
+					"editorDisplayPos": "Above",
+					"editorAlwaysShow": false,
+					"editorCutLongValues": true,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null
+				},
+				{
+					"identifier": "autoTeleportSide",
+					"__type": "LocalEnum.AutoTeleportSide",
+					"uid": 80,
+					"type": { "id": "F_Enum", "params": [79] },
+					"isArray": false,
+					"canBeNull": false,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "Hidden",
+					"editorDisplayPos": "Above",
+					"editorAlwaysShow": false,
+					"editorCutLongValues": true,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null
+				},
+				{
+					"identifier": "teleportOffset",
+					"__type": "Point",
+					"uid": 81,
+					"type": "F_Point",
+					"isArray": false,
+					"canBeNull": true,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "Hidden",
+					"editorDisplayPos": "Above",
+					"editorAlwaysShow": false,
+					"editorCutLongValues": true,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null
+				}
+			]
 		}
 	], "tilesets": [
 		{
@@ -1457,7 +1563,8 @@
 			{ "id": "Sakala_coat_of_arms", "tileId": 4, "color": 7171724, "__tileSrcRect": [0,32,32,32] }
 		], "iconTilesetUid": 14, "externalRelPath": null, "externalFileChecksum": null },
 		{ "identifier": "SittingDir", "uid": 30, "values": [ { "id": "LTR", "tileId": null, "color": 0, "__tileSrcRect": null }, { "id": "RTL", "tileId": null, "color": 0, "__tileSrcRect": null } ], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null },
-		{ "identifier": "FenceType", "uid": 38, "values": [ { "id": "Cfe", "tileId": 0, "color": 8024420, "__tileSrcRect": [0,0,38,38] }, { "id": "Sakala", "tileId": 1, "color": 7959150, "__tileSrcRect": [76,0,38,38] } ], "iconTilesetUid": 39, "externalRelPath": null, "externalFileChecksum": null }
+		{ "identifier": "FenceType", "uid": 38, "values": [ { "id": "Cfe", "tileId": 0, "color": 8024420, "__tileSrcRect": [0,0,38,38] }, { "id": "Sakala", "tileId": 1, "color": 7959150, "__tileSrcRect": [76,0,38,38] } ], "iconTilesetUid": 39, "externalRelPath": null, "externalFileChecksum": null },
+		{ "identifier": "AutoTeleportSide", "uid": 79, "values": [ { "id": "Top", "tileId": null, "color": 0, "__tileSrcRect": null }, { "id": "Bottom", "tileId": null, "color": 0, "__tileSrcRect": null } ], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null }
 	], "externalEnums": [], "levelFields": [] },
 	"levels": [
 		{
@@ -4507,7 +4614,7 @@
 					"layerDefUid": 10,
 					"pxOffsetX": 0,
 					"pxOffsetY": 0,
-					"visible": false,
+					"visible": true,
 					"optionalRules": [],
 					"intGrid": [],
 					"intGridCsv": [],
@@ -4864,6 +4971,141 @@
 							"defUid": 42,
 							"px": [726,208],
 							"fieldInstances": []
+						},
+						{
+							"__identifier": "Door",
+							"__grid": [21,9],
+							"__pivot": [0,0],
+							"__tile": null,
+							"width": 27,
+							"height": 38,
+							"defUid": 76,
+							"px": [344,147],
+							"fieldInstances": [
+								{
+									"__identifier": "from",
+									"__value": "outdoors",
+									"__type": "String",
+									"defUid": 77,
+									"realEditorValues": [{
+										"id": "V_String",
+										"params": ["outdoors"]
+									}]
+								},
+								{
+									"__identifier": "to",
+									"__value": "sakala-hall",
+									"__type": "String",
+									"defUid": 78,
+									"realEditorValues": [{
+										"id": "V_String",
+										"params": ["sakala-hall"]
+									}]
+								},
+								{
+									"__identifier": "autoTeleportSide",
+									"__value": "Bottom",
+									"__type": "LocalEnum.AutoTeleportSide",
+									"defUid": 80,
+									"realEditorValues": [{
+										"id": "V_String",
+										"params": ["Bottom"]
+									}]
+								},
+								{
+									"__identifier": "teleportOffset",
+									"__value": null,
+									"__type": "Point",
+									"defUid": 81,
+									"realEditorValues": [null]
+								}
+							]
+						},
+						{
+							"__identifier": "Door",
+							"__grid": [14,10],
+							"__pivot": [0,0],
+							"__tile": null,
+							"width": 23,
+							"height": 34,
+							"defUid": 76,
+							"px": [227,172],
+							"fieldInstances": [
+								{
+									"__identifier": "from",
+									"__value": "outdoors",
+									"__type": "String",
+									"defUid": 77,
+									"realEditorValues": [{
+										"id": "V_String",
+										"params": ["outdoors"]
+									}]
+								},
+								{
+									"__identifier": "to",
+									"__value": "cfe-hall",
+									"__type": "String",
+									"defUid": 78,
+									"realEditorValues": [{
+										"id": "V_String",
+										"params": ["cfe-hall"]
+									}]
+								},
+								{
+									"__identifier": "autoTeleportSide",
+									"__value": "Bottom",
+									"__type": "LocalEnum.AutoTeleportSide",
+									"defUid": 80,
+									"realEditorValues": [{
+										"id": "V_String",
+										"params": ["Bottom"]
+									}]
+								},
+								{ "__identifier": "teleportOffset", "__value": null, "__type": "Point", "defUid": 81, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "Door",
+							"__grid": [45,11],
+							"__pivot": [0,0],
+							"__tile": null,
+							"width": 20,
+							"height": 32,
+							"defUid": 76,
+							"px": [726,190],
+							"fieldInstances": [
+								{
+									"__identifier": "from",
+									"__value": "outdoors",
+									"__type": "String",
+									"defUid": 77,
+									"realEditorValues": [{
+										"id": "V_String",
+										"params": ["outdoors"]
+									}]
+								},
+								{
+									"__identifier": "to",
+									"__value": "feenoks",
+									"__type": "String",
+									"defUid": 78,
+									"realEditorValues": [{
+										"id": "V_String",
+										"params": ["feenoks"]
+									}]
+								},
+								{
+									"__identifier": "autoTeleportSide",
+									"__value": "Bottom",
+									"__type": "LocalEnum.AutoTeleportSide",
+									"defUid": 80,
+									"realEditorValues": [{
+										"id": "V_String",
+										"params": ["Bottom"]
+									}]
+								},
+								{ "__identifier": "teleportOffset", "__value": null, "__type": "Point", "defUid": 81, "realEditorValues": [] }
+							]
 						}
 					]
 				},

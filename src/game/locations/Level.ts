@@ -66,7 +66,13 @@ export interface IntEntityField {
   __value: number;
 }
 
-export type EntityField = EnumEntityField | IntEntityField;
+export interface PointEntityField {
+  __identifier: string;
+  __type: "Point";
+  __value: { cx: number; cy: number };
+}
+
+export type EntityField = EnumEntityField | IntEntityField | PointEntityField;
 
 export function getLevel(name: string): Level {
   const level = locationsJson.levels.find((level) => level.identifier === name) as Level | undefined;

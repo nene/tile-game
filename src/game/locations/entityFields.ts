@@ -1,7 +1,8 @@
+import { Coord } from "../Coord";
 import { EntityField } from "./Level";
 
 export function fieldExists(id: string, fields: EntityField[]): boolean {
-  return fields.some((f) => f.__identifier === id);
+  return fields.some((f) => f.__identifier === id && f.__value !== undefined && f.__value !== null);
 }
 
 export function readIntField(id: string, fields: EntityField[]): number {
@@ -18,6 +19,14 @@ export function readStringField(id: string, fields: EntityField[]): string {
     throw new Error(`Field ${id} is not a string`);
   }
   return field.__value;
+}
+
+export function readCoordField(id: string, fields: EntityField[]): Coord {
+  const field = lookupField(id, fields);
+  if (!(field.__value instanceof Object && typeof field.__value.cx === "number" && typeof field.__value.cy === "number")) {
+    throw new Error(`Field ${id} is not a point`);
+  }
+  return [field.__value.cx, field.__value.cy];
 }
 
 export function readMappedField<T>(id: string, map: Record<string, T>, fields: EntityField[]): T {
