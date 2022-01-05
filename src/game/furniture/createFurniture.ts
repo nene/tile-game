@@ -49,6 +49,10 @@ const classMap: Record<string, { new(coord: Coord): GameObject }> = {
     spriteName: "feenoks-fridge",
     boundingBox: { coord: [0, 0], size: [32, 11] },
   }),
+  "FeenoksMop": createFurnitureClass({
+    spriteName: "feenoks-mop",
+    boundingBox: { coord: [0, 0], size: [13, 5] },
+  }),
 };
 
 const variantClassMap: Record<string, { new(coord: Coord, variant?: number): GameObject }> = {
