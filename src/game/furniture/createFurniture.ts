@@ -1,5 +1,7 @@
 import { Coord, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
+import { readIntField, readMappedField } from "../locations/entityFields";
+import { EntityField } from "../locations/Level";
 import { SpriteName } from "../sprites/SpriteLibrary";
 import { BeerBox } from "./BeerBox";
 import { BeerCabinet } from "./BeerCabinet";
@@ -70,29 +72,22 @@ const paintingMap: Record<string, SpriteName> = {
   "Color_shield": "color-shield",
 };
 
-export interface EntityOptions {
-  variant?: number;
-  fenceType?: FenceType;
-  sittingDir?: "RTL" | "LTR";
-  paintingName?: string;
-}
-
-export function createFurniture(type: string, { coord, size }: Rect, opts: EntityOptions): GameObject {
-  if (type === "Painting" && opts.paintingName) {
-    return new Painting(coord, paintingMap[opts.paintingName]);
+export function createFurniture(type: string, { coord, size }: Rect, fields: EntityField[]): GameObject {
+  if (type === "Painting") {
+    return new Painting(coord, readMappedField("Painting", paintingMap, fields));
   }
   if (type === "Table") {
-    return new Table(coord, opts.sittingDir);
+    return new Table(coord, readMappedField("sittingDir", { "RTL": "RTL", "LTR": "LTR" }, fields));
   }
   if (type === "Fence") {
-    return new Fence(coord, opts.fenceType);
+    return new Fence(coord, readMappedField("FenceType", { "Cfe": FenceType.cfe, "Sakala": FenceType.sakala }, fields));
   }
   if (type === "Wall") {
     return new Wall({ coord, size });
   }
 
   if (variantClassMap[type]) {
-    return new variantClassMap[type](coord, opts.variant);
+    return new variantClassMap[type](coord, readIntField("variant", fields));
   }
   if (classMap[type]) {
     return new classMap[type](coord);
