@@ -9461,6 +9461,17 @@
 							"defUid": 83,
 							"px": [176,84],
 							"fieldInstances": []
+						},
+						{
+							"__identifier": "BeerBox",
+							"__grid": [14,4],
+							"__pivot": [0,0],
+							"__tile": { "tilesetUid": 17, "srcRect": [128,32,32,32] },
+							"width": 16,
+							"height": 16,
+							"defUid": 20,
+							"px": [234,69],
+							"fieldInstances": []
 						}
 					]
 				},
