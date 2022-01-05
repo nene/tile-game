@@ -155,7 +155,7 @@ const imageFiles = {
   'feenoks-shelf': spriteDef({ src: feenoksShelf, cfg: { size: [34, 54], offset: [0, -48], colsRows: [3, 1] } }),
   'feenoks-shelf-sideways': spriteDef({ src: feenoksShelfSideways, cfg: { size: [8, 78], offset: [0, -46] } }),
   'feenoks-fridge': spriteDef({ src: feenoksFridge, cfg: { size: [34, 48], offset: [0, -37] } }),
-  'feenoks-counter': spriteDef({ src: feenoksCounter, cfg: { size: [32, 32], offset: [0, -20], colsRows: [3, 1] } }),
+  'feenoks-counter': spriteDef({ src: feenoksCounter, cfg: { size: [32, 32], offset: [0, -20], colsRows: [2, 1] } }),
   'feenoks-payment-counter': spriteDef({ src: feenoksPaymentCounter, cfg: { size: [32, 32], offset: [0, -20], colsRows: [4, 1] } }),
   'feenoks-counter-sideways': spriteDef({ src: feenoksCounterSideways, cfg: { size: [16, 40], offset: [0, -11], colsRows: [3, 1] } }),
   'feenoks-lady': spriteDef({ src: feenoksLady, cfg: { size: PLAYER_SIZE, offset: PLAYER_OFFSET } }),

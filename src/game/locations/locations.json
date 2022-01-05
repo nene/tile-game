@@ -1177,7 +1177,7 @@
 			"renderMode": "Tile",
 			"showName": true,
 			"tilesetId": 17,
-			"tileId": 15,
+			"tileId": 17,
 			"tileRenderMode": "FitInside",
 			"maxCount": 0,
 			"limitScope": "PerLevel",
@@ -1464,7 +1464,7 @@
 			"savedSelections": [],
 			"cachedPixelData": {
 				"opaqueTiles": "000000000000000000000000",
-				"averageColors": "c33483336433433256667887c6546666b555599aa36444328754a99a1764b65567540000000000000000000000000000"
+				"averageColors": "c33483336433433256667887c6546666b555599aa36444328754a99a1764b6556754b876000000000000000000000000"
 			}
 		},
 		{
@@ -9312,7 +9312,7 @@
 							"__identifier": "FeenoksCounter",
 							"__grid": [7,5],
 							"__pivot": [0,0],
-							"__tile": { "tilesetUid": 17, "srcRect": [96,64,32,32] },
+							"__tile": { "tilesetUid": 17, "srcRect": [160,64,32,32] },
 							"width": 32,
 							"height": 12,
 							"defUid": 70,
@@ -9329,7 +9329,7 @@
 							"__identifier": "FeenoksCounter",
 							"__grid": [9,5],
 							"__pivot": [0,0],
-							"__tile": { "tilesetUid": 17, "srcRect": [96,64,32,32] },
+							"__tile": { "tilesetUid": 17, "srcRect": [160,64,32,32] },
 							"width": 32,
 							"height": 12,
 							"defUid": 70,
@@ -9397,7 +9397,7 @@
 							"__identifier": "FeenoksCounter",
 							"__grid": [1,5],
 							"__pivot": [0,0],
-							"__tile": { "tilesetUid": 17, "srcRect": [96,64,32,32] },
+							"__tile": { "tilesetUid": 17, "srcRect": [160,64,32,32] },
 							"width": 32,
 							"height": 12,
 							"defUid": 70,
@@ -9431,7 +9431,7 @@
 							"__identifier": "FeenoksCounter",
 							"__grid": [3,5],
 							"__pivot": [0,0],
-							"__tile": { "tilesetUid": 17, "srcRect": [96,64,32,32] },
+							"__tile": { "tilesetUid": 17, "srcRect": [160,64,32,32] },
 							"width": 32,
 							"height": 12,
 							"defUid": 70,
