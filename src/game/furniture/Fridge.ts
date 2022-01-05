@@ -6,17 +6,21 @@ import { getDrink } from "../items/Drink";
 import { BeerBottle } from "../items/BeerBottle";
 import { PixelScreen } from "../PixelScreen";
 import { SoundLibrary } from "../sounds/SoundLibrary";
-import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { UiController } from "../UiController";
 import { SimpleBottleOpener } from "../items/SimpleBottleOpener";
+import { SpriteAnimation } from "../sprites/SpriteAnimation";
+import { readAsepriteAnimation } from "../sprites/readAsepriteAnimation";
+import fridgeJson from "../sprites/data/fridge.json";
 
 export class Fridge implements GameObject {
-  private sprite: Sprite;
+  private animation: SpriteAnimation;
   private shop: Shop;
 
   constructor(private coord: Coord) {
-    this.sprite = SpriteLibrary.getSprite("fridge");
+    this.animation = new SpriteAnimation(SpriteLibrary.get("fridge"), {
+      frames: readAsepriteAnimation("humming", fridgeJson),
+    });
     this.shop = new Shop([
       new BeerBottle(getDrink("limonaad")),
       new BeerBottle(getDrink("kriek")),
@@ -32,10 +36,14 @@ export class Fridge implements GameObject {
     ]);
   }
 
-  tick() { }
+  tick() {
+    this.animation.tick();
+  }
 
   paint(screen: PixelScreen) {
-    screen.drawSprite(this.sprite, this.coord);
+    this.animation.getSprites().forEach((sprite) => {
+      screen.drawSprite(sprite, this.coord);
+    });
   }
 
   zIndex() {
