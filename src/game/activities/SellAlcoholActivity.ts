@@ -7,8 +7,14 @@ import { getDrink } from "../items/Drink";
 import { Shop } from "../inventory/Shop";
 import { SimpleBottleOpener } from "../items/SimpleBottleOpener";
 import { ShopView } from "../inventory/ShopView";
+import { SpriteAnimation } from "../sprites/SpriteAnimation";
+import { SpriteLibrary } from "../sprites/SpriteLibrary";
+import { readAsepriteAnimation } from "../sprites/readAsepriteAnimation";
+import feenoksLadyJson from "../sprites/data/feenoks-lady.json";
 
 export class SellAlcoholActivity implements Activity {
+  private animation: SpriteAnimation;
+
   private shop = new Shop([
     new BeerBottle(getDrink("limonaad")),
     new BeerBottle(getDrink("kriek")),
@@ -24,10 +30,16 @@ export class SellAlcoholActivity implements Activity {
   ]);
 
   constructor(private character: FeenoksLadyCharacter) {
+    this.animation = new SpriteAnimation(SpriteLibrary.get(character.getSpriteName()), {
+      frames: readAsepriteAnimation("idle", feenoksLadyJson),
+    });
   }
 
   tick(): ActivityUpdates {
-    return {};
+    this.animation.tick();
+    return {
+      sprites: this.animation.getSprites(),
+    };
   }
 
   isFinished() {
