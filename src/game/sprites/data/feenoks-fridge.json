@@ -1,0 +1,50 @@
+{ "frames": [
+   {
+    "filename": "#humming 0",
+    "frame": { "x": 0, "y": 0, "w": 34, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 34, "h": 48 },
+    "sourceSize": { "w": 34, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "#humming 1",
+    "frame": { "x": 34, "y": 0, "w": 34, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 34, "h": 48 },
+    "sourceSize": { "w": 34, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "#humming 2",
+    "frame": { "x": 68, "y": 0, "w": 34, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 34, "h": 48 },
+    "sourceSize": { "w": 34, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "#humming 3",
+    "frame": { "x": 102, "y": 0, "w": 34, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 34, "h": 48 },
+    "sourceSize": { "w": 34, "h": 48 },
+    "duration": 200
+   }
+ ],
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.2.30",
+  "image": "feenoks-fridge.png",
+  "format": "RGBA8888",
+  "size": { "w": 136, "h": 48 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "humming", "from": 0, "to": 3, "direction": "forward" }
+  ]
+ }
+}
