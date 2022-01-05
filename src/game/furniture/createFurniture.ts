@@ -12,12 +12,12 @@ import { createAnimatedFurnitureClass } from "./createAnimatedFurnitureClass";
 import { createFurnitureClass } from "./createFurnitureClass";
 import { Door } from "./Door";
 import { Fence, FenceType } from "./Fence";
-import { Fireplace } from "./Fireplace";
 import { Fridge } from "./Fridge";
 import { KitchenSink } from "./KitchenSink";
 import { Painting } from "./Painting";
 import { Table } from "./Table";
 import { Wall } from "./Wall";
+import fireplaceJson from "../sprites/data/fireplace.json";
 import feenoksPaymentCounterJson from "../sprites/data/feenoks-payment-counter.json";
 
 const classMap: Record<string, { new(coord: Coord): GameObject }> = {
@@ -25,7 +25,13 @@ const classMap: Record<string, { new(coord: Coord): GameObject }> = {
   "BeerCabinet": BeerCabinet,
   "BookCabinet": BookCabinet,
   "Countertop": Countertop,
-  "Fireplace": Fireplace,
+  "Fireplace": createAnimatedFurnitureClass({
+    spriteName: "fireplace",
+    asepriteFile: fireplaceJson,
+    animationName: "fire",
+    boundingBox: { coord: [1, 0], size: [62, 12] },
+    hitBox: { coord: [0, -22], size: [48, 32] },
+  }),
   "Fridge": Fridge,
   "KitchenSink": KitchenSink,
   "BoardTable": createFurnitureClass({
