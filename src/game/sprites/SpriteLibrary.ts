@@ -61,6 +61,7 @@ import feenoksShelf from "./data/feenoks-shelf.png";
 import feenoksShelfSideways from "./data/feenoks-shelf-sideways.png";
 import feenoksFridge from "./data/feenoks-fridge.png";
 import feenoksCounter from "./data/feenoks-counter.png";
+import feenoksPaymentCounter from "./data/feenoks-payment-counter.png";
 import feenoksCounterSideways from "./data/feenoks-counter-sideways.png";
 import feenoksLady from "./data/feenoks-lady.png";
 import feenoksMop from "./data/feenoks-mop.png";
@@ -154,8 +155,9 @@ const imageFiles = {
   'feenoks-shelf': spriteDef({ src: feenoksShelf, cfg: { size: [34, 54], offset: [0, -48], colsRows: [3, 1] } }),
   'feenoks-shelf-sideways': spriteDef({ src: feenoksShelfSideways, cfg: { size: [8, 78], offset: [0, -46] } }),
   'feenoks-fridge': spriteDef({ src: feenoksFridge, cfg: { size: [34, 48], offset: [0, -37] } }),
-  'feenoks-counter': spriteDef({ src: feenoksCounter, cfg: { size: [32, 32], offset: [0, -20] } }),
-  'feenoks-counter-sideways': spriteDef({ src: feenoksCounterSideways, cfg: { size: [16, 40], offset: [0, -11] } }),
+  'feenoks-counter': spriteDef({ src: feenoksCounter, cfg: { size: [32, 32], offset: [0, -20], colsRows: [3, 1] } }),
+  'feenoks-payment-counter': spriteDef({ src: feenoksPaymentCounter, cfg: { size: [32, 32], offset: [0, -20], colsRows: [4, 1] } }),
+  'feenoks-counter-sideways': spriteDef({ src: feenoksCounterSideways, cfg: { size: [16, 40], offset: [0, -11], colsRows: [3, 1] } }),
   'feenoks-lady': spriteDef({ src: feenoksLady, cfg: { size: PLAYER_SIZE, offset: PLAYER_OFFSET } }),
   'feenoks-mop': spriteDef({ src: feenoksMop, cfg: { size: [13, 32], offset: [0, -27] } }),
 };

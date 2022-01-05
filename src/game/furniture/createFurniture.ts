@@ -10,6 +10,7 @@ import { BookCabinet } from "./BookCabinet";
 import { Countertop } from "./Countertop";
 import { createFurnitureClass } from "./createFurnitureClass";
 import { Door } from "./Door";
+import { FeenoksPaymentCounter } from "./FeenoksPaymentCounter";
 import { Fence, FenceType } from "./Fence";
 import { Fireplace } from "./Fireplace";
 import { Fridge } from "./Fridge";
@@ -26,6 +27,7 @@ const classMap: Record<string, { new(coord: Coord): GameObject }> = {
   "Fireplace": Fireplace,
   "Fridge": Fridge,
   "KitchenSink": KitchenSink,
+  "FeenoksPaymentCounter": FeenoksPaymentCounter,
   "BoardTable": createFurnitureClass({
     spriteName: "board-table",
     boundingBox: { coord: [-5, 4], size: [42, 13] },

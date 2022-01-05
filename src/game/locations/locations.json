@@ -9,7 +9,7 @@
 		"url": "https://ldtk.io"
 	},
 	"jsonVersion": "0.9.3",
-	"nextUid": 83,
+	"nextUid": 85,
 	"worldLayout": "Free",
 	"worldGridWidth": 256,
 	"worldGridHeight": 256,
@@ -1206,6 +1206,31 @@
 					"textLanguageMode": null
 				}
 			]
+		},
+		{
+			"identifier": "FeenoksPaymentCounter",
+			"uid": 83,
+			"tags": [],
+			"width": 32,
+			"height": 12,
+			"resizableX": false,
+			"resizableY": false,
+			"keepAspectRatio": false,
+			"fillOpacity": 1,
+			"lineOpacity": 1,
+			"hollow": false,
+			"color": "#94D9B3",
+			"renderMode": "Tile",
+			"showName": true,
+			"tilesetId": 17,
+			"tileId": 15,
+			"tileRenderMode": "FitInside",
+			"maxCount": 0,
+			"limitScope": "PerLevel",
+			"limitBehavior": "MoveLastOne",
+			"pivotX": 0,
+			"pivotY": 0,
+			"fieldDefs": []
 		},
 		{
 			"identifier": "FeenoksCounterSideways",
@@ -9318,23 +9343,6 @@
 							}]
 						},
 						{
-							"__identifier": "FeenoksCounter",
-							"__grid": [11,5],
-							"__pivot": [0,0],
-							"__tile": { "tilesetUid": 17, "srcRect": [96,64,32,32] },
-							"width": 32,
-							"height": 12,
-							"defUid": 70,
-							"px": [176,84],
-							"fieldInstances": [{
-								"__identifier": "variant",
-								"__value": 2,
-								"__type": "Int",
-								"defUid": 71,
-								"realEditorValues": [{ "id": "V_Int", "params": [2] }]
-							}]
-						},
-						{
 							"__identifier": "FeenoksCounterSideways",
 							"__grid": [13,5],
 							"__pivot": [0,0],
@@ -9445,6 +9453,17 @@
 							"height": 5,
 							"defUid": 82,
 							"px": [243,160],
+							"fieldInstances": []
+						},
+						{
+							"__identifier": "FeenoksPaymentCounter",
+							"__grid": [11,5],
+							"__pivot": [0,0],
+							"__tile": { "tilesetUid": 17, "srcRect": [96,64,32,32] },
+							"width": 32,
+							"height": 12,
+							"defUid": 83,
+							"px": [176,84],
 							"fieldInstances": []
 						}
 					]
