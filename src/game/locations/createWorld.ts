@@ -7,7 +7,7 @@ import { FeenoksLocationFactory } from "./feenoks/FeenoksLocationFactory";
 
 export function createWorld(day: number): GameWorld {
   return new GameWorld({
-    startLocation: "feenoks",
+    startLocation: "sakala-hall",
     locations: [
       new FeenoksLocationFactory(),
       new OutdoorsLocationFactory(),
