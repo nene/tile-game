@@ -10,6 +10,7 @@ import { last } from "lodash";
 import { CharacterFigure, isCharacterFigure } from "../npc/CharacterFigure";
 import { LocationBackground } from "./LocationBackground";
 import { Character } from "../npc/Character";
+import { isPlayerSpawnPoint } from "../player/PlayerSpawnPoint";
 
 export interface TeleportCommand {
   entity: GameObject & { setCoord: (coord: Coord) => void };
@@ -54,6 +55,14 @@ export class Location {
 
   allObjects(): GameObject[] {
     return this.objects;
+  }
+
+  getPlayerSpawnCoord(): Coord {
+    const spawn = this.objects.find(isPlayerSpawnPoint)
+    if (!spawn) {
+      throw new Error(`PlayerSpawnPoint not found in ${this.name}`);
+    }
+    return spawn.getCoord();
   }
 
   tick(world: GameWorld): TeleportCommand[] {

@@ -14,7 +14,7 @@ export class GameWorld {
   constructor(locations: LocationFactory[]) {
     this.locations = new Map(locations.map((loc) => [loc.getName(), new Location(loc)]));
     this.activeLocation = this.getLocation(locations[0].getName());
-    this.player = new Player([160, 110]);
+    this.player = new Player(this.activeLocation.getPlayerSpawnCoord());
     this.activeLocation.add(this.player);
   }
 

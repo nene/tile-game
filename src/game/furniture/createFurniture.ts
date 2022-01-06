@@ -20,12 +20,14 @@ import { Wall } from "./Wall";
 import fireplaceJson from "../sprites/data/fireplace.json";
 import feenoksPaymentCounterJson from "../sprites/data/feenoks-payment-counter.json";
 import feenoksFridgeJson from "../sprites/data/feenoks-fridge.json";
+import { PlayerSpawnPoint } from "../player/PlayerSpawnPoint";
 
 const classMap: Record<string, { new(coord: Coord): GameObject }> = {
   "BeerBox": BeerBox,
   "BeerCabinet": BeerCabinet,
   "BookCabinet": BookCabinet,
   "Countertop": Countertop,
+  "PlayerSpawnPoint": PlayerSpawnPoint,
   "Fireplace": createAnimatedFurnitureClass({
     spriteName: "fireplace",
     asepriteFile: fireplaceJson,

@@ -9,7 +9,7 @@
 		"url": "https://ldtk.io"
 	},
 	"jsonVersion": "0.9.3",
-	"nextUid": 85,
+	"nextUid": 86,
 	"worldLayout": "Free",
 	"worldGridWidth": 256,
 	"worldGridHeight": 256,
@@ -1408,6 +1408,31 @@
 			"pivotX": 0,
 			"pivotY": 0,
 			"fieldDefs": []
+		},
+		{
+			"identifier": "PlayerSpawnPoint",
+			"uid": 85,
+			"tags": [],
+			"width": 16,
+			"height": 5,
+			"resizableX": false,
+			"resizableY": false,
+			"keepAspectRatio": false,
+			"fillOpacity": 1,
+			"lineOpacity": 1,
+			"hollow": false,
+			"color": "#2F2DF6",
+			"renderMode": "Rectangle",
+			"showName": true,
+			"tilesetId": null,
+			"tileId": null,
+			"tileRenderMode": "FitInside",
+			"maxCount": 1,
+			"limitScope": "PerLevel",
+			"limitBehavior": "MoveLastOne",
+			"pivotX": 0,
+			"pivotY": 0,
+			"fieldDefs": []
 		}
 	], "tilesets": [
 		{
@@ -2060,6 +2085,17 @@
 							"height": 16,
 							"defUid": 20,
 							"px": [320,112],
+							"fieldInstances": []
+						},
+						{
+							"__identifier": "PlayerSpawnPoint",
+							"__grid": [13,9],
+							"__pivot": [0,0],
+							"__tile": null,
+							"width": 16,
+							"height": 5,
+							"defUid": 85,
+							"px": [208,150],
 							"fieldInstances": []
 						}
 					]
@@ -3098,6 +3134,17 @@
 							"height": 8,
 							"defUid": 22,
 							"px": [384,112],
+							"fieldInstances": []
+						},
+						{
+							"__identifier": "PlayerSpawnPoint",
+							"__grid": [16,7],
+							"__pivot": [0,0],
+							"__tile": null,
+							"width": 16,
+							"height": 5,
+							"defUid": 85,
+							"px": [257,118],
 							"fieldInstances": []
 						}
 					]
@@ -5156,6 +5203,17 @@
 								},
 								{ "__identifier": "teleportOffset", "__value": null, "__type": "Point", "defUid": 81, "realEditorValues": [] }
 							]
+						},
+						{
+							"__identifier": "PlayerSpawnPoint",
+							"__grid": [27,17],
+							"__pivot": [0,0],
+							"__tile": null,
+							"width": 16,
+							"height": 5,
+							"defUid": 85,
+							"px": [447,272],
+							"fieldInstances": []
 						}
 					]
 				},
@@ -8523,6 +8581,17 @@
 									"params": ["Sakala_coat_of_arms"]
 								}]
 							}]
+						},
+						{
+							"__identifier": "PlayerSpawnPoint",
+							"__grid": [8,5],
+							"__pivot": [0,0],
+							"__tile": null,
+							"width": 16,
+							"height": 5,
+							"defUid": 85,
+							"px": [131,80],
+							"fieldInstances": []
 						}
 					]
 				},
@@ -8973,7 +9042,7 @@
 					"layerDefUid": 3,
 					"pxOffsetX": 0,
 					"pxOffsetY": 0,
-					"visible": true,
+					"visible": false,
 					"optionalRules": [],
 					"intGrid": [
 						{ "coordId": 0, "v": 0 },
@@ -9471,6 +9540,17 @@
 							"height": 16,
 							"defUid": 20,
 							"px": [234,69],
+							"fieldInstances": []
+						},
+						{
+							"__identifier": "PlayerSpawnPoint",
+							"__grid": [7,6],
+							"__pivot": [0,0],
+							"__tile": null,
+							"width": 16,
+							"height": 5,
+							"defUid": 85,
+							"px": [120,105],
 							"fieldInstances": []
 						}
 					]
