@@ -6,14 +6,19 @@ import { Player } from "./player/Player";
 import { Coord, Rect, rectDistance, rectTranslate } from "./Coord";
 import { UiController } from "./UiController";
 
+interface GameWorldConfig {
+  locations: LocationFactory[];
+  startLocation: LocationName;
+}
+
 export class GameWorld {
   private locations: Map<LocationName, Location>;
   private activeLocation: Location;
   private player: Player;
 
-  constructor(locations: LocationFactory[]) {
+  constructor({ locations, startLocation }: GameWorldConfig) {
     this.locations = new Map(locations.map((loc) => [loc.getName(), new Location(loc)]));
-    this.activeLocation = this.getLocation(locations[0].getName());
+    this.activeLocation = this.getLocation(startLocation);
     this.player = new Player(this.activeLocation.getPlayerSpawnCoord());
     this.activeLocation.add(this.player);
   }

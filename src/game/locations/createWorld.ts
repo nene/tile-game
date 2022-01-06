@@ -6,11 +6,14 @@ import { SakalaHallLocationFactory } from "./sakala/SakalaHallLocationFactory";
 import { FeenoksLocationFactory } from "./feenoks/FeenoksLocationFactory";
 
 export function createWorld(day: number): GameWorld {
-  return new GameWorld([
-    new FeenoksLocationFactory(),
-    new OutdoorsLocationFactory(),
-    new CfeHallLocationFactory(),
-    new CfeCellarLocationFactory(),
-    new SakalaHallLocationFactory(),
-  ]);
+  return new GameWorld({
+    startLocation: "feenoks",
+    locations: [
+      new FeenoksLocationFactory(),
+      new OutdoorsLocationFactory(),
+      new CfeHallLocationFactory(),
+      new CfeCellarLocationFactory(),
+      new SakalaHallLocationFactory(),
+    ],
+  });
 }
