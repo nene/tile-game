@@ -20,7 +20,7 @@ export class FeenoksLocationFactory implements LocationFactory {
       ...this.levelFactory.getFurniture(),
 
       new Door({
-        coord: tileToScreenCoord([1, 12]),
+        coord: tileToScreenCoord([1, 11]),
         area: { coord: [0, 0], size: [32, 32] },
         from: "feenoks",
         to: "outdoors",
