@@ -72,6 +72,14 @@ const classMap: Record<string, { new(coord: Coord): GameObject }> = {
     animationName: "idle",
     boundingBox: { coord: [0, 0], size: [32, 12] },
   }),
+  "SakalaChair": createFurnitureClass({
+    spriteName: "sakala-chair",
+    boundingBox: { coord: [0, 0], size: [10, 6] },
+  }),
+  "SakalaBoardTable": createFurnitureClass({
+    spriteName: "sakala-board-table",
+    boundingBox: { coord: [0, 0], size: [66, 13] },
+  }),
 };
 
 const variantClassMap: Record<string, { new(coord: Coord, variant?: number): GameObject }> = {

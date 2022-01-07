@@ -37,6 +37,8 @@ import countertop from "./data/countertop.png";
 import sofa from "./data/sofa.png";
 import lamp from "./data/lamp.png";
 import sakalaLamp from "./data/sakala-lamp.png";
+import sakalaChair from "./data/sakala-chair.png";
+import sakalaBoardTable from "./data/sakala-board-table.png";
 import slot from "./data/slot.png";
 import scrollBar from "./data/scroll-bar.png";
 import closeButton from "./data/close-button.png";
@@ -150,6 +152,10 @@ const imageFiles = {
 
   // Big building
   'fence': spriteDef({ src: fence, cfg: { size: [80, 38], offset: [0, -31], colsRows: [2, 1] } }),
+
+  // Sakala
+  'sakala-chair': spriteDef({ src: sakalaChair, cfg: { size: [10, 21], offset: [0, -15] } }),
+  'sakala-board-table': spriteDef({ src: sakalaBoardTable, cfg: { size: [66, 31], offset: [0, -18] } }),
 
   // Feenoks
   'feenoks-shelf': spriteDef({ src: feenoksShelf, cfg: { size: [34, 54], offset: [0, -48], colsRows: [3, 1] } }),
