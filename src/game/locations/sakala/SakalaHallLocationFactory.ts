@@ -16,10 +16,10 @@ export class SakalaHallLocationFactory implements LocationFactory {
     const lamps = [
       new Lamp(tileToScreenCoord([1.5, 4]), "sakala-lamp"),
       new Lamp(tileToScreenCoord([3.5, 4]), "sakala-lamp"),
-      new Lamp(tileToScreenCoord([7, 4]), "sakala-lamp"),
-      new Lamp(tileToScreenCoord([10, 4]), "sakala-lamp"),
-      new Lamp(tileToScreenCoord([16, 4]), "sakala-lamp"),
-      new Lamp(tileToScreenCoord([19, 4]), "sakala-lamp"),
+      new Lamp(tileToScreenCoord([8, 4]), "sakala-candle-lamp"),
+      new Lamp(tileToScreenCoord([10, 4]), "sakala-candle-lamp"),
+      new Lamp(tileToScreenCoord([16, 4]), "sakala-candle-lamp"),
+      new Lamp(tileToScreenCoord([18, 4]), "sakala-candle-lamp"),
     ];
 
     this.objects = [
