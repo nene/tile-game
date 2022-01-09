@@ -1,8 +1,10 @@
 import { Coord, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
 import { PixelScreen } from "../PixelScreen";
-import { SpriteAnimation } from "../sprites/SpriteAnimation";
+import { readAsepriteAnimation } from "../sprites/readAsepriteAnimation";
+import { FrameWithTicks, SpriteAnimation } from "../sprites/SpriteAnimation";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
+import sakalaCandleLampJson from "../sprites/data/sakala-candle-lamp.json";
 
 type LampType = "lamp" | "sakala-lamp" | "sakala-candle-lamp";
 
@@ -10,6 +12,12 @@ interface LampConfig {
   type: LampType;
   turnedOn?: boolean;
 }
+
+const onAnimationFrames: Record<LampType, Coord[] | FrameWithTicks[]> = {
+  "lamp": [[1, 0]],
+  "sakala-lamp": [[1, 0]],
+  "sakala-candle-lamp": readAsepriteAnimation("on", sakalaCandleLampJson),
+};
 
 export class Lamp implements GameObject {
   private offAnimation: SpriteAnimation;
@@ -23,7 +31,7 @@ export class Lamp implements GameObject {
       frames: [[0, 0]],
     });
     this.onAnimation = new SpriteAnimation(spriteSheet, {
-      frames: [[1, 0]],
+      frames: onAnimationFrames[type],
     });
   }
 
