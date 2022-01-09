@@ -1,16 +1,35 @@
 import { Coord, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
 import { PixelScreen } from "../PixelScreen";
+import { SpriteAnimation } from "../sprites/SpriteAnimation";
 import { SpriteLibrary, SpriteName } from "../sprites/SpriteLibrary";
 
 export class Lamp implements GameObject {
+  private offAnimation: SpriteAnimation;
+  private onAnimation: SpriteAnimation;
+
   constructor(private coord: Coord, private spriteName: SpriteName, private turnedOn: boolean = false) {
+    const spriteSheet = SpriteLibrary.get(this.spriteName);
+    this.offAnimation = new SpriteAnimation(spriteSheet, {
+      frames: [[0, 0]],
+    });
+    this.onAnimation = new SpriteAnimation(spriteSheet, {
+      frames: [[1, 0]],
+    });
   }
 
-  tick() { }
+  tick() {
+    this.getAnimation().tick();
+  }
 
   paint(screen: PixelScreen) {
-    screen.drawSprite(SpriteLibrary.getSprite(this.spriteName, [this.turnedOn ? 1 : 0, 0]), this.coord);
+    this.getAnimation().getSprites().forEach((sprite) => {
+      screen.drawSprite(sprite, this.coord);
+    });
+  }
+
+  private getAnimation() {
+    return this.turnedOn ? this.onAnimation : this.offAnimation;
   }
 
   getCoord() {
