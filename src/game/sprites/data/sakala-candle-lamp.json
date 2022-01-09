@@ -1,0 +1,60 @@
+{ "frames": [
+   {
+    "filename": "#off 0",
+    "frame": { "x": 0, "y": 0, "w": 25, "h": 28 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 25, "h": 28 },
+    "sourceSize": { "w": 25, "h": 28 },
+    "duration": 100
+   },
+   {
+    "filename": "#on 0",
+    "frame": { "x": 25, "y": 0, "w": 25, "h": 28 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 25, "h": 28 },
+    "sourceSize": { "w": 25, "h": 28 },
+    "duration": 1600
+   },
+   {
+    "filename": "#on 1",
+    "frame": { "x": 50, "y": 0, "w": 25, "h": 28 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 25, "h": 28 },
+    "sourceSize": { "w": 25, "h": 28 },
+    "duration": 100
+   },
+   {
+    "filename": "#on 2",
+    "frame": { "x": 75, "y": 0, "w": 25, "h": 28 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 25, "h": 28 },
+    "sourceSize": { "w": 25, "h": 28 },
+    "duration": 400
+   },
+   {
+    "filename": "#on 3",
+    "frame": { "x": 100, "y": 0, "w": 25, "h": 28 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 25, "h": 28 },
+    "sourceSize": { "w": 25, "h": 28 },
+    "duration": 100
+   }
+ ],
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.2.30",
+  "image": "sakala-candle-lamp.png",
+  "format": "RGBA8888",
+  "size": { "w": 125, "h": 28 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "off", "from": 0, "to": 0, "direction": "forward" },
+   { "name": "on", "from": 1, "to": 4, "direction": "forward" }
+  ]
+ }
+}
