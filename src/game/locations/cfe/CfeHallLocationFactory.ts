@@ -16,11 +16,11 @@ export class CfeHallLocationFactory implements LocationFactory {
 
   constructor() {
     const lamps = [
-      new Lamp(tileToScreenCoord([3, 6]), "lamp"),
-      new Lamp(tileToScreenCoord([8, 6]), "lamp"),
-      new Lamp(tileToScreenCoord([11, 6]), "lamp"),
-      new Lamp(tileToScreenCoord([16, 7]), "lamp"),
-      new Lamp(tileToScreenCoord([19, 7]), "lamp"),
+      new Lamp(tileToScreenCoord([3, 6]), { type: "lamp" }),
+      new Lamp(tileToScreenCoord([8, 6]), { type: "lamp" }),
+      new Lamp(tileToScreenCoord([11, 6]), { type: "lamp" }),
+      new Lamp(tileToScreenCoord([16, 7]), { type: "lamp" }),
+      new Lamp(tileToScreenCoord([19, 7]), { type: "lamp" }),
     ];
 
     this.objects = [

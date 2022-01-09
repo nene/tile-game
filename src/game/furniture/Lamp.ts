@@ -2,14 +2,23 @@ import { Coord, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
 import { PixelScreen } from "../PixelScreen";
 import { SpriteAnimation } from "../sprites/SpriteAnimation";
-import { SpriteLibrary, SpriteName } from "../sprites/SpriteLibrary";
+import { SpriteLibrary } from "../sprites/SpriteLibrary";
+
+type LampType = "lamp" | "sakala-lamp" | "sakala-candle-lamp";
+
+interface LampConfig {
+  type: LampType;
+  turnedOn?: boolean;
+}
 
 export class Lamp implements GameObject {
   private offAnimation: SpriteAnimation;
   private onAnimation: SpriteAnimation;
+  private turnedOn: boolean;
 
-  constructor(private coord: Coord, private spriteName: SpriteName, private turnedOn: boolean = false) {
-    const spriteSheet = SpriteLibrary.get(this.spriteName);
+  constructor(private coord: Coord, { type, turnedOn }: LampConfig) {
+    this.turnedOn = turnedOn ?? false;
+    const spriteSheet = SpriteLibrary.get(type);
     this.offAnimation = new SpriteAnimation(spriteSheet, {
       frames: [[0, 0]],
     });
