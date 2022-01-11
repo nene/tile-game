@@ -68,6 +68,7 @@ import feenoksPaymentCounter from "./data/feenoks-payment-counter.png";
 import feenoksCounterSideways from "./data/feenoks-counter-sideways.png";
 import feenoksLady from "./data/feenoks-lady.png";
 import feenoksMop from "./data/feenoks-mop.png";
+import amicitiaFlag from "./data/amicitia-flag.png";
 
 import { Coord } from "../Coord";
 import { SpriteSheet, SpriteSheetConfig } from "./SpriteSheet";
@@ -168,6 +169,9 @@ const imageFiles = {
   'feenoks-counter-sideways': spriteDef({ src: feenoksCounterSideways, cfg: { size: [16, 40], offset: [0, -11], colsRows: [3, 1] } }),
   'feenoks-lady': spriteDef({ src: feenoksLady, cfg: { size: PLAYER_SIZE, offset: PLAYER_OFFSET } }),
   'feenoks-mop': spriteDef({ src: feenoksMop, cfg: { size: [13, 32], offset: [0, -27] } }),
+
+  // Amicitia
+  'amicitia-flag': spriteDef({ src: amicitiaFlag, cfg: { size: [22, 32], offset: [0, -49] } }),
 };
 
 export type SpriteName = keyof typeof imageFiles;

@@ -9,7 +9,7 @@
 		"url": "https://ldtk.io"
 	},
 	"jsonVersion": "0.9.3",
-	"nextUid": 88,
+	"nextUid": 89,
 	"worldLayout": "Free",
 	"worldGridWidth": 256,
 	"worldGridHeight": 256,
@@ -1483,6 +1483,31 @@
 			"pivotX": 0,
 			"pivotY": 0,
 			"fieldDefs": []
+		},
+		{
+			"identifier": "AmicitiaFlag",
+			"uid": 88,
+			"tags": [],
+			"width": 16,
+			"height": 16,
+			"resizableX": false,
+			"resizableY": false,
+			"keepAspectRatio": false,
+			"fillOpacity": 1,
+			"lineOpacity": 1,
+			"hollow": false,
+			"color": "#94D9B3",
+			"renderMode": "Tile",
+			"showName": true,
+			"tilesetId": 17,
+			"tileId": 20,
+			"tileRenderMode": "FitInside",
+			"maxCount": 0,
+			"limitScope": "PerLevel",
+			"limitBehavior": "MoveLastOne",
+			"pivotX": 0,
+			"pivotY": 1,
+			"fieldDefs": []
 		}
 	], "tilesets": [
 		{
@@ -1539,7 +1564,7 @@
 			"savedSelections": [],
 			"cachedPixelData": {
 				"opaqueTiles": "000000000000000000000000",
-				"averageColors": "c33483336433433256667887c6546666b555599aa36444328754a99a1764b6556754b876000000000000000000000000"
+				"averageColors": "c33483336433433256667887c6546666b555599aa36444328754a99a1764b6556754b876724634223877000000000000"
 			}
 		},
 		{
@@ -5854,6 +5879,17 @@
 							"height": 5,
 							"defUid": 42,
 							"px": [356,258],
+							"fieldInstances": []
+						},
+						{
+							"__identifier": "AmicitiaFlag",
+							"__grid": [31,16],
+							"__pivot": [0,1],
+							"__tile": { "tilesetUid": 17, "srcRect": [64,96,32,32] },
+							"width": 16,
+							"height": 16,
+							"defUid": 88,
+							"px": [502,263],
 							"fieldInstances": []
 						}
 					]

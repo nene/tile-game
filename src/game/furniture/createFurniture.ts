@@ -20,6 +20,7 @@ import { Wall } from "./Wall";
 import fireplaceJson from "../sprites/data/fireplace.json";
 import feenoksPaymentCounterJson from "../sprites/data/feenoks-payment-counter.json";
 import feenoksFridgeJson from "../sprites/data/feenoks-fridge.json";
+import amicitiaFlagJson from "../sprites/data/amicitia-flag.json";
 import { PlayerSpawnPoint } from "../player/PlayerSpawnPoint";
 
 const classMap: Record<string, { new(coord: Coord): GameObject }> = {
@@ -79,6 +80,12 @@ const classMap: Record<string, { new(coord: Coord): GameObject }> = {
   "SakalaBoardTable": createFurnitureClass({
     spriteName: "sakala-board-table",
     boundingBox: { coord: [0, 0], size: [66, 13] },
+  }),
+  "AmicitiaFlag": createAnimatedFurnitureClass({
+    spriteName: "amicitia-flag",
+    asepriteFile: amicitiaFlagJson,
+    animationName: "wave",
+    boundingBox: { coord: [0, 0], size: [0, 0] },
   }),
 };
 
