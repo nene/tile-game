@@ -1,0 +1,140 @@
+{ "frames": [
+   {
+    "filename": "#wave 0",
+    "frame": { "x": 0, "y": 0, "w": 22, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 22, "h": 32 },
+    "sourceSize": { "w": 22, "h": 32 },
+    "duration": 100
+   },
+   {
+    "filename": "#wave 1",
+    "frame": { "x": 22, "y": 0, "w": 22, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 22, "h": 32 },
+    "sourceSize": { "w": 22, "h": 32 },
+    "duration": 100
+   },
+   {
+    "filename": "#wave 2",
+    "frame": { "x": 44, "y": 0, "w": 22, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 22, "h": 32 },
+    "sourceSize": { "w": 22, "h": 32 },
+    "duration": 100
+   },
+   {
+    "filename": "#wave 3",
+    "frame": { "x": 66, "y": 0, "w": 22, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 22, "h": 32 },
+    "sourceSize": { "w": 22, "h": 32 },
+    "duration": 100
+   },
+   {
+    "filename": "#wave 4",
+    "frame": { "x": 88, "y": 0, "w": 22, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 22, "h": 32 },
+    "sourceSize": { "w": 22, "h": 32 },
+    "duration": 100
+   },
+   {
+    "filename": "#wave 5",
+    "frame": { "x": 110, "y": 0, "w": 22, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 22, "h": 32 },
+    "sourceSize": { "w": 22, "h": 32 },
+    "duration": 100
+   },
+   {
+    "filename": "#wave 6",
+    "frame": { "x": 132, "y": 0, "w": 22, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 22, "h": 32 },
+    "sourceSize": { "w": 22, "h": 32 },
+    "duration": 100
+   },
+   {
+    "filename": "#wave 7",
+    "frame": { "x": 154, "y": 0, "w": 22, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 22, "h": 32 },
+    "sourceSize": { "w": 22, "h": 32 },
+    "duration": 100
+   },
+   {
+    "filename": "#wave 8",
+    "frame": { "x": 176, "y": 0, "w": 22, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 22, "h": 32 },
+    "sourceSize": { "w": 22, "h": 32 },
+    "duration": 100
+   },
+   {
+    "filename": "#wave 9",
+    "frame": { "x": 198, "y": 0, "w": 22, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 22, "h": 32 },
+    "sourceSize": { "w": 22, "h": 32 },
+    "duration": 100
+   },
+   {
+    "filename": "#wave 10",
+    "frame": { "x": 220, "y": 0, "w": 22, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 22, "h": 32 },
+    "sourceSize": { "w": 22, "h": 32 },
+    "duration": 100
+   },
+   {
+    "filename": "#wave 11",
+    "frame": { "x": 242, "y": 0, "w": 22, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 22, "h": 32 },
+    "sourceSize": { "w": 22, "h": 32 },
+    "duration": 100
+   },
+   {
+    "filename": "#wave 12",
+    "frame": { "x": 264, "y": 0, "w": 22, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 22, "h": 32 },
+    "sourceSize": { "w": 22, "h": 32 },
+    "duration": 100
+   },
+   {
+    "filename": "#wave 13",
+    "frame": { "x": 286, "y": 0, "w": 22, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 22, "h": 32 },
+    "sourceSize": { "w": 22, "h": 32 },
+    "duration": 100
+   }
+ ],
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.2.30",
+  "image": "amicitia-flag.png",
+  "format": "RGBA8888",
+  "size": { "w": 308, "h": 32 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "wave", "from": 0, "to": 13, "direction": "forward" }
+  ]
+ }
+}
