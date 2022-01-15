@@ -19,4 +19,4 @@ function readJson(filename) {
   return frames.map((frame, i) => readSprite(frame, bboxes[i]));
 }
 
-console.log(readJson("./src/game/sprites/data/sheet.json"));
+console.log(readJson("./src/game/sprites/data/furniture.json"));

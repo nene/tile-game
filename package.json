@@ -27,7 +27,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "aseprite": "/Applications/Aseprite.app/Contents/MacOS/aseprite",
-    "generate": "yarn aseprite -b art/pianino.aseprite art/board-table.aseprite art/sakala-chair.aseprite art/sakala-board-table.aseprite art/sofa.aseprite --sheet-pack --format json-array --list-tags --list-slices --filename-format '{title}' --sheet src/game/sprites/data/sheet.png --data src/game/sprites/data/sheet.json"
+    "gen-furniture": "yarn aseprite -b art/furniture/*.aseprite --sheet-pack --format json-array --list-tags --list-slices --filename-format '{title}' --sheet src/game/sprites/data/furniture.png --data src/game/sprites/data/furniture.json"
   },
   "eslintConfig": {
     "extends": [
