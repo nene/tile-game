@@ -3171,13 +3171,13 @@
 						},
 						{
 							"__identifier": "BoardTable",
-							"__grid": [5,6],
+							"__grid": [4,6],
 							"__pivot": [0,0],
 							"__tile": { "tilesetUid": 17, "srcRect": [32,0,32,32] },
 							"width": 32,
 							"height": 16,
 							"defUid": 9,
-							"px": [80,102],
+							"px": [75,106],
 							"fieldInstances": []
 						},
 						{

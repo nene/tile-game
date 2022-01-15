@@ -40,8 +40,8 @@ const classMap: Record<string, { new(coord: Coord): GameObject }> = {
   "KitchenSink": KitchenSink,
   "BoardTable": createFurnitureClass({
     spriteName: "board-table",
-    boundingBox: { coord: [-5, 4], size: [42, 13] },
-    hitBox: { coord: [-5, -5], size: [42, 22] },
+    boundingBox: { coord: [0, 0], size: [42, 13] },
+    hitBox: { coord: [0, -9], size: [42, 22] },
   }),
   "Pianino": createFurnitureClass({
     spriteName: "pianino",
