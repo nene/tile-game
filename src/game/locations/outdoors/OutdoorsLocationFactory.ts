@@ -4,6 +4,7 @@ import { GameObject } from "../../GameObject";
 import { SpawnPoint } from "../../furniture/SpawnPoint";
 import { TiledLevelFactory } from "../TiledLevelFactory";
 import { getLevel } from "../Level";
+import { LeavesFalling } from "../LeavesFalling";
 
 export class OutdoorsLocationFactory implements LocationFactory {
   private levelFactory = new TiledLevelFactory(getLevel("Outdoors"));
@@ -40,5 +41,9 @@ export class OutdoorsLocationFactory implements LocationFactory {
 
   getObjects() {
     return this.objects;
+  }
+
+  getParticles() {
+    return new LeavesFalling();
   }
 }

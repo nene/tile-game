@@ -11,6 +11,7 @@ import { CharacterFigure, isCharacterFigure } from "../npc/CharacterFigure";
 import { LocationBackground } from "./LocationBackground";
 import { Character } from "../npc/Character";
 import { isPlayerSpawnPoint } from "../player/PlayerSpawnPoint";
+import { Particles } from "./Particles";
 
 export interface TeleportCommand {
   entity: GameObject & { setCoord: (coord: Coord) => void };
@@ -26,6 +27,7 @@ export class Location {
   private objects: GameObject[];
   private indexer: ObjectIndexer;
   private pathFinder: PathFinder;
+  private particles?: Particles;
 
   constructor(private location: LocationFactory) {
     this.name = location.getName();
@@ -33,6 +35,7 @@ export class Location {
     this.background = new BackgroundCache(location.getBackgrounds());
     this.foreground = location.getForeground();
     this.objects = this.location.getObjects();
+    this.particles = this.location.getParticles?.();
     this.sortObjects();
     this.pathFinder = new PathFinder(this.indexer.isTileEmpty.bind(this.indexer));
   }
@@ -66,6 +69,8 @@ export class Location {
   }
 
   tick(world: GameWorld): TeleportCommand[] {
+    this.particles?.tick();
+
     const commands = [];
     for (const obj of this.objects) {
       const command = obj.tick(this, world);
@@ -81,6 +86,7 @@ export class Location {
     this.background.paint(screen);
     this.allObjects().forEach((obj) => obj.paint(screen));
     this.foreground?.paint(screen);
+    this.particles?.paint(screen);
   }
 
   activate() {
