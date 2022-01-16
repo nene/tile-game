@@ -43,19 +43,11 @@ const classMap: ClassMap = {
   }),
   "Fridge": Fridge,
   "KitchenSink": KitchenSink,
-  "FeenoksShelfSideways": createFurnitureClass({
-    sprite: "feenoks-shelf-sideways",
-    boundingBox: { coord: [0, 0], size: [8, 32] },
-  }),
   "FeenoksFridge": createAnimatedFurnitureClass({
     spriteName: "feenoks-fridge",
     asepriteFile: feenoksFridgeJson,
     animationName: "humming",
     boundingBox: { coord: [0, 0], size: [32, 11] },
-  }),
-  "FeenoksMop": createFurnitureClass({
-    sprite: "feenoks-mop",
-    boundingBox: { coord: [0, 0], size: [13, 5] },
   }),
   "FeenoksPaymentCounter": createAnimatedFurnitureClass({
     spriteName: "feenoks-payment-counter",
