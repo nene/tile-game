@@ -39,22 +39,22 @@ const classMap: Record<string, { new(coord: Coord): GameObject }> = {
   "Fridge": Fridge,
   "KitchenSink": KitchenSink,
   "BoardTable": createFurnitureClass({
-    spriteName: "board-table",
+    sprite: "board-table",
     boundingBox: { coord: [0, 0], size: [42, 13] },
     hitBox: { coord: [0, -9], size: [42, 22] },
   }),
   "Pianino": createFurnitureClass({
-    spriteName: "pianino",
+    sprite: "pianino",
     boundingBox: { coord: [0, 0], size: [32, 9] },
     hitBox: { coord: [0, -17], size: [32, 26] },
   }),
   "Sofa": createFurnitureClass({
-    spriteName: "sofa",
+    sprite: "sofa",
     boundingBox: { coord: [0, 0], size: [48, 11] },
     hitBox: { coord: [0, -15], size: [48, 26] },
   }),
   "FeenoksShelfSideways": createFurnitureClass({
-    spriteName: "feenoks-shelf-sideways",
+    sprite: "feenoks-shelf-sideways",
     boundingBox: { coord: [0, 0], size: [8, 32] },
   }),
   "FeenoksFridge": createAnimatedFurnitureClass({
@@ -64,7 +64,7 @@ const classMap: Record<string, { new(coord: Coord): GameObject }> = {
     boundingBox: { coord: [0, 0], size: [32, 11] },
   }),
   "FeenoksMop": createFurnitureClass({
-    spriteName: "feenoks-mop",
+    sprite: "feenoks-mop",
     boundingBox: { coord: [0, 0], size: [13, 5] },
   }),
   "FeenoksPaymentCounter": createAnimatedFurnitureClass({
@@ -74,11 +74,11 @@ const classMap: Record<string, { new(coord: Coord): GameObject }> = {
     boundingBox: { coord: [0, 0], size: [32, 12] },
   }),
   "SakalaChair": createFurnitureClass({
-    spriteName: "sakala-chair",
+    sprite: "sakala-chair",
     boundingBox: { coord: [0, 0], size: [10, 6] },
   }),
   "SakalaBoardTable": createFurnitureClass({
-    spriteName: "sakala-board-table",
+    sprite: "sakala-board-table",
     boundingBox: { coord: [0, 0], size: [66, 13] },
   }),
   "AmicitiaFlag": createAnimatedFurnitureClass({
@@ -91,15 +91,15 @@ const classMap: Record<string, { new(coord: Coord): GameObject }> = {
 
 const variantClassMap: Record<string, { new(coord: Coord, variant?: number): GameObject }> = {
   "FeenoksShelf": createFurnitureClass({
-    spriteName: "feenoks-shelf",
+    sprite: "feenoks-shelf",
     boundingBox: { coord: [0, 0], size: [32, 5] },
   }),
   "FeenoksCounter": createFurnitureClass({
-    spriteName: "feenoks-counter",
+    sprite: "feenoks-counter",
     boundingBox: { coord: [0, 0], size: [32, 12] },
   }),
   "FeenoksCounterSideways": createFurnitureClass({
-    spriteName: "feenoks-counter-sideways",
+    sprite: "feenoks-counter-sideways",
     boundingBox: { coord: [0, 0], size: [16, 29] },
   }),
 };

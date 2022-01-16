@@ -1,10 +1,11 @@
 import { Coord, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
 import { PixelScreen } from "../PixelScreen";
+import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary, SpriteName } from "../sprites/SpriteLibrary";
 
 export interface FurnitureClassConfig {
-  spriteName: SpriteName;
+  sprite: Sprite | SpriteName;
   boundingBox: Rect;
   hitBox?: Rect;
 }
@@ -17,7 +18,8 @@ export function createFurnitureClass(cfg: FurnitureClassConfig) {
     tick() { }
 
     paint(screen: PixelScreen) {
-      screen.drawSprite(SpriteLibrary.getSprite(cfg.spriteName, [this.variant, 0]), this.coord);
+      const sprite = typeof cfg.sprite === "string" ? SpriteLibrary.getSprite(cfg.sprite, [this.variant, 0]) : cfg.sprite;
+      screen.drawSprite(sprite, this.coord);
     }
 
     zIndex() {
