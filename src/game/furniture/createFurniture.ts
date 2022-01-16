@@ -1,9 +1,9 @@
-import { Coord, coordAdd, Rect } from "../Coord";
+import { coordAdd, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
 import { fieldExists, readCoordField, readIntField, readMappedField, readStringField } from "../locations/entityFields";
 import { EntityField } from "../locations/Level";
 import { LocationName } from "../locations/LocationFactory";
-import { SpriteName } from "../sprites/SpriteLibrary";
+import { SpriteLibrary, SpriteName } from "../sprites/SpriteLibrary";
 import { BeerBox } from "./BeerBox";
 import { BeerCabinet } from "./BeerCabinet";
 import { BookCabinet } from "./BookCabinet";
@@ -21,9 +21,14 @@ import fireplaceJson from "../sprites/data/fireplace.json";
 import feenoksPaymentCounterJson from "../sprites/data/feenoks-payment-counter.json";
 import feenoksFridgeJson from "../sprites/data/feenoks-fridge.json";
 import amicitiaFlagJson from "../sprites/data/amicitia-flag.json";
+import furnitureJson from "../sprites/data/furniture.json";
 import { PlayerSpawnPoint } from "../player/PlayerSpawnPoint";
+import { createFurnitureMap } from "./createFurnitureMap";
+import { ClassMap, VariantClassMap } from "./ClassMap";
 
-const classMap: Record<string, { new(coord: Coord): GameObject }> = {
+let autoGenClassMap: ClassMap;
+
+const classMap: ClassMap = {
   "BeerBox": BeerBox,
   "BeerCabinet": BeerCabinet,
   "BookCabinet": BookCabinet,
@@ -38,21 +43,6 @@ const classMap: Record<string, { new(coord: Coord): GameObject }> = {
   }),
   "Fridge": Fridge,
   "KitchenSink": KitchenSink,
-  "BoardTable": createFurnitureClass({
-    sprite: "board-table",
-    boundingBox: { coord: [0, 0], size: [42, 13] },
-    hitBox: { coord: [0, -9], size: [42, 22] },
-  }),
-  "Pianino": createFurnitureClass({
-    sprite: "pianino",
-    boundingBox: { coord: [0, 0], size: [32, 9] },
-    hitBox: { coord: [0, -17], size: [32, 26] },
-  }),
-  "Sofa": createFurnitureClass({
-    sprite: "sofa",
-    boundingBox: { coord: [0, 0], size: [48, 11] },
-    hitBox: { coord: [0, -15], size: [48, 26] },
-  }),
   "FeenoksShelfSideways": createFurnitureClass({
     sprite: "feenoks-shelf-sideways",
     boundingBox: { coord: [0, 0], size: [8, 32] },
@@ -73,14 +63,6 @@ const classMap: Record<string, { new(coord: Coord): GameObject }> = {
     animationName: "idle",
     boundingBox: { coord: [0, 0], size: [32, 12] },
   }),
-  "SakalaChair": createFurnitureClass({
-    sprite: "sakala-chair",
-    boundingBox: { coord: [0, 0], size: [10, 6] },
-  }),
-  "SakalaBoardTable": createFurnitureClass({
-    sprite: "sakala-board-table",
-    boundingBox: { coord: [0, 0], size: [66, 13] },
-  }),
   "AmicitiaFlag": createAnimatedFurnitureClass({
     spriteName: "amicitia-flag",
     asepriteFile: amicitiaFlagJson,
@@ -89,7 +71,7 @@ const classMap: Record<string, { new(coord: Coord): GameObject }> = {
   }),
 };
 
-const variantClassMap: Record<string, { new(coord: Coord, variant?: number): GameObject }> = {
+const variantClassMap: VariantClassMap = {
   "FeenoksShelf": createFurnitureClass({
     sprite: "feenoks-shelf",
     boundingBox: { coord: [0, 0], size: [32, 5] },
@@ -113,6 +95,10 @@ const paintingMap: Record<string, SpriteName> = {
 };
 
 export function createFurniture(type: string, { coord, size }: Rect, fields: EntityField[]): GameObject {
+  if (!autoGenClassMap) {
+    autoGenClassMap = createFurnitureMap(SpriteLibrary.getSprite("furniture").image, furnitureJson);
+  }
+
   if (type === "Painting") {
     return new Painting(coord, readMappedField("Painting", paintingMap, fields));
   }
@@ -141,6 +127,9 @@ export function createFurniture(type: string, { coord, size }: Rect, fields: Ent
   }
   if (classMap[type]) {
     return new classMap[type](coord);
+  }
+  if (autoGenClassMap[type]) {
+    return new autoGenClassMap[type](coord);
   }
 
   throw new Error(`No class with name "${type}"`);

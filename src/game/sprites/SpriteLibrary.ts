@@ -17,8 +17,6 @@ import beerCabinet from "./data/beer-cabinet.png";
 import beerBox from "./data/beer-box.png";
 import bookCabinet from "./data/book-cabinet.png";
 import kitchenSink from "./data/kitchen-sink.png";
-import pianino from "./data/pianino.png";
-import boardTable from "./data/board-table.png";
 import lightSwitch from "./data/light-switch.png";
 import tap from "./data/tap.png";
 import drain from "./data/drain.png";
@@ -34,12 +32,9 @@ import cfeCoatOfArms from "./data/cfe-coat-of-arms.png";
 import sakalaCoatOfArms from "./data/sakala-coat-of-arms.png";
 import fireplace from "./data/fireplace.png";
 import countertop from "./data/countertop.png";
-import sofa from "./data/sofa.png";
 import lamp from "./data/lamp.png";
 import sakalaLamp from "./data/sakala-lamp.png";
 import sakalaCandleLamp from "./data/sakala-candle-lamp.png";
-import sakalaChair from "./data/sakala-chair.png";
-import sakalaBoardTable from "./data/sakala-board-table.png";
 import slot from "./data/slot.png";
 import scrollBar from "./data/scroll-bar.png";
 import closeButton from "./data/close-button.png";
@@ -69,6 +64,7 @@ import feenoksCounterSideways from "./data/feenoks-counter-sideways.png";
 import feenoksLady from "./data/feenoks-lady.png";
 import feenoksMop from "./data/feenoks-mop.png";
 import amicitiaFlag from "./data/amicitia-flag.png";
+import furniture from "./data/furniture.png";
 
 import { Coord } from "../Coord";
 import { SpriteSheet, SpriteSheetConfig } from "./SpriteSheet";
@@ -96,6 +92,7 @@ const imageFiles = {
   'callout': spriteDef({ src: callout, cfg: { size: [16, 18], colsRows: [3, 1], offset: [-5, -52] } }),
 
   // Furniture
+  'furniture': spriteDef({ src: furniture, cfg: { size: [119, 58] } }),
   'table': spriteDef({ src: table, cfg: { size: [64, 23], offset: [0, -6] } }),
   'fridge': spriteDef({ src: fridge, cfg: { size: [16, 46], offset: [0, -32] } }),
   'beer-cabinet': spriteDef({ src: beerCabinet, cfg: { size: [32, 46], offset: [0, -32] } }),
@@ -107,10 +104,7 @@ const imageFiles = {
   'staircase-door': spriteDef({ src: staircaseDoor, cfg: { size: [32, 48], colsRows: [2, 1], offset: [0, -48] } }),
   'fireplace': spriteDef({ src: fireplace, cfg: { size: [64, 52], colsRows: [5, 1], offset: [0, -36] } }),
   'countertop': spriteDef({ src: countertop, cfg: { size: [16, 55], offset: [0, -23] } }),
-  'sofa': spriteDef({ src: sofa, cfg: { size: [48, 26], offset: [0, -15] } }),
   'lamp': spriteDef({ src: lamp, cfg: { size: [21, 24], colsRows: [2, 1], offset: [-3, -44] } }),
-  'pianino': spriteDef({ src: pianino, cfg: { size: [32, 27], offset: [0, -17] } }),
-  'board-table': spriteDef({ src: boardTable, cfg: { size: [43, 31], offset: [0, -18] } }),
   'light-switch': spriteDef({ src: lightSwitch, cfg: { size: [9, 6], colsRows: [2, 1], offset: [4, -19] } }),
   // paintings
   'bulletin-board': spriteDef({ src: bulletinBoard, cfg: { size: [13, 17], offset: [4, 8] } }),
@@ -155,8 +149,6 @@ const imageFiles = {
   'fence': spriteDef({ src: fence, cfg: { size: [80, 38], offset: [0, -31], colsRows: [2, 1] } }),
 
   // Sakala
-  'sakala-chair': spriteDef({ src: sakalaChair, cfg: { size: [10, 21], offset: [0, -15] } }),
-  'sakala-board-table': spriteDef({ src: sakalaBoardTable, cfg: { size: [66, 31], offset: [0, -18] } }),
   'sakala-lamp': spriteDef({ src: sakalaLamp, cfg: { size: [15, 19], offset: [1, -41], colsRows: [2, 1] } }),
   'sakala-candle-lamp': spriteDef({ src: sakalaCandleLamp, cfg: { size: [25, 28], offset: [-5, -46], colsRows: [5, 1] } }),
 
