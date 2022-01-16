@@ -63,6 +63,7 @@ import feenoksCounterSideways from "./data/feenoks-counter-sideways.png";
 import feenoksLady from "./data/feenoks-lady.png";
 import amicitiaFlag from "./data/amicitia-flag.png";
 import furniture from "./data/furniture.png";
+import leaves from "./data/leaves.png";
 
 import { Coord } from "../Coord";
 import { SpriteSheet, SpriteSheetConfig } from "./SpriteSheet";
@@ -77,6 +78,7 @@ const imageFiles = {
   'bg': spriteDef({ src: bg, cfg: { size: [16, 16], colsRows: [13, 6] } }),
   'grass': spriteDef({ src: grass, cfg: { size: [16, 16], colsRows: [5, 3] } }),
   'buildings': spriteDef({ src: buildings, cfg: { size: [16, 16], colsRows: [16, 26] } }),
+  'leaves': spriteDef({ src: leaves, cfg: { size: [27, 17], colsRows: [17, 1] } }),
 
   'cfe-reb': spriteDef({ src: cfeReb, cfg: { size: [16, 34], colsRows: [9, 7], offset: [-8, -31] } }),
   'cfe-reb-drunk': spriteDef({ src: cfeRebDrunk, cfg: { size: [32, 35], colsRows: [5, 2], offset: [-16, -30] } }),
