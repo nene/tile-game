@@ -21,6 +21,7 @@ export class GameWorld {
     this.activeLocation = this.getLocation(startLocation);
     this.player = new Player(this.activeLocation.getPlayerSpawnCoord());
     this.activeLocation.add(this.player);
+    this.activeLocation.activate();
   }
 
   getActiveLocation(): Location {

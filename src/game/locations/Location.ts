@@ -28,6 +28,7 @@ export class Location {
   private indexer: ObjectIndexer;
   private pathFinder: PathFinder;
   private particles?: Particles;
+  private isActive = false;
 
   constructor(private location: LocationFactory) {
     this.name = location.getName();
@@ -69,7 +70,9 @@ export class Location {
   }
 
   tick(world: GameWorld): TeleportCommand[] {
-    this.particles?.tick();
+    if (this.isActive) {
+      this.particles?.tick();
+    }
 
     const commands = [];
     for (const obj of this.objects) {
@@ -89,7 +92,12 @@ export class Location {
     this.particles?.paint(screen);
   }
 
+  deactivate() {
+    this.isActive = false;
+  }
+
   activate() {
+    this.isActive = true;
     this.background.invalidate();
   }
 
