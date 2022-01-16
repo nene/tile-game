@@ -3,7 +3,7 @@ import { Particles } from "./Particles";
 import { LeafParticle } from "./LeafParticle";
 import { range } from "lodash";
 
-const PARTICLE_COUNT = 30;
+const PARTICLE_COUNT = 50;
 
 export class LeavesFalling implements Particles {
   private particles = range(1, PARTICLE_COUNT).map(() => new LeafParticle());
