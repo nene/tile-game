@@ -35,6 +35,7 @@ export interface AsepriteMeta {
   size: AsepriteSize;
   scale: string;
   frameTags: AsepriteFrameTag[];
+  slices?: AsepriteSlice[];
 }
 
 export interface AsepriteFrameTag {
@@ -42,4 +43,15 @@ export interface AsepriteFrameTag {
   from: number;
   to: number;
   direction: string;
+}
+
+export interface AsepriteSlice {
+  name: string;
+  color: string;
+  keys: AsepriteSliceKey[];
+}
+
+export interface AsepriteSliceKey {
+  "frame": number;
+  "bounds": AsepriteRect;
 }
