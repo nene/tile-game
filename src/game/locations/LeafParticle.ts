@@ -1,21 +1,21 @@
 import { PixelScreen } from "../PixelScreen";
-import leavesAnimationJson from "../sprites/data/leaves.json";
 import { SpriteAnimation } from "../sprites/SpriteAnimation";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
-import { readAsepriteAnimation } from "../sprites/readAsepriteAnimation";
 import { Coord, coordAdd } from "../Coord";
 import { SCREEN_SIZE } from "../ui/screen-size";
 import { random } from "lodash";
 
-const animationFrames = readAsepriteAnimation("fall", leavesAnimationJson);
+const LAST_FRAME = 15;
 
 export class LeafParticle {
   private coord: Coord;
-  private animation = new SpriteAnimation(SpriteLibrary.get("leaves"), {
-    frames: animationFrames,
-  });
+  private animation: SpriteAnimation;
 
   constructor() {
+    const variant = this.randomVariant();
+    this.animation = new SpriteAnimation(SpriteLibrary.get("leaves"), {
+      frames: { from: [0, variant], to: [LAST_FRAME, variant] },
+    });
     this.coord = this.randomStartCoord();
     this.animation.setFrame(this.randomStartFrame());
   }
@@ -32,7 +32,11 @@ export class LeafParticle {
   }
 
   private randomStartFrame(): number {
-    return random(0, animationFrames.length - 1);
+    return random(0, LAST_FRAME);
+  }
+
+  private randomVariant(): number {
+    return random(0, 2);
   }
 
   private randomStartCoord(): Coord {

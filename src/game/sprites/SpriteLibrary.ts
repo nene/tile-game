@@ -78,7 +78,7 @@ const imageFiles = {
   'bg': spriteDef({ src: bg, cfg: { size: [16, 16], colsRows: [13, 6] } }),
   'grass': spriteDef({ src: grass, cfg: { size: [16, 16], colsRows: [5, 3] } }),
   'buildings': spriteDef({ src: buildings, cfg: { size: [16, 16], colsRows: [16, 26] } }),
-  'leaves': spriteDef({ src: leaves, cfg: { size: [27, 17], colsRows: [17, 1] } }),
+  'leaves': spriteDef({ src: leaves, cfg: { size: [27, 17], colsRows: [17, 3] } }),
 
   'cfe-reb': spriteDef({ src: cfeReb, cfg: { size: [16, 34], colsRows: [9, 7], offset: [-8, -31] } }),
   'cfe-reb-drunk': spriteDef({ src: cfeRebDrunk, cfg: { size: [32, 35], colsRows: [5, 2], offset: [-16, -30] } }),
