@@ -1,20 +1,36 @@
 import { PixelScreen } from "../PixelScreen";
 import { SpriteAnimation } from "../sprites/SpriteAnimation";
-import { SpriteLibrary } from "../sprites/SpriteLibrary";
+import { SpriteLibrary, SpriteName } from "../sprites/SpriteLibrary";
 import { Coord, coordAdd } from "../Coord";
 import { SCREEN_SIZE } from "../ui/screen-size";
 import { random } from "lodash";
+import { pickRandom } from "../utils/pickRandom";
 
-const LAST_FRAME = 15;
+interface LeafType {
+  sprite: SpriteName;
+  variant: number;
+  lastFrame: number;
+  step: Coord;
+}
+
+const leafTypes: LeafType[] = [
+  { sprite: "leaves", variant: 0, lastFrame: 15, step: [14, 7] },
+  { sprite: "leaves", variant: 1, lastFrame: 15, step: [14, 7] },
+  { sprite: "leaves", variant: 2, lastFrame: 15, step: [14, 7] },
+  { sprite: "leaves2", variant: 0, lastFrame: 3, step: [0, 18] },
+  { sprite: "leaves2", variant: 1, lastFrame: 3, step: [0, 18] },
+  { sprite: "leaves2", variant: 2, lastFrame: 3, step: [0, 18] },
+];
 
 export class LeafParticle {
   private coord: Coord;
   private animation: SpriteAnimation;
+  private leafType: LeafType;
 
   constructor() {
-    const variant = this.randomVariant();
-    this.animation = new SpriteAnimation(SpriteLibrary.get("leaves"), {
-      frames: { from: [0, variant], to: [LAST_FRAME, variant] },
+    this.leafType = this.randomLeafType();
+    this.animation = new SpriteAnimation(SpriteLibrary.get(this.leafType.sprite), {
+      frames: { from: [0, this.leafType.variant], to: [this.leafType.lastFrame, this.leafType.variant] },
     });
     this.coord = this.randomStartCoord();
     this.animation.setFrame(this.randomStartFrame());
@@ -23,7 +39,7 @@ export class LeafParticle {
   tick() {
     this.animation.tick();
     if (this.animation.getFrame() === 0) {
-      this.coord = coordAdd(this.coord, [14, 7]);
+      this.coord = coordAdd(this.coord, this.leafType.step);
       if (this.isOutsideScreen()) {
         this.coord = this.randomStartCoord();
         this.animation.setFrame(this.randomStartFrame());
@@ -31,12 +47,12 @@ export class LeafParticle {
     }
   }
 
-  private randomStartFrame(): number {
-    return random(0, LAST_FRAME);
+  private randomLeafType(): LeafType {
+    return pickRandom(leafTypes);
   }
 
-  private randomVariant(): number {
-    return random(0, 2);
+  private randomStartFrame(): number {
+    return random(0, this.leafType.lastFrame);
   }
 
   private randomStartCoord(): Coord {
