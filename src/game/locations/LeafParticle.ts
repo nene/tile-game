@@ -20,6 +20,9 @@ const leafTypes: LeafType[] = [
   { sprite: "leaves2", variant: 0, lastFrame: 3, step: [0, 18] },
   { sprite: "leaves2", variant: 1, lastFrame: 3, step: [0, 18] },
   { sprite: "leaves2", variant: 2, lastFrame: 3, step: [0, 18] },
+  { sprite: "leaves3", variant: 0, lastFrame: 5, step: [0, 24] },
+  { sprite: "leaves3", variant: 1, lastFrame: 5, step: [0, 24] },
+  { sprite: "leaves3", variant: 2, lastFrame: 5, step: [0, 24] },
 ];
 
 export class LeafParticle {
