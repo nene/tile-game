@@ -35,8 +35,8 @@ export class OutdoorsLocationFactory implements LocationFactory {
     ];
   }
 
-  getForeground() {
-    return undefined;
+  getForegrounds() {
+    return [];
   }
 
   getObjects() {

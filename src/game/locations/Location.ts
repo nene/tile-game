@@ -23,7 +23,7 @@ export interface TeleportCommand {
 export class Location {
   private name: LocationName;
   private background: BackgroundCache;
-  private foreground?: LocationBackground;
+  private foregrounds: LocationBackground[];
   private objects: GameObject[];
   private indexer: ObjectIndexer;
   private pathFinder: PathFinder;
@@ -34,7 +34,7 @@ export class Location {
     this.name = location.getName();
     this.indexer = new ObjectIndexer(screenToTileCoord(location.getSize()));
     this.background = new BackgroundCache(location.getBackgrounds());
-    this.foreground = location.getForeground();
+    this.foregrounds = location.getForegrounds();
     this.objects = this.location.getObjects();
     this.particles = this.location.getParticles?.();
     this.sortObjects();
@@ -88,7 +88,7 @@ export class Location {
   paint(screen: PixelScreen) {
     this.background.paint(screen);
     this.allObjects().forEach((obj) => obj.paint(screen));
-    this.foreground?.paint(screen);
+    this.foregrounds.forEach((fg) => fg.paint(screen));
     this.particles?.paint(screen);
   }
 

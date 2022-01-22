@@ -47,8 +47,8 @@ export class FeenoksLocationFactory implements LocationFactory {
     ];
   }
 
-  getForeground() {
-    return this.levelFactory.getForeground();
+  getForegrounds() {
+    return [this.levelFactory.getForeground()];
   }
 
   getObjects() {
