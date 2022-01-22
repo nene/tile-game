@@ -31,12 +31,12 @@ export class OutdoorsLocationFactory implements LocationFactory {
     return [
       this.levelFactory.getBackground(),
       this.levelFactory.getGrass(),
-      this.levelFactory.getBuildings(),
+      this.levelFactory.getBuildingsBackground(),
     ];
   }
 
   getForegrounds() {
-    return [];
+    return [this.levelFactory.getBuildingsForeground()];
   }
 
   getObjects() {

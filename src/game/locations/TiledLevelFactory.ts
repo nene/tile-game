@@ -19,8 +19,12 @@ export class TiledLevelFactory {
     return this.createTiledBackground("Background", "bg");
   }
 
-  getBuildings(): TiledBackground {
+  getBuildingsBackground(): TiledBackground {
     return this.createTiledBackground("Buildings", "buildings");
+  }
+
+  getBuildingsForeground(): TiledBackground {
+    return this.createTiledBackground("BuildingsForeground", "buildings");
   }
 
   getForeground(): TiledBackground {
