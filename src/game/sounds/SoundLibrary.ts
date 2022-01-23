@@ -5,6 +5,7 @@ import openingCabinetDoor from "./data/opening-cabinet-door.mp3";
 import openingFridgeDoor from "./data/opening-fridge-door.mp3";
 import coins from "./data/coins.wav";
 import glassBottles from "./data/glass-bottles.mp3";
+import { Howl } from "howler";
 
 const soundFiles = {
   'pouring-water': pouringWater,
@@ -19,7 +20,7 @@ const soundFiles = {
 type SoundName = keyof typeof soundFiles;
 
 export class SoundLibrary {
-  private static sounds: Record<string, HTMLAudioElement> = {};
+  private static sounds: Record<string, Howl> = {};
 
   public static async load() {
     for (const [name, fileName] of Object.entries(soundFiles)) {
@@ -27,17 +28,18 @@ export class SoundLibrary {
     }
   }
 
-  private static async loadAudio(src: string): Promise<HTMLAudioElement> {
+  private static async loadAudio(src: string): Promise<Howl> {
     return new Promise((resolve) => {
-      const audioEl = new Audio(src);
-      audioEl.preload = "auto";
-      audioEl.addEventListener("canplay", () => resolve(audioEl));
+      const howl: Howl = new Howl({
+        src,
+        onload: () => resolve(howl),
+      });
     });
   }
 
   public static play(soundName: SoundName) {
-    const audioEl = this.sounds[soundName];
-    audioEl.currentTime = 0;
-    audioEl.play();
+    const howl = this.sounds[soundName];
+    howl.stop();
+    howl.play();
   }
 }
