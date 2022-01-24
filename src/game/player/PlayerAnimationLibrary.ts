@@ -20,13 +20,13 @@ export class PlayerAnimationLibrary {
         frames: readAsepriteAnimation("idle", cfeRebJson),
       }),
       up: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), {
-        frames: [readAsepriteAnimation("base", cfeRebJson)[3]],
+        frames: readAsepriteAnimation("U", cfeRebJson),
       }),
       right: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), {
-        frames: [readAsepriteAnimation("base", cfeRebJson)[5]],
+        frames: readAsepriteAnimation("R", cfeRebJson),
       }),
       left: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), {
-        frames: [readAsepriteAnimation("base", cfeRebJson)[4]],
+        frames: readAsepriteAnimation("L", cfeRebJson),
       }),
     }
 
