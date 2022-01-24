@@ -1,5 +1,5 @@
 import { Coord } from "../Coord";
-import { Facing } from "../npc/Facing";
+import { Facing, headingToFacing } from "../npc/Facing";
 
 interface PlayerDirectionEvents {
   onStartMoving: (facing: Facing) => void;
@@ -64,7 +64,7 @@ export class PlayerDirection {
     const oldHeading = this.heading;
     if (this.isMoving(newHeading)) {
       const oldFacing = this.facing;
-      this.facing = this.headingToFacing(newHeading);
+      this.facing = headingToFacing(newHeading);
       if (this.isStanding(oldHeading)) {
         this.events.onStartMoving(this.facing);
       }
@@ -85,18 +85,5 @@ export class PlayerDirection {
 
   isMoving(heading: Coord = this.heading) {
     return !this.isStanding(heading);
-  }
-
-  private headingToFacing(heading: Coord): Facing {
-    if (heading[0] > 0) {
-      return 'right';
-    }
-    if (heading[0] < 0) {
-      return 'left';
-    }
-    if (heading[1] > 0) {
-      return 'down';
-    }
-    return 'up';
   }
 }
