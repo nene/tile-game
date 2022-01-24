@@ -32,10 +32,10 @@ export class PlayerAnimationLibrary {
 
     this.walkAnimations = {
       down: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), {
-        frames: readAsepriteAnimation("w-forward", cfeRebJson),
+        frames: readAsepriteAnimation("w-down", cfeRebJson),
       }),
       up: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), {
-        frames: readAsepriteAnimation("w-back", cfeRebJson),
+        frames: readAsepriteAnimation("w-up", cfeRebJson),
       }),
       right: new SpriteAnimation(SpriteLibrary.get("cfe-reb"), {
         frames: readAsepriteAnimation("w-right", cfeRebJson),

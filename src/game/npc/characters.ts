@@ -19,8 +19,8 @@ const characters = {
     name: "vil! Aleksander Popov",
     spriteName: "cfe-ksv-sass",
     moveAnimationFrames: {
-      down: readAsepriteAnimation("w-forward", sassJson),
-      up: readAsepriteAnimation("w-back", sassJson),
+      down: readAsepriteAnimation("w-down", sassJson),
+      up: readAsepriteAnimation("w-up", sassJson),
       left: readAsepriteAnimation("w-left", sassJson),
       right: readAsepriteAnimation("w-right", sassJson),
     },
