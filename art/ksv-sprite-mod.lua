@@ -1,19 +1,18 @@
 local sprite = app.activeSprite
 
--- Hide the shoppen layer
-for i,layer in ipairs(sprite.layers) do
-  if (layer.name == "kann") then
-    layer.isVisible = false
+function findLayer(name)
+  for i,layer in ipairs(app.activeSprite.layers) do
+    if (layer.name == name) then
+      return layer
+    end
   end
 end
 
+-- Hide the shoppen layer
+findLayer("kann").isVisible = false
+
 -- find the hand-layer
-local handLayer
-for i,layer in ipairs(sprite.layers) do
-  if (layer.name == "kasi") then
-    handLayer = layer
-  end
-end
+local handLayer = findLayer("kasi")
 
 -- move hand layer cel to a separate frame
 sprite:newEmptyFrame(3)
