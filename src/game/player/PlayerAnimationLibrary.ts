@@ -2,7 +2,7 @@ import { Animation } from "../sprites/Animation";
 import { CompositeAnimation } from "../sprites/CompositeAnimation";
 import { SpriteAnimation } from "../sprites/SpriteAnimation";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
-import { Facing } from "./PlayerDirection";
+import { Facing } from "../npc/Facing";
 import cfeRebJson from "../sprites/data/cfe-reb.json";
 import { readAsepriteAnimation } from "../sprites/readAsepriteAnimation";
 

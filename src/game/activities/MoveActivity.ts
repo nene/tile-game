@@ -3,7 +3,7 @@ import { Coord, coordEq, coordMul, coordUnit, coordSub, coordAdd } from "../Coor
 import { Location } from "../locations/Location";
 import { AcademicCharacter } from "../npc/AcademicCharacter";
 import { CharacterFigure } from "../npc/CharacterFigure";
-import { Facing } from "../player/PlayerDirection";
+import { Facing } from "../npc/Facing";
 import { SpriteAnimation } from "../sprites/SpriteAnimation";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { Activity, ActivityUpdates } from "./Activity";

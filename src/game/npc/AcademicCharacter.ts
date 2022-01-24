@@ -7,7 +7,7 @@ import { constrain } from "../utils/constrain";
 import { pickRandom } from "../utils/pickRandom";
 import { Character } from "./Character";
 import { createCharacterActivities } from "./createCharacterActivities";
-import { Facing } from "../player/PlayerDirection";
+import { Facing } from "../npc/Facing";
 
 export type Desire = "beer" | "question";
 

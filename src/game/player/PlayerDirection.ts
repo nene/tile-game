@@ -1,6 +1,5 @@
 import { Coord } from "../Coord";
-
-export type Facing = "up" | "down" | "left" | "right";
+import { Facing } from "../npc/Facing";
 
 interface PlayerDirectionEvents {
   onStartMoving: (facing: Facing) => void;

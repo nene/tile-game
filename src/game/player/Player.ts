@@ -12,7 +12,8 @@ import { PlayerMovement } from "./PlayerMovement";
 import { constrain } from "../utils/constrain";
 import { GameItem } from "../items/GameItem";
 import { PlayerAnimationLibrary } from "./PlayerAnimationLibrary";
-import { Facing, PlayerDirection } from "./PlayerDirection";
+import { PlayerDirection } from "./PlayerDirection";
+import { Facing } from "../npc/Facing";
 
 const MAX_SPEED = 6;
 
