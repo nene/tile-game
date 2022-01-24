@@ -5,13 +5,15 @@ import { Sprite } from "./Sprite";
 import { SpriteSheet } from "./SpriteSheet";
 
 interface AnimationConfig {
-  frames: Coord[] | FrameWithTicks[] | FrameRange;
+  frames: FramesDef;
   ticksPerFrame?: number;
   currentFrame?: number;
   repeat?: number;
 }
 
-interface FrameRange {
+export type FramesDef = Coord[] | FrameWithTicks[] | FrameRange;
+
+export interface FrameRange {
   from: Coord;
   to: Coord;
 }
@@ -37,7 +39,7 @@ export class SpriteAnimation implements Animation {
     this.currentFrame = cfg.currentFrame ?? 0;
   }
 
-  private toPlainFrames(frames: Coord[] | FrameWithTicks[] | FrameRange): Coord[] {
+  private toPlainFrames(frames: FramesDef): Coord[] {
     if (frames instanceof Array) {
       if (isCoordArray(frames)) {
         return frames;

@@ -2,7 +2,7 @@ import { Coord, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
 import { PixelScreen } from "../PixelScreen";
 import { readAsepriteAnimation } from "../sprites/readAsepriteAnimation";
-import { FrameWithTicks, SpriteAnimation } from "../sprites/SpriteAnimation";
+import { FramesDef, SpriteAnimation } from "../sprites/SpriteAnimation";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import sakalaCandleLampJson from "../sprites/data/sakala-candle-lamp.json";
 
@@ -13,7 +13,7 @@ interface LampConfig {
   turnedOn?: boolean;
 }
 
-const onAnimationFrames: Record<LampType, Coord[] | FrameWithTicks[]> = {
+const onAnimationFrames: Record<LampType, FramesDef> = {
   "lamp": [[1, 0]],
   "sakala-lamp": [[1, 0]],
   "sakala-candle-lamp": readAsepriteAnimation("on", sakalaCandleLampJson),

@@ -1,5 +1,4 @@
 import { compact } from "lodash";
-import { Coord } from "../Coord";
 import { Drink } from "../items/Drink";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary, SpriteName } from "../sprites/SpriteLibrary";
@@ -9,6 +8,7 @@ import { Character } from "./Character";
 import { createCharacterActivities } from "./createCharacterActivities";
 import { Facing } from "../npc/Facing";
 import { DrinkAnimationSprites } from "../sprites/DrinkAnimation";
+import { FramesDef } from "../sprites/SpriteAnimation";
 
 export type Desire = "beer" | "question";
 
@@ -25,7 +25,7 @@ interface DayConfig {
 export interface AcademicCharacterDef {
   name: string;
   spriteName: SpriteName;
-  moveAnimationFrames?: Record<Facing, Coord[]>
+  moveAnimationFrames?: Record<Facing, FramesDef>
   favoriteDrinks: Drink[];
   hatedDrinks: Drink[];
   days: Record<number, DayConfig>;
@@ -135,7 +135,7 @@ export class AcademicCharacter implements Character {
     this.colorBandState = ColorBandState.correct;
   }
 
-  getMoveAnimationFrames(): Record<Facing, Coord[]> {
+  getMoveAnimationFrames(): Record<Facing, FramesDef> {
     return this.def.moveAnimationFrames ?? {
       up: [[0, 0]],
       down: [[0, 0]],
