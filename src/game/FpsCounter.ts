@@ -17,6 +17,6 @@ export class FpsCounter {
 
   paint(screen: PixelScreen) {
     const fps = sum(this.fpsArray) / this.fpsArray.length;
-    screen.drawText(Math.floor(fps) + " fps", [25, 2], { size: "small", align: "right" });
+    screen.drawText(Math.floor(fps) + " fps", [25, 2], { size: "small", align: "right", shadowColor: "white" });
   }
 }
