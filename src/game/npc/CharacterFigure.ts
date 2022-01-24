@@ -31,15 +31,10 @@ export class CharacterFigure implements GameObject {
     if (updates.coord) {
       this.coord = updates.coord;
     }
-    this.sprites = updates.sprites || [];
+    this.sprites = updates.sprites || [this.defaultSprite];
   }
 
   paint(screen: PixelScreen) {
-    if (this.sprites.length === 0) {
-      screen.drawSprite(this.defaultSprite, this.coord);
-      return;
-    }
-
     screen.drawSprites(this.sprites, this.coord);
   }
 
