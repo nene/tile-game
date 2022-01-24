@@ -3,7 +3,7 @@ import { Coord, coordEq, coordMul, coordUnit, coordSub, coordAdd } from "../Coor
 import { Location } from "../locations/Location";
 import { AcademicCharacter } from "../npc/AcademicCharacter";
 import { CharacterFigure } from "../npc/CharacterFigure";
-import { Facing } from "../npc/Facing";
+import { Facing, headingToFacing } from "../npc/Facing";
 import { SpriteAnimation } from "../sprites/SpriteAnimation";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { Activity, ActivityUpdates } from "./Activity";
@@ -12,7 +12,6 @@ export class MoveActivity implements Activity {
   private speed: Coord = [0, 0];
   private path?: Coord[];
   private moveAnimations: Record<Facing, SpriteAnimation>;
-  private animation: SpriteAnimation;
   private finished = false;
 
   constructor(private destination: Coord, character: AcademicCharacter) {
@@ -20,13 +19,13 @@ export class MoveActivity implements Activity {
       character.getMoveAnimationFrames(),
       (frames) => new SpriteAnimation(SpriteLibrary.get(character.getSpriteName()), { frames })
     );
-    this.animation = this.moveAnimations.down;
   }
 
   public tick(figure: CharacterFigure, location: Location): ActivityUpdates {
     const coord = figure.getCoord();
-    this.animation.tick();
-    const sprites = this.animation.getSprites();
+    const animation = this.moveAnimations[headingToFacing(this.speed)];
+    animation.tick();
+    const sprites = animation.getSprites();
 
     if (coordEq(coord, this.destination)) {
       this.finished = true;
