@@ -4,6 +4,7 @@ import { SpriteAnimation } from "../sprites/SpriteAnimation";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { Facing } from "../npc/Facing";
 import cfeRebJson from "../sprites/data/cfe-reb.json";
+import cfeRebDrunkJson from "../sprites/data/cfe-reb-drunk.json";
 import { readAsepriteAnimation } from "../sprites/readAsepriteAnimation";
 
 export type PlayerAnimationType = 'stand' | 'walk' | 'drunk';
@@ -50,30 +51,14 @@ export class PlayerAnimationLibrary {
     this.sleepAnimation = new CompositeAnimation([
       this.createDrunkAnimation(1),
       new SpriteAnimation(SpriteLibrary.get("cfe-reb-drunk"), {
-        frames: [
-          [0, 1],
-          [1, 1],
-          [2, 1],
-          [3, 1],
-        ],
-        ticksPerFrame: 3,
+        frames: readAsepriteAnimation("sleep", cfeRebDrunkJson),
       }),
     ]);
   }
 
   private createDrunkAnimation(repeat?: number): Animation {
     return new SpriteAnimation(SpriteLibrary.get("cfe-reb-drunk"), {
-      frames: [
-        [2, 0],
-        [3, 0],
-        [4, 0],
-        [3, 0],
-        [2, 0],
-        [1, 0],
-        [0, 0],
-        [1, 0],
-      ],
-      ticksPerFrame: 2,
+      frames: readAsepriteAnimation("stand", cfeRebDrunkJson),
       repeat,
     });
   }

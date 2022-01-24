@@ -11,7 +11,11 @@ function getFramesByTagName(tag: string, file: AsepriteFile): AsepriteFrame[] {
   if (!frameTag) {
     throw new Error(`Tag ${tag} not found from Aseprite JSON data.`);
   }
-  return file.frames.slice(frameTag.from, frameTag.to + 1);
+  const frames = file.frames.slice(frameTag.from, frameTag.to + 1);
+  if (frameTag.direction === "pingpong") {
+    return [...frames, ...frames.slice(1, frames.length - 1).reverse()];
+  }
+  return frames;
 }
 
 function toFrameWithTicks({ frame, sourceSize, duration }: AsepriteFrame): FrameWithTicks {

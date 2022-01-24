@@ -71,4 +71,67 @@ describe("readAsepriteAnimation()", () => {
       { coord: [1, 1], ticks: 2 },
     ]);
   });
+
+  it("expands pingpong animation", () => {
+    const data: AsepriteFile = {
+      "frames": [
+        {
+          "filename": "#base 0",
+          "frame": { "x": 0, "y": 0, "w": 16, "h": 34 },
+          "rotated": false,
+          "trimmed": false,
+          "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 34 },
+          "sourceSize": { "w": 16, "h": 34 },
+          "duration": 100
+        },
+        {
+          "filename": "#base 1",
+          "frame": { "x": 16, "y": 0, "w": 16, "h": 34 },
+          "rotated": false,
+          "trimmed": false,
+          "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 34 },
+          "sourceSize": { "w": 16, "h": 34 },
+          "duration": 200
+        },
+        {
+          "filename": "#base 3",
+          "frame": { "x": 0, "y": 34, "w": 16, "h": 34 },
+          "rotated": false,
+          "trimmed": false,
+          "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 34 },
+          "sourceSize": { "w": 16, "h": 34 },
+          "duration": 200
+        },
+        {
+          "filename": "#w-right 1",
+          "frame": { "x": 16, "y": 34, "w": 16, "h": 34 },
+          "rotated": false,
+          "trimmed": false,
+          "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 34 },
+          "sourceSize": { "w": 16, "h": 34 },
+          "duration": 100
+        },
+      ],
+      "meta": {
+        "app": "https://www.aseprite.org/",
+        "version": "1.2.30",
+        "image": "cfe-reb.png",
+        "format": "RGBA8888",
+        "size": { "w": 144, "h": 238 },
+        "scale": "1",
+        "frameTags": [
+          { "name": "base", "from": 0, "to": 3, "direction": "pingpong" },
+        ]
+      }
+    };
+
+    expect(readAsepriteAnimation("base", data)).toEqual([
+      { coord: [0, 0], ticks: 1 },
+      { coord: [1, 0], ticks: 2 },
+      { coord: [0, 1], ticks: 2 },
+      { coord: [1, 1], ticks: 1 },
+      { coord: [0, 1], ticks: 2 },
+      { coord: [1, 0], ticks: 2 },
+    ]);
+  });
 });
