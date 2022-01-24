@@ -70,8 +70,8 @@ import leaves3 from "./data/leaves3.png";
 import { Coord } from "../Coord";
 import { SpriteSheet, SpriteSheetConfig } from "./SpriteSheet";
 
-const PLAYER_SIZE: Coord = [16, 34];
-const PLAYER_OFFSET: Coord = [-8, -31];
+const CHARACTER_SIZE: Coord = [16, 34];
+const CHARACTER_OFFSET: Coord = [-8, -31];
 
 // Helper to require values of `imageFiles` to conform to specific type
 const spriteDef = (x: { src: string, cfg: SpriteSheetConfig }) => x;
@@ -84,15 +84,15 @@ const imageFiles = {
   'leaves2': spriteDef({ src: leaves2, cfg: { size: [13, 24], colsRows: [4, 3] } }),
   'leaves3': spriteDef({ src: leaves3, cfg: { size: [7, 30], colsRows: [6, 3] } }),
 
-  'cfe-reb': spriteDef({ src: cfeReb, cfg: { size: [16, 34], colsRows: [9, 7], offset: [-8, -31] } }),
+  'cfe-reb': spriteDef({ src: cfeReb, cfg: { size: CHARACTER_SIZE, colsRows: [9, 7], offset: CHARACTER_OFFSET } }),
   'cfe-reb-drunk': spriteDef({ src: cfeRebDrunk, cfg: { size: [32, 35], colsRows: [5, 2], offset: [-16, -30] } }),
 
-  'cfe-ksv-sass': spriteDef({ src: cfeKsvSass, cfg: { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET } }),
-  'cfe-ksv-koppel': spriteDef({ src: cfeKsvKoppel, cfg: { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET } }),
-  'cfe-ksv-pikmets': spriteDef({ src: cfeKsvPikmets, cfg: { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET } }),
-  'cfe-ksv-otto': spriteDef({ src: cfeKsvOtto, cfg: { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET } }),
-  'cfe-ksv-karl': spriteDef({ src: cfeKsvKarl, cfg: { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET } }),
-  'cfe-ksv-kark': spriteDef({ src: cfeKsvKark, cfg: { size: PLAYER_SIZE, colsRows: [3, 1], offset: PLAYER_OFFSET } }),
+  'cfe-ksv-sass': spriteDef({ src: cfeKsvSass, cfg: { size: CHARACTER_SIZE, colsRows: [3, 1], offset: CHARACTER_OFFSET } }),
+  'cfe-ksv-koppel': spriteDef({ src: cfeKsvKoppel, cfg: { size: CHARACTER_SIZE, colsRows: [3, 1], offset: CHARACTER_OFFSET } }),
+  'cfe-ksv-pikmets': spriteDef({ src: cfeKsvPikmets, cfg: { size: CHARACTER_SIZE, colsRows: [3, 1], offset: CHARACTER_OFFSET } }),
+  'cfe-ksv-otto': spriteDef({ src: cfeKsvOtto, cfg: { size: CHARACTER_SIZE, colsRows: [3, 1], offset: CHARACTER_OFFSET } }),
+  'cfe-ksv-karl': spriteDef({ src: cfeKsvKarl, cfg: { size: CHARACTER_SIZE, colsRows: [3, 1], offset: CHARACTER_OFFSET } }),
+  'cfe-ksv-kark': spriteDef({ src: cfeKsvKark, cfg: { size: CHARACTER_SIZE, colsRows: [3, 1], offset: CHARACTER_OFFSET } }),
   'callout': spriteDef({ src: callout, cfg: { size: [16, 18], colsRows: [3, 1], offset: [-5, -52] } }),
 
   // Furniture
@@ -162,7 +162,7 @@ const imageFiles = {
   'feenoks-counter': spriteDef({ src: feenoksCounter, cfg: { size: [32, 32], offset: [0, -20], colsRows: [2, 1] } }),
   'feenoks-payment-counter': spriteDef({ src: feenoksPaymentCounter, cfg: { size: [32, 32], offset: [0, -20], colsRows: [4, 1] } }),
   'feenoks-counter-sideways': spriteDef({ src: feenoksCounterSideways, cfg: { size: [16, 40], offset: [0, -11], colsRows: [3, 1] } }),
-  'feenoks-lady': spriteDef({ src: feenoksLady, cfg: { size: PLAYER_SIZE, offset: PLAYER_OFFSET } }),
+  'feenoks-lady': spriteDef({ src: feenoksLady, cfg: { size: CHARACTER_SIZE, offset: CHARACTER_OFFSET } }),
 
   // Amicitia
   'amicitia-flag': spriteDef({ src: amicitiaFlag, cfg: { size: [22, 32], offset: [0, -49] } }),
