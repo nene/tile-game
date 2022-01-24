@@ -23,22 +23,26 @@ export class MoveActivity implements Activity {
 
   public tick(figure: CharacterFigure, location: Location): ActivityUpdates {
     const coord = figure.getCoord();
-    const animation = this.moveAnimations[headingToFacing(this.speed)];
-    animation.tick();
-    const sprites = animation.getSprites();
 
     if (coordEq(coord, this.destination)) {
       this.finished = true;
-      return { sprites };
+      return { sprites: this.tickAnimationAndGetSprites() };
     }
 
     const targetCoord = this.getActivePathStep(coord, location);
     if (targetCoord) {
       this.speed = this.getSpeed(coord, targetCoord);
-      return { coord: coordAdd(coord, this.speed), sprites };
+      return { coord: coordAdd(coord, this.speed), sprites: this.tickAnimationAndGetSprites() };
     }
+
     this.finished = true;
-    return { sprites };
+    return { sprites: this.tickAnimationAndGetSprites() };
+  }
+
+  private tickAnimationAndGetSprites() {
+    const animation = this.moveAnimations[headingToFacing(this.speed)];
+    animation.tick();
+    return animation.getSprites();
   }
 
   public isFinished() {
