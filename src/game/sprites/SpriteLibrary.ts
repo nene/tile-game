@@ -70,8 +70,8 @@ import leaves3 from "./data/leaves3.png";
 import { Coord } from "../Coord";
 import { SpriteSheet, SpriteSheetConfig } from "./SpriteSheet";
 
-const PLAYER_SIZE: Coord = [16, 35];
-const PLAYER_OFFSET: Coord = [-8, -30];
+const PLAYER_SIZE: Coord = [16, 34];
+const PLAYER_OFFSET: Coord = [-8, -31];
 
 // Helper to require values of `imageFiles` to conform to specific type
 const spriteDef = (x: { src: string, cfg: SpriteSheetConfig }) => x;

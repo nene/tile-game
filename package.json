@@ -29,7 +29,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "aseprite": "/Applications/Aseprite.app/Contents/MacOS/aseprite",
-    "gen-furniture": "yarn aseprite -b art/furniture/*.aseprite --sheet-pack --format json-array --list-tags --list-slices --filename-format '{title}' --sheet src/game/sprites/data/furniture.png --data src/game/sprites/data/furniture.json"
+    "gen-furniture": "yarn aseprite -b art/furniture/*.aseprite --sheet-pack --format json-array --list-tags --list-slices --filename-format '{title}' --sheet src/game/sprites/data/furniture.png --data src/game/sprites/data/furniture.json",
+    "gen-ksv": "for file in $(ls art/cfe-ksv-* | sed 's/art\\///' | sed 's/.aseprite//'); do yarn aseprite -b art/$file.aseprite --sheet src/game/sprites/data/$file.png; done"
   },
   "eslintConfig": {
     "extends": [
