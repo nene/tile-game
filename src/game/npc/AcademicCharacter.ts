@@ -8,6 +8,7 @@ import { pickRandom } from "../utils/pickRandom";
 import { Character } from "./Character";
 import { createCharacterActivities } from "./createCharacterActivities";
 import { Facing } from "../npc/Facing";
+import { DrinkAnimationSprites } from "../sprites/DrinkAnimation";
 
 export type Desire = "beer" | "question";
 
@@ -141,6 +142,13 @@ export class AcademicCharacter implements Character {
       left: [[0, 0]],
       right: [[0, 0]],
     };
+  }
+
+  getDrinkSprites(): DrinkAnimationSprites {
+    return {
+      figure: SpriteLibrary.getSprite(this.def.spriteName, [1, 0]),
+      hand: SpriteLibrary.getSprite(this.def.spriteName, [2, 0]),
+    }
   }
 }
 
