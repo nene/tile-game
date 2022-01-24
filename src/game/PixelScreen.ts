@@ -11,6 +11,10 @@ export interface TextStyle {
   shadowColor?: string;
 }
 
+export interface Paintable {
+  paint(screen: PixelScreen): void;
+}
+
 export class PixelScreen implements TextMeasurer {
   private ctx: CanvasRenderingContext2D;
   private size: Coord = SCREEN_SIZE;
@@ -30,6 +34,11 @@ export class PixelScreen implements TextMeasurer {
     this.fixed = true;
     fn();
     this.fixed = oldFixed;
+  }
+
+  // Helper for calling paint() method on multiple objects
+  paint(objects: Paintable[]) {
+    objects.forEach((obj) => obj.paint(this));
   }
 
   drawSprite(sprite: Sprite, coord: Coord) {

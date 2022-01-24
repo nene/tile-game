@@ -5,12 +5,12 @@ import { ObjectIndexer } from "../ObjectIndexer";
 import { PathFinder } from "../PathFinder";
 import { PixelScreen } from "../PixelScreen";
 import { GameWorld } from "../GameWorld";
-import { PaintableGroup } from "./PaintableGroup";
 import { last } from "lodash";
 import { CharacterFigure, isCharacterFigure } from "../npc/CharacterFigure";
 import { Character } from "../npc/Character";
 import { isPlayerSpawnPoint } from "../player/PlayerSpawnPoint";
 import { Particles } from "./Particles";
+import { LocationBackground } from "./LocationBackground";
 
 export interface TeleportCommand {
   entity: GameObject & { setCoord: (coord: Coord) => void };
@@ -21,8 +21,8 @@ export interface TeleportCommand {
 
 export class Location {
   private name: LocationName;
-  private background: PaintableGroup;
-  private foreground: PaintableGroup;
+  private backgrounds: LocationBackground[];
+  private foregrounds: LocationBackground[];
   private objects: GameObject[];
   private indexer: ObjectIndexer;
   private pathFinder: PathFinder;
@@ -32,8 +32,8 @@ export class Location {
   constructor(private location: LocationFactory) {
     this.name = location.getName();
     this.indexer = new ObjectIndexer(screenToTileCoord(location.getSize()));
-    this.background = new PaintableGroup(location.getBackgrounds());
-    this.foreground = new PaintableGroup(location.getForegrounds());
+    this.backgrounds = location.getBackgrounds();
+    this.foregrounds = location.getForegrounds();
     this.objects = this.location.getObjects();
     this.particles = this.location.getParticles?.();
     this.sortObjects();
@@ -85,9 +85,9 @@ export class Location {
   }
 
   paint(screen: PixelScreen) {
-    this.background.paint(screen);
+    screen.paint(this.backgrounds);
     this.allObjects().forEach((obj) => obj.paint(screen));
-    this.foreground.paint(screen);
+    screen.paint(this.foregrounds);
     this.particles?.paint(screen);
   }
 
