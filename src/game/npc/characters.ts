@@ -2,6 +2,8 @@ import { getDrink } from "../items/Drink";
 import { AcademicCharacter } from "./AcademicCharacter";
 import { Character } from "./Character";
 import { FeenoksLadyCharacter } from "./FeenoksLadyCharacter";
+import sassJson from "../sprites/data/cfe-ksv-sass.json";
+import { readAsepriteAnimation } from "../sprites/readAsepriteAnimation";
 
 const characters = {
   "koppel": new AcademicCharacter({
@@ -17,10 +19,10 @@ const characters = {
     name: "vil! Aleksander Popov",
     spriteName: "cfe-ksv-sass",
     moveAnimationFrames: {
-      down: [[0, 0]],
-      up: [[3, 0]],
-      left: [[4, 0]],
-      right: [[5, 0]],
+      down: readAsepriteAnimation("w-forward", sassJson),
+      up: readAsepriteAnimation("w-back", sassJson),
+      left: readAsepriteAnimation("w-left", sassJson),
+      right: readAsepriteAnimation("w-right", sassJson),
     },
     days: {
       2: { spawnTime: 5 * 10 },
