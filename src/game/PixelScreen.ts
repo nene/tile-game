@@ -60,6 +60,12 @@ export class PixelScreen implements TextMeasurer {
     }
   }
 
+  drawSprites(sprites: Sprite[], coord: Coord) {
+    sprites.forEach((sprite) => {
+      this.drawSprite(sprite, coord);
+    });
+  }
+
   drawRect(rect: Rect, fill: string | CanvasPattern) {
     const screenOffset: Coord = this.fixed ? [0, 0] : this.offset;
 

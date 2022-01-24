@@ -40,9 +40,7 @@ export class Lamp implements GameObject {
   }
 
   paint(screen: PixelScreen) {
-    this.getAnimation().getSprites().forEach((sprite) => {
-      screen.drawSprite(sprite, this.coord);
-    });
+    screen.drawSprites(this.getAnimation().getSprites(), this.coord);
   }
 
   private getAnimation() {

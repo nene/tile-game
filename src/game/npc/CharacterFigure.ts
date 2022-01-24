@@ -40,9 +40,7 @@ export class CharacterFigure implements GameObject {
       return;
     }
 
-    this.sprites.forEach((sprite) => {
-      screen.drawSprite(sprite, this.coord);
-    });
+    screen.drawSprites(this.sprites, this.coord);
   }
 
   zIndex() {

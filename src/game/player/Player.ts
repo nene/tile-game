@@ -142,9 +142,7 @@ export class Player implements GameObject {
   }
 
   paint(screen: PixelScreen) {
-    this.animation.getSprites().forEach((sprite) => {
-      screen.drawSprite(sprite, this.coord);
-    });
+    screen.drawSprites(this.animation.getSprites(), this.coord);
   }
 
   zIndex(): number {
