@@ -16,6 +16,12 @@ const characters = {
   "sass": new AcademicCharacter({
     name: "vil! Aleksander Popov",
     spriteName: "cfe-ksv-sass",
+    moveAnimationFrames: {
+      down: [[0, 0]],
+      up: [[3, 0]],
+      left: [[4, 0]],
+      right: [[5, 0]],
+    },
     days: {
       2: { spawnTime: 5 * 10 },
     },
