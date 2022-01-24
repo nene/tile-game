@@ -58,9 +58,7 @@ export class FlagQuestionContent implements Component {
     this.answerButton.paint(screen);
 
     // HACK: Render from right to left, so tooltips render on top of buttons
-    reverse([...this.colorButtons]).forEach((btn) => {
-      btn.paint(screen);
-    });
+    screen.paint(reverse([...this.colorButtons]));
 
     this.menu?.paint(screen);
   }

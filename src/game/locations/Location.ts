@@ -86,7 +86,7 @@ export class Location {
 
   paint(screen: PixelScreen) {
     screen.paint(this.backgrounds);
-    this.allObjects().forEach((obj) => obj.paint(screen));
+    screen.paint(this.allObjects());
     screen.paint(this.foregrounds);
     this.particles?.paint(screen);
   }

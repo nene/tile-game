@@ -45,10 +45,7 @@ export class MultiChoiceQuestionContent implements Component {
 
   paint(screen: PixelScreen) {
     this.question.paint(screen);
-
-    this.answerButtons.forEach((btn) => {
-      btn.paint(screen);
-    });
+    screen.paint(this.answerButtons);
   }
 
   handleGameEvent(event: GameEvent): boolean | undefined {

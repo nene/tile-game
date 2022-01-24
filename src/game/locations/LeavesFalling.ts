@@ -14,7 +14,7 @@ export class LeavesFalling implements Particles {
 
   paint(screen: PixelScreen) {
     screen.withFixedCoords(() => {
-      this.particles.forEach((p) => p.paint(screen));
+      screen.paint(this.particles);
     });
   }
 }
