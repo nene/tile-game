@@ -1,6 +1,6 @@
 { "frames": [
    {
-    "filename": "# 0",
+    "filename": "#D 0",
     "frame": { "x": 0, "y": 0, "w": 16, "h": 34 },
     "rotated": false,
     "trimmed": false,
@@ -25,6 +25,33 @@
     "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 34 },
     "sourceSize": { "w": 16, "h": 34 },
     "duration": 100
+   },
+   {
+    "filename": "#U 0",
+    "frame": { "x": 48, "y": 0, "w": 16, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 34 },
+    "sourceSize": { "w": 16, "h": 34 },
+    "duration": 100
+   },
+   {
+    "filename": "#L 0",
+    "frame": { "x": 64, "y": 0, "w": 16, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 34 },
+    "sourceSize": { "w": 16, "h": 34 },
+    "duration": 100
+   },
+   {
+    "filename": "#R 0",
+    "frame": { "x": 80, "y": 0, "w": 16, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 34 },
+    "sourceSize": { "w": 16, "h": 34 },
+    "duration": 100
    }
  ],
  "meta": {
@@ -32,9 +59,13 @@
   "version": "1.2.32-x64",
   "image": "cfe-ksv-koppel.png",
   "format": "RGBA8888",
-  "size": { "w": 48, "h": 34 },
+  "size": { "w": 96, "h": 34 },
   "scale": "1",
   "frameTags": [
+   { "name": "D", "from": 0, "to": 0, "direction": "forward" },
+   { "name": "U", "from": 3, "to": 3, "direction": "forward" },
+   { "name": "L", "from": 4, "to": 4, "direction": "forward" },
+   { "name": "R", "from": 5, "to": 5, "direction": "forward" }
   ]
  }
 }

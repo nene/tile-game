@@ -2,6 +2,7 @@ import { getDrink } from "../items/Drink";
 import { AcademicCharacter } from "./AcademicCharacter";
 import { Character } from "./Character";
 import { FeenoksLadyCharacter } from "./FeenoksLadyCharacter";
+import koppelJson from "../sprites/data/cfe-ksv-koppel.json";
 import sassJson from "../sprites/data/cfe-ksv-sass.json";
 import { readAsepriteAnimation } from "../sprites/readAsepriteAnimation";
 
@@ -9,6 +10,12 @@ const characters = {
   "koppel": new AcademicCharacter({
     name: "ksv! Jakob Koppel",
     spriteName: "cfe-ksv-koppel",
+    moveAnimationFrames: {
+      down: readAsepriteAnimation("D", koppelJson),
+      up: readAsepriteAnimation("U", koppelJson),
+      left: readAsepriteAnimation("L", koppelJson),
+      right: readAsepriteAnimation("R", koppelJson),
+    },
     days: {
       2: { spawnTime: 1 * 10 },
     },
