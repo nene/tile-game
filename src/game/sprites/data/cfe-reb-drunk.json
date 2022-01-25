@@ -1,6 +1,6 @@
 { "frames": [
    {
-    "filename": "#stand 0",
+    "filename": "#down 0",
     "frame": { "x": 0, "y": 0, "w": 32, "h": 35 },
     "rotated": false,
     "trimmed": false,
@@ -9,7 +9,7 @@
     "duration": 200
    },
    {
-    "filename": "#stand 1",
+    "filename": "#down 1",
     "frame": { "x": 32, "y": 0, "w": 32, "h": 35 },
     "rotated": false,
     "trimmed": false,
@@ -18,7 +18,7 @@
     "duration": 200
    },
    {
-    "filename": "#stand 2",
+    "filename": "#down 2",
     "frame": { "x": 64, "y": 0, "w": 32, "h": 35 },
     "rotated": false,
     "trimmed": false,
@@ -27,7 +27,7 @@
     "duration": 200
    },
    {
-    "filename": "#stand 3",
+    "filename": "#down 3",
     "frame": { "x": 96, "y": 0, "w": 32, "h": 35 },
     "rotated": false,
     "trimmed": false,
@@ -36,7 +36,7 @@
     "duration": 200
    },
    {
-    "filename": "#fall 0",
+    "filename": "#up 0",
     "frame": { "x": 0, "y": 35, "w": 32, "h": 35 },
     "rotated": false,
     "trimmed": false,
@@ -45,7 +45,7 @@
     "duration": 200
    },
    {
-    "filename": "#fall 1",
+    "filename": "#up 1",
     "frame": { "x": 32, "y": 35, "w": 32, "h": 35 },
     "rotated": false,
     "trimmed": false,
@@ -54,7 +54,7 @@
     "duration": 200
    },
    {
-    "filename": "#fall 2",
+    "filename": "#up 2",
     "frame": { "x": 64, "y": 35, "w": 32, "h": 35 },
     "rotated": false,
     "trimmed": false,
@@ -63,7 +63,7 @@
     "duration": 200
    },
    {
-    "filename": "#fall 3",
+    "filename": "#up 3",
     "frame": { "x": 96, "y": 35, "w": 32, "h": 35 },
     "rotated": false,
     "trimmed": false,
@@ -72,8 +72,44 @@
     "duration": 200
    },
    {
+    "filename": "#fall 0",
+    "frame": { "x": 0, "y": 70, "w": 32, "h": 35 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 35 },
+    "sourceSize": { "w": 32, "h": 35 },
+    "duration": 200
+   },
+   {
+    "filename": "#fall 1",
+    "frame": { "x": 32, "y": 70, "w": 32, "h": 35 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 35 },
+    "sourceSize": { "w": 32, "h": 35 },
+    "duration": 200
+   },
+   {
+    "filename": "#fall 2",
+    "frame": { "x": 64, "y": 70, "w": 32, "h": 35 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 35 },
+    "sourceSize": { "w": 32, "h": 35 },
+    "duration": 200
+   },
+   {
+    "filename": "#fall 3",
+    "frame": { "x": 96, "y": 70, "w": 32, "h": 35 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 35 },
+    "sourceSize": { "w": 32, "h": 35 },
+    "duration": 200
+   },
+   {
     "filename": "#fall 4",
-    "frame": { "x": 128, "y": 35, "w": 32, "h": 35 },
+    "frame": { "x": 128, "y": 70, "w": 32, "h": 35 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 35 },
@@ -82,7 +118,7 @@
    },
    {
     "filename": "#fall 5",
-    "frame": { "x": 160, "y": 35, "w": 32, "h": 35 },
+    "frame": { "x": 160, "y": 70, "w": 32, "h": 35 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 35 },
@@ -91,7 +127,7 @@
    },
    {
     "filename": "#sleep 0",
-    "frame": { "x": 0, "y": 70, "w": 32, "h": 35 },
+    "frame": { "x": 0, "y": 105, "w": 32, "h": 35 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 35 },
@@ -100,7 +136,7 @@
    },
    {
     "filename": "#sleep 1",
-    "frame": { "x": 32, "y": 70, "w": 32, "h": 35 },
+    "frame": { "x": 32, "y": 105, "w": 32, "h": 35 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 35 },
@@ -109,7 +145,7 @@
    },
    {
     "filename": "#sleep 2",
-    "frame": { "x": 64, "y": 70, "w": 32, "h": 35 },
+    "frame": { "x": 64, "y": 105, "w": 32, "h": 35 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 35 },
@@ -118,7 +154,7 @@
    },
    {
     "filename": "#sleep 3",
-    "frame": { "x": 96, "y": 70, "w": 32, "h": 35 },
+    "frame": { "x": 96, "y": 105, "w": 32, "h": 35 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 35 },
@@ -131,12 +167,13 @@
   "version": "1.2.32-x64",
   "image": "cfe-reb-drunk.png",
   "format": "RGBA8888",
-  "size": { "w": 192, "h": 105 },
+  "size": { "w": 192, "h": 140 },
   "scale": "1",
   "frameTags": [
-   { "name": "stand", "from": 0, "to": 3, "direction": "pingpong" },
-   { "name": "fall", "from": 4, "to": 9, "direction": "forward" },
-   { "name": "sleep", "from": 10, "to": 13, "direction": "forward" }
+   { "name": "down", "from": 0, "to": 3, "direction": "pingpong" },
+   { "name": "up", "from": 4, "to": 7, "direction": "pingpong" },
+   { "name": "fall", "from": 8, "to": 13, "direction": "forward" },
+   { "name": "sleep", "from": 14, "to": 17, "direction": "forward" }
   ]
  }
 }

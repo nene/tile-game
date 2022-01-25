@@ -13,7 +13,7 @@ export type PlayerAnimationType = 'stand' | 'walk' | 'drunk';
 export class PlayerAnimationLibrary {
   private standAnimations: Record<Facing, SpriteAnimation>;
   private walkAnimations: Record<Facing, SpriteAnimation>;
-  private drunkAnimation: Animation;
+  private drunkAnimations: Record<Facing, Animation>;
   private sleepAnimation: Animation;
 
   constructor() {
@@ -47,19 +47,24 @@ export class PlayerAnimationLibrary {
       }),
     };
 
-    this.drunkAnimation = this.createDrunkAnimation();
+    this.drunkAnimations = {
+      down: this.createDrunkAnimation("down"),
+      up: this.createDrunkAnimation("up"),
+      left: this.createDrunkAnimation("down"),
+      right: this.createDrunkAnimation("down"),
+    };
 
     this.sleepAnimation = new CompositeAnimation([
-      this.createDrunkAnimation(1),
+      this.createDrunkAnimation("down", 1),
       new SpriteAnimation(SpriteLibrary.get("cfe-reb-drunk"), {
         frames: readAsepriteAnimation("sleep", cfeRebDrunkJson),
       }),
     ]);
   }
 
-  private createDrunkAnimation(repeat?: number): Animation {
+  private createDrunkAnimation(facing: Facing, repeat?: number): Animation {
     return new SpriteAnimation(SpriteLibrary.get("cfe-reb-drunk"), {
-      frames: readAsepriteAnimation("stand", cfeRebDrunkJson),
+      frames: readAsepriteAnimation(facing, cfeRebDrunkJson),
       repeat,
     });
   }
@@ -72,8 +77,8 @@ export class PlayerAnimationLibrary {
     return this.walkAnimations[facing];
   }
 
-  getDrunk(): Animation {
-    return this.drunkAnimation;
+  getDrunk(facing: Facing): Animation {
+    return this.drunkAnimations[facing];
   }
 
   getSleep(): Animation {

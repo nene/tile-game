@@ -107,7 +107,7 @@ export class Player implements GameObject {
         this.animation = this.animationLib.getStanding(facing);
         break;
       case "drunk":
-        this.animation = this.animationLib.getDrunk();
+        this.animation = this.animationLib.getDrunk(facing);
         break;
       case "sleep":
         this.animation = this.animationLib.getSleep();
