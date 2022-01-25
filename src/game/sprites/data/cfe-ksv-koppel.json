@@ -9,7 +9,7 @@
     "duration": 100
    },
    {
-    "filename": "#B 0",
+    "filename": "#U 0",
     "frame": { "x": 16, "y": 0, "w": 16, "h": 34 },
     "rotated": false,
     "trimmed": false,
@@ -18,7 +18,7 @@
     "duration": 100
    },
    {
-    "filename": "#B 1",
+    "filename": "#L 0",
     "frame": { "x": 32, "y": 0, "w": 16, "h": 34 },
     "rotated": false,
     "trimmed": false,
@@ -27,7 +27,7 @@
     "duration": 100
    },
    {
-    "filename": "#U 0",
+    "filename": "#R 0",
     "frame": { "x": 48, "y": 0, "w": 16, "h": 34 },
     "rotated": false,
     "trimmed": false,
@@ -36,7 +36,7 @@
     "duration": 100
    },
    {
-    "filename": "#L 0",
+    "filename": "#B 0",
     "frame": { "x": 64, "y": 0, "w": 16, "h": 34 },
     "rotated": false,
     "trimmed": false,
@@ -45,7 +45,7 @@
     "duration": 100
    },
    {
-    "filename": "#R 0",
+    "filename": "#B 1",
     "frame": { "x": 80, "y": 0, "w": 16, "h": 34 },
     "rotated": false,
     "trimmed": false,
@@ -63,10 +63,10 @@
   "scale": "1",
   "frameTags": [
    { "name": "D", "from": 0, "to": 0, "direction": "forward" },
-   { "name": "B", "from": 1, "to": 2, "direction": "forward" },
-   { "name": "U", "from": 3, "to": 3, "direction": "forward" },
-   { "name": "L", "from": 4, "to": 4, "direction": "forward" },
-   { "name": "R", "from": 5, "to": 5, "direction": "forward" }
+   { "name": "U", "from": 1, "to": 1, "direction": "forward" },
+   { "name": "L", "from": 2, "to": 2, "direction": "forward" },
+   { "name": "R", "from": 3, "to": 3, "direction": "forward" },
+   { "name": "B", "from": 4, "to": 5, "direction": "forward" }
   ]
  }
 }
