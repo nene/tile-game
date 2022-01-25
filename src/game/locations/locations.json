@@ -9,7 +9,7 @@
 		"url": "https://ldtk.io"
 	},
 	"jsonVersion": "0.9.3",
-	"nextUid": 90,
+	"nextUid": 91,
 	"worldLayout": "Free",
 	"worldGridWidth": 256,
 	"worldGridHeight": 256,
@@ -1527,6 +1527,31 @@
 			"pivotX": 0,
 			"pivotY": 1,
 			"fieldDefs": []
+		},
+		{
+			"identifier": "PoolTable",
+			"uid": 90,
+			"tags": [],
+			"width": 64,
+			"height": 32,
+			"resizableX": false,
+			"resizableY": false,
+			"keepAspectRatio": false,
+			"fillOpacity": 1,
+			"lineOpacity": 1,
+			"hollow": false,
+			"color": "#94D9B3",
+			"renderMode": "Tile",
+			"showName": true,
+			"tilesetId": 17,
+			"tileId": 21,
+			"tileRenderMode": "FitInside",
+			"maxCount": 0,
+			"limitScope": "PerLevel",
+			"limitBehavior": "MoveLastOne",
+			"pivotX": 0,
+			"pivotY": 0,
+			"fieldDefs": []
 		}
 	], "tilesets": [
 		{
@@ -2215,6 +2240,17 @@
 							"height": 5,
 							"defUid": 85,
 							"px": [208,150],
+							"fieldInstances": []
+						},
+						{
+							"__identifier": "PoolTable",
+							"__grid": [5,11],
+							"__pivot": [0,0],
+							"__tile": { "tilesetUid": 17, "srcRect": [96,96,32,32] },
+							"width": 64,
+							"height": 32,
+							"defUid": 90,
+							"px": [80,176],
 							"fieldInstances": []
 						}
 					]
