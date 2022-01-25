@@ -1532,7 +1532,7 @@
 			"identifier": "PoolTable",
 			"uid": 90,
 			"tags": [],
-			"width": 64,
+			"width": 80,
 			"height": 32,
 			"resizableX": false,
 			"resizableY": false,
@@ -1608,7 +1608,7 @@
 			"savedSelections": [],
 			"cachedPixelData": {
 				"opaqueTiles": "000000000000000000000000",
-				"averageColors": "c33483336433433256667887c6546666b555599aa36444328754a99a1764b6556754b876724634223877000000000000"
+				"averageColors": "c33483336433433256667887c6546666b555599aa36444328754a99a1764b6556754b876724634223877955400000000"
 			}
 		},
 		{
@@ -2247,7 +2247,7 @@
 							"__grid": [5,11],
 							"__pivot": [0,0],
 							"__tile": { "tilesetUid": 17, "srcRect": [96,96,32,32] },
-							"width": 64,
+							"width": 80,
 							"height": 32,
 							"defUid": 90,
 							"px": [80,176],
