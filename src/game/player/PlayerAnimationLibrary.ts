@@ -6,6 +6,7 @@ import { Facing } from "../npc/Facing";
 import cfeRebJson from "../sprites/data/cfe-reb.json";
 import cfeRebDrunkJson from "../sprites/data/cfe-reb-drunk.json";
 import { readAsepriteAnimation } from "../sprites/readAsepriteAnimation";
+import { DrinkAnimationSprites } from "../sprites/DrinkAnimation";
 
 export type PlayerAnimationType = 'stand' | 'walk' | 'drunk';
 
@@ -77,6 +78,14 @@ export class PlayerAnimationLibrary {
 
   getSleep(): Animation {
     return this.sleepAnimation;
+  }
+
+  getDrinkAnimationSprites(): DrinkAnimationSprites {
+    const drinkFrames = readAsepriteAnimation("B", cfeRebJson);
+    return {
+      "figure": SpriteLibrary.getSprite("cfe-reb", drinkFrames[0].coord),
+      "hand": SpriteLibrary.getSprite("cfe-reb", drinkFrames[1].coord),
+    };
   }
 }
 

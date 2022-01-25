@@ -9,6 +9,8 @@ import { createCharacterActivities } from "./createCharacterActivities";
 import { Facing } from "../npc/Facing";
 import { DrinkAnimationSprites } from "../sprites/DrinkAnimation";
 import { FramesDef } from "../sprites/SpriteAnimation";
+import { AsepriteFile } from "../sprites/Aseprite";
+import { readAsepriteAnimation } from "../sprites/readAsepriteAnimation";
 
 export type Desire = "beer" | "question";
 
@@ -23,6 +25,7 @@ interface DayConfig {
 }
 
 export interface AcademicCharacterDef {
+  json: AsepriteFile,
   name: string;
   spriteName: SpriteName;
   moveAnimationFrames?: Record<Facing, FramesDef>
@@ -145,9 +148,10 @@ export class AcademicCharacter implements Character {
   }
 
   getDrinkSprites(): DrinkAnimationSprites {
+    const drinkFrames = readAsepriteAnimation("B", this.def.json);
     return {
-      figure: SpriteLibrary.getSprite(this.def.spriteName, [1, 0]),
-      hand: SpriteLibrary.getSprite(this.def.spriteName, [2, 0]),
+      figure: SpriteLibrary.getSprite(this.def.spriteName, drinkFrames[0].coord),
+      hand: SpriteLibrary.getSprite(this.def.spriteName, drinkFrames[1].coord),
     }
   }
 }

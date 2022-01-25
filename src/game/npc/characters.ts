@@ -2,12 +2,17 @@ import { getDrink } from "../items/Drink";
 import { AcademicCharacter } from "./AcademicCharacter";
 import { Character } from "./Character";
 import { FeenoksLadyCharacter } from "./FeenoksLadyCharacter";
+import { readAsepriteAnimation } from "../sprites/readAsepriteAnimation";
 import koppelJson from "../sprites/data/cfe-ksv-koppel.json";
 import sassJson from "../sprites/data/cfe-ksv-sass.json";
-import { readAsepriteAnimation } from "../sprites/readAsepriteAnimation";
+import pikmetsJson from "../sprites/data/cfe-ksv-pikmets.json";
+import ottoJson from "../sprites/data/cfe-ksv-otto.json";
+import karlJson from "../sprites/data/cfe-ksv-karl.json";
+import karkJson from "../sprites/data/cfe-ksv-kark.json";
 
 const characters = {
   "koppel": new AcademicCharacter({
+    json: koppelJson,
     name: "ksv! Jakob Koppel",
     spriteName: "cfe-ksv-koppel",
     moveAnimationFrames: {
@@ -23,6 +28,7 @@ const characters = {
     hatedDrinks: [getDrink("limonaad"), getDrink("paulaner"), getDrink("porter")],
   }),
   "sass": new AcademicCharacter({
+    json: sassJson,
     name: "vil! Aleksander Popov",
     spriteName: "cfe-ksv-sass",
     moveAnimationFrames: {
@@ -38,6 +44,7 @@ const characters = {
     hatedDrinks: [getDrink("porter"), getDrink("limonaad")],
   }),
   "pikmets": new AcademicCharacter({
+    json: pikmetsJson,
     name: "b!vil! Richard Pikmets",
     spriteName: "cfe-ksv-pikmets",
     days: {
@@ -47,6 +54,7 @@ const characters = {
     hatedDrinks: [getDrink("alexander"), getDrink("pilsner")],
   }),
   "otto": new AcademicCharacter({
+    json: ottoJson,
     name: "vil! Otto Pukk",
     spriteName: "cfe-ksv-otto",
     days: {
@@ -56,6 +64,7 @@ const characters = {
     hatedDrinks: [getDrink("kriek"), getDrink("limonaad")],
   }),
   "vanamees": new AcademicCharacter({
+    json: karlJson,
     name: "Vanamees",
     spriteName: "cfe-ksv-karl",
     days: {
@@ -66,6 +75,7 @@ const characters = {
     hatedDrinks: [getDrink("bock")],
   }),
   "kark": new AcademicCharacter({
+    json: karkJson,
     name: "vil! Raul Tõniste",
     spriteName: "cfe-ksv-kark",
     days: {

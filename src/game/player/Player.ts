@@ -14,7 +14,6 @@ import { GameItem } from "../items/GameItem";
 import { PlayerAnimationLibrary } from "./PlayerAnimationLibrary";
 import { PlayerDirection } from "./PlayerDirection";
 import { Facing } from "../npc/Facing";
-import { SpriteLibrary } from "../sprites/SpriteLibrary";
 
 const MAX_SPEED = 6;
 
@@ -185,10 +184,7 @@ export class Player implements GameObject {
       this.itemAtHand = glass;
       this.animation = new DrinkAnimation({
         beerGlass: glass,
-        sprites: {
-          "figure": SpriteLibrary.getSprite("cfe-reb", [1, 0]),
-          "hand": SpriteLibrary.getSprite("cfe-reb", [2, 0]),
-        },
+        sprites: this.animationLib.getDrinkAnimationSprites(),
         drinkTicks: 10,
         idleTicks: 10,
         onSip: (drink) => {
