@@ -8,6 +8,14 @@ function findLayer(name)
   end
 end
 
+function findTag(name)
+  for i,tag in ipairs(app.activeSprite.tags) do
+    if (tag.name == name) then
+      return tag
+    end
+  end
+end
+
 -- Hide the shoppen layer
 findLayer("kann").isVisible = false
 
@@ -15,6 +23,8 @@ findLayer("kann").isVisible = false
 local handLayer = findLayer("kasi")
 
 -- move hand layer cel to a separate frame
-sprite:newEmptyFrame(3)
-sprite:newCel(handLayer, 3, handLayer:cel(2).image, handLayer:cel(2).position)
-sprite:deleteCel(handLayer, 2)
+drinkFrameNr = findTag("B").fromFrame.frameNumber
+handFrameNr = drinkFrameNr + 1
+sprite:newEmptyFrame(handFrameNr)
+sprite:newCel(handLayer, handFrameNr, handLayer:cel(drinkFrameNr).image, handLayer:cel(drinkFrameNr).position)
+sprite:deleteCel(handLayer, drinkFrameNr)
