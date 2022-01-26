@@ -97,7 +97,7 @@ const imageFiles = {
 
   // Furniture
   'furniture': spriteDef({ src: furniture, cfg: { size: [130, 78] } }),
-  'table': spriteDef({ src: table, cfg: { size: [64, 23], offset: [0, -6] } }),
+  'table': spriteDef({ src: table, cfg: { size: [64, 32], offset: [0, -6] } }),
   'fridge': spriteDef({ src: fridge, cfg: { size: [16, 46], offset: [0, -32] } }),
   'beer-cabinet': spriteDef({ src: beerCabinet, cfg: { size: [32, 46], offset: [0, -32] } }),
   'beer-box': spriteDef({ src: beerBox, cfg: { size: [11, 14], offset: [3, -4] } }),
