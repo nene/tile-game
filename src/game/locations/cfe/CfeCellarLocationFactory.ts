@@ -14,7 +14,7 @@ export class CfeCellarLocationFactory implements LocationFactory {
     ...this.levelFactory.getFurniture(),
 
     new Door({
-      coord: tileToScreenCoord([12, 4]),
+      coord: tileToScreenCoord([11, 4]),
       area: SpriteLibrary.getSprite("staircase-door"),
       from: "cfe-cellar",
       to: "cfe-hall",
