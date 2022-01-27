@@ -1,5 +1,5 @@
 import { Skill } from "../attributes/Skill";
-import { Coord, coordAdd, rectGrow } from "../Coord";
+import { Coord, coordAdd, isCoordInRect, Rect, rectGrow } from "../Coord";
 import { GameEvent } from "../GameEvent";
 import { PixelScreen, TextStyle } from "../PixelScreen";
 import { readAsepriteAnimation } from "../sprites/readAsepriteAnimation";
@@ -25,10 +25,16 @@ export class LevelUpMessage implements Component {
     frames: readAsepriteAnimation("bounce", levelUpJson),
   });
   private opacity = 0;
+  private onClick: () => void;
+  private borderRect?: Rect;
 
   private hideMessageAfterDelay = debounce(() => {
     this.state = "fade-out";
   }, 10000);
+
+  constructor({ onClick }: { onClick: () => void }) {
+    this.onClick = onClick;
+  }
 
   onLevelUp(skill: Skill, text: string) {
     this.message = {
@@ -41,6 +47,10 @@ export class LevelUpMessage implements Component {
   }
 
   handleGameEvent(event: GameEvent) {
+    if (event.type === "click" && this.borderRect && isCoordInRect(event.coord, this.borderRect)) {
+      this.onClick();
+      return true;
+    }
     return undefined;
   };
 
@@ -73,13 +83,13 @@ export class LevelUpMessage implements Component {
       const style: TextStyle = { color: TEXT_COLOR, size: "small" };
       const textSize = coordAdd(screen.measureText(message.text, style), INDENT);
 
-      const borderRect = rectGrow({ coord: POSITION, size: textSize }, BORDER_PADDING);
-      screen.drawRect(borderRect, TEXT_COLOR);
+      this.borderRect = rectGrow({ coord: POSITION, size: textSize }, BORDER_PADDING);
+      screen.drawRect(this.borderRect, TEXT_COLOR);
       screen.drawRect(rectGrow({ coord: POSITION, size: textSize }, PADDING), BG_COLOR);
       screen.drawText(message.text, coordAdd(POSITION, INDENT), style);
 
-      screen.drawSprite(message.icon, coordAdd(borderRect.coord, [-6, -1]));
-      screen.drawSprites(this.animation.getSprites(), coordAdd(borderRect.coord, [1, -3]));
+      screen.drawSprite(message.icon, coordAdd(this.borderRect.coord, [-6, -1]));
+      screen.drawSprites(this.animation.getSprites(), coordAdd(this.borderRect.coord, [1, -3]));
     });
   }
 }

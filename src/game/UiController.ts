@@ -17,6 +17,7 @@ import { DayTransition } from "./DayTransition";
 import { resetCharactersForDay } from "./npc/characters";
 import { delay } from "lodash";
 import { LevelUpMessage } from "./ui/LevelUpMessage";
+import { toggleSkillsView } from "./ui/infoModals";
 
 export class UiController {
   private world: GameWorld;
@@ -27,7 +28,9 @@ export class UiController {
   private scoreBoard: ScoreBoard;
   private calendar: Calendar;
   private questionFacory: QuestionFactory;
-  private levelUpMsg = new LevelUpMessage();
+  private levelUpMsg = new LevelUpMessage({
+    onClick: () => toggleSkillsView(this),
+  });
   private attributes = new PlayerAttributes(this.levelUpMsg);
   private dayTransition?: DayTransition;
 
@@ -151,6 +154,7 @@ export class UiController {
     stopPropagation = stopPropagation || this.cursorController.handleGameEvent(event);
     stopPropagation = stopPropagation || this.modalWindow?.handleGameEvent(event);
     stopPropagation = stopPropagation || this.inventoryController.handleGameEvent(event);
+    stopPropagation = stopPropagation || this.levelUpMsg.handleGameEvent(event);
     if (stopPropagation) {
       return true;
     }
