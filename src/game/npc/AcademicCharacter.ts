@@ -149,9 +149,11 @@ export class AcademicCharacter implements Character {
 
   getDrinkSprites(): DrinkAnimationSprites {
     const drinkFrames = readAsepriteAnimation("B", this.def.json);
+    const [figure1, figure2, hand] = drinkFrames.length === 3 ? [0, 1, 2] : [0, 0, 1];
     return {
-      figure: SpriteLibrary.getSprite(this.def.spriteName, drinkFrames[0].coord),
-      hand: SpriteLibrary.getSprite(this.def.spriteName, drinkFrames[1].coord),
+      figure1: SpriteLibrary.getSprite(this.def.spriteName, drinkFrames[figure1].coord),
+      figure2: SpriteLibrary.getSprite(this.def.spriteName, drinkFrames[figure2].coord),
+      hand: SpriteLibrary.getSprite(this.def.spriteName, drinkFrames[hand].coord),
     }
   }
 }

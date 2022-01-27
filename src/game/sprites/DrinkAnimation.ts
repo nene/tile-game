@@ -5,7 +5,7 @@ import { Animation } from "./Animation";
 import { Drink } from "../items/Drink";
 import { noop } from "lodash";
 
-export type DrinkAnimationSprites = Record<"figure" | "hand", Sprite>;
+export type DrinkAnimationSprites = Record<"figure1" | "figure2" | "hand", Sprite>;
 
 interface DrinkAnimationConfig {
   beerGlass: BeerGlass;
@@ -56,7 +56,11 @@ export class DrinkAnimation implements Animation {
   }
 
   getSprites(): Sprite[] {
-    return [this.sprites.figure, this.getBeerSprite(), this.getHandSprite()];
+    return [this.getFigureSprite(), this.getBeerSprite(), this.getHandSprite()];
+  }
+
+  private getFigureSprite(): Sprite {
+    return this.isDrinking() ? this.sprites.figure2 : this.sprites.figure1;
   }
 
   private getHandSprite(): Sprite {
@@ -72,7 +76,11 @@ export class DrinkAnimation implements Animation {
   }
 
   private handPositionOffset(): Coord {
-    return (this.isHandUp && this.beerGlass.getLevel() !== DrinkLevel.empty) ? [0, -2] : [0, 0];
+    return this.isDrinking() ? [0, -2] : [0, 0];
+  }
+
+  private isDrinking(): boolean {
+    return this.isHandUp && this.beerGlass.getLevel() !== DrinkLevel.empty;
   }
 
   isFinished() {

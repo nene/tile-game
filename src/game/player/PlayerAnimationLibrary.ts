@@ -88,8 +88,9 @@ export class PlayerAnimationLibrary {
   getDrinkAnimationSprites(): DrinkAnimationSprites {
     const drinkFrames = readAsepriteAnimation("B", cfeRebJson);
     return {
-      "figure": SpriteLibrary.getSprite("cfe-reb", drinkFrames[0].coord),
-      "hand": SpriteLibrary.getSprite("cfe-reb", drinkFrames[1].coord),
+      "figure1": SpriteLibrary.getSprite("cfe-reb", drinkFrames[0].coord),
+      "figure2": SpriteLibrary.getSprite("cfe-reb", drinkFrames[1].coord),
+      "hand": SpriteLibrary.getSprite("cfe-reb", drinkFrames[2].coord),
     };
   }
 }

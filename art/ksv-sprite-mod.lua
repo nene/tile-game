@@ -23,8 +23,12 @@ findLayer("kann").isVisible = false
 local handLayer = findLayer("kasi")
 
 -- move hand layer cel to a separate frame
-drinkFrameNr = findTag("B").fromFrame.frameNumber
-handFrameNr = drinkFrameNr + 1
+drinkFrame1Nr = findTag("B").fromFrame.frameNumber
+drinkFrame2Nr = findTag("B").toFrame.frameNumber
+handFrameNr = drinkFrame2Nr + 1
 sprite:newEmptyFrame(handFrameNr)
-sprite:newCel(handLayer, handFrameNr, handLayer:cel(drinkFrameNr).image, handLayer:cel(drinkFrameNr).position)
-sprite:deleteCel(handLayer, drinkFrameNr)
+sprite:newCel(handLayer, handFrameNr, handLayer:cel(drinkFrame1Nr).image, handLayer:cel(drinkFrame1Nr).position)
+sprite:deleteCel(handLayer, drinkFrame1Nr)
+if (handLayer:cel(drinkFrame2Nr)) then
+  sprite:deleteCel(handLayer, drinkFrame2Nr)
+end
