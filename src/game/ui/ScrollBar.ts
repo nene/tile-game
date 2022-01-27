@@ -13,7 +13,14 @@ const SPRITE_DOWN: Coord = [2, 0];
 const SPRITE_DOWN_PRESSED: Coord = [3, 0];
 const SPRITE_BG: Coord = [4, 0];
 
+interface ScrollBarCfg {
+  rect: Rect;
+  scrollArea: Rect;
+}
+
 export class ScrollBar implements Component {
+  private rect: Rect;
+  private scrollArea: Rect;
   private bgPattern: CanvasPattern;
   private buttons: Record<"up" | "down", Button>;
   private sliderPos = 0;
@@ -21,7 +28,9 @@ export class ScrollBar implements Component {
   private sliderSize = 20;
   private sliderGrabbed?: Coord;
 
-  constructor(private rect: Rect, private scrollArea: Rect) {
+  constructor({ rect, scrollArea }: ScrollBarCfg) {
+    this.rect = rect;
+    this.scrollArea = scrollArea;
     this.sliderConstraints = { min: 0, max: rect.size[1] - 16 - this.sliderSize };
 
     this.buttons = {

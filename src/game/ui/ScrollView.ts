@@ -19,7 +19,10 @@ export class ScrollView<T> implements Component {
   private highlightedIndex = -1;
 
   constructor(private cfg: ScrollViewCfg<T>) {
-    this.scrollBar = new ScrollBar(this.scrollBarRect(), this.cfg.rect);
+    this.scrollBar = new ScrollBar({
+      rect: this.scrollBarRect(),
+      scrollArea: this.cfg.rect,
+    });
   }
 
   handleGameEvent(event: GameEvent): boolean | undefined {
