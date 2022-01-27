@@ -51,12 +51,10 @@ export class ScrollView<T> implements Component {
   paint(screen: PixelScreen) {
     screen.getOffscreen().drawRect(this.cfg.rect, this.cfg.bgColor);
 
-    const viewRect = this.viewRect();
-
     this.cfg.items.forEach((item, i) => {
       const rect = this.itemRect(i);
       // Only draw the item when it's in visible area
-      if (rectOverlaps(rect, viewRect)) {
+      if (rectOverlaps(rect, this.cfg.rect)) {
         this.cfg.renderer(screen.getOffscreen(), rect, item, this.highlightedIndex === i);
       }
     });
