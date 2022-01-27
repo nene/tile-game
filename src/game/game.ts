@@ -6,10 +6,7 @@ import { UiController } from "./UiController";
 import { Loops } from "./Loops";
 import { FpsCounter } from "./FpsCounter";
 import { GameEventFactory, GameEventType } from "./GameEvent";
-import { getAllCharacters } from "./npc/characters";
-import { OpinionsView } from "./npc/OpinionsView";
-import { SkillsView } from "./attributes/SkillsView";
-import { isAcademicCharacter } from "./npc/AcademicCharacter";
+import { toggleOpinionsView, toggleSkillsView } from "./ui/infoModals";
 
 export interface GameApi {
   onKeyEvent: (type: "keyup" | "keydown", key: string) => boolean;
@@ -53,24 +50,10 @@ export async function runGame(ctx: CanvasRenderingContext2D, offscreenCtx: Canva
     onKeyEvent: (type: "keyup" | "keydown", key: string): boolean => {
       const event = eventFactory.createKeyboardEvent(type, key);
       if (event.type === "keydown" && event.key === "OPINIONS") {
-        if (ui.getInfoModal() instanceof OpinionsView) {
-          ui.hideInfoModal();
-        } else {
-          ui.showInfoModal(new OpinionsView({
-            characters: getAllCharacters().filter(isAcademicCharacter),
-            onClose: () => ui.hideInfoModal(),
-          }));
-        }
+        toggleOpinionsView(ui);
       }
       if (event.type === "keydown" && event.key === "SKILLS") {
-        if (ui.getInfoModal() instanceof SkillsView) {
-          ui.hideInfoModal();
-        } else {
-          ui.showInfoModal(new SkillsView({
-            attributes: ui.getAttributes(),
-            onClose: () => ui.hideInfoModal(),
-          }));
-        }
+        toggleSkillsView(ui);
       }
       if (ui.isGameWorldActive() && ui.isGameWorldVisible()) {
         const result = ui.getWorld().getPlayer().handleKeyEvent(event);
