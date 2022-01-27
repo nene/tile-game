@@ -16,10 +16,10 @@ const characters = {
     name: "ksv! Jakob Koppel",
     spriteName: "cfe-ksv-koppel",
     moveAnimationFrames: {
-      down: readAsepriteAnimation("D", koppelJson),
-      up: readAsepriteAnimation("U", koppelJson),
-      left: readAsepriteAnimation("L", koppelJson),
-      right: readAsepriteAnimation("R", koppelJson),
+      down: readAsepriteAnimation("w-down", koppelJson),
+      up: readAsepriteAnimation("w-up", koppelJson),
+      left: readAsepriteAnimation("w-left", koppelJson),
+      right: readAsepriteAnimation("w-right", koppelJson),
     },
     days: {
       2: { spawnTime: 1 * 10 },
