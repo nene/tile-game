@@ -89,10 +89,10 @@ export class UiController {
       this.world.tick();
       this.inventoryController.tick();
       this.calendar.tick();
-      this.levelUpMsg.tick();
     } else {
       this.dayTransition?.tick();
     }
+    this.levelUpMsg.tick();
   }
 
   paint(screen: PixelScreen) {
