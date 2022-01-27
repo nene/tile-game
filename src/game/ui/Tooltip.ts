@@ -24,7 +24,7 @@ export class Tooltip {
     if (!this.text || !this.mouseCoord) {
       return;
     }
-    const style: TextStyle = { color: "#3e2821" };
+    const style: TextStyle = { color: "#3e2821", size: "small" };
 
     const rect = this.tooltipRect({
       coord: coordAdd(this.mouseCoord, [11, 2]),
