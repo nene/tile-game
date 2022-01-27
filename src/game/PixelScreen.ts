@@ -19,7 +19,6 @@ export class PixelScreen implements TextMeasurer {
   private ctx: CanvasRenderingContext2D;
   private size: Coord = SCREEN_SIZE;
   private offset: Coord = [0, 0];
-  private bg?: ImageData;
   private fixed = false;
 
   constructor(ctx: CanvasRenderingContext2D, private offscreen?: PixelScreen) {
@@ -125,21 +124,11 @@ export class PixelScreen implements TextMeasurer {
     this.ctx.textAlign = align ?? "left";
   }
 
-  saveBg() {
-    this.bg = this.ctx.getImageData(0, 0, this.size[0] * SCREEN_SCALE, this.size[1] * SCREEN_SCALE);
-  }
-
   centerTo(coord: Coord, location: Location) {
     this.offset = worldOffset(coord, {
       screenSize: this.size,
       worldSize: location.getSize(),
     });
-  }
-
-  restoreBg() {
-    if (this.bg) {
-      this.ctx.putImageData(this.bg, 0, 0);
-    }
   }
 
   getOffset(): Coord {
