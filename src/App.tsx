@@ -4,19 +4,31 @@ import { GameApi, runGame } from "./game/game";
 import { SCREEN_SCALE, SCREEN_SIZE } from "./game/ui/screen-size";
 import { mouseCoordRelativeTo } from "./mouseCoord";
 
+function getCanvasAndContext(canvasEl: React.RefObject<HTMLCanvasElement>): {
+  el: HTMLCanvasElement;
+  ctx: CanvasRenderingContext2D;
+} {
+  const canvas = canvasEl?.current;
+  if (!canvas) {
+    throw new Error("Unable to access canvas");
+  }
+  const ctx = canvas.getContext("2d", { alpha: false });
+  if (!ctx) {
+    throw new Error("Unable to access canvas 2D context");
+  }
+  return { el: canvas, ctx };
+}
+
 export function App() {
   const canvasEl = useRef<HTMLCanvasElement>(null);
+  const offscreenCanvasEl = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    const canvas = canvasEl?.current;
-    if (!canvas) {
-      throw new Error("Unable to access canvas");
-    }
-    const ctx = canvas.getContext("2d", { alpha: false });
-    if (!ctx) {
-      throw new Error("Unable to access canvas 2D context");
-    }
-    ctx.resetTransform();
+    const canvas = getCanvasAndContext(canvasEl);
+    canvas.ctx.resetTransform();
+
+    const offscreenCanvas = getCanvasAndContext(offscreenCanvasEl);
+    offscreenCanvas.ctx.resetTransform();
 
     let gameApi: GameApi;
     const onKeyDown = (e: KeyboardEvent) => {
@@ -30,40 +42,40 @@ export function App() {
       }
     };
     const onClick = (e: MouseEvent) => {
-      gameApi.onMouseEvent("click", mouseCoordRelativeTo(e, canvas));
+      gameApi.onMouseEvent("click", mouseCoordRelativeTo(e, canvas.el));
     };
     const onContextMenu = (e: MouseEvent) => {
       e.preventDefault();
-      gameApi.onMouseEvent("rightclick", mouseCoordRelativeTo(e, canvas));
+      gameApi.onMouseEvent("rightclick", mouseCoordRelativeTo(e, canvas.el));
     };
     const onMouseMove = (e: MouseEvent) => {
-      gameApi.onMouseEvent("mousemove", mouseCoordRelativeTo(e, canvas));
+      gameApi.onMouseEvent("mousemove", mouseCoordRelativeTo(e, canvas.el));
     };
     const onMouseDown = (e: MouseEvent) => {
-      gameApi.onMouseEvent("mousedown", mouseCoordRelativeTo(e, canvas));
+      gameApi.onMouseEvent("mousedown", mouseCoordRelativeTo(e, canvas.el));
     };
     const onMouseUp = (e: MouseEvent) => {
-      gameApi.onMouseEvent("mouseup", mouseCoordRelativeTo(e, canvas));
+      gameApi.onMouseEvent("mouseup", mouseCoordRelativeTo(e, canvas.el));
     };
     const onWheel = (e: WheelEvent) => {
-      gameApi.onMouseEvent("wheel", mouseCoordRelativeTo(e, canvas), [
+      gameApi.onMouseEvent("wheel", mouseCoordRelativeTo(e, canvas.el), [
         e.deltaX,
         e.deltaY,
       ]);
     };
 
     const game = async () => {
-      gameApi = await runGame(ctx);
+      gameApi = await runGame(canvas.ctx);
 
       document.addEventListener("keydown", onKeyDown);
       document.addEventListener("keyup", onKeyUp);
 
-      canvas.addEventListener("click", onClick);
-      canvas.addEventListener("contextmenu", onContextMenu);
-      canvas.addEventListener("mousemove", onMouseMove);
-      canvas.addEventListener("mousedown", onMouseDown);
-      canvas.addEventListener("mouseup", onMouseUp);
-      canvas.addEventListener("wheel", onWheel);
+      canvas.el.addEventListener("click", onClick);
+      canvas.el.addEventListener("contextmenu", onContextMenu);
+      canvas.el.addEventListener("mousemove", onMouseMove);
+      canvas.el.addEventListener("mousedown", onMouseDown);
+      canvas.el.addEventListener("mouseup", onMouseUp);
+      canvas.el.addEventListener("wheel", onWheel);
     };
     game();
 
@@ -71,12 +83,12 @@ export function App() {
       gameApi.cleanup();
       document.removeEventListener("keydown", onKeyDown);
       document.removeEventListener("keyup", onKeyUp);
-      canvas.removeEventListener("click", onClick);
-      canvas.removeEventListener("contextmenu", onContextMenu);
-      canvas.removeEventListener("mousemove", onMouseMove);
-      canvas.removeEventListener("mousedown", onMouseDown);
-      canvas.removeEventListener("mouseup", onMouseUp);
-      canvas.removeEventListener("wheel", onWheel);
+      canvas.el.removeEventListener("click", onClick);
+      canvas.el.removeEventListener("contextmenu", onContextMenu);
+      canvas.el.removeEventListener("mousemove", onMouseMove);
+      canvas.el.removeEventListener("mousedown", onMouseDown);
+      canvas.el.removeEventListener("mouseup", onMouseUp);
+      canvas.el.removeEventListener("wheel", onWheel);
     };
   }, []);
 
@@ -87,6 +99,12 @@ export function App() {
         width={SCREEN_SIZE[0] * SCREEN_SCALE}
         height={SCREEN_SIZE[1] * SCREEN_SCALE}
         ref={canvasEl}
+      ></GameCanvas>
+      <GameCanvas
+        id="offscreen-canvas"
+        width={SCREEN_SIZE[0] * SCREEN_SCALE}
+        height={SCREEN_SIZE[1] * SCREEN_SCALE}
+        ref={offscreenCanvasEl}
       ></GameCanvas>
     </AppWrapper>
   );
