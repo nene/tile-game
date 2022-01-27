@@ -26,7 +26,11 @@ export class UiController {
   private scoreBoard: ScoreBoard;
   private calendar: Calendar;
   private questionFacory: QuestionFactory;
-  private attributes = new PlayerAttributes();
+  private attributes = new PlayerAttributes({
+    onLevelUp: (skill, msg) => {
+      console.log(msg);
+    }
+  });
   private dayTransition?: DayTransition;
 
   constructor() {

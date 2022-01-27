@@ -7,6 +7,7 @@ import { OrgSkill } from "./OrgSkill";
 import { isBottleOpener } from "../items/BottleOpener";
 import { GameItem } from "../items/GameItem";
 import { PouringSkill } from "./PouringSkill";
+import { SkillConfig } from "./Skill";
 
 export class PlayerAttributes {
   public readonly inventory = new StorageInventory({
@@ -17,10 +18,16 @@ export class PlayerAttributes {
     ],
   });
   public readonly wallet = new Wallet(25);
-  public readonly alcoSkill = new AlcoSkill();
-  public readonly orgSkill = new OrgSkill();
-  public readonly pouringSkill = new PouringSkill();
+  public readonly alcoSkill: AlcoSkill;
+  public readonly orgSkill: OrgSkill;
+  public readonly pouringSkill: PouringSkill;
   private selectedItem?: GameItem;
+
+  constructor(cfg: SkillConfig) {
+    this.alcoSkill = new AlcoSkill(cfg);
+    this.orgSkill = new OrgSkill(cfg);
+    this.pouringSkill = new PouringSkill(cfg);
+  }
 
   getSelectedItem(): GameItem | undefined {
     return this.selectedItem;

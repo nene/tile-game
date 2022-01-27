@@ -1,3 +1,5 @@
+import { Skill, SkillConfig } from "./Skill";
+
 const pouringsPerLevel: Record<number, number> = {
   0: 1,
   1: 5,
@@ -12,9 +14,11 @@ const pouringsPerLevel: Record<number, number> = {
   10: 100,
 };
 
-export class PouringSkill {
+export class PouringSkill implements Skill {
   private level = 0; // number between 0..10
   private pourings = 0;
+
+  constructor(private cfg: SkillConfig) { }
 
   getLevel(): number {
     return this.level;
@@ -31,6 +35,7 @@ export class PouringSkill {
     if (this.level < 10) {
       this.level++;
       this.pourings = 0;
+      this.cfg.onLevelUp(this, "Muutud õllevalamises üha osavamaks!");
     }
   }
 }

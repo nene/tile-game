@@ -1,5 +1,6 @@
 import { Drink } from "../items/Drink";
 import { constrain } from "../utils/constrain";
+import { Skill, SkillConfig } from "./Skill";
 
 const drunkennessMinMax = { min: 0, max: 5 };
 
@@ -17,12 +18,14 @@ const levelMultiplier: Record<number, number> = {
   10: 0.1,
 };
 
-export class AlcoSkill {
+export class AlcoSkill implements Skill {
   private level = 0; // 0 .. 10
   private drunkenness = 0; // 0 .. 5
   private drunkennessChangeCallback?: (drunkenness: number) => void;
   // Records the number of sips one has had of each drink
   private sippedDrinks = new Map<Drink, number>();
+
+  constructor(private cfg: SkillConfig) { }
 
   // Consumes 1/4 of a glass (one step from beer glass)
   sip(drink: Drink) {
@@ -42,6 +45,7 @@ export class AlcoSkill {
   private levelUp() {
     if (this.level < 10) {
       this.level++;
+      this.cfg.onLevelUp(this, "Sinu õlletaluvus tõusis uuele tasemele!");
     }
   }
 

@@ -1,5 +1,6 @@
 import { allOrganizations, Organization, OrgSkillLevel } from "../orgs/Organization";
 import { QuestionCategory } from "../questions/Question";
+import { Skill, SkillConfig } from "./Skill";
 
 const correctAnswersPerLevel: Record<OrgSkillLevel, number> = {
   [OrgSkillLevel.estica]: 4, // All four possible questions
@@ -17,9 +18,11 @@ const correctAnswersPerLevel: Record<OrgSkillLevel, number> = {
 
 // Skill of answering questions about Academic Organizations.
 // As the player levels up, questions become harder.
-export class OrgSkill {
+export class OrgSkill implements Skill {
   private level = OrgSkillLevel.estica;
   private correctAnswers = 0;
+
+  constructor(private cfg: SkillConfig) { }
 
   getLevel(): OrgSkillLevel {
     return this.level;
@@ -42,6 +45,7 @@ export class OrgSkill {
     if (this.level < OrgSkillLevel.level10) {
       this.level++;
       this.correctAnswers = 0;
+      this.cfg.onLevelUp(this, "Oled ak orgide osas targemaks saanud!");
     }
   }
 
