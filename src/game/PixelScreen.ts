@@ -19,7 +19,6 @@ export class PixelScreen implements TextMeasurer {
   private ctx: CanvasRenderingContext2D;
   private size: Coord = SCREEN_SIZE;
   private offset: Coord = [0, 0];
-  private fixed = false;
 
   constructor(ctx: CanvasRenderingContext2D, private offscreen?: PixelScreen) {
     this.ctx = ctx;
@@ -29,10 +28,10 @@ export class PixelScreen implements TextMeasurer {
   }
 
   withFixedCoords(fn: () => void) {
-    const oldFixed = this.fixed;
-    this.fixed = true;
+    const oldOffset = this.offset;
+    this.offset = [0, 0];
     fn();
-    this.fixed = oldFixed;
+    this.offset = oldOffset;
   }
 
   // Helper for calling paint() method on multiple objects
@@ -41,10 +40,8 @@ export class PixelScreen implements TextMeasurer {
   }
 
   drawSprite(sprite: Sprite, coord: Coord) {
-    const screenOffset: Coord = this.fixed ? [0, 0] : this.offset;
-
-    if (rectOverlaps({ coord: coordAdd(coord, sprite.offset), size: sprite.size }, { coord: screenOffset, size: this.size })) {
-      const adjustedCoord = coordSub(coordAdd(coord, sprite.offset), screenOffset);
+    if (rectOverlaps({ coord: coordAdd(coord, sprite.offset), size: sprite.size }, { coord: this.offset, size: this.size })) {
+      const adjustedCoord = coordSub(coordAdd(coord, sprite.offset), this.offset);
       this.ctx.drawImage(
         sprite.image,
         sprite.coord[0],
@@ -66,9 +63,7 @@ export class PixelScreen implements TextMeasurer {
   }
 
   drawRect(rect: Rect, fill: string | CanvasPattern) {
-    const screenOffset: Coord = this.fixed ? [0, 0] : this.offset;
-
-    const adjustedCoord = coordSub(rect.coord, screenOffset);
+    const adjustedCoord = coordSub(rect.coord, this.offset);
     this.ctx.fillStyle = fill;
     this.ctx.fillRect(adjustedCoord[0], adjustedCoord[1], rect.size[0], rect.size[1]);
   }
