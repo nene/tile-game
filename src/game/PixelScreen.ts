@@ -22,7 +22,7 @@ export class PixelScreen implements TextMeasurer {
   private bg?: ImageData;
   private fixed = false;
 
-  constructor(ctx: CanvasRenderingContext2D) {
+  constructor(ctx: CanvasRenderingContext2D, private offscreen?: PixelScreen) {
     this.ctx = ctx;
     this.ctx.scale(SCREEN_SCALE, SCREEN_SCALE);
     this.ctx.imageSmoothingEnabled = false;
@@ -74,12 +74,25 @@ export class PixelScreen implements TextMeasurer {
     this.ctx.fillRect(adjustedCoord[0], adjustedCoord[1], rect.size[0], rect.size[1]);
   }
 
-  withClippedRegion({ coord, size }: Rect, fn: () => void) {
-    this.ctx.save();
-    this.ctx.rect(coord[0], coord[1], size[0], size[1]);
-    this.ctx.clip();
-    fn();
-    this.ctx.restore();
+  getOffscreen(): PixelScreen {
+    if (!this.offscreen) {
+      throw new Error("This PixelScreen has no offscreen canvas");
+    }
+    return this.offscreen;
+  }
+
+  copyFromOffscreen(source: Rect, target: Coord) {
+    this.ctx.drawImage(
+      this.getOffscreen().getContext().canvas,
+      source.coord[0] * SCREEN_SCALE,
+      source.coord[1] * SCREEN_SCALE,
+      source.size[0] * SCREEN_SCALE,
+      source.size[1] * SCREEN_SCALE,
+      target[0],
+      target[1],
+      source.size[0],
+      source.size[1],
+    );
   }
 
   drawText(text: string | number, coord: Coord, style: TextStyle = {}) {

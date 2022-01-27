@@ -49,21 +49,21 @@ export class ScrollView<T> implements Component {
   }
 
   paint(screen: PixelScreen) {
-    screen.drawRect(this.cfg.rect, this.cfg.bgColor);
-
-    this.scrollBar.paint(screen);
+    screen.getOffscreen().drawRect(this.cfg.rect, this.cfg.bgColor);
 
     const viewRect = this.viewRect();
 
-    screen.withClippedRegion(viewRect, () => {
-      this.cfg.items.forEach((item, i) => {
-        const rect = this.itemRect(i);
-        // Only draw the item when it's in visible area
-        if (rectOverlaps(rect, viewRect)) {
-          this.cfg.renderer(screen, rect, item, this.highlightedIndex === i);
-        }
-      });
+    this.cfg.items.forEach((item, i) => {
+      const rect = this.itemRect(i);
+      // Only draw the item when it's in visible area
+      if (rectOverlaps(rect, viewRect)) {
+        this.cfg.renderer(screen.getOffscreen(), rect, item, this.highlightedIndex === i);
+      }
     });
+
+    screen.copyFromOffscreen(this.cfg.rect, this.cfg.rect.coord);
+
+    this.scrollBar.paint(screen);
   }
 
   private scrollCoord(): Coord {

@@ -1,7 +1,7 @@
 import { Coord } from "../Coord";
 
 export interface Sprite {
-  image: HTMLImageElement,
+  image: CanvasImageSource,
   coord: Coord,
   size: Coord,
   offset: Coord,

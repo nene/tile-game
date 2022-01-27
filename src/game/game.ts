@@ -17,8 +17,8 @@ export interface GameApi {
   cleanup: () => void;
 }
 
-export async function runGame(ctx: CanvasRenderingContext2D): Promise<GameApi> {
-  const screen = new PixelScreen(ctx);
+export async function runGame(ctx: CanvasRenderingContext2D, offscreenCtx: CanvasRenderingContext2D): Promise<GameApi> {
+  const screen = new PixelScreen(ctx, new PixelScreen(offscreenCtx));
   let screenNeedsRepaint = true;
 
   await SpriteLibrary.load();
