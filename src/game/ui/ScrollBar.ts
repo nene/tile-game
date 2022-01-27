@@ -16,6 +16,7 @@ const SPRITE_BG: Coord = [4, 0];
 interface ScrollBarCfg {
   rect: Rect;
   scrollArea: Rect;
+  virtualHeight: number;
 }
 
 export class ScrollBar implements Component {
@@ -28,9 +29,10 @@ export class ScrollBar implements Component {
   private sliderSize = 20;
   private sliderGrabbed?: Coord;
 
-  constructor({ rect, scrollArea }: ScrollBarCfg) {
+  constructor({ rect, scrollArea, virtualHeight }: ScrollBarCfg) {
     this.rect = rect;
     this.scrollArea = scrollArea;
+    this.sliderSize = this.getSliderSize(this.rect.size[1], virtualHeight);
     this.sliderConstraints = { min: 0, max: rect.size[1] - 16 - this.sliderSize };
 
     this.buttons = {
@@ -55,6 +57,12 @@ export class ScrollBar implements Component {
     }
 
     this.bgPattern = PatternLibrary.get("scroll-bar", SPRITE_BG);
+  }
+
+  private getSliderSize(height: number, virtualHeight: number): number {
+    const ratio = height >= virtualHeight ? 1 : height / virtualHeight;
+    const scrollableAreaHeight = height - 16;
+    return Math.max(Math.floor(scrollableAreaHeight * ratio), 8);
   }
 
   handleGameEvent(event: GameEvent) {

@@ -22,6 +22,7 @@ export class ScrollView<T> implements Component {
     this.scrollBar = new ScrollBar({
       rect: this.scrollBarRect(),
       scrollArea: this.cfg.rect,
+      virtualHeight: this.fullItemHeight() * cfg.items.length,
     });
   }
 
