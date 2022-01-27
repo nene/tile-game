@@ -1,5 +1,6 @@
 import { sum } from "lodash";
 import { PixelScreen } from "./PixelScreen";
+import { SCREEN_SIZE } from "./ui/screen-size";
 
 export class FpsCounter {
   private fpsArray: number[] = [];
@@ -17,6 +18,6 @@ export class FpsCounter {
 
   paint(screen: PixelScreen) {
     const fps = sum(this.fpsArray) / this.fpsArray.length;
-    screen.drawText(Math.floor(fps) + " fps", [25, 2], { size: "small", align: "right", shadowColor: "white" });
+    screen.drawText(Math.floor(fps) + " fps", [25, SCREEN_SIZE[1] - 7], { size: "small", align: "right", shadowColor: "white" });
   }
 }

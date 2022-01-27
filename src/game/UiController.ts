@@ -16,6 +16,7 @@ import { createWorld } from "./locations/createWorld";
 import { DayTransition } from "./DayTransition";
 import { resetCharactersForDay } from "./npc/characters";
 import { delay } from "lodash";
+import { LevelUpMessage } from "./ui/LevelUpMessage";
 
 export class UiController {
   private world: GameWorld;
@@ -26,11 +27,8 @@ export class UiController {
   private scoreBoard: ScoreBoard;
   private calendar: Calendar;
   private questionFacory: QuestionFactory;
-  private attributes = new PlayerAttributes({
-    onLevelUp: (skill, msg) => {
-      console.log(msg);
-    }
-  });
+  private levelUpMsg = new LevelUpMessage();
+  private attributes = new PlayerAttributes(this.levelUpMsg);
   private dayTransition?: DayTransition;
 
   constructor() {
@@ -91,6 +89,7 @@ export class UiController {
       this.world.tick();
       this.inventoryController.tick();
       this.calendar.tick();
+      this.levelUpMsg.tick();
     } else {
       this.dayTransition?.tick();
     }
@@ -119,6 +118,7 @@ export class UiController {
         this.inventoryController.paint(screen);
       }
 
+      this.levelUpMsg.paint(screen);
       this.scoreBoard.paint(screen);
 
       this.dayTransition?.paint(screen);
