@@ -80,7 +80,15 @@ export class ScrollBar implements Component {
         }
         break;
       case "mouseup":
-        this.sliderGrabbed = undefined;
+        if (this.sliderGrabbed) {
+          this.sliderGrabbed = undefined;
+        }
+        else if (isCoordInRect(event.coord, this.aboveSliderRect())) {
+          this.sliderPos = constrain(this.sliderPos - this.sliderSize, this.sliderConstraints);
+        }
+        else if (isCoordInRect(event.coord, this.belowSliderRect())) {
+          this.sliderPos = constrain(this.sliderPos + this.sliderSize, this.sliderConstraints);
+        }
         break;
       case "mousemove":
         if (this.sliderGrabbed) {
@@ -117,5 +125,13 @@ export class ScrollBar implements Component {
 
   private sliderRect(): Rect {
     return { coord: coordAdd(this.rect.coord, [0, 8 + this.sliderPos]), size: [8, this.sliderSize] };
+  }
+
+  private aboveSliderRect(): Rect {
+    return { coord: coordAdd(this.rect.coord, [0, 8]), size: [8, this.sliderPos] };
+  }
+
+  private belowSliderRect(): Rect {
+    return { coord: coordAdd(this.rect.coord, [0, 8 + this.sliderPos + this.sliderSize]), size: [8, this.sliderConstraints.max - this.sliderPos] };
   }
 }
