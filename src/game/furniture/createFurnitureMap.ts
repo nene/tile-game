@@ -3,7 +3,7 @@ import { readPackedSprites } from "../sprites/readPackedSprites";
 import { ClassMap } from "./ClassMap";
 import { createFurnitureClass } from "./createFurnitureClass";
 
-export function createFurnitureMap(image: HTMLImageElement, json: AsepriteFile): ClassMap {
+export function createFurnitureMap(image: CanvasImageSource, json: AsepriteFile): ClassMap {
   const gameObjectDefs = readPackedSprites(json);
 
   const classMap: ClassMap = {};

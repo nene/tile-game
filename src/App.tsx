@@ -65,7 +65,7 @@ export function App() {
     };
 
     const game = async () => {
-      gameApi = await runGame(canvas.ctx);
+      gameApi = await runGame(canvas.ctx, offscreenCanvas.ctx);
 
       document.addEventListener("keydown", onKeyDown);
       document.addEventListener("keyup", onKeyUp);
@@ -100,12 +100,12 @@ export function App() {
         height={SCREEN_SIZE[1] * SCREEN_SCALE}
         ref={canvasEl}
       ></GameCanvas>
-      <GameCanvas
+      <OffscreenCanvas
         id="offscreen-canvas"
         width={SCREEN_SIZE[0] * SCREEN_SCALE}
         height={SCREEN_SIZE[1] * SCREEN_SCALE}
         ref={offscreenCanvasEl}
-      ></GameCanvas>
+      ></OffscreenCanvas>
     </AppWrapper>
   );
 }
@@ -115,6 +115,10 @@ const GameCanvas = styled.canvas`
   -webkit-font-smoothing: none;
   cursor: none;
   border: 4px solid #5c2d24;
+`;
+
+const OffscreenCanvas = styled(GameCanvas)`
+  display: none;
 `;
 
 const AppWrapper = styled.div`
