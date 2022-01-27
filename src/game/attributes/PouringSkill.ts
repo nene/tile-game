@@ -1,3 +1,4 @@
+import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { Skill, SkillConfig } from "./Skill";
 
 const pouringsPerLevel: Record<number, number> = {
@@ -22,6 +23,10 @@ export class PouringSkill implements Skill {
 
   getLevel(): number {
     return this.level;
+  }
+
+  getIcon() {
+    return SpriteLibrary.getSprite("level-up-icons", [0, 0]);
   }
 
   pourDrink() {

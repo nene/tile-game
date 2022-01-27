@@ -1,4 +1,5 @@
 import { Drink } from "../items/Drink";
+import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { constrain } from "../utils/constrain";
 import { Skill, SkillConfig } from "./Skill";
 
@@ -51,6 +52,10 @@ export class AlcoSkill implements Skill {
 
   getLevel() {
     return this.level;
+  }
+
+  getIcon() {
+    return SpriteLibrary.getSprite("level-up-icons", [0, 0]);
   }
 
   getDrunkenness() {

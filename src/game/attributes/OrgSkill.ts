@@ -1,5 +1,6 @@
 import { allOrganizations, Organization, OrgSkillLevel } from "../orgs/Organization";
 import { QuestionCategory } from "../questions/Question";
+import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { Skill, SkillConfig } from "./Skill";
 
 const correctAnswersPerLevel: Record<OrgSkillLevel, number> = {
@@ -47,6 +48,10 @@ export class OrgSkill implements Skill {
       this.correctAnswers = 0;
       this.cfg.onLevelUp(this, "Oled ak orgide osas targemaks saanud!");
     }
+  }
+
+  getIcon() {
+    return SpriteLibrary.getSprite("level-up-icons", [1, 0]);
   }
 
   // About which orgs we ask questions

@@ -7,6 +7,7 @@ import { SpriteAnimation } from "../sprites/SpriteAnimation";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { Component } from "./Component";
 import levelUpJson from "../sprites/data/level-up.json";
+import { Sprite } from "../sprites/Sprite";
 
 const TEXT_COLOR = "#3e2821";
 const BG_COLOR = "#c8b997";
@@ -21,10 +22,11 @@ export class LevelUpMessage implements Component {
   private animation = new SpriteAnimation(SpriteLibrary.get("level-up"), {
     frames: readAsepriteAnimation("bounce", levelUpJson),
   });
-  private icons = SpriteLibrary.get("level-up-icons");
+  private icon?: Sprite;
 
   onLevelUp(skill: Skill, msg: string) {
     this.msg = msg;
+    this.icon = skill.getIcon();
   }
 
   handleGameEvent(event: GameEvent) {
@@ -44,7 +46,9 @@ export class LevelUpMessage implements Component {
     screen.drawRect(rectGrow({ coord: POSITION, size: textSize }, PADDING), BG_COLOR);
     screen.drawText(this.msg, coordAdd(POSITION, INDENT), style);
 
-    screen.drawSprite(this.icons.getSprite([0, 0]), coordAdd(borderRect.coord, [-6, -1]));
+    if (this.icon) {
+      screen.drawSprite(this.icon, coordAdd(borderRect.coord, [-6, -1]));
+    }
     screen.drawSprites(this.animation.getSprites(), coordAdd(borderRect.coord, [1, -3]));
   }
 }
