@@ -34,6 +34,13 @@ export class PixelScreen implements TextMeasurer {
     this.offset = oldOffset;
   }
 
+  withOpacity(opacity: number, fn: () => void) {
+    const oldOpacity = this.ctx.globalAlpha;
+    this.ctx.globalAlpha = opacity;
+    fn();
+    this.ctx.globalAlpha = oldOpacity;
+  }
+
   // Helper for calling paint() method on multiple objects
   paint(objects: Paintable[]) {
     objects.forEach((obj) => obj.paint(this));
