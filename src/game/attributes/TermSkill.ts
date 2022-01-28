@@ -2,12 +2,12 @@ import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { Skill, SkillConfig } from "./Skill";
 
 const correctAnswersPerLevel: Record<number, number> = {
-  0: 4,
-  1: 10, // Max 5x4 questions
-  2: 10, // Max 6x4 questions
-  3: 10, // Max 5x4 questions
-  4: 10, // Max 6x4 questions
-  5: 10, // Max 5x4 questions
+  0: 1,
+  1: 10,
+  2: 10,
+  3: 10,
+  4: 10,
+  5: 10,
   6: 100,
   7: 100,
   8: 100,

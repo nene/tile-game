@@ -21,6 +21,7 @@ export function createTerminologyQuestion(): MultiChoiceQuestion {
 }
 
 interface TerminologyQuestion {
+  level?: number;
   question: string;
   correctAnswer: string;
   wrongAnswers: string[];
@@ -28,6 +29,47 @@ interface TerminologyQuestion {
 
 const questions: TerminologyQuestion[] = [
   {
+    level: 0,
+    question: "Kes sa oled?",
+    correctAnswer: "Olen korp! Fraternitas Estica uus rebane.",
+    wrongAnswers: [
+      "Olen korp! Fraternicas Estica uus rebane.",
+      "Olen korp! Faternitas Estika uus rebane.",
+      "Olen korp! Faterlitas Estika uus rebane.",
+    ],
+  },
+  {
+    level: 1,
+    question: "Kes on rebane?",
+    correctAnswer: "Tegevkonvendi liige, kel vanust alla kahe semestri.",
+    wrongAnswers: [
+      "Konvendi kandideeriv liige kel pole värve.",
+      "Konvendi liige, kel on raskusi sirkli joonistamisega.",
+      "Punase kasukaga metsik kanavaras.",
+    ],
+  },
+  {
+    level: 1,
+    question: "Kes on jänes?",
+    correctAnswer: "Pikkade kõrvadega väikeuluk.",
+    wrongAnswers: [
+      "vil! Siili suurim sõber.",
+      "Mitte-mensurandist kaasvõitlaja.",
+      "Põhjuseta lahkunuks arvatud liige.",
+    ],
+  },
+  {
+    level: 1,
+    question: "Kes on kaasvõitleja?",
+    correctAnswer: "Tegevkonvendi värvikandja, kes käib ülikoolis ja on vanem kui rebane.",
+    wrongAnswers: [
+      "Korporatsiooni liige, kel on värvide kandmise õigus.",
+      "Auvahekorra vastaspool (mitte kuramaator).",
+      "Konvendi tegevliige.",
+    ],
+  },
+  {
+    level: 1,
     question: "Mis on komitaat?",
     correctAnswer: "Äsja ülikooli lõpetanud fraaterite korraldatud pidu.",
     wrongAnswers: [
@@ -37,6 +79,7 @@ const questions: TerminologyQuestion[] = [
     ],
   },
   {
+    level: 1,
     question: "Mis on lakkimine?",
     correctAnswer: "Karistuseks määratud värvide kandmise keeld.",
     wrongAnswers: [
@@ -46,6 +89,7 @@ const questions: TerminologyQuestion[] = [
     ],
   },
   {
+    level: 1,
     question: "Mis on stehhimine?",
     correctAnswer: "Rapiiriteraga tekli läbistamine vennastuspeol.",
     wrongAnswers: [
@@ -55,6 +99,7 @@ const questions: TerminologyQuestion[] = [
     ],
   },
   {
+    level: 1,
     question: "Mis on juhtsimine?",
     correctAnswer: "Karistus liikmemaksu tasumata jätmise eest.",
     wrongAnswers: [
@@ -64,6 +109,7 @@ const questions: TerminologyQuestion[] = [
     ],
   },
   {
+    level: 1,
     question: "Kes on ruktoonus?",
     correctAnswer: "Isik kellel on korporatsiooniga läbikäimine keelatud.",
     wrongAnswers: [
@@ -73,6 +119,7 @@ const questions: TerminologyQuestion[] = [
     ],
   },
   {
+    level: 1,
     question: "Mis on rebaste raseerimise õigus?",
     correctAnswer: "Rebaste õigus vennastuse ajal veini pihta panna.",
     wrongAnswers: [
@@ -82,6 +129,7 @@ const questions: TerminologyQuestion[] = [
     ],
   },
   {
+    level: 1,
     question: "Mis on trisna?",
     correctAnswer: "Fraateri matustele järgnev koosviibimine konvendis.",
     wrongAnswers: [
@@ -91,6 +139,7 @@ const questions: TerminologyQuestion[] = [
     ],
   },
   {
+    level: 1,
     question: "Mis on pluserdamine?",
     correctAnswer: "Konvendi vara tahtlik lõhkumine.",
     wrongAnswers: [
@@ -100,6 +149,7 @@ const questions: TerminologyQuestion[] = [
     ],
   },
   {
+    level: 1,
     question: "Mis on kaatripäev?",
     correctAnswer: "Tervist taastav koosviibimine peale kommerssi või muud suuremat pidu.",
     wrongAnswers: [
@@ -109,6 +159,7 @@ const questions: TerminologyQuestion[] = [
     ],
   },
   {
+    level: 1,
     question: "Mis on comment suspendu?",
     correctAnswer: "Ootele pandud auvahekord.",
     wrongAnswers: [
@@ -118,6 +169,7 @@ const questions: TerminologyQuestion[] = [
     ],
   },
   {
+    level: 1,
     question: "Mis on küüneproov?",
     correctAnswer: "Šoppeni tühjuse kontroll.",
     wrongAnswers: [
@@ -127,6 +179,7 @@ const questions: TerminologyQuestion[] = [
     ],
   },
   {
+    level: 1,
     question: "Mis on coetus-šlukk?",
     correctAnswer: "Con-coetorite ühine laulmine peale vennastuspidu.",
     wrongAnswers: [
@@ -136,6 +189,7 @@ const questions: TerminologyQuestion[] = [
     ],
   },
   {
+    level: 2,
     question: "Mitmendat semestrit käib noormaja?",
     correctAnswer: "3. ja 4. semestrit.",
     wrongAnswers: [
@@ -145,6 +199,7 @@ const questions: TerminologyQuestion[] = [
     ],
   },
   {
+    level: 2,
     question: "Kuidas nimetatakse 6. semestrit liige olijat?",
     correctAnswer: "Vanamaja.",
     wrongAnswers: [
@@ -154,6 +209,7 @@ const questions: TerminologyQuestion[] = [
     ],
   },
   {
+    level: 2,
     question: "Kuidas nimetatakse 7. semestrit liige olijat.",
     correctAnswer: "Väga-vanamaja.",
     wrongAnswers: [
@@ -163,6 +219,7 @@ const questions: TerminologyQuestion[] = [
     ],
   },
   {
+    level: 2,
     question: "Mitmendat semestrit käib sammalpea?",
     correctAnswer: "9. ja 10. semestrit.",
     wrongAnswers: [
@@ -172,6 +229,7 @@ const questions: TerminologyQuestion[] = [
     ],
   },
   {
+    level: 2,
     question: "Kuidas nimetatakse 11. semestrit liige olijat.",
     correctAnswer: "Väga-sammalpea.",
     wrongAnswers: [
@@ -181,6 +239,7 @@ const questions: TerminologyQuestion[] = [
     ],
   },
   {
+    level: 2,
     question: "Kui vana on kuldrebane?",
     correctAnswer: "13 või rohkem semestrit.",
     wrongAnswers: [
