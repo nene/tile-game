@@ -13,3 +13,7 @@ export interface SellableGameItem extends GameItem {
   getPrice: () => number;
   clone: () => GameItem;
 }
+
+export type SmallGameItem = GameItem & { getSmallSprite(): Sprite };
+
+export const isSmallGameItem = (item: GameItem): item is SmallGameItem => "getSmallSprite" in item;

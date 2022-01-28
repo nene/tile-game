@@ -4,11 +4,11 @@ import { Coord, coordAdd, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
 import { StorageInventory } from "../inventory/StorageInventory";
 import { StorageInventoryView } from "../inventory/StorageInventoryView";
-import { BeerGlass, isBeerGlass } from "../items/BeerGlass";
 import { PixelScreen } from "../PixelScreen";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { UiController } from "../UiController";
+import { isSmallGameItem, SmallGameItem } from "../items/GameItem";
 
 export class Table implements GameObject {
   private sprite: Sprite;
@@ -31,9 +31,9 @@ export class Table implements GameObject {
     });
   }
 
-  private itemCoords(): [BeerGlass, Coord][] {
-    const itemCoordPairs: [BeerGlass, Coord][] = this.inventory.allItems()
-      .filter((item): item is BeerGlass => isBeerGlass(item))
+  private itemCoords(): [SmallGameItem, Coord][] {
+    const itemCoordPairs: [SmallGameItem, Coord][] = this.inventory.allItems()
+      .filter(isSmallGameItem)
       .map((item, i) => {
         const index = Math.floor(this.noise.random(i) * glassPositions.length);
         const offset = glassPositions[index];
@@ -121,3 +121,4 @@ const glassPositions: Coord[] = [
   [5 + 9 * 4, 15],
   [5 + 9 * 5, 15],
 ];
+

@@ -69,6 +69,13 @@ export class BeerBottle implements SellableGameItem {
     }
   }
 
+  getSmallSprite(): Sprite {
+    return {
+      ...this.spriteSheet.getSprite([0, this.drink.bottleSpriteIndex]),
+      size: [3, 7],
+    };
+  }
+
   combine(item: GameItem): MiniGame | undefined {
     if (isBeerGlass(item)) {
       return item.combine(this); // Keep main logic in beer-glass
