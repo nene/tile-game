@@ -71,8 +71,8 @@ export class BeerBottle implements SellableGameItem {
 
   getSmallSprite(): Sprite {
     return {
-      ...this.spriteSheet.getSprite([0, this.drink.bottleSpriteIndex]),
-      size: [3, 7],
+      ...this.spriteSheet.getSprite([1, this.drink.bottleSpriteIndex]),
+      offset: [-3, -6],
     };
   }
 
