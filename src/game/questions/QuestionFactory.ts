@@ -60,15 +60,25 @@ export class QuestionFactory {
     if (this.isOrgQuestion(question)) {
       this.orgSkill.rightAnswer();
     }
+    if (this.isTermQuestion(question)) {
+      this.termSkill.rightAnswer();
+    }
   }
 
   wrongAnswer(question: Question) {
     if (this.isOrgQuestion(question)) {
       this.orgSkill.wrongAnswer();
     }
+    if (this.isTermQuestion(question)) {
+      this.termSkill.wrongAnswer();
+    }
   }
 
   private isOrgQuestion(question: Question): boolean {
     return this.orgSkill.getEnabledCategories().includes(question.category);
+  }
+
+  private isTermQuestion(question: Question): boolean {
+    return question.category === "terminology";
   }
 }
