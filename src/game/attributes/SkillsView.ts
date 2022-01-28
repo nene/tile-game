@@ -22,7 +22,7 @@ export class SkillsView implements Component {
   private uususedSkill: Skill = {
     getLevel: () => 0,
     getProgress: () => 0,
-    getIcon: () => SpriteLibrary.getSprite("level-up-icons"),
+    getIcon: () => SpriteLibrary.getSprite("level-up-icons", [1, 0]),
   };
 
   constructor({ attributes, onClose }: SkillsViewConfig) {
@@ -51,16 +51,17 @@ export class SkillsView implements Component {
   }
 
   private drawSkill(screen: PixelScreen, title: string, skill: Skill, offset: Coord) {
-    screen.drawText(title, offset, { color: "#000", shadowColor: UI_SHADOW_COLOR });
-    this.scoreChart.paint(screen, skill.getLevel(), coordAdd(offset, [85, 0]));
+    screen.drawSprite(skill.getIcon(), coordAdd(offset, [0, -2]));
+    screen.drawText(title, coordAdd(offset, [12, 0]), { color: "#000", shadowColor: UI_SHADOW_COLOR });
+    this.scoreChart.paint(screen, skill.getLevel(), coordAdd(offset, [85, 1]));
     this.drawProgress(screen, skill.getProgress(), offset);
   }
 
   private drawProgress(screen: PixelScreen, progress: number, offset: Coord) {
     const opacity = 0.25 + progress * 0.75;
     screen.withOpacity(opacity, () => {
-      screen.drawSprite(SpriteLibrary.getSprite("level-up-mini"), coordAdd(offset, [175, 1]));
-      screen.drawText(Math.round(progress * 100) + "%", coordAdd(offset, [174, 1.5]), { size: "small", align: "right", color: "#364a3c" });
+      screen.drawSprite(SpriteLibrary.getSprite("level-up-mini"), coordAdd(offset, [175, 2]));
+      screen.drawText(Math.round(progress * 100) + "%", coordAdd(offset, [174, 2.5]), { size: "small", align: "right", color: "#364a3c" });
     });
   }
 
