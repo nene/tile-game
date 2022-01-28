@@ -1,5 +1,4 @@
-import { sortBy } from "lodash";
-import { Noise } from "../utils/Noise";
+import { shuffle, sortBy } from "lodash";
 import { Coord, coordAdd, Rect } from "../Coord";
 import { GameObject } from "../GameObject";
 import { StorageInventory } from "../inventory/StorageInventory";
@@ -13,10 +12,11 @@ import { isSmallGameItem, SmallGameItem } from "../items/GameItem";
 export class Table implements GameObject {
   private sprite: Sprite;
   private inventory: StorageInventory;
-  private noise = new Noise();
+  private positions: Coord[];
 
   constructor(private coord: Coord, private sittingDir: "LTR" | "RTL" = "LTR") {
     this.sprite = SpriteLibrary.getSprite("table");
+    this.positions = [...firstTriangle, ...secondTriangle, ...shuffle(triangleLeftovers)];
     this.inventory = new StorageInventory({
       size: 24,
     });
@@ -35,8 +35,7 @@ export class Table implements GameObject {
     const itemCoordPairs: [SmallGameItem, Coord][] = this.inventory.allItems()
       .filter(isSmallGameItem)
       .map((item, i) => {
-        const index = Math.floor(this.noise.random(i) * glassPositions.length);
-        const offset = glassPositions[index];
+        const offset = this.positions[i];
         return [item, coordAdd(this.coord, coordAdd(offset, [0, -12]))];
       });
     return sortBy(itemCoordPairs, ([_, coord]) => coord[1]);
@@ -91,34 +90,68 @@ export const isTable = (obj: GameObject): obj is Table => obj instanceof Table;
 // Positions for maximum of 26 glasses on the table
 const glassPositions: Coord[] = [
   // 1st row
-  [9 * 0, 0],
-  [9 * 1, 0],
-  [9 * 2, 0],
-  [9 * 3, 0],
-  [9 * 4, 0],
+  [9 * 0, 0], //#0  7
+  [9 * 1, 0], //#1  8
+  [9 * 2, 0], //#2  9
+  [9 * 3, 0], //#3  10
+  [9 * 4, 0], //#4  !1
   [9 * 5, 0],
   [9 * 6, 0],
   // 2nd row
-  [5 + 9 * 0, 5],
-  [5 + 9 * 1, 5],
-  [5 + 9 * 2, 5],
-  [5 + 9 * 3, 5],
-  [5 + 9 * 4, 5],
+  [5 + 9 * 0, 5], //#7  4
+  [5 + 9 * 1, 5], //#8  5
+  [5 + 9 * 2, 5], //#9  6
+  [5 + 9 * 3, 5], //#10  !2
+  [5 + 9 * 4, 5], //#11  !3
   [5 + 9 * 5, 5],
   // 3rd row
   [9 * 0, 10],
-  [9 * 1, 10],
-  [9 * 2, 10],
-  [9 * 3, 10],
-  [9 * 4, 10],
-  [9 * 5, 10],
+  [9 * 1, 10], //#14  2
+  [9 * 2, 10], //#15  3
+  [9 * 3, 10], //#16  !4
+  [9 * 4, 10], //#17  !5
+  [9 * 5, 10], //#18  !6
   [9 * 6, 10],
   // 4th row
   [5 + 9 * 0, 15],
-  [5 + 9 * 1, 15],
-  [5 + 9 * 2, 15],
-  [5 + 9 * 3, 15],
-  [5 + 9 * 4, 15],
-  [5 + 9 * 5, 15],
+  [5 + 9 * 1, 15], //#21  1
+  [5 + 9 * 2, 15], //#22  !7
+  [5 + 9 * 3, 15], //#23  !8
+  [5 + 9 * 4, 15], //#24  !9
+  [5 + 9 * 5, 15], //#25  !10
 ];
 
+const firstTriangle: Coord[] = [
+  glassPositions[21],
+  glassPositions[14],
+  glassPositions[15],
+  glassPositions[7],
+  glassPositions[8],
+  glassPositions[9],
+  glassPositions[0],
+  glassPositions[1],
+  glassPositions[2],
+  glassPositions[3],
+];
+
+const secondTriangle: Coord[] = [
+  glassPositions[4],
+  glassPositions[10],
+  glassPositions[11],
+  glassPositions[16],
+  glassPositions[17],
+  glassPositions[18],
+  glassPositions[22],
+  glassPositions[23],
+  glassPositions[24],
+  glassPositions[25],
+];
+
+const triangleLeftovers: Coord[] = [
+  glassPositions[5],
+  glassPositions[6],
+  glassPositions[12],
+  glassPositions[13],
+  glassPositions[19],
+  glassPositions[20],
+];
