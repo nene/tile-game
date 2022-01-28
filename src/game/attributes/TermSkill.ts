@@ -23,6 +23,10 @@ export class TermSkill implements Skill {
 
   constructor(private cfg: SkillConfig) { }
 
+  getName() {
+    return "Uusused";
+  }
+
   getLevel(): number {
     return this.level;
   }

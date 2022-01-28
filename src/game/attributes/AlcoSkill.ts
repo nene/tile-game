@@ -50,6 +50,10 @@ export class AlcoSkill implements Skill {
     }
   }
 
+  getName() {
+    return "Õlletaluvus";
+  }
+
   getLevel() {
     return this.level;
   }

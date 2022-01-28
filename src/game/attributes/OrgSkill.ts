@@ -25,6 +25,10 @@ export class OrgSkill implements Skill {
 
   constructor(private cfg: SkillConfig) { }
 
+  getName() {
+    return "Ak. Orgid";
+  }
+
   getLevel(): OrgSkillLevel {
     return this.level;
   }

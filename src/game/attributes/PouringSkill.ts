@@ -21,6 +21,10 @@ export class PouringSkill implements Skill {
 
   constructor(private cfg: SkillConfig) { }
 
+  getName() {
+    return "Õllevalamine";
+  }
+
   getLevel(): number {
     return this.level;
   }
