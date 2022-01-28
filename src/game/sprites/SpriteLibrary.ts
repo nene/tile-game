@@ -121,7 +121,7 @@ const imageFiles = {
   'sakala-coat-of-arms': spriteDef({ src: sakalaCoatOfArms, cfg: { size: [59, 36], offset: [12, 5] } }),
 
   // UI
-  'slot': spriteDef({ src: slot, cfg: { size: [20, 20], colsRows: [2, 1] } }),
+  'slot': spriteDef({ src: slot, cfg: { size: [16, 16], colsRows: [2, 1] } }),
   'scroll-bar': spriteDef({ src: scrollBar, cfg: { size: [8, 8], colsRows: [5, 1] } }),
   'close-button': spriteDef({ src: closeButton, cfg: { size: [8, 8], colsRows: [2, 1] } }),
   'cursor': spriteDef({ src: cursor, cfg: { size: [8, 11], colsRows: [2, 1] } }),

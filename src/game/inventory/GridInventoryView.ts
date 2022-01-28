@@ -14,6 +14,9 @@ interface GridInventoryViewCfg {
   align: Alignment;
 }
 
+const SLOT_SIZE: Coord = [16, 16];
+const PADDED_SLOT_SIZE: Coord = coordAdd(SLOT_SIZE, [1, 1]);
+
 export class GridInventoryView implements InventoryView {
   private slotSprites: SpriteSheet;
   private rect: Rect;
@@ -27,7 +30,7 @@ export class GridInventoryView implements InventoryView {
     this.inventory = inventory;
     this.size = size;
     this.slotSprites = SpriteLibrary.get("slot");
-    this.rect = rectAlign({ coord: [0, 0], size: coordAdd(coordMul([21, 21], size), [1, 1]) }, container, align);
+    this.rect = rectAlign({ coord: [0, 0], size: coordAdd(coordMul(PADDED_SLOT_SIZE, size), [1, 1]) }, container, align);
   }
 
   onSlotClick(cb: SlotClickHandler) {
@@ -53,11 +56,11 @@ export class GridInventoryView implements InventoryView {
       const [cols, rows] = this.size;
       for (let y = 0; y < rows; y++) {
         for (let x = 0; x < cols; x++) {
-          const slotCoord = coordAdd(startCoord, coordMul([21, 21], [x, y]));
+          const slotCoord = coordAdd(startCoord, coordMul(PADDED_SLOT_SIZE, [x, y]));
           screen.drawSprite(this.getSlotSprite(), slotCoord);
           const item = this.inventory.itemAt(this.coordToIndex([x, y]));
           if (item) {
-            screen.drawSprite(item.getSprite(), coordAdd(slotCoord, [2, 2]));
+            screen.drawSprite(item.getSprite(), slotCoord);
           }
         }
       }
@@ -110,8 +113,8 @@ export class GridInventoryView implements InventoryView {
     const [cols, rows] = this.size;
     for (let y = 0; y < rows; y++) {
       for (let x = 0; x < cols; x++) {
-        const slotCoord = coordAdd(startCoord, coordMul([21, 21], [x, y]));
-        if (isCoordInRect(screenCoord, { coord: slotCoord, size: [20, 20] })) {
+        const slotCoord = coordAdd(startCoord, coordMul(PADDED_SLOT_SIZE, [x, y]));
+        if (isCoordInRect(screenCoord, { coord: slotCoord, size: SLOT_SIZE })) {
           return this.coordToIndex([x, y]);
         }
       }

@@ -16,7 +16,7 @@ export class BeerBox implements GameObject {
   constructor(private coord: Coord) {
     this.sprite = SpriteLibrary.getSprite("beer-box");
     this.inventory = new StorageInventory({
-      size: 12,
+      size: 20,
       isAcceptingItem: (item) => isBeerBottle(item) && item.isEmpty(),
     });
   }
@@ -56,8 +56,8 @@ export class BeerBox implements GameObject {
     this.inventory.clear();
     ui.showInventory(new StorageInventoryView({
       inventory: this.inventory,
-      windowSize: [91, 87],
-      gridSize: [4, 3],
+      windowSize: [92, 92],
+      gridSize: [5, 4],
       headline: { title: "Taarakast", description: "Viska siia tühjad pudelid." },
       onClose: () => ui.hideInventory(),
     }));

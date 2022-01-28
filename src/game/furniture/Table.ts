@@ -18,7 +18,7 @@ export class Table implements GameObject {
   constructor(private coord: Coord, private sittingDir: "LTR" | "RTL" = "LTR") {
     this.sprite = SpriteLibrary.getSprite("table");
     this.inventory = new StorageInventory({
-      size: 10,
+      size: 24,
     });
   }
 
@@ -78,8 +78,8 @@ export class Table implements GameObject {
   interact(ui: UiController) {
     ui.showInventory(new StorageInventoryView({
       inventory: this.inventory,
-      windowSize: [112, 66],
-      gridSize: [5, 2],
+      windowSize: [109, 92],
+      gridSize: [6, 4],
       headline: { title: "Laud", description: "Siin võib vedeleda tühju šoppeneid." },
       onClose: () => ui.hideInventory(),
     }));

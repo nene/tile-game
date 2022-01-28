@@ -16,7 +16,7 @@ export class BeerCabinet implements GameObject {
   constructor(private coord: Coord) {
     this.sprite = SpriteLibrary.getSprite("beer-cabinet");
     this.inventory = new StorageInventory({
-      size: 12,
+      size: 24,
       items: [
         new BeerGlass(),
         new BeerGlass(),
@@ -69,8 +69,8 @@ export class BeerCabinet implements GameObject {
     SoundLibrary.play('opening-cabinet-door');
     ui.showInventory(new StorageInventoryView({
       inventory: this.inventory,
-      windowSize: [91, 87],
-      gridSize: [4, 3],
+      windowSize: [109, 92],
+      gridSize: [6, 4],
       headline: { title: "Šoppeniriiul", description: "Haara siit paar kannu." },
       onClose: () => ui.hideInventory(),
     }));
