@@ -54,6 +54,10 @@ export class AlcoSkill implements Skill {
     return this.level;
   }
 
+  getProgress(): number {
+    return this.drunkenness / drunkennessMinMax.max;
+  }
+
   getIcon() {
     return SpriteLibrary.getSprite("level-up-icons", [0, 0]);
   }

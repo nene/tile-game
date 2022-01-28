@@ -25,6 +25,10 @@ export class PouringSkill implements Skill {
     return this.level;
   }
 
+  getProgress(): number {
+    return this.pourings / pouringsPerLevel[this.level];
+  }
+
   getIcon() {
     return SpriteLibrary.getSprite("level-up-icons", [0, 0]);
   }

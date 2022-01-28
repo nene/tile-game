@@ -68,6 +68,7 @@ import leaves2 from "./data/leaves2.png";
 import leaves3 from "./data/leaves3.png";
 import levelUp from "./data/level-up.png";
 import levelUpIcons from "./data/level-up-icons.png";
+import levelUpMini from "./data/level-up-mini.png";
 
 import { Coord } from "../Coord";
 import { SpriteSheet, SpriteSheetConfig } from "./SpriteSheet";
@@ -131,6 +132,7 @@ const imageFiles = {
   'color-band': spriteDef({ src: colorBand, cfg: { size: [16, 16], colsRows: [3, 1] } }),
   'level-up': spriteDef({ src: levelUp, cfg: { size: [7, 11], colsRows: [5, 1] } }),
   'level-up-icons': spriteDef({ src: levelUpIcons, cfg: { size: [10, 11], colsRows: [2, 1] } }),
+  'level-up-mini': spriteDef({ src: levelUpMini, cfg: { size: [5, 5] } }),
 
   // Items
   'beer-glass-lg': spriteDef({ src: beerGlassLg, cfg: { size: [16, 16], colsRows: [5, 5] } }),

@@ -29,6 +29,10 @@ export class OrgSkill implements Skill {
     return this.level;
   }
 
+  getProgress(): number {
+    return this.correctAnswers / correctAnswersPerLevel[this.level];
+  }
+
   // Notifies about correctly answered question
   rightAnswer() {
     this.correctAnswers++;
