@@ -72,7 +72,7 @@ export class UiController {
     this.inventoryController = new InventoryController(this.attributes);
     this.cursorController = new CursorController();
     this.scoreBoard = new ScoreBoard(this.attributes.wallet, this.attributes.alcoSkill, this.calendar);
-    this.questionFacory = new QuestionFactory(this.attributes.orgSkill);
+    this.questionFacory = new QuestionFactory(this.attributes.orgSkill, this.attributes.termSkill);
   }
 
   showInventory(view: InventoryView) {

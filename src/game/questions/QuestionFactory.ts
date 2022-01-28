@@ -1,4 +1,5 @@
 import { OrgSkill } from "../attributes/OrgSkill";
+import { TermSkill } from "../attributes/TermSkill";
 import { pickRandom } from "../utils/pickRandom";
 import { createColorsQuestion } from "./ColorsQuestion";
 import { createPlaceQuestion } from "./PlaceQuestion";
@@ -16,7 +17,7 @@ export class QuestionFactory {
   private previousQuestions: string[] = [];
   private answeredQuestions: string[] = [];
 
-  constructor(private orgSkill: OrgSkill) { }
+  constructor(private orgSkill: OrgSkill, private termSkill: TermSkill) { }
 
   create(): Question {
     let retries = 0;
@@ -39,7 +40,7 @@ export class QuestionFactory {
       case "place": return createPlaceQuestion(this.orgSkill.getTargetOrgs(), this.orgSkill.getPossibleOrgs());
       case "slogan": return createSloganQuestion(this.orgSkill.getTargetOrgs(), this.orgSkill.getPossibleOrgs());
       case "year": return createYearQuestion(this.orgSkill.getTargetOrgs(), this.orgSkill.getPossibleOrgs());
-      case "terminology": return createTerminologyQuestion();
+      case "terminology": return createTerminologyQuestion(this.termSkill.getLevel());
     }
   }
 

@@ -2,8 +2,8 @@ import { shuffle } from "lodash";
 import { pickRandom } from "../utils/pickRandom";
 import { MultiChoiceQuestion } from "./Question";
 
-export function createTerminologyQuestion(): MultiChoiceQuestion {
-  const { question, correctAnswer, wrongAnswers } = pickRandom(questions);
+export function createTerminologyQuestion(level: number): MultiChoiceQuestion {
+  const { question, correctAnswer, wrongAnswers } = pickRandom(questions.filter((q) => q.level === level));
   return {
     type: "multi-choice",
     category: "terminology",
