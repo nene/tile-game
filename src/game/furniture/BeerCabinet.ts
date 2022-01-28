@@ -24,6 +24,12 @@ export class BeerCabinet implements GameObject {
         new BeerGlass(),
         new BeerGlass(),
         new BeerGlass(),
+        new BeerGlass(),
+        new BeerGlass(),
+        new BeerGlass(),
+        new BeerGlass(),
+        new BeerGlass(),
+        new BeerGlass(),
       ],
       isAcceptingItem: isBeerGlass,
     });
