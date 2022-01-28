@@ -19,11 +19,6 @@ export class SkillsView implements Component {
   private onClose: () => void;
   private scoreChart: ScoreChart;
   private attributes: PlayerAttributes;
-  private uususedSkill: Skill = {
-    getLevel: () => 0,
-    getProgress: () => 0,
-    getIcon: () => SpriteLibrary.getSprite("level-up-icons", [1, 0]),
-  };
 
   constructor({ attributes, onClose }: SkillsViewConfig) {
     this.scoreChart = new ScoreChart();
@@ -47,7 +42,7 @@ export class SkillsView implements Component {
     this.drawSkill(screen, "Õlletaluvus", this.attributes.alcoSkill, coordAdd(coord, [0, 13 * 0]));
     this.drawSkill(screen, "Õllevalamine", this.attributes.pouringSkill, coordAdd(coord, [0, 13 * 1]));
     this.drawSkill(screen, "Ak. Orgid", this.attributes.orgSkill, coordAdd(coord, [0, 13 * 2]));
-    this.drawSkill(screen, "Uusused", this.uususedSkill, coordAdd(coord, [0, 13 * 3]));
+    this.drawSkill(screen, "Uusused", this.attributes.termSkill, coordAdd(coord, [0, 13 * 3]));
   }
 
   private drawSkill(screen: PixelScreen, title: string, skill: Skill, offset: Coord) {
