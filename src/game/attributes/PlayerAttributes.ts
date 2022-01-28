@@ -12,7 +12,7 @@ import { TermSkill } from "./TermSkill";
 
 export class PlayerAttributes {
   public readonly inventory = new StorageInventory({
-    size: 5,
+    size: 7,
     items: [
       new BeerGlass(getDrink("pilsner"), DrinkLevel.full),
       new BeerGlass(getDrink("pilsner"), DrinkLevel.almostFull)

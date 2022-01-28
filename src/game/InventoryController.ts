@@ -23,7 +23,7 @@ export class InventoryController {
   constructor(private attributes: PlayerAttributes) {
     this.playerInventoryView = new GridInventoryView({
       inventory: this.attributes.inventory,
-      size: [5, 1],
+      size: [7, 1],
       container: SCREEN_RECT,
       align: "bottom"
     });
