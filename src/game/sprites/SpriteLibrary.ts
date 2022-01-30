@@ -96,7 +96,7 @@ const imageFiles = {
   'cfe-ksv-otto': spriteDef({ src: cfeKsvOtto, cfg: { size: CHARACTER_SIZE, colsRows: [3, 1], offset: CHARACTER_OFFSET } }),
   'cfe-ksv-karl': spriteDef({ src: cfeKsvKarl, cfg: { size: CHARACTER_SIZE, colsRows: [3, 1], offset: CHARACTER_OFFSET } }),
   'cfe-ksv-kark': spriteDef({ src: cfeKsvKark, cfg: { size: CHARACTER_SIZE, colsRows: [3, 1], offset: CHARACTER_OFFSET } }),
-  'callout': spriteDef({ src: callout, cfg: { size: [16, 18], colsRows: [3, 1], offset: [-5, -52] } }),
+  'callout': spriteDef({ src: callout, cfg: { size: [16, 22], colsRows: [3, 1], offset: [-5, -56] } }),
 
   // Furniture
   'furniture': spriteDef({ src: furniture, cfg: { size: [130, 78] } }),

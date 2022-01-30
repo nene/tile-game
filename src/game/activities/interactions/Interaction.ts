@@ -3,9 +3,10 @@ import { UiController } from "../../UiController";
 import { Activity } from "../Activity";
 
 export enum InteractionType {
-  beer = 0,
-  water = 1,
-  question = 2,
+  glass = 0,
+  beer = 1,
+  water = 2,
+  question = 3,
 }
 
 export interface Interaction {
