@@ -7,7 +7,7 @@ import { pickRandom } from "../utils/pickRandom";
 import { Character } from "./Character";
 import { createCharacterActivities } from "./createCharacterActivities";
 import { Facing } from "../npc/Facing";
-import { DrinkAnimationSprites } from "../sprites/DrinkAnimation";
+import { DrinkAnimationConfig, DrinkAnimationSprites } from "../sprites/DrinkAnimation";
 import { FramesDef } from "../sprites/SpriteAnimation";
 import { AsepriteFile } from "../sprites/Aseprite";
 import { readAsepriteAnimation } from "../sprites/readAsepriteAnimation";
@@ -156,7 +156,20 @@ export class AcademicCharacter implements Character {
     };
   }
 
-  getDrinkSprites(): DrinkAnimationSprites {
+  getDrinkAnimationConfig(): DrinkAnimationConfig {
+    const beerGlass = this.getField("glass");
+    if (!beerGlass) {
+      throw new Error("Can't execute drink animation when no beer glass at hand");
+    }
+    return {
+      beerGlass,
+      sprites: this.getDrinkSprites(),
+      idleTicks: 30,
+      drinkTicks: 10,
+    };
+  }
+
+  private getDrinkSprites(): DrinkAnimationSprites {
     const drinkFrames = readAsepriteAnimation("B", this.def.json);
     const [figure1, figure2, hand] = drinkFrames.length === 3 ? [0, 1, 2] : [0, 0, 1];
     return {

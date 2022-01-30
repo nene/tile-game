@@ -1,11 +1,11 @@
 import { AcademicCharacter } from "../../npc/AcademicCharacter";
 import { isFullBeerBottle } from "../../items/BeerBottle";
-import { BeerGlass, DrinkLevel } from "../../items/BeerGlass";
+import { DrinkLevel } from "../../items/BeerGlass";
 import { DrinkActivity } from "../DrinkActivity";
 import { Completion } from "./Completion";
 
 export class DrinkFromTableCompletion implements Completion {
-  private beerGlass?: BeerGlass;
+  private completed = false;
 
   constructor(private character: AcademicCharacter) {
   }
@@ -24,7 +24,7 @@ export class DrinkFromTableCompletion implements Completion {
     if (beerBottle) {
       beerBottle.open();
       beerGlass.fill(beerBottle.getDrink(), DrinkLevel.full);
-      this.beerGlass = beerGlass;
+      this.completed = true;
       beerBottle.empty();
       table.getInventory().add(beerBottle);
       this.character.satisfyDesire("beer");
@@ -34,15 +34,12 @@ export class DrinkFromTableCompletion implements Completion {
   }
 
   isComplete() {
-    return Boolean(this.beerGlass);
+    return this.completed;
   }
 
   nextActivity() {
-    if (this.beerGlass) {
-      return new DrinkActivity(
-        this.beerGlass,
-        this.character
-      );
+    if (this.completed) {
+      return new DrinkActivity(this.character);
     }
   }
 }

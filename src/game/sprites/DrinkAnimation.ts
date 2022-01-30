@@ -7,7 +7,7 @@ import { noop } from "lodash";
 
 export type DrinkAnimationSprites = Record<"figure1" | "figure2" | "hand", Sprite>;
 
-interface DrinkAnimationConfig {
+export interface DrinkAnimationConfig {
   beerGlass: BeerGlass;
   sprites: DrinkAnimationSprites;
   idleTicks: number;

@@ -10,7 +10,7 @@ import { showPlainTextDialog } from "../../dialogs/showPlainTextDialog";
 import { GameItem } from "../../items/GameItem";
 
 export class RequestDrinkInteraction implements Interaction {
-  private receivedBeerGlass?: BeerGlass;
+  private hasReceivedBeerGlass = false;
 
   constructor(private character: AcademicCharacter) {
   }
@@ -20,7 +20,7 @@ export class RequestDrinkInteraction implements Interaction {
   }
 
   isFinished() {
-    return Boolean(this.receivedBeerGlass);
+    return this.hasReceivedBeerGlass;
   }
 
   interact(ui: UiController, item?: GameItem) {
@@ -37,8 +37,9 @@ export class RequestDrinkInteraction implements Interaction {
     if (this.acceptDrink(ui, item)) {
       ui.getAttributes().setSelectedItem(undefined);
       ui.getAttributes().wallet.add(item.getDrink()?.price || 0);
+      this.character.setField("glass", item);
       this.character.satisfyDesire("beer");
-      this.receivedBeerGlass = item;
+      this.hasReceivedBeerGlass = true;
     }
   }
 
@@ -76,8 +77,8 @@ export class RequestDrinkInteraction implements Interaction {
   }
 
   nextActivity() {
-    if (this.receivedBeerGlass) {
-      return new DrinkActivity(this.receivedBeerGlass, this.character);
+    if (this.hasReceivedBeerGlass) {
+      return new DrinkActivity(this.character);
     }
   }
 
