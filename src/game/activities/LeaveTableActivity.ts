@@ -10,6 +10,12 @@ export class LeaveTableActivity implements Activity {
   }
 
   tick(figure: CharacterFigure, location: Location): ActivityUpdates {
+    const tableInventory = figure.getTable()?.getInventory();
+    const beerGlass = figure.getGlass();
+    if (tableInventory && beerGlass && !tableInventory.isFull()) {
+      tableInventory.add(beerGlass);
+    }
+    figure.setGlass(undefined);
     figure.sitAtTable(undefined);
     this.finished = true;
     return {};

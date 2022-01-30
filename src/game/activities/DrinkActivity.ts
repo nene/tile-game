@@ -19,12 +19,6 @@ export class DrinkActivity implements Activity {
 
   tick(figure: CharacterFigure, location: Location): ActivityUpdates {
     this.animation.tick();
-    if (this.animation.isFinished()) {
-      const tableInventory = figure.getTable()?.getInventory();
-      if (tableInventory && !tableInventory?.isFull()) {
-        tableInventory.add(this.beerGlass);
-      }
-    }
     return { sprites: this.animation.getSprites() };
   }
 
