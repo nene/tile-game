@@ -7,7 +7,8 @@ import { PixelScreen } from "../PixelScreen";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { UiController } from "../UiController";
-import { isSmallGameItem, SmallGameItem } from "../items/GameItem";
+import { GameItem, isSmallGameItem, SmallGameItem } from "../items/GameItem";
+import { isDefined } from "../utils/isDefined";
 
 export class Table implements GameObject {
   private sprite: Sprite;
@@ -32,13 +33,20 @@ export class Table implements GameObject {
   }
 
   private itemCoords(): [SmallGameItem, Coord][] {
-    const itemCoordPairs: [SmallGameItem, Coord][] = this.inventory.allItems()
-      .filter(isSmallGameItem)
-      .map((item, i) => {
-        const offset = this.positions[i];
-        return [item, coordAdd(this.coord, coordAdd(offset, [0, -12]))];
-      });
+    const itemCoordPairs = this.inventory.allSlots()
+      .map(this.slotToItemCoordPair, this)
+      .filter(isDefined);
+
     return sortBy(itemCoordPairs, ([_, coord]) => coord[1]);
+  }
+
+  private slotToItemCoordPair(item: GameItem | undefined, i: number): [SmallGameItem, Coord] | undefined {
+    if (item && isSmallGameItem(item)) {
+      const offset = this.positions[i];
+      return [item, coordAdd(this.coord, coordAdd(offset, [0, -12]))] as [SmallGameItem, Coord];
+    } else {
+      return undefined;
+    }
   }
 
   getSittingPositions(): Coord[] {
