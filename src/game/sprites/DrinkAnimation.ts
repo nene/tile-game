@@ -37,10 +37,12 @@ export class DrinkAnimation implements Animation {
 
   tick() {
     this.ticks++;
-    if (this.isHandUp && this.ticks > this.drinkTicks) {
+    if (this.isHandUp && this.ticks >= this.drinkTicks) {
       this.ticks = 0;
-      this.isHandUp = false;
-      const drink = this.beerGlass.getDrink()
+      // Only lower the hand when we're planning to spend time resting between sips
+      this.isHandUp = !this.isRestNeeded();
+
+      const drink = this.beerGlass.getDrink();
       if (drink) {
         this.onSip(drink);
         this.beerGlass.consume();
@@ -49,10 +51,14 @@ export class DrinkAnimation implements Animation {
         }
       }
     }
-    else if (!this.isHandUp && this.ticks > this.idleTicks) {
+    else if (!this.isHandUp && this.ticks >= this.idleTicks) {
       this.ticks = 0;
       this.isHandUp = true;
     }
+  }
+
+  private isRestNeeded() {
+    return this.idleTicks > 0;
   }
 
   getSprites(): Sprite[] {

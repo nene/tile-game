@@ -26,6 +26,10 @@ const characters = {
     },
     favoriteDrinks: [getDrink("bock"), getDrink("pilsner")],
     hatedDrinks: [getDrink("limonaad"), getDrink("paulaner"), getDrink("porter")],
+    drinkingSpeed: {
+      idleTicks: 10,
+      drinkTicks: 6,
+    }
   }),
   "sass": new AcademicCharacter({
     json: sassJson,
@@ -62,6 +66,10 @@ const characters = {
     },
     favoriteDrinks: [getDrink("paulaner"), getDrink("porter")],
     hatedDrinks: [getDrink("kriek"), getDrink("limonaad")],
+    drinkingSpeed: {
+      idleTicks: 0,
+      drinkTicks: 5,
+    }
   }),
   "vanamees": new AcademicCharacter({
     json: karlJson,

@@ -34,6 +34,7 @@ export interface AcademicCharacterDef {
   favoriteDrinks: Drink[];
   hatedDrinks: Drink[];
   days: Record<number, DayConfig>;
+  drinkingSpeed?: { idleTicks: number; drinkTicks: number };
 }
 
 const MAX_BEERS = 1;
@@ -164,8 +165,7 @@ export class AcademicCharacter implements Character {
     return {
       beerGlass,
       sprites: this.getDrinkSprites(),
-      idleTicks: 30,
-      drinkTicks: 10,
+      ...(this.def.drinkingSpeed ?? { idleTicks: 30, drinkTicks: 10 }),
     };
   }
 
