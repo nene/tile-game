@@ -4,7 +4,6 @@ import { UiController } from "../UiController";
 import { GameWorld } from "../GameWorld";
 import { Location } from "../locations/Location";
 import { CallFuxActivity } from "./CallFuxActivity";
-import { RequestDrinkInteraction } from "./interactions/RequestDrinkInteraction";
 import { AskQuestionInteraction } from "./interactions/AskQuestionInteraction";
 import { CharacterFigure } from "../npc/CharacterFigure";
 import { ReceiveBookInteraction } from "./plain-interactions/ReceiveBookInteraction";
@@ -13,6 +12,7 @@ import { ContinuationActivity } from "./ContinuationActivity";
 import { pickRandom } from "../utils/pickRandom";
 import { ColorBandInteraction } from "./plain-interactions/ColorBandInteraction";
 import { GameItem } from "../items/GameItem";
+import { DrinkFromTableActivity } from "./DrinkFromTableActivity";
 
 export class SatisfyDesiresActivity implements Activity {
   private finished = false;
@@ -36,7 +36,7 @@ export class SatisfyDesiresActivity implements Activity {
   }
 
   private chooseDrinkActivity() {
-    return new CallFuxActivity(this.character, new RequestDrinkInteraction(this.character));
+    return new DrinkFromTableActivity(this.character);
   }
 
   private chooseQuestionActivity() {

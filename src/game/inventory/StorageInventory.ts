@@ -63,6 +63,16 @@ export class StorageInventory implements WritableInventory {
     return item;
   }
 
+  takeFirstOfKind<T extends GameItem>(predicate: (item: GameItem) => item is T): T | undefined {
+    for (let i = 0; i < this.slots.length; i++) {
+      const item = this.slots[i];
+      if (item && predicate(item)) {
+        return item;
+      }
+    }
+    return undefined;
+  }
+
   size(): number {
     return this._size;
   }
