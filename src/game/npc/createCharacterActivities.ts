@@ -14,7 +14,7 @@ import { LocationName } from "../locations/LocationFactory";
 import { LeaveTableActivity } from "../activities/LeaveTableActivity";
 import { CallFuxActivity } from "../activities/CallFuxActivity";
 import { GlassFromTableCompletion } from "../activities/completions/GlassFromTableCompletion";
-import { RequestWaterInteraction } from "../activities/interactions/RequestWaterInteraction";
+import { RequestGlassInteraction } from "../activities/interactions/RequestGlassInteraction";
 
 export function createCharacterActivities(character: AcademicCharacter): Activity[] {
   return compact([
@@ -23,7 +23,7 @@ export function createCharacterActivities(character: AcademicCharacter): Activit
     ...travel(["cfe-cellar"], character),
     new PauseActivity(5, character),
     new MoveToTableActivity(character),
-    new CallFuxActivity(character, new RequestWaterInteraction(character), new GlassFromTableCompletion(character)),
+    new CallFuxActivity(character, new RequestGlassInteraction(character), new GlassFromTableCompletion(character)),
     new SatisfyDesiresActivity(character),
     new LeaveTableActivity(character),
     // ...travel(["cfe-hall", "outdoors"], character),
