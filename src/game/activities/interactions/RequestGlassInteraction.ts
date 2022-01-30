@@ -30,7 +30,8 @@ export class RequestGlassInteraction implements Interaction {
     }
 
     this.showDialog(ui, "Aitäh!", () => {
-      // TODO: Can't access CharacterFigure here
+      ui.getAttributes().setSelectedItem(undefined);
+      this.character.setField("glass", item);
       this.finished = true;
     });
   }

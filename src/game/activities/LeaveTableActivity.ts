@@ -1,3 +1,5 @@
+import { Table } from "../furniture/Table";
+import { BeerGlass } from "../items/BeerGlass";
 import { Location } from "../locations/Location";
 import { AcademicCharacter } from "../npc/AcademicCharacter";
 import { CharacterFigure } from "../npc/CharacterFigure";
@@ -10,13 +12,13 @@ export class LeaveTableActivity implements Activity {
   }
 
   tick(figure: CharacterFigure, location: Location): ActivityUpdates {
-    const tableInventory = figure.getTable()?.getInventory();
-    const beerGlass = figure.getGlass();
+    const tableInventory = this.character.getField<Table>("table")?.getInventory();
+    const beerGlass = this.character.getField<BeerGlass>("glass");
     if (tableInventory && beerGlass && !tableInventory.isFull()) {
       tableInventory.add(beerGlass);
     }
-    figure.setGlass(undefined);
-    figure.sitAtTable(undefined);
+    this.character.setField("glass", undefined);
+    this.character.setField("table", undefined);
     this.finished = true;
     return {};
   }

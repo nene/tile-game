@@ -37,6 +37,8 @@ export interface AcademicCharacterDef {
 const MAX_BEERS = 1;
 const MAX_QUESTIONS = 0;
 
+type FieldName = "table" | "glass";
+
 export class AcademicCharacter implements Character {
   // How much the NPC likes or dislikes the player
   private opinion = 0; // 0..10
@@ -46,6 +48,10 @@ export class AcademicCharacter implements Character {
   private questionsAsked = 0;
   private colorBandState = this.randomColorBandState();
   private today?: DayConfig;
+  private fields: Record<FieldName, any> = {
+    table: undefined,
+    glass: undefined,
+  };
 
   constructor(private def: AcademicCharacterDef) {
   }
@@ -155,6 +161,14 @@ export class AcademicCharacter implements Character {
       figure2: SpriteLibrary.getSprite(this.def.spriteName, drinkFrames[figure2].coord),
       hand: SpriteLibrary.getSprite(this.def.spriteName, drinkFrames[hand].coord),
     }
+  }
+
+  setField(name: FieldName, value: any) {
+    this.fields[name] = value;
+  }
+
+  getField<T>(name: FieldName): T | undefined {
+    return this.fields[name];
   }
 }
 

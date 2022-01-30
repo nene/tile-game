@@ -9,15 +9,11 @@ import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { Location } from "../locations/Location";
 import { GameItem } from "../items/GameItem";
 import { Character } from "./Character";
-import { Table } from "../furniture/Table";
-import { BeerGlass } from "../items/BeerGlass";
 
 export class CharacterFigure implements GameObject {
   private activityManager: ActivityManager;
   private sprites: Sprite[] = [];
   private defaultSprite: Sprite;
-  private table?: Table;
-  private glass?: BeerGlass;
 
   constructor(private coord: Coord, private character: Character) {
     this.activityManager = new ActivityManager(character.getActivities());
@@ -68,22 +64,6 @@ export class CharacterFigure implements GameObject {
 
   interact(ui: UiController, item?: GameItem) {
     this.activityManager.currentActivity().interact(ui, item);
-  }
-
-  sitAtTable(table: Table | undefined) {
-    this.table = table;
-  }
-
-  getTable(): Table | undefined {
-    return this.table;
-  }
-
-  setGlass(glass: BeerGlass | undefined) {
-    this.glass = glass;
-  }
-
-  getGlass(): BeerGlass | undefined {
-    return this.glass;
   }
 }
 

@@ -22,7 +22,7 @@ export class MoveToTableActivity implements Activity {
     // Are we already sitting in one of the tables. If yes, then finish.
     for (const table of allTables) {
       if (this.isAtTable(figure, table) && !this.isOccupied(figureBounds, figure, location)) {
-        figure.sitAtTable(table);
+        this.character.setField("table", table);
         this.finished = true;
         return {};
       }

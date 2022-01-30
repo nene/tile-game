@@ -1,7 +1,7 @@
 import { AcademicCharacter } from "../../npc/AcademicCharacter";
-import { CharacterFigure } from "../../npc/CharacterFigure";
 import { isEmptyBeerGlass } from "../../items/BeerGlass";
 import { Completion } from "./Completion";
+import { Table } from "../../furniture/Table";
 
 export class GlassFromTableCompletion implements Completion {
   private complete = false;
@@ -9,15 +9,15 @@ export class GlassFromTableCompletion implements Completion {
   constructor(private character: AcademicCharacter) {
   }
 
-  tryComplete(figure: CharacterFigure): boolean {
-    const table = figure.getTable();
+  tryComplete(): boolean {
+    const table = this.character.getField<Table>("table");
     if (!table) {
       throw new Error("Can't perform GlassFromTable completion when not sitting at table.");
     }
 
     const beerGlass = table.getInventory().takeFirstOfKind(isEmptyBeerGlass);
     if (beerGlass) {
-      figure.setGlass(beerGlass);
+      this.character.setField("glass", beerGlass);
       this.complete = true;
       return true;
     }
