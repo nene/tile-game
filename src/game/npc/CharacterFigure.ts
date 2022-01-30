@@ -68,7 +68,7 @@ export class CharacterFigure implements GameObject {
     this.activityManager.currentActivity().interact(ui, item);
   }
 
-  sitAtTable(table: Table) {
+  sitAtTable(table: Table | undefined) {
     this.table = table;
   }
 
