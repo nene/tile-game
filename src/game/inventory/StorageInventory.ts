@@ -67,6 +67,7 @@ export class StorageInventory implements WritableInventory {
     for (let i = 0; i < this.slots.length; i++) {
       const item = this.slots[i];
       if (item && predicate(item)) {
+        this.slots[i] = undefined;
         return item;
       }
     }

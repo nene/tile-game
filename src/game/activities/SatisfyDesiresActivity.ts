@@ -12,7 +12,8 @@ import { ContinuationActivity } from "./ContinuationActivity";
 import { pickRandom } from "../utils/pickRandom";
 import { ColorBandInteraction } from "./plain-interactions/ColorBandInteraction";
 import { GameItem } from "../items/GameItem";
-import { DrinkFromTableActivity } from "./DrinkFromTableActivity";
+import { RequestDrinkInteraction } from "./interactions/RequestDrinkInteraction";
+import { DrinkFromTableCompletion } from "./DrinkFromTableCompletion";
 
 export class SatisfyDesiresActivity implements Activity {
   private finished = false;
@@ -36,7 +37,11 @@ export class SatisfyDesiresActivity implements Activity {
   }
 
   private chooseDrinkActivity() {
-    return new DrinkFromTableActivity(this.character);
+    return new CallFuxActivity(
+      this.character,
+      new RequestDrinkInteraction(this.character),
+      new DrinkFromTableCompletion(this.character),
+    );
   }
 
   private chooseQuestionActivity() {
