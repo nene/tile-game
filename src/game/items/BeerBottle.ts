@@ -71,7 +71,7 @@ export class BeerBottle implements SellableGameItem {
 
   getSmallSprite(): Sprite {
     return {
-      ...this.spriteSheet.getSprite([1, this.drink.bottleSpriteIndex]),
+      ...this.getSprite(),
       offset: [-3, -6],
     };
   }
@@ -91,3 +91,5 @@ export class BeerBottle implements SellableGameItem {
 }
 
 export const isBeerBottle = (item: GameItem): item is BeerBottle => item instanceof BeerBottle;
+
+export const isFullBeerBottle = (item: GameItem): item is BeerBottle => isBeerBottle(item) && !item.isEmpty();
