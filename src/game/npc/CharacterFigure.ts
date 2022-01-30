@@ -9,11 +9,13 @@ import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { Location } from "../locations/Location";
 import { GameItem } from "../items/GameItem";
 import { Character } from "./Character";
+import { Table } from "../furniture/Table";
 
 export class CharacterFigure implements GameObject {
   private activityManager: ActivityManager;
   private sprites: Sprite[] = [];
   private defaultSprite: Sprite;
+  private table?: Table;
 
   constructor(private coord: Coord, private character: Character) {
     this.activityManager = new ActivityManager(character.getActivities());
@@ -64,6 +66,14 @@ export class CharacterFigure implements GameObject {
 
   interact(ui: UiController, item?: GameItem) {
     this.activityManager.currentActivity().interact(ui, item);
+  }
+
+  sitAtTable(table: Table) {
+    this.table = table;
+  }
+
+  getTable(): Table | undefined {
+    return this.table;
   }
 }
 

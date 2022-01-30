@@ -3,8 +3,6 @@ import { BeerGlass } from "../items/BeerGlass";
 import { AcademicCharacter } from "../npc/AcademicCharacter";
 import { DrinkAnimation } from "../sprites/DrinkAnimation";
 import { Location } from "../locations/Location";
-import { coordAdd, rectTranslate } from "../Coord";
-import { isTable, Table } from "../furniture/Table";
 import { CharacterFigure } from "../npc/CharacterFigure";
 
 export class DrinkActivity implements Activity {
@@ -22,16 +20,12 @@ export class DrinkActivity implements Activity {
   tick(figure: CharacterFigure, location: Location): ActivityUpdates {
     this.animation.tick();
     if (this.animation.isFinished()) {
-      const tableInventory = this.nearbyTable(figure, location)?.getInventory();
+      const tableInventory = figure.getTable()?.getInventory();
       if (tableInventory && !tableInventory?.isFull()) {
         tableInventory.add(this.beerGlass);
       }
     }
     return { sprites: this.animation.getSprites() };
-  }
-
-  private nearbyTable(figure: CharacterFigure, location: Location): Table | undefined {
-    return location.getObjectsInRect(rectTranslate(figure.boundingBox(), coordAdd(figure.getCoord(), [0, 2]))).find(isTable);
   }
 
   isFinished() {
