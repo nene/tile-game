@@ -11,6 +11,8 @@ import { DrinkAnimationSprites } from "../sprites/DrinkAnimation";
 import { FramesDef } from "../sprites/SpriteAnimation";
 import { AsepriteFile } from "../sprites/Aseprite";
 import { readAsepriteAnimation } from "../sprites/readAsepriteAnimation";
+import { Table } from "../furniture/Table";
+import { BeerGlass } from "../items/BeerGlass";
 
 export type Desire = "beer" | "question";
 
@@ -37,7 +39,11 @@ export interface AcademicCharacterDef {
 const MAX_BEERS = 1;
 const MAX_QUESTIONS = 0;
 
-type FieldName = "table" | "glass";
+type Fields = {
+  table?: Table;
+  glass?: BeerGlass;
+}
+type FieldName = keyof Fields;
 
 export class AcademicCharacter implements Character {
   // How much the NPC likes or dislikes the player
@@ -48,10 +54,7 @@ export class AcademicCharacter implements Character {
   private questionsAsked = 0;
   private colorBandState = this.randomColorBandState();
   private today?: DayConfig;
-  private fields: Record<FieldName, any> = {
-    table: undefined,
-    glass: undefined,
-  };
+  private fields: Fields = {};
 
   constructor(private def: AcademicCharacterDef) {
   }
@@ -163,11 +166,11 @@ export class AcademicCharacter implements Character {
     }
   }
 
-  setField(name: FieldName, value: any) {
+  setField<T extends FieldName>(name: T, value: Fields[T]) {
     this.fields[name] = value;
   }
 
-  getField<T>(name: FieldName): T | undefined {
+  getField<T extends FieldName>(name: T): Fields[T] {
     return this.fields[name];
   }
 }

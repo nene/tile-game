@@ -3,7 +3,6 @@ import { isFullBeerBottle } from "../../items/BeerBottle";
 import { BeerGlass, DrinkLevel } from "../../items/BeerGlass";
 import { DrinkActivity } from "../DrinkActivity";
 import { Completion } from "./Completion";
-import { Table } from "../../furniture/Table";
 
 export class DrinkFromTableCompletion implements Completion {
   private beerGlass?: BeerGlass;
@@ -12,11 +11,11 @@ export class DrinkFromTableCompletion implements Completion {
   }
 
   tryComplete(): boolean {
-    const table = this.character.getField<Table>("table");
+    const table = this.character.getField("table");
     if (!table) {
       throw new Error("Can't perform DrinkFromTable completion when not sitting at table.");
     }
-    const beerGlass = this.character.getField<BeerGlass>("glass");
+    const beerGlass = this.character.getField("glass");
     if (!beerGlass) {
       throw new Error("Can't perform DrinkFromTable completion when no BeerGlass already at hand.");
     }
