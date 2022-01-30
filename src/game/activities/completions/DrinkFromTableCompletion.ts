@@ -1,17 +1,9 @@
-import { Activity } from "./Activity";
-import { AcademicCharacter } from "../npc/AcademicCharacter";
-import { Location } from "../locations/Location";
-import { CharacterFigure } from "../npc/CharacterFigure";
-import { isFullBeerBottle } from "../items/BeerBottle";
-import { BeerGlass, DrinkLevel } from "../items/BeerGlass";
-import { DrinkActivity } from "./DrinkActivity";
-import { GameWorld } from "../GameWorld";
-
-export interface Completion {
-  tryComplete(figure: CharacterFigure, location: Location, world: GameWorld): boolean;
-  isComplete(): boolean;
-  nextActivity(): Activity | undefined;
-}
+import { AcademicCharacter } from "../../npc/AcademicCharacter";
+import { CharacterFigure } from "../../npc/CharacterFigure";
+import { isFullBeerBottle } from "../../items/BeerBottle";
+import { BeerGlass, DrinkLevel } from "../../items/BeerGlass";
+import { DrinkActivity } from "../DrinkActivity";
+import { Completion } from "./Completion";
 
 export class DrinkFromTableCompletion implements Completion {
   private beerGlass?: BeerGlass;

@@ -6,7 +6,7 @@ import { AcademicCharacter } from "../npc/AcademicCharacter";
 import { UiController } from "../UiController";
 import { Interaction } from "./interactions/Interaction";
 import { GameItem } from "../items/GameItem";
-import { Completion } from "./DrinkFromTableCompletion";
+import { Completion } from "./completions/Completion";
 import { CharacterFigure } from "../npc/CharacterFigure";
 import { Location } from "../locations/Location";
 import { GameWorld } from "../GameWorld";

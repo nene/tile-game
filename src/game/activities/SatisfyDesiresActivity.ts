@@ -13,7 +13,7 @@ import { pickRandom } from "../utils/pickRandom";
 import { ColorBandInteraction } from "./plain-interactions/ColorBandInteraction";
 import { GameItem } from "../items/GameItem";
 import { RequestDrinkInteraction } from "./interactions/RequestDrinkInteraction";
-import { DrinkFromTableCompletion } from "./DrinkFromTableCompletion";
+import { DrinkFromTableCompletion } from "./completions/DrinkFromTableCompletion";
 
 export class SatisfyDesiresActivity implements Activity {
   private finished = false;
