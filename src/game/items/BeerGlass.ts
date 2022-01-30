@@ -63,3 +63,5 @@ export class BeerGlass implements GameItem {
 }
 
 export const isBeerGlass = (item: GameItem): item is BeerGlass => item instanceof BeerGlass;
+
+export const isEmptyBeerGlass = (item: GameItem): item is BeerGlass => isBeerGlass(item) && item.getLevel() === DrinkLevel.empty;

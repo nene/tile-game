@@ -14,13 +14,18 @@ export class DrinkFromTableCompletion implements Completion {
   tryComplete(figure: CharacterFigure): boolean {
     const table = figure.getTable();
     if (!table) {
-      throw new Error("Can't perform DrinkFromTable activity when not sitting at table.");
+      throw new Error("Can't perform DrinkFromTable completion when not sitting at table.");
+    }
+    const beerGlass = figure.getGlass();
+    if (!beerGlass) {
+      throw new Error("Can't perform DrinkFromTable completion when no BeerGlass already at hand.");
     }
 
     const beerBottle = table.getInventory().takeFirstOfKind(isFullBeerBottle);
     if (beerBottle) {
       beerBottle.open();
-      this.beerGlass = new BeerGlass(beerBottle.getDrink(), DrinkLevel.full);
+      beerGlass.fill(beerBottle.getDrink(), DrinkLevel.full);
+      this.beerGlass = beerGlass;
       beerBottle.empty();
       table.getInventory().add(beerBottle);
       return true;
