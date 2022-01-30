@@ -1,7 +1,6 @@
 import { Coord, tileToScreenCoord } from "../../Coord";
 import { LocationFactory, LocationName } from "../LocationFactory";
 import { GameObject } from "../../GameObject";
-import { SpawnPoint } from "../../furniture/SpawnPoint";
 import { TiledLevelFactory } from "../TiledLevelFactory";
 import { getLevel } from "../Level";
 import { LeavesFalling } from "../LeavesFalling";
@@ -15,7 +14,7 @@ export class OutdoorsLocationFactory implements LocationFactory {
       ...this.levelFactory.getWalls(),
       ...this.levelFactory.getFurniture(),
       // A spawn location outside of the fence
-      new SpawnPoint(tileToScreenCoord([14, 15])),
+      // new SpawnPoint(tileToScreenCoord([14, 15])),
     ];
   }
 

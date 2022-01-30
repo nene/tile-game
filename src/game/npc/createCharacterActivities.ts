@@ -15,15 +15,17 @@ import { LeaveTableActivity } from "../activities/LeaveTableActivity";
 
 export function createCharacterActivities(character: AcademicCharacter): Activity[] {
   return compact([
-    ...travel(["cfe-hall"], character),
+    // ...travel(["cfe-hall"], character),
     character.isRememberingBookWriting() ? new WriteToBookActivity(character) : undefined,
     ...travel(["cfe-cellar"], character),
     new PauseActivity(5, character),
     new MoveToTableActivity(character),
     new SatisfyDesiresActivity(character),
     new LeaveTableActivity(character),
-    ...travel(["cfe-hall", "outdoors"], character),
-    new MoveActivity(tileToScreenCoord([10, 15]), character),
+    // ...travel(["cfe-hall", "outdoors"], character),
+    // new MoveActivity(tileToScreenCoord([10, 15]), character),
+    ...travel(["cfe-hall"], character),
+    new MoveActivity(tileToScreenCoord([9, 6]), character),
     new DespawnActivity(character),
   ]);
 }
