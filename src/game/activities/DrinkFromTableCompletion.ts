@@ -8,7 +8,7 @@ import { DrinkActivity } from "./DrinkActivity";
 import { GameWorld } from "../GameWorld";
 
 export interface Completion {
-  tryComplete(figure: CharacterFigure, location: Location, world: GameWorld): void;
+  tryComplete(figure: CharacterFigure, location: Location, world: GameWorld): boolean;
   isComplete(): boolean;
   nextActivity(): Activity | undefined;
 }
@@ -19,7 +19,7 @@ export class DrinkFromTableCompletion implements Completion {
   constructor(private character: AcademicCharacter) {
   }
 
-  tryComplete(figure: CharacterFigure) {
+  tryComplete(figure: CharacterFigure): boolean {
     const table = figure.getTable();
     if (!table) {
       throw new Error("Can't perform DrinkFromTable activity when not sitting at table.");
@@ -30,7 +30,9 @@ export class DrinkFromTableCompletion implements Completion {
       beerBottle.open();
       beerBottle.empty();
       this.beerBottle = beerBottle;
+      return true;
     }
+    return false;
   }
 
   isComplete() {

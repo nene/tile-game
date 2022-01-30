@@ -22,7 +22,9 @@ export class CallFuxActivity implements Activity {
   }
 
   tick(figure: CharacterFigure, location: Location, world: GameWorld): ActivityUpdates {
-    this.completion?.tryComplete(figure, location, world);
+    if (this.completion?.tryComplete(figure, location, world)) {
+      return {};
+    }
 
     this.counter++;
     return {
