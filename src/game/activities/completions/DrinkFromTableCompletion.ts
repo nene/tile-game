@@ -28,6 +28,7 @@ export class DrinkFromTableCompletion implements Completion {
       this.beerGlass = beerGlass;
       beerBottle.empty();
       table.getInventory().add(beerBottle);
+      this.character.satisfyDesire("beer");
       return true;
     }
     return false;
