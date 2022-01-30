@@ -1,6 +1,5 @@
 import { AlcoSkill } from "./AlcoSkill";
 import { StorageInventory } from "../inventory/StorageInventory";
-import { BeerGlass, DrinkLevel } from "../items/BeerGlass";
 import { getDrink } from "../items/Drink";
 import { Wallet } from "./Wallet";
 import { OrgSkill } from "./OrgSkill";
@@ -9,13 +8,18 @@ import { GameItem } from "../items/GameItem";
 import { PouringSkill } from "./PouringSkill";
 import { SkillConfig } from "./Skill";
 import { TermSkill } from "./TermSkill";
+import { BeerBottle } from "../items/BeerBottle";
 
 export class PlayerAttributes {
   public readonly inventory = new StorageInventory({
     size: 7,
     items: [
-      new BeerGlass(getDrink("pilsner"), DrinkLevel.full),
-      new BeerGlass(getDrink("pilsner"), DrinkLevel.almostFull)
+      new BeerBottle(getDrink("tommu-hiid")),
+      new BeerBottle(getDrink("pilsner")),
+      new BeerBottle(getDrink("special")),
+      new BeerBottle(getDrink("heineken")),
+      new BeerBottle(getDrink("pilsner")),
+      new BeerBottle(getDrink("pilsner")),
     ],
   });
   public readonly wallet = new Wallet(25);
