@@ -115,7 +115,8 @@ export class AcademicCharacter implements Character {
   getDesires(): Desire[] {
     return compact([
       this.beersConsumed < MAX_BEERS ? "beer" : undefined,
-      this.questionsAsked < MAX_QUESTIONS ? "question" : undefined,
+      // this.questionsAsked < MAX_QUESTIONS ? "question" : undefined, // XXX: Temporarily disabled
+      this.questionsAsked < MAX_QUESTIONS ? undefined : undefined,
     ]);
   }
 
