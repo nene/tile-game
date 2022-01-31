@@ -9,6 +9,7 @@ import { Rect } from "../../Coord";
 import { MultiChoiceQuestionContent } from "../../dialogs/MultiChoiceQuestionContent";
 import { CallFuxActivity } from "../CallFuxActivity";
 import { RequestWaterInteraction } from "./RequestWaterInteraction";
+import { SoundLibrary } from "../../sounds/SoundLibrary";
 
 export class AskQuestionInteraction implements Interaction {
   private finished = false;
@@ -67,11 +68,13 @@ export class AskQuestionInteraction implements Interaction {
     this.showReply(ui, result.msg);
     this.character.satisfyDesire("question");
     if (result.type === "punish") {
+      SoundLibrary.play("hmm-disproval");
       ui.questions().wrongAnswer(question);
       this.character.changeOpinion(-1);
       this.punishWithWater = true;
     }
     else if (result.type === "praise") {
+      SoundLibrary.play("hmm-approval");
       ui.questions().rightAnswer(question);
       this.character.changeOpinion(+1);
     }

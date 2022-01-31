@@ -5,6 +5,8 @@ import openingCabinetDoor from "./data/opening-cabinet-door.mp3";
 import openingFridgeDoor from "./data/opening-fridge-door.mp3";
 import coins from "./data/coins.wav";
 import glassBottles from "./data/glass-bottles.mp3";
+import hmmApproval from "./data/hmm-approval.mp3";
+import hmmDisproval from "./data/hmm-disproval.mp3";
 import { Howl } from "howler";
 
 const soundFiles = {
@@ -15,6 +17,8 @@ const soundFiles = {
   'opening-fridge-door': openingFridgeDoor,
   'coins': coins,
   'glass-bottles': glassBottles,
+  'hmm-approval': hmmApproval,
+  'hmm-disproval': hmmDisproval,
 };
 
 type SoundName = keyof typeof soundFiles;
