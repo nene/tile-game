@@ -33,7 +33,7 @@ const characters = {
   }),
   "sass": new AcademicCharacter({
     json: sassJson,
-    name: "vil! Aleksander Popov",
+    name: "vil! Aleksandr Popov",
     spriteName: "cfe-ksv-sass",
     moveAnimationFrames: {
       down: readAsepriteAnimation("w-down", sassJson),
