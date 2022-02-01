@@ -73,8 +73,8 @@ import levelUpMini from "./data/level-up-mini.png";
 import { Coord } from "../Coord";
 import { SpriteSheet, SpriteSheetConfig } from "./SpriteSheet";
 
-const CHARACTER_SIZE: Coord = [16, 34];
-const CHARACTER_OFFSET: Coord = [-8, -31];
+const CHARACTER_SIZE: Coord = [16, 36];
+const CHARACTER_OFFSET: Coord = [-8, -33];
 
 // Helper to require values of `imageFiles` to conform to specific type
 const spriteDef = (x: { src: string, cfg: SpriteSheetConfig }) => x;

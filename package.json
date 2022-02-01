@@ -31,7 +31,8 @@
     "aseprite": "/Applications/Aseprite.app/Contents/MacOS/aseprite",
     "gen-furniture": "yarn aseprite -b art/furniture/*.aseprite --sheet-pack --format json-array --list-tags --list-slices --filename-format '{title}' --sheet src/game/sprites/data/furniture.png --data src/game/sprites/data/furniture.json",
     "gen-ksv": "for file in $(ls art/cfe-ksv-* | sed 's/art\\///' | sed 's/.aseprite//'); do yarn aseprite -b art/$file.aseprite --script art/ksv-sprite-mod.lua --sheet-pack --format json-array --list-tags --filename-format '#{tag} {tagframe}' --sheet src/game/sprites/data/$file.png --data src/game/sprites/data/$file.json; done",
-    "gen-reb": "yarn aseprite -b art/cfe-reb.aseprite --script art/ksv-sprite-mod.lua --sheet-pack --format json-array --list-tags --filename-format '#{tag} {tagframe}' --sheet src/game/sprites/data/cfe-reb.png --data src/game/sprites/data/cfe-reb.json"
+    "gen-reb": "yarn aseprite -b art/cfe-reb.aseprite --script art/ksv-sprite-mod.lua --sheet-pack --format json-array --list-tags --filename-format '#{tag} {tagframe}' --sheet src/game/sprites/data/cfe-reb.png --data src/game/sprites/data/cfe-reb.json",
+    "gen-feenoks-lady": "yarn aseprite -b art/feenoks-lady.aseprite --sheet-pack --format json-array --list-tags --filename-format '#{tag} {tagframe}' --sheet src/game/sprites/data/feenoks-lady.png --data src/game/sprites/data/feenoks-lady.json"
   },
   "eslintConfig": {
     "extends": [

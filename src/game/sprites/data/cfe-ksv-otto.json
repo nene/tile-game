@@ -1,29 +1,29 @@
 { "frames": [
    {
     "filename": "# 0",
-    "frame": { "x": 0, "y": 0, "w": 16, "h": 34 },
+    "frame": { "x": 0, "y": 0, "w": 16, "h": 36 },
     "rotated": false,
     "trimmed": false,
-    "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 34 },
-    "sourceSize": { "w": 16, "h": 34 },
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 36 },
+    "sourceSize": { "w": 16, "h": 36 },
     "duration": 100
    },
    {
     "filename": "#B 0",
-    "frame": { "x": 16, "y": 0, "w": 16, "h": 34 },
+    "frame": { "x": 16, "y": 0, "w": 16, "h": 36 },
     "rotated": false,
     "trimmed": false,
-    "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 34 },
-    "sourceSize": { "w": 16, "h": 34 },
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 36 },
+    "sourceSize": { "w": 16, "h": 36 },
     "duration": 100
    },
    {
     "filename": "#B 1",
-    "frame": { "x": 0, "y": 34, "w": 16, "h": 34 },
+    "frame": { "x": 0, "y": 36, "w": 16, "h": 36 },
     "rotated": false,
     "trimmed": false,
-    "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 34 },
-    "sourceSize": { "w": 16, "h": 34 },
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 36 },
+    "sourceSize": { "w": 16, "h": 36 },
     "duration": 100
    }
  ],
@@ -32,7 +32,7 @@
   "version": "1.2.32-x64",
   "image": "cfe-ksv-otto.png",
   "format": "RGBA8888",
-  "size": { "w": 32, "h": 68 },
+  "size": { "w": 32, "h": 72 },
   "scale": "1",
   "frameTags": [
    { "name": "B", "from": 1, "to": 2, "direction": "forward" }
