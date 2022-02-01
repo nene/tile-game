@@ -13,6 +13,7 @@ import { compact } from "lodash";
 import { LocationName } from "../locations/LocationFactory";
 import { LeaveTableActivity } from "../activities/LeaveTableActivity";
 import { AvoidAnnoyancesActivity } from "../activities/AvoidAnnoyancesActivity";
+import { GreetActivity } from "../activities/GreetActivity";
 
 export function createCharacterActivities(character: AcademicCharacter): Activity[] {
   return compact([
@@ -20,6 +21,7 @@ export function createCharacterActivities(character: AcademicCharacter): Activit
     character.isRememberingBookWriting() ? new WriteToBookActivity(character) : undefined,
     ...travel(["cfe-cellar"], character),
     new PauseActivity(5, character),
+    new GreetActivity(character),
     new MoveToTableActivity(character),
     new AvoidAnnoyancesActivity(character, new SatisfyDesiresActivity(character)),
     new LeaveTableActivity(character),

@@ -194,6 +194,14 @@ export class AcademicCharacter implements Character {
     }
   }
 
+  getGreetAnimationFrames(): FramesDef {
+    try {
+      return readAsepriteAnimation("greet", this.def.json);
+    } catch (e) {
+      return [[0, 0]];
+    }
+  }
+
   setField<T extends FieldName>(name: T, value: Fields[T]) {
     this.fields[name] = value;
   }
