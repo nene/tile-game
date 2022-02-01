@@ -5,7 +5,7 @@ import { SpriteLibrary, SpriteName } from "../sprites/SpriteLibrary";
 import { constrain } from "../utils/constrain";
 import { pickRandom } from "../utils/pickRandom";
 import { Character } from "./Character";
-import { createCharacterActivities } from "./createCharacterActivities";
+import { createAcademicCharacterActivity } from "../activities/createAcademicCharacterActivity";
 import { Facing } from "../npc/Facing";
 import { DrinkAnimationConfig, DrinkAnimationSprites } from "../sprites/DrinkAnimation";
 import { FramesDef } from "../sprites/SpriteAnimation";
@@ -15,7 +15,7 @@ import { Table } from "../furniture/Table";
 import { BeerGlass } from "../items/BeerGlass";
 import { isEmptyBeerBottle } from "../items/BeerBottle";
 import { Activity } from "../activities/Activity";
-import { ActivityGroup } from "../activities/ActivityGroup";
+import { IdleActivity } from "../activities/IdleActivity";
 
 export type Desire = "beer" | "question";
 
@@ -58,7 +58,7 @@ export class AcademicCharacter implements Character {
   private beersConsumed = 0;
   private questionsAsked = 0;
   private colorBandState = this.randomColorBandState();
-  private activity = new ActivityGroup([]);
+  private activity: Activity = new IdleActivity();
   private today?: DayConfig;
   private fields: Fields = {};
   private greetedCharacters = new Set<Character>();
@@ -73,7 +73,7 @@ export class AcademicCharacter implements Character {
     this.questionsAsked = 0;
     this.colorBandState = this.randomColorBandState();
     this.fields = {};
-    this.activity = new ActivityGroup(createCharacterActivities(this));
+    this.activity = createAcademicCharacterActivity(this);
     this.greetedCharacters = new Set<Character>();
   }
 

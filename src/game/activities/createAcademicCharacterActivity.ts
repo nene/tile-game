@@ -1,21 +1,26 @@
-import { Activity } from "../activities/Activity";
-import { MoveToTableActivity } from "../activities/MoveToTableActivity";
-import { MoveToDoorActivity } from "../activities/MoveToDoorActivity";
-import { DespawnActivity } from "../activities/DespawnActivity";
-import { PauseActivity } from "../activities/PauseActivity";
-import { SatisfyDesiresActivity } from "../activities/SatisfyDesiresActivity";
-import { EnterDoorActivity } from "../activities/EnterDoorActivity";
-import { MoveActivity } from "../activities/MoveActivity";
+import { Activity } from "./Activity";
+import { MoveToTableActivity } from "./MoveToTableActivity";
+import { MoveToDoorActivity } from "./MoveToDoorActivity";
+import { DespawnActivity } from "./DespawnActivity";
+import { PauseActivity } from "./PauseActivity";
+import { SatisfyDesiresActivity } from "./SatisfyDesiresActivity";
+import { EnterDoorActivity } from "./EnterDoorActivity";
+import { MoveActivity } from "./MoveActivity";
 import { tileToScreenCoord } from "../Coord";
-import { WriteToBookActivity } from "../activities/WriteToBookActivity";
-import { AcademicCharacter } from "./AcademicCharacter";
+import { WriteToBookActivity } from "./WriteToBookActivity";
+import { AcademicCharacter } from "../npc/AcademicCharacter";
 import { compact } from "lodash";
 import { LocationName } from "../locations/LocationFactory";
-import { LeaveTableActivity } from "../activities/LeaveTableActivity";
-import { AvoidAnnoyancesActivity } from "../activities/AvoidAnnoyancesActivity";
-import { GreetActivity } from "../activities/GreetActivity";
+import { LeaveTableActivity } from "./LeaveTableActivity";
+import { AvoidAnnoyancesActivity } from "./AvoidAnnoyancesActivity";
+import { GreetActivity } from "./GreetActivity";
+import { ActivityGroup } from "./ActivityGroup";
 
-export function createCharacterActivities(character: AcademicCharacter): Activity[] {
+export function createAcademicCharacterActivity(character: AcademicCharacter): Activity {
+  return new ActivityGroup(createActivities(character));
+}
+
+function createActivities(character: AcademicCharacter): Activity[] {
   return compact([
     // ...travel(["cfe-hall"], character),
     character.isRememberingBookWriting() ? new WriteToBookActivity(character) : undefined,
