@@ -13,9 +13,7 @@ import { pickRandom } from "../utils/pickRandom";
 import { ColorBandInteraction } from "./plain-interactions/ColorBandInteraction";
 import { GameItem } from "../items/GameItem";
 import { RequestDrinkInteraction } from "./interactions/RequestDrinkInteraction";
-import { DrinkFromTableCompletion } from "./completions/DrinkFromTableCompletion";
 import { RequestGlassInteraction } from "./interactions/RequestGlassInteraction";
-import { GlassFromTableCompletion } from "./completions/GlassFromTableCompletion";
 
 export class SatisfyDesiresActivity implements Activity {
   private finished = false;
@@ -42,7 +40,6 @@ export class SatisfyDesiresActivity implements Activity {
     const requestBeer = new CallFuxActivity(
       this.character,
       new RequestDrinkInteraction(this.character),
-      new DrinkFromTableCompletion(this.character),
     );
     if (this.character.getField("glass")) {
       return requestBeer;
@@ -50,7 +47,6 @@ export class SatisfyDesiresActivity implements Activity {
       const requestGlass = new CallFuxActivity(
         this.character,
         new RequestGlassInteraction(this.character),
-        new GlassFromTableCompletion(this.character),
       );
       return new ContinuationActivity(requestGlass, requestBeer);
     }

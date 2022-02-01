@@ -22,6 +22,10 @@ export class AskQuestionInteraction implements Interaction {
     return InteractionType.question;
   }
 
+  tryComplete() {
+    return false;
+  }
+
   isFinished() {
     return this.finished;
   }

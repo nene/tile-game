@@ -7,7 +7,6 @@ import { CallFuxActivity } from "./CallFuxActivity";
 import { CharacterFigure } from "../npc/CharacterFigure";
 import { GameItem } from "../items/GameItem";
 import { EmptyBottlesInteraction } from "./interactions/EmptyBottlesInteraction";
-import { EmptyBottlesCompletion } from "./completions/EmptyBottlesCompletion";
 
 export class AvoidAnnoyancesActivity implements Activity {
   private finished = false;
@@ -19,7 +18,7 @@ export class AvoidAnnoyancesActivity implements Activity {
   tick(figure: CharacterFigure, location: Location, world: GameWorld): ActivityUpdates {
     if (this.character.getAnnoyance()) {
       if (!this.activity) {
-        this.activity = new CallFuxActivity(this.character, new EmptyBottlesInteraction(this.character), new EmptyBottlesCompletion(this.character));
+        this.activity = new CallFuxActivity(this.character, new EmptyBottlesInteraction(this.character));
       }
       const result = this.activity.tick(figure, location, world);
       if (this.activity.isFinished()) {

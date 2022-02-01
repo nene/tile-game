@@ -18,6 +18,10 @@ export class RequestWaterInteraction implements Interaction {
     return InteractionType.water;
   }
 
+  tryComplete() {
+    return false;
+  }
+
   isFinished() {
     return this.finished;
   }

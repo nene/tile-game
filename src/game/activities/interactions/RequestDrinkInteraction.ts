@@ -3,7 +3,7 @@ import { UiController } from "../../UiController";
 import { Interaction, InteractionType } from "./Interaction";
 import { BeerGlass, DrinkLevel, isBeerGlass } from "../../items/BeerGlass";
 import { DrinkActivity } from "./../DrinkActivity";
-import { BeerBottle, isBeerBottle } from "../../items/BeerBottle";
+import { BeerBottle, isBeerBottle, isFullBeerBottle } from "../../items/BeerBottle";
 import { ValidationResult } from "../../questions/Question";
 import { getDrink } from "../../items/Drink";
 import { GameItem } from "../../items/GameItem";
@@ -19,6 +19,29 @@ export class RequestDrinkInteraction implements Interaction {
 
   getType() {
     return InteractionType.beer;
+  }
+
+  tryComplete(): boolean {
+    const table = this.character.getField("table");
+    if (!table) {
+      throw new Error("Can't perform DrinkFromTable completion when not sitting at table.");
+    }
+    const beerGlass = this.character.getField("glass");
+    if (!beerGlass) {
+      throw new Error("Can't perform DrinkFromTable completion when no BeerGlass already at hand.");
+    }
+
+    const beerBottle = table.getInventory().takeFirstOfKind(isFullBeerBottle);
+    if (beerBottle) {
+      beerBottle.open();
+      beerGlass.fill(beerBottle.getDrink(), DrinkLevel.full);
+      this.hasReceivedBeerGlass = true;
+      beerBottle.empty();
+      table.getInventory().add(beerBottle);
+      this.character.satisfyDesire("beer");
+      return true;
+    }
+    return false;
   }
 
   isFinished() {

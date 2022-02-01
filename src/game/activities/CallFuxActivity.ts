@@ -6,7 +6,6 @@ import { AcademicCharacter } from "../npc/AcademicCharacter";
 import { UiController } from "../UiController";
 import { Interaction } from "./interactions/Interaction";
 import { GameItem } from "../items/GameItem";
-import { Completion } from "./completions/Completion";
 import { CharacterFigure } from "../npc/CharacterFigure";
 import { Location } from "../locations/Location";
 import { GameWorld } from "../GameWorld";
@@ -16,13 +15,13 @@ export class CallFuxActivity implements Activity {
   private sprite: Sprite;
   private calloutSprite: Sprite;
 
-  constructor(private character: AcademicCharacter, private interaction: Interaction, private completion?: Completion) {
+  constructor(character: AcademicCharacter, private interaction: Interaction) {
     this.sprite = SpriteLibrary.getSprite(character.getSpriteName());
     this.calloutSprite = SpriteLibrary.getSprite("callout", [interaction.getType(), 0]);
   }
 
   tick(figure: CharacterFigure, location: Location, world: GameWorld): ActivityUpdates {
-    if (this.completion?.tryComplete(figure, location, world)) {
+    if (this.interaction.tryComplete(figure, location, world)) {
       return {};
     }
 
@@ -48,7 +47,7 @@ export class CallFuxActivity implements Activity {
   }
 
   isFinished() {
-    return this.interaction.isFinished() || Boolean(this.completion?.isComplete());
+    return this.interaction.isFinished();
   }
 
   isInteractable() {
@@ -63,6 +62,5 @@ export class CallFuxActivity implements Activity {
     if (this.interaction.isFinished()) {
       return this.interaction.nextActivity();
     }
-    return this.completion?.nextActivity();
   }
 }

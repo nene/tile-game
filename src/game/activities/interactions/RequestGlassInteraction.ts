@@ -1,7 +1,7 @@
 import { AcademicCharacter } from "../../npc/AcademicCharacter";
 import { UiController } from "../../UiController";
 import { Interaction, InteractionType } from "./Interaction";
-import { DrinkLevel, isBeerGlass } from "../../items/BeerGlass";
+import { DrinkLevel, isBeerGlass, isEmptyBeerGlass } from "../../items/BeerGlass";
 import { GameItem } from "../../items/GameItem";
 import { CharacterDialog } from "../../dialogs/CharacterDialog";
 
@@ -15,6 +15,21 @@ export class RequestGlassInteraction implements Interaction {
 
   getType() {
     return InteractionType.glass;
+  }
+
+  tryComplete(): boolean {
+    const table = this.character.getField("table");
+    if (!table) {
+      throw new Error("Can't perform GlassFromTable completion when not sitting at table.");
+    }
+
+    const beerGlass = table.getInventory().takeFirstOfKind(isEmptyBeerGlass);
+    if (beerGlass) {
+      this.character.setField("glass", beerGlass);
+      this.finished = true;
+      return true;
+    }
+    return false;
   }
 
   isFinished() {

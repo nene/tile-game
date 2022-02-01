@@ -4,10 +4,9 @@ import { Interaction, InteractionType } from "./Interaction";
 import { CharacterDialog } from "../../dialogs/CharacterDialog";
 
 export class EmptyBottlesInteraction implements Interaction {
-  private finished = false;
   private dialog: CharacterDialog;
 
-  constructor(character: AcademicCharacter) {
+  constructor(private character: AcademicCharacter) {
     this.dialog = new CharacterDialog(character);
   }
 
@@ -15,8 +14,12 @@ export class EmptyBottlesInteraction implements Interaction {
     return InteractionType.emptyBottle;
   }
 
+  tryComplete() {
+    return this.isFinished();
+  }
+
   isFinished() {
-    return this.finished;
+    return this.character.getAnnoyance() !== "empty-bottles";
   }
 
   interact(ui: UiController) {
