@@ -13,11 +13,15 @@ import { compact } from "lodash";
 import { LocationName } from "../locations/LocationFactory";
 import { LeaveTableActivity } from "./LeaveTableActivity";
 import { AvoidAnnoyancesActivity } from "./AvoidAnnoyancesActivity";
-import { GreetActivity } from "./GreetActivity";
 import { ActivityGroup } from "./ActivityGroup";
+import { BlockingActivity } from "./BlockingActivity";
+import { GreetActivityTrigger } from "./GreetActivityTrigger";
 
 export function createAcademicCharacterActivity(character: AcademicCharacter): Activity {
-  return new ActivityGroup(createActivities(character));
+  return new BlockingActivity({
+    triggers: [new GreetActivityTrigger(character)],
+    innerActivity: new ActivityGroup(createActivities(character)),
+  });
 }
 
 function createActivities(character: AcademicCharacter): Activity[] {
@@ -26,7 +30,6 @@ function createActivities(character: AcademicCharacter): Activity[] {
     character.isRememberingBookWriting() ? new WriteToBookActivity(character) : undefined,
     ...travel(["cfe-cellar"], character),
     new PauseActivity(5, character),
-    new GreetActivity(character),
     new MoveToTableActivity(character),
     new AvoidAnnoyancesActivity(character, new SatisfyDesiresActivity(character)),
     new LeaveTableActivity(character),
