@@ -7,6 +7,8 @@ export enum InteractionType {
   beer = 1,
   water = 2,
   question = 3,
+  bottle = 4,
+  emptyBottle = 5,
 }
 
 export interface Interaction {

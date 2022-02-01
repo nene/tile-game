@@ -13,6 +13,7 @@ import { AsepriteFile } from "../sprites/Aseprite";
 import { readAsepriteAnimation } from "../sprites/readAsepriteAnimation";
 import { Table } from "../furniture/Table";
 import { BeerGlass } from "../items/BeerGlass";
+import { isEmptyBeerBottle } from "../items/BeerBottle";
 
 export type Desire = "beer" | "question";
 
@@ -37,8 +38,9 @@ export interface AcademicCharacterDef {
   drinkingSpeed?: { idleTicks: number; drinkTicks: number };
 }
 
-const MAX_BEERS = 1;
+const MAX_BEERS = 3;
 const MAX_QUESTIONS = 0;
+const MAX_EMPTY_BOTTLES = 3;
 
 type Fields = {
   table?: Table;
@@ -138,6 +140,14 @@ export class AcademicCharacter implements Character {
         this.questionsAsked++;
         break;
     }
+  }
+
+  getAnnoyance(): "empty-bottles" | undefined {
+    const table = this.getField("table");
+    if (table && table.getInventory().allItems().filter(isEmptyBeerBottle).length > MAX_EMPTY_BOTTLES) {
+      return "empty-bottles";
+    }
+    return undefined;
   }
 
   getColorBandState(): ColorBandState {

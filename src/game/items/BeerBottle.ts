@@ -93,3 +93,5 @@ export class BeerBottle implements SellableGameItem {
 export const isBeerBottle = (item: GameItem): item is BeerBottle => item instanceof BeerBottle;
 
 export const isFullBeerBottle = (item: GameItem): item is BeerBottle => isBeerBottle(item) && !item.isEmpty();
+
+export const isEmptyBeerBottle = (item: GameItem): item is BeerBottle => isBeerBottle(item) && item.isEmpty();

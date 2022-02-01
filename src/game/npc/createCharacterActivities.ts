@@ -12,6 +12,7 @@ import { AcademicCharacter } from "./AcademicCharacter";
 import { compact } from "lodash";
 import { LocationName } from "../locations/LocationFactory";
 import { LeaveTableActivity } from "../activities/LeaveTableActivity";
+import { AvoidAnnoyancesActivity } from "../activities/AvoidAnnoyancesActivity";
 
 export function createCharacterActivities(character: AcademicCharacter): Activity[] {
   return compact([
@@ -20,7 +21,7 @@ export function createCharacterActivities(character: AcademicCharacter): Activit
     ...travel(["cfe-cellar"], character),
     new PauseActivity(5, character),
     new MoveToTableActivity(character),
-    new SatisfyDesiresActivity(character),
+    new AvoidAnnoyancesActivity(character, new SatisfyDesiresActivity(character)),
     new LeaveTableActivity(character),
     // ...travel(["cfe-hall", "outdoors"], character),
     // new MoveActivity(tileToScreenCoord([10, 15]), character),
