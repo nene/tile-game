@@ -68,6 +68,7 @@ export class AcademicCharacter implements Character {
     this.beersConsumed = 0;
     this.questionsAsked = 0;
     this.colorBandState = this.randomColorBandState();
+    this.fields = {};
   }
 
   private randomWillWriteToBook(): boolean {
