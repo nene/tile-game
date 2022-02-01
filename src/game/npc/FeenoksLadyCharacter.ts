@@ -41,4 +41,8 @@ export class FeenoksLadyCharacter implements Character {
   markDialogShown() {
     this.dialogShown = true;
   }
+
+  isGreetable() {
+    return false;
+  }
 }

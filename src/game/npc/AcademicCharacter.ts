@@ -61,6 +61,7 @@ export class AcademicCharacter implements Character {
   private activityManager = new ActivityManager([]);
   private today?: DayConfig;
   private fields: Fields = {};
+  private greetedCharacters = new Set<Character>();
 
   constructor(private def: AcademicCharacterDef) {
   }
@@ -73,6 +74,7 @@ export class AcademicCharacter implements Character {
     this.colorBandState = this.randomColorBandState();
     this.fields = {};
     this.activityManager = new ActivityManager(createCharacterActivities(this));
+    this.greetedCharacters = new Set<Character>();
   }
 
   private randomWillWriteToBook(): boolean {
@@ -208,6 +210,20 @@ export class AcademicCharacter implements Character {
 
   getField<T extends FieldName>(name: T): Fields[T] {
     return this.fields[name];
+  }
+
+  isGreetable() {
+    return true;
+  }
+
+  // Returns true when character ha not been greeted yet
+  greet(character: Character): boolean {
+    if (character === this || this.greetedCharacters.has(character) || !character.isGreetable()) {
+      return false;
+    } else {
+      this.greetedCharacters.add(character);
+      return true;
+    }
   }
 }
 

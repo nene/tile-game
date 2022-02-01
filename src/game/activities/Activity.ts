@@ -18,3 +18,7 @@ export interface Activity {
   interact: (ui: UiController, item?: GameItem) => void;
   nextActivity(): Activity | undefined;
 }
+
+export interface TriggerableActivity extends Activity {
+  shouldTrigger: (figure: CharacterFigure, location: Location, world: GameWorld) => boolean;
+}

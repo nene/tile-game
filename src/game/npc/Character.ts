@@ -8,4 +8,5 @@ export interface Character {
   getFaceSprite: () => Sprite;
   resetForDay: (n: number) => void;
   currentActivity: () => Activity;
+  isGreetable: () => boolean;
 }

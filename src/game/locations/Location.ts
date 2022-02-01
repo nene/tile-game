@@ -141,8 +141,11 @@ export class Location {
   }
 
   findCharacterFigure(character: Character): CharacterFigure | undefined {
-    return this.allObjects()
-      .filter(isCharacterFigure)
+    return this.allCharacterFigures()
       .find((fig) => fig.getCharacter() === character);
+  }
+
+  allCharacterFigures(): CharacterFigure[] {
+    return this.allObjects().filter(isCharacterFigure);
   }
 }
