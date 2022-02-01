@@ -6,13 +6,15 @@ import { DrinkActivity } from "./../DrinkActivity";
 import { BeerBottle, isBeerBottle } from "../../items/BeerBottle";
 import { ValidationResult } from "../../questions/Question";
 import { getDrink } from "../../items/Drink";
-import { showPlainTextDialog } from "../../dialogs/showPlainTextDialog";
 import { GameItem } from "../../items/GameItem";
+import { CharacterDialog } from "../../dialogs/CharacterDialog";
 
 export class RequestDrinkInteraction implements Interaction {
   private hasReceivedBeerGlass = false;
+  private dialog: CharacterDialog;
 
   constructor(private character: AcademicCharacter) {
+    this.dialog = new CharacterDialog(character);
   }
 
   getType() {
@@ -25,12 +27,12 @@ export class RequestDrinkInteraction implements Interaction {
 
   interact(ui: UiController, item?: GameItem) {
     if (!item || !(isBeerBottle(item) || isBeerGlass(item))) {
-      this.showDialog(ui, "Rebane! Too mulle šoppen õlut.");
+      this.dialog.show(ui, "Rebane! Too mulle šoppen õlut.");
       return;
     }
 
     if (item.getDrink() === getDrink("water")) {
-      this.showDialog(ui, "Vett võid sa ise juua kui tahad.");
+      this.dialog.show(ui, "Vett võid sa ise juua kui tahad.");
       return;
     }
 
@@ -45,7 +47,7 @@ export class RequestDrinkInteraction implements Interaction {
   private acceptDrink(ui: UiController, item: BeerGlass | BeerBottle): item is BeerGlass {
     if (isBeerGlass(item)) {
       const result = this.validateBeerGlass(item);
-      this.showDialog(ui, result.msg);
+      this.dialog.show(ui, result.msg);
 
       if (result.type === "praise") {
         this.character.changeOpinion(+1);
@@ -61,18 +63,14 @@ export class RequestDrinkInteraction implements Interaction {
       }
     }
     else if (isBeerBottle(item) && !item.isOpen()) {
-      this.showDialog(ui, "Aitäh.\nTee palun pudel lahti ja vala šoppenisse ka.");
+      this.dialog.show(ui, "Aitäh.\nTee palun pudel lahti ja vala šoppenisse ka.");
       return false;
     }
     else if (isBeerBottle(item) && item.isOpen()) {
-      this.showDialog(ui, "Aitäh.\nVala õlu šoppenisse ka.");
+      this.dialog.show(ui, "Aitäh.\nVala õlu šoppenisse ka.");
       return false;
     }
     return false;
-  }
-
-  private showDialog(ui: UiController, text: string) {
-    showPlainTextDialog({ ui, character: this.character, text });
   }
 
   nextActivity() {

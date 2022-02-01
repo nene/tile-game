@@ -1,7 +1,6 @@
 import { Activity, ActivityUpdates } from "./Activity";
 import { UiController } from "../UiController";
 import { FeenoksLadyCharacter } from "../npc/FeenoksLadyCharacter";
-import { showPlainTextDialog } from "../dialogs/showPlainTextDialog";
 import { BeerBottle } from "../items/BeerBottle";
 import { getDrink } from "../items/Drink";
 import { Shop } from "../inventory/Shop";
@@ -11,9 +10,11 @@ import { SpriteAnimation } from "../sprites/SpriteAnimation";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { readAsepriteAnimation } from "../sprites/readAsepriteAnimation";
 import feenoksLadyJson from "../sprites/data/feenoks-lady.json";
+import { CharacterDialog } from "../dialogs/CharacterDialog";
 
 export class SellAlcoholActivity implements Activity {
   private animation: SpriteAnimation;
+  private dialog: CharacterDialog;
 
   private shop = new Shop([
     new BeerBottle(getDrink("limonaad")),
@@ -33,6 +34,7 @@ export class SellAlcoholActivity implements Activity {
     this.animation = new SpriteAnimation(SpriteLibrary.get(character.getSpriteName()), {
       frames: readAsepriteAnimation("idle", feenoksLadyJson),
     });
+    this.dialog = new CharacterDialog(character);
   }
 
   tick(): ActivityUpdates {
@@ -55,10 +57,7 @@ export class SellAlcoholActivity implements Activity {
       return this.showShop(ui);
     }
 
-    showPlainTextDialog({
-      ui,
-      character: this.character,
-      text: "Teretulemast Feenoksi alkoparadiisi!",
+    this.dialog.show(ui, "Teretulemast Feenoksi alkoparadiisi!", {
       onClose: () => {
         this.character.markDialogShown();
         this.showShop(ui);
