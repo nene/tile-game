@@ -7,5 +7,5 @@ export interface Character {
   getSpriteName: () => SpriteName;
   getFaceSprite: () => Sprite;
   resetForDay: (n: number) => void;
-  getActivities: () => Activity[];
+  currentActivity: () => Activity;
 }

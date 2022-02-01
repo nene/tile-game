@@ -4,19 +4,16 @@ import { GameWorld } from "../GameWorld";
 import { PixelScreen } from "../PixelScreen";
 import { Sprite } from "../sprites/Sprite";
 import { UiController } from "../UiController";
-import { ActivityManager } from "./ActivityManager";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { Location } from "../locations/Location";
 import { GameItem } from "../items/GameItem";
 import { Character } from "./Character";
 
 export class CharacterFigure implements GameObject {
-  private activityManager: ActivityManager;
   private sprites: Sprite[] = [];
   private defaultSprite: Sprite;
 
   constructor(private coord: Coord, private character: Character) {
-    this.activityManager = new ActivityManager(character.getActivities());
     this.defaultSprite = SpriteLibrary.getSprite(character.getSpriteName());
   }
 
@@ -25,7 +22,7 @@ export class CharacterFigure implements GameObject {
   }
 
   tick(location: Location, world: GameWorld) {
-    const activity = this.activityManager.currentActivity();
+    const activity = this.character.currentActivity();
 
     const updates = activity.tick(this, location, world);
     if (updates.coord) {
@@ -59,11 +56,11 @@ export class CharacterFigure implements GameObject {
   }
 
   isInteractable(ui: UiController, item?: GameItem) {
-    return this.activityManager.currentActivity().isInteractable(ui, item);
+    return this.character.currentActivity().isInteractable(ui, item);
   }
 
   interact(ui: UiController, item?: GameItem) {
-    this.activityManager.currentActivity().interact(ui, item);
+    this.character.currentActivity().interact(ui, item);
   }
 }
 

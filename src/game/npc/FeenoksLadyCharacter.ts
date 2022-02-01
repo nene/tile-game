@@ -2,9 +2,12 @@ import { SpriteLibrary, SpriteName } from "../sprites/SpriteLibrary";
 import { Character } from "./Character";
 import { Sprite } from "../sprites/Sprite";
 import { SellAlcoholActivity } from "../activities/SellAlcoholActivity";
+import { Activity } from "../activities/Activity";
+import { IdleActivity } from "../activities/IdleActivity";
 
 export class FeenoksLadyCharacter implements Character {
   private dialogShown = false;
+  private activity: Activity = new IdleActivity();
 
   getName() {
     return "Proua Fenoksia";
@@ -24,12 +27,11 @@ export class FeenoksLadyCharacter implements Character {
   }
 
   resetForDay() {
+    this.activity = new SellAlcoholActivity(this);
   }
 
-  getActivities() {
-    return [
-      new SellAlcoholActivity(this),
-    ];
+  currentActivity(): Activity {
+    return this.activity;
   }
 
   isDialogShown(): boolean {

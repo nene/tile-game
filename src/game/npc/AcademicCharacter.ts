@@ -14,6 +14,8 @@ import { readAsepriteAnimation } from "../sprites/readAsepriteAnimation";
 import { Table } from "../furniture/Table";
 import { BeerGlass } from "../items/BeerGlass";
 import { isEmptyBeerBottle } from "../items/BeerBottle";
+import { ActivityManager } from "./ActivityManager";
+import { Activity } from "../activities/Activity";
 
 export type Desire = "beer" | "question";
 
@@ -56,6 +58,7 @@ export class AcademicCharacter implements Character {
   private beersConsumed = 0;
   private questionsAsked = 0;
   private colorBandState = this.randomColorBandState();
+  private activityManager = new ActivityManager([]);
   private today?: DayConfig;
   private fields: Fields = {};
 
@@ -69,6 +72,7 @@ export class AcademicCharacter implements Character {
     this.questionsAsked = 0;
     this.colorBandState = this.randomColorBandState();
     this.fields = {};
+    this.activityManager = new ActivityManager(createCharacterActivities(this));
   }
 
   private randomWillWriteToBook(): boolean {
@@ -97,8 +101,8 @@ export class AcademicCharacter implements Character {
     };
   }
 
-  getActivities() {
-    return createCharacterActivities(this);
+  currentActivity(): Activity {
+    return this.activityManager.currentActivity();
   }
 
   getSpawnTime(): number {
