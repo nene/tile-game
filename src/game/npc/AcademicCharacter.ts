@@ -14,8 +14,8 @@ import { readAsepriteAnimation } from "../sprites/readAsepriteAnimation";
 import { Table } from "../furniture/Table";
 import { BeerGlass } from "../items/BeerGlass";
 import { isEmptyBeerBottle } from "../items/BeerBottle";
-import { ActivityManager } from "./ActivityManager";
 import { Activity } from "../activities/Activity";
+import { ActivityGroup } from "../activities/ActivityGroup";
 
 export type Desire = "beer" | "question";
 
@@ -58,7 +58,7 @@ export class AcademicCharacter implements Character {
   private beersConsumed = 0;
   private questionsAsked = 0;
   private colorBandState = this.randomColorBandState();
-  private activityManager = new ActivityManager([]);
+  private activity = new ActivityGroup([]);
   private today?: DayConfig;
   private fields: Fields = {};
   private greetedCharacters = new Set<Character>();
@@ -73,7 +73,7 @@ export class AcademicCharacter implements Character {
     this.questionsAsked = 0;
     this.colorBandState = this.randomColorBandState();
     this.fields = {};
-    this.activityManager = new ActivityManager(createCharacterActivities(this));
+    this.activity = new ActivityGroup(createCharacterActivities(this));
     this.greetedCharacters = new Set<Character>();
   }
 
@@ -104,7 +104,7 @@ export class AcademicCharacter implements Character {
   }
 
   currentActivity(): Activity {
-    return this.activityManager.currentActivity();
+    return this.activity;
   }
 
   getSpawnTime(): number {
