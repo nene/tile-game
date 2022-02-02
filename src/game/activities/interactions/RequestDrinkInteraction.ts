@@ -6,6 +6,7 @@ import { CharacterDialog } from "../../dialogs/CharacterDialog";
 import { CallFuxActivity } from "../CallFuxActivity";
 import { OpenBottleInteraction } from "./OpenBottleInteraction";
 import { isFullBeerBottle } from "../../items/BeerBottle";
+import { getDrink } from "../../items/Drink";
 
 export class RequestDrinkInteraction implements Interaction {
   private finished = false;
@@ -43,7 +44,17 @@ export class RequestDrinkInteraction implements Interaction {
   }
 
   interact(ui: UiController, item?: GameItem) {
-    // todo...
+    if (!item || !isFullBeerBottle(item)) {
+      this.dialog.show(ui, "Rebane! Õlut!");
+      return;
+    }
+    if (item.getDrink() === getDrink("water")) {
+      this.dialog.show(ui, "Vett võid sa ise juua kui tahad.");
+      return;
+    }
+    this.dialog.show(ui, "Aitäh!");
+    this.character.setField("bottle", item);
+    this.finished = true;
   }
 
   nextActivity() {
