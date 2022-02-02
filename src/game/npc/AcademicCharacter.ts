@@ -13,7 +13,7 @@ import { AsepriteFile } from "../sprites/Aseprite";
 import { readAsepriteAnimation } from "../sprites/readAsepriteAnimation";
 import { Table } from "../furniture/Table";
 import { BeerGlass } from "../items/BeerGlass";
-import { isEmptyBeerBottle } from "../items/BeerBottle";
+import { BeerBottle, isEmptyBeerBottle } from "../items/BeerBottle";
 import { Activity } from "../activities/Activity";
 import { IdleActivity } from "../activities/IdleActivity";
 
@@ -46,6 +46,7 @@ const MAX_EMPTY_BOTTLES = 3;
 
 type Fields = {
   table?: Table;
+  bottle?: BeerBottle;
   glass?: BeerGlass;
 }
 type FieldName = keyof Fields;
