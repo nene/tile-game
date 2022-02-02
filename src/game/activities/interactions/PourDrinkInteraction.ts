@@ -29,12 +29,15 @@ export class PourDrinkInteraction implements Interaction {
       throw new Error("Can't perform PourDrinkInteraction completion when not sitting at table.");
     }
 
-    beerGlass.fill(beerBottle.getDrink(), DrinkLevel.full);
-    beerBottle.empty();
-    table.getInventory().add(beerBottle);
-    this.character.satisfyDesire("beer");
-    this.finished = true;
-    return true;
+    if (this.character.hasSkill("pouring")) {
+      beerGlass.fill(beerBottle.getDrink(), DrinkLevel.full);
+      beerBottle.empty();
+      table.getInventory().add(beerBottle);
+      this.character.satisfyDesire("beer");
+      this.finished = true;
+      return true;
+    }
+    return false;
   }
 
   isFinished() {

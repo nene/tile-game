@@ -29,7 +29,8 @@ const characters = {
     drinkingSpeed: {
       idleTicks: 10,
       drinkTicks: 6,
-    }
+    },
+    skills: { opening: true, pouring: true },
   }),
   "sass": new AcademicCharacter({
     json: sassJson,
@@ -46,6 +47,7 @@ const characters = {
     },
     favoriteDrinks: [getDrink("alexander"), getDrink("tommu-hiid")],
     hatedDrinks: [getDrink("porter"), getDrink("limonaad")],
+    skills: { opening: true, pouring: true },
   }),
   "pikmets": new AcademicCharacter({
     json: pikmetsJson,
@@ -56,6 +58,7 @@ const characters = {
     },
     favoriteDrinks: [getDrink("special"), getDrink("kriek")],
     hatedDrinks: [getDrink("alexander"), getDrink("pilsner")],
+    skills: { opening: true, pouring: true },
   }),
   "otto": new AcademicCharacter({
     json: ottoJson,
@@ -69,7 +72,8 @@ const characters = {
     drinkingSpeed: {
       idleTicks: 0,
       drinkTicks: 5,
-    }
+    },
+    skills: { opening: false, pouring: true },
   }),
   "vanamees": new AcademicCharacter({
     json: karlJson,
@@ -81,6 +85,7 @@ const characters = {
     },
     favoriteDrinks: [getDrink("alexander"), getDrink("pilsner"), getDrink("tommu-hiid")],
     hatedDrinks: [getDrink("bock")],
+    skills: { opening: true, pouring: true },
   }),
   "kark": new AcademicCharacter({
     json: karkJson,
@@ -91,6 +96,7 @@ const characters = {
     },
     favoriteDrinks: [getDrink("paulaner")],
     hatedDrinks: [getDrink("porter")],
+    skills: { opening: false, pouring: true },
   }),
   "feenoks-lady": new FeenoksLadyCharacter(),
 };

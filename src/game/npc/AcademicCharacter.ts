@@ -38,6 +38,10 @@ export interface AcademicCharacterDef {
   hatedDrinks: Drink[];
   days: Record<number, DayConfig>;
   drinkingSpeed?: { idleTicks: number; drinkTicks: number };
+  skills: {
+    opening: boolean;
+    pouring: boolean;
+  };
 }
 
 const MAX_BEERS = 3;
@@ -225,6 +229,10 @@ export class AcademicCharacter implements Character {
       this.greetedCharacters.add(character);
       return true;
     }
+  }
+
+  hasSkill(skill: "opening" | "pouring"): boolean {
+    return this.def.skills[skill];
   }
 }
 

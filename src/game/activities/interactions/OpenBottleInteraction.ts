@@ -21,9 +21,16 @@ export class OpenBottleInteraction implements Interaction {
       throw new Error("Can't perform OpenBettleInteraction when no bottle already at hand.");
     }
 
-    beerBottle.open();
-    this.finished = true;
-    return true;
+    if (beerBottle.isOpen()) {
+      this.finished = true;
+      return true
+    }
+    if (this.character.hasSkill("opening")) {
+      beerBottle.open();
+      this.finished = true;
+      return true
+    }
+    return false;
   }
 
   isFinished() {
