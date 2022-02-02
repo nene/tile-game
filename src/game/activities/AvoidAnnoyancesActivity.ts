@@ -25,6 +25,8 @@ export class AvoidAnnoyancesActivity implements Activity {
         this.activity = undefined;
       }
       return result;
+    } else {
+      this.activity = undefined;
     }
     return this.innerActivity.tick(figure, location, world);
   }
