@@ -77,10 +77,10 @@ export class Dialog implements Component {
       return true;
     }
 
-    if (event.type === "mousemove" && isAcademicCharacter(this.character)) {
+    if (event.type === "mousemove" && isAcademicCharacter(this.character) && !this.ui.getAttributes().getSelectedItem()) {
       this.iconHovered = isCoordInRect(event.coord, this.iconRect);
       this.ui.highlightCursor(this.iconHovered);
-      return this.iconHovered;
+      return true;
     }
 
     if (event.type === "click") {
