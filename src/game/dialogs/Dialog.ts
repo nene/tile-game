@@ -1,4 +1,4 @@
-import { coordAdd, isCoordInRect, Rect, rectGrow } from "../Coord";
+import { Alignment, coordAdd, isCoordInRect, Rect, rectGrow } from "../Coord";
 import { GameEvent } from "../GameEvent";
 import { ColorBandTouch } from "../items/ColorBandTouch";
 import { AcademicCharacter, isAcademicCharacter } from "../npc/AcademicCharacter";
@@ -15,6 +15,7 @@ interface DialogConfig {
   character: Character;
   createContent: (rect: Rect) => Component,
   onClose?: () => void;
+  align?: Alignment;
 }
 
 export class Dialog implements Component {
@@ -26,7 +27,7 @@ export class Dialog implements Component {
   private iconRect: Rect;
   private iconHovered = false;
 
-  constructor({ ui, character, createContent, onClose }: DialogConfig) {
+  constructor({ ui, character, createContent, onClose, align }: DialogConfig) {
     this.ui = ui;
     this.onClose = onClose;
     this.character = character;
@@ -37,7 +38,7 @@ export class Dialog implements Component {
       },
       headlinePadding: 20,
       size: [200, 109],
-      align: "bottom",
+      align: align ?? "bottom",
       onClose: onClose
     });
     this.content = createContent(rectGrow(this.window.contentAreaRect(), [-2, -2]));
@@ -79,7 +80,7 @@ export class Dialog implements Component {
     if (event.type === "mousemove" && isAcademicCharacter(this.character)) {
       this.iconHovered = isCoordInRect(event.coord, this.iconRect);
       this.ui.highlightCursor(this.iconHovered);
-      return true;
+      return this.iconHovered;
     }
 
     if (event.type === "click") {

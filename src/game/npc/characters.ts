@@ -30,7 +30,7 @@ const characters = {
       idleTicks: 10,
       drinkTicks: 6,
     },
-    skills: { opening: true, pouring: true },
+    skills: { opening: false, pouring: true },
   }),
   "sass": new AcademicCharacter({
     json: sassJson,
