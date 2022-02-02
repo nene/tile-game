@@ -70,6 +70,12 @@ const characters = {
     json: ottoJson,
     name: "vil! Otto Pukk",
     spriteName: "cfe-ksv-otto",
+    moveAnimationFrames: {
+      down: readAsepriteAnimation("D", ottoJson),
+      up: readAsepriteAnimation("U", ottoJson),
+      left: readAsepriteAnimation("L", ottoJson),
+      right: readAsepriteAnimation("R", ottoJson),
+    },
     days: {
       2: { spawnTime: 30 * 10 },
     },
