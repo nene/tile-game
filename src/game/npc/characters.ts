@@ -53,6 +53,12 @@ const characters = {
     json: pikmetsJson,
     name: "b!vil! Richard Pikmets",
     spriteName: "cfe-ksv-pikmets",
+    moveAnimationFrames: {
+      down: readAsepriteAnimation("D", pikmetsJson),
+      up: readAsepriteAnimation("U", pikmetsJson),
+      left: readAsepriteAnimation("L", pikmetsJson),
+      right: readAsepriteAnimation("R", pikmetsJson),
+    },
     days: {
       2: { spawnTime: 20 * 10 },
     },
