@@ -7,12 +7,15 @@ import { PourDrinkInteraction } from "./PourDrinkInteraction";
 import { DialogInventoryView } from "../../inventory/DialogInventoryView";
 import { StorageInventory } from "../../inventory/StorageInventory";
 import { BeerBottle, isBeerBottle } from "../../items/BeerBottle";
+import { CharacterDialog } from "../../dialogs/CharacterDialog";
 
 export class OpenBottleInteraction implements Interaction {
   private finished = false;
   private inventory: StorageInventory;
+  private dialog: CharacterDialog;
 
   constructor(private character: AcademicCharacter) {
+    this.dialog = new CharacterDialog(character);
     this.inventory = new StorageInventory({
       size: 1,
       isAcceptingItem: isBeerBottle,
@@ -54,6 +57,15 @@ export class OpenBottleInteraction implements Interaction {
   }
 
   interact(ui: UiController, item?: GameItem) {
+    if (item && isBeerBottle(item)) {
+      if (item.isOpen()) {
+        this.dialog.show(ui, "Aitäh!");
+      } else {
+        this.dialog.show(ui, "Tee palun pudel lahti.");
+      }
+      return;
+    }
+
     ui.showInventory(new DialogInventoryView({
       ui,
       character: this.character,
