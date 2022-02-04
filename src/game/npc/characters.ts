@@ -104,6 +104,7 @@ const characters = {
     json: karkJson,
     name: "vil! Raul Tõniste",
     spriteName: "cfe-ksv-kark",
+    moveAnimationFrames: readStandAnimations(karkJson),
     days: {
       2: { spawnTime: 40 * 10 },
     },
