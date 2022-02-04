@@ -67,7 +67,7 @@ export class AcademicCharacter implements Character {
   private greetedCharacters = new Set<Character>();
 
   constructor(private def: AcademicCharacterDef) {
-    this.graphics = new AcademicCharacterGraphics(this, def);
+    this.graphics = new AcademicCharacterGraphics(def);
   }
 
   resetForDay(day: number) {

@@ -2,13 +2,19 @@ import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { CharacterGraphics } from "./Character";
 import { Facing } from "../npc/Facing";
-import { DrinkAnimationConfig, DrinkAnimationSprites } from "../sprites/DrinkAnimation";
+import { DrinkAnimationSprites } from "../sprites/DrinkAnimation";
 import { FramesDef } from "../sprites/SpriteAnimation";
 import { readAsepriteAnimation } from "../sprites/readAsepriteAnimation";
-import { AcademicCharacter, AcademicCharacterDef } from "./AcademicCharacter";
+import { AcademicCharacterDef } from "./AcademicCharacter";
+
+interface DrinkAnimationSpriteConfig {
+  sprites: DrinkAnimationSprites;
+  idleTicks: number;
+  drinkTicks: number;
+}
 
 export class AcademicCharacterGraphics implements CharacterGraphics {
-  constructor(private character: AcademicCharacter, private def: AcademicCharacterDef) {
+  constructor(private def: AcademicCharacterDef) {
   }
 
   getSpriteName() {
@@ -34,13 +40,8 @@ export class AcademicCharacterGraphics implements CharacterGraphics {
     };
   }
 
-  getDrinkAnimationConfig(): DrinkAnimationConfig {
-    const beerGlass = this.character.getField("glass");
-    if (!beerGlass) {
-      throw new Error("Can't execute drink animation when no beer glass at hand");
-    }
+  getDrinkAnimationConfig(): DrinkAnimationSpriteConfig {
     return {
-      beerGlass,
       sprites: this.getDrinkSprites(),
       ...(this.def.drinkingSpeed ?? { idleTicks: 30, drinkTicks: 10 }),
     };

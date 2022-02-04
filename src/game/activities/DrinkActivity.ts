@@ -6,7 +6,15 @@ export class DrinkActivity implements Activity {
   private animation: DrinkAnimation;
 
   constructor(private character: AcademicCharacter) {
-    this.animation = new DrinkAnimation(character.getGraphics().getDrinkAnimationConfig());
+    const beerGlass = character.getField("glass");
+    if (!beerGlass) {
+      throw new Error("Can't execute drink animation when no beer glass at hand");
+    }
+
+    this.animation = new DrinkAnimation({
+      beerGlass,
+      ...character.getGraphics().getDrinkAnimationConfig(),
+    });
   }
 
   tick(): ActivityUpdates {
