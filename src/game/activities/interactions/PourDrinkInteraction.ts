@@ -60,7 +60,6 @@ export class PourDrinkInteraction implements Interaction {
       beerBottle.empty();
       this.character.setField("glass", beerGlass);
       this.getTable().getInventory().add(beerBottle);
-      this.character.satisfyDesire("beer");
       this.finished = true;
       return true;
     }

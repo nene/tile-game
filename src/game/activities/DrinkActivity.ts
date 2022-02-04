@@ -5,12 +5,15 @@ import { DrinkAnimation } from "../sprites/DrinkAnimation";
 export class DrinkActivity implements Activity {
   private animation: DrinkAnimation;
 
-  constructor(character: AcademicCharacter) {
+  constructor(private character: AcademicCharacter) {
     this.animation = new DrinkAnimation(character.getDrinkAnimationConfig());
   }
 
   tick(): ActivityUpdates {
     this.animation.tick();
+    if (this.animation.isFinished()) {
+      this.character.satisfyDesire("beer");
+    }
     return { sprites: this.animation.getSprites() };
   }
 
