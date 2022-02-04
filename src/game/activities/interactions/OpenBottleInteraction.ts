@@ -60,16 +60,15 @@ export class OpenBottleInteraction implements Interaction {
   }
 
   interact(ui: UiController, item?: GameItem) {
-    if (item && isBeerBottle(item)) {
-      if (item.isOpen()) {
-        if (item.getDrink() === this.drink) {
-          this.dialog.show(ui, "Aitäh!");
-        } else {
-          this.dialog.show(ui, "See pole see pudel, mille ma palusin avada.");
+    if (this.isCorrectOpenedBottle(item)) {
+      this.isDialogOpen = true;
+      this.openedBottle = item;
+      ui.getAttributes().setSelectedItem(undefined);
+      this.dialog.show(ui, "Aitäh!", {
+        onClose: () => {
+          this.isDialogOpen = false;
         }
-      } else {
-        this.dialog.show(ui, "Tee palun pudel lahti.");
-      }
+      });
       return;
     }
 
@@ -85,6 +84,16 @@ export class OpenBottleInteraction implements Interaction {
         this.isDialogOpen = false;
       },
     }));
+  }
+
+  private isCorrectOpenedBottle(item?: GameItem): item is BeerBottle {
+    return Boolean(
+      this.inventory.allItems().length === 0 &&
+      item &&
+      isBeerBottle(item) &&
+      item.isOpen() &&
+      item.getDrink() === this.drink
+    );
   }
 
   private tryTakeOpenedBottleFromInventory(): BeerBottle | undefined {

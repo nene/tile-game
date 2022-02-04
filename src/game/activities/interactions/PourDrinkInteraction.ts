@@ -70,7 +70,16 @@ export class PourDrinkInteraction implements Interaction {
   }
 
   interact(ui: UiController, item?: GameItem) {
-    if (item) {
+    if (this.isCorrectPouredDrink(item)) {
+      this.isDialogOpen = true;
+      ui.getAttributes().setSelectedItem(undefined);
+      this.character.setField("glass", item);
+      this.dialog.show(ui, "Aitäh!", {
+        onClose: () => {
+          this.finished = true;
+          this.isDialogOpen = false;
+        }
+      });
       return;
     }
 
@@ -86,6 +95,16 @@ export class PourDrinkInteraction implements Interaction {
         this.isDialogOpen = false;
       },
     }));
+  }
+
+  private isCorrectPouredDrink(item?: GameItem): item is BeerGlass {
+    return Boolean(
+      this.inventory.allItems().length === 0 &&
+      item &&
+      isBeerGlass(item) &&
+      item.getLevel() !== DrinkLevel.empty &&
+      item.getDrink() === this.drink
+    );
   }
 
   private tryTakePouredDrinkFromInventory(): boolean {
