@@ -7,8 +7,8 @@ export class GreetActivity implements Activity {
   private animation: SpriteAnimation;
 
   constructor(private character: AcademicCharacter) {
-    this.animation = new SpriteAnimation(SpriteLibrary.get(character.getSpriteName()), {
-      frames: character.getGreetAnimationFrames(),
+    this.animation = new SpriteAnimation(SpriteLibrary.get(character.getGraphics().getSpriteName()), {
+      frames: character.getGraphics().getGreetAnimationFrames(),
       repeat: 1,
     });
   }

@@ -18,7 +18,7 @@ export class CharacterOpinionRenderer {
 
     screen.drawRect(rect, UI_BG_COLOR);
     screen.drawRect(iconRect, UI_HIGHLIGHT_COLOR);
-    screen.drawSprite(character.getFaceSprite(), iconRect.coord);
+    screen.drawSprite(character.getGraphics().getFaceSprite(), iconRect.coord);
     screen.drawText(character.getName(), nameCoord, { color: "#000", shadowColor: UI_SHADOW_COLOR });
 
     this.scoreChart.paint(screen, character.getOpinion(), opinionCoord);

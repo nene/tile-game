@@ -16,8 +16,8 @@ export class MoveActivity implements Activity {
 
   constructor(private destination: Coord, character: AcademicCharacter) {
     this.moveAnimations = mapValues(
-      character.getMoveAnimationFrames(),
-      (frames) => new SpriteAnimation(SpriteLibrary.get(character.getSpriteName()), { frames })
+      character.getGraphics().getMoveAnimationFrames(),
+      (frames) => new SpriteAnimation(SpriteLibrary.get(character.getGraphics().getSpriteName()), { frames })
     );
   }
 

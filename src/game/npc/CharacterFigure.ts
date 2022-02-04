@@ -14,7 +14,7 @@ export class CharacterFigure implements GameObject {
   private defaultSprite: Sprite;
 
   constructor(private coord: Coord, private character: Character) {
-    this.defaultSprite = SpriteLibrary.getSprite(character.getSpriteName());
+    this.defaultSprite = SpriteLibrary.getSprite(character.getGraphics().getSpriteName());
   }
 
   getCharacter(): Character {

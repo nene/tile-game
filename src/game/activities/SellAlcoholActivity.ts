@@ -31,7 +31,7 @@ export class SellAlcoholActivity implements Activity {
   ]);
 
   constructor(private character: FeenoksLadyCharacter) {
-    this.animation = new SpriteAnimation(SpriteLibrary.get(character.getSpriteName()), {
+    this.animation = new SpriteAnimation(SpriteLibrary.get(character.getGraphics().getSpriteName()), {
       frames: readAsepriteAnimation("idle", feenoksLadyJson),
     });
     this.dialog = new CharacterDialog(character);

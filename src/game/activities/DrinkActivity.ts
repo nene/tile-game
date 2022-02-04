@@ -6,7 +6,7 @@ export class DrinkActivity implements Activity {
   private animation: DrinkAnimation;
 
   constructor(private character: AcademicCharacter) {
-    this.animation = new DrinkAnimation(character.getDrinkAnimationConfig());
+    this.animation = new DrinkAnimation(character.getGraphics().getDrinkAnimationConfig());
   }
 
   tick(): ActivityUpdates {

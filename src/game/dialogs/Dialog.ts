@@ -65,7 +65,7 @@ export class Dialog implements Component {
 
   private drawAvatar(screen: PixelScreen) {
     screen.drawRect(this.iconRect, UI_HIGHLIGHT_COLOR);
-    screen.drawSprite(this.character.getFaceSprite(), this.iconRect.coord);
+    screen.drawSprite(this.character.getGraphics().getFaceSprite(), this.iconRect.coord);
   }
 
   getRect(): Rect {

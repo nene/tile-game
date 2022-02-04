@@ -1,21 +1,19 @@
 import { compact } from "lodash";
 import { Drink } from "../items/Drink";
-import { Sprite } from "../sprites/Sprite";
-import { SpriteLibrary, SpriteName } from "../sprites/SpriteLibrary";
+import { SpriteName } from "../sprites/SpriteLibrary";
 import { constrain } from "../utils/constrain";
 import { pickRandom } from "../utils/pickRandom";
 import { Character } from "./Character";
 import { createAcademicCharacterActivity } from "../activities/createAcademicCharacterActivity";
 import { Facing } from "../npc/Facing";
-import { DrinkAnimationConfig, DrinkAnimationSprites } from "../sprites/DrinkAnimation";
 import { FramesDef } from "../sprites/SpriteAnimation";
 import { AsepriteFile } from "../sprites/Aseprite";
-import { readAsepriteAnimation } from "../sprites/readAsepriteAnimation";
 import { Table } from "../furniture/Table";
 import { BeerGlass } from "../items/BeerGlass";
 import { isEmptyBeerBottle } from "../items/BeerBottle";
 import { Activity } from "../activities/Activity";
 import { IdleActivity } from "../activities/IdleActivity";
+import { AcademicCharacterGraphics } from "./AcademicCharacterGraphics";
 
 export type Desire = "beer" | "question";
 
@@ -55,6 +53,7 @@ type Fields = {
 type FieldName = keyof Fields;
 
 export class AcademicCharacter implements Character {
+  private graphics: AcademicCharacterGraphics;
   // How much the NPC likes or dislikes the player
   private opinion = 0; // 0..10
   // 3 times out of 4 the fraater will remember to write himself into the book
@@ -68,6 +67,7 @@ export class AcademicCharacter implements Character {
   private greetedCharacters = new Set<Character>();
 
   constructor(private def: AcademicCharacterDef) {
+    this.graphics = new AcademicCharacterGraphics(this, def);
   }
 
   resetForDay(day: number) {
@@ -93,18 +93,8 @@ export class AcademicCharacter implements Character {
     return this.def.name;
   }
 
-  getSpriteName() {
-    return this.def.spriteName;
-  }
-
-  getFaceSprite(): Sprite {
-    // Extract the upper portion (face) of the first sprite
-    return {
-      ...SpriteLibrary.getSprite(this.def.spriteName, [0, 0]),
-      coord: [0, 3],
-      size: [16, 16],
-      offset: [0, 0],
-    };
+  getGraphics() {
+    return this.graphics;
   }
 
   currentActivity(): Activity {
@@ -167,45 +157,6 @@ export class AcademicCharacter implements Character {
 
   correctColorBand() {
     this.colorBandState = ColorBandState.correct;
-  }
-
-  getMoveAnimationFrames(): Record<Facing, FramesDef> {
-    return this.def.moveAnimationFrames ?? {
-      up: [[0, 0]],
-      down: [[0, 0]],
-      left: [[0, 0]],
-      right: [[0, 0]],
-    };
-  }
-
-  getDrinkAnimationConfig(): DrinkAnimationConfig {
-    const beerGlass = this.getField("glass");
-    if (!beerGlass) {
-      throw new Error("Can't execute drink animation when no beer glass at hand");
-    }
-    return {
-      beerGlass,
-      sprites: this.getDrinkSprites(),
-      ...(this.def.drinkingSpeed ?? { idleTicks: 30, drinkTicks: 10 }),
-    };
-  }
-
-  private getDrinkSprites(): DrinkAnimationSprites {
-    const drinkFrames = readAsepriteAnimation("B", this.def.json);
-    const [figure1, figure2, hand] = drinkFrames.length === 3 ? [0, 1, 2] : [0, 0, 1];
-    return {
-      figure1: SpriteLibrary.getSprite(this.def.spriteName, drinkFrames[figure1].coord),
-      figure2: SpriteLibrary.getSprite(this.def.spriteName, drinkFrames[figure2].coord),
-      hand: SpriteLibrary.getSprite(this.def.spriteName, drinkFrames[hand].coord),
-    }
-  }
-
-  getGreetAnimationFrames(): FramesDef {
-    try {
-      return readAsepriteAnimation("greet", this.def.json);
-    } catch (e) {
-      return [[0, 0]];
-    }
   }
 
   setField<T extends FieldName>(name: T, value: Fields[T]) {

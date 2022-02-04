@@ -4,9 +4,13 @@ import { SpriteName } from "../sprites/SpriteLibrary";
 
 export interface Character {
   getName: () => string;
-  getSpriteName: () => SpriteName;
-  getFaceSprite: () => Sprite;
+  getGraphics: () => CharacterGraphics;
   resetForDay: (n: number) => void;
   currentActivity: () => Activity;
   isGreetable: () => boolean;
+}
+
+export interface CharacterGraphics {
+  getSpriteName: () => SpriteName;
+  getFaceSprite: () => Sprite;
 }
