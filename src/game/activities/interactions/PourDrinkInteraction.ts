@@ -58,6 +58,7 @@ export class PourDrinkInteraction implements Interaction {
     if (this.character.hasSkill("pouring")) {
       beerGlass.fill(beerBottle.getDrink(), DrinkLevel.full);
       beerBottle.empty();
+      this.character.setField("glass", beerGlass);
       this.getTable().getInventory().add(beerBottle);
       this.character.satisfyDesire("beer");
       this.finished = true;
