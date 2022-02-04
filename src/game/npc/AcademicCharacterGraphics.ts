@@ -21,6 +21,10 @@ export class AcademicCharacterGraphics implements CharacterGraphics {
     return this.def.spriteName;
   }
 
+  getDefaultSprite(): Sprite {
+    return SpriteLibrary.getSprite(this.getSpriteName(), [0, 0]);
+  }
+
   getFaceSprite(): Sprite {
     // Extract the upper portion (face) of the first sprite
     return {

@@ -12,5 +12,6 @@ export interface Character {
 
 export interface CharacterGraphics {
   getSpriteName: () => SpriteName;
+  getDefaultSprite: () => Sprite;
   getFaceSprite: () => Sprite;
 }

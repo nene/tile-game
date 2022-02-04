@@ -7,9 +7,13 @@ export class FeenoksLadyGraphics implements CharacterGraphics {
     return "feenoks-lady";
   }
 
+  getDefaultSprite(): Sprite {
+    return SpriteLibrary.getSprite(this.getSpriteName(), [0, 0]);
+  }
+
   getFaceSprite(): Sprite {
     return {
-      ...SpriteLibrary.getSprite(this.getSpriteName(), [0, 0]),
+      ...this.getDefaultSprite(),
       coord: [0, 3],
       size: [16, 16],
       offset: [0, 0],

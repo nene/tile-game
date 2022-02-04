@@ -4,7 +4,6 @@ import { GameWorld } from "../GameWorld";
 import { PixelScreen } from "../PixelScreen";
 import { Sprite } from "../sprites/Sprite";
 import { UiController } from "../UiController";
-import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { Location } from "../locations/Location";
 import { GameItem } from "../items/GameItem";
 import { Character } from "./Character";
@@ -14,7 +13,7 @@ export class CharacterFigure implements GameObject {
   private defaultSprite: Sprite;
 
   constructor(private coord: Coord, private character: Character) {
-    this.defaultSprite = SpriteLibrary.getSprite(character.getGraphics().getSpriteName());
+    this.defaultSprite = character.getGraphics().getDefaultSprite();
   }
 
   getCharacter(): Character {
