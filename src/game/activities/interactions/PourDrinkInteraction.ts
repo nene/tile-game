@@ -9,15 +9,18 @@ import { StorageInventory } from "../../inventory/StorageInventory";
 import { BeerBottle, isBeerBottle } from "../../items/BeerBottle";
 import { DialogInventoryView } from "../../inventory/DialogInventoryView";
 import { Table } from "../../furniture/Table";
+import { Drink } from "../../items/Drink";
 
 export class PourDrinkInteraction implements Interaction {
   private finished = false;
   private isDialogOpen = false;
   private inventory: StorageInventory;
   private dialog: CharacterDialog;
+  private drink: Drink;
 
   constructor(private character: AcademicCharacter, beerBottle: BeerBottle) {
     this.dialog = new CharacterDialog(character);
+    this.drink = beerBottle.getDrink();
     this.inventory = new StorageInventory({
       size: 2,
       isAcceptingItem: (item) => isBeerBottle(item) || isBeerGlass(item),
@@ -87,7 +90,7 @@ export class PourDrinkInteraction implements Interaction {
 
   private tryTakePouredDrinkFromInventory(): boolean {
     const [beerGlass, beerBottle] = this.glassAndBottleFromInventory();
-    if (!beerGlass || beerGlass.getLevel() === DrinkLevel.empty) {
+    if (!beerGlass || beerGlass.getLevel() === DrinkLevel.empty || beerGlass.getDrink() !== this.drink) {
       return false;
     }
     this.character.setField("glass", beerGlass);

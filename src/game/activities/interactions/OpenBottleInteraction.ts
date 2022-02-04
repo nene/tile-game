@@ -8,15 +8,18 @@ import { DialogInventoryView } from "../../inventory/DialogInventoryView";
 import { StorageInventory } from "../../inventory/StorageInventory";
 import { BeerBottle, isBeerBottle } from "../../items/BeerBottle";
 import { CharacterDialog } from "../../dialogs/CharacterDialog";
+import { Drink } from "../../items/Drink";
 
 export class OpenBottleInteraction implements Interaction {
   private openedBottle?: BeerBottle;
   private isDialogOpen = false;
   private inventory: StorageInventory;
   private dialog: CharacterDialog;
+  private drink: Drink;
 
   constructor(private character: AcademicCharacter, closedBottle: BeerBottle) {
     this.dialog = new CharacterDialog(character);
+    this.drink = closedBottle.getDrink();
     this.inventory = new StorageInventory({
       size: 1,
       isAcceptingItem: isBeerBottle,
@@ -34,6 +37,9 @@ export class OpenBottleInteraction implements Interaction {
     }
     const beerBottle = this.inventory.itemAt(0) as BeerBottle | undefined;
     if (!beerBottle) {
+      return false;
+    }
+    if (beerBottle.getDrink() !== this.drink) {
       return false;
     }
 
@@ -56,7 +62,11 @@ export class OpenBottleInteraction implements Interaction {
   interact(ui: UiController, item?: GameItem) {
     if (item && isBeerBottle(item)) {
       if (item.isOpen()) {
-        this.dialog.show(ui, "Aitäh!");
+        if (item.getDrink() === this.drink) {
+          this.dialog.show(ui, "Aitäh!");
+        } else {
+          this.dialog.show(ui, "See pole see pudel, mille ma palusin avada.");
+        }
       } else {
         this.dialog.show(ui, "Tee palun pudel lahti.");
       }
@@ -79,7 +89,7 @@ export class OpenBottleInteraction implements Interaction {
 
   private tryTakeOpenedBottleFromInventory(): BeerBottle | undefined {
     const beerBottle = this.inventory.itemAt(0) as BeerBottle | undefined;
-    return beerBottle?.isOpen() ? beerBottle : undefined;
+    return beerBottle?.isOpen() && beerBottle.getDrink() === this.drink ? beerBottle : undefined;
   }
 
   nextActivity() {
