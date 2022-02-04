@@ -1,5 +1,5 @@
 import { compact } from "lodash";
-import { Drink } from "../items/Drink";
+import { Drink, getDrink } from "../items/Drink";
 import { SpriteName } from "../sprites/SpriteLibrary";
 import { constrain } from "../utils/constrain";
 import { pickRandom } from "../utils/pickRandom";
@@ -51,6 +51,8 @@ type Fields = {
   glass?: BeerGlass;
 }
 type FieldName = keyof Fields;
+
+export type ValidationResult = { valid: true } | { valid: false, msg: string };
 
 export class AcademicCharacter implements Character {
   private graphics: AcademicCharacterGraphics;
@@ -111,6 +113,16 @@ export class AcademicCharacter implements Character {
 
   getHatedDrinks() {
     return this.def.favoriteDrinks;
+  }
+
+  validateDrink(drink: Drink): ValidationResult {
+    if (drink === getDrink("water")) {
+      return { valid: false, msg: "Vett võid sa ise juua kui tahad." };
+    }
+    if (drink === getDrink("limonaad")) {
+      return { valid: false, msg: "Õlut, mitte limonaadi!" };
+    }
+    return { valid: true };
   }
 
   getOpinion() {
