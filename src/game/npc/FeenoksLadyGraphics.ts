@@ -4,14 +4,19 @@ import { SpriteAnimation } from "../sprites/SpriteAnimation";
 import { SpriteLibrary, SpriteName } from "../sprites/SpriteLibrary";
 import { CharacterGraphics } from "./Character";
 import feenoksLadyJson from "../sprites/data/feenoks-lady.json";
+import { SpriteSheet } from "../sprites/SpriteSheet";
 
 export class FeenoksLadyGraphics implements CharacterGraphics {
   getSpriteName(): SpriteName {
     return "feenoks-lady";
   }
 
+  private getSpriteSheet(): SpriteSheet {
+    return SpriteLibrary.get(this.getSpriteName());
+  }
+
   getDefaultSprite(): Sprite {
-    return SpriteLibrary.getSprite(this.getSpriteName(), [0, 0]);
+    return this.getSpriteSheet().getSprite([0, 0]);
   }
 
   getFaceSprite(): Sprite {
@@ -24,7 +29,7 @@ export class FeenoksLadyGraphics implements CharacterGraphics {
   }
 
   getIdleAnimation(): SpriteAnimation {
-    return new SpriteAnimation(SpriteLibrary.get(this.getSpriteName()), {
+    return new SpriteAnimation(this.getSpriteSheet(), {
       frames: readAsepriteAnimation("idle", feenoksLadyJson),
     });
   }
