@@ -7,9 +7,6 @@ import { Shop } from "../inventory/Shop";
 import { SimpleBottleOpener } from "../items/SimpleBottleOpener";
 import { ShopView } from "../inventory/ShopView";
 import { SpriteAnimation } from "../sprites/SpriteAnimation";
-import { SpriteLibrary } from "../sprites/SpriteLibrary";
-import { readAsepriteAnimation } from "../sprites/readAsepriteAnimation";
-import feenoksLadyJson from "../sprites/data/feenoks-lady.json";
 import { CharacterDialog } from "../dialogs/CharacterDialog";
 
 export class SellAlcoholActivity implements Activity {
@@ -31,9 +28,7 @@ export class SellAlcoholActivity implements Activity {
   ]);
 
   constructor(private character: FeenoksLadyCharacter) {
-    this.animation = new SpriteAnimation(SpriteLibrary.get(character.getGraphics().getSpriteName()), {
-      frames: readAsepriteAnimation("idle", feenoksLadyJson),
-    });
+    this.animation = character.getGraphics().getIdleAnimation();
     this.dialog = new CharacterDialog(character);
   }
 

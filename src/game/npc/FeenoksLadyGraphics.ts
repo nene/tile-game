@@ -1,6 +1,9 @@
+import { readAsepriteAnimation } from "../sprites/readAsepriteAnimation";
 import { Sprite } from "../sprites/Sprite";
+import { SpriteAnimation } from "../sprites/SpriteAnimation";
 import { SpriteLibrary, SpriteName } from "../sprites/SpriteLibrary";
 import { CharacterGraphics } from "./Character";
+import feenoksLadyJson from "../sprites/data/feenoks-lady.json";
 
 export class FeenoksLadyGraphics implements CharacterGraphics {
   getSpriteName(): SpriteName {
@@ -18,5 +21,11 @@ export class FeenoksLadyGraphics implements CharacterGraphics {
       size: [16, 16],
       offset: [0, 0],
     };
+  }
+
+  getIdleAnimation(): SpriteAnimation {
+    return new SpriteAnimation(SpriteLibrary.get(this.getSpriteName()), {
+      frames: readAsepriteAnimation("idle", feenoksLadyJson),
+    });
   }
 }
