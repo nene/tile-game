@@ -11,6 +11,7 @@ import { CharacterDialog } from "../../dialogs/CharacterDialog";
 
 export class OpenBottleInteraction implements Interaction {
   private finished = false;
+  private isDialogOpen = false;
   private inventory: StorageInventory;
   private dialog: CharacterDialog;
 
@@ -33,6 +34,9 @@ export class OpenBottleInteraction implements Interaction {
   }
 
   tryComplete(): boolean {
+    if (this.isDialogOpen) {
+      return false;
+    }
     const beerBottle = this.inventory.itemAt(0) as BeerBottle | undefined;
     if (!beerBottle) {
       return false;
@@ -66,16 +70,27 @@ export class OpenBottleInteraction implements Interaction {
       return;
     }
 
+    this.isDialogOpen = true;
     ui.showInventory(new DialogInventoryView({
       ui,
       character: this.character,
       inventory: this.inventory,
       text: this.inventory.itemAt(0) ? "Palun ava pudel." : "Too avatud pudel tagasi.",
       onClose: () => {
-        this.tryComplete();
+        this.finished = this.tryTakeOpenBottleFromInventory();
         ui.hideInventory();
+        this.isDialogOpen = false;
       },
     }));
+  }
+
+  private tryTakeOpenBottleFromInventory(): boolean {
+    const beerBottle = this.inventory.itemAt(0) as BeerBottle | undefined;
+    if (beerBottle?.isOpen()) {
+      this.character.setField("bottle", beerBottle);
+      return true;
+    }
+    return false;
   }
 
   nextActivity() {
