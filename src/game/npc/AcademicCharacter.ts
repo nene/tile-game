@@ -28,10 +28,10 @@ interface DayConfig {
 }
 
 export interface AcademicCharacterDef {
-  json: AsepriteFile,
+  json: AsepriteFile;
   name: string;
   spriteName: SpriteName;
-  moveAnimationFrames?: Record<Facing, FramesDef>
+  moveAnimationFrames?: Record<Facing, FramesDef>;
   favoriteDrinks: Drink[];
   hatedDrinks: Drink[];
   days: Record<number, DayConfig>;
