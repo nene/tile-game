@@ -10,23 +10,18 @@ import { BeerBottle, isBeerBottle } from "../../items/BeerBottle";
 import { CharacterDialog } from "../../dialogs/CharacterDialog";
 
 export class OpenBottleInteraction implements Interaction {
-  private finished = false;
+  private openedBottle?: BeerBottle;
   private isDialogOpen = false;
   private inventory: StorageInventory;
   private dialog: CharacterDialog;
 
-  constructor(private character: AcademicCharacter) {
+  constructor(private character: AcademicCharacter, closedBottle: BeerBottle) {
     this.dialog = new CharacterDialog(character);
     this.inventory = new StorageInventory({
       size: 1,
       isAcceptingItem: isBeerBottle,
+      items: [closedBottle],
     });
-
-    const beerBottle = this.character.getField("bottle");
-    if (beerBottle) {
-      this.inventory.add(beerBottle);
-      this.character.setField("bottle", undefined);
-    }
   }
 
   getType() {
@@ -43,21 +38,19 @@ export class OpenBottleInteraction implements Interaction {
     }
 
     if (beerBottle.isOpen()) {
-      this.finished = true;
-      this.character.setField("bottle", beerBottle);
+      this.openedBottle = beerBottle;
       return true
     }
     if (this.character.hasSkill("opening")) {
       beerBottle.open();
-      this.character.setField("bottle", beerBottle);
-      this.finished = true;
+      this.openedBottle = beerBottle;
       return true
     }
     return false;
   }
 
   isFinished() {
-    return this.finished;
+    return Boolean(this.openedBottle);
   }
 
   interact(ui: UiController, item?: GameItem) {
@@ -77,25 +70,21 @@ export class OpenBottleInteraction implements Interaction {
       inventory: this.inventory,
       text: this.inventory.itemAt(0) ? "Palun ava pudel." : "Too avatud pudel tagasi.",
       onClose: () => {
-        this.finished = this.tryTakeOpenBottleFromInventory();
+        this.openedBottle = this.tryTakeOpenedBottleFromInventory();
         ui.hideInventory();
         this.isDialogOpen = false;
       },
     }));
   }
 
-  private tryTakeOpenBottleFromInventory(): boolean {
+  private tryTakeOpenedBottleFromInventory(): BeerBottle | undefined {
     const beerBottle = this.inventory.itemAt(0) as BeerBottle | undefined;
-    if (beerBottle?.isOpen()) {
-      this.character.setField("bottle", beerBottle);
-      return true;
-    }
-    return false;
+    return beerBottle?.isOpen() ? beerBottle : undefined;
   }
 
   nextActivity() {
-    if (this.finished) {
-      return new CallFuxActivity(this.character, new PourDrinkInteraction(this.character));
+    if (this.openedBottle) {
+      return new CallFuxActivity(this.character, new PourDrinkInteraction(this.character, this.openedBottle));
     }
   }
 }

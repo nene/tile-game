@@ -5,11 +5,11 @@ import { GameItem } from "../../items/GameItem";
 import { CharacterDialog } from "../../dialogs/CharacterDialog";
 import { CallFuxActivity } from "../CallFuxActivity";
 import { OpenBottleInteraction } from "./OpenBottleInteraction";
-import { isFullBeerBottle } from "../../items/BeerBottle";
+import { BeerBottle, isFullBeerBottle } from "../../items/BeerBottle";
 import { getDrink } from "../../items/Drink";
 
 export class RequestDrinkInteraction implements Interaction {
-  private finished = false;
+  private beerBottle?: BeerBottle;
   private dialog: CharacterDialog;
 
   constructor(private character: AcademicCharacter) {
@@ -32,15 +32,14 @@ export class RequestDrinkInteraction implements Interaction {
 
     const beerBottle = table.getInventory().takeFirstOfKind(isFullBeerBottle);
     if (beerBottle) {
-      this.character.setField("bottle", beerBottle);
-      this.finished = true;
+      this.beerBottle = beerBottle;
       return true;
     }
     return false;
   }
 
   isFinished() {
-    return this.finished;
+    return Boolean(this.beerBottle);
   }
 
   interact(ui: UiController, item?: GameItem) {
@@ -53,13 +52,12 @@ export class RequestDrinkInteraction implements Interaction {
       return;
     }
     this.dialog.show(ui, "Aitäh!");
-    this.character.setField("bottle", item);
-    this.finished = true;
+    this.beerBottle = item;
   }
 
   nextActivity() {
-    if (this.finished) {
-      return new CallFuxActivity(this.character, new OpenBottleInteraction(this.character));
+    if (this.beerBottle) {
+      return new CallFuxActivity(this.character, new OpenBottleInteraction(this.character, this.beerBottle));
     }
   }
 }

@@ -16,18 +16,14 @@ export class PourDrinkInteraction implements Interaction {
   private inventory: StorageInventory;
   private dialog: CharacterDialog;
 
-  constructor(private character: AcademicCharacter) {
+  constructor(private character: AcademicCharacter, beerBottle: BeerBottle) {
     this.dialog = new CharacterDialog(character);
     this.inventory = new StorageInventory({
       size: 2,
       isAcceptingItem: (item) => isBeerBottle(item) || isBeerGlass(item),
     });
 
-    const beerBottle = this.character.getField("bottle");
-    if (beerBottle) {
-      this.inventory.add(beerBottle);
-      this.character.setField("bottle", undefined);
-    }
+    this.inventory.add(beerBottle);
 
     const beerGlass = this.character.getField("glass");
     if (beerGlass) {
