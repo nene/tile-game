@@ -3,6 +3,9 @@ import { AcademicCharacter } from "./AcademicCharacter";
 import { Character } from "./Character";
 import { FeenoksLadyCharacter } from "./FeenoksLadyCharacter";
 import { readAsepriteAnimation } from "../sprites/readAsepriteAnimation";
+import { Facing } from "./Facing";
+import { FramesDef } from "../sprites/SpriteAnimation";
+import { AsepriteFile } from "../sprites/Aseprite";
 import koppelJson from "../sprites/data/cfe-ksv-koppel.json";
 import sassJson from "../sprites/data/cfe-ksv-sass.json";
 import pikmetsJson from "../sprites/data/cfe-ksv-pikmets.json";
@@ -10,17 +13,30 @@ import ottoJson from "../sprites/data/cfe-ksv-otto.json";
 import karlJson from "../sprites/data/cfe-ksv-karl.json";
 import karkJson from "../sprites/data/cfe-ksv-kark.json";
 
+function readWalkAnimations(json: AsepriteFile): Record<Facing, FramesDef> {
+  return {
+    down: readAsepriteAnimation("w-down", json),
+    up: readAsepriteAnimation("w-up", json),
+    left: readAsepriteAnimation("w-left", json),
+    right: readAsepriteAnimation("w-right", json),
+  };
+}
+
+function readStandAnimations(json: AsepriteFile): Record<Facing, FramesDef> {
+  return {
+    down: readAsepriteAnimation("D", json),
+    up: readAsepriteAnimation("U", json),
+    left: readAsepriteAnimation("L", json),
+    right: readAsepriteAnimation("R", json),
+  };
+}
+
 const characters = {
   "koppel": new AcademicCharacter({
     json: koppelJson,
     name: "ksv! Jakob Koppel",
     spriteName: "cfe-ksv-koppel",
-    moveAnimationFrames: {
-      down: readAsepriteAnimation("w-down", koppelJson),
-      up: readAsepriteAnimation("w-up", koppelJson),
-      left: readAsepriteAnimation("w-left", koppelJson),
-      right: readAsepriteAnimation("w-right", koppelJson),
-    },
+    moveAnimationFrames: readWalkAnimations(koppelJson),
     days: {
       2: { spawnTime: 1 * 10 },
     },
@@ -36,12 +52,7 @@ const characters = {
     json: sassJson,
     name: "vil! Aleksandr Popov",
     spriteName: "cfe-ksv-sass",
-    moveAnimationFrames: {
-      down: readAsepriteAnimation("w-down", sassJson),
-      up: readAsepriteAnimation("w-up", sassJson),
-      left: readAsepriteAnimation("w-left", sassJson),
-      right: readAsepriteAnimation("w-right", sassJson),
-    },
+    moveAnimationFrames: readWalkAnimations(sassJson),
     days: {
       2: { spawnTime: 5 * 10 },
     },
@@ -53,12 +64,7 @@ const characters = {
     json: pikmetsJson,
     name: "b!vil! Richard Pikmets",
     spriteName: "cfe-ksv-pikmets",
-    moveAnimationFrames: {
-      down: readAsepriteAnimation("w-down", pikmetsJson),
-      up: readAsepriteAnimation("w-up", pikmetsJson),
-      left: readAsepriteAnimation("w-left", pikmetsJson),
-      right: readAsepriteAnimation("w-right", pikmetsJson),
-    },
+    moveAnimationFrames: readWalkAnimations(pikmetsJson),
     days: {
       2: { spawnTime: 20 * 10 },
     },
@@ -70,12 +76,7 @@ const characters = {
     json: ottoJson,
     name: "vil! Otto Pukk",
     spriteName: "cfe-ksv-otto",
-    moveAnimationFrames: {
-      down: readAsepriteAnimation("D", ottoJson),
-      up: readAsepriteAnimation("U", ottoJson),
-      left: readAsepriteAnimation("L", ottoJson),
-      right: readAsepriteAnimation("R", ottoJson),
-    },
+    moveAnimationFrames: readStandAnimations(ottoJson),
     days: {
       2: { spawnTime: 30 * 10 },
     },
