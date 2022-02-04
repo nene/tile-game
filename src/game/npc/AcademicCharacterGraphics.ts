@@ -26,12 +26,8 @@ export class AcademicCharacterGraphics implements CharacterGraphics {
   constructor(private def: AcademicCharacterDef) {
   }
 
-  getSpriteName() {
-    return this.def.spriteName;
-  }
-
   private getSpriteSheet(): SpriteSheet {
-    return SpriteLibrary.get(this.getSpriteName());
+    return SpriteLibrary.get(this.def.spriteName);
   }
 
   getDefaultSprite(): Sprite {

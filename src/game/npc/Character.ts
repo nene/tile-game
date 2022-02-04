@@ -1,6 +1,5 @@
 import { Activity } from "../activities/Activity";
 import { Sprite } from "../sprites/Sprite";
-import { SpriteName } from "../sprites/SpriteLibrary";
 
 export interface Character {
   getName: () => string;
@@ -11,7 +10,6 @@ export interface Character {
 }
 
 export interface CharacterGraphics {
-  getSpriteName: () => SpriteName;
   getDefaultSprite: () => Sprite;
   getFaceSprite: () => Sprite;
 }
