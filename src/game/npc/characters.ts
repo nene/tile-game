@@ -54,10 +54,10 @@ const characters = {
     name: "b!vil! Richard Pikmets",
     spriteName: "cfe-ksv-pikmets",
     moveAnimationFrames: {
-      down: readAsepriteAnimation("D", pikmetsJson),
-      up: readAsepriteAnimation("U", pikmetsJson),
-      left: readAsepriteAnimation("L", pikmetsJson),
-      right: readAsepriteAnimation("R", pikmetsJson),
+      down: readAsepriteAnimation("w-down", pikmetsJson),
+      up: readAsepriteAnimation("w-up", pikmetsJson),
+      left: readAsepriteAnimation("w-left", pikmetsJson),
+      right: readAsepriteAnimation("w-right", pikmetsJson),
     },
     days: {
       2: { spawnTime: 20 * 10 },
