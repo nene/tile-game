@@ -7,12 +7,20 @@ import { FramesDef, SpriteAnimation } from "../sprites/SpriteAnimation";
 import { readAsepriteAnimation } from "../sprites/readAsepriteAnimation";
 import { AcademicCharacterDef } from "./AcademicCharacter";
 import { SpriteSheet } from "../sprites/SpriteSheet";
+import { mapValues } from "lodash";
 
 interface DrinkAnimationSpriteConfig {
   sprites: DrinkAnimationSprites;
   idleTicks: number;
   drinkTicks: number;
 }
+
+const DEFAULT_MOVE_ANIMATION_FRAMES: Record<Facing, FramesDef> = {
+  up: [[0, 0]],
+  down: [[0, 0]],
+  left: [[0, 0]],
+  right: [[0, 0]],
+};
 
 export class AcademicCharacterGraphics implements CharacterGraphics {
   constructor(private def: AcademicCharacterDef) {
@@ -40,13 +48,11 @@ export class AcademicCharacterGraphics implements CharacterGraphics {
     };
   }
 
-  getMoveAnimationFrames(): Record<Facing, FramesDef> {
-    return this.def.moveAnimationFrames ?? {
-      up: [[0, 0]],
-      down: [[0, 0]],
-      left: [[0, 0]],
-      right: [[0, 0]],
-    };
+  getMoveAnimations(): Record<Facing, SpriteAnimation> {
+    return mapValues(
+      this.def.moveAnimationFrames || DEFAULT_MOVE_ANIMATION_FRAMES,
+      (frames) => new SpriteAnimation(this.getSpriteSheet(), { frames })
+    );
   }
 
   getDrinkAnimationConfig(): DrinkAnimationSpriteConfig {

@@ -1,11 +1,9 @@
-import { mapValues } from "lodash";
 import { Coord, coordEq, coordMul, coordUnit, coordSub, coordAdd } from "../Coord";
 import { Location } from "../locations/Location";
 import { AcademicCharacter } from "../npc/AcademicCharacter";
 import { CharacterFigure } from "../npc/CharacterFigure";
 import { Facing, headingToFacing } from "../npc/Facing";
 import { SpriteAnimation } from "../sprites/SpriteAnimation";
-import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { Activity, ActivityUpdates } from "./Activity";
 
 export class MoveActivity implements Activity {
@@ -15,10 +13,7 @@ export class MoveActivity implements Activity {
   private finished = false;
 
   constructor(private destination: Coord, character: AcademicCharacter) {
-    this.moveAnimations = mapValues(
-      character.getGraphics().getMoveAnimationFrames(),
-      (frames) => new SpriteAnimation(SpriteLibrary.get(character.getGraphics().getSpriteName()), { frames })
-    );
+    this.moveAnimations = character.getGraphics().getMoveAnimations();
   }
 
   public tick(figure: CharacterFigure, location: Location): ActivityUpdates {
