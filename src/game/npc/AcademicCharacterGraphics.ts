@@ -3,7 +3,7 @@ import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { CharacterGraphics } from "./Character";
 import { Facing } from "../npc/Facing";
 import { DrinkAnimationSprites } from "../sprites/DrinkAnimation";
-import { FramesDef } from "../sprites/SpriteAnimation";
+import { FramesDef, SpriteAnimation } from "../sprites/SpriteAnimation";
 import { readAsepriteAnimation } from "../sprites/readAsepriteAnimation";
 import { AcademicCharacterDef } from "./AcademicCharacter";
 import { SpriteSheet } from "../sprites/SpriteSheet";
@@ -66,7 +66,14 @@ export class AcademicCharacterGraphics implements CharacterGraphics {
     }
   }
 
-  getGreetAnimationFrames(): FramesDef {
+  getGreetAnimation(): SpriteAnimation {
+    return new SpriteAnimation(this.getSpriteSheet(), {
+      frames: this.getGreetAnimationFrames(),
+      repeat: 1,
+    });
+  }
+
+  private getGreetAnimationFrames(): FramesDef {
     try {
       return readAsepriteAnimation("greet", this.def.json);
     } catch (e) {

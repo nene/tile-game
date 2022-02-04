@@ -1,16 +1,12 @@
 import { Activity, ActivityUpdates } from "./Activity";
 import { AcademicCharacter } from "../npc/AcademicCharacter";
 import { SpriteAnimation } from "../sprites/SpriteAnimation";
-import { SpriteLibrary } from "../sprites/SpriteLibrary";
 
 export class GreetActivity implements Activity {
   private animation: SpriteAnimation;
 
-  constructor(private character: AcademicCharacter) {
-    this.animation = new SpriteAnimation(SpriteLibrary.get(character.getGraphics().getSpriteName()), {
-      frames: character.getGraphics().getGreetAnimationFrames(),
-      repeat: 1,
-    });
+  constructor(character: AcademicCharacter) {
+    this.animation = character.getGraphics().getGreetAnimation();
   }
 
   tick(): ActivityUpdates {
