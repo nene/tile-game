@@ -20,7 +20,7 @@ export class RequestGlassInteraction implements Interaction {
   tryComplete(): boolean {
     const table = this.character.getField("table");
     if (!table) {
-      throw new Error("Can't perform GlassFromTable completion when not sitting at table.");
+      throw new Error("Can't perform RequestGlassInteraction when not sitting at table.");
     }
 
     const beerGlass = table.getInventory().takeFirstOfKind(isEmptyBeerGlass);

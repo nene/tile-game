@@ -101,7 +101,7 @@ export class PourDrinkInteraction implements Interaction {
   private getTable(): Table {
     const table = this.character.getField("table");
     if (!table) {
-      throw new Error("Can't perform PourDrinkInteraction completion when not sitting at table.");
+      throw new Error("Can't perform PourDrinkInteraction when not sitting at table.");
     }
     return table;
   }
