@@ -17,7 +17,7 @@ export class RequestDrinkInteraction implements Interaction {
   }
 
   getType() {
-    return InteractionType.beer;
+    return InteractionType.bottle;
   }
 
   tryComplete(): boolean {
