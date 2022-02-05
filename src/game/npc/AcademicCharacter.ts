@@ -121,7 +121,7 @@ export class AcademicCharacter implements Character {
     if (drink === getDrink("limonaad")) {
       return { type: "punish", msg: "Õlut, mitte limonaadi!" };
     }
-    return { type: "praise", msg: "" };
+    return { type: "neutral", msg: "" };
   }
 
   getOpinion() {
