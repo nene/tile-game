@@ -10,6 +10,7 @@ import { BeerBottle, isBeerBottle } from "../../items/BeerBottle";
 import { DialogInventoryView } from "../../inventory/DialogInventoryView";
 import { Table } from "../../furniture/Table";
 import { Drink } from "../../items/Drink";
+import { ValidationResult } from "../../questions/Question";
 
 export class PourDrinkInteraction implements Interaction {
   private finished = false;
@@ -74,12 +75,7 @@ export class PourDrinkInteraction implements Interaction {
       this.isDialogOpen = true;
       ui.getAttributes().setSelectedItem(undefined);
       this.character.setField("glass", item);
-      this.dialog.show(ui, "Aitäh!", {
-        onClose: () => {
-          this.finished = true;
-          this.isDialogOpen = false;
-        }
-      });
+      this.showRatingDialog(ui, item);
       return;
     }
 
@@ -90,9 +86,14 @@ export class PourDrinkInteraction implements Interaction {
       inventory: this.inventory,
       text: "Palun vala õlu välja.",
       onClose: () => {
-        this.finished = this.tryTakePouredDrinkFromInventory();
+        const beerGlass = this.tryTakePouredDrinkFromInventory();
         ui.hideInventory();
-        this.isDialogOpen = false;
+        if (beerGlass) {
+          this.character.setField("glass", beerGlass);
+          this.showRatingDialog(ui, beerGlass);
+        } else {
+          this.isDialogOpen = false;
+        }
       },
     }));
   }
@@ -102,22 +103,19 @@ export class PourDrinkInteraction implements Interaction {
       this.inventory.allItems().length === 0 &&
       item &&
       isBeerGlass(item) &&
-      item.getLevel() !== DrinkLevel.empty &&
       item.getDrink() === this.drink
     );
   }
 
-  private tryTakePouredDrinkFromInventory(): boolean {
+  private tryTakePouredDrinkFromInventory(): BeerGlass | undefined {
     const [beerGlass, beerBottle] = this.glassAndBottleFromInventory();
-    if (!beerGlass || beerGlass.getLevel() === DrinkLevel.empty || beerGlass.getDrink() !== this.drink) {
-      return false;
+    if (!beerGlass || beerGlass.getDrink() !== this.drink) {
+      return undefined;
     }
-    this.character.setField("glass", beerGlass);
-
     if (beerBottle) {
       this.getTable().getInventory().add(beerBottle);
     }
-    return true;
+    return beerGlass;
   }
 
   private getTable(): Table {
@@ -126,6 +124,41 @@ export class PourDrinkInteraction implements Interaction {
       throw new Error("Can't perform PourDrinkInteraction when not sitting at table.");
     }
     return table;
+  }
+
+  private showRatingDialog(ui: UiController, beerGlass: BeerGlass) {
+    const rating = this.ratePouring(beerGlass);
+    this.dialog.show(ui, rating.msg, {
+      onClose: () => {
+        this.praiseOrPunish(rating);
+        this.finished = true;
+        this.isDialogOpen = false;
+      }
+    });
+  }
+
+  private ratePouring(beerGlass: BeerGlass): ValidationResult {
+    switch (beerGlass.getLevel()) {
+      case DrinkLevel.full:
+        return { type: "praise", msg: "Ooo! See on ju suurepäraselt täidetud šoppen. Oled tõega kiitust väärt." };
+      case DrinkLevel.almostFull:
+        return { type: "neutral", msg: "Aitäh! Oled üsna tublisti valanud." };
+      case DrinkLevel.half:
+        return { type: "punish", msg: "No kuule! See on ju poolik šoppen. Mis jama sa mulle tood!" };
+      case DrinkLevel.almostEmpty:
+        return { type: "punish", msg: "See ei lähe! Ma palusin sul tuua šoppeni täie õlut, aga sina tood mulle mingi tilga šoppeni põhjas." };
+      case DrinkLevel.empty:
+        throw new Error("Not expecting this method to be called with empty glass.");
+    }
+  }
+
+  private praiseOrPunish(rating: ValidationResult) {
+    if (rating.type === "praise") {
+      this.character.changeOpinion(+1);
+    }
+    else if (rating.type === "punish") {
+      this.character.changeOpinion(-1);
+    }
   }
 
   nextActivity() {
