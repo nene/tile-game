@@ -14,7 +14,7 @@ import { isEmptyBeerBottle } from "../items/BeerBottle";
 import { Activity } from "../activities/Activity";
 import { IdleActivity } from "../activities/IdleActivity";
 import { AcademicCharacterGraphics } from "./AcademicCharacterGraphics";
-import { ValidationResult } from "../questions/Question";
+import { ValidationResult } from "../questions/ValidationResult";
 
 export type Desire = "beer" | "question";
 

@@ -1,11 +1,7 @@
 import { FlagColor } from "../orgs/FlagColors";
+import { ValidationResult } from "./ValidationResult";
 
 export type QuestionCategory = "colors" | "place" | "slogan" | "year" | "terminology";
-
-export interface ValidationResult {
-  type: "praise" | "punish" | "neutral";
-  msg: string;
-}
 
 export interface ColorsQuestion {
   type: "colors";

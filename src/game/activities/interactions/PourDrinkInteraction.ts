@@ -10,7 +10,7 @@ import { BeerBottle, isBeerBottle } from "../../items/BeerBottle";
 import { DialogInventoryView } from "../../inventory/DialogInventoryView";
 import { Table } from "../../furniture/Table";
 import { Drink } from "../../items/Drink";
-import { ValidationResult } from "../../questions/Question";
+import { ValidationResult } from "../../questions/ValidationResult";
 
 export class PourDrinkInteraction implements Interaction {
   private finished = false;
