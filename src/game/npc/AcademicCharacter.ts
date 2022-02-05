@@ -38,7 +38,7 @@ export interface AcademicCharacterDef {
   name: string;
   spriteName: SpriteName;
   moveAnimationFrames?: Record<Facing, FramesDef>;
-  favoriteDrinks: Drink[];
+  favoriteDrinks: DrinkOpinion[];
   hatedDrinks: DrinkOpinion[];
   days: Record<number, DayConfig>;
   drinkingSpeed?: { idleTicks: number; drinkTicks: number };
@@ -115,9 +115,13 @@ export class AcademicCharacter implements Character {
     if (drink === getDrink("water")) {
       return { type: "punish", msg: "Vett võid sa ise juua kui tahad." };
     }
-    const drinkOpinion = this.def.hatedDrinks.find((opinion) => getDrink(opinion.drink) === drink)
-    if (drinkOpinion) {
-      return { type: "punish", msg: drinkOpinion.opinion };
+    const badOpinion = this.def.hatedDrinks.find((opinion) => getDrink(opinion.drink) === drink)
+    if (badOpinion) {
+      return { type: "punish", msg: badOpinion.opinion };
+    }
+    const goodOpinion = this.def.favoriteDrinks.find((opinion) => getDrink(opinion.drink) === drink)
+    if (goodOpinion) {
+      return { type: "praise", msg: goodOpinion.opinion };
     }
     return { type: "neutral", msg: "" };
   }

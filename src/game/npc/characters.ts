@@ -1,4 +1,3 @@
-import { getDrink } from "../items/Drink";
 import { AcademicCharacter } from "./AcademicCharacter";
 import { Character } from "./Character";
 import { FeenoksLadyCharacter } from "./FeenoksLadyCharacter";
@@ -40,7 +39,10 @@ const characters = {
     days: {
       2: { spawnTime: 1 * 10 },
     },
-    favoriteDrinks: [getDrink("bock"), getDrink("pilsner")],
+    favoriteDrinks: [
+      { drink: "bock", opinion: "Vat see on üks korralik õlu! Mitte mingi lurr!" },
+      { drink: "pilsner", opinion: "Oo jaa! See märjuke õlitab iga korralikku korporanti." },
+    ],
     hatedDrinks: [
       { drink: "limonaad", opinion: "Õlut, mitte limonaadi!" },
       { drink: "paulaner", opinion: "Seda sakste löga ma oma suu sisse ei võta!" },
@@ -60,7 +62,10 @@ const characters = {
     days: {
       2: { spawnTime: 5 * 10 },
     },
-    favoriteDrinks: [getDrink("alexander"), getDrink("tommu-hiid")],
+    favoriteDrinks: [
+      { drink: "alexander", opinion: "Võid ise arvata, kas ma omanimelist õlut armastan või jumaldan." },
+      { drink: "tommu-hiid", opinion: "Mmm... Klassikud on minu lauas alati teretulnud." },
+    ],
     hatedDrinks: [
       { drink: "limonaad", opinion: "Õlut, mitte limonaadi!" },
       { drink: "porter", opinion: "Öäkk! Misasja sa mulle pakud!" },
@@ -75,7 +80,10 @@ const characters = {
     days: {
       2: { spawnTime: 20 * 10 },
     },
-    favoriteDrinks: [getDrink("special"), getDrink("kriek")],
+    favoriteDrinks: [
+      { drink: "special", opinion: "Üks eriline õlu erilisele mehele. Aitäh!" },
+      { drink: "kriek", opinion: "Ooo... see on ju Belgia õllekunsti meistriteos!" },
+    ],
     hatedDrinks: [
       { drink: "pilsner", opinion: "Ega ma mingi mats pole, et pilkut kaanin!" },
       { drink: "alexander", opinion: "Lihtrahva õlled las jäävad rebastele. Mulle palun too midagi viisakamat." },
@@ -90,7 +98,10 @@ const characters = {
     days: {
       2: { spawnTime: 30 * 10 },
     },
-    favoriteDrinks: [getDrink("paulaner"), getDrink("porter")],
+    favoriteDrinks: [
+      { drink: "paulaner", opinion: "Seda jooki võiks ette võtta suuremates kogustes!" },
+      { drink: "porter", opinion: "Võrratu valik. Tume ja tummine!" },
+    ],
     hatedDrinks: [
       { drink: "limonaad", opinion: "Õlut, mitte limonaadi!" },
       { drink: "kriek", opinion: "See on ju naiste õlu! Vii see mõnele neiule, mulle too meeste jooki." },
@@ -109,7 +120,11 @@ const characters = {
       1: { spawnTime: 1 * 10 },
       2: { spawnTime: 32 * 10 },
     },
-    favoriteDrinks: [getDrink("alexander"), getDrink("pilsner"), getDrink("tommu-hiid")],
+    favoriteDrinks: [
+      { drink: "alexander", opinion: "Vahune sass in iga õllekannu uhkuseks!" },
+      { drink: "pilsner", opinion: "Priima! Võid seda vabalt kohe kastiga ette kanda." },
+      { drink: "tommu-hiid", opinion: "Tänud. Sellesse pudelisse on villitud pesueht Tartu vaim." },
+    ],
     hatedDrinks: [
       { drink: "bock", opinion: "Jeerum, kas ma olen Revelia kaatripäevale sattunud? Vii see tagasi sinne kust sa selle leidsid." },
     ],
@@ -123,7 +138,9 @@ const characters = {
     days: {
       2: { spawnTime: 40 * 10 },
     },
-    favoriteDrinks: [getDrink("paulaner")],
+    favoriteDrinks: [
+      { drink: "paulaner", opinion: "Selle hurmava märjukesega määrin ma vahel ka oma banjo pillikeeli." },
+    ],
     hatedDrinks: [
       { drink: "porter", opinion: "See on solvang püha õllekunsti pihta. Kao mu silmist!" },
     ],

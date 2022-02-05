@@ -55,7 +55,10 @@ export class RequestDrinkInteraction implements Interaction {
       this.dialog.show(ui, result.msg);
       return;
     }
-    this.dialog.show(ui, "Aitäh!");
+
+    if (result.type === "praise") {
+      this.dialog.show(ui, result.msg);
+    }
     this.beerBottle = item;
   }
 
