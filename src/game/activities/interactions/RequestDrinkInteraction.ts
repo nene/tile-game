@@ -56,6 +56,7 @@ export class RequestDrinkInteraction implements Interaction {
       return;
     }
 
+    ui.getAttributes().setSelectedItem(undefined);
     if (result.type === "praise") {
       this.dialog.show(ui, result.msg);
     }
