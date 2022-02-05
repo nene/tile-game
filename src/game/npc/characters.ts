@@ -41,7 +41,11 @@ const characters = {
       2: { spawnTime: 1 * 10 },
     },
     favoriteDrinks: [getDrink("bock"), getDrink("pilsner")],
-    hatedDrinks: [getDrink("limonaad"), getDrink("paulaner"), getDrink("porter")],
+    hatedDrinks: [
+      { drink: "limonaad", opinion: "Õlut, mitte limonaadi!" },
+      { drink: "paulaner", opinion: "Seda sakste löga ma oma suu sisse ei võta!" },
+      { drink: "porter", opinion: "Öäkk! Misasja sa mulle pakud!" },
+    ],
     drinkingSpeed: {
       idleTicks: 10,
       drinkTicks: 6,
@@ -57,7 +61,10 @@ const characters = {
       2: { spawnTime: 5 * 10 },
     },
     favoriteDrinks: [getDrink("alexander"), getDrink("tommu-hiid")],
-    hatedDrinks: [getDrink("porter"), getDrink("limonaad")],
+    hatedDrinks: [
+      { drink: "limonaad", opinion: "Õlut, mitte limonaadi!" },
+      { drink: "porter", opinion: "Öäkk! Misasja sa mulle pakud!" },
+    ],
     skills: { opening: true, pouring: true },
   }),
   "pikmets": new AcademicCharacter({
@@ -69,7 +76,10 @@ const characters = {
       2: { spawnTime: 20 * 10 },
     },
     favoriteDrinks: [getDrink("special"), getDrink("kriek")],
-    hatedDrinks: [getDrink("alexander"), getDrink("pilsner")],
+    hatedDrinks: [
+      { drink: "pilsner", opinion: "Ega ma mingi mats pole, et pilkut kaanin!" },
+      { drink: "alexander", opinion: "Lihtrahva õlled las jäävad rebastele. Mulle palun too midagi viisakamat." },
+    ],
     skills: { opening: true, pouring: true },
   }),
   "otto": new AcademicCharacter({
@@ -81,7 +91,10 @@ const characters = {
       2: { spawnTime: 30 * 10 },
     },
     favoriteDrinks: [getDrink("paulaner"), getDrink("porter")],
-    hatedDrinks: [getDrink("kriek"), getDrink("limonaad")],
+    hatedDrinks: [
+      { drink: "limonaad", opinion: "Õlut, mitte limonaadi!" },
+      { drink: "kriek", opinion: "See on ju naiste õlu! Vii see mõnele neiule, mulle too meeste jooki." },
+    ],
     drinkingSpeed: {
       idleTicks: 0,
       drinkTicks: 5,
@@ -97,7 +110,9 @@ const characters = {
       2: { spawnTime: 32 * 10 },
     },
     favoriteDrinks: [getDrink("alexander"), getDrink("pilsner"), getDrink("tommu-hiid")],
-    hatedDrinks: [getDrink("bock")],
+    hatedDrinks: [
+      { drink: "bock", opinion: "Jeerum, kas ma olen Revelia kaatripäevale sattunud? Vii see tagasi sinne kust sa selle leidsid." },
+    ],
     skills: { opening: true, pouring: true },
   }),
   "kark": new AcademicCharacter({
@@ -109,7 +124,9 @@ const characters = {
       2: { spawnTime: 40 * 10 },
     },
     favoriteDrinks: [getDrink("paulaner")],
-    hatedDrinks: [getDrink("porter")],
+    hatedDrinks: [
+      { drink: "porter", opinion: "See on solvang püha õllekunsti pihta. Kao mu silmist!" },
+    ],
     skills: { opening: false, pouring: true },
   }),
   "feenoks-lady": new FeenoksLadyCharacter(),

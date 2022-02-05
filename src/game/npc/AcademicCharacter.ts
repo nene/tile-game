@@ -1,5 +1,5 @@
 import { compact } from "lodash";
-import { Drink, getDrink } from "../items/Drink";
+import { Drink, DrinkType, getDrink } from "../items/Drink";
 import { SpriteName } from "../sprites/SpriteLibrary";
 import { constrain } from "../utils/constrain";
 import { pickRandom } from "../utils/pickRandom";
@@ -28,13 +28,18 @@ interface DayConfig {
   spawnTime: number;
 }
 
+interface DrinkOpinion {
+  drink: DrinkType;
+  opinion: string;
+}
+
 export interface AcademicCharacterDef {
   json: AsepriteFile;
   name: string;
   spriteName: SpriteName;
   moveAnimationFrames?: Record<Facing, FramesDef>;
   favoriteDrinks: Drink[];
-  hatedDrinks: Drink[];
+  hatedDrinks: DrinkOpinion[];
   days: Record<number, DayConfig>;
   drinkingSpeed?: { idleTicks: number; drinkTicks: number };
   skills: {
@@ -110,8 +115,9 @@ export class AcademicCharacter implements Character {
     if (drink === getDrink("water")) {
       return { type: "punish", msg: "Vett võid sa ise juua kui tahad." };
     }
-    if (drink === getDrink("limonaad")) {
-      return { type: "punish", msg: "Õlut, mitte limonaadi!" };
+    const drinkOpinion = this.def.hatedDrinks.find((opinion) => getDrink(opinion.drink) === drink)
+    if (drinkOpinion) {
+      return { type: "punish", msg: drinkOpinion.opinion };
     }
     return { type: "neutral", msg: "" };
   }
