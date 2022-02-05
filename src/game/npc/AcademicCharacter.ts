@@ -14,6 +14,7 @@ import { isEmptyBeerBottle } from "../items/BeerBottle";
 import { Activity } from "../activities/Activity";
 import { IdleActivity } from "../activities/IdleActivity";
 import { AcademicCharacterGraphics } from "./AcademicCharacterGraphics";
+import { ValidationResult } from "../questions/Question";
 
 export type Desire = "beer" | "question";
 
@@ -51,8 +52,6 @@ type Fields = {
   glass?: BeerGlass;
 }
 type FieldName = keyof Fields;
-
-export type ValidationResult = { valid: true } | { valid: false, msg: string };
 
 export class AcademicCharacter implements Character {
   private graphics: AcademicCharacterGraphics;
@@ -117,12 +116,12 @@ export class AcademicCharacter implements Character {
 
   validateDrink(drink: Drink): ValidationResult {
     if (drink === getDrink("water")) {
-      return { valid: false, msg: "Vett võid sa ise juua kui tahad." };
+      return { type: "punish", msg: "Vett võid sa ise juua kui tahad." };
     }
     if (drink === getDrink("limonaad")) {
-      return { valid: false, msg: "Õlut, mitte limonaadi!" };
+      return { type: "punish", msg: "Õlut, mitte limonaadi!" };
     }
-    return { valid: true };
+    return { type: "praise", msg: "" };
   }
 
   getOpinion() {

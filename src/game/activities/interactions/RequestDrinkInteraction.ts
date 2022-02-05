@@ -38,7 +38,7 @@ export class RequestDrinkInteraction implements Interaction {
   }
 
   private isDesiredBottle(item: GameItem): item is BeerBottle {
-    return isFullBeerBottle(item) && this.character.validateDrink(item.getDrink()).valid;
+    return isFullBeerBottle(item) && this.character.validateDrink(item.getDrink()).type === "praise";
   }
 
   isFinished() {
@@ -51,7 +51,7 @@ export class RequestDrinkInteraction implements Interaction {
       return;
     }
     const result = this.character.validateDrink(item.getDrink());
-    if (!result.valid) {
+    if (result.type === "punish") {
       this.dialog.show(ui, result.msg);
       return;
     }
