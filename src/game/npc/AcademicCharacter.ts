@@ -106,14 +106,6 @@ export class AcademicCharacter implements Character {
     return this.today?.spawnTime ?? Infinity;
   }
 
-  getFavoriteDrinks() {
-    return this.def.favoriteDrinks;
-  }
-
-  getHatedDrinks() {
-    return this.def.favoriteDrinks;
-  }
-
   validateDrink(drink: Drink): ValidationResult {
     if (drink === getDrink("water")) {
       return { type: "punish", msg: "Vett võid sa ise juua kui tahad." };
