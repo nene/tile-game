@@ -37,7 +37,7 @@ export interface AcademicCharacterDef {
   json: AsepriteFile;
   name: string;
   spriteName: SpriteName;
-  moveAnimationFrames?: Record<Facing, FramesDef>;
+  moveAnimationFrames: Record<Facing, FramesDef>;
   favoriteDrinks: DrinkOpinion[];
   hatedDrinks: DrinkOpinion[];
   days: Record<number, DayConfig>;
