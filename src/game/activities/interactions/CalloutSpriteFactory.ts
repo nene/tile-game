@@ -1,6 +1,7 @@
 import { CALLOUT_OFFSET, SpriteLibrary } from "../../sprites/SpriteLibrary";
 import { Sprite } from "../../sprites/Sprite";
 import { Drink } from "../../items/Drink";
+import { coordAdd } from "../../Coord";
 
 export enum InteractionType {
   glass = 0,
@@ -20,7 +21,7 @@ export class CalloutSpriteFactory {
   public static getBottleSprite(drink: Drink): Sprite {
     return {
       ...SpriteLibrary.getSprite("bottle", [2, drink.bottleSpriteIndex]),
-      offset: CALLOUT_OFFSET,
+      offset: coordAdd(CALLOUT_OFFSET, [0, 1]),
     };
   }
 }
