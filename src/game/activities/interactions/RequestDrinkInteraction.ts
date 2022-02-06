@@ -7,7 +7,7 @@ import { CallFuxActivity } from "../CallFuxActivity";
 import { OpenBottleInteraction } from "./OpenBottleInteraction";
 import { BeerBottle, isFullBeerBottle } from "../../items/BeerBottle";
 import { CalloutSpriteFactory, InteractionType } from "./CalloutSpriteFactory";
-import { getDrink } from "../../items/Drink";
+import { pickRandom } from "../../utils/pickRandom";
 
 export class RequestDrinkInteraction implements Interaction {
   private beerBottle?: BeerBottle;
@@ -20,7 +20,7 @@ export class RequestDrinkInteraction implements Interaction {
   getCalloutSprites() {
     return [
       CalloutSpriteFactory.getSprite(InteractionType.bottle),
-      CalloutSpriteFactory.getBottleSprite(getDrink("bock")),
+      CalloutSpriteFactory.getBottleSprite(pickRandom(this.character.getValidDrinks())),
     ];
   }
 

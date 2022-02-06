@@ -1,5 +1,5 @@
 import { compact } from "lodash";
-import { Drink, DrinkType, getDrink } from "../items/Drink";
+import { Drink, DrinkType, getAllDrinks, getDrink } from "../items/Drink";
 import { SpriteName } from "../sprites/SpriteLibrary";
 import { constrain } from "../utils/constrain";
 import { pickRandom } from "../utils/pickRandom";
@@ -124,6 +124,10 @@ export class AcademicCharacter implements Character {
       return { type: "praise", msg: goodOpinion.opinion };
     }
     return { type: "neutral", msg: "" };
+  }
+
+  getValidDrinks(): Drink[] {
+    return getAllDrinks().filter((drink) => this.validateDrink(drink).type !== "punish");
   }
 
   getOpinion() {

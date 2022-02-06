@@ -164,3 +164,7 @@ export type DrinkType = keyof typeof drinks;
 export function getDrink(type: DrinkType): Drink {
   return drinks[type];
 }
+
+export function getAllDrinks(): Drink[] {
+  return Object.values(drinks);
+}
