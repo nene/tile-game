@@ -1,7 +1,6 @@
 import { Coord, coordAdd } from "../Coord";
 import { Activity, ActivityUpdates } from "./Activity";
 import { Sprite } from "../sprites/Sprite";
-import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { AcademicCharacter } from "../npc/AcademicCharacter";
 import { UiController } from "../UiController";
 import { Interaction } from "./interactions/Interaction";
@@ -17,7 +16,7 @@ export class CallFuxActivity implements Activity {
 
   constructor(character: AcademicCharacter, private interaction: Interaction) {
     this.sprite = character.getGraphics().getDefaultSprite();
-    this.calloutSprite = SpriteLibrary.getSprite("callout", [interaction.getType(), 0]);
+    this.calloutSprite = interaction.getCalloutSprites()[0];
   }
 
   tick(figure: CharacterFigure, location: Location, world: GameWorld): ActivityUpdates {

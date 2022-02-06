@@ -9,6 +9,7 @@ import { StorageInventory } from "../../inventory/StorageInventory";
 import { BeerBottle, isBeerBottle } from "../../items/BeerBottle";
 import { CharacterDialog } from "../../dialogs/CharacterDialog";
 import { Drink } from "../../items/Drink";
+import { CalloutSpriteFactory } from "./CalloutSpriteFactory";
 
 export class OpenBottleInteraction implements Interaction {
   private openedBottle?: BeerBottle;
@@ -27,8 +28,8 @@ export class OpenBottleInteraction implements Interaction {
     });
   }
 
-  getType() {
-    return InteractionType.opener;
+  getCalloutSprites() {
+    return [CalloutSpriteFactory.getSprite(InteractionType.opener)];
   }
 
   tryComplete(): boolean {

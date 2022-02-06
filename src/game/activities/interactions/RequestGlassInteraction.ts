@@ -4,6 +4,7 @@ import { Interaction, InteractionType } from "./Interaction";
 import { DrinkLevel, isBeerGlass, isEmptyBeerGlass } from "../../items/BeerGlass";
 import { GameItem } from "../../items/GameItem";
 import { CharacterDialog } from "../../dialogs/CharacterDialog";
+import { CalloutSpriteFactory } from "./CalloutSpriteFactory";
 
 export class RequestGlassInteraction implements Interaction {
   private finished = false;
@@ -13,8 +14,8 @@ export class RequestGlassInteraction implements Interaction {
     this.dialog = new CharacterDialog(character);
   }
 
-  getType() {
-    return InteractionType.glass;
+  getCalloutSprites() {
+    return [CalloutSpriteFactory.getSprite(InteractionType.glass)];
   }
 
   tryComplete(): boolean {

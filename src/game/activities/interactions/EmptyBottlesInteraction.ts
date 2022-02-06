@@ -2,6 +2,7 @@ import { AcademicCharacter } from "../../npc/AcademicCharacter";
 import { UiController } from "../../UiController";
 import { Interaction, InteractionType } from "./Interaction";
 import { CharacterDialog } from "../../dialogs/CharacterDialog";
+import { CalloutSpriteFactory } from "./CalloutSpriteFactory";
 
 export class EmptyBottlesInteraction implements Interaction {
   private dialog: CharacterDialog;
@@ -10,8 +11,8 @@ export class EmptyBottlesInteraction implements Interaction {
     this.dialog = new CharacterDialog(character);
   }
 
-  getType() {
-    return InteractionType.emptyBottle;
+  getCalloutSprites() {
+    return [CalloutSpriteFactory.getSprite(InteractionType.emptyBottle)];
   }
 
   tryComplete() {

@@ -11,6 +11,7 @@ import { DialogInventoryView } from "../../inventory/DialogInventoryView";
 import { Table } from "../../furniture/Table";
 import { Drink } from "../../items/Drink";
 import { ValidationResult } from "../../questions/ValidationResult";
+import { CalloutSpriteFactory } from "./CalloutSpriteFactory";
 
 export class PourDrinkInteraction implements Interaction {
   private finished = false;
@@ -36,8 +37,8 @@ export class PourDrinkInteraction implements Interaction {
     }
   }
 
-  getType() {
-    return InteractionType.beer;
+  getCalloutSprites() {
+    return [CalloutSpriteFactory.getSprite(InteractionType.beer)];
   }
 
   private glassAndBottleFromInventory(): [BeerGlass | undefined, BeerBottle | undefined] {

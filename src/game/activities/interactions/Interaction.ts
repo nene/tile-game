@@ -4,6 +4,7 @@ import { CharacterFigure } from "../../npc/CharacterFigure";
 import { UiController } from "../../UiController";
 import { Activity } from "../Activity";
 import { Location } from "../../locations/Location";
+import { Sprite } from "../../sprites/Sprite";
 
 export enum InteractionType {
   glass = 0,
@@ -20,5 +21,5 @@ export interface Interaction {
   interact(ui: UiController, item?: GameItem): void;
   isFinished(): boolean;
   nextActivity(): Activity | undefined;
-  getType(): InteractionType;
+  getCalloutSprites(): Sprite[];
 }

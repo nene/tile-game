@@ -6,6 +6,7 @@ import { CharacterDialog } from "../../dialogs/CharacterDialog";
 import { CallFuxActivity } from "../CallFuxActivity";
 import { OpenBottleInteraction } from "./OpenBottleInteraction";
 import { BeerBottle, isFullBeerBottle } from "../../items/BeerBottle";
+import { CalloutSpriteFactory } from "./CalloutSpriteFactory";
 
 export class RequestDrinkInteraction implements Interaction {
   private beerBottle?: BeerBottle;
@@ -15,8 +16,8 @@ export class RequestDrinkInteraction implements Interaction {
     this.dialog = new CharacterDialog(character);
   }
 
-  getType() {
-    return InteractionType.bottle;
+  getCalloutSprites() {
+    return [CalloutSpriteFactory.getSprite(InteractionType.bottle)];
   }
 
   tryComplete(): boolean {

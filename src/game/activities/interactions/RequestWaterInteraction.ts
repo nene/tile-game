@@ -5,6 +5,7 @@ import { DrinkLevel, isBeerGlass } from "../../items/BeerGlass";
 import { getDrink } from "../../items/Drink";
 import { GameItem } from "../../items/GameItem";
 import { CharacterDialog } from "../../dialogs/CharacterDialog";
+import { CalloutSpriteFactory } from "./CalloutSpriteFactory";
 
 export class RequestWaterInteraction implements Interaction {
   private finished = false;
@@ -14,8 +15,8 @@ export class RequestWaterInteraction implements Interaction {
     this.dialog = new CharacterDialog(character);
   }
 
-  getType() {
-    return InteractionType.water;
+  getCalloutSprites() {
+    return [CalloutSpriteFactory.getSprite(InteractionType.water)];
   }
 
   tryComplete() {

@@ -11,6 +11,7 @@ import { MultiChoiceQuestionContent } from "../../dialogs/MultiChoiceQuestionCon
 import { CallFuxActivity } from "../CallFuxActivity";
 import { RequestWaterInteraction } from "./RequestWaterInteraction";
 import { SoundLibrary } from "../../sounds/SoundLibrary";
+import { CalloutSpriteFactory } from "./CalloutSpriteFactory";
 
 export class AskQuestionInteraction implements Interaction {
   private finished = false;
@@ -19,8 +20,8 @@ export class AskQuestionInteraction implements Interaction {
   constructor(private character: AcademicCharacter) {
   }
 
-  getType() {
-    return InteractionType.question;
+  getCalloutSprites() {
+    return [CalloutSpriteFactory.getSprite(InteractionType.question)];
   }
 
   tryComplete() {
