@@ -1,11 +1,11 @@
 import { AcademicCharacter } from "../../npc/AcademicCharacter";
 import { UiController } from "../../UiController";
-import { Interaction, InteractionType } from "./Interaction";
+import { Interaction } from "./Interaction";
 import { DrinkLevel, isBeerGlass } from "../../items/BeerGlass";
 import { getDrink } from "../../items/Drink";
 import { GameItem } from "../../items/GameItem";
 import { CharacterDialog } from "../../dialogs/CharacterDialog";
-import { CalloutSpriteFactory } from "./CalloutSpriteFactory";
+import { CalloutSpriteFactory, InteractionType } from "./CalloutSpriteFactory";
 
 export class RequestWaterInteraction implements Interaction {
   private finished = false;

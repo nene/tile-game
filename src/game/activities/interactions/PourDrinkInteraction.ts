@@ -1,6 +1,6 @@
 import { AcademicCharacter } from "../../npc/AcademicCharacter";
 import { UiController } from "../../UiController";
-import { Interaction, InteractionType } from "./Interaction";
+import { Interaction } from "./Interaction";
 import { DrinkActivity } from "./../DrinkActivity";
 import { GameItem } from "../../items/GameItem";
 import { BeerGlass, DrinkLevel, isBeerGlass } from "../../items/BeerGlass";
@@ -11,7 +11,7 @@ import { DialogInventoryView } from "../../inventory/DialogInventoryView";
 import { Table } from "../../furniture/Table";
 import { Drink } from "../../items/Drink";
 import { ValidationResult } from "../../questions/ValidationResult";
-import { CalloutSpriteFactory } from "./CalloutSpriteFactory";
+import { CalloutSpriteFactory, InteractionType } from "./CalloutSpriteFactory";
 
 export class PourDrinkInteraction implements Interaction {
   private finished = false;

@@ -1,12 +1,12 @@
 import { AcademicCharacter } from "../../npc/AcademicCharacter";
 import { UiController } from "../../UiController";
-import { Interaction, InteractionType } from "./Interaction";
+import { Interaction } from "./Interaction";
 import { GameItem } from "../../items/GameItem";
 import { CharacterDialog } from "../../dialogs/CharacterDialog";
 import { CallFuxActivity } from "../CallFuxActivity";
 import { OpenBottleInteraction } from "./OpenBottleInteraction";
 import { BeerBottle, isFullBeerBottle } from "../../items/BeerBottle";
-import { CalloutSpriteFactory } from "./CalloutSpriteFactory";
+import { CalloutSpriteFactory, InteractionType } from "./CalloutSpriteFactory";
 
 export class RequestDrinkInteraction implements Interaction {
   private beerBottle?: BeerBottle;

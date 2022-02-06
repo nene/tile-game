@@ -2,7 +2,7 @@ import { AcademicCharacter } from "../../npc/AcademicCharacter";
 import { UiController } from "../../UiController";
 import { TextContent } from "../../dialogs/TextContent";
 import { FlagQuestionContent } from "../../dialogs/FlagQuestionContent";
-import { Interaction, InteractionType } from "./Interaction";
+import { Interaction } from "./Interaction";
 import { Dialog } from "../../dialogs/Dialog";
 import { ColorsQuestion, MultiChoiceQuestion, Question } from "../../questions/Question";
 import { ValidationResult } from "../../questions/ValidationResult";
@@ -11,7 +11,7 @@ import { MultiChoiceQuestionContent } from "../../dialogs/MultiChoiceQuestionCon
 import { CallFuxActivity } from "../CallFuxActivity";
 import { RequestWaterInteraction } from "./RequestWaterInteraction";
 import { SoundLibrary } from "../../sounds/SoundLibrary";
-import { CalloutSpriteFactory } from "./CalloutSpriteFactory";
+import { CalloutSpriteFactory, InteractionType } from "./CalloutSpriteFactory";
 
 export class AskQuestionInteraction implements Interaction {
   private finished = false;

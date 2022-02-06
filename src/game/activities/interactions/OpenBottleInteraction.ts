@@ -1,6 +1,6 @@
 import { AcademicCharacter } from "../../npc/AcademicCharacter";
 import { UiController } from "../../UiController";
-import { Interaction, InteractionType } from "./Interaction";
+import { Interaction } from "./Interaction";
 import { GameItem } from "../../items/GameItem";
 import { CallFuxActivity } from "../CallFuxActivity";
 import { PourDrinkInteraction } from "./PourDrinkInteraction";
@@ -9,7 +9,7 @@ import { StorageInventory } from "../../inventory/StorageInventory";
 import { BeerBottle, isBeerBottle } from "../../items/BeerBottle";
 import { CharacterDialog } from "../../dialogs/CharacterDialog";
 import { Drink } from "../../items/Drink";
-import { CalloutSpriteFactory } from "./CalloutSpriteFactory";
+import { CalloutSpriteFactory, InteractionType } from "./CalloutSpriteFactory";
 
 export class OpenBottleInteraction implements Interaction {
   private openedBottle?: BeerBottle;
