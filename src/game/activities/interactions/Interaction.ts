@@ -16,9 +16,9 @@ export enum InteractionType {
 }
 
 export interface Interaction {
-  tryComplete: (figure: CharacterFigure, location: Location, world: GameWorld) => boolean;
-  interact: (ui: UiController, item?: GameItem) => void;
-  isFinished: () => boolean;
-  nextActivity: () => Activity | undefined;
-  getType: () => InteractionType;
+  tryComplete(figure: CharacterFigure, location: Location, world: GameWorld): boolean;
+  interact(ui: UiController, item?: GameItem): void;
+  isFinished(): boolean;
+  nextActivity(): Activity | undefined;
+  getType(): InteractionType;
 }
