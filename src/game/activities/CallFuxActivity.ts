@@ -12,11 +12,11 @@ import { GameWorld } from "../GameWorld";
 export class CallFuxActivity implements Activity {
   private counter = 0;
   private sprite: Sprite;
-  private calloutSprite: Sprite;
+  private calloutSprites: Sprite[];
 
   constructor(character: AcademicCharacter, private interaction: Interaction) {
     this.sprite = character.getGraphics().getDefaultSprite();
-    this.calloutSprite = interaction.getCalloutSprites()[0];
+    this.calloutSprites = interaction.getCalloutSprites();
   }
 
   tick(figure: CharacterFigure, location: Location, world: GameWorld): ActivityUpdates {
@@ -28,7 +28,7 @@ export class CallFuxActivity implements Activity {
     return {
       sprites: [
         this.sprite,
-        this.translateSprite(this.calloutSprite, this.spriteOffset())
+        ...this.calloutSprites.map((sprite) => this.translateSprite(sprite, this.spriteOffset()))
       ],
     };
   }

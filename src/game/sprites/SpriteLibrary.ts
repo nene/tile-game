@@ -75,6 +75,7 @@ import { SpriteSheet, SpriteSheetConfig } from "./SpriteSheet";
 
 const CHARACTER_SIZE: Coord = [16, 36];
 const CHARACTER_OFFSET: Coord = [-8, -33];
+export const CALLOUT_OFFSET: Coord = [-5, -56];
 
 // Helper to require values of `imageFiles` to conform to specific type
 const spriteDef = (x: { src: string, cfg: SpriteSheetConfig }) => x;
@@ -96,7 +97,7 @@ const imageFiles = {
   'cfe-ksv-otto': spriteDef({ src: cfeKsvOtto, cfg: { size: CHARACTER_SIZE, colsRows: [3, 1], offset: CHARACTER_OFFSET } }),
   'cfe-ksv-karl': spriteDef({ src: cfeKsvKarl, cfg: { size: CHARACTER_SIZE, colsRows: [3, 1], offset: CHARACTER_OFFSET } }),
   'cfe-ksv-kark': spriteDef({ src: cfeKsvKark, cfg: { size: CHARACTER_SIZE, colsRows: [3, 1], offset: CHARACTER_OFFSET } }),
-  'callout': spriteDef({ src: callout, cfg: { size: [16, 22], colsRows: [3, 1], offset: [-5, -56] } }),
+  'callout': spriteDef({ src: callout, cfg: { size: [16, 22], colsRows: [3, 1], offset: CALLOUT_OFFSET } }),
 
   // Furniture
   'furniture': spriteDef({ src: furniture, cfg: { size: [130, 78] } }),
