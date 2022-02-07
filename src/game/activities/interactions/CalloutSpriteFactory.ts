@@ -9,8 +9,9 @@ export enum InteractionType {
   water = 2,
   question = 3,
   opener = 4,
-  bottle = 5,
-  emptyBottle = 6,
+  ocean = 5,
+  bottle = 6,
+  emptyBottle = 7,
 }
 
 export class CalloutSpriteFactory {
