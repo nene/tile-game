@@ -19,9 +19,7 @@ import beerBox from "./data/beer-box.png";
 import bookCabinet from "./data/book-cabinet.png";
 import kitchenSink from "./data/kitchen-sink.png";
 import lightSwitch from "./data/light-switch.png";
-import tap from "./data/tap.png";
-import drain from "./data/drain.png";
-import book from "./data/book.png";
+import items from "./data/items.png";
 import door from "./data/door.png";
 import doorLarge from "./data/door-large.png";
 import staircaseDoor from "./data/staircase-door.png";
@@ -46,7 +44,6 @@ import flagColors from "./data/flag-colors.png";
 import beerGlassLg from "./data/beer-glass-lg.png";
 import beerGlassSm from "./data/beer-glass-sm.png";
 import bottle from "./data/bottle.png";
-import bottleOpener from "./data/bottle-opener.png";
 import openingGameBg from "./data/opening-game-bg.png";
 import bottleXl from "./data/bottle-xl.png";
 import bottleCapXl from "./data/bottle-cap-xl.png";
@@ -136,13 +133,10 @@ const imageFiles = {
   'level-up-mini': spriteDef({ src: levelUpMini, cfg: { size: [5, 5] } }),
 
   // Items
+  'items': spriteDef({ src: items, cfg: { size: [16, 16], colsRows: [6, 1] } }),
   'beer-glass-lg': spriteDef({ src: beerGlassLg, cfg: { size: [16, 16], colsRows: [5, 5] } }),
   'beer-glass-sm': spriteDef({ src: beerGlassSm, cfg: { size: [10, 10], colsRows: [5, 5] } }),
   'bottle': spriteDef({ src: bottle, cfg: { size: [16, 16], colsRows: [3, 12] } }),
-  'bottle-opener': spriteDef({ src: bottleOpener, cfg: { size: [16, 16], colsRows: [2, 1] } }),
-  'tap': spriteDef({ src: tap, cfg: { size: [16, 16] } }),
-  'drain': spriteDef({ src: drain, cfg: { size: [16, 16] } }),
-  'book': spriteDef({ src: book, cfg: { size: [16, 16] } }),
 
   // bottle-opening game
   'opening-game-bg': spriteDef({ src: openingGameBg, cfg: { size: [16, 16] } }),

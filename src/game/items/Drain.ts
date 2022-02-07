@@ -1,7 +1,7 @@
 import { MiniGame } from "../minigames/MiniGame";
 import { SoundLibrary } from "../sounds/SoundLibrary";
 import { Sprite } from "../sprites/Sprite";
-import { SpriteLibrary } from "../sprites/SpriteLibrary";
+import { ItemSpriteLibrary } from "./ItemSpriteLibrary";
 import { isBeerBottle } from "./BeerBottle";
 import { DrinkLevel, isBeerGlass } from "./BeerGlass";
 import { GameItem } from "./GameItem";
@@ -12,7 +12,7 @@ export class Drain implements GameItem {
   }
 
   getSprite(): Sprite {
-    return SpriteLibrary.getSprite("drain");
+    return ItemSpriteLibrary.getSprite("drain");
   }
 
   combine(item: GameItem): MiniGame | undefined {

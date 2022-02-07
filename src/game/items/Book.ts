@@ -1,6 +1,6 @@
 import { AcademicCharacter } from "../npc/AcademicCharacter";
 import { Sprite } from "../sprites/Sprite";
-import { SpriteLibrary } from "../sprites/SpriteLibrary";
+import { ItemSpriteLibrary } from "./ItemSpriteLibrary";
 import { GameItem } from "./GameItem";
 
 export class Book implements GameItem {
@@ -11,7 +11,7 @@ export class Book implements GameItem {
   }
 
   getSprite(): Sprite {
-    return SpriteLibrary.getSprite("book");
+    return ItemSpriteLibrary.getSprite("book");
   }
 
   addEntry(char: AcademicCharacter) {

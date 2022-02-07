@@ -1,6 +1,6 @@
 import { MiniGame } from "../minigames/MiniGame";
 import { Sprite } from "../sprites/Sprite";
-import { SpriteLibrary } from "../sprites/SpriteLibrary";
+import { ItemSpriteLibrary } from "./ItemSpriteLibrary";
 import { isBeerBottle } from "./BeerBottle";
 import { BottleOpener } from "./BottleOpener";
 import { GameItem } from "./GameItem";
@@ -21,7 +21,7 @@ export class LockedBottleOpener implements BottleOpener {
   }
 
   getSprite(): Sprite {
-    return SpriteLibrary.getSprite("bottle-opener", [1, 0]);
+    return ItemSpriteLibrary.getSprite("bottle-opener-locked");
   }
 
   combine(item: GameItem): MiniGame | undefined {

@@ -29,6 +29,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "aseprite": "/Applications/Aseprite.app/Contents/MacOS/aseprite",
+    "gen-items": "yarn aseprite -b art/items/*.aseprite --sheet-type horizontal --format json-array --list-tags --filename-format '{title}{tag}' --sheet src/game/sprites/data/items.png --data src/game/sprites/data/items.json",
     "gen-furniture": "yarn aseprite -b art/furniture/*.aseprite --sheet-pack --format json-array --list-tags --list-slices --filename-format '{title}' --sheet src/game/sprites/data/furniture.png --data src/game/sprites/data/furniture.json",
     "gen-ksv": "for file in $(ls art/chars/cfe-ksv-*.aseprite | sed 's/art\\/chars\\///' | sed 's/.aseprite//'); do yarn aseprite -b art/chars/$file.aseprite --script art/chars/ksv-sprite-mod.lua --sheet-pack --format json-array --list-tags --filename-format '#{tag} {tagframe}' --color-mode rgb --sheet src/game/sprites/data/$file.png --data src/game/sprites/data/$file.json; done",
     "gen-reb": "yarn aseprite -b art/chars/cfe-reb.aseprite --script art/chars/ksv-sprite-mod.lua --sheet-pack --format json-array --list-tags --filename-format '#{tag} {tagframe}' --color-mode rgb --sheet src/game/sprites/data/cfe-reb.png --data src/game/sprites/data/cfe-reb.json",
