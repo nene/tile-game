@@ -4,7 +4,7 @@ import { SpriteLibrary } from "../sprites/SpriteLibrary";
 
 const framesMap = readFramesMap(itemsJson);
 
-export type ItemSpriteType = 'bottle-opener-simple' | 'bottle-opener-locked' | 'tap' | 'drain' | 'book';
+export type ItemSpriteType = 'bottle-opener-simple' | 'bottle-opener-locked' | 'tap' | 'drain' | 'book' | 'water';
 
 export class ItemSpriteLibrary {
   public static getSprite(name: ItemSpriteType) {

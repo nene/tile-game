@@ -43,6 +43,15 @@
     "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 16 },
     "sourceSize": { "w": 16, "h": 16 },
     "duration": 100
+   },
+   {
+    "filename": "water",
+    "frame": { "x": 80, "y": 0, "w": 16, "h": 16 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 16 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 100
    }
  ],
  "meta": {
@@ -50,7 +59,7 @@
   "version": "1.2.32-x64",
   "image": "items.png",
   "format": "RGBA8888",
-  "size": { "w": 80, "h": 16 },
+  "size": { "w": 96, "h": 16 },
   "scale": "1",
   "frameTags": [
    { "name": "-simple", "from": 0, "to": 0, "direction": "forward" },
