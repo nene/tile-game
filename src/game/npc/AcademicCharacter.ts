@@ -15,6 +15,9 @@ import { Activity } from "../activities/Activity";
 import { IdleActivity } from "../activities/IdleActivity";
 import { AcademicCharacterGraphics } from "./AcademicCharacterGraphics";
 import { ValidationResult } from "../questions/ValidationResult";
+import { isOcean } from "../items/Ocean";
+import { AnnoyanceType } from "../activities/AvoidAnnoyancesActivity";
+import { GameItem } from "../items/GameItem";
 
 export type Desire = "beer" | "question";
 
@@ -51,6 +54,7 @@ export interface AcademicCharacterDef {
 const MAX_BEERS = 3;
 const MAX_QUESTIONS = 0;
 const MAX_EMPTY_BOTTLES = 3;
+const MAX_OCEAN = 3;
 
 type Fields = {
   table?: Table;
@@ -160,12 +164,19 @@ export class AcademicCharacter implements Character {
     }
   }
 
-  getAnnoyance(): "empty-bottles" | undefined {
-    const table = this.getField("table");
-    if (table && table.getInventory().allItems().filter(isEmptyBeerBottle).length > MAX_EMPTY_BOTTLES) {
+  getAnnoyance(): AnnoyanceType | undefined {
+    if (this.countItemsOnTable(isOcean) > MAX_OCEAN) {
+      return "ocean";
+    }
+    if (this.countItemsOnTable(isEmptyBeerBottle) > MAX_EMPTY_BOTTLES) {
       return "empty-bottles";
     }
     return undefined;
+  }
+
+  private countItemsOnTable(predicate: (item: GameItem) => boolean): number {
+    const table = this.getField("table");
+    return table ? table.getInventory().allItems().filter(predicate).length : 0;
   }
 
   getColorBandState(): ColorBandState {
@@ -200,6 +211,10 @@ export class AcademicCharacter implements Character {
 
   hasSkill(skill: "opening" | "pouring"): boolean {
     return this.def.skills[skill];
+  }
+
+  getSpillAmount(): number {
+    return 3;
   }
 }
 

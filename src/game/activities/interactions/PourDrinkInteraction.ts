@@ -12,6 +12,8 @@ import { Table } from "../../furniture/Table";
 import { Drink } from "../../items/Drink";
 import { ValidationResult } from "../../questions/ValidationResult";
 import { CalloutSpriteFactory, InteractionType } from "./CalloutSpriteFactory";
+import { Ocean } from "../../items/Ocean";
+import { times } from "lodash";
 
 export class PourDrinkInteraction implements Interaction {
   private finished = false;
@@ -61,6 +63,9 @@ export class PourDrinkInteraction implements Interaction {
       beerBottle.empty();
       this.character.setField("glass", beerGlass);
       this.getTable().getInventory().add(beerBottle);
+      times(this.character.getSpillAmount(), () => {
+        this.getTable().getInventory().add(new Ocean());
+      });
       this.finished = true;
       return true;
     }
