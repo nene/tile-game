@@ -149,6 +149,10 @@ export class InventoryController {
         // Ensure we start minigame with current mouse coordinate
         this.miniGame.handleGameEvent({ type: "mousemove", coord: this.mouseCoord });
         this.miniGame.init(this.attributes);
+        // Minigame might finish immediately. Discard it in that case
+        if (this.miniGame.isFinished()) {
+          this.miniGame = undefined;
+        }
       }
     }
   }
