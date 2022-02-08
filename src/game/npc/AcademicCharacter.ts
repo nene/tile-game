@@ -214,7 +214,7 @@ export class AcademicCharacter implements Character {
   }
 
   getSpillAmount(): number {
-    return 3;
+    return 1;
   }
 }
 
