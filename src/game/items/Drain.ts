@@ -5,6 +5,8 @@ import { ItemSpriteLibrary } from "./ItemSpriteLibrary";
 import { isBeerBottle } from "./BeerBottle";
 import { DrinkLevel, isBeerGlass } from "./BeerGlass";
 import { GameItem } from "./GameItem";
+import { isOcean } from "./Ocean";
+import { DiscardSelectedItem } from "../minigames/DiscardSelectedItem";
 
 export class Drain implements GameItem {
   getName() {
@@ -29,6 +31,10 @@ export class Drain implements GameItem {
     if (isBeerBottle(item) && item.isOpen() && !item.isEmpty()) {
       SoundLibrary.play("pouring-water");
       item.empty();
+    }
+    if (isOcean(item)) {
+      SoundLibrary.play("pouring-water");
+      return new DiscardSelectedItem();
     }
     return undefined;
   }
