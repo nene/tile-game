@@ -9,14 +9,17 @@ import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { UiController } from "../UiController";
 import { GameItem, isSmallGameItem, SmallGameItem } from "../items/GameItem";
 import { isDefined } from "../utils/isDefined";
+import { SpriteSheet } from "../sprites/SpriteSheet";
+import { isOcean } from "../items/Ocean";
+import { constrain } from "../utils/constrain";
 
 export class Table implements GameObject {
-  private sprite: Sprite;
+  private spriteSheet: SpriteSheet;
   private inventory: StorageInventory;
   private positions: Coord[];
 
   constructor(private coord: Coord, private sittingDir: "LTR" | "RTL" = "LTR") {
-    this.sprite = SpriteLibrary.getSprite("table");
+    this.spriteSheet = SpriteLibrary.get("table");
     this.positions = [...firstTriangle, ...secondTriangle, ...shuffle(triangleLeftovers)];
     this.inventory = new StorageInventory({
       size: 24,
@@ -26,10 +29,15 @@ export class Table implements GameObject {
   tick() { }
 
   paint(screen: PixelScreen) {
-    screen.drawSprite(this.sprite, this.coord);
+    screen.drawSprite(this.getTableSprite(), this.coord);
     this.itemCoords().forEach(([item, coord], i) => {
       screen.drawSprite(item.getSmallSprite(), coord);
     });
+  }
+
+  private getTableSprite(): Sprite {
+    const oceanCount = constrain(this.inventory.allItems().filter(isOcean).length, { min: 0, max: 4 });
+    return this.spriteSheet.getSprite([oceanCount, 0]);
   }
 
   private itemCoords(): [SmallGameItem, Coord][] {
