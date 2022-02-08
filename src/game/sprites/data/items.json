@@ -36,7 +36,7 @@
     "duration": 100
    },
    {
-    "filename": "tap",
+    "filename": "ocean",
     "frame": { "x": 64, "y": 0, "w": 16, "h": 16 },
     "rotated": false,
     "trimmed": false,
@@ -45,7 +45,7 @@
     "duration": 100
    },
    {
-    "filename": "water",
+    "filename": "tap",
     "frame": { "x": 80, "y": 0, "w": 16, "h": 16 },
     "rotated": false,
     "trimmed": false,
