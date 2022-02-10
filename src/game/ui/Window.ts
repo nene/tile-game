@@ -8,7 +8,6 @@ import { SCREEN_RECT } from "./screen-size";
 
 interface WindowCfg {
   headline: Headline;
-  headlinePadding?: number;
   align?: Alignment;
   size: Coord;
   onClose?: () => void;
@@ -24,13 +23,11 @@ const DESCRIPTION_HEIGHT = 7;
 
 export class Window implements Component {
   private headline: Headline;
-  private headlinePadding: number;
   private rect: Rect;
   private closeButton?: Button;
 
-  constructor({ headline, headlinePadding, align, size, onClose }: WindowCfg) {
+  constructor({ headline, align, size, onClose }: WindowCfg) {
     this.headline = headline;
-    this.headlinePadding = headlinePadding ?? 3;
     this.rect = rectAlign({ coord: [0, 0], size }, SCREEN_RECT, align || "center");
     if (onClose) {
       this.closeButton = new Button({
@@ -56,9 +53,9 @@ export class Window implements Component {
   }
 
   private drawHeadline(screen: PixelScreen) {
-    screen.drawText(this.headline.title, coordAdd(this.rect.coord, [this.headlinePadding, 2]), { shadowColor: UI_SHADOW_COLOR });
+    screen.drawText(this.headline.title, coordAdd(this.rect.coord, [3, 2]), { shadowColor: UI_SHADOW_COLOR });
     if (this.headline.description) {
-      screen.drawText(this.headline.description, coordAdd(this.rect.coord, [this.headlinePadding, 12]), { size: "small" });
+      screen.drawText(this.headline.description, coordAdd(this.rect.coord, [3, 12]), { size: "small" });
     }
   }
 
