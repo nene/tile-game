@@ -6,6 +6,7 @@ import { Character } from "../npc/Character";
 import { PixelScreen } from "../PixelScreen";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { Component } from "../ui/Component";
+import { DecoratedFrame } from "../ui/DecoratedFrame";
 import { UI_HIGHLIGHT_COLOR } from "../ui/ui-utils";
 import { Window } from "../ui/Window";
 import { UiController } from "../UiController";
@@ -26,6 +27,7 @@ export class Dialog implements Component {
   private character: Character;
   private iconRect: Rect;
   private iconHovered = false;
+  private frame: DecoratedFrame;
 
   constructor({ ui, character, createContent, onClose, align }: DialogConfig) {
     this.ui = ui;
@@ -37,16 +39,18 @@ export class Dialog implements Component {
         description: " ",
       },
       headlinePadding: 20,
-      size: [200, 109],
+      size: [208, 112],
       align: align ?? "bottom",
       onClose: onClose
     });
     this.content = createContent(rectGrow(this.window.contentAreaRect(), [-2, -2]));
     this.iconRect = { coord: coordAdd(this.window.getRect().coord, [2, 2]), size: [16, 16] };
+    this.frame = new DecoratedFrame(rectGrow(this.window.getRect(), [8, 8]));
   }
 
   paint(screen: PixelScreen) {
     this.window.paint(screen);
+    this.frame.paint(screen);
     this.drawIcon(screen);
     this.content.paint(screen);
   }
