@@ -1,0 +1,25 @@
+{ "frames": [
+   {
+    "filename": "ribbon-frame",
+    "frame": { "x": 0, "y": 0, "w": 80, "h": 80 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 80 },
+    "sourceSize": { "w": 80, "h": 80 },
+    "duration": 100
+   }
+ ],
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.2.32-x64",
+  "image": "ribbon-frame.png",
+  "format": "RGBA8888",
+  "size": { "w": 80, "h": 80 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "slices": [
+   { "name": "Slice 1", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 0, "y": 0, "w": 80, "h": 80 }, "center": {"x": 16, "y": 16, "w": 48, "h": 48 } }] }
+  ]
+ }
+}

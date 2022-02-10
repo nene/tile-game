@@ -52,6 +52,7 @@ export interface AsepriteSlice {
 }
 
 export interface AsepriteSliceKey {
-  "frame": number;
-  "bounds": AsepriteRect;
+  frame: number;
+  bounds: AsepriteRect;
+  center?: AsepriteRect;
 }

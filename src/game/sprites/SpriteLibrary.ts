@@ -66,6 +66,7 @@ import leaves3 from "./data/leaves3.png";
 import levelUp from "./data/level-up.png";
 import levelUpIcons from "./data/level-up-icons.png";
 import levelUpMini from "./data/level-up-mini.png";
+import ribbonFrame from "./data/ribbon-frame.png";
 
 import { Coord } from "../Coord";
 import { SpriteSheet, SpriteSheetConfig } from "./SpriteSheet";
@@ -131,6 +132,7 @@ const imageFiles = {
   'level-up': spriteDef({ src: levelUp, cfg: { size: [7, 11], colsRows: [5, 1] } }),
   'level-up-icons': spriteDef({ src: levelUpIcons, cfg: { size: [10, 11], colsRows: [2, 1] } }),
   'level-up-mini': spriteDef({ src: levelUpMini, cfg: { size: [5, 5] } }),
+  'ribbon-frame': spriteDef({ src: ribbonFrame, cfg: { size: [16, 16], colsRows: [5, 5] } }),
 
   // Items
   'items': spriteDef({ src: items, cfg: { size: [16, 16], colsRows: [6, 1] } }),
