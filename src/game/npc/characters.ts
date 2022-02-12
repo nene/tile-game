@@ -116,7 +116,7 @@ const characters = {
     json: karlJson,
     name: "Vanamees",
     spriteName: "cfe-ksv-karl",
-    moveAnimationFrames: readStandAnimations(karlJson),
+    moveAnimationFrames: readWalkAnimations(karlJson),
     days: {
       1: { spawnTime: 1 * 10 },
       2: { spawnTime: 32 * 10 },
