@@ -39,17 +39,7 @@ export class UiController {
     resetCharactersForDay(this.calendar.getDay());
     this.world = createWorld(this.calendar.getDay());
 
-    this.attributes.alcoSkill.drunkenness$.subscribe((drunkenness) => {
-      const player = this.world.getPlayer();
-      if (drunkenness === 5) {
-        player.setMentalState('sleep');
-        player.onSleepStarted(() => {
-          delay(this.calendar.endDay.bind(this.calendar), 6000);
-        });
-      } else {
-        player.setMentalState(drunkenness >= 3 ? 'drunk' : 'sober');
-      }
-    });
+    this.attributes.alcoSkill.drunkenness$.subscribe((drunkenness) => this.updatePlayerMentalState(drunkenness));
 
     this.inventoryController = new InventoryController(this.attributes);
     this.cursorController = new CursorController();
@@ -80,6 +70,18 @@ export class UiController {
         this.dayTransition = undefined;
       }
     });
+  }
+
+  private updatePlayerMentalState(drunkenness: number) {
+    const player = this.world.getPlayer();
+    if (drunkenness === 5) {
+      player.setMentalState('sleep');
+      player.onSleepStarted(() => {
+        delay(this.calendar.endDay.bind(this.calendar), 6000);
+      });
+    } else {
+      player.setMentalState(drunkenness >= 3 ? 'drunk' : 'sober');
+    }
   }
 
   showInventory(view: InventoryView) {
