@@ -7,7 +7,6 @@ import { PixelScreen } from "./PixelScreen";
 import { Sprite } from "./sprites/Sprite";
 import { SpriteLibrary } from "./sprites/SpriteLibrary";
 import { SpriteSheet } from "./sprites/SpriteSheet";
-import { Wallet } from "./attributes/Wallet";
 import { Calendar } from "./Calendar";
 import { SCREEN_RECT } from "./ui/screen-size";
 
@@ -15,8 +14,9 @@ export class ScoreBoard {
   private bg: Sprite;
   private beerGlass: SpriteSheet;
   private coord: Coord;
+  private money = 0;
 
-  constructor(private wallet: Wallet, private alcoSkill: AlcoSkill, private calendar: Calendar) {
+  constructor(private alcoSkill: AlcoSkill, private calendar: Calendar) {
     this.bg = SpriteLibrary.getSprite("scoreboard");
     this.beerGlass = SpriteLibrary.get("beer-glass-sm");
     this.coord = rectAlign({ coord: [0, 0], size: this.bg.size }, SCREEN_RECT, "top-right").coord;
@@ -29,13 +29,17 @@ export class ScoreBoard {
     this.drawAlcoholLevel(screen);
   }
 
+  setMoney(money: number) {
+    this.money = money;
+  }
+
   private drawCalendar(screen: PixelScreen) {
     screen.drawText(this.calendar.getDayText(), coordAdd(this.coord, [6, 0]), { size: "small" });
     screen.drawText(this.calendar.getTimeText(), coordAdd(this.coord, [6, 6]), { size: "small" });
   }
 
   private drawWallet(screen: PixelScreen) {
-    screen.drawText(this.wallet.getMoney(), coordAdd(this.coord, [39, 14]), { align: "right", shadowColor: "#8f563b" });
+    screen.drawText(this.money, coordAdd(this.coord, [39, 14]), { align: "right", shadowColor: "#8f563b" });
   }
 
   private drawAlcoholLevel(screen: PixelScreen) {
