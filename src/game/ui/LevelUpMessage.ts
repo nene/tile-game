@@ -1,4 +1,4 @@
-import { Skill } from "../attributes/Skill";
+import { LevelUpEvent } from "../attributes/Skill";
 import { Coord, coordAdd, isCoordInRect, Rect, rectGrow } from "../Coord";
 import { GameEvent } from "../GameEvent";
 import { PixelScreen, TextStyle } from "../PixelScreen";
@@ -36,10 +36,10 @@ export class LevelUpMessage implements Component {
     this.onClick = onClick;
   }
 
-  onLevelUp(skill: Skill, text: string) {
+  show({ skill, msg }: LevelUpEvent) {
     this.message = {
       icon: skill.getIcon(),
-      text,
+      text: msg,
     };
     this.opacity = 0;
     this.state = "fade-in";

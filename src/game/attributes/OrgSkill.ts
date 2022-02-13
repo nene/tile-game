@@ -1,7 +1,8 @@
+import { Subject } from "rxjs";
 import { allOrganizations, Organization, OrgSkillLevel } from "../orgs/Organization";
 import { QuestionCategory } from "../questions/Question";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
-import { Skill, SkillConfig } from "./Skill";
+import { LevelUpSubject, Skill } from "./Skill";
 
 const correctAnswersPerLevel: Record<OrgSkillLevel, number> = {
   [OrgSkillLevel.estica]: 4, // All four possible questions
@@ -22,8 +23,7 @@ const correctAnswersPerLevel: Record<OrgSkillLevel, number> = {
 export class OrgSkill implements Skill {
   private level = OrgSkillLevel.estica;
   private correctAnswers = 0;
-
-  constructor(private cfg: SkillConfig) { }
+  public levelUp$: LevelUpSubject = new Subject();
 
   getName() {
     return "Ak. Orgid";
@@ -54,7 +54,7 @@ export class OrgSkill implements Skill {
     if (this.level < OrgSkillLevel.level10) {
       this.level++;
       this.correctAnswers = 0;
-      this.cfg.onLevelUp(this, "Oled ak orgide osas targemaks saanud!");
+      this.levelUp$.next({ skill: this, msg: "Oled ak orgide osas targemaks saanud!" });
     }
   }
 

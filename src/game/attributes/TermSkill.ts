@@ -1,5 +1,6 @@
+import { Subject } from "rxjs";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
-import { Skill, SkillConfig } from "./Skill";
+import { LevelUpSubject, Skill } from "./Skill";
 
 const correctAnswersPerLevel: Record<number, number> = {
   0: 1,
@@ -20,8 +21,7 @@ const correctAnswersPerLevel: Record<number, number> = {
 export class TermSkill implements Skill {
   private level = 0;
   private correctAnswers = 0;
-
-  constructor(private cfg: SkillConfig) { }
+  public levelUp$: LevelUpSubject = new Subject();
 
   getName() {
     return "Uusused";
@@ -52,7 +52,7 @@ export class TermSkill implements Skill {
     if (this.level < 10) {
       this.level++;
       this.correctAnswers = 0;
-      this.cfg.onLevelUp(this, "Sinu teadmised on jõudnud uuele tasemele!");
+      this.levelUp$.next({ skill: this, msg: "Sinu teadmised on jõudnud uuele tasemele!" });
     }
   }
 

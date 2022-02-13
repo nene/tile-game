@@ -1,8 +1,8 @@
+import { Subject } from "rxjs";
 import { Sprite } from "../sprites/Sprite";
 
-export interface SkillConfig {
-  onLevelUp: (skill: Skill, msg: string) => void;
-}
+export type LevelUpEvent = { skill: Skill, msg: string };
+export type LevelUpSubject = Subject<LevelUpEvent>;
 
 export interface Skill {
   getName(): string;

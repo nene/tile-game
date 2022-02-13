@@ -1,5 +1,6 @@
+import { Subject } from "rxjs";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
-import { Skill, SkillConfig } from "./Skill";
+import { LevelUpSubject, Skill } from "./Skill";
 
 const pouringsPerLevel: Record<number, number> = {
   0: 1,
@@ -18,8 +19,7 @@ const pouringsPerLevel: Record<number, number> = {
 export class PouringSkill implements Skill {
   private level = 0; // number between 0..10
   private pourings = 0;
-
-  constructor(private cfg: SkillConfig) { }
+  public levelUp$: LevelUpSubject = new Subject();
 
   getName() {
     return "Õllevalamine";
@@ -48,7 +48,7 @@ export class PouringSkill implements Skill {
     if (this.level < 10) {
       this.level++;
       this.pourings = 0;
-      this.cfg.onLevelUp(this, "Muutud õllevalamises üha osavamaks!");
+      this.levelUp$.next({ skill: this, msg: "Muutud õllevalamises üha osavamaks!" });
     }
   }
 }

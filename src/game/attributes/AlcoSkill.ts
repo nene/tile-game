@@ -1,8 +1,8 @@
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, Subject } from "rxjs";
 import { Drink } from "../items/Drink";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { constrain } from "../utils/constrain";
-import { Skill, SkillConfig } from "./Skill";
+import { LevelUpSubject, Skill } from "./Skill";
 
 const drunkennessMinMax = { min: 0, max: 5 };
 
@@ -27,8 +27,7 @@ export class AlcoSkill implements Skill {
   private sippedDrinks = new Map<Drink, number>();
 
   public drunkenness$ = new BehaviorSubject(0);
-
-  constructor(private cfg: SkillConfig) { }
+  public levelUp$: LevelUpSubject = new Subject();
 
   // Consumes 1/4 of a glass (one step from beer glass)
   sip(drink: Drink) {
@@ -48,7 +47,7 @@ export class AlcoSkill implements Skill {
   private levelUp() {
     if (this.level < 10) {
       this.level++;
-      this.cfg.onLevelUp(this, "Sinu õlletaluvus tõusis uuele tasemele!");
+      this.levelUp$.next({ skill: this, msg: "Sinu õlletaluvus tõusis uuele tasemele!" });
     }
   }
 

@@ -6,10 +6,11 @@ import { OrgSkill } from "./OrgSkill";
 import { isBottleOpener } from "../items/BottleOpener";
 import { GameItem } from "../items/GameItem";
 import { PouringSkill } from "./PouringSkill";
-import { SkillConfig } from "./Skill";
+import { LevelUpEvent } from "./Skill";
 import { TermSkill } from "./TermSkill";
 import { BeerBottle } from "../items/BeerBottle";
 import { BeerGlass, DrinkLevel } from "../items/BeerGlass";
+import { Observable, mergeWith } from "rxjs";
 
 export class PlayerAttributes {
   public readonly inventory = new StorageInventory({
@@ -30,13 +31,25 @@ export class PlayerAttributes {
   public readonly orgSkill: OrgSkill;
   public readonly pouringSkill: PouringSkill;
   public readonly termSkill: TermSkill;
+
+  // When any of the skills triggers LevelUpEvent
+  public levelUp$: Observable<LevelUpEvent>;
+
   private selectedItem?: GameItem;
 
-  constructor(cfg: SkillConfig) {
-    this.alcoSkill = new AlcoSkill(cfg);
-    this.orgSkill = new OrgSkill(cfg);
-    this.pouringSkill = new PouringSkill(cfg);
-    this.termSkill = new TermSkill(cfg);
+  constructor() {
+    this.alcoSkill = new AlcoSkill();
+    this.orgSkill = new OrgSkill();
+    this.pouringSkill = new PouringSkill();
+    this.termSkill = new TermSkill();
+
+    this.levelUp$ = this.alcoSkill.levelUp$.pipe(
+      mergeWith(
+        this.orgSkill.levelUp$,
+        this.pouringSkill.levelUp$,
+        this.termSkill.levelUp$,
+      )
+    );
   }
 
   getSelectedItem(): GameItem | undefined {

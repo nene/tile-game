@@ -31,7 +31,7 @@ export class UiController {
   private levelUpMsg = new LevelUpMessage({
     onClick: () => toggleSkillsView(this),
   });
-  private attributes = new PlayerAttributes(this.levelUpMsg);
+  private attributes = new PlayerAttributes();
   private dayTransition?: DayTransition;
 
   constructor() {
@@ -77,6 +77,8 @@ export class UiController {
     this.calendar.dateTime$.subscribe((dateTime) => this.scoreBoard.setDateTime(dateTime));
 
     this.questionFacory = new QuestionFactory(this.attributes.orgSkill, this.attributes.termSkill);
+
+    this.attributes.levelUp$.subscribe((event) => this.levelUpMsg.show(event));
   }
 
   showInventory(view: InventoryView) {
