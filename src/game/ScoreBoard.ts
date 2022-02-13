@@ -1,6 +1,5 @@
 import { times } from "lodash";
 import { Coord, coordAdd, rectAlign } from "./Coord";
-import { AlcoSkill } from "./attributes/AlcoSkill";
 import { DrinkColor } from "./items/Drink";
 import { DrinkLevel } from "./items/BeerGlass";
 import { PixelScreen } from "./PixelScreen";
@@ -15,8 +14,9 @@ export class ScoreBoard {
   private beerGlass: SpriteSheet;
   private coord: Coord;
   private money = 0;
+  private drunkenness = 0;
 
-  constructor(private alcoSkill: AlcoSkill, private calendar: Calendar) {
+  constructor(private calendar: Calendar) {
     this.bg = SpriteLibrary.getSprite("scoreboard");
     this.beerGlass = SpriteLibrary.get("beer-glass-sm");
     this.coord = rectAlign({ coord: [0, 0], size: this.bg.size }, SCREEN_RECT, "top-right").coord;
@@ -31,6 +31,10 @@ export class ScoreBoard {
 
   setMoney(money: number) {
     this.money = money;
+  }
+
+  setDrunkenness(drunkenness: number) {
+    this.drunkenness = drunkenness;
   }
 
   private drawCalendar(screen: PixelScreen) {
@@ -52,7 +56,7 @@ export class ScoreBoard {
   // drunkenness level goes: 0...5
   // steps go: 0..4
   private getDrinkLevelForStep(levelStep: number): DrinkLevel {
-    const diff = this.alcoSkill.getDrunkenness() - levelStep;
+    const diff = this.drunkenness - levelStep;
     if (diff >= 1) {
       return DrinkLevel.full;
     }

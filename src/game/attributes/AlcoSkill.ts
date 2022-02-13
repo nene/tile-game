@@ -1,3 +1,4 @@
+import { BehaviorSubject } from "rxjs";
 import { Drink } from "../items/Drink";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { constrain } from "../utils/constrain";
@@ -26,6 +27,8 @@ export class AlcoSkill implements Skill {
   // Records the number of sips one has had of each drink
   private sippedDrinks = new Map<Drink, number>();
 
+  public drunkenness$ = new BehaviorSubject(0);
+
   constructor(private cfg: SkillConfig) { }
 
   // Consumes 1/4 of a glass (one step from beer glass)
@@ -37,6 +40,7 @@ export class AlcoSkill implements Skill {
     }
     this.sippedDrinks.set(drink, (this.sippedDrinks.get(drink) ?? 0) + 1);
     this.drunkennessChangeCallback?.(this.drunkenness);
+    this.drunkenness$.next(this.drunkenness);
   }
 
   private drunkennessPerSip(drink: Drink) {
@@ -64,10 +68,6 @@ export class AlcoSkill implements Skill {
 
   getIcon() {
     return SpriteLibrary.getSprite("level-up-icons", [0, 0]);
-  }
-
-  getDrunkenness() {
-    return this.drunkenness;
   }
 
   // Returns number between 0...1

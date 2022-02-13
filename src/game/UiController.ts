@@ -71,8 +71,9 @@ export class UiController {
     this.inventoryController = new InventoryController(this.attributes);
     this.cursorController = new CursorController();
 
-    this.scoreBoard = new ScoreBoard(this.attributes.alcoSkill, this.calendar);
+    this.scoreBoard = new ScoreBoard(this.calendar);
     this.attributes.wallet.money$.subscribe((money) => this.scoreBoard.setMoney(money));
+    this.attributes.alcoSkill.drunkenness$.subscribe((drunkenness) => this.scoreBoard.setDrunkenness(drunkenness));
 
     this.questionFacory = new QuestionFactory(this.attributes.orgSkill, this.attributes.termSkill);
   }
