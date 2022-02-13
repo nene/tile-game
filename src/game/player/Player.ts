@@ -24,7 +24,7 @@ export class Player implements GameObject {
   private coord: Coord;
   private speed = 0;
   private animation: Animation;
-  private itemAtHand?: BeerGlass;
+  private isDrinking = false;
   public mentalState$ = new BehaviorSubject<MentalState>('sober');
   private movement = new PlayerMovement(this);
   private animationLib = new PlayerAnimationLibrary();
@@ -43,13 +43,12 @@ export class Player implements GameObject {
   }
 
   setMentalState(state: MentalState) {
-    console.log("setMentalState: " + state);
     if (this.mentalState$.getValue() === state) {
       return;
     }
 
     this.mentalState$.next(state);
-    if (this.direction.isStanding() && !this.itemAtHand) {
+    if (this.direction.isStanding() && !this.isDrinking) {
       this.startStanding("down");
     }
   }
@@ -59,7 +58,7 @@ export class Player implements GameObject {
   }
 
   handleKeyEvent(event: GameKeyEvent): boolean {
-    if (this.itemAtHand || this.mentalState$.getValue() === "sleep") {
+    if (this.isDrinking || this.mentalState$.getValue() === "sleep") {
       return false;
     }
     if (event.type === "keydown") {
@@ -174,7 +173,7 @@ export class Player implements GameObject {
 
   // True when the player isn't busy doing something (e.g. drinking)
   isFree(): boolean {
-    return !this.itemAtHand && this.mentalState$.getValue() !== "sleep";
+    return !this.isDrinking && this.mentalState$.getValue() !== "sleep";
   }
 
   isInteractable(ui: UiController, glass?: GameItem) {
@@ -183,7 +182,7 @@ export class Player implements GameObject {
 
   interact(ui: UiController, glass?: GameItem) {
     if (this.isNonEmptyGlass(glass) && this.isFree()) {
-      this.itemAtHand = glass;
+      this.isDrinking = true;
       this.animation = new DrinkAnimation({
         beerGlass: glass,
         sprites: this.animationLib.getDrinkAnimationSprites(),
@@ -196,7 +195,7 @@ export class Player implements GameObject {
           this.startStanding("down");
 
           ui.getAttributes().inventory.add(glass);
-          this.itemAtHand = undefined;
+          this.isDrinking = false;
         }
       });
       ui.getAttributes().setSelectedItem(undefined);
