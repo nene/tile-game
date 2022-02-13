@@ -34,37 +34,39 @@ export class UiController {
 
   constructor() {
     this.calendar = new Calendar();
-    this.calendar.dayEnd$.subscribe((day) => this.doDayTransition(day + 1));
+    this.inventoryController = new InventoryController(this.attributes);
+    this.cursorController = new CursorController();
+    this.scoreBoard = new ScoreBoard();
+    this.questionFacory = new QuestionFactory(this.attributes.orgSkill, this.attributes.termSkill);
 
-    resetCharactersForDay(this.calendar.getDay());
-    this.world = createWorld(this.calendar.getDay());
+    this.world = this.rebuildWorld(this.calendar.getDay());
+
+    this.calendar.dayEnd$.subscribe((day) => this.doDayTransition(day + 1));
 
     this.attributes.alcoSkill.drunkenness$.subscribe((drunkenness) => this.updatePlayerMentalState(drunkenness));
 
-    this.inventoryController = new InventoryController(this.attributes);
-    this.cursorController = new CursorController();
-
-    this.scoreBoard = new ScoreBoard();
     this.attributes.wallet.money$.subscribe((money) => this.scoreBoard.setMoney(money));
     this.attributes.alcoSkill.drunkenness$.subscribe((drunkenness) => this.scoreBoard.setDrunkenness(drunkenness));
     this.calendar.dateTime$.subscribe((dateTime) => this.scoreBoard.setDateTime(dateTime));
 
-    this.questionFacory = new QuestionFactory(this.attributes.orgSkill, this.attributes.termSkill);
-
     this.attributes.levelUp$.subscribe((event) => this.levelUpMsg.show(event));
     this.levelUpMsg.click$.subscribe(() => toggleSkillsView(this));
+  }
+
+  private rebuildWorld(day: number): GameWorld {
+    this.inventoryController.resetForNewDay();
+    this.attributes.resetForNewDay();
+    this.calendar.setDay(day);
+    resetCharactersForDay(day);
+    return createWorld(day);
   }
 
   private doDayTransition(newDay: number) {
     this.dayTransition = new DayTransition({
       day: newDay,
       onHalfWay: () => {
-        this.inventoryController.resetForNewDay();
-        this.attributes.resetForNewDay();
         this.modalWindow = undefined;
-        resetCharactersForDay(newDay);
-        this.world = createWorld(newDay);
-        this.calendar.setDay(newDay);
+        this.world = this.rebuildWorld(newDay);
       },
       onFinished: () => {
         this.dayTransition = undefined;
