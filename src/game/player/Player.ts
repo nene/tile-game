@@ -14,6 +14,7 @@ import { GameItem } from "../items/GameItem";
 import { PlayerAnimationLibrary } from "./PlayerAnimationLibrary";
 import { PlayerDirection } from "./PlayerDirection";
 import { Facing } from "../npc/Facing";
+import { BehaviorSubject } from "rxjs";
 
 const MAX_SPEED = 6;
 
@@ -24,7 +25,7 @@ export class Player implements GameObject {
   private speed = 0;
   private animation: Animation;
   private itemAtHand?: BeerGlass;
-  private mentalState: MentalState = 'sober';
+  public mentalState$ = new BehaviorSubject<MentalState>('sober');
   private movement = new PlayerMovement(this);
   private animationLib = new PlayerAnimationLibrary();
   private direction: PlayerDirection;
@@ -42,11 +43,12 @@ export class Player implements GameObject {
   }
 
   setMentalState(state: MentalState) {
-    if (this.mentalState === state) {
+    console.log("setMentalState: " + state);
+    if (this.mentalState$.getValue() === state) {
       return;
     }
 
-    this.mentalState = state;
+    this.mentalState$.next(state);
     if (this.direction.isStanding() && !this.itemAtHand) {
       this.startStanding("down");
     }
@@ -57,7 +59,7 @@ export class Player implements GameObject {
   }
 
   handleKeyEvent(event: GameKeyEvent): boolean {
-    if (this.itemAtHand || this.mentalState === "sleep") {
+    if (this.itemAtHand || this.mentalState$.getValue() === "sleep") {
       return false;
     }
     if (event.type === "keydown") {
@@ -102,7 +104,7 @@ export class Player implements GameObject {
   }
 
   private startStanding(facing: Facing) {
-    switch (this.mentalState) {
+    switch (this.mentalState$.getValue()) {
       case "sober":
         this.animation = this.animationLib.getStanding(facing);
         break;
@@ -172,7 +174,7 @@ export class Player implements GameObject {
 
   // True when the player isn't busy doing something (e.g. drinking)
   isFree(): boolean {
-    return !this.itemAtHand && this.mentalState !== "sleep";
+    return !this.itemAtHand && this.mentalState$.getValue() !== "sleep";
   }
 
   isInteractable(ui: UiController, glass?: GameItem) {
