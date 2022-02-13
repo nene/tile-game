@@ -19,6 +19,8 @@ import { delay } from "lodash";
 import { LevelUpMessage } from "./ui/LevelUpMessage";
 import { toggleSkillsView } from "./ui/infoModals";
 
+const START_DAY = 2;
+
 export class UiController {
   private world: GameWorld;
   private inventoryController: InventoryController;
@@ -39,7 +41,7 @@ export class UiController {
     this.scoreBoard = new ScoreBoard();
     this.questionFacory = new QuestionFactory(this.attributes.orgSkill, this.attributes.termSkill);
 
-    this.world = this.rebuildWorld(this.calendar.getDay());
+    this.world = this.rebuildWorld(START_DAY);
 
     this.calendar.dayEnd$.subscribe((day) => this.doDayTransition(day + 1));
 

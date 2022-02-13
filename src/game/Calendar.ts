@@ -8,7 +8,7 @@ export type DateTime = { day: number, time: number }
 
 export class Calendar {
   private ticks = DAY_START_TIME;
-  private day = 2;
+  private day = 0;
 
   public dateTime$ = new BehaviorSubject<DateTime>({ day: this.day, time: this.ticksToHours(this.ticks) });
   public dayEnd$ = new Subject<number>();
