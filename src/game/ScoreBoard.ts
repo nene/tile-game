@@ -6,7 +6,7 @@ import { PixelScreen } from "./PixelScreen";
 import { Sprite } from "./sprites/Sprite";
 import { SpriteLibrary } from "./sprites/SpriteLibrary";
 import { SpriteSheet } from "./sprites/SpriteSheet";
-import { Calendar } from "./Calendar";
+import { DateTime } from "./Calendar";
 import { SCREEN_RECT } from "./ui/screen-size";
 
 export class ScoreBoard {
@@ -15,8 +15,9 @@ export class ScoreBoard {
   private coord: Coord;
   private money = 0;
   private drunkenness = 0;
+  private date: DateTime = { day: 0, time: 0 };
 
-  constructor(private calendar: Calendar) {
+  constructor() {
     this.bg = SpriteLibrary.getSprite("scoreboard");
     this.beerGlass = SpriteLibrary.get("beer-glass-sm");
     this.coord = rectAlign({ coord: [0, 0], size: this.bg.size }, SCREEN_RECT, "top-right").coord;
@@ -37,9 +38,13 @@ export class ScoreBoard {
     this.drunkenness = drunkenness;
   }
 
+  setDateTime(date: DateTime) {
+    this.date = date;
+  }
+
   private drawCalendar(screen: PixelScreen) {
-    screen.drawText(this.calendar.getDayText(), coordAdd(this.coord, [6, 0]), { size: "small" });
-    screen.drawText(this.calendar.getTimeText(), coordAdd(this.coord, [6, 6]), { size: "small" });
+    screen.drawText(`${this.date.day}. päev`, coordAdd(this.coord, [6, 0]), { size: "small" });
+    screen.drawText(`kell ${this.date.time}`, coordAdd(this.coord, [6, 6]), { size: "small" });
   }
 
   private drawWallet(screen: PixelScreen) {
