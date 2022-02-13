@@ -35,23 +35,22 @@ export class UiController {
   private dayTransition?: DayTransition;
 
   constructor() {
-    this.calendar = new Calendar({
-      onDayEnd: (day) => {
-        this.dayTransition = new DayTransition({
-          calendar: this.calendar,
-          onHalfWay: () => {
-            this.inventoryController.resetForNewDay();
-            this.attributes.resetForNewDay();
-            this.modalWindow = undefined;
-            resetCharactersForDay(day + 1);
-            this.world = createWorld(day + 1);
-            this.calendar.setDay(day + 1);
-          },
-          onFinished: () => {
-            this.dayTransition = undefined;
-          }
-        });
-      },
+    this.calendar = new Calendar();
+    this.calendar.dayEnd$.subscribe((day) => {
+      this.dayTransition = new DayTransition({
+        calendar: this.calendar,
+        onHalfWay: () => {
+          this.inventoryController.resetForNewDay();
+          this.attributes.resetForNewDay();
+          this.modalWindow = undefined;
+          resetCharactersForDay(day + 1);
+          this.world = createWorld(day + 1);
+          this.calendar.setDay(day + 1);
+        },
+        onFinished: () => {
+          this.dayTransition = undefined;
+        }
+      });
     });
 
     resetCharactersForDay(this.calendar.getDay());

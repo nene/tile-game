@@ -1,29 +1,23 @@
+import { Subject } from "rxjs";
 const GAME_HOUR_LENGTH = 60 * 10;
 
 const DAY_START_TIME = 6 * GAME_HOUR_LENGTH; // 6:00 pm
 const DAY_END_TIME = (12 + 2) * GAME_HOUR_LENGTH; // 2:00 am
 
-interface CalendarConfig {
-  onDayEnd: (day: number) => void;
-}
-
 export class Calendar {
   private ticks = DAY_START_TIME;
   private day = 2;
-  private onDayEnd: (day: number) => void;
 
-  constructor({ onDayEnd }: CalendarConfig) {
-    this.onDayEnd = onDayEnd;
-  }
+  public dayEnd$ = new Subject<number>();
 
   endDay() {
-    this.onDayEnd(this.day);
+    this.dayEnd$.next(this.day);
   }
 
   tick() {
     this.ticks++;
     if (this.ticks > DAY_END_TIME) {
-      this.onDayEnd(this.day);
+      this.endDay();
     }
   }
 
