@@ -34,22 +34,7 @@ export class UiController {
 
   constructor() {
     this.calendar = new Calendar();
-    this.calendar.dayEnd$.subscribe((day) => {
-      this.dayTransition = new DayTransition({
-        day: day + 1,
-        onHalfWay: () => {
-          this.inventoryController.resetForNewDay();
-          this.attributes.resetForNewDay();
-          this.modalWindow = undefined;
-          resetCharactersForDay(day + 1);
-          this.world = createWorld(day + 1);
-          this.calendar.setDay(day + 1);
-        },
-        onFinished: () => {
-          this.dayTransition = undefined;
-        }
-      });
-    });
+    this.calendar.dayEnd$.subscribe((day) => this.doDayTransition(day + 1));
 
     resetCharactersForDay(this.calendar.getDay());
     this.world = createWorld(this.calendar.getDay());
@@ -78,6 +63,23 @@ export class UiController {
 
     this.attributes.levelUp$.subscribe((event) => this.levelUpMsg.show(event));
     this.levelUpMsg.click$.subscribe(() => toggleSkillsView(this));
+  }
+
+  private doDayTransition(newDay: number) {
+    this.dayTransition = new DayTransition({
+      day: newDay,
+      onHalfWay: () => {
+        this.inventoryController.resetForNewDay();
+        this.attributes.resetForNewDay();
+        this.modalWindow = undefined;
+        resetCharactersForDay(newDay);
+        this.world = createWorld(newDay);
+        this.calendar.setDay(newDay);
+      },
+      onFinished: () => {
+        this.dayTransition = undefined;
+      }
+    });
   }
 
   showInventory(view: InventoryView) {
