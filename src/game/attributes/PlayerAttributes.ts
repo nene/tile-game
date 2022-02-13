@@ -9,7 +9,7 @@ import { PouringSkill } from "./PouringSkill";
 import { SkillConfig } from "./Skill";
 import { TermSkill } from "./TermSkill";
 import { BeerBottle } from "../items/BeerBottle";
-import { BeerGlass } from "../items/BeerGlass";
+import { BeerGlass, DrinkLevel } from "../items/BeerGlass";
 
 export class PlayerAttributes {
   public readonly inventory = new StorageInventory({
@@ -22,7 +22,7 @@ export class PlayerAttributes {
       new BeerGlass(),
       new BeerGlass(),
       new BeerGlass(),
-      new BeerGlass(),
+      new BeerGlass(getDrink("tommu-hiid"), DrinkLevel.full),
     ],
   });
   public readonly wallet = new Wallet(25);

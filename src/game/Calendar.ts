@@ -35,10 +35,6 @@ export class Calendar {
     this.dateTime$.next({ day: this.day, time: this.ticksToHours(this.ticks) });
   }
 
-  getDayText(): string {
-    return `${this.day}. päev`;
-  }
-
   private ticksToHours(ticks: number) {
     const hours = Math.floor(ticks / GAME_HOUR_LENGTH);
     return hours % 12 === 0 ? 12 : hours % 12;

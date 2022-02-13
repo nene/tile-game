@@ -1,4 +1,3 @@
-import { Calendar } from "./Calendar";
 import { rectCenter } from "./Coord";
 import { GameEvent } from "./GameEvent";
 import { PixelScreen } from "./PixelScreen";
@@ -8,7 +7,7 @@ import { SCREEN_RECT } from "./ui/screen-size";
 import { drawUpset, UI_BG_COLOR, UI_SHADOW_COLOR } from "./ui/ui-utils";
 
 interface DayTransitionConfig {
-  calendar: Calendar,
+  day: number,
   onHalfWay: () => void;
   onFinished: () => void;
 }
@@ -16,12 +15,12 @@ interface DayTransitionConfig {
 export class DayTransition implements Component {
   private opacity = 0;
   private phase: "day-ending" | "pause" | "day-starting" = "day-ending";
-  private calendar: Calendar;
+  private day: number;
   private onHalfWay: () => void;
   private onFinished: () => void;
 
-  constructor({ calendar, onHalfWay, onFinished }: DayTransitionConfig) {
-    this.calendar = calendar;
+  constructor({ day, onHalfWay, onFinished }: DayTransitionConfig) {
+    this.day = day;
     this.onHalfWay = onHalfWay;
     this.onFinished = onFinished;
   }
@@ -59,7 +58,7 @@ export class DayTransition implements Component {
     const textRect = rectCenter({ coord: [0, 0], size: [1, 9] }, SCREEN_RECT);
     screen.drawRect(rect, UI_BG_COLOR);
     drawUpset(screen, rect);
-    screen.drawText(this.calendar.getDayText(), textRect.coord, { shadowColor: UI_SHADOW_COLOR, align: "center" });
+    screen.drawText(`${this.day}. päev`, textRect.coord, { shadowColor: UI_SHADOW_COLOR, align: "center" });
   }
 
   handleGameEvent(event: GameEvent) {

@@ -38,7 +38,7 @@ export class UiController {
     this.calendar = new Calendar();
     this.calendar.dayEnd$.subscribe((day) => {
       this.dayTransition = new DayTransition({
-        calendar: this.calendar,
+        day: day + 1,
         onHalfWay: () => {
           this.inventoryController.resetForNewDay();
           this.attributes.resetForNewDay();
