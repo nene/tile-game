@@ -15,9 +15,10 @@ import { GameWorld } from "./GameWorld";
 import { createWorld } from "./locations/createWorld";
 import { DayTransition } from "./DayTransition";
 import { resetCharactersForDay } from "./npc/characters";
-import { delay } from "lodash";
 import { LevelUpMessage } from "./ui/LevelUpMessage";
 import { toggleSkillsView } from "./ui/infoModals";
+import { Player } from "./player/Player";
+import { filter, delay, Subscription, combineLatest } from "rxjs";
 
 const START_DAY = 2;
 
@@ -33,6 +34,7 @@ export class UiController {
   private levelUpMsg = new LevelUpMessage();
   private attributes = new PlayerAttributes();
   private dayTransition?: DayTransition;
+  private playerSubscription?: Subscription;
 
   constructor() {
     this.calendar = new Calendar();
@@ -60,7 +62,23 @@ export class UiController {
     this.attributes.resetForNewDay();
     this.calendar.setDay(day);
     resetCharactersForDay(day);
-    return createWorld(day);
+    const world = createWorld(day);
+    this.initPlayer(world.getPlayer());
+    return world;
+  }
+
+  private initPlayer(player: Player) {
+    this.playerSubscription?.unsubscribe();
+
+    this.playerSubscription = combineLatest([
+      player.mentalState$,
+      player.isDrinking$,
+    ]).pipe(
+      filter(([state, isDrinking]) => state === "sleep" && !isDrinking),
+      delay(6000),
+    ).subscribe(() => {
+      this.calendar.endDay();
+    });
   }
 
   private doDayTransition(newDay: number) {
@@ -80,9 +98,6 @@ export class UiController {
     const player = this.world.getPlayer();
     if (drunkenness === 5) {
       player.setMentalState('sleep');
-      player.onSleepStarted(() => {
-        delay(this.calendar.endDay.bind(this.calendar), 6000);
-      });
     } else {
       player.setMentalState(drunkenness >= 3 ? 'drunk' : 'sober');
     }

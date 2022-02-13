@@ -29,7 +29,6 @@ export class Player implements GameObject {
   private movement = new PlayerMovement(this);
   private animationLib = new PlayerAnimationLibrary();
   private direction: PlayerDirection;
-  private sleepStarted?: () => void;
 
   constructor(coord: Coord) {
     this.coord = coord;
@@ -51,10 +50,6 @@ export class Player implements GameObject {
     if (this.direction.isStanding() && !this.isDrinking$.getValue()) {
       this.startStanding("down");
     }
-  }
-
-  onSleepStarted(cb: () => void) {
-    this.sleepStarted = cb;
   }
 
   handleKeyEvent(event: GameKeyEvent): boolean {
@@ -112,7 +107,6 @@ export class Player implements GameObject {
         break;
       case "sleep":
         this.animation = this.animationLib.getSleep();
-        this.sleepStarted?.();
         break;
     }
   }
