@@ -9,6 +9,7 @@ import { Component } from "./Component";
 import levelUpJson from "../sprites/data/level-up.json";
 import { Sprite } from "../sprites/Sprite";
 import { debounce } from "lodash";
+import { Subject } from "rxjs";
 
 const TEXT_COLOR = "#3e2821";
 const BG_COLOR = "#c8b997";
@@ -25,16 +26,13 @@ export class LevelUpMessage implements Component {
     frames: readAsepriteAnimation("bounce", levelUpJson),
   });
   private opacity = 0;
-  private onClick: () => void;
   private borderRect?: Rect;
+
+  public click$ = new Subject<void>();
 
   private hideMessageAfterDelay = debounce(() => {
     this.state = "fade-out";
   }, 10000);
-
-  constructor({ onClick }: { onClick: () => void }) {
-    this.onClick = onClick;
-  }
 
   show({ skill, msg }: LevelUpEvent) {
     this.message = {
@@ -48,7 +46,7 @@ export class LevelUpMessage implements Component {
 
   handleGameEvent(event: GameEvent) {
     if (event.type === "click" && this.borderRect && isCoordInRect(event.coord, this.borderRect)) {
-      this.onClick();
+      this.click$.next();
       return true;
     }
     return undefined;
