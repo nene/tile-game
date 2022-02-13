@@ -56,7 +56,7 @@ export class UiController {
     resetCharactersForDay(this.calendar.getDay());
     this.world = createWorld(this.calendar.getDay());
 
-    this.attributes.alcoSkill.onDrunkennessChange((drunkenness) => {
+    this.attributes.alcoSkill.drunkenness$.subscribe((drunkenness) => {
       const player = this.world.getPlayer();
       if (drunkenness === 5) {
         player.setMentalState('sleep');
