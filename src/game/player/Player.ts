@@ -24,7 +24,7 @@ export class Player implements GameObject {
   private coord: Coord;
   private speed = 0;
   private animation: Animation;
-  private isDrinking = false;
+  public isDrinking$ = new BehaviorSubject(false);
   public mentalState$ = new BehaviorSubject<MentalState>('sober');
   private movement = new PlayerMovement(this);
   private animationLib = new PlayerAnimationLibrary();
@@ -48,7 +48,7 @@ export class Player implements GameObject {
     }
 
     this.mentalState$.next(state);
-    if (this.direction.isStanding() && !this.isDrinking) {
+    if (this.direction.isStanding() && !this.isDrinking$.getValue()) {
       this.startStanding("down");
     }
   }
@@ -58,7 +58,7 @@ export class Player implements GameObject {
   }
 
   handleKeyEvent(event: GameKeyEvent): boolean {
-    if (this.isDrinking || this.mentalState$.getValue() === "sleep") {
+    if (this.isDrinking$.getValue() || this.mentalState$.getValue() === "sleep") {
       return false;
     }
     if (event.type === "keydown") {
@@ -173,7 +173,7 @@ export class Player implements GameObject {
 
   // True when the player isn't busy doing something (e.g. drinking)
   isFree(): boolean {
-    return !this.isDrinking && this.mentalState$.getValue() !== "sleep";
+    return !this.isDrinking$.getValue() && this.mentalState$.getValue() !== "sleep";
   }
 
   isInteractable(ui: UiController, glass?: GameItem) {
@@ -182,7 +182,7 @@ export class Player implements GameObject {
 
   interact(ui: UiController, glass?: GameItem) {
     if (this.isNonEmptyGlass(glass) && this.isFree()) {
-      this.isDrinking = true;
+      this.isDrinking$.next(true);
       this.animation = new DrinkAnimation({
         beerGlass: glass,
         sprites: this.animationLib.getDrinkAnimationSprites(),
@@ -195,7 +195,7 @@ export class Player implements GameObject {
           this.startStanding("down");
 
           ui.getAttributes().inventory.add(glass);
-          this.isDrinking = false;
+          this.isDrinking$.next(false);
         }
       });
       ui.getAttributes().setSelectedItem(undefined);
