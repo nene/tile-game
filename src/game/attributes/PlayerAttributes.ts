@@ -3,7 +3,6 @@ import { StorageInventory } from "../inventory/StorageInventory";
 import { getDrink } from "../items/Drink";
 import { Wallet } from "./Wallet";
 import { OrgSkill } from "./OrgSkill";
-import { isBottleOpener } from "../items/BottleOpener";
 import { GameItem } from "../items/GameItem";
 import { PouringSkill } from "./PouringSkill";
 import { LevelUpEvent } from "./Skill";
@@ -62,7 +61,6 @@ export class PlayerAttributes {
 
   resetForNewDay() {
     this.resetSelectedItem();
-    this.resetInventory();
     this.alcoSkill.reset();
   }
 
@@ -71,11 +69,5 @@ export class PlayerAttributes {
       this.inventory.add(this.selectedItem);
       this.selectedItem = undefined;
     }
-  }
-
-  private resetInventory() {
-    const openers = this.inventory.allItems().filter(isBottleOpener);
-    this.inventory.clear();
-    openers.forEach((item) => this.inventory.add(item))
   }
 }
