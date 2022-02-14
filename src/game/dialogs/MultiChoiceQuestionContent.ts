@@ -4,6 +4,7 @@ import { TextButton } from "../ui/TextButton";
 import { PixelScreen } from "../PixelScreen";
 import { TextContent } from "./TextContent";
 import { Component } from "../ui/Component";
+import { CounterAnimation } from "./CounterAnimation";
 
 interface MultiChoiceQuestionContentConfig {
   container: Rect;
@@ -17,6 +18,7 @@ export class MultiChoiceQuestionContent implements Component {
   private fontSize?: "medium" | "small";
   private question: TextContent;
   private answerButtons: TextButton[];
+  private answerButtonsVisible: CounterAnimation;
   private onAnswer: (answer: string) => void;
 
   constructor({ container, question, choices, fontSize, onAnswer }: MultiChoiceQuestionContentConfig) {
@@ -24,6 +26,7 @@ export class MultiChoiceQuestionContent implements Component {
     this.onAnswer = onAnswer;
     this.question = new TextContent({ text: question, rect: container, animated: true });
     this.answerButtons = this.createAnswerButtons(choices, container);
+    this.answerButtonsVisible = new CounterAnimation({ ticksPerFrame: 2, total: choices.length });
   }
 
   private createAnswerButtons(choices: string[], container: Rect): TextButton[] {
@@ -45,11 +48,14 @@ export class MultiChoiceQuestionContent implements Component {
 
   tick() {
     this.question.tick();
+    if (this.question.isAnimationFinished()) {
+      this.answerButtonsVisible.tick();
+    }
   }
 
   paint(screen: PixelScreen) {
     this.question.paint(screen);
-    screen.paint(this.answerButtons);
+    screen.paint(this.answerButtons.slice(0, this.answerButtonsVisible.getCount()));
   }
 
   handleGameEvent(event: GameEvent): boolean | undefined {

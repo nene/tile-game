@@ -42,4 +42,8 @@ export class TextContent implements TickableComponent {
   handleGameEvent(event: GameEvent): boolean | undefined {
     return undefined;
   }
+
+  isAnimationFinished(): boolean {
+    return this.visibleTextLength === this.text.length;
+  }
 }
