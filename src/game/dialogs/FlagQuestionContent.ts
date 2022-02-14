@@ -7,7 +7,7 @@ import { ColorButton } from "../ui/ColorButton";
 import { ColorMenu } from "../ui/ColorMenu";
 import { TextContent } from "./TextContent";
 import { FlagColor } from "../orgs/FlagColors";
-import { Component } from "../ui/Component";
+import { TickableComponent } from "../ui/Component";
 import { isDefined } from "../utils/isDefined";
 
 interface FlagQuestionContentConfig {
@@ -16,14 +16,14 @@ interface FlagQuestionContentConfig {
   onAnswer: (colors: FlagColor[]) => void;
 }
 
-export class FlagQuestionContent implements Component {
+export class FlagQuestionContent implements TickableComponent {
   private question: TextContent;
   private colorButtons: ColorButton[];
   private menu?: ColorMenu;
   private answerButton: TextButton;
 
   constructor({ question, container, onAnswer }: FlagQuestionContentConfig) {
-    this.question = new TextContent({ text: question, rect: container });
+    this.question = new TextContent({ text: question, rect: container, animated: true });
     this.colorButtons = this.createColorButtons(container);
     this.answerButton = new TextButton({
       rect: { coord: coordAdd(container.coord, [container.size[0] - 60, container.size[1] - 14]), size: [60, 14] },
@@ -50,6 +50,10 @@ export class FlagQuestionContent implements Component {
 
   private getAnswer(): FlagColor[] {
     return this.colorButtons.map((button) => button.getColor()).filter(isDefined);
+  }
+
+  tick() {
+    this.question.tick();
   }
 
   paint(screen: PixelScreen) {

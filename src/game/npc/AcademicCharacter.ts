@@ -51,8 +51,8 @@ export interface AcademicCharacterDef {
   };
 }
 
-const MAX_BEERS = 3;
-const MAX_QUESTIONS = 0;
+const MAX_BEERS = 0;
+const MAX_QUESTIONS = 3;
 const MAX_EMPTY_BOTTLES = 3;
 const MAX_OCEAN = 3;
 
