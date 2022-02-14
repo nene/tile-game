@@ -97,7 +97,7 @@ export class AskQuestionInteraction implements Interaction {
     ui.showModal(new Dialog({
       ui,
       character: this.character,
-      createContent: (rect) => new TextContent({ text, rect }),
+      createContent: (rect) => new TextContent({ text, rect, animated: true }),
       onClose: () => ui.hideModal(),
     }));
   }
