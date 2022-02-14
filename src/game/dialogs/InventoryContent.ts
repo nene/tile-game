@@ -11,7 +11,7 @@ export class InventoryContent implements Component {
   private grid: GridInventoryView;
 
   constructor(inventory: Inventory, text: string, rect: Rect) {
-    this.text = new TextContent(text, rect);
+    this.text = new TextContent({ text, rect });
     this.grid = new GridInventoryView({
       inventory,
       size: [inventory.size(), 1],

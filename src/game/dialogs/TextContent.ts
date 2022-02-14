@@ -6,10 +6,20 @@ import { fitText } from "../ui/fitText";
 import { UI_SHADOW_COLOR } from "../ui/ui-utils";
 import { constrain } from "../utils/constrain";
 
+interface TextContentConfig {
+  text: string;
+  rect: Rect;
+  animated?: boolean;
+}
+
 export class TextContent implements TickableComponent {
+  private text: string;
+  private rect: Rect;
   private visibleTextLength: number;
 
-  constructor(private text: string, private rect: Rect, animated?: boolean) {
+  constructor({ text, rect, animated }: TextContentConfig) {
+    this.text = text;
+    this.rect = rect;
     this.visibleTextLength = animated ? 0 : text.length;
   }
 

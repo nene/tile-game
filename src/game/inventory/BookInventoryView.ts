@@ -54,10 +54,10 @@ export class BookInventoryView implements InventoryView {
   private drawNames(screen: PixelScreen) {
     const { coord, size } = this.window.contentAreaRect();
 
-    const namesList = new TextContent(
-      this.getNames(),
-      rectGrow({ coord: coordAdd(coord, [23, 0]), size: coordAdd(size, [-23, 0]) }, [-1, -1]),
-    );
+    const namesList = new TextContent({
+      text: this.getNames(),
+      rect: rectGrow({ coord: coordAdd(coord, [23, 0]), size: coordAdd(size, [-23, 0]) }, [-1, -1]),
+    });
 
     namesList.paint(screen);
   }

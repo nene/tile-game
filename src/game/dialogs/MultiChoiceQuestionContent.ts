@@ -22,7 +22,7 @@ export class MultiChoiceQuestionContent implements Component {
   constructor({ container, question, choices, fontSize, onAnswer }: MultiChoiceQuestionContentConfig) {
     this.fontSize = fontSize;
     this.onAnswer = onAnswer;
-    this.question = new TextContent(question, container);
+    this.question = new TextContent({ text: question, rect: container });
     this.answerButtons = this.createAnswerButtons(choices, container);
   }
 

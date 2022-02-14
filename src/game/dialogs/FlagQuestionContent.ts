@@ -23,7 +23,7 @@ export class FlagQuestionContent implements Component {
   private answerButton: TextButton;
 
   constructor({ question, container, onAnswer }: FlagQuestionContentConfig) {
-    this.question = new TextContent(question, container);
+    this.question = new TextContent({ text: question, rect: container });
     this.colorButtons = this.createColorButtons(container);
     this.answerButton = new TextButton({
       rect: { coord: coordAdd(container.coord, [container.size[0] - 60, container.size[1] - 14]), size: [60, 14] },
