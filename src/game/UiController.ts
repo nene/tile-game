@@ -9,7 +9,7 @@ import { InventoryView } from "./inventory/InventoryView";
 import { PlayerAttributes } from "./attributes/PlayerAttributes";
 import { Coord } from "./Coord";
 import { Calendar } from "./Calendar";
-import { Component } from "./ui/Component";
+import { Component, isTickableComponent } from "./ui/Component";
 import { QuestionFactory } from "./questions/QuestionFactory";
 import { GameWorld } from "./GameWorld";
 import { createWorld } from "./locations/createWorld";
@@ -122,6 +122,9 @@ export class UiController {
       this.calendar.tick();
     } else {
       this.dayTransition?.tick();
+      if (this.modalWindow && isTickableComponent(this.modalWindow)) {
+        this.modalWindow.tick();
+      }
     }
     this.levelUpMsg.tick();
   }

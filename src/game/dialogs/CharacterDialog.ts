@@ -14,7 +14,7 @@ export class CharacterDialog {
     ui.showModal(new Dialog({
       ui,
       character: this.character,
-      createContent: (rect) => new TextContent(text, rect),
+      createContent: (rect) => new TextContent(text, rect, true),
       onClose: () => {
         ui.hideModal();
         cfg.onClose && cfg.onClose();

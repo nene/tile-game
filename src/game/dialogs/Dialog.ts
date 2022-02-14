@@ -6,7 +6,7 @@ import { Character } from "../npc/Character";
 import { PixelScreen } from "../PixelScreen";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { Button } from "../ui/Button";
-import { Component } from "../ui/Component";
+import { Component, isTickableComponent, TickableComponent } from "../ui/Component";
 import { DecoratedFrame } from "../ui/DecoratedFrame";
 import { SCREEN_RECT } from "../ui/screen-size";
 import { drawInset, UI_BG_COLOR, UI_HIGHLIGHT_COLOR, UI_SHADOW_COLOR } from "../ui/ui-utils";
@@ -22,7 +22,7 @@ interface DialogConfig {
 
 const HEADLINE_HEIGHT = 20;
 
-export class Dialog implements Component {
+export class Dialog implements TickableComponent {
   private ui: UiController;
   private content: Component;
   private onClose?: () => void;
@@ -56,6 +56,12 @@ export class Dialog implements Component {
   private contentAreaRect(): Rect {
     const { coord, size } = rectGrow(this.rect, [-4, -4]);
     return { coord: coordAdd(coord, [0, HEADLINE_HEIGHT]), size: coordSub(size, [0, HEADLINE_HEIGHT]) };
+  }
+
+  tick() {
+    if (isTickableComponent(this.content)) {
+      this.content.tick();
+    }
   }
 
   paint(screen: PixelScreen) {
