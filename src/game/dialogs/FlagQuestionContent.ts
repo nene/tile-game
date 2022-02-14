@@ -9,6 +9,7 @@ import { TextContent } from "./TextContent";
 import { FlagColor } from "../orgs/FlagColors";
 import { TickableComponent } from "../ui/Component";
 import { isDefined } from "../utils/isDefined";
+import { CounterAnimation } from "./CounterAnimation";
 
 interface FlagQuestionContentConfig {
   question: string;
@@ -21,6 +22,7 @@ export class FlagQuestionContent implements TickableComponent {
   private colorButtons: ColorButton[];
   private menu?: ColorMenu;
   private answerButton: TextButton;
+  private answerButtonsVisible = new CounterAnimation({ ticksPerFrame: 2, total: 2 });
 
   constructor({ question, container, onAnswer }: FlagQuestionContentConfig) {
     this.question = new TextContent({ text: question, rect: container, animated: true });
@@ -54,15 +56,22 @@ export class FlagQuestionContent implements TickableComponent {
 
   tick() {
     this.question.tick();
+    if (this.question.isAnimationFinished()) {
+      this.answerButtonsVisible.tick();
+    }
   }
 
   paint(screen: PixelScreen) {
     this.question.paint(screen);
 
-    this.answerButton.paint(screen);
+    if (this.answerButtonsVisible.getCount() >= 1) {
+      // HACK: Render from right to left, so tooltips render on top of buttons
+      screen.paint(reverse([...this.colorButtons]));
+    }
 
-    // HACK: Render from right to left, so tooltips render on top of buttons
-    screen.paint(reverse([...this.colorButtons]));
+    if (this.answerButtonsVisible.getCount() >= 2) {
+      this.answerButton.paint(screen);
+    }
 
     this.menu?.paint(screen);
   }
