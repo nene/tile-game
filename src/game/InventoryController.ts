@@ -12,6 +12,7 @@ import { Inventory } from "./inventory/Inventory";
 import { SCREEN_RECT } from "./ui/screen-size";
 import { BeerGlass } from "./items/BeerGlass";
 import { beerGlassName } from "./items/beerGlassName";
+import { isTickableComponent } from "./ui/Component";
 
 export class InventoryController {
   private playerInventoryView: InventoryView;
@@ -68,10 +69,16 @@ export class InventoryController {
     return Boolean(this.objectInventoryView);
   }
 
-  tick() {
+  gameTick() {
     this.miniGame?.tick();
     if (this.miniGame?.isFinished()) {
       this.miniGame = undefined;
+    }
+  }
+
+  uiTick() {
+    if (this.objectInventoryView && isTickableComponent(this.objectInventoryView)) {
+      this.objectInventoryView.tick();
     }
   }
 

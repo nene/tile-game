@@ -7,6 +7,7 @@ import { Character } from "../npc/Character";
 import { Dialog } from "../dialogs/Dialog";
 import { UiController } from "../UiController";
 import { InventoryContent } from "../dialogs/InventoryContent";
+import { TickableComponent } from "../ui/Component";
 
 interface DialogInventoryViewCfg {
   ui: UiController;
@@ -16,7 +17,7 @@ interface DialogInventoryViewCfg {
   onClose: () => void;
 }
 
-export class DialogInventoryView implements InventoryView {
+export class DialogInventoryView implements InventoryView, TickableComponent {
   private inventory: Inventory;
   private dialog: Dialog;
   private content?: InventoryContent;
@@ -33,6 +34,10 @@ export class DialogInventoryView implements InventoryView {
       },
       onClose,
     });
+  }
+
+  tick() {
+    this.dialog.tick();
   }
 
   onSlotClick(cb: SlotClickHandler) {

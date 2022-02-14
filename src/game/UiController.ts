@@ -118,13 +118,14 @@ export class UiController {
   tick() {
     if (this.isGameWorldActive()) {
       this.world.tick();
-      this.inventoryController.tick();
+      this.inventoryController.gameTick();
       this.calendar.tick();
     } else {
       this.dayTransition?.tick();
       if (this.modalWindow && isTickableComponent(this.modalWindow)) {
         this.modalWindow.tick();
       }
+      this.inventoryController.uiTick();
     }
     this.levelUpMsg.tick();
   }
