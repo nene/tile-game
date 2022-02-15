@@ -1,6 +1,6 @@
 import { AcActivityFactory } from "../activities/AcActivityFactory";
 import { SellAlcoholActivity } from "../activities/SellAlcoholActivity";
-import { tileToScreenCoord } from "../Coord";
+import { tileCenterCoord, tileToScreenCoord } from "../Coord";
 import { GameWorld } from "../GameWorld";
 import { AcademicCharacter } from "../npc/AcademicCharacter";
 import { FeenoksLadyCharacter } from "../npc/FeenoksLadyCharacter";
@@ -26,7 +26,7 @@ export class CellarScene implements Scene {
   ];
 
   getStartPosition(): WorldPosition {
-    return { location: "cfe-cellar", coord: tileToScreenCoord([13, 9]) };
+    return { location: "cfe-cellar", coord: tileCenterCoord([12, 8]) };
   }
 
   tick(world: GameWorld): void {

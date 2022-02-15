@@ -1,11 +1,9 @@
 import { AcActivityFactory } from "../activities/AcActivityFactory";
-import { Coord, coordAdd, tileToScreenCoord } from "../Coord";
+import { tileCenterCoord } from "../Coord";
 import { GameWorld } from "../GameWorld";
 import { AcademicCharacter } from "../npc/AcademicCharacter";
 import { Scene, WorldPosition } from "./Scene";
 import { Spawner } from "./Spawner";
-
-const tileCenterCoord = (coord: Coord) => coordAdd(tileToScreenCoord(coord), [8, 8]);
 
 const oldermanCoord = tileCenterCoord([4, 9]);
 

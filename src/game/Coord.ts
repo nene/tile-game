@@ -134,3 +134,8 @@ export const tileToScreenRect = ({ coord, size }: Rect): Rect => ({
   coord: tileToScreenCoord(coord),
   size: tileToScreenCoord(size),
 });
+
+// Useful for placing characters at the center of a tile
+export function tileCenterCoord(coord: Coord): Coord {
+  return coordAdd(tileToScreenCoord(coord), [8, 8]);
+}
