@@ -4,7 +4,6 @@ import { SpriteName } from "../sprites/SpriteLibrary";
 import { constrain } from "../utils/constrain";
 import { pickRandom } from "../utils/pickRandom";
 import { Character } from "./Character";
-import { createAcademicCharacterActivity } from "../activities/createAcademicCharacterActivity";
 import { Facing } from "../npc/Facing";
 import { FramesDef } from "../sprites/SpriteAnimation";
 import { AsepriteFile } from "../sprites/Aseprite";
@@ -80,7 +79,7 @@ export class AcademicCharacter implements Character {
     this.questionsAsked = 0;
     this.colorBandState = this.randomColorBandState();
     this.fields = {};
-    this.activity = createAcademicCharacterActivity(this);
+    this.activity = new IdleActivity();
     this.greetedCharacters = new Set<Character>();
   }
 
@@ -98,6 +97,10 @@ export class AcademicCharacter implements Character {
 
   getGraphics() {
     return this.graphics;
+  }
+
+  setActivity(activity: Activity) {
+    this.activity = activity;
   }
 
   currentActivity(): Activity {

@@ -5,6 +5,7 @@ export interface Character {
   getName: () => string;
   getGraphics: () => CharacterGraphics;
   reset: () => void;
+  setActivity: (activity: Activity) => void;
   currentActivity: () => Activity;
   isGreetable: () => boolean;
 }

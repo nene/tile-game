@@ -1,5 +1,4 @@
 import { Character } from "./Character";
-import { SellAlcoholActivity } from "../activities/SellAlcoholActivity";
 import { Activity } from "../activities/Activity";
 import { IdleActivity } from "../activities/IdleActivity";
 import { FeenoksLadyGraphics } from "./FeenoksLadyGraphics";
@@ -18,7 +17,11 @@ export class FeenoksLadyCharacter implements Character {
   }
 
   reset() {
-    this.activity = new SellAlcoholActivity(this);
+    this.activity = new IdleActivity();
+  }
+
+  setActivity(activity: Activity) {
+    this.activity = activity;
   }
 
   currentActivity(): Activity {
@@ -37,3 +40,5 @@ export class FeenoksLadyCharacter implements Character {
     return false;
   }
 }
+
+export const isFeenoksLadyCharacter = (char: Character): char is FeenoksLadyCharacter => char instanceof FeenoksLadyCharacter;
