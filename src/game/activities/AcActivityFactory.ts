@@ -14,6 +14,7 @@ import { MoveToDoorActivity } from "./MoveToDoorActivity";
 import { MoveToTableActivity } from "./MoveToTableActivity";
 import { PauseActivity } from "./PauseActivity";
 import { SatisfyDesiresActivity } from "./SatisfyDesiresActivity";
+import { TalkActivity } from "./TalkActivity";
 import { WriteToBookActivity } from "./WriteToBookActivity";
 
 export class AcActivityFactory {
@@ -23,6 +24,11 @@ export class AcActivityFactory {
 
   pause(numberOfTicks: number): this {
     this.activities.push(new PauseActivity(numberOfTicks, this.character));
+    return this;
+  }
+
+  talk(text: string): this {
+    this.activities.push(new TalkActivity(text, this.character));
     return this;
   }
 

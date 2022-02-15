@@ -26,7 +26,7 @@ export class StartScene implements Scene {
 function createActivity(character: AcademicCharacter) {
   return new AcActivityFactory(character)
     .moveToCoord(tileCenterCoord([8, 9]))
-    .pause(2 * 10)
+    .talk("Võtan su vastu Fraternitas Estica uueks rebaseks!")
     .moveToCoord(oldermanCoord)
     .despawn()
     .create();
