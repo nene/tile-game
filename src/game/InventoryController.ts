@@ -13,13 +13,15 @@ import { SCREEN_RECT } from "./ui/screen-size";
 import { BeerGlass } from "./items/BeerGlass";
 import { beerGlassName } from "./items/beerGlassName";
 import { isTickableComponent } from "./ui/Component";
+import { Subject } from "rxjs";
 
 export class InventoryController {
   private playerInventoryView: InventoryView;
   private objectInventoryView?: InventoryView;
   private mouseCoord: Coord = [-16, -16];
-  private miniGame?: MiniGame;
   private tooltip = new Tooltip();
+
+  public miniGame$ = new Subject<MiniGame>();
 
   constructor(private attributes: PlayerAttributes) {
     this.playerInventoryView = new GridInventoryView({
@@ -56,12 +58,7 @@ export class InventoryController {
     this.objectInventoryView = undefined;
   }
 
-  getMiniGame(): MiniGame | undefined {
-    return this.miniGame;
-  }
-
   resetForNewDay() {
-    this.miniGame = undefined;
     this.hideInventory();
   }
 
@@ -69,14 +66,7 @@ export class InventoryController {
     return Boolean(this.objectInventoryView);
   }
 
-  gameTick() {
-    this.miniGame?.tick();
-    if (this.miniGame?.isFinished()) {
-      this.miniGame = undefined;
-    }
-  }
-
-  uiTick() {
+  tick() {
     if (this.objectInventoryView && isTickableComponent(this.objectInventoryView)) {
       this.objectInventoryView.tick();
     }
@@ -151,15 +141,8 @@ export class InventoryController {
       // Combine these items if possible
       const miniGame = item.combine(selectedItem);
       if (miniGame) {
-        // A minigame is used for combining
-        this.miniGame = miniGame;
-        // Ensure we start minigame with current mouse coordinate
-        this.miniGame.handleGameEvent({ type: "mousemove", coord: this.mouseCoord });
-        this.miniGame.init(this.attributes);
-        // Minigame might finish immediately. Discard it in that case
-        if (this.miniGame.isFinished()) {
-          this.miniGame = undefined;
-        }
+        // Use minigame for combining
+        this.miniGame$.next(miniGame);
       }
     }
   }

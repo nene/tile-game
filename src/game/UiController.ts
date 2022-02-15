@@ -38,6 +38,7 @@ export class UiController {
   private attributes = new PlayerAttributes();
   private dayTransition?: DayTransition;
   private playerSubscription?: Subscription;
+  private miniGame?: MiniGame;
 
   constructor() {
     this.calendar = new Calendar();
@@ -58,9 +59,12 @@ export class UiController {
 
     this.attributes.levelUp$.subscribe((event) => this.levelUpMsg.show(event));
     this.levelUpMsg.click$.subscribe(() => toggleSkillsView(this));
+
+    this.inventoryController.miniGame$.subscribe((miniGame) => this.startMiniGame(miniGame));
   }
 
   private rebuildWorld(day: number): [Scene, GameWorld] {
+    this.miniGame = undefined;
     this.inventoryController.resetForNewDay();
     this.attributes.resetForNewDay();
     this.calendar.setDay(day);
@@ -123,14 +127,17 @@ export class UiController {
     if (this.isGameWorldActive()) {
       this.scene.tick(this.world);
       this.world.tick();
-      this.inventoryController.gameTick();
+      this.miniGame?.tick();
+      if (this.miniGame?.isFinished()) {
+        this.miniGame = undefined;
+      }
       this.calendar.tick();
     } else {
       this.dayTransition?.tick();
       if (this.modalWindow && isTickableComponent(this.modalWindow)) {
         this.modalWindow.tick();
       }
-      this.inventoryController.uiTick();
+      this.inventoryController.tick();
     }
     this.levelUpMsg.tick();
   }
@@ -141,7 +148,8 @@ export class UiController {
     }
 
     screen.withFixedCoords(() => {
-      if (this.getMiniGame()) {
+      if (this.miniGame) {
+        this.miniGame.paint(screen);
         this.paintMinigameUi(screen);
       } else {
         this.paintGameUi(screen);
@@ -167,8 +175,6 @@ export class UiController {
   }
 
   private paintMinigameUi(screen: PixelScreen) {
-    this.getMiniGame()?.paint(screen);
-
     if (this.infoModalWindow) {
       Overlay.paint(screen);
       this.infoModalWindow.paint(screen);
@@ -190,18 +196,18 @@ export class UiController {
     }
     // Time also stops when inventory or modalWindow is open,
     // but regardless of that, time always runs during mini-game.
-    return Boolean(this.getMiniGame()) || (!this.inventoryController.isObjectInventoryShown() && !this.modalWindow);
+    return Boolean(this.miniGame) || (!this.inventoryController.isObjectInventoryShown() && !this.modalWindow);
   }
 
   isGameWorldVisible(): boolean {
-    return !this.inventoryController.getMiniGame();
+    return !this.miniGame;
   }
 
   handleGameEvent(event: GameEvent): boolean | undefined {
     let stopPropagation: boolean | undefined = undefined;
     stopPropagation = stopPropagation || this.dayTransition?.handleGameEvent(event);
     stopPropagation = stopPropagation || this.infoModalWindow?.handleGameEvent(event);
-    stopPropagation = stopPropagation || this.getMiniGame()?.handleGameEvent(event);
+    stopPropagation = stopPropagation || this.miniGame?.handleGameEvent(event);
     stopPropagation = stopPropagation || this.cursorController.handleGameEvent(event);
     stopPropagation = stopPropagation || this.modalWindow?.handleGameEvent(event);
     stopPropagation = stopPropagation || this.inventoryController.handleGameEvent(event);
@@ -217,10 +223,6 @@ export class UiController {
 
   getMouseCoord(): Coord {
     return this.cursorController.getCoord();
-  }
-
-  private getMiniGame(): MiniGame | undefined {
-    return this.inventoryController.getMiniGame();
   }
 
   // Normal modal
@@ -251,5 +253,16 @@ export class UiController {
 
   getWorld() {
     return this.world;
+  }
+
+  private startMiniGame(miniGame: MiniGame) {
+    this.miniGame = miniGame;
+    // Ensure we start minigame with current mouse coordinate
+    this.miniGame.handleGameEvent({ type: "mousemove", coord: this.getMouseCoord() });
+    this.miniGame.init(this.attributes);
+    // Minigame might finish immediately. Discard it in that case
+    if (this.miniGame.isFinished()) {
+      this.miniGame = undefined;
+    }
   }
 }
