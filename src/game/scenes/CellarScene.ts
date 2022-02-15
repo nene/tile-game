@@ -1,6 +1,6 @@
-import { createAcademicCharacterActivity } from "../activities/createAcademicCharacterActivity";
+import { AcActivityFactory } from "../activities/AcActivityFactory";
 import { SellAlcoholActivity } from "../activities/SellAlcoholActivity";
-import { coordAdd, tileToScreenCoord } from "../Coord";
+import { tileToScreenCoord } from "../Coord";
 import { GameWorld } from "../GameWorld";
 import { LocationName } from "../locations/LocationFactory";
 import { AcademicCharacter } from "../npc/AcademicCharacter";
@@ -8,7 +8,7 @@ import { FeenoksLadyCharacter } from "../npc/FeenoksLadyCharacter";
 import { Scene } from "./Scene";
 import { Spawner } from "./Spawner";
 
-const SPAWN_COORD = coordAdd(tileToScreenCoord([9, 6]), [8, 8]);
+const SPAWN_COORD = tileToScreenCoord([10, 15]);
 const FEENOKS_LADY_COORD = tileToScreenCoord([12, 5]);
 
 export class CellarScene implements Scene {
@@ -17,12 +17,12 @@ export class CellarScene implements Scene {
       1: { coord: FEENOKS_LADY_COORD, locationName: "feenoks", characterName: "feenoks-lady", createActivity: (char) => new SellAlcoholActivity(char) },
     }),
     new Spawner<AcademicCharacter>({
-      [1 * 10]: { coord: SPAWN_COORD, locationName: "cfe-hall", characterName: "koppel", createActivity: createAcademicCharacterActivity },
-      [5 * 10]: { coord: SPAWN_COORD, locationName: "cfe-hall", characterName: "sass", createActivity: createAcademicCharacterActivity },
-      [20 * 10]: { coord: SPAWN_COORD, locationName: "cfe-hall", characterName: "pikmets", createActivity: createAcademicCharacterActivity },
-      [30 * 10]: { coord: SPAWN_COORD, locationName: "cfe-hall", characterName: "otto", createActivity: createAcademicCharacterActivity },
-      [32 * 10]: { coord: SPAWN_COORD, locationName: "cfe-hall", characterName: "vanamees", createActivity: createAcademicCharacterActivity },
-      [40 * 10]: { coord: SPAWN_COORD, locationName: "cfe-hall", characterName: "kark", createActivity: createAcademicCharacterActivity },
+      [1 * 10]: { coord: SPAWN_COORD, locationName: "outdoors", characterName: "koppel", createActivity },
+      [5 * 10]: { coord: SPAWN_COORD, locationName: "outdoors", characterName: "sass", createActivity },
+      [20 * 10]: { coord: SPAWN_COORD, locationName: "outdoors", characterName: "pikmets", createActivity },
+      [30 * 10]: { coord: SPAWN_COORD, locationName: "outdoors", characterName: "otto", createActivity },
+      [32 * 10]: { coord: SPAWN_COORD, locationName: "outdoors", characterName: "vanamees", createActivity },
+      [40 * 10]: { coord: SPAWN_COORD, locationName: "outdoors", characterName: "kark", createActivity },
     }),
   ];
 
@@ -33,4 +33,18 @@ export class CellarScene implements Scene {
   tick(world: GameWorld): void {
     this.spawners.forEach((s) => s.tick(world));
   }
+}
+
+function createActivity(character: AcademicCharacter) {
+  return new AcActivityFactory(character)
+    .moveToLocation("cfe-hall")
+    .writeToBook()
+    .moveToLocation("cfe-cellar")
+    .pause(5)
+    .sitInTable()
+    .moveToLocation("cfe-hall")
+    .moveToLocation("outdoors")
+    .moveToCoord(tileToScreenCoord([10, 15]))
+    .despawn()
+    .create();
 }
