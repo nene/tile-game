@@ -37,7 +37,6 @@ const characters = {
     spriteName: "cfe-ksv-koppel",
     moveAnimationFrames: readWalkAnimations(koppelJson),
     days: {
-      2: { spawnTime: 1 * 10 },
     },
     favoriteDrinks: [
       { drink: "bock", opinion: "Vat see on üks korralik õlu! Mitte mingi lurr!" },
@@ -60,7 +59,6 @@ const characters = {
     spriteName: "cfe-ksv-sass",
     moveAnimationFrames: readWalkAnimations(sassJson),
     days: {
-      2: { spawnTime: 5 * 10 },
     },
     favoriteDrinks: [
       { drink: "alexander", opinion: "Võid ise arvata, kas ma omanimelist õlut armastan või jumaldan." },
@@ -78,7 +76,6 @@ const characters = {
     spriteName: "cfe-ksv-pikmets",
     moveAnimationFrames: readWalkAnimations(pikmetsJson),
     days: {
-      2: { spawnTime: 20 * 10 },
     },
     favoriteDrinks: [
       { drink: "special", opinion: "Üks eriline õlu erilisele mehele. Aitäh!" },
@@ -96,7 +93,6 @@ const characters = {
     spriteName: "cfe-ksv-otto",
     moveAnimationFrames: readStandAnimations(ottoJson),
     days: {
-      2: { spawnTime: 30 * 10 },
     },
     favoriteDrinks: [
       { drink: "paulaner", opinion: "Seda jooki võiks ette võtta suuremates kogustes!" },
@@ -118,8 +114,6 @@ const characters = {
     spriteName: "cfe-ksv-karl",
     moveAnimationFrames: readWalkAnimations(karlJson),
     days: {
-      1: { spawnTime: 1 * 10 },
-      2: { spawnTime: 32 * 10 },
     },
     favoriteDrinks: [
       { drink: "alexander", opinion: "Vahune sass in iga õllekannu uhkuseks!" },
@@ -137,7 +131,6 @@ const characters = {
     spriteName: "cfe-ksv-kark",
     moveAnimationFrames: readWalkAnimations(karkJson),
     days: {
-      2: { spawnTime: 40 * 10 },
     },
     favoriteDrinks: [
       { drink: "paulaner", opinion: "Selle hurmava märjukesega määrin ma vahel ka oma banjo pillikeeli." },

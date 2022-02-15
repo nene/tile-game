@@ -20,10 +20,12 @@ import { toggleSkillsView } from "./ui/infoModals";
 import { Player } from "./player/Player";
 import { filter, delay, Subscription, combineLatest } from "rxjs";
 import { CellarScene } from "./scenes/CellarScene";
+import { Scene } from "./scenes/Scene";
 
 const START_DAY = 2;
 
 export class UiController {
+  private scene: Scene;
   private world: GameWorld;
   private inventoryController: InventoryController;
   private cursorController: CursorController;
@@ -44,6 +46,7 @@ export class UiController {
     this.scoreBoard = new ScoreBoard();
     this.questionFacory = new QuestionFactory(this.attributes.orgSkill, this.attributes.termSkill);
 
+    this.scene = new CellarScene();
     this.world = this.rebuildWorld(START_DAY);
 
     this.calendar.dayEnd$.subscribe((day) => this.doDayTransition(day + 1));
@@ -63,7 +66,7 @@ export class UiController {
     this.attributes.resetForNewDay();
     this.calendar.setDay(day);
     resetCharactersForDay(day);
-    const world = createWorld(new CellarScene());
+    const world = createWorld(this.scene);
     this.initPlayer(world.getPlayer());
     return world;
   }
@@ -118,6 +121,7 @@ export class UiController {
 
   tick() {
     if (this.isGameWorldActive()) {
+      this.scene.tick(this.world);
       this.world.tick();
       this.inventoryController.gameTick();
       this.calendar.tick();

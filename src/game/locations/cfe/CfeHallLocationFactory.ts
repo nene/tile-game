@@ -8,7 +8,6 @@ import { getLevel } from "../Level";
 import { TiledLevelFactory } from "../TiledLevelFactory";
 import { WallSection } from "../../furniture/WallSection";
 import { Painting } from "../../furniture/Painting";
-import { SpawnPoint } from "../../furniture/SpawnPoint";
 
 export class CfeHallLocationFactory implements LocationFactory {
   private levelFactory = new TiledLevelFactory(getLevel("CFE_hall"));
@@ -52,7 +51,6 @@ export class CfeHallLocationFactory implements LocationFactory {
       new LightSwitch(tileToScreenCoord([15, 7]), lamps, false),
 
       new WallSection({ coord: tileToScreenCoord([23, 6]), size: tileToScreenCoord([3, 1]) }, "cfe-hall"),
-      new SpawnPoint(tileToScreenCoord([9, 6])),
     ];
   }
 
