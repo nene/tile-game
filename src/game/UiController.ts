@@ -46,8 +46,7 @@ export class UiController {
     this.scoreBoard = new ScoreBoard();
     this.questionFacory = new QuestionFactory(this.attributes.orgSkill, this.attributes.termSkill);
 
-    this.scene = new CellarScene();
-    this.world = this.rebuildWorld(START_DAY);
+    [this.scene, this.world] = this.rebuildWorld(START_DAY);
 
     this.calendar.dayEnd$.subscribe((day) => this.doDayTransition(day + 1));
 
@@ -61,14 +60,15 @@ export class UiController {
     this.levelUpMsg.click$.subscribe(() => toggleSkillsView(this));
   }
 
-  private rebuildWorld(day: number): GameWorld {
+  private rebuildWorld(day: number): [Scene, GameWorld] {
     this.inventoryController.resetForNewDay();
     this.attributes.resetForNewDay();
     this.calendar.setDay(day);
     resetCharacters();
-    const world = createWorld(this.scene);
+    const scene = new CellarScene();
+    const world = createWorld(scene);
     this.initPlayer(world.getPlayer());
-    return world;
+    return [scene, world];
   }
 
   private initPlayer(player: Player) {
@@ -90,7 +90,7 @@ export class UiController {
       day: newDay,
       onHalfWay: () => {
         this.modalWindow = undefined;
-        this.world = this.rebuildWorld(newDay);
+        [this.scene, this.world] = this.rebuildWorld(newDay);
       },
       onFinished: () => {
         this.dayTransition = undefined;
