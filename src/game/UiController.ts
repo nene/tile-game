@@ -19,6 +19,7 @@ import { LevelUpMessage } from "./ui/LevelUpMessage";
 import { toggleSkillsView } from "./ui/infoModals";
 import { Player } from "./player/Player";
 import { filter, delay, Subscription, combineLatest } from "rxjs";
+import { CellarScene } from "./scenes/CellarScene";
 
 const START_DAY = 2;
 
@@ -62,7 +63,7 @@ export class UiController {
     this.attributes.resetForNewDay();
     this.calendar.setDay(day);
     resetCharactersForDay(day);
-    const world = createWorld(day);
+    const world = createWorld(new CellarScene());
     this.initPlayer(world.getPlayer());
     return world;
   }

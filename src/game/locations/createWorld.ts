@@ -4,10 +4,11 @@ import { CfeCellarLocationFactory } from "./cfe/CfeCellarLocationFactory";
 import { OutdoorsLocationFactory } from "./outdoors/OutdoorsLocationFactory";
 import { SakalaHallLocationFactory } from "./sakala/SakalaHallLocationFactory";
 import { FeenoksLocationFactory } from "./feenoks/FeenoksLocationFactory";
+import { Scene } from "../scenes/Scene";
 
-export function createWorld(day: number): GameWorld {
+export function createWorld(scene: Scene): GameWorld {
   return new GameWorld({
-    startLocation: "cfe-cellar",
+    startLocation: scene.getStartLocation(),
     locations: [
       new FeenoksLocationFactory(),
       new OutdoorsLocationFactory(),
