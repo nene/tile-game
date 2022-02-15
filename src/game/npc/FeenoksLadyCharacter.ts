@@ -17,7 +17,7 @@ export class FeenoksLadyCharacter implements Character {
     return this.graphics;
   }
 
-  resetForDay() {
+  reset() {
     this.activity = new SellAlcoholActivity(this);
   }
 

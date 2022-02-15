@@ -14,7 +14,7 @@ import { QuestionFactory } from "./questions/QuestionFactory";
 import { GameWorld } from "./GameWorld";
 import { createWorld } from "./locations/createWorld";
 import { DayTransition } from "./DayTransition";
-import { resetCharactersForDay } from "./npc/characters";
+import { resetCharacters } from "./npc/characters";
 import { LevelUpMessage } from "./ui/LevelUpMessage";
 import { toggleSkillsView } from "./ui/infoModals";
 import { Player } from "./player/Player";
@@ -65,7 +65,7 @@ export class UiController {
     this.inventoryController.resetForNewDay();
     this.attributes.resetForNewDay();
     this.calendar.setDay(day);
-    resetCharactersForDay(day);
+    resetCharacters();
     const world = createWorld(this.scene);
     this.initPlayer(world.getPlayer());
     return world;

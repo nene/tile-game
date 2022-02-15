@@ -4,7 +4,7 @@ import { Sprite } from "../sprites/Sprite";
 export interface Character {
   getName: () => string;
   getGraphics: () => CharacterGraphics;
-  resetForDay: (n: number) => void;
+  reset: () => void;
   currentActivity: () => Activity;
   isGreetable: () => boolean;
 }

@@ -74,7 +74,7 @@ export class AcademicCharacter implements Character {
     this.graphics = new AcademicCharacterGraphics(def);
   }
 
-  resetForDay(day: number) {
+  reset() {
     this.willWriteToBook = this.randomWillWriteToBook();
     this.beersConsumed = 0;
     this.questionsAsked = 0;

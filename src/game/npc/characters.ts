@@ -141,6 +141,6 @@ export function getAllCharacters(): Character[] {
   return Object.values(characters);
 }
 
-export function resetCharactersForDay(n: number) {
-  getAllCharacters().forEach((char) => char.resetForDay(n));
+export function resetCharacters() {
+  getAllCharacters().forEach((char) => char.reset());
 }
