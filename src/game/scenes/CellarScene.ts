@@ -1,7 +1,6 @@
 import { createAcademicCharacterActivity } from "../activities/createAcademicCharacterActivity";
 import { SellAlcoholActivity } from "../activities/SellAlcoholActivity";
 import { coordAdd, tileToScreenCoord } from "../Coord";
-import { GameObject } from "../GameObject";
 import { GameWorld } from "../GameWorld";
 import { LocationName } from "../locations/LocationFactory";
 import { AcademicCharacter } from "../npc/AcademicCharacter";
@@ -29,10 +28,6 @@ export class CellarScene implements Scene {
 
   getStartLocation(): LocationName {
     return "cfe-cellar";
-  }
-
-  getInitialObjects(): Map<LocationName, GameObject[]> {
-    return new Map();
   }
 
   tick(world: GameWorld): void {
