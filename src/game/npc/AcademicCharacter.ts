@@ -27,10 +27,6 @@ export enum ColorBandState {
   inverted = 2,
 }
 
-interface DayConfig {
-  spawnTime: number;
-}
-
 interface DrinkOpinion {
   drink: DrinkType;
   opinion: string;
@@ -43,7 +39,6 @@ export interface AcademicCharacterDef {
   moveAnimationFrames: Record<Facing, FramesDef>;
   favoriteDrinks: DrinkOpinion[];
   hatedDrinks: DrinkOpinion[];
-  days: Record<number, DayConfig>;
   drinkingSpeed?: { idleTicks: number; drinkTicks: number };
   skills: {
     opening: boolean;
@@ -72,7 +67,6 @@ export class AcademicCharacter implements Character {
   private questionsAsked = 0;
   private colorBandState = this.randomColorBandState();
   private activity: Activity = new IdleActivity();
-  private today?: DayConfig;
   private fields: Fields = {};
   private greetedCharacters = new Set<Character>();
 
@@ -81,7 +75,6 @@ export class AcademicCharacter implements Character {
   }
 
   resetForDay(day: number) {
-    this.today = this.def.days[day];
     this.willWriteToBook = this.randomWillWriteToBook();
     this.beersConsumed = 0;
     this.questionsAsked = 0;
@@ -109,10 +102,6 @@ export class AcademicCharacter implements Character {
 
   currentActivity(): Activity {
     return this.activity;
-  }
-
-  getSpawnTime(): number {
-    return this.today?.spawnTime ?? Infinity;
   }
 
   validateDrink(drink: Drink): ValidationResult {

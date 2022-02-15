@@ -36,8 +36,6 @@ const characters = {
     name: "ksv! Jakob Koppel",
     spriteName: "cfe-ksv-koppel",
     moveAnimationFrames: readWalkAnimations(koppelJson),
-    days: {
-    },
     favoriteDrinks: [
       { drink: "bock", opinion: "Vat see on üks korralik õlu! Mitte mingi lurr!" },
       { drink: "pilsner", opinion: "Oo jaa! See märjuke õlitab iga korralikku korporanti." },
@@ -58,8 +56,6 @@ const characters = {
     name: "vil! Aleksandr Popov",
     spriteName: "cfe-ksv-sass",
     moveAnimationFrames: readWalkAnimations(sassJson),
-    days: {
-    },
     favoriteDrinks: [
       { drink: "alexander", opinion: "Võid ise arvata, kas ma omanimelist õlut armastan või jumaldan." },
       { drink: "tommu-hiid", opinion: "Mmm... Klassikud on minu lauas alati teretulnud." },
@@ -75,8 +71,6 @@ const characters = {
     name: "b!vil! Richard Pikmets",
     spriteName: "cfe-ksv-pikmets",
     moveAnimationFrames: readWalkAnimations(pikmetsJson),
-    days: {
-    },
     favoriteDrinks: [
       { drink: "special", opinion: "Üks eriline õlu erilisele mehele. Aitäh!" },
       { drink: "kriek", opinion: "Ooo... see on ju Belgia õllekunsti meistriteos!" },
@@ -92,8 +86,6 @@ const characters = {
     name: "vil! Otto Pukk",
     spriteName: "cfe-ksv-otto",
     moveAnimationFrames: readStandAnimations(ottoJson),
-    days: {
-    },
     favoriteDrinks: [
       { drink: "paulaner", opinion: "Seda jooki võiks ette võtta suuremates kogustes!" },
       { drink: "porter", opinion: "Võrratu valik. Tume ja tummine!" },
@@ -113,8 +105,6 @@ const characters = {
     name: "Vanamees",
     spriteName: "cfe-ksv-karl",
     moveAnimationFrames: readWalkAnimations(karlJson),
-    days: {
-    },
     favoriteDrinks: [
       { drink: "alexander", opinion: "Vahune sass in iga õllekannu uhkuseks!" },
       { drink: "pilsner", opinion: "Priima! Võid seda vabalt kohe kastiga ette kanda." },
@@ -130,8 +120,6 @@ const characters = {
     name: "vil! Raul Tõniste",
     spriteName: "cfe-ksv-kark",
     moveAnimationFrames: readWalkAnimations(karkJson),
-    days: {
-    },
     favoriteDrinks: [
       { drink: "paulaner", opinion: "Selle hurmava märjukesega määrin ma vahel ka oma banjo pillikeeli." },
     ],
