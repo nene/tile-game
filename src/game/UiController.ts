@@ -142,31 +142,45 @@ export class UiController {
 
     screen.withFixedCoords(() => {
       if (this.getMiniGame()) {
-        this.getMiniGame()?.paint(screen);
-        if (this.infoModalWindow) {
-          Overlay.paint(screen);
-          this.infoModalWindow.paint(screen);
-          this.cursorController.paint(screen);
-        }
-      } else if (this.infoModalWindow) {
-        Overlay.paint(screen);
-        this.infoModalWindow.paint(screen);
-      } else if (this.modalWindow) {
-        Overlay.paint(screen);
-        this.modalWindow.paint(screen);
+        this.paintMinigameUi(screen);
       } else {
-        this.inventoryController.paint(screen);
-      }
-
-      this.levelUpMsg.paint(screen);
-      this.scoreBoard.paint(screen);
-
-      this.dayTransition?.paint(screen);
-
-      if (!this.getMiniGame()) {
-        this.cursorController.paint(screen);
+        this.paintGameUi(screen);
       }
     });
+  }
+
+  private paintGameUi(screen: PixelScreen) {
+    if (this.infoModalWindow) {
+      Overlay.paint(screen);
+      this.infoModalWindow.paint(screen);
+    } else if (this.modalWindow) {
+      Overlay.paint(screen);
+      this.modalWindow.paint(screen);
+    } else {
+      this.inventoryController.paint(screen);
+    }
+
+    this.levelUpMsg.paint(screen);
+    this.scoreBoard.paint(screen);
+    this.dayTransition?.paint(screen);
+    this.cursorController.paint(screen);
+  }
+
+  private paintMinigameUi(screen: PixelScreen) {
+    this.getMiniGame()?.paint(screen);
+
+    if (this.infoModalWindow) {
+      Overlay.paint(screen);
+      this.infoModalWindow.paint(screen);
+    }
+
+    this.levelUpMsg.paint(screen);
+    this.scoreBoard.paint(screen);
+    this.dayTransition?.paint(screen);
+
+    if (this.infoModalWindow) {
+      this.cursorController.paint(screen);
+    }
   }
 
   isGameWorldActive(): boolean {
