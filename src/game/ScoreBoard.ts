@@ -8,8 +8,9 @@ import { SpriteLibrary } from "./sprites/SpriteLibrary";
 import { SpriteSheet } from "./sprites/SpriteSheet";
 import { DateTime } from "./Calendar";
 import { SCREEN_RECT } from "./ui/screen-size";
+import { Component } from "./ui/Component";
 
-export class ScoreBoard {
+export class ScoreBoard implements Component {
   private bg: Sprite;
   private beerGlass: SpriteSheet;
   private coord: Coord;
@@ -28,6 +29,10 @@ export class ScoreBoard {
     this.drawCalendar(screen);
     this.drawWallet(screen);
     this.drawAlcoholLevel(screen);
+  }
+
+  handleGameEvent() {
+    return undefined;
   }
 
   setMoney(money: number) {
