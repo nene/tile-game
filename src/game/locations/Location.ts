@@ -8,7 +8,6 @@ import { GameWorld } from "../GameWorld";
 import { last } from "lodash";
 import { CharacterFigure, isCharacterFigure } from "../npc/CharacterFigure";
 import { Character } from "../npc/Character";
-import { isPlayerSpawnPoint } from "../player/PlayerSpawnPoint";
 import { Particles } from "./Particles";
 import { LocationBackground } from "./LocationBackground";
 
@@ -58,14 +57,6 @@ export class Location {
 
   allObjects(): GameObject[] {
     return this.objects;
-  }
-
-  getPlayerSpawnCoord(): Coord {
-    const spawn = this.objects.find(isPlayerSpawnPoint)
-    if (!spawn) {
-      throw new Error(`PlayerSpawnPoint not found in ${this.name}`);
-    }
-    return spawn.getCoord();
   }
 
   tick(world: GameWorld): TeleportCommand[] {

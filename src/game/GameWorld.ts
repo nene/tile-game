@@ -5,10 +5,11 @@ import { GameObject } from "./GameObject";
 import { Player } from "./player/Player";
 import { Coord, Rect, rectDistance, rectTranslate } from "./Coord";
 import { UiController } from "./UiController";
+import { WorldPosition } from "./scenes/Scene";
 
 interface GameWorldConfig {
   locations: LocationFactory[];
-  startLocation: LocationName;
+  startPosition: WorldPosition;
 }
 
 export class GameWorld {
@@ -16,10 +17,10 @@ export class GameWorld {
   private activeLocation: Location;
   private player: Player;
 
-  constructor({ locations, startLocation }: GameWorldConfig) {
+  constructor({ locations, startPosition }: GameWorldConfig) {
     this.locations = new Map(locations.map((loc) => [loc.getName(), new Location(loc)]));
-    this.activeLocation = this.getLocation(startLocation);
-    this.player = new Player(this.activeLocation.getPlayerSpawnCoord());
+    this.activeLocation = this.getLocation(startPosition.location);
+    this.player = new Player(startPosition.coord);
     this.activeLocation.add(this.player);
     this.activeLocation.activate();
   }

@@ -1,9 +1,8 @@
 import { AcActivityFactory } from "../activities/AcActivityFactory";
 import { tileToScreenCoord } from "../Coord";
 import { GameWorld } from "../GameWorld";
-import { LocationName } from "../locations/LocationFactory";
 import { AcademicCharacter } from "../npc/AcademicCharacter";
-import { Scene } from "./Scene";
+import { Scene, WorldPosition } from "./Scene";
 import { Spawner } from "./Spawner";
 
 const SPAWN_COORD = tileToScreenCoord([12, 4]);
@@ -26,8 +25,8 @@ export class DrinkingScene implements Scene {
     }),
   ];
 
-  getStartLocation(): LocationName {
-    return "cfe-cellar";
+  getStartPosition(): WorldPosition {
+    return { location: "cfe-cellar", coord: tileToScreenCoord([13, 9]) };
   }
 
   tick(world: GameWorld): void {

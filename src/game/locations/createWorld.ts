@@ -8,7 +8,7 @@ import { Scene } from "../scenes/Scene";
 
 export function createWorld(scene: Scene): GameWorld {
   return new GameWorld({
-    startLocation: scene.getStartLocation(),
+    startPosition: scene.getStartPosition(),
     locations: [
       new FeenoksLocationFactory(),
       new OutdoorsLocationFactory(),
