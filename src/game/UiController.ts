@@ -20,7 +20,7 @@ import { toggleSkillsView } from "./ui/infoModals";
 import { Player } from "./player/Player";
 import { filter, delay, Subscription, combineLatest } from "rxjs";
 import { Scene } from "./scenes/Scene";
-import { DrinkingScene } from "./scenes/DrinkingScene";
+import { StartScene } from "./scenes/StartScene";
 
 const START_DAY = 2;
 
@@ -65,7 +65,7 @@ export class UiController {
     this.attributes.resetForNewDay();
     this.calendar.setDay(day);
     resetCharacters();
-    const scene = new DrinkingScene();
+    const scene = new StartScene();
     const world = createWorld(scene);
     this.initPlayer(world.getPlayer());
     return [scene, world];
