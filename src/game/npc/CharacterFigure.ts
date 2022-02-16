@@ -3,7 +3,7 @@ import { GameObject } from "../GameObject";
 import { GameWorld } from "../GameWorld";
 import { PixelScreen } from "../PixelScreen";
 import { Sprite } from "../sprites/Sprite";
-import { UiController } from "../UiController";
+import { UiApi } from "../UiController";
 import { Location } from "../locations/Location";
 import { GameItem } from "../items/GameItem";
 import { Character } from "./Character";
@@ -54,11 +54,11 @@ export class CharacterFigure implements GameObject {
     return { coord: [-8, -2], size: [16, 5] };
   }
 
-  isInteractable(ui: UiController, item?: GameItem) {
+  isInteractable(ui: UiApi, item?: GameItem) {
     return this.character.currentActivity().isInteractable(ui, item);
   }
 
-  interact(ui: UiController, item?: GameItem) {
+  interact(ui: UiApi, item?: GameItem) {
     this.character.currentActivity().interact(ui, item);
   }
 }

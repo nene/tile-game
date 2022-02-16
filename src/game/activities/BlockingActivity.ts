@@ -2,7 +2,7 @@ import { GameWorld } from "../GameWorld";
 import { GameItem } from "../items/GameItem";
 import { Location } from "../locations/Location";
 import { CharacterFigure } from "../npc/CharacterFigure";
-import { UiController } from "../UiController";
+import { UiApi } from "../UiController";
 import { Activity, ActivityUpdates } from "./Activity";
 import { ActivityTrigger } from "./ActivityTrigger";
 
@@ -41,11 +41,11 @@ export class BlockingActivity implements Activity {
     return this.innerActivity.isFinished();
   }
 
-  isInteractable(ui: UiController, item?: GameItem): boolean {
+  isInteractable(ui: UiApi, item?: GameItem): boolean {
     return this.currentActivity().isInteractable(ui, item);
   }
 
-  interact(ui: UiController, item?: GameItem): void {
+  interact(ui: UiApi, item?: GameItem): void {
     return this.currentActivity().interact(ui, item);
   }
 

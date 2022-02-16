@@ -24,7 +24,18 @@ import { StartScene } from "./scenes/StartScene";
 
 const START_DAY = 2;
 
-export class UiController {
+export interface UiApi {
+  showInventory(view: InventoryView): void;
+  hideInventory(): void;
+  getAttributes(): PlayerAttributes;
+  highlightCursor(highlighted: boolean): void;
+  showModal(modalWindow: Component): void;
+  hideModal(): void;
+  questions(): QuestionFactory;
+  getWorld(): GameWorld;
+}
+
+export class UiController implements UiApi {
   private scene: Scene;
   private world: GameWorld;
   private inventoryController: InventoryController;

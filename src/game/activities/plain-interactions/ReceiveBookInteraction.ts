@@ -1,7 +1,7 @@
 import { isBook } from "../../items/Book";
 import { getDrink } from "../../items/Drink";
 import { AcademicCharacter } from "../../npc/AcademicCharacter";
-import { UiController } from "../../UiController";
+import { UiApi } from "../../UiController";
 import { CallFuxActivity } from "../CallFuxActivity";
 import { InteractionResult, PlainInteraction } from "./PlainInteraction";
 import { RequestWaterInteraction } from "../interactions/RequestWaterInteraction";
@@ -15,7 +15,7 @@ export class ReceiveBookInteraction implements PlainInteraction {
     this.dialog = new CharacterDialog(character);
   }
 
-  interact(ui: UiController, item?: GameItem): InteractionResult | undefined {
+  interact(ui: UiApi, item?: GameItem): InteractionResult | undefined {
     if (!item || !isBook(item)) {
       return undefined;
     }

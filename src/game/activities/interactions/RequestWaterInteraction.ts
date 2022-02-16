@@ -1,5 +1,5 @@
 import { AcademicCharacter } from "../../npc/AcademicCharacter";
-import { UiController } from "../../UiController";
+import { UiApi } from "../../UiController";
 import { Interaction } from "./Interaction";
 import { DrinkLevel, isBeerGlass } from "../../items/BeerGlass";
 import { getDrink } from "../../items/Drink";
@@ -27,7 +27,7 @@ export class RequestWaterInteraction implements Interaction {
     return this.finished;
   }
 
-  interact(ui: UiController, item?: GameItem) {
+  interact(ui: UiApi, item?: GameItem) {
     if (!item || !(isBeerGlass(item))) {
       this.dialog.show(ui, "Too šoppen vett!");
       return;

@@ -7,7 +7,7 @@ import { PixelScreen } from "../PixelScreen";
 import { SoundLibrary } from "../sounds/SoundLibrary";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
-import { UiController } from "../UiController";
+import { UiApi } from "../UiController";
 
 export class BeerBox implements GameObject {
   private sprite: Sprite;
@@ -51,7 +51,7 @@ export class BeerBox implements GameObject {
     return true;
   }
 
-  interact(ui: UiController) {
+  interact(ui: UiApi) {
     SoundLibrary.play("glass-bottles");
     this.inventory.clear();
     ui.showInventory(new StorageInventoryView({

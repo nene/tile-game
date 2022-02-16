@@ -3,7 +3,7 @@ import { GameWorld } from "./GameWorld";
 import { GameItem } from "./items/GameItem";
 import { Location, TeleportCommand } from "./locations/Location";
 import { PixelScreen } from "./PixelScreen";
-import { UiController } from "./UiController";
+import { UiApi } from "./UiController";
 
 export interface GameObject {
   zIndex: () => number;
@@ -13,6 +13,6 @@ export interface GameObject {
   isSolid: () => boolean;
   hitBox: () => Rect;
   boundingBox: () => Rect;
-  interact: (ui: UiController, item?: GameItem) => void;
-  isInteractable: (ui: UiController, item?: GameItem) => boolean;
+  interact: (ui: UiApi, item?: GameItem) => void;
+  isInteractable: (ui: UiApi, item?: GameItem) => boolean;
 }

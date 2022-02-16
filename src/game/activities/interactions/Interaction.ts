@@ -1,7 +1,7 @@
 import { GameWorld } from "../../GameWorld";
 import { GameItem } from "../../items/GameItem";
 import { CharacterFigure } from "../../npc/CharacterFigure";
-import { UiController } from "../../UiController";
+import { UiApi } from "../../UiController";
 import { Activity } from "../Activity";
 import { Location } from "../../locations/Location";
 import { Sprite } from "../../sprites/Sprite";
@@ -18,7 +18,7 @@ export enum InteractionType {
 
 export interface Interaction {
   tryComplete(figure: CharacterFigure, location: Location, world: GameWorld): boolean;
-  interact(ui: UiController, item?: GameItem): void;
+  interact(ui: UiApi, item?: GameItem): void;
   isFinished(): boolean;
   nextActivity(): Activity | undefined;
   getCalloutSprites(): Sprite[];

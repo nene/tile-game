@@ -6,7 +6,7 @@ import { LockedBottleOpener } from "../items/LockedBottleOpener";
 import { PixelScreen } from "../PixelScreen";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
-import { UiController } from "../UiController";
+import { UiApi } from "../UiController";
 
 export class Countertop implements GameObject {
   private sprite: Sprite;
@@ -51,7 +51,7 @@ export class Countertop implements GameObject {
     return true;
   }
 
-  interact(ui: UiController) {
+  interact(ui: UiApi) {
     ui.showInventory(new StorageInventoryView({
       inventory: this.inventory,
       windowSize: [97, 87],

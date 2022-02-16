@@ -7,7 +7,7 @@ import { BeerBottle } from "../items/BeerBottle";
 import { PixelScreen } from "../PixelScreen";
 import { SoundLibrary } from "../sounds/SoundLibrary";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
-import { UiController } from "../UiController";
+import { UiApi } from "../UiController";
 import { SimpleBottleOpener } from "../items/SimpleBottleOpener";
 import { SpriteAnimation } from "../sprites/SpriteAnimation";
 import { readAsepriteAnimation } from "../sprites/readAsepriteAnimation";
@@ -68,7 +68,7 @@ export class Fridge implements GameObject {
     return true;
   }
 
-  interact(ui: UiController) {
+  interact(ui: UiApi) {
     SoundLibrary.play('opening-fridge-door');
     ui.showInventory(new ShopView({
       shop: this.shop,

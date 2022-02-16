@@ -1,5 +1,5 @@
 import { AcademicCharacter } from "../../npc/AcademicCharacter";
-import { UiController } from "../../UiController";
+import { UiApi } from "../../UiController";
 import { Interaction } from "./Interaction";
 import { CharacterDialog } from "../../dialogs/CharacterDialog";
 import { CalloutSpriteFactory, InteractionType } from "./CalloutSpriteFactory";
@@ -23,7 +23,7 @@ export class OceanInteraction implements Interaction {
     return this.character.getAnnoyance() !== "ocean";
   }
 
-  interact(ui: UiController) {
+  interact(ui: UiApi) {
     this.dialog.show(ui, "Ookean!");
   }
 

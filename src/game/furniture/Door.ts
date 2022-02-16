@@ -2,7 +2,7 @@ import { Coord, coordAdd, Rect, rectAlign, rectContains, rectTranslate } from ".
 import { GameObject } from "../GameObject";
 import { PixelScreen } from "../PixelScreen";
 import { Sprite } from "../sprites/Sprite";
-import { UiController } from "../UiController";
+import { UiApi } from "../UiController";
 import { LocationName } from "../locations/LocationFactory";
 import { Location, TeleportCommand } from "../locations/Location";
 import { GameWorld } from "../GameWorld";
@@ -99,7 +99,7 @@ export class Door implements GameObject {
     return true;
   }
 
-  interact(ui: UiController) {
+  interact(ui: UiApi) {
     this.teleport(ui.getWorld());
   }
 

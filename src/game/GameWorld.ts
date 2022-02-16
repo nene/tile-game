@@ -4,7 +4,7 @@ import { PixelScreen } from "./PixelScreen";
 import { GameObject } from "./GameObject";
 import { Player } from "./player/Player";
 import { Coord, Rect, rectDistance, rectTranslate } from "./Coord";
-import { UiController } from "./UiController";
+import { UiApi } from "./UiController";
 import { WorldPosition } from "./scenes/Scene";
 
 interface GameWorldConfig {
@@ -64,7 +64,7 @@ export class GameWorld {
     this.activeLocation.activate();
   }
 
-  isInteractable(ui: UiController, worldCoord: Coord): boolean {
+  isInteractable(ui: UiApi, worldCoord: Coord): boolean {
     const obj = this.activeLocation.getObjectVisibleOnCoord(worldCoord);
     return Boolean(
       obj &&
@@ -74,7 +74,7 @@ export class GameWorld {
     );
   }
 
-  interact(ui: UiController, worldCoord: Coord) {
+  interact(ui: UiApi, worldCoord: Coord) {
     const obj = this.activeLocation.getObjectVisibleOnCoord(worldCoord);
     if (obj && isObjectsCloseby(this.player, obj) && this.player.isFree()) {
       obj.interact(ui, ui.getAttributes().getSelectedItem());

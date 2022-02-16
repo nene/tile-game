@@ -1,5 +1,5 @@
 import { AcademicCharacter } from "../../npc/AcademicCharacter";
-import { UiController } from "../../UiController";
+import { UiApi } from "../../UiController";
 import { TextContent } from "../../dialogs/TextContent";
 import { FlagQuestionContent } from "../../dialogs/FlagQuestionContent";
 import { Interaction } from "./Interaction";
@@ -32,7 +32,7 @@ export class AskQuestionInteraction implements Interaction {
     return this.finished;
   }
 
-  interact(ui: UiController) {
+  interact(ui: UiApi) {
     const question = ui.questions().create();
 
     ui.showModal(new Dialog({
@@ -48,7 +48,7 @@ export class AskQuestionInteraction implements Interaction {
     }));
   }
 
-  private createColorsContent(ui: UiController, rect: Rect, question: ColorsQuestion) {
+  private createColorsContent(ui: UiApi, rect: Rect, question: ColorsQuestion) {
     return new FlagQuestionContent({
       question: question.question,
       container: rect,
@@ -58,7 +58,7 @@ export class AskQuestionInteraction implements Interaction {
     });
   }
 
-  private createMultiChoiceContent(ui: UiController, rect: Rect, question: MultiChoiceQuestion) {
+  private createMultiChoiceContent(ui: UiApi, rect: Rect, question: MultiChoiceQuestion) {
     return new MultiChoiceQuestionContent({
       container: rect,
       question: question.question,
@@ -70,7 +70,7 @@ export class AskQuestionInteraction implements Interaction {
     });
   }
 
-  private handleValidationResult(result: ValidationResult, question: Question, ui: UiController) {
+  private handleValidationResult(result: ValidationResult, question: Question, ui: UiApi) {
     this.showReply(ui, result.msg);
     this.character.satisfyDesire("question");
     if (result.type === "punish") {
@@ -93,7 +93,7 @@ export class AskQuestionInteraction implements Interaction {
     }
   }
 
-  private showReply(ui: UiController, text: string) {
+  private showReply(ui: UiApi, text: string) {
     ui.showModal(new Dialog({
       ui,
       character: this.character,

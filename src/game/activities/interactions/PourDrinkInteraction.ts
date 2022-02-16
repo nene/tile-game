@@ -1,5 +1,5 @@
 import { AcademicCharacter } from "../../npc/AcademicCharacter";
-import { UiController } from "../../UiController";
+import { UiApi } from "../../UiController";
 import { Interaction } from "./Interaction";
 import { DrinkActivity } from "./../DrinkActivity";
 import { GameItem } from "../../items/GameItem";
@@ -76,7 +76,7 @@ export class PourDrinkInteraction implements Interaction {
     return this.finished;
   }
 
-  interact(ui: UiController, item?: GameItem) {
+  interact(ui: UiApi, item?: GameItem) {
     if (this.isCorrectPouredDrink(item)) {
       this.isDialogOpen = true;
       ui.getAttributes().setSelectedItem(undefined);
@@ -132,7 +132,7 @@ export class PourDrinkInteraction implements Interaction {
     return table;
   }
 
-  private showRatingDialog(ui: UiController, beerGlass: BeerGlass) {
+  private showRatingDialog(ui: UiApi, beerGlass: BeerGlass) {
     const rating = this.ratePouring(beerGlass);
     this.dialog.show(ui, rating.msg, {
       onClose: () => {

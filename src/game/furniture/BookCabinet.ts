@@ -5,7 +5,7 @@ import { StorageInventory } from "../inventory/StorageInventory";
 import { Book, isBook } from "../items/Book";
 import { PixelScreen } from "../PixelScreen";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
-import { UiController } from "../UiController";
+import { UiApi } from "../UiController";
 
 const WITH_BOOK: Coord = [0, 0];
 const WITHOUT_BOOK: Coord = [1, 0];
@@ -52,7 +52,7 @@ export class BookCabinet implements GameObject {
     return true;
   }
 
-  interact(ui: UiController) {
+  interact(ui: UiApi) {
     ui.showInventory(new BookInventoryView({
       inventory: this.inventory,
       windowSize: [200, 120],

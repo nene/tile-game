@@ -6,7 +6,7 @@ import { Tap } from "../items/Tap";
 import { Drain } from "../items/Drain";
 import { PixelScreen } from "../PixelScreen";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
-import { UiController } from "../UiController";
+import { UiApi } from "../UiController";
 
 export class KitchenSink implements GameObject {
   private inventory = new StaticInventory({
@@ -46,11 +46,11 @@ export class KitchenSink implements GameObject {
     return { coord: [0, 0], size: [16, 32] };
   }
 
-  isInteractable(ui: UiController) {
+  isInteractable(ui: UiApi) {
     return true;
   }
 
-  interact(ui: UiController) {
+  interact(ui: UiApi) {
     ui.showInventory(new StorageInventoryView({
       inventory: this.inventory,
       windowSize: [140, 87],

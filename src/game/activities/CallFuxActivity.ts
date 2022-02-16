@@ -2,7 +2,7 @@ import { Coord, coordAdd } from "../Coord";
 import { Activity, ActivityUpdates } from "./Activity";
 import { Sprite } from "../sprites/Sprite";
 import { AcademicCharacter } from "../npc/AcademicCharacter";
-import { UiController } from "../UiController";
+import { UiApi } from "../UiController";
 import { Interaction } from "./interactions/Interaction";
 import { GameItem } from "../items/GameItem";
 import { CharacterFigure } from "../npc/CharacterFigure";
@@ -53,7 +53,7 @@ export class CallFuxActivity implements Activity {
     return true;
   }
 
-  interact(ui: UiController, item?: GameItem) {
+  interact(ui: UiApi, item?: GameItem) {
     this.interaction.interact(ui, item);
   }
 

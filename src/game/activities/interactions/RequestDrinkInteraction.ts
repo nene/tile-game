@@ -1,5 +1,5 @@
 import { AcademicCharacter } from "../../npc/AcademicCharacter";
-import { UiController } from "../../UiController";
+import { UiApi } from "../../UiController";
 import { Interaction } from "./Interaction";
 import { GameItem } from "../../items/GameItem";
 import { CharacterDialog } from "../../dialogs/CharacterDialog";
@@ -50,7 +50,7 @@ export class RequestDrinkInteraction implements Interaction {
     return Boolean(this.beerBottle);
   }
 
-  interact(ui: UiController, item?: GameItem) {
+  interact(ui: UiApi, item?: GameItem) {
     if (!item || !isFullBeerBottle(item)) {
       this.dialog.show(ui, "Rebane! Õlut!");
       return;

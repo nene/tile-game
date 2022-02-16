@@ -10,10 +10,10 @@ import { Component, isTickableComponent, TickableComponent } from "../ui/Compone
 import { DecoratedFrame } from "../ui/DecoratedFrame";
 import { SCREEN_RECT } from "../ui/screen-size";
 import { drawInset, UI_BG_COLOR, UI_HIGHLIGHT_COLOR, UI_SHADOW_COLOR } from "../ui/ui-utils";
-import { UiController } from "../UiController";
+import { UiApi } from "../UiController";
 
 interface DialogConfig {
-  ui: UiController;
+  ui: UiApi;
   character: Character;
   createContent: (rect: Rect) => Component,
   onClose?: () => void;
@@ -23,7 +23,7 @@ interface DialogConfig {
 const HEADLINE_HEIGHT = 20;
 
 export class Dialog implements TickableComponent {
-  private ui: UiController;
+  private ui: UiApi;
   private content: Component;
   private onClose?: () => void;
   private character: Character;

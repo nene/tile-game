@@ -1,5 +1,5 @@
 import { Activity, ActivityUpdates } from "./Activity";
-import { UiController } from "../UiController";
+import { UiApi } from "../UiController";
 import { FeenoksLadyCharacter } from "../npc/FeenoksLadyCharacter";
 import { BeerBottle } from "../items/BeerBottle";
 import { getDrink } from "../items/Drink";
@@ -47,7 +47,7 @@ export class SellAlcoholActivity implements Activity {
     return true;
   }
 
-  interact(ui: UiController) {
+  interact(ui: UiApi) {
     if (this.character.isDialogShown()) {
       return this.showShop(ui);
     }
@@ -60,7 +60,7 @@ export class SellAlcoholActivity implements Activity {
     });
   }
 
-  private showShop(ui: UiController) {
+  private showShop(ui: UiApi) {
     ui.showInventory(new ShopView({
       shop: this.shop,
       wallet: ui.getAttributes().wallet,

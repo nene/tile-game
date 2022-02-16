@@ -1,5 +1,5 @@
 import { Activity, ActivityUpdates } from "./Activity";
-import { UiController } from "../UiController";
+import { UiApi } from "../UiController";
 import { CharacterDialog } from "../dialogs/CharacterDialog";
 import { Character } from "../npc/Character";
 
@@ -23,7 +23,7 @@ export class TalkActivity implements Activity {
     return true;
   }
 
-  interact(ui: UiController) {
+  interact(ui: UiApi) {
     this.dialog.show(ui, this.text, {
       onClose: () => {
         this.finished = true;

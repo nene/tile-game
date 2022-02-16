@@ -2,7 +2,7 @@ import { GameWorld } from "../GameWorld";
 import { GameItem } from "../items/GameItem";
 import { Location } from "../locations/Location";
 import { CharacterFigure } from "../npc/CharacterFigure";
-import { UiController } from "../UiController";
+import { UiApi } from "../UiController";
 import { Activity, ActivityUpdates } from "./Activity";
 
 export class ContinuationActivity implements Activity {
@@ -17,11 +17,11 @@ export class ContinuationActivity implements Activity {
     return this.current.isFinished();
   }
 
-  isInteractable(ui: UiController, item?: GameItem) {
+  isInteractable(ui: UiApi, item?: GameItem) {
     return this.current.isInteractable(ui, item);
   }
 
-  interact(ui: UiController, item?: GameItem) {
+  interact(ui: UiApi, item?: GameItem) {
     return this.current.interact(ui, item);
   }
 

@@ -1,5 +1,5 @@
 import { AcademicCharacter } from "../../npc/AcademicCharacter";
-import { UiController } from "../../UiController";
+import { UiApi } from "../../UiController";
 import { Interaction } from "./Interaction";
 import { GameItem } from "../../items/GameItem";
 import { CallFuxActivity } from "../CallFuxActivity";
@@ -60,7 +60,7 @@ export class OpenBottleInteraction implements Interaction {
     return Boolean(this.openedBottle);
   }
 
-  interact(ui: UiController, item?: GameItem) {
+  interact(ui: UiApi, item?: GameItem) {
     if (this.isCorrectOpenedBottle(item)) {
       this.isDialogOpen = true;
       this.openedBottle = item;

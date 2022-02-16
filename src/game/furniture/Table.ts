@@ -6,7 +6,7 @@ import { StorageInventoryView } from "../inventory/StorageInventoryView";
 import { PixelScreen } from "../PixelScreen";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
-import { UiController } from "../UiController";
+import { UiApi } from "../UiController";
 import { GameItem, isSmallGameItem, SmallGameItem } from "../items/GameItem";
 import { isDefined } from "../utils/isDefined";
 import { SpriteSheet } from "../sprites/SpriteSheet";
@@ -90,7 +90,7 @@ export class Table implements GameObject {
     return true;
   }
 
-  interact(ui: UiController) {
+  interact(ui: UiApi) {
     ui.showInventory(new StorageInventoryView({
       inventory: this.inventory,
       windowSize: [109, 92],

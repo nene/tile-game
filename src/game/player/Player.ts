@@ -2,7 +2,7 @@ import { PixelScreen } from "../PixelScreen";
 import { GameObject } from "../GameObject";
 import { Coord, coordConstrain, coordSub, Rect } from "../Coord";
 import { SpriteAnimation } from "../sprites/SpriteAnimation";
-import { UiController } from "../UiController";
+import { UiApi } from "../UiController";
 import { BeerGlass, DrinkLevel, isBeerGlass } from "../items/BeerGlass";
 import { DrinkAnimation } from "../sprites/DrinkAnimation";
 import { Animation } from "../sprites/Animation";
@@ -170,11 +170,11 @@ export class Player implements GameObject {
     return !this.isDrinking$.getValue() && this.mentalState$.getValue() !== "sleep";
   }
 
-  isInteractable(ui: UiController, glass?: GameItem) {
+  isInteractable(ui: UiApi, glass?: GameItem) {
     return this.isNonEmptyGlass(glass) && this.isFree();
   }
 
-  interact(ui: UiController, glass?: GameItem) {
+  interact(ui: UiApi, glass?: GameItem) {
     if (this.isNonEmptyGlass(glass) && this.isFree()) {
       this.isDrinking$.next(true);
       this.animation = new DrinkAnimation({

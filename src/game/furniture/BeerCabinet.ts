@@ -5,7 +5,7 @@ import { PixelScreen } from "../PixelScreen";
 import { Sprite } from "../sprites/Sprite";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { BeerGlass, isBeerGlass } from "../items/BeerGlass";
-import { UiController } from "../UiController";
+import { UiApi } from "../UiController";
 import { SoundLibrary } from "../sounds/SoundLibrary";
 import { StorageInventoryView } from "../inventory/StorageInventoryView";
 
@@ -65,7 +65,7 @@ export class BeerCabinet implements GameObject {
     return true;
   }
 
-  interact(ui: UiController) {
+  interact(ui: UiApi) {
     SoundLibrary.play('opening-cabinet-door');
     ui.showInventory(new StorageInventoryView({
       inventory: this.inventory,

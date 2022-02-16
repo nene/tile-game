@@ -5,12 +5,12 @@ import { InventoryView, ItemHoverHandler, SlotClickHandler } from "./InventoryVi
 import { GameEvent } from "../GameEvent";
 import { Character } from "../npc/Character";
 import { Dialog } from "../dialogs/Dialog";
-import { UiController } from "../UiController";
+import { UiApi } from "../UiController";
 import { InventoryContent } from "../dialogs/InventoryContent";
 import { TickableComponent } from "../ui/Component";
 
 interface DialogInventoryViewCfg {
-  ui: UiController;
+  ui: UiApi;
   inventory: Inventory;
   character: Character;
   text: string;

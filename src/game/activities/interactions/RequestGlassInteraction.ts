@@ -1,5 +1,5 @@
 import { AcademicCharacter } from "../../npc/AcademicCharacter";
-import { UiController } from "../../UiController";
+import { UiApi } from "../../UiController";
 import { Interaction } from "./Interaction";
 import { DrinkLevel, isBeerGlass, isEmptyBeerGlass } from "../../items/BeerGlass";
 import { GameItem } from "../../items/GameItem";
@@ -37,7 +37,7 @@ export class RequestGlassInteraction implements Interaction {
     return this.finished;
   }
 
-  interact(ui: UiController, item?: GameItem) {
+  interact(ui: UiApi, item?: GameItem) {
     if (!item || !(isBeerGlass(item))) {
       this.dialog.show(ui, "Reb! too mulle üks tühi šoppen.");
       return;

@@ -1,6 +1,6 @@
 import { Activity, ActivityUpdates } from "./Activity";
 import { AcademicCharacter, Desire } from "../npc/AcademicCharacter";
-import { UiController } from "../UiController";
+import { UiApi } from "../UiController";
 import { GameWorld } from "../GameWorld";
 import { Location } from "../locations/Location";
 import { CallFuxActivity } from "./CallFuxActivity";
@@ -90,7 +90,7 @@ export class SatisfyDesiresActivity implements Activity {
     return true;
   }
 
-  interact(ui: UiController, item?: GameItem) {
+  interact(ui: UiApi, item?: GameItem) {
     if (!this.activity) {
       return;
     }
