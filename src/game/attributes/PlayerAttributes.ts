@@ -21,7 +21,7 @@ export class PlayerAttributes {
       new BeerBottle(getDrink("heineken")),
       new BeerGlass(),
       new BeerGlass(),
-      new BeerGlass(),
+      new BeerGlass(getDrink("pilsner"), DrinkLevel.full),
       new BeerGlass(getDrink("tommu-hiid"), DrinkLevel.full),
     ],
   });
