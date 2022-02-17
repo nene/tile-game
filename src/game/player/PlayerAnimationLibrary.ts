@@ -4,7 +4,6 @@ import { SpriteAnimation } from "../sprites/SpriteAnimation";
 import { SpriteLibrary } from "../sprites/SpriteLibrary";
 import { Facing } from "../npc/Facing";
 import cfeRebJson from "../sprites/data/cfe-reb.json";
-import cfeRebDrunkJson from "../sprites/data/cfe-reb-drunk.json";
 import { readAsepriteAnimation } from "../sprites/readAsepriteAnimation";
 import { DrinkAnimationSprites } from "../sprites/DrinkAnimation";
 
@@ -56,15 +55,15 @@ export class PlayerAnimationLibrary {
 
     this.sleepAnimation = new CompositeAnimation([
       this.createDrunkAnimation("down", 1),
-      new SpriteAnimation(SpriteLibrary.get("cfe-reb-drunk"), {
-        frames: readAsepriteAnimation("sleep", cfeRebDrunkJson),
+      new SpriteAnimation(SpriteLibrary.get("cfe-reb"), {
+        frames: readAsepriteAnimation("sleep", cfeRebJson),
       }),
     ]);
   }
 
   private createDrunkAnimation(facing: Facing, repeat?: number): Animation {
-    return new SpriteAnimation(SpriteLibrary.get("cfe-reb-drunk"), {
-      frames: readAsepriteAnimation(facing, cfeRebDrunkJson),
+    return new SpriteAnimation(SpriteLibrary.get("cfe-reb"), {
+      frames: readAsepriteAnimation("dr-" + facing, cfeRebJson),
       repeat,
     });
   }

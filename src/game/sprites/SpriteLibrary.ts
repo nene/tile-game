@@ -1,6 +1,5 @@
 import bg from "./data/bg.png";
 import cfeReb from "./data/cfe-reb.png";
-import cfeRebDrunk from "./data/cfe-reb-drunk.png";
 import cfeKsvSass from "./data/cfe-ksv-sass.png";
 import cfeKsvKoppel from "./data/cfe-ksv-koppel.png";
 import cfeKsvPikmets from "./data/cfe-ksv-pikmets.png";
@@ -86,8 +85,7 @@ const imageFiles = {
   'leaves2': spriteDef({ src: leaves2, cfg: { size: [13, 24], colsRows: [4, 3] } }),
   'leaves3': spriteDef({ src: leaves3, cfg: { size: [7, 30], colsRows: [6, 3] } }),
 
-  'cfe-reb': spriteDef({ src: cfeReb, cfg: { size: [32, 38], colsRows: [8, 7], offset: [-16, -33] } }),
-  'cfe-reb-drunk': spriteDef({ src: cfeRebDrunk, cfg: { size: [32, 35], colsRows: [5, 2], offset: [-16, -30] } }),
+  'cfe-reb': spriteDef({ src: cfeReb, cfg: { size: [32, 38], colsRows: [9, 8], offset: [-16, -33] } }),
 
   'cfe-ksv-sass': spriteDef({ src: cfeKsvSass, cfg: { size: CHARACTER_SIZE, colsRows: [3, 1], offset: CHARACTER_OFFSET } }),
   'cfe-ksv-koppel': spriteDef({ src: cfeKsvKoppel, cfg: { size: CHARACTER_SIZE, colsRows: [3, 1], offset: CHARACTER_OFFSET } }),
