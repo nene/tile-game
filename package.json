@@ -2,6 +2,7 @@
   "name": "tiles",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://nene.github.io/uus-rebane",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
@@ -29,6 +30,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -d build",
     "aseprite": "/Applications/Aseprite.app/Contents/MacOS/aseprite",
     "gen-items": "yarn aseprite -b art/items/*.aseprite --sheet-type horizontal --format json-array --list-tags --filename-format '{title}{tag}' --sheet src/game/sprites/data/items.png --data src/game/sprites/data/items.json",
     "gen-furniture": "yarn aseprite -b art/furniture/*.aseprite --sheet-pack --format json-array --list-tags --list-slices --filename-format '{title}' --sheet src/game/sprites/data/furniture.png --data src/game/sprites/data/furniture.json",
@@ -53,5 +56,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^5.0.0"
   }
 }
