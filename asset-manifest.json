@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.js": "/uus-rebane/static/js/main.d8d76c5c.chunk.js",
+    "main.js.map": "/uus-rebane/static/js/main.d8d76c5c.chunk.js.map",
+    "runtime-main.js": "/uus-rebane/static/js/runtime-main.d9473319.js",
+    "runtime-main.js.map": "/uus-rebane/static/js/runtime-main.d9473319.js.map",
+    "static/js/2.65b97839.chunk.js": "/uus-rebane/static/js/2.65b97839.chunk.js",
+    "static/js/2.65b97839.chunk.js.map": "/uus-rebane/static/js/2.65b97839.chunk.js.map",
+    "index.html": "/uus-rebane/index.html",
+    "static/js/2.65b97839.chunk.js.LICENSE.txt": "/uus-rebane/static/js/2.65b97839.chunk.js.LICENSE.txt",
+    "static/media/buildings.b1f01d66.png": "/uus-rebane/static/media/buildings.b1f01d66.png",
+    "static/media/cfe-reb.c231ad38.png": "/uus-rebane/static/media/cfe-reb.c231ad38.png",
+    "static/media/coins.1d2e60f2.wav": "/uus-rebane/static/media/coins.1d2e60f2.wav",
+    "static/media/glass-bottles.84665c62.mp3": "/uus-rebane/static/media/glass-bottles.84665c62.mp3",
+    "static/media/hmm-approval.e376920d.mp3": "/uus-rebane/static/media/hmm-approval.e376920d.mp3",
+    "static/media/hmm-disproval.facafc35.mp3": "/uus-rebane/static/media/hmm-disproval.facafc35.mp3",
+    "static/media/opening-beer.c2980ba1.mp3": "/uus-rebane/static/media/opening-beer.c2980ba1.mp3",
+    "static/media/opening-cabinet-door.ca16807e.mp3": "/uus-rebane/static/media/opening-cabinet-door.ca16807e.mp3",
+    "static/media/opening-fridge-door.12ef9de2.mp3": "/uus-rebane/static/media/opening-fridge-door.12ef9de2.mp3",
+    "static/media/pouring-beer.adab6609.mp3": "/uus-rebane/static/media/pouring-beer.adab6609.mp3",
+    "static/media/pouring-water.4835fdb5.mp3": "/uus-rebane/static/media/pouring-water.4835fdb5.mp3"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d9473319.js",
+    "static/js/2.65b97839.chunk.js",
+    "static/js/main.d8d76c5c.chunk.js"
+  ]
+}
